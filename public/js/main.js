@@ -46,7 +46,7 @@ function generate_addresses(seed)
 	    		ks.generateNewAddress(pwDerivedKey, totalAddresses);
 	    		var addresses = ks.getAddresses();	
 	    		
-	    		//var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+	    		var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
 
 	    		var html = "";
 
@@ -54,12 +54,12 @@ function generate_addresses(seed)
 	    		{
 					var address = addresses[count];
 					var private_key = ks.exportPrivateKey(address, pwDerivedKey);
-					//var balance = web3.eth.getBalance("0x" + address);
+					var balance = web3.eth.getBalance("0x" + address);
 
 					html = html + "<li>";
 					html = html + "<p><b>Address: </b>0x" + address + "</p>";
 					html = html + "<p><b>Private Key: </b>0x" + private_key + "</p>";
-					//html = html + "<p><b>Balance: </b>" + web3.fromWei(balance, "ether") + " ether</p>";
+					html = html + "<p><b>Balance: </b>" + web3.fromWei(balance, "ether") + " ether</p>";
 		    		html = html + "</li>";
 	    		}
 
@@ -99,7 +99,7 @@ function send_ether()
 			    };
 
 			    var provider = new HookedWeb3Provider({
-  					host: "http://localhost:8545",
+  					host: "http://localhost:7545",
   					transaction_signer: ks
 				});
 

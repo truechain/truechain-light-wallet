@@ -5,7 +5,7 @@ http.createServer(function(req, res) {
     });
     var Web3 = require('web3');
     var web3 = new Web3();
-    web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'));
+    web3.setProvider(new web3.providers.HttpProvider('http://localhost:7545'));
     console.log(web3.eth.accounts[0]);
     var balance = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0]), 'ether');
     console.log(balance);
@@ -24,5 +24,5 @@ http.createServer(function(req, res) {
     res.write('</p>');
     res.end();
 	
-}).listen(8000); //监听8000端口
+}).listen(3000); //监听3000端口
 console.log('Server is running');

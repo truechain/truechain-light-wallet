@@ -8,7 +8,7 @@ var Web3 = require('web3')
 //创建web3实例
 var web3 = new Web3()
 //创建http连接到区块链
-web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'))
+web3.setProvider(new web3.providers.HttpProvider('http://localhost:7545'))
 
 // 加载模板引擎
 app.use(views(path.join(__dirname, './view'), {
@@ -25,3 +25,4 @@ app.use( async ( ctx ) => {
 })
 
 app.listen(3000)
+console.log('Server is running')
