@@ -31,10 +31,12 @@ function generate_addresses(seed)
 	}
 
 	var password = Math.random().toString();
+	var hdPathString = "m/44'/60'/0'/0";
 
 	lightwallet.keystore.createVault({
 		password: password,
-	  	seedPhrase: seed
+	  	seedPhrase: seed,
+		hdPathString:hdPathString
 	}, function (err, ks) {
 	  	ks.keyFromPassword(password, function (err, pwDerivedKey) {
 	    	if(err)
