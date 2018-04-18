@@ -1,0 +1,141 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<style type="text/css">
+			.mui-bar {
+				background: #528bf7;
+				min-height: 180px;
+			}
+			
+			.white {
+				font-family: "微软雅黑";
+				color: #fff;
+			}
+			
+			.font {
+				font-size: 20px;
+				color: #000;
+			}
+			
+			.content {
+				position: fixed;
+				top: 150px;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				z-index: 10;
+			}
+			
+			.success {
+				min-height: 120px;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-around;
+				align-items: center;
+				border-bottom: 1px solid #7777774a;
+			}
+			
+			.center {
+				width: 90%;
+				margin: 0 auto;
+			}
+			
+			.mui-table-view {
+				background: none;
+			}
+			
+			.mui-table-view-cell {
+				padding: 5px 0 !important;
+			}
+			
+			.mui-table-view-cell:after,
+			.mui-table-view:before,
+			.mui-table-view:after {
+				height: 0;
+			}
+			
+			.success_bg {
+				width: 60px;
+				height: 60px;
+				background: url(../assets/assets/2.3-币种详情/iOS/交易成功icon.png) no-repeat;
+			}
+			
+			.transactionNumber {
+				margin-top: 20px;
+				display: flex;
+				min-height: 200px;
+				justify-content: space-between;
+				align-items: center;
+				border-top: 1px solid #7777774a;
+			}
+			
+			.number {
+				color: #35CCBF;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-pull-right white" style="line-height: 45px;">完成</a>
+			<h1 class="mui-title white">交易成功</h1>
+		</header>
+		<div class="content">
+			<div class="success center">
+				<i class="success_bg"></i>
+				<p class="font">-10.0000 <span>ETH</span></p>
+			</div>
+			<div class="center">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<p>发款方</p>
+						<p>hfkjadhgfhjdkahdfhjdkhaldhfdadfdaf</p>
+					</li>
+					<li class="mui-table-view-cell">
+						<p>收款方</p>
+						<p>dfhkdlajdhfkdhjalhdfhkjdgahgdhjfkh</p>
+					</li>
+					<li class="mui-table-view-cell">
+						<p>矿工费用</p>
+						<p>0.000034125 ether</p>
+					</li>
+					<li class="mui-table-view-cell">
+						<p>备注</p>
+						<p>线下交易</p>
+					</li>
+				</ul>
+			</div>
+
+			<div class="transactionNumber center">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<p>交易号</p>
+						<p class="number">0xd324hg....hdksfh</p>
+					</li>
+					<li class="mui-table-view-cell">
+						<p>区块</p>
+						<p>5355031</p>
+					</li>
+					<li class="mui-table-view-cell">
+						<p>交易时间</p>
+						<p>2018/05/01 21:21:21 +0800</p>
+					</li>
+				</ul>
+				<div>
+					<img src="../assets/1523520245.png" style="width: 80px; height: 80px;" />
+					<p style="background: #e6e6e6; color:#666666 ;padding: 5px;text-align: center;">复制URL</p>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+	mui.init()
+</script>

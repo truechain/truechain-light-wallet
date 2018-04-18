@@ -1,0 +1,13 @@
+.mui-content {
+	padding-top: 30px !important;
+}
+
+.right {
+	float: right;
+	font-size: 14px;
+	color: #8f8f94;
+}
+
+.mui-table-view-cell .mui-active {
+	background-color: #0062CC;
+}

@@ -1,0 +1,68 @@
+.mui-bar {
+	background-color: #528bf7;
+}
+
+.mui-content {
+	position: fixed;
+	top: -2px;
+	right: 0;
+	bottom: 50px;
+	left: 0;
+	overflow: auto;
+}
+
+.mui-table-view:before {
+	height: 0;
+}
+
+.white {
+	color: #fff;
+}
+
+.size {
+	font-size: 25px;
+}
+
+.mui-bar-nav {
+	box-shadow: 0 0 0 #ccc;
+	-webkit-box-shadow: 0 0 0 #ccc;
+}
+
+.marketVal {
+	min-height: 100px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: #528bf7;
+}
+
+.top {
+	margin: 10px 0 0 10px;
+}
+
+.func {
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 50px;
+}
+
+.b {
+	width: 50%;
+	min-height: 50px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+.bs {
+	background-color: #35ccbf;
+}
+
+.bsk {
+	background-color: #528bf7;
+}

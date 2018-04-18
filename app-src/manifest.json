@@ -1,0 +1,554 @@
+{
+	"@platforms": ["android", "iPhone", "iPad"],
+	"id": "H5C997B60",/*应用的标识，创建应用时自动生成，勿手动修改*/
+	"name": "InitialChain",/*应用名称，程序桌面图标名称*/
+	"version": {
+		"name": "1.0.0",/*应用版本名称*/
+		"code": "83"
+	},
+	"description": "InitialChain",/*应用描述信息*/
+	"icons": {
+		"72": "icon.png"
+	},
+	"launch_path": "app-src/guide.html",/*应用的入口页面，默认为根目录下的index.html；支持网络地址，必须以http://或https://开头*/
+	"developer": {
+		"name": "",/*开发者名称*/
+		"email": "",/*开发者邮箱地址*/
+		"url": "http://www.dcloud.io"
+	},
+	"permissions": {
+        "Cache": {
+            "description": "管理应用缓存"
+        },
+        "Console": {
+            "description": "跟踪调试输出日志"
+        },
+        "Contacts": {
+            "description": "访问系统联系人信息"
+        },
+        "Events": {
+            "description": "应用扩展事件"
+        },
+        "Messaging": {
+            "description": "访问通讯能力"
+        },
+        "Maps": {
+            "description": "管理地图插件"
+        },
+        "Speech": {
+            "description": "管理语音识别插件"
+        }
+	},
+	"plus": {
+		"statusbar":{
+			"style":"UIStatusBarStyleBlackOpaque"
+		},
+		"splashscreen": {
+			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
+			"waiting": false,"delay":"20"
+		},
+		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
+		"distribute": {
+			"apple": {
+				"appid": "",/*iOS应用标识，苹果开发网站申请的appid，如io.dcloud.HelloH5*/
+				"mobileprovision": "",/*iOS应用打包配置文件*/
+				"password": "",/*iOS应用打包个人证书导入密码*/
+				"p12": "",/*iOS应用打包个人证书，打包配置文件关联的个人证书*/
+				"devices": "universal",/*iOS应用支持的设备类型，可取值iphone/ipad/universal*/
+				"frameworks": []
+			},
+			"google": {
+				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
+				"keystore": "",/*Android应用打包使用的密钥库文件*/
+				"password": "",/*Android应用打包使用密钥库中证书的密码*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"]
+			},
+			"orientation": ["portrait-primary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
+			"icons": {
+				"ios": {
+					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
+					 /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					"iphone": {
+						"normal": "",/*iPhone普通屏幕程序图标，分辨率：57x57*/
+						"retina": "",/*iPhone高分屏程序图标，分辨率：114x114*/
+						"retina7": "",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						"spotlight-normal": "", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
+						"spotlight-retina": "", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
+						"spotlight-retina7": "",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "", /*iPhone设置页面程序图标，分辨率：29x29*/
+						"settings-retina": ""
+					},
+					"ipad": {
+						"normal": "", /*iPad普通屏幕程序图标，分辨率：72x72*/
+						"retina": "", /*iPad高分屏程序图标，分辨率：144x144*/
+						"normal7": "", /*iPad iOS7程序图标，分辨率：76x76*/
+						"retina7": "", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						"spotlight-normal": "", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
+						"spotlight-retina": "", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
+						"spotlight-normal7": "",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						"spotlight-retina7": "",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						"settings-normal": "",/*iPad设置页面程序图标，分辨率：29x29*/
+						"settings-retina": ""
+					},"appstore":"C:/Users/wangqi/Desktop/UI设计稿/1.资产/logo.png"
+				},
+				"android": {
+					"mdpi": "", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": ""
+				}
+			},
+			"splashscreen": {
+				"ios": {
+					"iphone": {
+						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
+						"retina35": ""
+					},
+					"ipad": {
+						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
+						"portrait-retina": "",/*iPad高分屏竖屏图片，分辨率：1536x2008*/
+						"landscape": "", /*iPad横屏启动图片，分辨率：1024x748*/
+						"landscape-retina": "", /*iPad高分屏横屏启动图片，分辨率：2048x1496*/
+						"portrait7": "", /*iPad iOS7竖屏启动图片，分辨率：768x1024*/
+						"portrait-retina7": "",/*iPad iOS7高分屏竖屏图片，分辨率：1536x2048*/
+						"landscape7": "", /*iPad iOS7横屏启动图片，分辨率：1024x768*/
+						"landscape-retina7": ""
+					}
+				},
+				"android": {
+					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
+					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
+					"hdpi": "", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": ""
+				}
+			}
+		}
+	},"fullscreen":false,
+	"dependencies":{
+	  "pages": {
+	    "pages/Personal.html": {
+	      "href": "pages/Personal.html",
+	      "resources": [
+	        "js/mui.min.js",
+	        "css/mui.min.css",
+	        "fonts/mui.ttf",
+	        "css/personal.css",
+	        "iconFont/iconfont.css",
+	        "iconFont/iconfont.eot",
+	        "iconFont/iconfont.ttf",
+	        "iconFont/iconfont.svg"
+	      ],
+	      "priority": 0
+	    },
+	    "pages/mnemonic.html": {
+	      "href": "pages/mnemonic.html",
+	      "resources": [
+	        "js/mui.min.js",
+	        "css/mui.min.css",
+	        "fonts/mui.ttf",
+	        "css/reset.css",
+	        "css/mnemonic.css"
+	      ],
+	      "priority": 1
+	    },
+	    "pages/keyStore.html": {
+	      "href": "pages/keyStore.html",
+	      "resources": [
+	        "js/mui.min.js",
+	        "css/mui.min.css",
+	        "fonts/mui.ttf",
+	        "css/reset.css",
+	        "css/keyStore.css",
+	        "assets/1523520245.png"
+	      ],
+	      "priority": 2
+	    },
+	    "pages/changePwd.html": {
+	      "href": "pages/changePwd.html",
+	      "resources": [
+	        "js/mui.min.js",
+	        "css/mui.min.css",
+	        "fonts/mui.ttf",
+	        "css/reset.css"
+	      ],
+	      "priority": 3
+	    },
+	    "pages/mywallet.html": {
+	      "href": "pages/mywallet.html",
+	      "resources": [
+	        "js/mui.min.js",
+	        "js/h.min.js",
+	        "css/mui.min.css",
+	        "fonts/mui.ttf",
+	        "css/mywallet.css",
+	        "assets/assets/2.1-资产首页/iOS/头像.png"
+	      ],
+	      "refer": [
+	        "pages/mnemonic.html",
+	        "pages/keyStore.html",
+	        "pages/changePwd.html"
+	      ],
+	      "priority": 1
+	    },
+	    "pages/addcurrency.html": {
+	      "href": "pages/addcurrency.html",
+	      "resources": [
+	        "js/mui.min.js",
+	        "css/mui.min.css",
+	        "fonts/mui.ttf",
+	        "css/reset.css",
+	        "css/addcurrency.css"
+	      ],
+	      "priority": 2
+	    },
+	    "pages/currencyDetail.html": {
+	      "href": "pages/currencyDetail.html",
+	      "resources": [
+	        "js/mui.min.js",
+	        "css/mui.min.css",
+	        "fonts/mui.ttf",
+	        "css/reset.css",
+	        "css/currentDetail.css"
+	      ],
+	      "priority": 3
+	    },
+	    "pages/Assets.html": {
+	      "href": "pages/Assets.html",
+	      "resources": [
+	        "js/mui.min.js",
+	        "css/mui.min.css",
+	        "fonts/mui.ttf",
+	        "css/assets.css",
+	        "assets/assets/2.1-资产首页/iOS/头像.png"
+	      ],
+	      "refer": [
+	        "pages/mywallet.html",
+	        "pages/addcurrency.html",
+	        "pages/currencyDetail.html"
+	      ],
+	      "priority": 1
+	    },
+	    "index.html": {
+	      "href": "index.html",
+	      "resources": [
+	        "js/mui.min.js",
+	        "js/h.min.js",
+	        "css/mui.min.css",
+	        "fonts/mui.ttf",
+	        "dist/css/common/common.css",
+	        "dist/images/common/asset1@2x.png",
+	        "dist/images/common/asset1@3x.png",
+	        "dist/images/common/asset2@2x.png",
+	        "dist/images/common/asset2@3x.png",
+	        "dist/images/common/my1@2x.png",
+	        "dist/images/common/my1@3x.png",
+	        "dist/images/common/my2@2x.png",
+	        "dist/images/common/my2@3x.png"
+	      ],
+	      "refer": [
+	        "pages/Personal.html"
+	      ],
+	      "priority": 0
+	    },
+	    "guide.html": {
+	      "href": "guide.html",
+	      "resources": [
+	        "js/mui.min.js",
+	        "css/mui.min.css",
+	        "fonts/mui.ttf",
+	        "dist/css/common/common.css",
+	        "dist/images/common/asset1@2x.png",
+	        "dist/images/common/asset1@3x.png",
+	        "dist/images/common/asset2@2x.png",
+	        "dist/images/common/asset2@3x.png",
+	        "dist/images/common/my1@2x.png",
+	        "dist/images/common/my1@3x.png",
+	        "dist/images/common/my2@2x.png",
+	        "dist/images/common/my2@3x.png",
+	        "dist/css/common/guide.css",
+	        "assets/my/3.6-关于我们/ios/logo.png"
+	      ],
+	      "refer": [
+	        "index.html"
+	      ],
+	      "priority": 0
+	    }
+	  },
+	  "idle": {
+	    "resources": [
+	      "assets/Global/iOS/扫一扫icon.png",
+	      "assets/my/3.1我的首页/iOS/钱包@2x.png",
+	      "assets/my/3.5-帮助中心/ios/关闭icon.png",
+	      "assets/Global/安卓/drawable-hdpi/我的-负.png",
+	      "assets/my/3.3-交易记录/安卓/drawable-xhdpi/调节器.png",
+	      "assets/my/3.3-交易记录/ios/搜索@3x.png",
+	      "assets/my/3.3-交易记录/安卓/drawable-xhdpi/搜索.png",
+	      "assets/my/3.1我的首页/iOS/钱包.png",
+	      "assets/assets/2.1-资产首页/安卓/drawable-xhdpi/新增icon.png",
+	      "assets/assets/2.2-账户信息/iOS/头像.png",
+	      "pages/info.html",
+	      "assets/my/3.1我的首页/iOS/联系人icon@2x.png",
+	      "assets/my/3.4-联系人/ios/联系人-3@3x.png",
+	      "assets/my/3.4-联系人/安卓/drawable-xhdpi/扫一扫.png",
+	      "css/receipt.css",
+	      "assets/assets/2.1-资产首页/iOS/二维码.png",
+	      "assets/my/3.5-帮助中心/安卓/drawable-hdpi/关闭icon.png",
+	      "assets/Global/iOS/扫一扫icon@2x.png",
+	      "assets/assets/2.1-资产首页/iOS/二维码@3x.png",
+	      "assets/my/3.3-交易记录/安卓/drawable-hdpi/勾.png",
+	      "dist/images/my/contacts-icon@3x.png",
+	      "assets/my/3.4-联系人/安卓/drawable-xhdpi/联系人icon.png",
+	      "assets/my/3.4-联系人/安卓/drawable-hdpi/添加.png",
+	      "assets/assets/2.1-资产首页/安卓/drawable-xhdpi/二维码.png",
+	      "README.md",
+	      "assets/my/3.1我的首页/iOS/钱包@3x.png",
+	      "iconFont/demo.css",
+	      "assets/Global/安卓/drawable-xhdpi/资产-负.png",
+	      "assets/my/3.1我的首页/安卓/drawable-hdpi/交易记录.png",
+	      "assets/my/3.2-钱包管理/ios/头像@3x.png",
+	      "assets/my/3.1我的首页/iOS/消息icon.png",
+	      "assets/my/3.3-交易记录/ios/勾@2x.png",
+	      "dist/images/my/help-icon@3x.png",
+	      "assets/my/3.3-交易记录/安卓/drawable-hdpi/支出icon.png",
+	      "assets/my/3.3-交易记录/ios/支出icon@3x.png",
+	      "assets/my/3.1我的首页/安卓/drawable-xhdpi/联系人icon.png",
+	      "assets/Global/安卓/drawable-xhdpi/更多icon.png",
+	      "dist/images/asset/head@2x.png",
+	      "assets/my/3.3-交易记录/ios/勾.png",
+	      "assets/my/3.5-帮助中心/安卓/drawable-hdpi/添加图片icon.png",
+	      "assets/assets/2.3-币种详情/安卓/drawable-xhdpi/好友列表icon.png",
+	      "pages/receipt.html",
+	      "pages/successful.html",
+	      "assets/my/3.3-交易记录/安卓/drawable-hdpi/搜索.png",
+	      "assets/Global/安卓/drawable-hdpi/更多icon.png",
+	      "assets/assets/2.3-币种详情/iOS/支出icon@3x.png",
+	      "assets/my/3.1我的首页/iOS/消息icon@3x.png",
+	      "dist/images/my/aboutus-icon@2x.png",
+	      "assets/my/3.1我的首页/iOS/交易记录@2x.png",
+	      "assets/my/3.5-帮助中心/ios/关闭icon@2x.png",
+	      "dist/css/common/base.css",
+	      "assets/assets/2.1-资产首页/安卓/drawable-hdpi/总资产body.png",
+	      "assets/assets/2.3-币种详情/iOS/收款码头像.png",
+	      "assets/my/3.6-关于我们/ios/logo@3x.png",
+	      "assets/my/3.1我的首页/安卓/drawable-xhdpi/消息icon.png",
+	      "pages/walletManger.html",
+	      "assets/my/3.4-联系人/安卓/drawable-hdpi/扫一扫.png",
+	      "assets/my/3.1我的首页/安卓/drawable-hdpi/关于我们icon.png",
+	      "assets/Global/安卓/drawable-xhdpi/扫一扫icon.png",
+	      "assets/my/3.4-联系人/ios/扫一扫.png",
+	      "assets/my/3.1我的首页/iOS/交易记录.png",
+	      "assets/my/3.4-联系人/ios/扫一扫@2x.png",
+	      "assets/my/3.2-钱包管理/安卓/drawable-xhdpi/助记词icon.png",
+	      "assets/assets/2.3-币种详情/iOS/收入icon.png",
+	      "dist/images/my/wallet-icon@3x.png",
+	      "dist/images/my/massage-icon@2x.png",
+	      "assets/Global/iOS/导航栏-返回@2x.png",
+	      "assets/my/3.2-钱包管理/ios/助记词icon.png",
+	      "assets/my/3.1我的首页/安卓/drawable-hdpi/消息icon.png",
+	      "assets/my/3.1我的首页/安卓/drawable-xhdpi/帮助中心icon.png",
+	      "assets/my/3.1我的首页/安卓/drawable-xhdpi/关于我们icon.png",
+	      "dist/images/ios/asset2@2x.png",
+	      "assets/my/3.4-联系人/安卓/drawable-hdpi/联系人icon.png",
+	      "assets/my/3.2-钱包管理/ios/助记词icon@3x.png",
+	      "assets/Global/安卓/drawable-xhdpi/我的-负.png",
+	      "assets/Global/iOS/我的-负.png",
+	      "assets/my/3.5-帮助中心/ios/关闭icon@3x.png",
+	      "assets/Global/安卓/drawable-hdpi/我的-正.png",
+	      "pages/transfer.html",
+	      "dist/images/logo.png",
+	      "assets/assets/2.3-币种详情/iOS/支出icon.png",
+	      "assets/my/3.2-钱包管理/ios/头像.png",
+	      "assets/my/3.5-帮助中心/ios/添加图片icon.png",
+	      "assets/Global/iOS/我的-负@3x.png",
+	      "assets/my/3.3-交易记录/安卓/drawable-xhdpi/支出icon.png",
+	      "assets/my/3.1我的首页/安卓/drawable-xhdpi/钱包.png",
+	      "assets/assets/2.1-资产首页/iOS/头像@3x.png",
+	      "assets/assets/2.3-币种详情/安卓/drawable-hdpi/交易成功icon.png",
+	      "assets/my/3.2-钱包管理/安卓/drawable-xhdpi/头像.png",
+	      "assets/my/3.6-关于我们/安卓/drawable-xhdpi/logo.png",
+	      "assets/assets/2.3-币种详情/安卓/drawable-hdpi/收入icon.png",
+	      "assets/Global/iOS/更多icon.png",
+	      "assets/assets/2.3-币种详情/安卓/drawable-xhdpi/交易成功icon.png",
+	      "assets/my/3.1我的首页/iOS/联系人icon.png",
+	      "assets/my/3.1我的首页/安卓/drawable-xhdpi/交易记录.png",
+	      "assets/Global/iOS/资产-正@2x.png",
+	      "assets/assets/2.3-币种详情/iOS/收入icon@3x.png",
+	      "assets/my/3.1我的首页/iOS/交易记录@3x.png",
+	      "assets/assets/2.1-资产首页/iOS/总资产body@2x.png",
+	      "assets/assets/2.3-币种详情/iOS/支出icon@2x.png",
+	      "assets/my/3.1我的首页/iOS/设置icon@2x.png",
+	      "assets/assets/2.3-币种详情/iOS/收款码头像@2x.png",
+	      "assets/my/3.2-钱包管理/安卓/drawable-xhdpi/私钥icon.png",
+	      "assets/assets/2.2-账户信息/iOS/头像@3x.png",
+	      "assets/Global/iOS/导航栏-返回icon@2x.png",
+	      "dist/images/asset/ercode@2x.png",
+	      "pages/infoDetail.html",
+	      "assets/my/3.1我的首页/iOS/帮助中心icon@2x.png",
+	      "assets/my/3.1我的首页/iOS/关于我们icon.png",
+	      "css/about.css",
+	      "assets/assets/2.3-币种详情/安卓/drawable-xhdpi/收款码头像.png",
+	      "assets/my/3.1我的首页/安卓/drawable-hdpi/帮助中心icon.png",
+	      "assets/my/3.3-交易记录/安卓/drawable-hdpi/调节器.png",
+	      "assets/Global/安卓/drawable-xhdpi/我的-正.png",
+	      "assets/my/3.1我的首页/iOS/设置icon.png",
+	      "dist/images/my/help-icon@2x.png",
+	      "assets/assets/2.3-币种详情/安卓/drawable-xhdpi/收入icon.png",
+	      "assets/my/3.2-钱包管理/安卓/drawable-hdpi/助记词icon.png",
+	      "assets/assets/2.1-资产首页/安卓/drawable-hdpi/二维码.png",
+	      "pages/contact.html",
+	      "dist/images/asset/newaddicon@2x.png",
+	      "assets/my/3.3-交易记录/安卓/drawable-xhdpi/收入icon.png",
+	      "assets/my/3.1我的首页/iOS/联系人icon@3x.png",
+	      "assets/assets/2.1-资产首页/iOS/新增icon@3x.png",
+	      "assets/assets/2.2-账户信息/安卓/drawable-hdpi/头像.png",
+	      "pages/help.html",
+	      "assets/my/3.2-钱包管理/安卓/drawable-xhdpi/创建钱包-圆点.png",
+	      "assets/assets/2.3-币种详情/iOS/好友列表icon.png",
+	      "assets/Global/iOS/更多icon@3x.png",
+	      "assets/Global/安卓/drawable-hdpi/导航栏-返回.png",
+	      "css/info.css",
+	      "assets/assets/2.1-资产首页/安卓/drawable-hdpi/头像.png",
+	      "dist/images/my/deal-icon@2x.png",
+	      "assets/Global/iOS/导航栏-返回.png",
+	      "assets/assets/2.3-币种详情/安卓/drawable-hdpi/支出icon.png",
+	      "assets/Global/安卓/drawable-hdpi/资产-正.png",
+	      "assets/Global/iOS/关闭icon.png",
+	      "css/recording.css",
+	      "assets/assets/2.1-资产首页/安卓/drawable-xhdpi/总资产body.png",
+	      "assets/assets/2.1-资产首页/iOS/二维码@2x.png",
+	      "pages/setting.html",
+	      "assets/my/3.2-钱包管理/ios/创建钱包-圆点@3x.png",
+	      "css/contact.css",
+	      "assets/my/3.3-交易记录/ios/支出icon.png",
+	      "dist/css/my/my.css",
+	      "dist/images/ios/asset1@2x.png",
+	      "assets/assets/2.3-币种详情/安卓/drawable-hdpi/收款码头像.png",
+	      "assets/Global/iOS/资产-正@3x.png",
+	      "assets/assets/2.3-币种详情/iOS/收款码头像@3x.png",
+	      "dist/images/my/setting-icon@2x.png",
+	      "assets/Global/安卓/drawable-hdpi/关闭icon.png",
+	      "dist/images/ios/my1@2x.png",
+	      "pages/agreement.html",
+	      "assets/my/3.3-交易记录/ios/支出icon@2x.png",
+	      "assets/assets/2.2-账户信息/安卓/drawable-xhdpi/头像.png",
+	      "assets/assets/2.3-币种详情/iOS/交易成功icon.png",
+	      "assets/assets/2.3-币种详情/iOS/收入icon@2x.png",
+	      "assets/my/3.1我的首页/iOS/设置icon@3x.png",
+	      "assets/Global/iOS/资产-正.png",
+	      "assets/Global/iOS/资产-负.png",
+	      "js/mui.js",
+	      "pages/createWallet.html",
+	      "assets/my/3.5-帮助中心/ios/添加图片icon@2x.png",
+	      "assets/assets/2.3-币种详情/iOS/交易成功icon@2x.png",
+	      "assets/Global/iOS/导航栏-返回icon@3x.png",
+	      "assets/my/3.2-钱包管理/ios/私钥icon@3x.png",
+	      "assets/assets/2.3-币种详情/安卓/drawable-hdpi/好友列表icon.png",
+	      "assets/my/3.1我的首页/安卓/drawable-xhdpi/设置icon.png",
+	      "assets/assets/2.1-资产首页/iOS/新增icon.png",
+	      "assets/my/3.2-钱包管理/ios/私钥icon.png",
+	      "assets/my/3.2-钱包管理/ios/创建钱包-圆点@2x.png",
+	      "assets/my/3.1我的首页/iOS/帮助中心icon@3x.png",
+	      "assets/my/3.4-联系人/ios/联系人-3@2x.png",
+	      "assets/Global/安卓/drawable-hdpi/资产-负.png",
+	      "pages/recording.html",
+	      "dist/css/asset/amendpaw.css",
+	      "assets/Global/安卓/drawable-hdpi/导航栏-返回icon.png",
+	      "css/createWallet.css",
+	      "iconFont/iconfont.woff",
+	      "assets/my/3.3-交易记录/ios/收入icon.png",
+	      "assets/Global/iOS/我的-正@3x.png",
+	      "dist/images/asset/head@3x.png",
+	      "assets/assets/2.3-币种详情/iOS/好友列表icon@3x.png",
+	      "assets/Global/iOS/扫一扫icon@3x.png",
+	      "assets/Global/安卓/drawable-hdpi/扫一扫icon.png",
+	      "assets/my/3.4-联系人/ios/联系人-3.png",
+	      "assets/my/3.5-帮助中心/安卓/drawable-xhdpi/关闭icon.png",
+	      "css/transfer.css",
+	      "dist/images/my/massage-icon@3x.png",
+	      "assets/my/3.6-关于我们/ios/logo@2x.png",
+	      "assets/my/3.4-联系人/ios/添加@3x.png",
+	      "assets/my/3.1我的首页/iOS/消息icon@2x.png",
+	      "dist/css/asset/userinfo.css",
+	      "assets/my/3.3-交易记录/ios/调节器@3x.png",
+	      "dist/images/my/wallet-icon@2x.png",
+	      "assets/my/3.2-钱包管理/ios/助记词icon@2x.png",
+	      "assets/my/3.5-帮助中心/ios/添加图片icon@3x.png",
+	      "assets/assets/2.1-资产首页/iOS/头像@2x.png",
+	      "dist/images/my/setting-icon@3x.png",
+	      "pages/privacyPolicy.html",
+	      "dist/images/my/contacts-icon@2x.png",
+	      "assets/Global/iOS/我的-负@2x.png",
+	      "assets/my/3.1我的首页/安卓/drawable-hdpi/联系人icon.png",
+	      "assets/assets/2.1-资产首页/iOS/总资产body.png",
+	      "assets/my/3.6-关于我们/安卓/drawable-hdpi/logo.png",
+	      "assets/assets/2.1-资产首页/安卓/drawable-hdpi/新增icon.png",
+	      "assets/my/3.1我的首页/安卓/drawable-hdpi/设置icon.png",
+	      "assets/my/3.1我的首页/iOS/帮助中心icon.png",
+	      "assets/my/3.5-帮助中心/安卓/drawable-xhdpi/添加图片icon.png",
+	      "assets/assets/2.2-账户信息/iOS/头像@2x.png",
+	      "assets/Global/iOS/资产-负@2x.png",
+	      "assets/my/3.3-交易记录/ios/调节器@2x.png",
+	      "assets/my/3.4-联系人/ios/添加@2x.png",
+	      "assets/my/3.3-交易记录/ios/搜索@2x.png",
+	      "assets/my/3.4-联系人/ios/添加.png",
+	      "assets/my/3.3-交易记录/ios/收入icon@2x.png",
+	      "assets/my/3.3-交易记录/安卓/drawable-hdpi/收入icon.png",
+	      "assets/Global/安卓/drawable-xhdpi/导航栏-返回.png",
+	      "css/walletManger.css",
+	      "assets/my/3.2-钱包管理/安卓/drawable-hdpi/创建钱包-圆点.png",
+	      "assets/my/3.1我的首页/安卓/drawable-hdpi/钱包.png",
+	      "assets/my/3.3-交易记录/ios/勾@3x.png",
+	      "assets/Global/安卓/drawable-xhdpi/资产-正.png",
+	      "assets/Global/iOS/关闭icon@3x.png",
+	      "assets/assets/2.3-币种详情/iOS/好友列表icon@2x.png",
+	      "assets/my/3.1我的首页/iOS/关于我们icon@2x.png",
+	      "assets/Global/iOS/导航栏-返回icon.png",
+	      "assets/Global/iOS/资产-负@3x.png",
+	      "assets/Global/iOS/导航栏-返回@3x.png",
+	      "assets/my/3.2-钱包管理/ios/私钥icon@2x.png",
+	      "assets/Global/iOS/更多icon@2x.png",
+	      "assets/my/3.4-联系人/ios/扫一扫@3x.png",
+	      "assets/Global/安卓/drawable-xhdpi/导航栏-返回icon.png",
+	      "assets/assets/2.1-资产首页/iOS/总资产body@3x.png",
+	      "css/mui.css",
+	      "assets/my/3.2-钱包管理/安卓/drawable-hdpi/头像.png",
+	      "dist/images/asset/totalassets@3x.png",
+	      "assets/my/3.3-交易记录/ios/搜索.png",
+	      "assets/my/3.2-钱包管理/ios/头像@2x.png",
+	      "pages/about.html",
+	      "assets/assets/2.3-币种详情/iOS/交易成功icon@3x.png",
+	      "assets/my/3.3-交易记录/ios/收入icon@3x.png",
+	      "dist/images/ios/my2@2x.png",
+	      "dist/images/my/aboutus-icon@3x.png",
+	      "assets/assets/2.3-币种详情/安卓/drawable-xhdpi/支出icon.png",
+	      "dist/images/asset/totalassets@2x.png",
+	      "assets/Global/iOS/我的-正.png",
+	      "assets/my/3.2-钱包管理/安卓/drawable-hdpi/私钥icon.png",
+	      "assets/assets/2.1-资产首页/安卓/drawable-xhdpi/头像.png",
+	      "assets/Global/iOS/关闭icon@2x.png",
+	      "dist/images/my/deal-icon@3x.png",
+	      "assets/my/3.3-交易记录/ios/调节器.png",
+	      "assets/assets/2.2-账户信息/iOS/关闭icon@2x.png",
+	      "iconFont/iconfont.js",
+	      "dist/images/asset/newaddicon@3x.png",
+	      "dist/css/asset/asset.css",
+	      "dist/css/my/about.css",
+	      "assets/assets/2.1-资产首页/iOS/新增icon@2x.png",
+	      "assets/my/3.2-钱包管理/ios/创建钱包-圆点.png",
+	      "assets/my/3.4-联系人/安卓/drawable-xhdpi/添加.png",
+	      "css/help.css",
+	      "assets/assets/2.2-账户信息/iOS/关闭icon.png",
+	      "dist/images/asset/ercode@3x.png",
+	      "assets/assets/2.2-账户信息/iOS/关闭icon@3x.png",
+	      "assets/my/3.1我的首页/iOS/关于我们icon@3x.png",
+	      "assets/my/3.3-交易记录/安卓/drawable-xhdpi/勾.png",
+	      "assets/Global/iOS/我的-正@2x.png",
+	      "assets/Global/安卓/drawable-xhdpi/关闭icon.png"
+	    ]
+	  }
+	}
+}

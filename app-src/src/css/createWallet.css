@@ -1,0 +1,163 @@
+.mui-slider .mui-segmented-control.mui-segmented-control-inverted~.mui-slider-group .mui-slider-item {
+	border: none;
+}
+
+.Instructions {
+	background: #528bf7;
+	min-height: 60px;
+}
+
+.center {
+	width: 90%;
+	margin: 0 auto;
+	padding: 5px 0;
+}
+
+.white {
+	color: #efeff4;
+	letter-spacing: 0.3px;
+}
+
+.mui-input-group {
+	display: flex;
+	flex-direction: column;
+	min-height: 200px;
+	justify-content: space-around;
+}
+
+.mui-input-group:after {
+	height: 0;
+}
+
+.mui-input-group .mui-input-row {
+	height: 60px;
+	line-height: 60px;
+}
+
+
+/*美化单选框*/
+
+
+/*
+.box {
+	width: 300px;
+	height: 100px;
+	margin: 100px auto;
+}
+*/
+
+.box {
+	display: flex;
+}
+
+.check {
+	position: relative;
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin-right: 5px;
+}
+
+.check input {
+	display: none;
+}
+
+.check label {
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 0;
+	left: 0;
+	border: 2px solid #528bf7;
+	border-radius: 50%;
+	background: #fff;
+}
+
+
+/*鼠标悬浮样式*/
+
+.check label:hover {
+	border-color: #528bf7;
+}
+
+.check label:after {
+	position: absolute;
+	content: "";
+	width: 8px;
+	height: 4px;
+	border: 2px solid #f7f7f7;
+	border-top: none;
+	border-right: none;
+	opacity: 0.4;
+	transform: rotate(-45deg);
+	top: 4px;
+	left: 3px;
+}
+
+.check label:hover:after {
+	border-color: #528bf7;
+}
+
+.check input:checked+label {
+	border: 2px solid #528bf7;
+}
+
+.check input:checked+label:after {
+	opacity: 1;
+	border: 2px solid #528bf7;
+	border-top: none;
+	border-right: none;
+}
+
+input[type="range"] {
+	width: 300px;
+	height: 10px;
+	border: 0;
+	background-color: #528bf7;
+	border-radius: 5px;
+	position: relative;
+	-webkit-appearance: none !important;
+	outline: none;
+}
+
+input[type=range]::-webkit-slider-thumb {
+	-webkit-appearance: none;
+	width: 20px;
+	height: 20px;
+	border-radius: 50%;
+	background: #528bf7;
+}
+
+.options_item {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 50px;
+	border-radius: 50px;
+	margin-top: 50px;
+}
+
+.options_item_bg {
+	width: 80%;
+	min-height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+
+.r {
+	border-radius: 50px;
+}
+
+.bs {
+	background-color: #528bf7;
+}
+
+.white {
+	color: #fff;
+}
+
+.lead-wallet {
+	text-align: center;
+	margin-top: 20px;
+	color: #35CCBF;
+}

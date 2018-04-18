@@ -1,0 +1,12 @@
+.currencyInfo {
+	display: flex;
+	align-items: center;
+}
+
+.currencyImg {
+	border-radius: 50%;
+}
+
+.spacing {
+	margin-left: 15px;
+}

@@ -1,0 +1,96 @@
+.mui-bar {
+	background-color: #fff;
+}
+
+a {
+	color: #000;
+}
+
+.mui-modal {
+	top: 60% !important;
+	min-height: 0;
+}
+
+.mui-modal.mui-active {
+	height: 40% !important;
+}
+
+.accountInfo {
+	min-height: 150px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.headPortrait {
+	border-radius: 50%;
+	width: 50px;
+	height: 50px;
+}
+
+.accountInfo_text {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+
+.mui-table-view {
+	margin-top: 20px;
+}
+
+.mui-table-view:before {
+	height: 0 !important;
+}
+
+.deleceWallet {
+	border: 2px solid red;
+	width: 80%;
+	margin: 20px 10%;
+}
+
+.center {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.options {
+	height: 100%;
+	margin-top: 20px;
+}
+
+.options_item {
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+	min-height: 50px;
+	border-radius: 50px;
+}
+
+.options_item_bg {
+width: 50%;
+	min-height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+
+.l {
+	border-radius: 50px 0 0 50px;
+}
+
+.r {
+	border-radius: 0 50px 50px 0;
+}
+
+.bsk {
+	background-color: #35ccbf;
+}
+
+.bs {
+	background-color: #528bf7;
+}
+
+.white {
+	color: #fff;
+}

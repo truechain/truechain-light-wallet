@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport"
+          content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no"/>
+    <link href="../css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="../css/reset.css"/>
+    <link rel="stylesheet" type="text/css" href="../../iconFont/iconfont.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/transfer.css"/>
+</head>
+
+<body>
+<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <a class="iconfont icon-saomiao mui-pull-right" style="line-height: 45px;"></a>
+    <h1 class="mui-title">ETH转账</h1>
+</header>
+<div class="mui-content">
+    <form class="mui-input-group center top">
+        <div class="mui-input-row">
+            <label>
+                <img src="../assets/assets/2.3-币种详情/iOS/好友列表icon.png" style="width: 30px; height: 30px;"/>
+            </label>
+            <input type="text" class="mui-input-clear" placeholder="收款人钱包地址">
+        </div>
+        <div class="mui-input-row">
+            <input type="text" class="mui-input-clear" placeholder="转账金额">
+        </div>
+        <div class="mui-input-row">
+            <input type="text" class="mui-input-clear" placeholder="备注">
+        </div>
+        <div class="mui-input-row">
+            <input type="text" placeholder="矿工费用" readonly="readonly"/>
+        </div>
+        <div class="mui-input-row mui-input-range center">
+            <input type="range" min="0" max="100">
+        </div>
+        <div class="center speed">
+            <p>慢</p>
+
+            <p>快</p>
+        </div>
+
+        <a href="#modal" class="next top" id="next">下一步</a>
+    </form>
+</div>
+
+<div id="modal" class="mui-modal mui-backdrop">
+    <header class="mui-bar mui-bar-nav">
+        <a class="modal_item mui-icon mui-icon-close mui-pull-right close" href="#modal"></a>
+        <h1 class="mui-title">支付详情</h1>
+    </header>
+    <div class="mui-content options">
+        <div class="center">
+            <ul class="mui-table-view">
+                <li class="mui-table-view-cell">
+                    <p>
+                        <span>订单信息</span>
+                        <span class="left">转账</span>
+                    </p>
+                </li>
+                <li class="mui-table-view-cell">
+                    <p>
+                        <span>转入地址</span>
+                        <span class="left address">fhjdkhfkjhkh</span>
+                    </p>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <p>
+                        <span>转出地址</span>
+                        <span class="left ">dhfsakdfsdhkg</span>
+                    </p>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <p>
+                        <span>矿工费用</span>
+                    </p>
+                    <p class="cost">
+								<span class="text_right">
+									0.000012254  ETH
+								</span>
+                        <span>
+									≈ Gas(6000) * Gas Price(568 gwe)
+								</span>
+                    </p>
+                </li>
+                <li class="mui-table-view-cell ">
+                    <p>
+								<span>
+									金额
+								</span>
+                        <span class="amountVal">100  ETH</span>
+                    </p>
+                </li>
+            </ul>
+        </div>
+        <div class="options_item center ">
+            <a class="options_item_bg r bs white" href="###" id="confirm">确认</a>
+        </div>
+    </div>
+</div>
+</div>
+
+<div id="currencyPwd" class="mui-modal mui-backdrop">
+    <header class="mui-bar mui-bar-nav">
+        <a class="modal_item mui-icon mui-icon-close mui-pull-right close" href="#currencyPwd"></a>
+        <h1 class="mui-title">钱包密码</h1>
+    </header>
+    <div class="mui-content options">
+        <form class="mui-input-group center top">
+            <div class="mui-input-row">
+                <input type="password" class="mui-input-clear" placeholder="请输入你的密码">
+            </div>
+            <div class="options_item center ">
+                <a class="options_item_bg r bs white">确认</a>
+            </div>
+        </form>
+    </div>
+</div>
+</div>
+
+</body>
+
+</html>
+<script src="../js/mui.min.js "></script>
+<script type="text/javascript ">
+    mui.init();
+
+    function Obtain(id, callback) {
+        let ele = document.getElementById(id),
+            elec = document.getElementsByClassName(id)[0];
+        if (ele) {
+            ele.addEventListener('tap', callback)
+        } else {
+            elec.addEventListener('tap', callback)
+        }
+    }
+
+    Obtain('next', function () {
+        document.getElementById('confirm').href = '#currencyPwd';
+        Obtain('confirm', function () {
+            /*
+             * 处理输入支付密码前的验证逻辑
+             *
+             * */
+        })
+
+        var mask = mui.createMask(function () {
+            return false
+        });
+        mask.show();
+
+        Obtain('close', function () {
+            mask._remove()
+        })
+
+    })
+</script>

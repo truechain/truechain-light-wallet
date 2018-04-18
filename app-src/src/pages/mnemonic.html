@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mnemonic.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">导出助记词</h1>
+		</header>
+		<div class="mui-content center">
+			<div class="introduce">
+				<p class="sg">抄写下你的钱包助记词</p>
+				<p>
+					助记词用于恢复钱包或重置钱包密码,将它准确的抄写到纸上,并存放在只有你知道的安全地方。
+				</p>
+			</div>
+			<div class="key">
+				sdalfj djl hjdff hjkhf hja hjkh sdalfj djl hjdff hjkhf hja hjkh sdalfj djl hjdff hjkhf hja hjkh
+			</div>
+			<div class="options_item center ">
+				<a href="#mnemonic" class="options_item_bg r bs white">下一步</a>
+			</div>
+		</div>
+
+		<div id="mnemonic" class="mui-modal mui-backdrop">
+			<div class="center">
+				<header class="mui-bar mui-bar-nav">
+					<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+					<h1 class="mui-title">确认助记词</h1>
+				</header>
+				<div class="introduce">
+					<p class="sg">确认你的钱包助记词</p>
+					<p>
+						请按顺序点击助记词,以确认你备份的助记词正确。
+					</p>
+				</div>
+				<div class="key">
+
+				</div>
+
+				<div class="key_item">
+					<span>
+						uhufjld
+					</span>
+					<span>
+						cja
+					</span>
+					<span>
+						uhudf
+					</span>
+					<span>
+						uhd
+					</span>
+					<span>
+						cjawe
+					</span>
+					<span>
+						uhu
+					</span>
+					<span>
+						uhufjld
+					</span>
+					<span>
+						cj
+					</span>
+					<span>
+						uhudf
+					</span>
+				</div>
+				<div class="options_item center ">
+					<a class="options_item_bg r bs white">完成</a>
+				</div>
+
+			</div>
+		</div>
+	</body>
+
+</html>
+
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+	mui.init();
+
+	let e = document.getElementsByClassName('key_item')[0].children;
+
+	mui.each(e, function(index, item) {
+		item.addEventListener('tap', function() {
+			/*toggleClass(this, 'kii')*/
+		})
+	})
+</script>

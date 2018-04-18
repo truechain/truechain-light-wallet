@@ -1,0 +1,171 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/mywallet.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的钱包</h1>
+		</header>
+		<div class="mui-content">
+			<div class="accountInfo">
+				<div>
+					<img src="../assets/assets/2.1-资产首页/iOS/头像.png" class="headPortrait" alt="" />
+				</div>
+				<div class="accountInfo_text">
+					<p>我的钱包</p>
+					<p>zhjkdhfjdhuadneuilhjd</p>
+				</div>
+			</div>
+			<ul class="mui-table-view">
+				<li id="walletname" class="mui-table-view-cell">
+					<a href="#modal" class="mui-navigate-right wallet-cell">
+						钱包名称
+					</a>
+				</li>
+				<li id="changePwd" class="mui-table-view-cell">
+					<a class="mui-navigate-right">
+						修改密码
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell exportkey-cell">
+					<a class="mui-navigate-right">
+						导出私钥
+					</a>
+				</li>
+				<li class="mui-table-view-cell exportkeystore-cell">
+					<a class="mui-navigate-right">
+						导出keystore
+					</a>
+				</li>
+				<li class="mui-table-view-cell mnemonic">
+					<a class="mui-navigate-right">
+						导出助记词
+					</a>
+				</li>
+			</ul>
+
+			<button id="huhu" type="button" class="mui-btn mui-btn-danger deleceWallet">删除钱包</button>
+
+			<div id="modal" class="mui-modal">
+				<header class="mui-bar mui-bar-nav">
+					<!--<a class="mui-icon mui-icon-close mui-pull-right" href="#modal"></a>-->
+					<h1 class="mui-title">钱包名称</h1>
+				</header>
+				<div class="mui-content options">
+					<div class="center">
+						<textarea name="" rows="" cols="" placeholder="输入您的新名称"></textarea>
+					</div>
+
+					<div class="options_item center">
+						<a class="options_item_bg l bsk white cancel">取消</a>
+						<a class="options_item_bg r bs white save">保存</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/h.min.js"></script>
+<script type="text/javascript">
+	mui.init({
+		swipeBack: true
+	});
+
+	var flag = false;
+	var mask = mui.createMask(callback);
+	let cancel = document.getElementsByClassName('cancel')[0]
+	let save = document.getElementsByClassName('save')[0];
+
+	//修改
+	h('.wallet-cell').tap(function() {
+		showMask();
+		save.href = cancel.href = '#modal';
+	});
+
+	function showMask() {
+		flag = false;
+		mask.show();
+	}
+
+	function callback() {
+		return flag;
+	}
+	//取消
+	h('.cancel').tap(function() {
+		flag = true;
+		mask.close();
+	})
+
+	//保存
+	h('.save').tap(function() {
+		flag = true;
+		mask.close();
+		/*
+		 
+		 * 处理钱包名称修改完成之后代码逻辑
+		 * */
+		mui.alert("修改钱包名称成功");
+	})
+
+	//导出私钥
+	h('.exportkey-cell').tap(function() {
+		mui.prompt('', 'Password', '请输入密码', ['取消', '确定'], function(e) {
+			/*console.log(e)*/
+			if(e.index == 1) {
+				mui.alert("密码错误");
+			} else {
+				return;
+			}
+		}, 'div');
+	})
+
+	//导出keystore
+	h('.exportkeystore-cell').tap(function() {
+		mui.prompt('', 'Password', '请输入密码', ['取消', '确定'], function(e) {
+			/*console.log(e)*/
+			if(e.index == 1) {
+				/*mui.alert("密码错误");*/
+				mui.openWindow({
+					url: 'keyStore.html',
+					id: 'keyStore'
+				})
+			} else {
+				return;
+			}
+		}, 'div');
+	})
+
+	//导出助记词
+	h('.mnemonic').tap(function() {
+		mui.prompt('', 'Password', '请输入密码', ['取消', '确定'], function(e) {
+			if(e.index == 1) {
+				/*mui.alert("密码错误");*/
+				mui.openWindow({
+					url: 'mnemonic.html',
+					id: 'mnemonic'
+				})
+			} else {
+				return;
+			}
+		}, 'div');
+	})
+
+	mui('#changePwd').on('tap', 'a', function() {
+		mui.openWindow({
+			url: 'changePwd.html',
+			id: 'changePwd'
+		})
+	})
+</script>

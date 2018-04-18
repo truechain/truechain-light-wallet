@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+		<style>
+			.size {
+				font-size: 15px !important;
+				color: #0062CC;
+				border: none;
+				margin: 10px auto;
+				width: 100%;
+			}
+			
+			.mui-input-group:after {
+				height: 0;
+			}
+			
+			.forget {
+				font-size: 15px;
+				width: 90%;
+				margin: 10px auto 0;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+
+			<h1 class="mui-title">修改密码</h1>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<label>当前密码</label>
+					<input data-pwd='currentPwd' type="text" class="mui-input-clear" placeholder="请输入当前密码" required="required">
+				</div>
+				<div class="mui-input-row">
+					<label>新密码</label>
+					<input type="password" class="mui-input-password" data-pwd='newPwd' placeholder="请输入新密码" required="required">
+				</div>
+				<div class="mui-input-row">
+					<label>重复新密码</label>
+					<input type="password" class="mui-input-password" data-pwd='repeatNewPwd' placeholder="重复输入新密码" required="required">
+				</div>
+				<button type="submit" class="size" id="save">完成</button>
+			</form>
+			<div class="forget">
+				<p>
+					忘记密码?&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;导入助记词或者私钥可重置密码。
+				</p>
+				<a href="#" style="color:#0062CC;">马上导入</a>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript">
+	mui.init();
+	mui('.mui-input-group').on('tap', 'button', function() {
+		mui.each(mui('input'), function(index, item) {
+			/*console.log(item.dataset.pwd)*/
+			/*根据data-pwd的标记进行密码校验的逻辑处理*/
+
+		})
+		mui.alert('密码修改成功,请注意保存!')
+	})
+</script>

@@ -1,0 +1,68 @@
+	.mui-bar {
+		background-color: #528bf7;
+	}
+	
+	.white {
+		color: #fff;
+	}
+	
+	.top {
+		margin-top: 10px;
+	}
+	
+	.mui-bar {
+		min-height: 150px;
+	}
+	
+	.center {
+		width: 60%;
+		margin: 0 auto;
+	}
+	
+	.mui-bar-nav~.mui-content {
+		z-index: 99999;
+		padding-top: 140px;
+	}
+	
+	.receipt_item {
+		display: flex;
+		justify-content: center;
+		margin-top: -45px;
+		position: relative;
+		flex-direction: column;
+		align-items: center;
+		z-index: 100;
+	}
+	
+	.avatar {
+		width: 70px;
+		height: 70px;
+		border-radius: 50%;
+	}
+	
+	.avatar_text {
+		width: 60%;
+		word-wrap: break-word;
+		text-align: center;
+	}
+	
+	.qrcode {
+		background-color: #f5f5f5;
+	}
+	
+	.qrcode_item {
+		width: 100%;
+		min-height: 220px;
+		background: url(../assets/1523520245.png) no-repeat center center;
+		background-size: 100% 100%;
+	}
+	
+	.copyAddress {
+		display: flex;
+		margin-top: 20px;
+		min-height: 50px;
+		justify-content: center;
+		align-items: center;
+		background: #528bf7;
+		border-radius: 50px;
+	}

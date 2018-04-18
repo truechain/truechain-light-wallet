@@ -1,0 +1,30 @@
+.mui-table-view:before {
+	height: 0;
+}
+
+.mui-table-view:after {
+	left: 15px;
+}
+
+.center {
+	width: 90%;
+	margin: 0 auto;
+}
+
+.recording {
+	width: 90%;
+	margin: 20px auto 0;
+}
+
+.mui-table-view-cell {
+	display: flex;
+	justify-content: space-between;
+	/*padding: 11px 15px 11px 0;*/
+}
+
+.currencyImg {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	background: url(../assets/3.jpg) no-repeat center center;
+}

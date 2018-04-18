@@ -1,0 +1,142 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="../../iconFont/iconfont.css" />
+		<link rel="stylesheet" type="text/css" href="../css/importWallet.css" />
+		<link rel="stylesheet" type="text/css" href="../css/createWallet.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<a class="mui-pull-right iconfont icon-saomiao" style="line-height: 44px;"></a>
+			<h1 class="mui-title">导入钱包</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-slider">
+				<div class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted">
+					<a class="mui-control-item" href="#item1">助记词</a>
+					<a class="mui-control-item" href="#item2">官方钱包</a>
+					<a class="mui-control-item" href="#item3">私钥</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-4"></div>
+				<div class="mui-slider-group">
+					<div id="item1" class="mui-slider-item mui-control-content mui-active">
+						<div class="center">
+							<textarea id="seeds" name="words" rows="" placeholder="助记词,按空格分隔" class="words">
+								hen awkward emerge once swim issue august wire snake alcohol path safe
+							</textarea>
+							<form class="mui-input-group minHe">
+								<div class="mui-input-row">
+									<input type="text" class="mui-input-clear" value="m/44'/60'/0'/0/0">
+								</div>
+								<div class="mui-input-row">
+									<input type="password" placeholder="输入您的密码" />
+								</div>
+								<div class="mui-input-row">
+									<input type="password" placeholder="确认您的密码" />
+								</div>
+								<div class="box center">
+									<span class="check">
+　　　　<input type="radio" name="radio" id="check1">
+　　　　<label for="check1"></label>
+　　</span>
+									<label for="check1">我已仔细阅读并同意《服务及隐私条款》</a></label>
+								</div>
+
+							</form>
+							<div class="options_item center">
+								<a id="import" class="options_item_bg r bs white">开始导入</a>
+							</div>
+							<p class="doubt" id="memorizingWords">什么是助记词</p>
+						</div>
+					</div>
+					<div id="item2" class="mui-slider-item mui-control-content">
+						<div class="center">
+							<p>
+								直接通过复制粘贴以太坊官方钱包 keystore 文件内容至输入框。或者通过生成keystore内容的二维码,扫描录入。
+							</p>
+							<textarea placeholder="keystore  文本内容" class="words"></textarea>
+							<form class="mui-input-group" style="min-height: unset !important;">
+								<div class="mui-input-row">
+									<input type="password" placeholder="输入您的密码" />
+								</div>
+								<div class="box center">
+									<span class="check">
+　　　　<input type="radio" name="radio" id="check2">
+　　　　<label for="check2"></label>
+　　</span>
+									<label for="check2">我已仔细阅读并同意《服务及隐私条款》</a></label>
+								</div>
+							</form>
+							<div class="options_item center">
+								<a id="import" class="options_item_bg r bs white">开始导入</a>
+							</div>
+							<p class="doubt">什么是keystore</p>
+						</div>
+					</div>
+
+					<div id="item3" class="mui-slider-item mui-control-content">
+						<div class="center">
+							<textarea placeholder="明文私钥" class="words"></textarea>
+							<form class="mui-input-group minHe">
+								<div class="mui-input-row">
+									<input type="password" placeholder="输入您的密码" />
+								</div>
+								<div class="mui-input-row">
+									<input type="password" placeholder="确认您的密码" />
+								</div>
+								<div class="box center">
+									<span class="check">
+　　　　<input type="radio" name="radio" id="check3">
+　　　　<label for="check3"></label>
+　　</span>
+									<label for="check3">我已仔细阅读并同意《服务及隐私条款》</a></label>
+								</div>
+
+							</form>
+							<div class="options_item center">
+								<a id="import" class="options_item_bg r bs white">开始导入</a>
+							</div>
+							<p class="doubt">什么是私钥?</p>
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+		</div>
+	</body>
+
+</html>
+<script src="../js/mui.min.js"></script>
+<script type="text/javascript" src="../js/common.js">
+	
+</script>
+<script type="text/javascript" src="../js/h.min.js"></script>
+<script type="text/javascript" src="../js/web3.min.js"></script>
+<script type="text/javascript" src="../js/hooked-web3-provider.min.js"></script>
+<script type="text/javascript" src="../js/lightwallet.min.js"></script>
+
+<script type="text/javascript" src="../js/main.js"></script>
+
+<script type="text/javascript">
+	mui.init();
+	
+	
+	h('#memorizingWords').tap(function(){
+		mui.openWindow('memorizingWords.html');
+	})
+	h('#import').tap(function() {
+		let seeds = h('#seeds').val(); //助记词 ,  暂时写死!
+		/*
+		 调用后台接口代码逻辑
+		 * */
+	})
+</script>
