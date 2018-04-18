@@ -9,24 +9,26 @@ function generate_seed() {
 var totalAddresses = 0;
 
 function generate_addresses(seed) {
+
 	if(seed == undefined) {
 		seed = document.getElementById("seed").value;
 	}
 
 	if(!lightwallet.keystore.isSeedValid(seed)) {
-		document.getElementById("info").innerHTML = "Please enter a valid seed";
+		document.getElementById("import").innerHTML = "Please enter a valid seed";
 		return;
 	}
 
 	totalAddresses = prompt("How many addresses do you want to generate");
-
 	if(!Number.isInteger(parseInt(totalAddresses))) {
-		document.getElementById("info").innerHTML = "Please enter valid number of addresses";
+		document.getElementById("import").innerHTML = "Please enter valid number of addresses";
 		return;
 	}
 
 	var password = Math.random().toString();
 	var hdPathString = "m/44'/60'/0'/0";
+
+	console.log(password, '-----')
 
 	lightwallet.keystore.createVault({
 		password: password,
@@ -40,9 +42,10 @@ function generate_addresses(seed) {
 				ks.generateNewAddress(pwDerivedKey, totalAddresses);
 				var addresses = ks.getAddresses();
 
-				var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-
-				var html = "";
+				console.log(addresses, '999999');
+				
+				/*var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));*/
+				/*var html = "";
 
 				for(var count = 0; count < addresses.length; count++) {
 					var address = addresses[count];
@@ -56,7 +59,7 @@ function generate_addresses(seed) {
 					html = html + "</li>";
 				}
 
-				document.getElementById("list").innerHTML = html;
+				document.getElementById("list").innerHTML = html;*/
 			}
 		});
 	});

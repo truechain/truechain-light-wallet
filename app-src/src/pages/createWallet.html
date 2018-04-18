@@ -8,6 +8,118 @@
 		<link href="../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../css/reset.css" />
 		<link rel="stylesheet" href="../css/createWallet.css" />
+		<style type="text/css">
+			.ywz_zhuce_bao {
+				float: left;
+				width: 640px;
+				height: 360px;
+				padding: 30px 0px 0px 66px;
+				border-right: 1px dashed #e5e5e5;
+			}
+			
+			.ywz_zhucexiaobo {
+				float: left;
+				width: 620px;
+				padding-bottom: 10px;
+				padding-top: 5px;
+				margin-left: 20px;
+			}
+			
+			.ywz_zhuce_youjian {
+				float: left;
+				width: 100px;
+				margin: 5px 0 0 0;
+				font-size: 14px;
+				text-align: right;
+			}
+			/*用户*/
+			
+			.ywz_zhuce_yongyu1 {
+				float: left;
+				color: #C00;
+				font-size: 12px;
+				padding-left: 10px;
+				margin-top: 10px;
+				_padding-left: 0px;
+			}
+			/*后面的文字*/
+			
+			.ywz_zhuce_yongyu1 a {
+				color: #C00;
+				text-decoration: none;
+			}
+			
+			.ywz_zhuce_yongyu1 a:hover {
+				color: #C00;
+			}
+			
+			.ywz_zhuce_xiaoxiaobao {
+				float: left;
+				width: 226px;
+			}
+			
+			.ywz_zhuce_hongxian {
+				float: left;
+				background: #ff3300;
+				width: 62px;
+				height: 4px;
+				margin-top: 5px;
+				margin-left: 5px;
+				_margin-top: 0px;
+				_height: 2px;
+				font-size: 0px;
+			}
+			
+			.ywz_zhuce_hongxian2 {
+				float: left;
+				background: #099;
+				width: 62px;
+				height: 4px;
+				margin-top: 5px;
+				margin-left: 5px;
+				_margin-top: 0px;
+				_height: 2px;
+				font-size: 0px;
+			}
+			
+			.ywz_zhuce_hongxian3 {
+				float: left;
+				background: #060;
+				width: 62px;
+				height: 4px;
+				margin-top: 5px;
+				margin-left: 5px;
+				_margin-top: 0px;
+				_height: 2px;
+				font-size: 0px;
+			}
+			
+			.ywz_zhuce_huixian {
+				float: left;
+				background: #d6d3d3;
+				width: 62px;
+				height: 4px;
+				margin-top: 5px;
+				_margin-top: 0px;
+				margin-left: 5px;
+				_height: 2px;
+				font-size: 0px;
+			}
+			/*框*/
+			
+			.ywz_zhuce_kuangwenzi1 {
+				float: left;
+				/*background: url(../images/dengl_06.jpg) no-repeat;*/
+				border: 0;
+				color: #3e3e3e;
+				width: 210px;
+				height: 40px;
+				line-height: 35px;
+				padding-left: 25px;
+				_padding-left: 20px;
+				outline: medium;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -28,10 +140,17 @@
 					<input type="text" class="mui-input-clear" placeholder="输入钱包名称">
 				</div>
 				<div class="mui-input-row">
-					<input type="password" placeholder="输入您的密码" min="8">
+					<input name="tbPassword" type="password" id="tbPassword" class="ywz_zhuce_kuangwenzi1" placeholder="确认您的密码!" />
+					<div>
+						<!--****************************-->
+						<div class="ywz_zhuce_huixian" id='pwdLevel_1'> </div>
+						<div class="ywz_zhuce_huixian" id='pwdLevel_2'> </div>
+						<div class="ywz_zhuce_huixian" id='pwdLevel_3'> </div>
+					</div>
 				</div>
+
 				<div class="mui-input-row">
-					<input type="password" placeholder="确认您的密码">
+					<input type="password" placeholder="输入您的密码" min="8">
 				</div>
 
 				<div class="box center">
@@ -51,6 +170,7 @@
 
 </html>
 <script src="../js/mui.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="../js/common.js">
 </script>
 <script type="text/javascript">
@@ -59,4 +179,144 @@
 	document.getElementById('lead-wallet').addEventListener('tap', function() {
 		mui.openWindow('importWallet.html');
 	});
+	/*创建钱包*/
+	
 </script>
+
+
+<!--密码校验强度-->
+
+<!--<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js">
+</script>
+
+<script type="text/javascript">
+	$('#tbPassword').focus(function() {
+		mui.alert('00000')
+		$('#pwdLevel_1').attr('class', 'ywz_zhuce_hongxian');
+		$('#tbPassword').keyup();
+	});
+
+	$('#tbPassword').keyup(function() {
+		var __th = $(this);
+
+		if(!__th.val()) {
+			$('#pwd_tip').hide();
+			$('#pwd_err').show();
+			Primary();
+			return;
+		}
+		if(__th.val().length < 8) {
+			$('#pwd_tip').hide();
+			$('#pwd_err').show();
+			Weak();
+			return;
+		}
+		var _r = checkPassword(__th);
+		if(_r < 1) {
+			$('#pwd_tip').hide();
+			$('#pwd_err').show();
+			Primary();
+			return;
+		}
+
+		if(_r > 0 && _r < 2) {
+			Weak();
+		} else if(_r >= 2 && _r < 4) {
+			Medium();
+		} else if(_r >= 4) {
+			Tough();
+		}
+
+		$('#pwd_tip').hide();
+		$('#pwd_err').hide();
+	});
+
+	function Primary() {
+		$('#pwdLevel_1').attr('class', 'ywz_zhuce_huixian');
+		$('#pwdLevel_2').attr('class', 'ywz_zhuce_huixian');
+		$('#pwdLevel_3').attr('class', 'ywz_zhuce_huixian');
+	}
+
+	function Weak() {
+		$('#pwdLevel_1').attr('class', 'ywz_zhuce_hongxian');
+		$('#pwdLevel_2').attr('class', 'ywz_zhuce_huixian');
+		$('#pwdLevel_3').attr('class', 'ywz_zhuce_huixian');
+	}
+
+	function Medium() {
+		$('#pwdLevel_1').attr('class', 'ywz_zhuce_hongxian');
+		$('#pwdLevel_2').attr('class', 'ywz_zhuce_hongxian2');
+		$('#pwdLevel_3').attr('class', 'ywz_zhuce_huixian');
+	}
+
+	function Tough() {
+		$('#pwdLevel_1').attr('class', 'ywz_zhuce_hongxian');
+		$('#pwdLevel_2').attr('class', 'ywz_zhuce_hongxian2');
+		$('#pwdLevel_3').attr('class', 'ywz_zhuce_hongxian3');
+	}
+
+	function checkPassword(pwdinput) {
+		var maths, smalls, bigs, corps, cat, num;
+		var str = $(pwdinput).val()
+		var len = str.length;
+
+		var cat = /.{16}/g
+		if(len == 0) return 1;
+		if(len > 16) {
+			$(pwdinput).val(str.match(cat)[0]);
+		}
+		cat = /.*[\u4e00-\u9fa5]+.*$/
+		if(cat.test(str)) {
+			return -1;
+		}
+		cat = /\d/;
+		var maths = cat.test(str);
+		cat = /[a-z]/;
+		var smalls = cat.test(str);
+		cat = /[A-Z]/;
+		var bigs = cat.test(str);
+		var corps = corpses(pwdinput);
+		var num = maths + smalls + bigs + corps;
+
+		if(len < 6) {
+			return 1;
+		}
+
+		if(len >= 6 && len <= 8) {
+			if(num == 1) return 1;
+			if(num == 2 || num == 3) return 2;
+			if(num == 4) return 3;
+		}
+
+		if(len > 8 && len <= 11) {
+			if(num == 1) return 2;
+			if(num == 2) return 3;
+			if(num == 3) return 4;
+			if(num == 4) return 5;
+		}
+
+		if(len > 11) {
+			if(num == 1) return 3;
+			if(num == 2) return 4;
+			if(num > 2) return 5;
+		}
+	}
+
+	function corpses(pwdinput) {
+		var cat = /./g
+		var str = $(pwdinput).val();
+		var sz = str.match(cat)
+		for(var i = 0; i < sz.length; i++) {
+			cat = /\d/;
+			maths_01 = cat.test(sz[i]);
+			cat = /[a-z]/;
+			smalls_01 = cat.test(sz[i]);
+			cat = /[A-Z]/;
+			bigs_01 = cat.test(sz[i]);
+			if(!maths_01 && !smalls_01 && !bigs_01) {
+				return true;
+			}
+		}
+		return false;
+	}
+</script>-->

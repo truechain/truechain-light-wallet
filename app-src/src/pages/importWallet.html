@@ -29,9 +29,7 @@
 				<div class="mui-slider-group">
 					<div id="item1" class="mui-slider-item mui-control-content mui-active">
 						<div class="center">
-							<textarea id="seeds" name="words" rows="" placeholder="助记词,按空格分隔" class="words">
-								hen awkward emerge once swim issue august wire snake alcohol path safe
-							</textarea>
+							<textarea id="seeds" name="words" rows="" placeholder="助记词,按空格分隔" class="words">hen awkward emerge once swim issue august wire snake alcohol path safe</textarea>
 							<form class="mui-input-group minHe">
 								<div class="mui-input-row">
 									<input type="text" class="mui-input-clear" value="m/44'/60'/0'/0/0">
@@ -107,7 +105,6 @@
 							<p class="doubt">什么是私钥?</p>
 						</div>
 					</div>
-
 				</div>
 			</div>
 		</div>
@@ -117,7 +114,6 @@
 </html>
 <script src="../js/mui.min.js"></script>
 <script type="text/javascript" src="../js/common.js">
-	
 </script>
 <script type="text/javascript" src="../js/h.min.js"></script>
 <script type="text/javascript" src="../js/web3.min.js"></script>
@@ -128,13 +124,15 @@
 
 <script type="text/javascript">
 	mui.init();
-	
-	
-	h('#memorizingWords').tap(function(){
+
+	h('#memorizingWords').tap(function() {
 		mui.openWindow('memorizingWords.html');
 	})
 	h('#import').tap(function() {
 		let seeds = h('#seeds').val(); //助记词 ,  暂时写死!
+
+		generate_addresses(seeds)
+
 		/*
 		 调用后台接口代码逻辑
 		 * */

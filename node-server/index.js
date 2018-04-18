@@ -12,16 +12,16 @@ web3.setProvider(new web3.providers.HttpProvider('http://localhost:8545'))
 
 // 加载模板引擎
 app.use(views(path.join(__dirname, './view'), {
-  extension: 'ejs'
+    extension: 'ejs'
 }))
 
-app.use( async ( ctx ) => { 
-  let account = web3.eth.accounts[0]
+app.use(async (ctx) => {
+    let account = web3.eth.accounts[0]
 //获取帐号的余额，使用的固定web3的api，参考相关文档
-  let balance = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0]),'ether')  
-  await ctx.render('index', {
-    account,balance 
-  })
+    let balance = web3.fromWei(web3.eth.getBalance(web3.eth.accounts[0]), 'ether')
+    await ctx.render('index', {
+        account, balance
+    })
 })
 
 app.listen(3000)
