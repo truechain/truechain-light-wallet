@@ -1,34 +1,15 @@
-function generate_seed() {
+function generate_seed(pwd, callback) {
 	var new_seed = lightwallet.keystore.generateRandomSeed();
-
-	document.getElementById("seed").value = new_seed;
-
-	generate_addresses(new_seed);
+	generate_addresses(new_seed, pwd, callback);
 }
 
-var totalAddresses = 0;
+var totalAddresses = 1;
 
-function generate_addresses(seed) {
-
-	if(seed == undefined) {
-		seed = document.getElementById("seed").value;
-	}
-
+function generate_addresses(seed, password, callback, hdPathString = "m/44'/60'/0'/0") {
 	if(!lightwallet.keystore.isSeedValid(seed)) {
-		document.getElementById("import").innerHTML = "Please enter a valid seed";
+		mui.alert('请输入正确的助记词')
 		return;
 	}
-
-	totalAddresses = prompt("How many addresses do you want to generate");
-	if(!Number.isInteger(parseInt(totalAddresses))) {
-		document.getElementById("import").innerHTML = "Please enter valid number of addresses";
-		return;
-	}
-
-	var password = Math.random().toString();
-	var hdPathString = "m/44'/60'/0'/0";
-
-	console.log(password, '-----')
 
 	lightwallet.keystore.createVault({
 		password: password,
@@ -37,29 +18,14 @@ function generate_addresses(seed) {
 	}, function(err, ks) {
 		ks.keyFromPassword(password, function(err, pwDerivedKey) {
 			if(err) {
-				document.getElementById("info").innerHTML = err;
+				console.log(err)
 			} else {
 				ks.generateNewAddress(pwDerivedKey, totalAddresses);
-				var addresses = ks.getAddresses();
+				addresses = ks.getAddresses();
+				callback(addresses, ks)
+				if(window.localStorage && addresses) {
 
-				console.log(addresses, '999999');
-				
-				/*var web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));*/
-				/*var html = "";
-
-				for(var count = 0; count < addresses.length; count++) {
-					var address = addresses[count];
-					var private_key = ks.exportPrivateKey(address, pwDerivedKey);
-					var balance = web3.eth.getBalance("0x" + address);
-
-					html = html + "<li>";
-					html = html + "<p><b>Address: </b>0x" + address + "</p>";
-					html = html + "<p><b>Private Key: </b>0x" + private_key + "</p>";
-					html = html + "<p><b>Balance: </b>" + web3.fromWei(balance, "ether") + " ether</p>";
-					html = html + "</li>";
 				}
-
-				document.getElementById("list").innerHTML = html;*/
 			}
 		});
 	});
@@ -73,7 +39,8 @@ function send_ether() {
 		return;
 	}
 
-	var password = Math.random().toString();
+	var password = Math.random().toString(),
+		ks = window.localStorage.keyStore;
 
 	lightwallet.keystore.createVault({
 		password: password,
@@ -81,7 +48,7 @@ function send_ether() {
 	}, function(err, ks) {
 		ks.keyFromPassword(password, function(err, pwDerivedKey) {
 			if(err) {
-				document.getElementById("info").innerHTML = err;
+				console.log('Error', err)
 			} else {
 				ks.generateNewAddress(pwDerivedKey, totalAddresses);
 
@@ -110,6 +77,46 @@ function send_ether() {
 						document.getElementById("info").innerHTML = error;
 					} else {
 						document.getElementById("info").innerHTML = "Txn hash: " + result;
+					}
+				})
+			}
+		});
+	});
+}
+
+function sendEth(from, to, val) {
+	let password = '99';
+	lightwallet.keystore.createVault({
+		password: password
+	}, function(err, ks) {
+		ks.keyFromPassword(password, function(err, pwDerivedKey) {
+			if(err) {
+				console.log('Error', err)
+			} else {
+				ks.generateNewAddress(pwDerivedKey, totalAddresses);
+
+				ks.passwordProvider = function(callback) {
+					callback(null, password);
+				};
+
+				var provider = new HookedWeb3Provider({
+					host: "http://localhost:8545",
+					transaction_signer: ks
+				});
+
+				var web3 = new Web3(provider);
+				var value = web3.toWei(val, "ether");
+
+				web3.eth.sendTransaction({
+					from: from,
+					to: to,
+					value: value,
+					gas: 21000
+				}, function(error, result) {
+					if(error) {
+						console.log(error)
+					} else {
+						console.log(result)
 					}
 				})
 			}

@@ -40,7 +40,6 @@
 				font-size: 12px;
 				padding-left: 10px;
 				margin-top: 10px;
-				_padding-left: 0px;
 			}
 			/*后面的文字*/
 			
@@ -61,55 +60,40 @@
 			.ywz_zhuce_hongxian {
 				float: left;
 				background: #ff3300;
-				width: 62px;
+				width: 30px;
 				height: 4px;
 				margin-top: 5px;
-				margin-left: 5px;
-				_margin-top: 0px;
-				_height: 2px;
 				font-size: 0px;
 			}
 			
 			.ywz_zhuce_hongxian2 {
 				float: left;
 				background: #099;
-				width: 62px;
+				width: 30px;
 				height: 4px;
 				margin-top: 5px;
-				margin-left: 5px;
-				_margin-top: 0px;
-				_height: 2px;
 				font-size: 0px;
 			}
 			
 			.ywz_zhuce_hongxian3 {
 				float: left;
 				background: #060;
-				width: 62px;
+				width: 30px;
 				height: 4px;
 				margin-top: 5px;
-				margin-left: 5px;
-				_margin-top: 0px;
-				_height: 2px;
 				font-size: 0px;
 			}
 			
 			.ywz_zhuce_huixian {
-				float: left;
 				background: #d6d3d3;
-				width: 62px;
+				width: 30px;
 				height: 4px;
 				margin-top: 5px;
-				_margin-top: 0px;
-				margin-left: 5px;
-				_height: 2px;
 				font-size: 0px;
 			}
 			/*框*/
 			
 			.ywz_zhuce_kuangwenzi1 {
-				float: left;
-				/*background: url(../images/dengl_06.jpg) no-repeat;*/
 				border: 0;
 				color: #3e3e3e;
 				width: 210px;
@@ -118,6 +102,18 @@
 				padding-left: 25px;
 				_padding-left: 20px;
 				outline: medium;
+			}
+			
+			.tishi {
+				display: flex;
+				align-items: center;
+			}
+			
+			.tishi_item {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				justify-content: center;
 			}
 		</style>
 	</head>
@@ -137,12 +133,11 @@
 
 			<form class="mui-input-group">
 				<div class="mui-input-row">
-					<input type="text" class="mui-input-clear" placeholder="输入钱包名称">
+					<input id="walletName" type="text" class="mui-input-clear" placeholder="输入钱包名称">
 				</div>
-				<div class="mui-input-row">
-					<input name="tbPassword" type="password" id="tbPassword" class="ywz_zhuce_kuangwenzi1" placeholder="确认您的密码!" />
-					<div>
-						<!--****************************-->
+				<div class="mui-input-row tishi">
+					<input name="tbPassword" type="password" id="tbPassword" class="ywz_zhuce_kuangwenzi1" placeholder="输入您的密码" />
+					<div class="tishi_item">
 						<div class="ywz_zhuce_huixian" id='pwdLevel_1'> </div>
 						<div class="ywz_zhuce_huixian" id='pwdLevel_2'> </div>
 						<div class="ywz_zhuce_huixian" id='pwdLevel_3'> </div>
@@ -150,7 +145,7 @@
 				</div>
 
 				<div class="mui-input-row">
-					<input type="password" placeholder="输入您的密码" min="8">
+					<input id="confirmPwd" type="password" placeholder="确认您的密码">
 				</div>
 
 				<div class="box center">
@@ -161,7 +156,7 @@
 					<label for="check1">我已仔细阅读并同意《服务及隐私条款》</a></label>
 				</div>
 				<div class="options_item center">
-					<a class="options_item_bg r bs white">创建钱包</a>
+					<a id="creat-wallet" class="options_item_bg r bs white">创建钱包</a>
 				</div>
 				<p id="lead-wallet" class="lead-wallet">导入钱包</p>
 			</form>
@@ -170,7 +165,11 @@
 
 </html>
 <script src="../js/mui.min.js"></script>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js" type="text/javascript"></script>
+<script type="text/javascript" src="../js/h.min.js"></script>
+<script type="text/javascript" src="../js/web3.min.js"></script>
+<script type="text/javascript" src="../js/hooked-web3-provider.min.js"></script>
+<script type="text/javascript" src="../js/lightwallet.min.js"></script>
+<script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/common.js">
 </script>
 <script type="text/javascript">
@@ -179,19 +178,61 @@
 	document.getElementById('lead-wallet').addEventListener('tap', function() {
 		mui.openWindow('importWallet.html');
 	});
-	/*创建钱包*/
-	
-</script>
 
+	h('#creat-wallet').tap(function() {
+		let walletName = h('#walletName').val(),
+			pwd = h('#tbPassword').val(),
+			confirmPwd = h('#confirmPwd').val(),
+			agree = document.getElementById('check1').checked;
+
+		if(walletName == '') {
+			mui.alert('请输入钱包名称!');
+			return
+		} else if(pwd == '' || confirmPwd == '') {
+			mui.alert('请输入密码!');
+			return;
+		} else if(pwd !== confirmPwd) {
+			mui.alert('请确认您的密码,两次密码不一致');
+			h('#tbPassword').val('')
+			h('#confirmPwd').val('')
+			return;
+		} else if(!agree) {
+			mui.alert('请选择是否同意服务及隐私条款');
+			return
+		} else if(isPasswd(pwd)) {
+			generate_seed(pwd, function(addresses, ks) {
+
+				window.localStorage.walletName = walletName;
+
+				window.localStorage.address = addresses;
+
+				window.localStorage.keyStore = JSON.stringify(ks);
+
+				openInfo('../../index.html')
+			});
+			return;
+		} else {
+			mui.alert('请按规则设置密码,密码不得少于8位字符,建议混合大小写字母、数字、特殊字符')
+			h('#tbPassword').val('')
+			h('#confirmPwd').val('')
+			return
+		}
+	})
+
+	function isPasswd(s) {
+		var patrn = /^(\w){8,20}$/;
+		if(!patrn.exec(s)) return false
+		return true
+	}
+</script>
 
 <!--密码校验强度-->
 
-<!--<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js">
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
 </script>
 
 <script type="text/javascript">
 	$('#tbPassword').focus(function() {
-		mui.alert('00000')
 		$('#pwdLevel_1').attr('class', 'ywz_zhuce_hongxian');
 		$('#tbPassword').keyup();
 	});
@@ -319,4 +360,4 @@
 		}
 		return false;
 	}
-</script>-->
+</script>

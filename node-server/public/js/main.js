@@ -1,4 +1,3 @@
-
 function generate_seed() {
 	var new_seed = lightwallet.keystore.generateRandomSeed();
 
