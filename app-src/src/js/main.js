@@ -1,125 +1,135 @@
-function generate_seed(pwd, callback) {
-	var new_seed = lightwallet.keystore.generateRandomSeed();
-	generate_addresses(new_seed, pwd, callback);
+var web3 = new Web3();
+var global_keystore;
+
+function setWeb3Provider(keystore) {
+	var web3Provider = new HookedWeb3Provider({
+		//host: "https://rinkeby.infura.io/",
+		/*host: "https://ropsten.infura.io/",*/
+		host: "http://localhost:8545",
+		transaction_signer: keystore
+	});
+	web3.setProvider(web3Provider);
 }
 
-var totalAddresses = 1;
+function newAddresses(password, callback) {
+	/*if(password == '') {
+		password = prompt('Enter password to retrieve addresses', 'Password');
+	}*/
+	var numAddr = 1; //生成数量
+	global_keystore.keyFromPassword(password, function(err, pwDerivedKey) {
+		global_keystore.generateNewAddress(pwDerivedKey, numAddr);
+		var addresses = global_keystore.getAddresses();
+		callback(addresses, global_keystore)
+		//getBalances();
+	})
+}
 
-function generate_addresses(seed, password, callback, hdPathString = "m/44'/60'/0'/0") {
-	if(!lightwallet.keystore.isSeedValid(seed)) {
-		mui.alert('请输入正确的助记词')
-		return;
-	}
-
+function getBalances() {
+	var addresses = global_keystore.getAddresses();
+	document.getElementById('addr').innerHTML = 'Retrieving addresses...'
+	async.map(addresses, web3.eth.getBalance, function(err, balances) {
+		async.map(addresses, web3.eth.getTransactionCount, function(err, nonces) {
+			document.getElementById('addr').innerHTML = ''
+			for(var i = 0; i < addresses.length; ++i) {
+				document.getElementById('addr').innerHTML += '<div>' + addresses[i] + ' (Bal: ' + (balances[i] / 1.0e18) + ' ETH, Nonce: ' + nonces[i] + ')' + '</div>'
+			}
+		})
+	})
+}
+/*
+function setSeed() {
+	var password = prompt('Enter Password to encrypt your seed', 'Password');
 	lightwallet.keystore.createVault({
 		password: password,
-		seedPhrase: seed,
-		hdPathString: hdPathString
+		seedPhrase: document.getElementById('seed').value,
+		//random salt 
+		hdPathString: "m/44'/60'/0'/0"
 	}, function(err, ks) {
-		ks.keyFromPassword(password, function(err, pwDerivedKey) {
-			if(err) {
-				console.log(err)
-			} else {
-				ks.generateNewAddress(pwDerivedKey, totalAddresses);
-				addresses = ks.getAddresses();
-				callback(addresses, ks)
-				if(window.localStorage && addresses) {
+		global_keystore = ks
+		document.getElementById('seed').value = ''
 
-				}
-			}
-		});
-	});
+		newAddresses(password);
+		setWeb3Provider(global_keystore);
+		getBalances();
+	})
 }
-
-function send_ether() {
-	var seed = document.getElementById("seed").value;
-
-	if(!lightwallet.keystore.isSeedValid(seed)) {
-		document.getElementById("info").innerHTML = "Please enter a valid seed";
-		return;
-	}
-
-	var password = Math.random().toString(),
-		ks = window.localStorage.keyStore;
-
+*/
+function newWallet(password, callback) {
+	var randomSeed = lightwallet.keystore.generateRandomSeed();
 	lightwallet.keystore.createVault({
 		password: password,
-		seedPhrase: seed
+		seedPhrase: randomSeed,
+		//random salt 
+		hdPathString: "m/44'/60'/0'/0"
 	}, function(err, ks) {
-		ks.keyFromPassword(password, function(err, pwDerivedKey) {
-			if(err) {
-				console.log('Error', err)
-			} else {
-				ks.generateNewAddress(pwDerivedKey, totalAddresses);
+		global_keystore = ks
+		newAddresses(password, callback);
+		//setWeb3Provider(global_keystore);
+		//getBalances();
+	})
+}
 
-				ks.passwordProvider = function(callback) {
-					callback(null, password);
-				};
-
-				var provider = new HookedWeb3Provider({
-					host: "http://localhost:8545",
-					transaction_signer: ks
-				});
-
-				var web3 = new Web3(provider);
-
-				var from = document.getElementById("address1").value;
-				var to = document.getElementById("address2").value;
-				var value = web3.toWei(document.getElementById("ether").value, "ether");
-
-				web3.eth.sendTransaction({
-					from: from,
-					to: to,
-					value: value,
-					gas: 21000
-				}, function(error, result) {
-					if(error) {
-						document.getElementById("info").innerHTML = error;
-					} else {
-						document.getElementById("info").innerHTML = "Txn hash: " + result;
-					}
-				})
-			}
-		});
+function showSeed() {
+	var password = prompt('Enter password to show your seed. Do not let anyone else see your seed.', 'Password');
+	global_keystore.keyFromPassword(password, function(err, pwDerivedKey) {
+		var seed = global_keystore.getSeed(pwDerivedKey);
+		alert('Your seed is: "' + seed + '". Please write it down.');
 	});
 }
 
-function sendEth(from, to, val) {
-	let password = '99';
-	lightwallet.keystore.createVault({
-		password: password
-	}, function(err, ks) {
-		ks.keyFromPassword(password, function(err, pwDerivedKey) {
-			if(err) {
-				console.log('Error', err)
-			} else {
-				ks.generateNewAddress(pwDerivedKey, totalAddresses);
+function sendEth(fromAddr, toAddr, valueEth) {
+	let p = [],
+		ks = null;
+	for(let i = 0; i <= parseInt(window.localStorage.walletNum); i++) {
+		let a = JSON.parse(window.localStorage[i]);
+		p[i] = a;
+	}
 
-				ks.passwordProvider = function(callback) {
-					callback(null, password);
-				};
+	for(let j = 0; j < p.length; j++) {
+		ks = JSON.parse(p[j].keyStore);
+	}
 
-				var provider = new HookedWeb3Provider({
-					host: "http://localhost:8545",
-					transaction_signer: ks
-				});
+	setWeb3Provider(ks)
 
-				var web3 = new Web3(provider);
-				var value = web3.toWei(val, "ether");
+	var value = parseFloat(valueEth) * 1.0e18
+	var gasPrice = 18000000000
+	var gas = 50000
+	web3.eth.sendTransaction({
+		from: fromAddr,
+		to: toAddr,
+		value: value,
+		gasPrice: gasPrice,
+		gas: gas
+	}, function(err, txhash) {
+		console.log('error: ' + err)
+		console.log('txhash: ' + txhash)
+	})
+}
 
-				web3.eth.sendTransaction({
-					from: from,
-					to: to,
-					value: value,
-					gas: 21000
-				}, function(error, result) {
-					if(error) {
-						console.log(error)
-					} else {
-						console.log(result)
-					}
-				})
-			}
-		});
-	});
+
+
+
+function functionCall() {
+	var fromAddr = document.getElementById('functionCaller').value
+	var contractAddr = document.getElementById('contractAddr').value
+	var abi = JSON.parse(document.getElementById('contractAbi').value)
+	var contract = web3.eth.contract(abi).at(contractAddr)
+	var functionName = document.getElementById('functionName').value
+	var args = JSON.parse('[' + document.getElementById('functionArgs').value + ']')
+	var valueEth = document.getElementById('sendValueAmount').value
+	var value = parseFloat(valueEth) * 1.0e18
+	var gasPrice = 50000000000
+	var gas = 4541592
+	args.push({
+		from: fromAddr,
+		value: value,
+		gasPrice: gasPrice,
+		gas: gas
+	})
+	var callback = function(err, txhash) {
+		console.log('error: ' + err)
+		console.log('txhash: ' + txhash)
+	}
+	args.push(callback)
+	contract[functionName].apply(this, args)
 }

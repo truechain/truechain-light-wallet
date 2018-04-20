@@ -174,7 +174,6 @@
 </script>
 <script type="text/javascript">
 	mui.init()
-
 	document.getElementById('lead-wallet').addEventListener('tap', function() {
 		mui.openWindow('importWallet.html');
 	});
@@ -200,14 +199,25 @@
 			mui.alert('请选择是否同意服务及隐私条款');
 			return
 		} else if(isPasswd(pwd)) {
-			generate_seed(pwd, function(addresses, ks) {
-
-				window.localStorage.walletName = walletName;
-
-				window.localStorage.address = addresses;
-
-				window.localStorage.keyStore = JSON.stringify(ks);
-
+			newWallet(pwd, function(addresses, ks) {
+				let walletNum = window.localStorage.walletNum;
+				if(walletNum == undefined) {
+					walletNum = 0;
+					window.localStorage[walletNum] = JSON.stringify({
+						'walletName': walletName,
+						'address': addresses,
+						'keyStore': JSON.stringify(ks)
+					});
+					window.localStorage.walletNum = walletNum++;
+				} else {
+					walletNum = ++walletNum;
+					window.localStorage[walletNum] = JSON.stringify({
+						'walletName': walletName,
+						'address': addresses,
+						'keyStore': JSON.stringify(ks)
+					});
+					window.localStorage.walletNum = walletNum;
+				}
 				openInfo('../../index.html')
 			});
 			return;

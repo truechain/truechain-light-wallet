@@ -175,9 +175,11 @@
 
 <script type="text/javascript">
 	h('#next').tap(function() {
-		let from = '0x2B9f2669A434a538E7fFD5b70c893ce20451F8e8';
-		let to = h('#toAddress').val(),
-			amount = h('#amount').val();
+		let from = '0xd902d313367b85a3fc509d04d7ef97552f6ca764';
+		let to = '0x14Cd0D3Fd1F22564Db8177E51827DEA42D7156C5',
+			amount = 20;
+		/*let to = h('#toAddress').val(),
+			amount = h('#amount').val();*/
 		sendEth(from, to, amount)
 	})
 </script>
