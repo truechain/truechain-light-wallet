@@ -1,0 +1,116 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>Asset</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="lib/css/mui.min.css" />
+		<link rel="stylesheet" href="dist/css/common/common.css" />
+		<link rel="stylesheet" href="dist/css/asset/asset.css" />
+	</head>
+
+	<body>
+		<!--asset-资产模块-->
+		<div id="app" class="bg-top">
+			<div class="my-head">
+			</div>
+			<div class="my-wallet">
+				<!--钱包名称-->
+			</div>
+			<div class="er-code">
+				<div class="walletAddress">
+					<!--钱包地址-->
+				</div>
+				<div class="er-code-img"></div>
+			</div>
+		</div>
+		<div class="asset-content">
+			<div class="asset-content-top">
+				账户总资产($)：
+				<div class="total-money">
+					5178.00
+				</div>
+				<div class="new-add-btn"></div>
+			</div>
+			<div class="asset-content-list border-1px">
+				<a href="javascript:openInfo('view/asset/currencydetail.html')">
+					<div class="list-left"></div>
+					<div class="list-middle">
+						<div class="title top">ETH</div>
+						<div class="price bottom"><span>2589.00</span>CNY</div>
+					</div>
+					<div class="list-right">
+						<div class="top">1.000</div>
+						<div class="price bottom"><span>2589.00</span>CNY</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="asset-content-list">
+				<a href="javascript:openInfo('view/asset/currencydetail.html')">
+					<div class="list-left"></div>
+					<div class="list-middle">
+						<div class="title top">TRUE</div>
+						<div class="price bottom"><span>2589.00</span>CNY</div>
+					</div>
+					<div class="list-right">
+						<div class="top">1.000</div>
+						<div class="price bottom"><span>2589.00</span>CNY</div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+		<div class="backup-mask">
+			<div class="content">
+				<div class="title">
+					<h3>备份钱包</h3>
+					<i class="close mui-icon mui-icon-closeempty"></i>
+				</div>
+				<div class="tip">
+					<p>区块链钱包不同于传统网站账户，它是基于密码学的 去中心化账户系统。</p>
+					<p>你必须自己保管好钱包的私钥和交易密码，任何意外 发生都会导致资产丢失。</p>
+					<p>我们建议先做好双重备份，再打入小额测试，最好开 始愉快使用。</p>
+				</div>
+
+				<section class="clearfix">
+					<i class="icon-key"></i>
+					<p class="sub-title">备份助记词</p>
+					<p>丢失钱包或忘记密码时，可帮助恢复钱包</p>
+				</section>
+
+				<section class="clearfix">
+					<i class="icon-word"></i>
+					<p class="sub-title">备份 keystore 文件</p>
+					<p>官方钱包格式，交易密码保护的私钥文件</p>
+				</section>
+
+				<button class="large-btn">立即备份</button>
+			</div>
+		</div>
+	</body>
+	<script src="lib/js/mui.min.js"></script>
+	<script src="lib/js/h.min.js"></script>
+	<script type="text/javascript" src="src/js/common.js"></script>
+	<script type="text/javascript" src="src/js/asset/asset.js"></script>
+	<script type="text/javascript">
+		mui.init({
+			swipeBack: true
+		});
+		//将子页面添加到index.html中
+		//		mui.plusReady(function(){
+		//			var wvs=plus.webview.all();
+		//			for(var i=0;i<wvs.length;i++){
+		//				console.log('webview'+i+': '+wvs[i].getURL());
+		//			}
+		//			
+		//			var ws=plus.webview.currentWebview();
+		//			console.log('窗口标识: '+ws.id);
+		//			
+		//			var h=plus.webview.getWebviewById( plus.runtime.appid );
+		//			console.log( "应用首页Webview窗口："+h.getURL() );
+		//		})
+	</script>
+
+</html>

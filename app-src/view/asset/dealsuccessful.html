@@ -1,0 +1,103 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../lib/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/asset/dealsuccessful.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-pull-right white" style="line-height: 45px;">完成</a>
+			<h1 class="mui-title white">交易成功</h1>
+		</header>
+		<div class="content">
+			<div class="success center">
+				<i class="success_bg"></i>
+				<p class="font">-10.0000 <span>ETH</span></p>
+			</div>
+			<div class="center">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<p>发款方</p>
+						<p>hfkjadhgfhjdkahdfhjdkhaldhfdadfdaf</p>
+					</li>
+					<li class="mui-table-view-cell">
+						<p>收款方</p>
+						<p>dfhkdlajdhfkdhjalhdfhkjdgahgdhjfkh</p>
+					</li>
+					<li class="mui-table-view-cell">
+						<p>矿工费用</p>
+						<p>0.000034125 ether</p>
+					</li>
+					<li class="mui-table-view-cell">
+						<p>备注</p>
+						<p>线下交易</p>
+					</li>
+				</ul>
+			</div>
+
+			<div class="transactionNumber center">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<p>交易号</p>
+						<p class="number">0xd324hg....hdksfh</p>
+					</li>
+					<li class="mui-table-view-cell">
+						<p>区块</p>
+						<p>5355031</p>
+					</li>
+					<li class="mui-table-view-cell">
+						<p>交易时间</p>
+						<p>2018/05/01 21:21:21 +0800</p>
+					</li>
+				</ul>
+				<div>
+					<img src="../../dist/images/common/code.png" style="width: 80px; height: 80px;" />
+					<p id='copy-btn' style="background: #e6e6e6; color:#666666 ;padding: 5px;text-align: center;">复制URL</p>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="../../lib/js/mui.min.js"></script>
+<script type="text/javascript" src="../../src/js/common.js" ></script>
+<script type="text/javascript" src="../../lib/js/h.min.js" ></script>
+<script type="text/javascript" src="../../lib/js/clipboard.min.js" ></script>
+<script>
+	//keystore
+	var copyFlag = false;
+	h('#copy-btn').tap(function(){
+		copyFlag = true;
+		myCopy();
+		if(copyFlag){
+			h('#copy-btn').css({
+				'background': '#CCC',
+		   		'color': '#666'
+			});
+			h('#copy-btn').html('复制成功');
+		}
+	})
+	//复制方法
+	function myCopy(){
+		var keyCode = window.location.href;
+		var clipboard = new ClipboardJS('#copy-btn', {
+	        text: function() {
+	            return keyCode;
+	        }
+	    });
+	
+	    clipboard.on('success', function(e) {
+	        console.log(e);
+	    });
+	
+	    clipboard.on('error', function(e) {
+	        console.log(e);
+	    });
+	}
+</script>

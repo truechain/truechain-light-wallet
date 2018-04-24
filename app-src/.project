@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>InitialChain</name>
+	<name>truelian</name>
 	<comment>Create By HBuilder</comment>
 	<projects>
 	</projects>
@@ -22,7 +22,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>0</id>
+			<id>1523273771425</id>
 			<name></name>
 			<type>10</type>
 			<matcher>
@@ -40,7 +40,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1523606365155</id>
+			<id>1523274007469</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -49,25 +49,25 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1523606365293</id>
+			<id>1523274007496</id>
 			<name></name>
-			<type>26</type>
+			<type>10</type>
 			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-node_modules</arguments>
+				<id>org.eclipse.ui.ide.orFilterMatcher</id>
+				<arguments>
+					<matcher>
+						<id>org.eclipse.ui.ide.multiFilter</id>
+						<arguments>1.0-projectRelativePath-matches-false-false-bin</arguments>
+					</matcher>
+					<matcher>
+						<id>org.eclipse.ui.ide.multiFilter</id>
+						<arguments>1.0-projectRelativePath-matches-false-false-setting</arguments>
+					</matcher>
+				</arguments>
 			</matcher>
 		</filter>
 		<filter>
-			<id>1523960148840</id>
-			<name></name>
-			<type>26</type>
-			<matcher>
-				<id>org.eclipse.ui.ide.multiFilter</id>
-				<arguments>1.0-name-matches-false-false-node_modules</arguments>
-			</matcher>
-		</filter>
-		<filter>
-			<id>1524014335900</id>
+			<id>1524463126964</id>
 			<name></name>
 			<type>26</type>
 			<matcher>

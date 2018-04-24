@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../lib/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/asset/currencydetail.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+			<h1 class="mui-title white">ETH</h1>
+		</header>
+		<div class="mui-content" id="refreshContainer">
+			<div class="marketVal">
+				<p class="price white size">1.0000</p>
+				<p class="val white">市值: <span>2555.26</span>CNY</p>
+			</div>
+			<p class="top">近期交易记录</p>
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell mui-media subli">
+					<a href="javascript:;">
+						<div class="expend_icon"></div>
+						<div class="mui-media-body">
+							<p>sjkjljflsdhaf...hfdshjlkds
+								<span class="sub right">-10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">3秒前
+								<span class="right">1/2</span> 
+							</p>
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="income_icon"></div>
+						<div class="mui-media-body">
+							<p>sjkjljflsdhaf...hfdshjlkds
+								<span class="add right">+10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">0秒前
+								<span class="right">等待打包</span> 
+							</p>
+						</div>
+					</a>
+					<div id="demo2" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="income_icon"></div>
+						<div class="mui-media-body">
+							<p>sjkjljflsdhaf...hfdshjlkds
+								<span class="add right">+10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">0秒前
+								<span class="right">等待打包</span> 
+							</p>
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="expend_icon"></div>
+						<div class="mui-media-body">
+							<p>sjkjljflsdhaf...hfdshjlkds
+								<span class="sub right">-10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">3秒前
+								<span class="right">1/2</span> 
+							</p>
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="income_icon"></div>
+						<div class="mui-media-body">
+							<p>sjkjljflsdhaf...hfdshjlkds
+								<span class="add right">+10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">0秒前
+								<span class="right">等待打包</span> 
+							</p>
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="expend_icon"></div>
+						<div class="mui-media-body">
+							<p>sjkjljflsdhaf...hfdshjlkds
+								<span class="sub right">-10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">3秒前
+								<span class="right">1/2</span> 
+							</p>
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>
+			</ul>
+		</div>
+		<div class="func">
+			<a class="b bs white" id="transfer" href="transfer.html">转账</a>
+			<a class="b bsk white" id="receipt">收款</span>
+		</div>
+	</body>
+
+</html>
+<script src="../../lib/js/mui.min.js"></script>
+<script type="text/javascript">
+	mui.init();
+	
+	mui('#demo1').progressbar({progress:20}).show();
+	mui('#demo2').progressbar({progress:50}).show();
+	
+	mui.plusReady(function() {
+		var self = plus.webview.currentWebview();
+		document.getElementsByClassName('mui-title')[0].innerText = self.currencyName;
+		document.getElementsByClassName('price')[0].innerText = self.currencyPrice;
+		document.getElementsByClassName('val')[0].innerText = '市值 : ' + self.currencyVal;
+	});
+
+//	function Jump(id) {
+//		document.getElementById(id).addEventListener('tap', function() {
+//			mui.openWindow({
+//				url: id + '.html',
+//				id: id
+//			})
+//		})
+//	}
+//
+//	Jump('transfer');
+//	Jump('receipt')
+</script>

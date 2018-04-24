@@ -1,127 +1,51 @@
 {
-  "pages/Personal.html": {
-    "href": "pages/Personal.html",
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/personal.css",
-      "iconFont/iconfont.css"
-    ],
-    "refer": [],
-    "priority": 0
-  },
-  "pages/mnemonic.html": {
-    "href": "pages/mnemonic.html",
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/reset.css",
-      "css/mnemonic.css"
-    ],
-    "refer": [],
-    "priority": 0
-  },
-  "pages/keyStore.html": {
-    "href": "pages/keyStore.html",
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/reset.css",
-      "css/keyStore.css",
-      "assets/1523520245.png"
-    ],
-    "refer": [],
-    "priority": 0
-  },
-  "pages/changePwd.html": {
-    "href": "pages/changePwd.html",
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/reset.css"
-    ],
-    "refer": [],
-    "priority": 0
-  },
-  "pages/mywallet.html": {
-    "href": "pages/mywallet.html",
-    "resources": [
-      "js/mui.min.js",
-      "js/h.min.js",
-      "css/mui.min.css",
-      "css/mywallet.css",
-      "assets/assets/2.1-Dßñu/iOS/4œ.png"
-    ],
-    "refer": [
-      "pages/mnemonic.html",
-      "pages/keyStore.html",
-      "pages/changePwd.html"
-    ],
-    "priority": 0
-  },
-  "pages/addcurrency.html": {
-    "href": "pages/addcurrency.html",
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/reset.css",
-      "css/addcurrency.css"
-    ],
-    "refer": [],
-    "priority": 0
-  },
-  "pages/currencyDetail.html": {
-    "href": "pages/currencyDetail.html",
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/reset.css",
-      "css/currentDetail.css"
-    ],
-    "refer": [],
-    "priority": 0
-  },
-  "pages/Assets.html": {
-    "href": "pages/Assets.html",
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "css/assets.css",
-      "assets/assets/2.1-Dßñu/iOS/4œ.png"
-    ],
-    "refer": [
-      "pages/mywallet.html",
-      "pages/addcurrency.html",
-      "pages/currencyDetail.html"
-    ],
-    "priority": 0
-  },
-  "index.html": {
-    "href": "index.html",
-    "resources": [
-      "js/mui.min.js",
-      "js/h.min.js",
-      "css/mui.min.css",
-      "dist/css/common/common.css"
-    ],
-    "refer": [
-      "pages/Personal.html",
-      "pages/Assets.html"
-    ],
-    "priority": 0
-  },
-  "guide.html": {
-    "href": "guide.html",
-    "resources": [
-      "js/mui.min.js",
-      "css/mui.min.css",
-      "dist/css/common/common.css",
-      "dist/css/common/guide.css",
-      "assets/my/3.6-séÏ/ios/logo.png"
-    ],
-    "refer": [
-      "index.html"
-    ],
-    "priority": 0
-  }
+	"index.html": {
+		"resources": [
+			"asset.html"
+		],
+		"refer": [
+			"my.html",
+			"asset.html"
+		]
+	},
+	"guide.html": {
+		"refer": [
+			"index.html"
+		]
+	},
+	"my.html": {
+		"resources": [
+			"/dist/css/common/guide.css",
+			"/dist/css/common/common.css",
+			"/lib/css/mui.min.css"
+		],
+		"refer": [
+			"view/my/wallet/wallet.html",
+			"view/my/help/help.html"
+		]
+	},
+	"view/my/wallet/wallet.html": {
+		"refer": [
+			"view/my/wallet/setup.html",
+			"view/my/wallet/importwallet.html"
+		],
+		"resources": [
+			"view/my/wallet/setup.html"
+		]
+	},
+	"view/my/wallet/setup.html": {
+		"refer": [
+			"asset.html"
+		]
+	},
+	"asset.html": {
+		"refer": [
+			"view/asset/userinfo.html"
+		]
+	},
+	"view/my/help/help.html": {
+		"refer": [
+			"view/my/help/contact.html"
+		]
+	}
 }

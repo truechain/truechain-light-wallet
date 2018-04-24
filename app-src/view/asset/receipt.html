@@ -1,0 +1,73 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../lib/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/asset/receipt.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+			<a class="mui-pull-right white" style="line-height: 45px;">分享</a>
+			<h1 class="mui-title white">收款码</h1>
+		</header>
+		<div class="mui-content">
+			<div class="receipt_item">
+				<img class="avatar" src="../../dist/images/asset/head@3x.png" />
+				<p class="avatar_text top">dlsahjdhfjkdsdlsahjdhfjkdsdlsahjdhfjkds</p>
+			</div>
+
+			<div class="mui-input-row center">
+				<input type="text" placeholder="自定义收款">
+			</div>
+
+			<div class="qrcode center">
+				<div class="qrcode_item"></div>
+			</div>
+
+			<button id="copy-btn" class="white center">复制收款地址</button>
+
+		</div>
+	</body>
+
+</html>
+<script src="../../lib/js/mui.min.js"></script>
+<script type="text/javascript" src="../../src/js/common.js" ></script>
+<script type="text/javascript" src="../../lib/js/h.min.js" ></script>
+<script type="text/javascript" src="../../lib/js/clipboard.min.js" ></script>
+<script>
+	//keystore
+	var copyFlag = false;
+	h('#copy-btn').tap(function(){
+		copyFlag = true;
+		myCopy();
+		if(copyFlag){
+			h('#copy-btn').css({
+				'background': '#CCC',
+		   		'color': '#666'
+			});
+			h('#copy-btn').html('复制成功');
+		}
+	})
+	//复制方法
+	function myCopy(){
+		var keyCode = h('input').val();
+		var clipboard = new ClipboardJS('#copy-btn', {
+	        text: function() {
+	            return keyCode;
+	        }
+	    });
+	
+	    clipboard.on('success', function(e) {
+	        console.log(e);
+	    });
+	
+	    clipboard.on('error', function(e) {
+	        console.log(e);
+	    });
+	}
+</script>

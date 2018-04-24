@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的钱包</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../lib/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/asset/userinfo.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的钱包</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="userinfo-top">
+				<div class="my-head"></div>
+				<div class="my-wellet">
+					<div class="top walletName">
+						<!--钱包名称-->
+					</div>
+					<div class="buttom walletAddress">
+						<!--钱包地址-->
+					</div>
+				</div>
+			</div>
+			<!--列表-->
+			<ul class="mui-table-view top">
+				<li class="mui-table-view-cell wallet-cell">
+					<a class="mui-navigate-right">钱包名称<span class="walletName"></span></a>
+				</li>
+				<li class="mui-table-view-cell amendpaw-cell">
+					<a href="javascript:openInfo('amendpaw.html')" class="mui-navigate-right">修改密码</a>
+				</li>
+			</ul>
+
+			<ul class="mui-table-view">
+				<li class="mui-table-view-cell exportkey-cell">
+					<a class="mui-navigate-right">导出私钥</a>
+				</li>
+				<li class="mui-table-view-cell aboutus-cell">
+					<a href="exportkeystore.html" class="mui-navigate-right">导出keystore</a>
+				</li>
+				<li class="mui-table-view-cell setting-cell">
+					<a class="mui-navigate-right">导出助记词</a>
+				</li>
+			</ul>
+
+			<!--删除钱包-->
+			<button id="delelet-wallet">删除钱包</button>
+		</div>
+
+		<!--弹层-修改钱包名称-->
+		<div class="up-windows amend-wallet not-view">
+			<div class="title">钱包名称</div>
+			<div class="wallet-namet-box">
+				<textarea id="newWalletName" name="func" rows="3" cols="5" placeholder="请输入您的新名称"></textarea>
+			</div>
+			<div class="cancel-or-save">
+				<div class="cancel">取消</div>
+				<div class="save">保存</div>
+			</div>
+		</div>
+
+		<!--弹层-导出私钥-->
+		<div class="up-center-windows export-key not-view">
+			<div class="title">导出私钥<span class="close-export-key">X</span></div>
+			<div class="export-key-box">
+				<div class="warm">安全警告：私钥未经加密，导出存在风险，建议使用 助记词和 keystore 进行备份。</div>
+				<div class="key-code">20f8cf2868e79869163df24932dd59fa421a5c9bdc6cc6d18520934d985eeb</div>
+				<button id="copy-btn">复制</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../lib/js/mui.min.js"></script>
+	<script type="text/javascript" src="../../src/js/common.js"></script>
+	<script type="text/javascript" src="../../lib/js/h.min.js"></script>
+	<script type="text/javascript" src="../../lib/js/clipboard.min.js"></script>
+
+	<script type="text/javascript" src="../../lib/js/lightwallet.min.js"></script>
+	<script type="text/javascript" src="../../lib/js/web3.min.js"></script>
+	<script type="text/javascript" src="../../lib/js/hooked-web3-provider.min.js"></script>
+
+	<script type="text/javascript" src="../../src/js/asset/userinfo.js"></script>
+
+</html>

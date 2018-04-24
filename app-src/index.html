@@ -5,8 +5,8 @@
 		<meta charset="UTF-8">
 		<title>TrueChain</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link rel="stylesheet" href="src/css/mui.min.css" />
-		<link rel="stylesheet" href="src/css/common/common.css" />
+		<link rel="stylesheet" href="lib/css/mui.min.css" />
+		<link rel="stylesheet" href="dist/css/common/common.css" />
 	</head>
 
 	<body>
@@ -23,21 +23,22 @@
 			</a>
 		</nav>
 	</body>
-	<script src="src/js/mui.min.js"></script>
-	<script src="src/js/h.min.js"></script>
+	<script src="lib/js/mui.min.js"></script>
+	<script src="lib/js/h.min.js"></script>
 	<script type="text/javascript" charset="utf-8">
 		mui.back = function() {
 			var btnArray = ['是', '否'];
-			mui.confirm('是否退出应用', 'TrueChain', btnArray, function(e) {
-				if(e.index == 0) {
-					plus.runtime.quit()
-				}
-			})
+			mui.confirm('是否退出应用', 'TrueChain', btnArray,
+				function(e) {
+					if(e.index == 0) {
+						plus.runtime.quit()
+					}
+				})
 		}
 
 		mui.init({
 			subpages: [{
-					url: 'src/pages/Assets.html',
+					url: 'asset.html',
 					id: 'asset',
 					styles: {
 						top: '0px',
@@ -46,7 +47,7 @@
 					}
 				},
 				{
-					url: 'src/pages/Personal.html',
+					url: 'my.html',
 					id: 'my',
 					styles: {
 						top: '0px',
@@ -60,9 +61,17 @@
 
 		h('#tab1').tap(function() {
 			changSub(1);
-		});
-		h('#tab2').tap(function() {
+			//		    mui.plusReady(function(){
+			//		    	var robj = plus.webview.getWebviewById("regstep2.html");
+			//		    	robj.evalJS("myrefresh()");
+			//		    });
+});
+h('#tab2').tap(function() {
 			changSub(2);
+			//		mui.plusReady(function(){
+			//	    	var robj = plus.webview.getWebviewById("regstep2.html");
+			//	    	robj.evalJS("myrefresh()");
+			//	    });
 		});
 
 		function changSub(index) {
