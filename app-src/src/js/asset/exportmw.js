@@ -28,10 +28,10 @@ mui('.my-word').on('tap', 'span', function() {
 
 h('#complete-btn').tap(function() {
 	let orderWords = h('#orderWord').html();
-	//if(orderWords == orderWord + ' ') {
-	mui.toast('助记词验证通过,请妥善保存!')
-	mui.openWindow('../../index.html', 'index');
-	/*} else {
+	if(orderWords == orderWord + ' ') {
+		mui.toast('助记词验证通过,请妥善保存!')
+		plus.webview.show(plus.webview.getWebviewById('index.html'));
+	} else {
 		mui.toast('助记词输入错误,请重新输入!')
-	}*/
+	}
 })

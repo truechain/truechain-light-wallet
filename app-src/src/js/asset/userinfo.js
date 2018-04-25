@@ -114,13 +114,3 @@ function myCopy() {
 h('.setting-cell').tap(function() {
 	mui.openWindow('exportmw.html', 'exportmw')
 })
-
-
-
-
-
-/*
- 
- * 
- *foss resem   naeeow  comfort  second   bless   shu  edu  pool   ladder    route bund 
- * */

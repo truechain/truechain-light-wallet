@@ -28,8 +28,8 @@
 		<div class="asset-content">
 			<div class="asset-content-top">
 				账户总资产($)：
-				<div class="total-money">
-					5178.00
+				<div class="total-money balance">
+					<!--9999.00-->
 				</div>
 				<div class="new-add-btn"></div>
 			</div>
@@ -92,24 +92,27 @@
 	</body>
 	<script src="lib/js/mui.min.js"></script>
 	<script src="lib/js/h.min.js"></script>
+	<script type="text/javascript" src="lib/js/web3.min.js"></script>
+	<script type="text/javascript" src="lib/js/hooked-web3-provider.min.js"></script>
 	<script type="text/javascript" src="src/js/common.js"></script>
 	<script type="text/javascript" src="src/js/asset/asset.js"></script>
 	<script type="text/javascript">
 		mui.init({
 			swipeBack: true
 		});
+
 		//将子页面添加到index.html中
-		//		mui.plusReady(function(){
-		//			var wvs=plus.webview.all();
-		//			for(var i=0;i<wvs.length;i++){
-		//				console.log('webview'+i+': '+wvs[i].getURL());
+		//		mui.plusReady(function() {
+		//			var wvs = plus.webview.all();
+		//			for(var i = 0; i < wvs.length; i++) {
+		//				console.log('webview' + i + ': ' + wvs[i].getURL());
 		//			}
-		//			
-		//			var ws=plus.webview.currentWebview();
-		//			console.log('窗口标识: '+ws.id);
-		//			
-		//			var h=plus.webview.getWebviewById( plus.runtime.appid );
-		//			console.log( "应用首页Webview窗口："+h.getURL() );
+		//
+		//			var ws = plus.webview.currentWebview();
+		//			console.log('窗口标识: ' + ws.id);
+		//
+		//			var h = plus.webview.getWebviewById(plus.runtime.appid);
+		//			console.log("应用首页Webview窗口：" + h.getURL());
 		//		})
 	</script>
 
