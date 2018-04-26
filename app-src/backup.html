@@ -14,29 +14,26 @@
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<a class="iconfont icon-saomiao mui-pull-right" style="line-height: 45px;"></a>
-			<h1 class="mui-title"><!--转账--></h1>
+			<h1 class="mui-title">ETH转账</h1>
 			<span class="ercode-icon"></span>
 		</header>
 		<div class="mui-content">
 			<form class="mui-input-group center top">
-				<div class="row">
+				<div class="row" style="display: flex;flex-direction: row-reverse;">
 					<label>
-					<!--<img src="../assets/about/logo.png" style="width: 30px; height: 30px;"/>-->
-				</label>
-					<input type="text" id="toAddress" class="mui-input-clear add" placeholder="收款人钱包地址">
+						<!--<img src="../../src/images/my/my_close@2x.png" style="width: 30px; height: 30px;"/>-->
+					</label>
+					<input type="text" class="mui-input-clear toAddressItem" placeholder="收款人钱包地址">
 				</div>
-				<div class="err-box err-add mui-hidden"></div>
 				<div class="row">
-					<input type="text" id="amount" class="mui-input-clear money" placeholder="转账金额">
+					<input type="text" class="mui-input-clear amountItem" placeholder="转账金额">
 				</div>
-				<div class="err-box err-money mui-hidden"></div>
 				<div class="row">
 					<input type="text" class="mui-input-clear" placeholder="备注">
 				</div>
-				<div class="row costrow">
+				<div class="row">
 					<input type="text" placeholder="矿工费用" readonly="readonly" />
 				</div>
-				<div class="err-box err-cost mui-hidden"></div>
 				<div class="mui-input-row mui-input-range">
 					<input type="range" min="0" max="1" value="0.00005" step="0.00001">
 					<span class="mui-tooltip">0.00005</span>
@@ -46,14 +43,13 @@
 
 					<p>快</p>
 				</div>
-
 			</form>
 			<button id="next">下一步</button>
 		</div>
 
 		<div id="modal" class="mui-modal">
 			<header class="mui-bar mui-bar-nav">
-				<a class="modal_item mui-icon mui-icon-close mui-pull-right close" href=""></a>
+				<a class="modal_item mui-icon mui-icon-close mui-pull-right close"></a>
 				<h1 class="mui-title">支付详情</h1>
 			</header>
 			<div class="mui-content options">
@@ -68,13 +64,13 @@
 						<li class="mui-table-view-cell">
 							<p>
 								<span>转入地址</span>
-								<span id="toaddressItem" class="left address"><!--转入地址--></span>
+								<span class="left address fromAddress"><!--转入地址--></span>
 							</p>
 						</li>
 						<li class="mui-table-view-cell ">
 							<p>
 								<span>转出地址</span>
-								<span class="left" id="fromAddress"><!--转出地址--></span>
+								<span class="left toAddress"><!--转出地址--></span>
 							</p>
 						</li>
 						<li class="mui-table-view-cell ">
@@ -83,51 +79,51 @@
 							</p>
 							<p class="cost">
 								<span class="text_right">
-								0.000012254  ETH
-							</span>
+									0.000012254  ETH
+								</span>
 								<span>
-								≈ Gas(6000) * Gas Price(568 gwe)
-							</span>
+									≈ Gas(6000) * Gas Price(568 gwe)
+								</span>
 							</p>
 						</li>
 						<li class="mui-table-view-cell ">
 							<p>
 								<span>
-								金额
-							</span>
-								<span id="amountItem" class="amountVal">100  ETH</span>
+									金额
+								</span>
+								<span class="amountVal amount"></span>
 							</p>
 						</li>
 					</ul>
 				</div>
 				<div class="options_item center">
-					<a class="options_item_bg r bs white" id="confirmOrder">确认</a>
+					<a class="options_item_bg r bs white" id="confirm">确认</a>
 				</div>
 			</div>
 		</div>
+		</div>
 
-		<div id="currencyPwd" class="mui-modal mui-hidden">
+		<div id="currencyPwd" class="mui-modal">
 			<header class="mui-bar mui-bar-nav">
-				<a class="modal_item mui-icon mui-icon-close mui-pull-right close" href="#"></a>
+				<a class="modal_item mui-icon mui-icon-close mui-pull-right close"></a>
 				<h1 class="mui-title">钱包密码</h1>
 			</header>
 			<div class="mui-content options">
 				<form class="mui-input-group center top">
 					<div class="mui-input-row">
-						<input type="password" class="mui-input-clear psw" placeholder="请输入你的密码">
+						<input type="password" class="mui-input-clear" placeholder="请输入你的密码">
 					</div>
-					<div class="err-box err-psw mui-hidden" style="margin-top: 10px;"></div>
 					<div class="options_item">
-						<a class="options_item_bg r bs white comfirmPsw">确认</a>
+						<a class="options_item_bg r bs white comfirmPsw" id="comfirmPsw">确认</a>
 					</div>
 				</form>
 			</div>
 		</div>
 		</div>
-
 	</body>
 
 </html>
+
 <script src="../../lib/js/mui.min.js"></script>
 <script src="../../dist/js/common.min.js"></script>
 <script src="../../lib/js/h.min.js"></script>
@@ -136,6 +132,5 @@
 <script src="../../lib/js/web3.min.js"></script>
 <script src="../../lib/js/hooked-web3-provider.min.js"></script>
 <script src="../../lib/js/lightwallet.min.js"></script>
-<script type="text/javascript" src="../../lib/js/sendToken.js"></script>
 
 <script src="../../dist/js/asset/transfer.min.js"></script>

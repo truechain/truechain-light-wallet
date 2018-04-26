@@ -25,7 +25,7 @@
 				<div class="er-code-img"></div>
 			</div>
 		</div>
-		<div class="asset-content">
+		<div id="assetContent" class="asset-content">
 			<div class="asset-content-top">
 				账户总资产($)：
 				<div class="total-money balance">
@@ -34,20 +34,20 @@
 				<div class="new-add-btn"></div>
 			</div>
 			<div class="asset-content-list border-1px">
-				<a href="javascript:openInfo('view/asset/currencydetail.html')">
+				<a href="javascript:openInfo('view/asset/currencydetail.html',{'currencyName':'ETH','currencyPrice':'0'})">
 					<div class="list-left"></div>
 					<div class="list-middle">
 						<div class="title top">ETH</div>
-						<div class="price bottom"><span>2589.00</span>CNY</div>
+						<div class="price bottom"><span>0.00</span>CNY</div>
 					</div>
 					<div class="list-right">
-						<div class="top">1.000</div>
-						<div class="price bottom"><span>2589.00</span>CNY</div>
+						<div class="top">1000.000</div>
+						<div class="price bottom"><span>0.00</span>CNY</div>
 					</div>
 				</a>
 			</div>
 
-			<div class="asset-content-list">
+			<!--<div class="asset-content-list">
 				<a href="javascript:openInfo('view/asset/currencydetail.html')">
 					<div class="list-left"></div>
 					<div class="list-middle">
@@ -60,6 +60,7 @@
 					</div>
 				</a>
 			</div>
+		-->
 		</div>
 
 		<div class="backup-mask">
@@ -92,15 +93,13 @@
 	</body>
 	<script src="lib/js/mui.min.js"></script>
 	<script src="lib/js/h.min.js"></script>
+	<script type="text/javascript" src="lib/js/zepto.min.js"></script>
 	<script type="text/javascript" src="lib/js/web3.min.js"></script>
 	<script type="text/javascript" src="lib/js/hooked-web3-provider.min.js"></script>
 	<script type="text/javascript" src="src/js/common.js"></script>
+	<script type="text/javascript" src="lib/js/addToken.js"></script>
 	<script type="text/javascript" src="src/js/asset/asset.js"></script>
 	<script type="text/javascript">
-		mui.init({
-			swipeBack: true
-		});
-
 		//将子页面添加到index.html中
 		//		mui.plusReady(function() {
 		//			var wvs = plus.webview.all();

@@ -1,37 +1,55 @@
-let orderWord = plus.storage.getItem('seed');
-h('#words').html(orderWord)
+//let orderWord = plus.storage.getItem('seed');
 
-h('#next-btn').tap(function() {
-	h('.step-1').addClass('not-view');
-	h('.step-2').removeClass('not-view');
-})
+//显示助记词
+! function showSeed() {
+	var password = prompt('验证密码!', 'Password');
 
-function randomSort() {
-	return Math.random() > 0.5 ? -1 : 1;
-}
+	var serialized_keystore = plus.storage.getItem('keystore')
+	global_keystore = lightwallet.keystore.deserialize(serialized_keystore) //将序列号的keystore转换为对象 
 
-let orderWordsAry = orderWord.split(' '),
-	string = '';
-orderWordsAry = orderWordsAry.sort(randomSort);
+	global_keystore.keyFromPassword(password, function(err, pwDerivedKey) {
+		if(err) {
+			mui.alert('密码验证错误,请返回重新验证!');
+		} else {
+			var orderWord = global_keystore.getSeed(pwDerivedKey);
+			h('#words').html(orderWord)
 
-orderWordsAry.forEach(function(item, index) {
-	string += `<span>${item}</span>`;
-})
+			function randomSort() {
+				return Math.random() > 0.5 ? -1 : 1;
+			}
 
-document.getElementsByClassName('my-word')[0].innerHTML = string;
+			let orderWordsAry = orderWord.split(' '),
+				string = '';
+			orderWordsAry = orderWordsAry.sort(randomSort);
 
-mui('.my-word').on('tap', 'span', function() {
-	var orderWord = this.innerText;
-	var html = '<span>' + orderWord + '</span><br/>';
-	document.getElementById('orderWord').append(orderWord + ' ');
-})
+			orderWordsAry.forEach(function(item, index) {
+				string += `<span>${item}</span>`;
+			})
 
-h('#complete-btn').tap(function() {
-	let orderWords = h('#orderWord').html();
-	if(orderWords == orderWord + ' ') {
-		mui.toast('助记词验证通过,请妥善保存!')
-		plus.webview.show(plus.webview.getWebviewById('index.html'));
-	} else {
-		mui.toast('助记词输入错误,请重新输入!')
-	}
-})
+			document.getElementsByClassName('my-word')[0].innerHTML = string;
+
+			h('#next-btn').tap(function() {
+				h('.step-1').addClass('not-view');
+				h('.step-2').removeClass('not-view');
+			})
+
+			mui('.my-word').on('tap', 'span', function() {
+				var oWord = this.innerText;
+				var html = '<span>' + oWord + '</span><br/>';
+				document.getElementById('orderWord').append(oWord + ' ');
+			})
+
+			h('#complete-btn').tap(function() {
+				let orderWords = h('#orderWord').html();
+				if(orderWords == orderWord + ' ') {
+					mui.toast('助记词验证通过,请妥善保存!');
+					plus.webview.show(plus.webview.create('userinfo.html'));
+					//失效.....
+					//plus.webview.show(plus.webview.getWebviewById('asset'));
+				} else {
+					mui.toast('助记词输入错误,请重新输入!')
+				}
+			})
+		}
+	});
+}()
