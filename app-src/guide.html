@@ -24,9 +24,6 @@
 	<script src="lib/js/mui.min.js"></script>
 	<script type="text/javascript">
 		//plus.storage.clear();
-		/*(function() {
-																			plus.storage.getItem('initialized') == '1' ? window.location.href = "index.html" : plus.storage.setItem('initialized', '1');
-																		})()*/
 		(function() {
 			plus.storage.getItem('initialized') ? mui.openWindow('index.html') : null;
 		})()

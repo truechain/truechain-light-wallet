@@ -1,1 +1,47 @@
-@media (-webkit-min-device-pixel-ratio:1.5),(min-device-pixel-ratio:1.5){.border-1px::after{-webkit-transform:scaleY(.7);transform:scaleY(.7)}}@media (-webkit-min-device-pixel-ratio:2),(min-device-pixel-ratio:2){.border-1px::after{-webkit-transform:scaleY(.5);transform:scaleY(.5)}}@c-mask : rgba(0,0,0,.6) //透明背景 //1级状态颜色 @c333-2: rgba(51,51,51,.2);.mui-content{padding:0 15px 30px;background:#f5f5f5}h1.title{text-align:center;margin:20px auto;font-size:18px}section,section h2{margin-bottom:30px}section p{text-align:justify;line-height:1.5;font-size:15px;color:#333;letter-spacing:.5px}section:last-child{margin-bottom:10px}
+@media (-webkit-min-device-pixel-ratio:1.5),
+(min-device-pixel-ratio:1.5) {
+	.border-1px::after {
+		-webkit-transform: scaleY(.7);
+		transform: scaleY(.7)
+	}
+}
+
+@media (-webkit-min-device-pixel-ratio:2),
+(min-device-pixel-ratio:2) {
+	.border-1px::after {
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5)
+	}
+}
+
+ul,
+li {
+	list-style: none;
+}
+
+.mui-content {
+	background: transparent;
+}
+
+.title {
+	text-align: center;
+	font-size: 20px;
+}
+
+.titles {
+	font-size: 18px;
+}
+
+.bold {
+	font-weight: 500;
+}
+
+.mui-bar-nav.mui-bar .mui-icon {
+	color: #000;
+}
+
+ul {
+	padding: 0;
+}
+
+@c-mask : rgba(0, 0, 0, .6) //透明背景 //1级状态颜色 @c333-2: rgba(51,51,51,.2);.mui-content{padding:0 15px 30px;background:#f5f5f5}h1.title{text-align:center;margin:20px auto;font-size:18px}section,section h2{margin-bottom:30px}section p{text-align:justify;line-height:1.5;font-size:15px;color:#333;letter-spacing:.5px}section:last-child{margin-bottom:10px}

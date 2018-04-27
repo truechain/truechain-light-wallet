@@ -1,12 +1,14 @@
 <!doctype html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title>我的</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link rel="stylesheet" href="lib/css/mui.min.css"/>
-		<link rel="stylesheet" href="dist/css/my/my.css"/>
+		<link rel="stylesheet" href="lib/css/mui.min.css" />
+		<link rel="stylesheet" href="dist/css/my/my.css" />
 	</head>
+
 	<body>
 		<!--我的-->
 		<div class="bg-top">
@@ -25,25 +27,39 @@
 		<div class="mian">
 			<div class="mian-top">
 				<ul class="mui-table-view top">
-				    <li class="mui-table-view-cell massage-cell"><a href="javascript:openInfo('find/secure.html')" class="mui-navigate-right">消息中心</a></li>
-				    <li class="mui-table-view-cell contacts-cell"><a href="javascript:openInfo('find/authority.html')" class="mui-navigate-right">联系人</a></li>
-				    <li class="mui-table-view-cell setting-cell"><a href="javascript:openInfo('find/help.html')"  class="mui-navigate-right">系统中心</a></li>
+					<li class="mui-table-view-cell mui-disabled massage-cell">
+						<a href="javascript:openInfo('view/my/message/message.html')" class="mui-navigate-right">消息中心</a>
+					</li>
+					<li class="mui-table-view-cell mui-disabled contacts-cell">
+						<a href="javascript:openInfo('view/my/linkman/linkman.html')" class="mui-navigate-right">联系人</a>
+					</li>
+					<li class="mui-table-view-cell mui-disabled setting-cell">
+						<a href="javascript:openInfo('view/my/system/setting.html')" class="mui-navigate-right">系统中心</a>
+					</li>
 				</ul>
 			</div>
 			<div class="mian-bottom">
 				<ul class="mui-table-view">
-				    <li class="mui-table-view-cell help-cell"><a href="javascript:openInfo('view/my/help/help.html')" class="mui-navigate-right">帮助中心</a></li>
-				    <li class="mui-table-view-cell aboutus-cell"><a href="javascript:openInfo('view/my/about.html')" class="mui-navigate-right">关于我们</a></li>
+					<li class="mui-table-view-cell mui-disabled help-cell">
+						<a href="javascript:openInfo('view/my/help/help.html')" class="mui-navigate-right">帮助中心</a>
+					</li>
+					<li class="mui-table-view-cell mui-disabled aboutus-cell">
+						<a href="javascript:openInfo('view/my/about/about.html')" class="mui-navigate-right">关于我们</a>
+					</li>
 				</ul>
 			</div>
 		</div>
 	</body>
-	<script src="lib/js/mui.min.js"></script>	
+	<script src="lib/js/mui.min.js"></script>
 	<script src="lib/js/h.min.js"></script>
-	<script type="text/javascript" src="src/js/common.js" ></script>
+	<script type="text/javascript" src="src/js/common.js"></script>
 	<script type="text/javascript">
-		h('.left').tap(function(){
-			openInfo('view/my/wallet/wallet.html')
+		h('.left').tap(function() {
+			openInfo('view/my/wallet/wallet.html');
+		});
+		h('.right').tap(function() {
+			openInfo('view/my/record/record.html');
 		});
 	</script>
+
 </html>

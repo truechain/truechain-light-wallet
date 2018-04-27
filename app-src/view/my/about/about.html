@@ -29,21 +29,21 @@
 		</div>
 		
 		<ul class="mui-table-view">
-      <li class="mui-table-view-cell">
-        <a class="mui-navigate-right">
+      <li class="mui-table-view-cell mui-disabled">
+        <a class="mui-navigate-right" href="javascript:openInfo('../../rules/useragreement.html','useragreement')">
 					使用协议
         </a>
       </li>
-      <li class="mui-table-view-cell">
-        <a class="mui-navigate-right">
+      <li class="mui-table-view-cell mui-disabled">
+        <a class="mui-navigate-right" href="javascript:openInfo('../../rules/privacypolicy.html','privacypolicy')">
 					隐私条款
         </a>
-      <li class="mui-table-view-cell">
-        <a class="mui-navigate-right">
+      <li class="mui-table-view-cell mui-disabled">
+        <a class="mui-navigate-right" href="javascript:openInfo('versionlog.html','versionlog')">
 					版本日志
         </a>
       </li>
-      <li class="mui-table-view-cell">
+      <li class="mui-table-view-cell mui-disabled check-version">
         <a class="mui-navigate-right">
 					检测新版
         </a>
@@ -51,6 +51,13 @@
   	</ul>
 	</div>
 <script src="../../../lib/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../dist/js/common.min.js" type="text/javascript" charset="utf-8"></script>
 </body>
-
+<script type="text/javascript">
+mui('.check-version')[0].addEventListener('tap',function(){
+	mui.confirm('版本更新说明版本更新说明版本更新说明版本更新说明版本更新说明版本更新说明版本更新说明','发现 True v1.0.1 新版本',['暂不升级','立即升级'],function (e) {
+		e.index
+	},'div')
+});
+</script>
 </html>

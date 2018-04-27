@@ -1,12 +1,12 @@
-function sendToken() {
+function sendToken(fromAddr, toAddr, valueToken, pwd) {
+	console.log(fromAddr, toAddr, valueToken, pwd, '这是')
 	console.log('发送代币执行!')
-	var fromAddr = '0x5833fa6053e6e781eafb8695d63d90f6b3571e5e';
-	var toAddr = '0x10592A6daD0055c586bb95474e7056F72462997A';
+	//var fromAddr = '0x5833fa6053e6e781eafb8695d63d90f6b3571e5e';
+	//var toAddr = '0x10592A6daD0055c586bb95474e7056F72462997A';
 
-	var valueToken = 2
-	var amount = parseFloat(valueToken) * 1.0e18
-
-	var gasPrice = 18000000000,
+	//	var valueToken = 2,
+	var amount = parseFloat(valueToken) * 1.0e18,
+		gasPrice = 18000000000,
 		gas = 50000,
 		privateKey;
 
@@ -157,15 +157,18 @@ function sendToken() {
 	var serialized_keystore = plus.storage.getItem('keystore');
 	var keystore = lightwallet.keystore.deserialize(serialized_keystore) //将序列号的keystore转换为对象  
 
-	var password = '';
+	/*var password = '';
 	if(password == '') {
 		password = prompt('Enter password to retrieve addresses', 'Password');
-	}
+	}*/
+
+	var password = pwd;
 
 	keystore.keyFromPassword(password, function(err, pwDerivedKey) {
 		//console.log(pwDerivedKey) ;
 		if(err) {
-			console(err);
+			console.log(err);
+			mui.alert('密码错误,请重新输入!')
 		} else {
 			var totalAddresses = 1;
 			keystore.generateNewAddress(pwDerivedKey, totalAddresses);
@@ -231,6 +234,12 @@ function sendToken() {
 					data: data
 				},
 				function(err, txhash) {
+					if(err) {
+						mui.alert('无效地址或密码错误,请重试!')
+					} else {
+						mui.toast('交易成功')
+						mui.openWindow('dealsuccessful.html')
+					}
 					console.log('error: ' + err);
 					console.log('txhash: ' + txhash);
 				})
