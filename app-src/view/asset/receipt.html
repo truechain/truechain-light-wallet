@@ -1,5 +1,6 @@
 <!doctype html>
 <html>
+
 	<head>
 		<meta charset="UTF-8">
 		<title></title>
@@ -18,15 +19,17 @@
 		<div class="mui-content">
 			<div class="receipt_item">
 				<img class="avatar" src="../../dist/images/asset/head@3x.png" />
-				<p class="avatar_text top">dlsahjdhfjkdsdlsahjdhfjkdsdlsahjdhfjkds</p>
+				<p class="avatar_text top walletAddress">
+					<!--钱包地址-->
+				</p>
 			</div>
 
 			<div class="mui-input-row center">
 				<input type="text" placeholder="自定义收款">
 			</div>
 
-			<div class="qrcode center">
-				<div class="qrcode_item"></div>
+			<div id="qrcode" class="qrcode center">
+				<!--<div class="qrcode_item"></div>-->
 			</div>
 
 			<button id="copy-btn" class="white center">复制收款地址</button>
@@ -36,38 +39,47 @@
 
 </html>
 <script src="../../lib/js/mui.min.js"></script>
-<script type="text/javascript" src="../../src/js/common.js" ></script>
-<script type="text/javascript" src="../../lib/js/h.min.js" ></script>
-<script type="text/javascript" src="../../lib/js/clipboard.min.js" ></script>
+<script type="text/javascript" src="../../src/js/common.js"></script>
+<script type="text/javascript" src="../../lib/js/h.min.js"></script>
+<script type="text/javascript" src="../../lib/js/clipboard.min.js"></script>
+<script type="text/javascript" src="../../lib/js/qrcode.js"></script>
 <script>
 	//keystore
 	var copyFlag = false;
-	h('#copy-btn').tap(function(){
+	let walletAddress = plus.storage.getItem('walletAddress')
+	h('.walletAddress').html(walletAddress);
+	h('#copy-btn').tap(function() {
 		copyFlag = true;
 		myCopy();
-		if(copyFlag){
+		if(copyFlag) {
 			h('#copy-btn').css({
 				'background': '#CCC',
-		   		'color': '#666'
+				'color': '#666'
 			});
 			h('#copy-btn').html('复制成功');
 		}
 	})
 	//复制方法
-	function myCopy(){
-		var keyCode = h('input').val();
+	function myCopy() {
+		//var keyCode = h('input').val();
 		var clipboard = new ClipboardJS('#copy-btn', {
-	        text: function() {
-	            return keyCode;
-	        }
-	    });
-	
-	    clipboard.on('success', function(e) {
-	        console.log(e);
-	    });
-	
-	    clipboard.on('error', function(e) {
-	        console.log(e);
-	    });
+			text: function() {
+				return walletAddress;
+			}
+		});
+
+		clipboard.on('success', function(e) {
+			console.log(e);
+		});
+
+		clipboard.on('error', function(e) {
+			console.log(e);
+		});
 	}
+
+	var qrcode = new QRCode('qrcode', {
+		text: walletAddress,
+		width: 100,
+		height: 100
+	});
 </script>
