@@ -27,22 +27,37 @@
 		</div>
 		<div id="assetContent" class="asset-content">
 			<div class="asset-content-top">
-				账户总资产($)：
-				<div class="total-money balance">
+				账户总资产：
+				<div class="total-money">
 					<!--9999.00-->
 				</div>
-				<div class="new-add-btn"></div>
 			</div>
-			<div class="asset-content-list border-1px">
-				<a href="javascript:openInfo('view/asset/currencydetail.html',{'currencyName':'ETH','currencyPrice':'0'})">
+			<div class="asset-content-list border-1px" id="ethAssets">
+				<a>
+					<!--href="javascript:openInfo('view/asset/currencydetail.html',{'currencyName':'ETH'})"-->
 					<div class="list-left"></div>
 					<div class="list-middle">
 						<div class="title top">ETH</div>
-						<div class="price bottom"><span>0.00</span>CNY</div>
+						<!--<div class="price bottom"><span>0.00</span>CNY</div>-->
 					</div>
 					<div class="list-right">
-						<div class="top">1000.000</div>
-						<div class="price bottom"><span>0.00</span>CNY</div>
+						<div class="top balance">
+							<!--1000.00-->
+						</div>
+						<!--<div class="price bottom"><span>0.00</span>CNY</div>-->
+					</div>
+				</a>
+			</div>
+
+			<div class="asset-content-list" id="trueAssets">
+				<a>
+					<!--href="javascript:openInfo('view/asset/currencydetail.html',{'currencyName':'TRUE'})"-->
+					<div class="list-left-true"></div>
+					<div class="list-middle">
+						<div class="title top">TRUE</div>
+					</div>
+					<div class="list-right">
+						<div class="top balances"></div>
 					</div>
 				</a>
 			</div>
@@ -63,7 +78,7 @@
 		-->
 		</div>
 
-		<div class="backup-mask">
+		<div class="backup-mask mui-hidden">
 			<div class="content">
 				<div class="title">
 					<h3>备份钱包</h3>
@@ -113,6 +128,37 @@
 		//			var h = plus.webview.getWebviewById(plus.runtime.appid);
 		//			console.log("应用首页Webview窗口：" + h.getURL());
 		//		})
+
+		mui.plusReady(function() {
+
+			//获取资产   -- 暂不做资产转换
+			var web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/"));
+
+			var addresses = plus.storage.getItem('walletAddress'),
+				balance = web3.fromWei(web3.eth.getBalance(addresses), 'ether');
+			//		balance=balance.slice()
+			h('.balance').html(balance);
+
+			let contractAddr = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab';
+			addToken(contractAddr, function() {
+				h('.balances').html(balances);
+				h('.total-money').html(balances);
+
+				h('#ethAssets').tap(function() {
+					openInfo('view/asset/currencydetail.html', {
+						currencyName: 'ETH',
+						currencyPrice: balance
+					})
+				})
+				h('#trueAssets').tap(function() {
+					openInfo('view/asset/currencydetail.html', {
+						currencyName: 'TRUE',
+						currencyPrice: balances
+					})
+				})
+			})
+
+		})
 	</script>
 
 </html>

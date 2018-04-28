@@ -45,41 +45,43 @@
 <script type="text/javascript" src="../../lib/js/qrcode.js"></script>
 <script>
 	//keystore
-	var copyFlag = false;
-	let walletAddress = plus.storage.getItem('walletAddress')
-	h('.walletAddress').html(walletAddress);
-	h('#copy-btn').tap(function() {
-		copyFlag = true;
-		myCopy();
-		if(copyFlag) {
-			h('#copy-btn').css({
-				'background': '#CCC',
-				'color': '#666'
-			});
-			h('#copy-btn').html('复制成功');
-		}
-	})
-	//复制方法
-	function myCopy() {
-		//var keyCode = h('input').val();
-		var clipboard = new ClipboardJS('#copy-btn', {
-			text: function() {
-				return walletAddress;
+	mui.plusReady(function() {
+		var copyFlag = false;
+		let walletAddress = plus.storage.getItem('walletAddress');
+		h('.walletAddress').html('0x' + walletAddress);
+		h('#copy-btn').tap(function() {
+			copyFlag = true;
+			myCopy();
+			if(copyFlag) {
+				h('#copy-btn').css({
+					'background': '#CCC',
+					'color': '#666'
+				});
+				h('#copy-btn').html('复制成功');
 			}
-		});
+		})
+		//复制方法
+		function myCopy() {
+			//var keyCode = h('input').val();
+			var clipboard = new ClipboardJS('#copy-btn', {
+				text: function() {
+					return walletAddress;
+				}
+			});
 
-		clipboard.on('success', function(e) {
-			console.log(e);
-		});
+			clipboard.on('success', function(e) {
+				console.log(e);
+			});
 
-		clipboard.on('error', function(e) {
-			console.log(e);
-		});
-	}
+			clipboard.on('error', function(e) {
+				console.log(e);
+			});
+		}
 
-	var qrcode = new QRCode('qrcode', {
-		text: walletAddress,
-		width: 100,
-		height: 100
-	});
+		var qrcode = new QRCode('qrcode', {
+			text: walletAddress,
+			width: 100,
+			height: 100
+		});
+	})
 </script>

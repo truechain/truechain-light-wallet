@@ -15,7 +15,6 @@ let symbol, contract, name, decimals, balances;
 
 // 根据当前帐户地址 和 合约地址，查询代表名称、余额
 function addToken(contractAddr, callback) {
-
 	//var fromAddr = '0x10592A6daD0055c586bb95474e7056F72462997A'
 	var fromAddr = '0x' + plus.storage.getItem('walletAddress');
 
@@ -167,7 +166,8 @@ function addToken(contractAddr, callback) {
 	setWeb3Provider(keyStore);
 	symbol = contract.symbol();
 	name = contract.name();
-	decimals = contract.decimals(); //小数点位数
-	balances = contract.balanceOf(fromAddr); //查地址的余额
+	//decimals = contract.decimals(); //小数点位数
+	balances = contract.balanceOf(fromAddr); //查地址的余额	
+	balances = Number(balances) / 1000000000000000000;
 	callback();
 }

@@ -32,9 +32,7 @@
         "Console": {
             "description": "跟踪调试输出日志"
         },
-        "Contacts": {
-            "description": "访问系统联系人信息"
-        },
+        
         "Device": {
             "description": "访问设备信息"
         },
@@ -56,9 +54,7 @@
          "Invocation": {
             "description": "使用Native.js能力"
         },
-        "Messaging": {
-            "description": "访问通讯能力"
-        },
+        
         "Orientation": {
             "description": "访问方向感应器"
         },
@@ -84,12 +80,8 @@
         "Barcode": {
             "description": "管理二维码扫描插件"
         },
-        "Maps": {
-            "description": "管理地图插件"
-        },
-        "Speech": {
-            "description": "管理语音识别插件"
-        },
+        
+        
         "Webview":{
         	"description": "窗口管理"
         },
@@ -106,9 +98,9 @@
 	"plus": {
 		"splashscreen": {
 			"autoclose": true,/*是否自动关闭程序启动界面，true表示应用加载应用入口页面后自动关闭；false则需调plus.navigator.closeSplashscreen()关闭*/
-			"waiting": true
+			"waiting": true,"delay":"2000"
 		},
-		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
 		"distribute": {
 			"apple": {
@@ -124,50 +116,50 @@
 				"keystore": "",/*Android应用打包使用的密钥库文件*/
 				"password": "",/*Android应用打包使用密钥库中证书的密码*/
 				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
-				"permissions": ["<uses-permission android:name=\"android.permission.CHANGE_NETWORK_STATE\"/>","<uses-permission android:name=\"android.permission.MOUNT_UNMOUNT_FILESYSTEMS\"/>","<uses-permission android:name=\"android.permission.READ_CONTACTS\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.READ_LOGS\"/>","<uses-permission android:name=\"android.permission.ACCESS_WIFI_STATE\"/>","<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-permission android:name=\"android.permission.WRITE_CONTACTS\"/>","<uses-permission android:name=\"android.permission.ACCESS_NETWORK_STATE\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>","<uses-permission android:name=\"android.permission.GET_ACCOUNTS\"/>","<uses-permission android:name=\"android.permission.RECORD_AUDIO\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.READ_PHONE_STATE\"/>","<uses-permission android:name=\"android.permission.CHANGE_WIFI_STATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.ACCESS_COARSE_LOCATION\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.ACCESS_FINE_LOCATION\"/>","<uses-permission android:name=\"android.permission.WRITE_SETTINGS\"/>"]
+				"permissions": ["<uses-feature android:name=\"android.hardware.camera.autofocus\"/>","<uses-feature android:name=\"android.hardware.camera\"/>","<uses-permission android:name=\"android.permission.MODIFY_AUDIO_SETTINGS\"/>","<uses-permission android:name=\"com.android.launcher.permission.INSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.VIBRATE\"/>","<uses-permission android:name=\"android.permission.WAKE_LOCK\"/>","<uses-permission android:name=\"android.permission.CALL_PHONE\"/>","<uses-permission android:name=\"android.permission.FLASHLIGHT\"/>","<uses-permission android:name=\"com.android.launcher.permission.UNINSTALL_SHORTCUT\"/>","<uses-permission android:name=\"android.permission.CAMERA\"/>"]
 			},
 			"orientation": ["portrait-primary", "portrait-secondary"],/*应用支持的方向，portrait-primary：竖屏正方向；portrait-secondary：竖屏反方向；landscape-primary：横屏正方向；landscape-secondary：横屏反方向*/
 			"icons": {
 				"ios": {
 					"prerendered": true, /*应用图标是否已经高亮处理，在iOS6及以下设备上有效*/
-					"auto": "", /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
+					 /*应用图标，分辨率：512x512，用于自动生成各种尺寸程序图标*/
 					"iphone": {
 						"normal": "",/*iPhone普通屏幕程序图标，分辨率：57x57*/
 						"retina": "",/*iPhone高分屏程序图标，分辨率：114x114*/
-						"retina7": "",/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
+						/*iPhone iOS7高分屏程序图标，分辨率：120x120*/
 						"spotlight-normal": "", /*iPhone Spotlight搜索程序图标，分辨率：29x29*/
 						"spotlight-retina": "", /*iPhone高分屏Spotlight搜索程序图标，分辨率：58x58*/
-						"spotlight-retina7": "",/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						/*iPhone iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
 						"settings-normal": "", /*iPhone设置页面程序图标，分辨率：29x29*/
-						"settings-retina": ""
+						"app@2x":"unpackage/res/icons/120x120.png","app@3x":"unpackage/res/icons/180x180.png","settings@3x":"unpackage/res/icons/87x87.png","settings@2x":"unpackage/res/icons/58x58.png","spotlight@2x":"unpackage/res/icons/80x80.png","spotlight@3x":"unpackage/res/icons/120x120.png","notification@3x":"unpackage/res/icons/60x60.png","notification@2x":"unpackage/res/icons/40x40.png"
 					},
 					"ipad": {
 						"normal": "", /*iPad普通屏幕程序图标，分辨率：72x72*/
 						"retina": "", /*iPad高分屏程序图标，分辨率：144x144*/
-						"normal7": "", /*iPad iOS7程序图标，分辨率：76x76*/
-						"retina7": "", /*iPad iOS7高分屏程序图标，分辨率：152x152*/
+						 /*iPad iOS7程序图标，分辨率：76x76*/
+						 /*iPad iOS7高分屏程序图标，分辨率：152x152*/
 						"spotlight-normal": "", /*iPad Spotlight搜索程序图标，分辨率：50x50*/
 						"spotlight-retina": "", /*iPad高分屏Spotlight搜索程序图标，分辨率：100x100*/
-						"spotlight-normal7": "",/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
-						"spotlight-retina7": "",/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
-						"settings-normal": "",/*iPad设置页面程序图标，分辨率：29x29*/
-						"settings-retina": ""
-					}
+						/*iPad iOS7 Spotlight搜索程序图标，分辨率：40x40*/
+						/*iPad iOS7高分屏Spotlight搜索程序图标，分辨率：80x80*/
+						/*iPad设置页面程序图标，分辨率：29x29*/
+						"app":"unpackage/res/icons/76x76.png","app@2x":"unpackage/res/icons/152x152.png","settings":"unpackage/res/icons/29x29.png","proapp@2x":"unpackage/res/icons/167x167.png","spotlight":"unpackage/res/icons/40x40.png","settings@2x":"unpackage/res/icons/58x58.png","spotlight@2x":"unpackage/res/icons/80x80.png","notification":"unpackage/res/icons/20x20.png","notification@2x":"unpackage/res/icons/40x40.png"
+					},"appstore":"unpackage/res/icons/1024x1024.png"
 				},
 				"android": {
-					"mdpi": "", /*普通屏程序图标，分辨率：48x48*/
-					"ldpi": "", /*大屏程序图标，分辨率：48x48*/
-					"hdpi": "", /*高分屏程序图标，分辨率：72x72*/
-					"xhdpi": "",/*720P高分屏程序图标，分辨率：96x96*/
-					"xxhdpi": ""
+					"mdpi": "unpackage/res/icons/48x48.png", /*普通屏程序图标，分辨率：48x48*/
+					"ldpi": "unpackage/res/icons/48x48.png", /*大屏程序图标，分辨率：48x48*/
+					"hdpi": "unpackage/res/icons/72x72.png", /*高分屏程序图标，分辨率：72x72*/
+					"xhdpi": "unpackage/res/icons/96x96.png",/*720P高分屏程序图标，分辨率：96x96*/
+					"xxhdpi": "unpackage/res/icons/144x144.png","xxxhdpi":"unpackage/res/icons/192x192.png"
 				}
 			},
 			"splashscreen": {
 				"ios": {
 					"iphone": {
 						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": ""
+						"retina35": "C:/Users/wangqi/Desktop/启动页/01-ios/1-iPhone4.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina40": "C:/Users/wangqi/Desktop/启动页/01-ios/2-iPhone5.png","retina47":"C:/Users/wangqi/Desktop/启动页/01-ios/3-iPhone6.png","retina55":"C:/Users/wangqi/Desktop/启动页/01-ios/4-iPhone6 plus.png","iphonex":"C:/Users/wangqi/Desktop/启动页/01-ios/5-iPhone x.png"
 					},
 					"ipad": {
 						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
@@ -183,12 +175,12 @@
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": ""
+					"hdpi": "C:/Users/wangqi/Desktop/启动页/02-安卓/480px.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "C:/Users/wangqi/Desktop/启动页/02-安卓/720px.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "C:/Users/wangqi/Desktop/启动页/02-安卓/1080px.png"
 				}
 			}
-		}
+		},"ads":{"rp":false,"splash":false,"push":false},"adid":""
 	},
 	"dependencies": {
 		"pages": {
@@ -204,7 +196,9 @@
 			"guide.html": {
 				"resources": [],
 				"refer": [
-					"index.html"
+					"index.html",
+					"view/my/wallet/importwallet.html",
+					"view/my/wallet/setup.html"
 				],
 				"priority": 0
 			},
@@ -216,7 +210,9 @@
 				],
 				"refer": [
 					"view/my/wallet/wallet.html",
-					"view/my/help/help.html"
+					"view/my/help/help.html",
+					"view/my/record/record.html",
+					"view/my/about/about.html"
 				],
 				"priority": 0
 			},
@@ -239,14 +235,66 @@
 			"asset.html": {
 				"resources": [],
 				"refer": [
-					"view/asset/userinfo.html"
+					"view/asset/userinfo.html",
+					"view/asset/currencydetail.html",
+					"view/asset/receipt.html",
+					"view/asset/newcurrency.html"
 				],
 				"priority": 0
 			},
 			"view/my/help/help.html": {
 				"resources": [],
 				"refer": [
-					"view/my/help/contact.html"
+					"view/my/help/contact.html",
+					"view/my/wallet/keystore.html",
+					"view/my/wallet/mnemonicword.html",
+					"view/my/wallet/privateKey.html"
+				],
+				"priority": 0
+			},
+			"view/my/wallet/importwallet.html": {
+				"resources": [],
+				"refer": [
+					"index.html"
+				],
+				"priority": 0
+			},
+			"view/my/about/about.html": {
+				"resources": [],
+				"refer": [
+					"view/my/about/versionlog.html",
+					"view/rules/privacypolicy.html",
+					"view/rules/useragreement.html"
+				],
+				"priority": 0
+			},
+			"view/asset/receipt.html": {
+				"resources": [],
+				"refer": [
+					"view/asset/currencydetail.html"
+				],
+				"priority": 0
+			},
+			"view/asset/currencydetail.html": {
+				"resources": [],
+				"refer": [
+					"view/asset/transfer.html",
+					"view/asset/receipt.html"
+				],
+				"priority": 0
+			},
+			"view/asset/transfer.html": {
+				"resources": [],
+				"refer": [
+					"view/asset/currencydetail.html",
+					"view/my/wallet/ercode.html"
+				],
+				"priority": 0
+			},
+			"view/asset/userinfo.html": {
+				"resources": [],
+				"refer": [
+					"view/asset/amendpaw.html"
 				],
 				"priority": 0
 			}
@@ -307,5 +355,13 @@
 				"dist/images/ios/my2@2x.png"
 			]
 		}
-	}
+	},
+	"unpackage":[
+	  "src/less/asset/asset.less",
+	  "src/less/common/base.less",
+	  "src/less/common/common.less",
+	  "src/less/common/guide.less",
+	  "gulpfile.js",
+	  "package.json"
+	]
 }

@@ -16,17 +16,19 @@
 			<img src="src/images/logo.png" />
 		</div>
 		<div class="welcome-trueChain">
-			欢迎来到True！
+			欢迎来到 TRUE
 		</div>
 		<button id="creat-wallet">创建钱包</button>
 		<button id="lead-wallet">导入钱包</button>
 	</body>
 	<script src="lib/js/mui.min.js"></script>
 	<script type="text/javascript">
-		//plus.storage.clear();
-		(function() {
-			plus.storage.getItem('initialized') ? mui.openWindow('index.html') : null;
-		})()
+		mui.plusReady(function() {
+			//plus.storage.clear();
+			(function() {
+				plus.storage.getItem('initialized') ? mui.openWindow('index.html') : null;
+			})()
+		})
 
 		document.getElementById('creat-wallet').addEventListener('tap', function() {
 			mui.openWindow('view/my/wallet/setup.html');

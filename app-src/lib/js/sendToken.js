@@ -6,8 +6,8 @@ function sendToken(fromAddr, toAddr, valueToken, pwd) {
 
 	//	var valueToken = 2,
 	var amount = parseFloat(valueToken) * 1.0e18,
-		gasPrice = 18000000000,
-		gas = 50000,
+		gasPrice = 21000000000,
+		gas = 110000,
 		privateKey;
 
 	//合约的interface
@@ -151,7 +151,7 @@ function sendToken(fromAddr, toAddr, valueToken, pwd) {
 		"type": "event"
 	}]
 
-	var contractAddr = '0x84b8b3370edddbace3ddbd85165ffc97e4549db7' // ropsten - HONG   
+	var contractAddr = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab' // ropsten - HONG   
 
 	///////////////////////////////////////
 	var serialized_keystore = plus.storage.getItem('keystore');
@@ -181,8 +181,8 @@ function sendToken(fromAddr, toAddr, valueToken, pwd) {
 			var web3Provider = new HookedWeb3Provider({
 				//host: "http://localhost:8545", 				// 私链 
 				//host: "https://rinkeby.infura.io/",		// 以太坊测试  
-				host: "https://ropsten.infura.io/", // 以太坊测试 (ropsten) 
-				//host: "https://mainnet.infura.io/",					// 以太坊正式网 
+				//host: "https://ropsten.infura.io/", // 以太坊测试 (ropsten) 
+				host: "https://mainnet.infura.io/", // 以太坊正式网 
 				transaction_signer: {
 					hasAddress: function(address, callback) {
 						callback(null, true);
@@ -235,7 +235,7 @@ function sendToken(fromAddr, toAddr, valueToken, pwd) {
 				},
 				function(err, txhash) {
 					if(err) {
-						mui.alert('无效地址或密码错误,请重试!')
+						mui.alert('交易失败原因: 无效地址或密码错误或ETH不足,请重试!')
 					} else {
 						mui.toast('交易成功')
 						mui.openWindow('dealsuccessful.html')
@@ -248,7 +248,6 @@ function sendToken(fromAddr, toAddr, valueToken, pwd) {
 				//num代表传入的数字，n代表要保留的字符的长度  
 				return(Array(n).join(0) + num).slice(-n);
 			}
-
 		}
 
 	});
