@@ -145,14 +145,25 @@
 			var balance = web3.fromWei(web3.eth.getBalance(addresses), 'ether');
 			balance = Math.round(balance * 10000) / 10000;
 			h('.balance').html(balance);
+<<<<<<< HEAD
 			let contractAddr = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab';
 			addToken(contractAddr, function(balance, balances) {
+=======
+			console.log(balance, '---------999999999')
+			let contractAddr = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab';
+			addToken(contractAddr, function(balances) {
+>>>>>>> see
 				if(balances) {
 					h('.balances').html(balances);
 					h('.total-money').html(balances);
 				} else {
 					balances = 0;
+<<<<<<< HEAD
 					h('.total-money').html('0');
+=======
+					h('.total-money').html(balances);
+					h('.balances').html(balances);
+>>>>>>> see
 				}
 				h('#ethAssets').tap(function() {
 					openInfo('view/asset/currencydetail.html', {
