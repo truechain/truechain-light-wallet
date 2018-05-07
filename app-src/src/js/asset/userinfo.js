@@ -1,4 +1,6 @@
 mui.plusReady(function() {
+	let web3 = new Web3();
+
 	function getUserInfo() {
 		h('.walletName').html(plus.storage.getItem('walletName'))
 		h('.walletAddress').html(plus.storage.getItem('walletAddress'))
@@ -52,20 +54,27 @@ mui.plusReady(function() {
 	h('.exportkey-cell').tap(function() {
 		mui.prompt('', 'Password', '请输入密码', ['取消', '保存'], function(e) {
 			let password = e.value;
-			let seed = plus.storage.getItem('seed');
-			if(e.index == 1) {
-				mui.toast('密码正确')
-				/*ks.keyFromPassword(password, function(err, pwDerivedKey) {
-				mui.toast('密码正确!')
-				//密码验证后的导出私钥处理
-		}) */
-
-				//			setTimeout(function() {
-				showMask();
-				h('.export-key').removeClass('not-view');
-				//			}, 1000)
+			if(!password) {
+				mui.alert('请输入密码!')
 			} else {
-				return;
+				mui.toast('请稍等!')
+				showMask();
+				var serialized_keystore = plus.storage.getItem('keystore'),
+					keystore = lightwallet.keystore.deserialize(serialized_keystore);
+				keystore.keyFromPassword(password, function(err, pwDerivedKey) {
+					if(err) {
+						mui.alert('密码验证错误,请重新输入!');
+						mask._remove();
+						return;
+					} else {
+						keystore.generateNewAddress(pwDerivedKey, 1);
+						var address = keystore.getAddresses();
+						let PrivateKey = keystore.exportPrivateKey(address[0], pwDerivedKey);
+						h('.key-code').html(PrivateKey);
+						showMask();
+						h('.export-key').removeClass('not-view');
+					}
+				});
 			}
 		}, 'div');
 	})
@@ -113,6 +122,34 @@ mui.plusReady(function() {
 	//导出助记词
 
 	h('.setting-cell').tap(function() {
-		mui.openWindow('exportmw.html', 'exportmw')
+		mui.openWindow('exportmw.html', 'exportmw');
+	})
+
+	//删除钱包
+	h('#delelet-wallet').tap(function() {
+		mui.prompt('', 'Password', '请输入密码', ['取消', '保存'], function(e) {
+			let password = e.value;
+			if(!password) {
+				mui.alert('请输入密码!')
+			} else {
+				mui.toast('请稍等!')
+				showMask();
+				var serialized_keystore = plus.storage.getItem('keystore'),
+					keystore = lightwallet.keystore.deserialize(serialized_keystore);
+				keystore.keyFromPassword(password, function(err, pwDerivedKey) {
+					if(err) {
+						mui.alert('密码验证错误,请重新输入!');
+						mask._remove();
+						return;
+					} else {
+						mask._remove();
+						keystore.generateNewAddress(pwDerivedKey, 1);
+						plus.storage.clear();
+						mui.toast('已删除');
+						mui.openWindow('../../guide.html');
+					}
+				});
+			}
+		}, 'div');
 	})
 })

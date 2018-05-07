@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../lib/css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/my/locker.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<h1 class="mui-title">验证手势密码</h1>
+		</header>
+		<div class="mui-content">
+			<div id='holder' class="mui-locker" data-locker-options='{"ringColor":"rgba(210,210,210,1)","fillColor":"#ffffff","pointColor":"rgba(0,136,204,1)","lineColor":"rgba(0,136,204,1)"}' data-locker-width='300' data-locker-height='300'></div>
+			<div id='alert'></div>
+		</div>
+	</body>
+
+</html>
+<script src="../../../lib/js/mui.min.js"></script>
+<script type="text/javascript" src="../../../dist/js/my/locker.js"></script>
+<script type="text/javascript">
+	mui.init();
+	mui.plusReady(function() {
+		var holder = document.querySelector('#holder'),
+			alert = document.querySelector('#alert'),
+			record = [],
+			locker = plus.storage.getItem('locker');
+		//处理事件
+		holder.addEventListener('done', function(event) {
+			var rs = event.detail;
+			if(rs.points.length < 4) {
+				alert.innerText = '最少连接4个点';
+				record = [];
+				rs.sender.clear();
+				return;
+			}
+			console.log(rs.points.join(''));
+			if(locker == rs.points.join('')) {
+				alert.innerText = '手势验证完成';
+				setTimeout(function() {
+					mui.openWindow('../../../index.html');
+				}, 1200)
+			} else {
+				alert.innerText = '验证失败,请重试!';
+			}
+			rs.sender.clear();
+			record = [];
+		});
+	})
+</script>

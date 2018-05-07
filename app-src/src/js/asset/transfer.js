@@ -53,3 +53,44 @@
 
 	Validata.init();
 })();
+
+//	//二维码按钮
+//	h('.ercode-icon').tap(function(){
+//		openInfo('../my/wallet/ercode.html')
+//	});
+//	
+//	function Obtain(id, callback) {
+//		let ele = document.getElementById(id),
+//			elec = document.getElementsByClassName(id)[0];
+//		if(ele) {
+//			ele.addEventListener('tap', callback)
+//		} else {
+//			elec.addEventListener('tap', callback)
+//		}
+//	}
+//
+//	Obtain('next', function() {
+//		h('#currencyPwd').addClass('mui-active');
+//		Obtain('comfirmPsw', function() {
+//			h('#currencyPwd').removeClass('mui-active');
+//			h('#modal').addClass('mui-active');
+//			
+//		})
+//
+//		var mask = mui.createMask(function() {
+//			return false
+//		});
+//		mask.show();
+//
+//		h('.close').tap(function(){
+//			mask._remove();
+//		})
+//
+//	})
+
+//showMask(){
+//	var mask = mui.createMask(function() {
+//			return false
+//	});
+//	mask.show();
+//}gul
