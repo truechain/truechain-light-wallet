@@ -29,8 +29,11 @@
 			<div class="asset-content-top">
 				账户总资产：
 				<div class="total-money">
+					0
 					<!--9999.00-->
 				</div>
+				<!--新增币种-->
+				<!--<div class="new-add-btn"></div>-->
 			</div>
 			<div class="asset-content-list border-1px" id="ethAssets">
 				<a>
@@ -42,7 +45,7 @@
 					</div>
 					<div class="list-right">
 						<div class="top balance">
-							<!--1000.00-->
+							<!--1000.00-->0
 						</div>
 						<!--<div class="price bottom"><span>0.00</span>CNY</div>-->
 					</div>
@@ -57,7 +60,7 @@
 						<div class="title top">TRUE</div>
 					</div>
 					<div class="list-right">
-						<div class="top balances"></div>
+						<div class="top balances">0</div>
 					</div>
 				</a>
 			</div>
@@ -130,20 +133,27 @@
 		//		})
 
 		mui.plusReady(function() {
+			let host = plus.storage.getItem('web3Host');
+			if(!host) {
+				host = 'https://mainnet.infura.io/';
+			}
 
 			//获取资产   -- 暂不做资产转换
-			var web3 = new Web3(new Web3.providers.HttpProvider("https://mainnet.infura.io/"));
+			var web3 = new Web3(new Web3.providers.HttpProvider(host));
 
-			var addresses = plus.storage.getItem('walletAddress'),
-				balance = web3.fromWei(web3.eth.getBalance(addresses), 'ether');
-			//		balance=balance.slice()
+			var addresses = plus.storage.getItem('walletAddress');
+			var balance = web3.fromWei(web3.eth.getBalance(addresses), 'ether');
+			balance = Math.round(balance * 10000) / 10000;
 			h('.balance').html(balance);
-
 			let contractAddr = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab';
-			addToken(contractAddr, function() {
-				h('.balances').html(balances);
-				h('.total-money').html(balances);
-
+			addToken(contractAddr, function(balance, balances) {
+				if(balances) {
+					h('.balances').html(balances);
+					h('.total-money').html(balances);
+				} else {
+					balances = 0;
+					h('.total-money').html('0');
+				}
 				h('#ethAssets').tap(function() {
 					openInfo('view/asset/currencydetail.html', {
 						currencyName: 'ETH',

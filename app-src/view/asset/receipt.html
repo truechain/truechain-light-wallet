@@ -13,7 +13,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
-			<a class="mui-pull-right white" style="line-height: 45px;">分享</a>
+			<!--<a class="mui-pull-right white" style="line-height: 45px;">分享</a>-->
 			<h1 class="mui-title white">收款码</h1>
 		</header>
 		<div class="mui-content">
@@ -48,7 +48,7 @@
 	mui.plusReady(function() {
 		var copyFlag = false;
 		let walletAddress = plus.storage.getItem('walletAddress');
-		h('.walletAddress').html('0x' + walletAddress);
+		h('.walletAddress').html(walletAddress);
 		h('#copy-btn').tap(function() {
 			copyFlag = true;
 			myCopy();

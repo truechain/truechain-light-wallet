@@ -23,9 +23,14 @@
 					<a class="mui-control-item mui-active" href="#item1mobile">
 						助记词
 					</a>
+					<a class="mui-control-item" href="#item2mobile">
+						官方钱包
+					</a>
+					<!--	<a class="mui-control-item" href="#item3mobile">
+						私钥
+					</a>-->
 				</div>
-				<div id="sliderProgressBar" class="mui-slider-progress-bar "></div>
-				<!--mui-col-xs-4-->
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
 				<div class="mui-slider-group">
 					<div id="item1mobile" class="md-f1 mui-slider-item mui-control-content detailInfos md-box md-ver mui-active">
 						<div class="mnemonic-word-box">
@@ -39,13 +44,13 @@
 								不少于8位字符，建议混合大小写字母、数字、特殊字符
 							</div>
 							<li>
-								<input type="text" class="e-wallet-pwd" value="" placeholder="输入您的密码" />
+								<input type="password" class="e-wallet-pwd e-pwd" value="" placeholder="输入您的密码" />
 							</li>
 							<div class="pwd-error error mui-hidden">
 								不少于8位字符，建议混合大小写字母、数字、特殊字符
 							</div>
 							<li>
-								<input type="text" class="e-wallet-repwd" value="" placeholder="确认您的密码" />
+								<input type="password" class="e-wallet-repwd e-pwd" value="" placeholder="确认您的密码" />
 							</li>
 							<div class="repwd-error error mui-hidden">
 								不少于8位字符，建议混合大小写字母、数字、特殊字符
@@ -60,6 +65,60 @@
 						<a href="javascript:openInfo('mnemonicword.html')" class="what-mnemonic-word">什么是助记词?</a>
 					</div>
 
+					<div id="item2mobile" class="md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
+						<div class="remind">
+							直接复制粘贴以太坊官方钱包 keystore 文件内容至输入框。或者通过生成 keystore 内容的二维码，扫描录入。
+						</div>
+						<div class="wallet-box">
+							<textarea class="keystorecontent" name="func" rows="6" cols="5" placeholder="keystore 文本内容"></textarea>
+						</div>
+						<ul>
+							<li>
+								<input type="password" class="e-wallet-pwd2 e-pwd" value="" placeholder="输入您的密码" />
+							</li>
+						</ul>
+						<div class="pwd-error2 error mui-hidden">
+							不少于8位字符，建议混合大小写字母、数字、特殊字符
+						</div>
+
+						<div class="mui-input-row mui-checkbox mui-left">
+							<label>我已仔细阅读并同意<a href="">《服务及隐私条款》</a></label>
+							<input name="checkbox2" value="Item 1" type="checkbox">
+						</div>
+
+						<button class="star-import2">开始导入</button>
+
+						<a href="javascript:openInfo('mnemonicword.html')" class="what-mnemonic-word">什么是助记词?</a>
+					</div>
+
+					<div id="item3mobile" class="md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
+						<div class="keystore-box">
+							<textarea class="privateContent" name="func" rows="6" cols="5" placeholder="明文私钥"></textarea>
+						</div>
+						<ul>
+							<li>
+								<input type="password" class="e-wallet-pwd3 e-pwd" value="" placeholder="输入您的密码" />
+							</li>
+							<div class="pwd-error3 error mui-hidden">
+								不少于8位字符，建议混合大小写字母、数字、特殊字符
+							</div>
+							<li>
+								<input type="password" class="e-wallet-repwd3 e-pwd" value="" placeholder="确认您的密码" />
+							</li>
+							<div class="repwd-error3 error mui-hidden">
+								不少于8位字符，建议混合大小写字母、数字、特殊字符
+							</div>
+						</ul>
+
+						<div class="mui-input-row mui-checkbox mui-left">
+							<label>我已仔细阅读并同意<a href="">《服务及隐私条款》</a></label>
+							<input name="checkbox3" value="Item 1" type="checkbox">
+						</div>
+
+						<button class="star-import3">开始导入</button>
+
+						<a href="javascript:openInfo('mnemonicword.html')" class="what-mnemonic-word">什么是助记词?</a>
+					</div>
 
 				</div>
 			</div>
