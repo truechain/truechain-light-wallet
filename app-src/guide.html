@@ -23,8 +23,11 @@
 	</body>
 	<script src="lib/js/mui.min.js"></script>
 	<script type="text/javascript">
+		mui.back = function() {
+			return false;
+		}
 		mui.plusReady(function() {
-			plus.storage.clear();
+			//plus.storage.clear();
 			(function() {
 				let initialized = plus.storage.getItem('initialized'),
 					locker = plus.storage.getItem('locker');

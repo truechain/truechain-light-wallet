@@ -124,7 +124,8 @@
   },
   "view/my/record/record.html": {
     "refer": [
-      "view/my/record/switchaccount.html"
+      "view/my/record/switchaccount.html",
+      "view/my/record/record.html"
     ]
   }
 }

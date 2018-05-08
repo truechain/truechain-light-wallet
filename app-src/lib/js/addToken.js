@@ -177,5 +177,4 @@ function addToken(contractAddr, callback) {
 
 	//var contraccontractAddrtAddr = '0x11769e3b12d34da9a33c1d3f08e8851a2a0528b5' // erc20 合约地址
 	//contractAddr = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab'; // TRUE  erc20 合约地址
-
 }

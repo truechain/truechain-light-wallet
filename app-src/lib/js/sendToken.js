@@ -1,12 +1,10 @@
-mui.plusReady(function() {
-
-	function sendToken(fromAddr, toAddr, valueToken, pwd) {
+function sendToken(fromAddr, toAddr, valueToken, pwd) {
+	mui.plusReady(function() {
 		let host = plus.storage.getItem('web3Host');
 		if(!host) {
 			host = 'https://mainnet.infura.io/';
 		}
-
-		console.log('发送代币执行!')
+		console.log('发送代币执行!');
 		//var fromAddr = '0x5833fa6053e6e781eafb8695d63d90f6b3571e5e';
 		//var toAddr = '0x10592A6daD0055c586bb95474e7056F72462997A';
 		var amount = parseFloat(valueToken) * 1.0e18,
@@ -233,7 +231,7 @@ mui.plusReady(function() {
 					},
 					function(err, txhash) {
 						if(err) {
-							mui.alert('交易失败原因: 无效地址或密码错误或ETH不足,请重试!')
+							mui.alert('交易失败原因: 无效地址或密码错误或ETH不足,请重试!');
 						} else {
 							mui.toast('交易成功');
 							mui.openWindow('dealsuccessful.html');
@@ -249,5 +247,6 @@ mui.plusReady(function() {
 			}
 
 		});
-	}
-})
+
+	})
+}
