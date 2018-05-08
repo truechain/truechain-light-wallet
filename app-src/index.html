@@ -19,6 +19,10 @@
 			</a>
 			<a class="mui-tab-item" id="tab2">
 				<span class="mui-icon my-icon"></span>
+				<span class="mui-tab-label">节点</span>
+			</a>
+			<a class="mui-tab-item" id="tab3">
+				<span class="mui-icon my-icon"></span>
 				<span class="mui-tab-label">我的</span>
 			</a>
 		</nav>
@@ -55,6 +59,16 @@
 						width: "100%",
 						left: "100%"
 					}
+				},
+				{
+					url: 'node.html',
+					id: 'node',
+					styles: {
+						top: '0px',
+						bottom: '50px',
+						width: "100%",
+						left: "100%"
+					}
 				}
 			]
 		});
@@ -73,15 +87,26 @@
 			//	    	robj.evalJS("myrefresh()");
 			//	    });
 		});
+		h('#tab3').tap(function() {
+			changSub(3);
+			//		mui.plusReady(function(){
+			//	    	var robj = plus.webview.getWebviewById("regstep2.html");
+			//	    	robj.evalJS("myrefresh()");
+			//	    });
+		});
 
 		function changSub(index) {
 			var sub1 = plus.webview.getWebviewById('asset');
-			var sub2 = plus.webview.getWebviewById('my');
+			var sub2 = plus.webview.getWebviewById('node');
+			var sub3 = plus.webview.getWebviewById('my');
 			sub1.setStyle({
 				left: (1 - index) * 100 + '%'
 			});
 			sub2.setStyle({
 				left: (2 - index) * 100 + "%"
+			});
+			sub3.setStyle({
+				left: (3 - index) * 100 + "%"
 			});
 		};
 	</script>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/node/signUp.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">投票</h1>
+		</header>
+		<div class="mui-content">
+			<div class="main">
+				<ul>
+					<li>
+						<div class="nodeType">
+							<div class="nodeType_title">
+								<span>
+									标准节点(POW节点)
+								</span>
+								<span>
+									<img src="../../dist/images/node/list_more.png"/>
+								</span>
+							</div>
+							<p class="nodeType_introduce">标准节点即POW节点,主网测试期结束后将无节点数量限制,仅执行POW节点任务,可以自由出入。个人竞选需要2000持币量;组队竞选需要3000持币量。</p>
+						</div>
+					</li>
+					<li>
+						<div class="nodeType">
+							<div class="nodeType_title">
+								<span>
+									全节点(POW+PBFT)
+								</span>
+								<span>
+									<img src="../../dist/images/node/list_more.png"/>
+								</span>
+							</div>
+							<p class="nodeType_introduce">全节点即POW+PBFT节点，也被称为MasterNode：全节点在未进入PBFT Committee委员会的情况下，会自动执行POW节点任务，全节点需要具备相应的算力要求，但是可以自由出入。 个人竞选需要不少于5万TRUE，并执行锁仓；组队竞选需要不少于10万TRUE，并执行锁仓。
+							</p>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+
+	</body>
+
+</html>
+<script src="../../lib/js/mui.min.js"></script>
+<script type="text/javascript">
+	mui.init()
+</script>

@@ -1,0 +1,60 @@
+body,
+.mui-content {
+	background: rgba(245, 245, 245, 1);
+}
+
+.main {
+	padding: 15px;
+}
+
+.signUp {
+	background: #fff;
+	border-radius: 5px;
+	min-height: 60px;
+	display: flex;
+	margin-top: 10px;
+	padding: 10px;
+}
+
+.signUp_personal {
+	align-items: center;
+	justify-content: space-between;
+}
+
+.arrow,
+.search {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+}
+
+.arrow {
+	background: url(../../images/node/list_more.png) no-repeat center center;
+}
+
+.search {
+	background: url(../../images/node/搜索.png) no-repeat center center;
+}
+
+.signUp_team {
+	justify-content: center;
+	flex-direction: column;
+}
+
+.signUp_team_item {
+	align-items: center;
+}
+
+.establish {
+	padding: 8px;
+	color: #fff;
+	background: rgba(82, 139, 247, 1);
+	border-radius: 15px;
+}
+
+.signUp_team li {
+	border-bottom: 1px solid #F3F3F3;
+	min-height: 30px;
+	display: flex;
+	align-items: center;
+}
