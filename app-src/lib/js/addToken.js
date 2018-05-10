@@ -162,13 +162,41 @@ function addToken(contractAddr, callback) {
 		}]
 
 		contract = web3.eth.contract(abi).at(contractAddr);
+
 		let keyStore = plus.storage.getItem('keystore');
 		setWeb3Provider(keyStore);
-		symbol = contract.symbol();
-		name = contract.name();
+//		if(contract.symbol() && contract.symbol()) {
+//			console.log('哈哈呼呼虎虎')
+//			symbol = contract.symbol();
+//			name = contract.symbol();
+//			return;
+//		}
+
 		//decimals = contract.decimals(); //小数点位数
-		balances = contract.balanceOf(fromAddr); //查地址的余额	
-		balances = Number(balances) / 1000000000000000000;
+
+		balances = show(Number(contract.balanceOf(fromAddr) / 1.0e18)); //查地址的余额	
+		console.log(balances + '呼呼哈哈')
+
+		function show(num) {
+			num += '';
+			num = num.replace(/[^0-9|\.]/g, '');
+
+			if(/^0+/) {
+				num = num.replace(/^0+/, '');
+
+			};
+			if(!/\./.test(num)) {
+				num += '.00000';
+			};
+			if(/^\./.test(num)) {
+				num = '0' + num;
+			};
+			num += '00000';
+			num = num.match(/\d+\.\d{5}/)[0];
+			return num
+		};
+
+		/*balances = Number(balances) / 1000000000000000000;*/
 		setTimeout(function() {
 			callback(balances);
 		}, 1000)
@@ -177,5 +205,4 @@ function addToken(contractAddr, callback) {
 
 	//var contraccontractAddrtAddr = '0x11769e3b12d34da9a33c1d3f08e8851a2a0528b5' // erc20 合约地址
 	//contractAddr = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab'; // TRUE  erc20 合约地址
-
 }

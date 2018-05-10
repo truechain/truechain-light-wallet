@@ -38,7 +38,9 @@
 			<div class="asset-content-list border-1px" id="ethAssets">
 				<a>
 					<!--href="javascript:openInfo('view/asset/currencydetail.html',{'currencyName':'ETH'})"-->
-					<div class="list-left"></div>
+					<div class="list-left">
+						<img src="dist/images/asset/eth_logo.png" />
+					</div>
 					<div class="list-middle">
 						<div class="title top">ETH</div>
 						<!--<div class="price bottom"><span>0.00</span>CNY</div>-->
@@ -55,7 +57,10 @@
 			<div class="asset-content-list" id="trueAssets">
 				<a>
 					<!--href="javascript:openInfo('view/asset/currencydetail.html',{'currencyName':'TRUE'})"-->
-					<div class="list-left-true"></div>
+					<div class="list-left-true">
+						<!--<img src="src/images/Artboard2.jpg" />-->
+						<img src="src/images/true-logo.png" />
+					</div>
 					<div class="list-middle">
 						<div class="title top">TRUE</div>
 					</div>
@@ -142,35 +147,46 @@
 			var web3 = new Web3(new Web3.providers.HttpProvider(host));
 
 			var addresses = plus.storage.getItem('walletAddress');
-			var balance = web3.fromWei(web3.eth.getBalance(addresses), 'ether');
-			balance = Math.round(balance * 10000) / 10000;
+			var balance = show(web3.fromWei(web3.eth.getBalance(addresses), 'ether'));
+
+			function show(num) {
+				num += '';
+				num = num.replace(/[^0-9|\.]/g, '');
+
+				if(/^0+/) {
+					num = num.replace(/^0+/, '');
+
+				};
+				if(!/\./.test(num)) {
+					num += '.00000';
+				};
+				if(/^\./.test(num)) {
+					num = '0' + num;
+				};
+				num += '00000';
+				num = num.match(/\d+\.\d{5}/)[0];
+				return num
+			};
+
+			/*balance = Math.round(balance * 100000) / 100000;*/
 			h('.balance').html(balance);
-<<<<<<< HEAD
-			let contractAddr = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab';
-			addToken(contractAddr, function(balance, balances) {
-=======
-			console.log(balance, '---------999999999')
+			console.log(balance, '-----173----');
 			let contractAddr = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab';
 			addToken(contractAddr, function(balances) {
->>>>>>> see
 				if(balances) {
 					h('.balances').html(balances);
 					h('.total-money').html(balances);
 				} else {
 					balances = 0;
-<<<<<<< HEAD
-					h('.total-money').html('0');
-=======
 					h('.total-money').html(balances);
 					h('.balances').html(balances);
->>>>>>> see
 				}
 				h('#ethAssets').tap(function() {
 					openInfo('view/asset/currencydetail.html', {
 						currencyName: 'ETH',
 						currencyPrice: balance
 					})
-				})
+				});
 				h('#trueAssets').tap(function() {
 					openInfo('view/asset/currencydetail.html', {
 						currencyName: 'TRUE',
@@ -178,7 +194,6 @@
 					})
 				})
 			})
-
 		})
 	</script>
 

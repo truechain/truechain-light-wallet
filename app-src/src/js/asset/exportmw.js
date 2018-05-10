@@ -3,11 +3,11 @@
 //显示助记词
 ! function showSeed() {
 
-	mui.prompt('', 'Password', '请输入密码', ['取消', '保存'], function(e) {
-		console.log(e, '000000000')
+	mui.prompt('', 'Password', '请输入密码', ['取消', '确定'], function(e) {
+
 		let password = e.value;
-		var serialized_keystore = plus.storage.getItem('keystore')
-		global_keystore = lightwallet.keystore.deserialize(serialized_keystore) //将序列号的keystore转换为对象 
+		var serialized_keystore = plus.storage.getItem('keystore');
+		global_keystore = lightwallet.keystore.deserialize(serialized_keystore); //将序列号的keystore转换为对象 
 
 		global_keystore.keyFromPassword(password, function(err, pwDerivedKey) {
 			if(err) {
@@ -16,7 +16,7 @@
 			} else {
 				mui.toast('请稍等!')
 				var orderWord = global_keystore.getSeed(pwDerivedKey);
-				h('#words').html(orderWord)
+				h('#words').html(orderWord);
 
 				function randomSort() {
 					return Math.random() > 0.5 ? -1 : 1;
@@ -56,9 +56,6 @@
 				})
 			}
 		});
-
 	}, 'div');
-
-	//var password = prompt('验证密码!', 'Password');
-
+	document.querySelector('.mui-popup-input input').type = 'password';
 }()
