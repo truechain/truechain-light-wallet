@@ -20,7 +20,7 @@
 			<div class="main">
 				<ul>
 					<li>
-						<a href="javascript:openInfo('standardNode/standardNode.html')">
+						<a class="standardNode">
 							<div class="nodeType">
 								<div class="nodeType_title">
 									<span>
@@ -57,7 +57,20 @@
 
 </html>
 <script src="../../lib/js/mui.min.js"></script>
+<script src="../../lib/js/zepto.min.js"></script>
+<script src="../../lib/js/h.min.js"></script>
 <script src="../../src/js/common.js"></script>
 <script type="text/javascript">
-	mui.init()
+	mui.init();
+	/*判断是否报名成功*/
+
+	if(true) {
+		h('.standardNode').attr('href', "javascript:openInfo('standardNode/standardNode.html')");
+	} else {
+		h('.standardNode').attr('href', "javascript:openInfo('signUpSuccess.html')");
+	}
+
+	$('.standardNode').on('tap', function() {
+		console.log('报名  74--')
+	})
 </script>

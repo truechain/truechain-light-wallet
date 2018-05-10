@@ -3,7 +3,7 @@
 
 	<head>
 		<meta charset="UTF-8">
-		<title></title>
+		<title>个人报名</title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="../../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../../dist/css/common/common.css" />
@@ -52,7 +52,6 @@
 							<i class="arrow"></i>
 						</li>
 					</ul>
-
 				</div>
 			</div>
 
@@ -99,19 +98,30 @@
 						$('.fail').removeClass('not-view');
 					}
 				});
+				/*建立组队*/
+
+				h('.establish').tap(function() {
+					openInfo('createTeam/createTeam.html')
+				})
 
 				/*关闭*/
 				h('.close').tap(function() {
 					$('.fail').addClass('not-view');
 					mask._remove();
 				})
-				/*加入组队*/
 
+				/*加入组队*/
 				h('#joinOrganize').tap(function() {
 					$('.fail').addClass('not-view');
 					mask._remove();
 					//openInfo('organizeTeamNode/joinOrganize.html')
+				});
+
+				$('.signUp_team').on('tap', 'li', function() {
+					/*选择哪个队伍即加入哪个队伍*/
+					openInfo('organizeTeamNode/joinOrganize.html')
 				})
+
 			}
 		};
 		Validate.init();
