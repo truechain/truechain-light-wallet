@@ -1,0 +1,125 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../../dist/css/node/standardNode/organizeTeamNode/InfoFilling.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">填写信息</h1>
+		</header>
+		<div class="mui-content">
+			<div class="main">
+				<h2>个人信息</h2>
+				<input type="text" class="nickName" placeholder="昵称" />
+				<input type="text" class="reason" placeholder="申请理由" />
+			</div>
+			<div class="join">
+				申请加入
+			</div>
+
+			<!--申请提交-->
+			<div class="up-center-windows applySucc not-view">
+				<div class="title">申请提交成功
+					<i class="close"></i>
+				</div>
+
+				<div class="applySucc-box">
+					<div class="succ">申请已提交成功,请等待队长处理!</div>
+					<button id="back-btn">返回</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="../../../../lib/js/mui.min.js"></script>
+<script src="../../../../lib/js/zepto.min.js"></script>
+<script src="../../../../src/js/common.js"></script>
+<script type="text/javascript">
+	mui.init();
+	(function() {
+		var mask = mui.createMask(function() {
+			return flag;
+		});
+		var Validata = {
+			nickName: null,
+			reason: null,
+			flag: false,
+			isEmpty: true,
+			nickNameFlag: false,
+			reasonFlag: false,
+			checkEmpty: function checkEmpty(val) {
+				if(val) {
+					this.isEmpty = false;
+				} else {
+					this.isEmpty = true;
+				}
+			},
+			checkNickName: function checkNickName(elements) {
+				this.nickNameFlag = false;
+				this.nickName = $(elements).val();
+				this.checkEmpty(this.nickName);
+				if(this.isEmpty) {
+					mui.toast('昵称不能为空');
+					return
+				} else {
+					this.nickNameFlag = true;
+					return
+				}
+				return this
+			},
+			checkReason: function checkReason(elements) {
+				this.reasonFlag = false;
+				this.reason = $(elements).val();
+				this.checkEmpty(this.reason);
+				if(this.isEmpty) {
+					mui.toast('申请理由不能为空!');
+					return
+				} else {
+					this.reasonFlag = true;
+					return
+				}
+				return this
+			},
+			init() {
+				this.submitForm();
+			},
+			close() {
+				flag = true;
+				mask.close();
+				$('.applySucc').addClass('not-view');
+				plus.webview.show(plus.webview.getWebviewById('index.html'));
+				//openInfo('../../../../node.html');
+			},
+			submitForm() {
+				var that = this;
+				$('.join').on('tap', function() {
+					that.checkNickName('.nickName');
+					that.checkReason('.reason')
+					if(that.nickNameFlag) {
+						if(that.reason) {
+							$(this).html('已申请');
+							$(this).addClass('joined mui-disabled');
+							flag = false;
+							mask.show();
+							$('.applySucc').removeClass('not-view');
+						}
+					}
+				});
+
+				/*关闭*/
+				$('#back-btn').on('tap', that.close)
+				$('.close').on('tap', that.close)
+			}
+		};
+		Validata.init();
+	})()
+</script>

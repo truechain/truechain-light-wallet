@@ -189,7 +189,8 @@
 					"asset.html"
 				],
 				"refer": [
-					"my.html"
+					"my.html",
+					"node.html"
 				],
 				"priority": 0
 			},
@@ -341,6 +342,36 @@
 				"refer": [
 					"view/my/record/switchaccount.html",
 					"view/my/record/record.html"
+				],
+				"priority": 0
+			},
+			"node.html": {
+				"resources": [],
+				"refer": [
+					"view/node/signUp.html"
+				],
+				"priority": 0
+			},
+			"view/node/signUp.html": {
+				"resources": [],
+				"refer": [
+					"view/node/standardNode/standardNode.html"
+				],
+				"priority": 0
+			},
+			"view/node/standardNode/standardNode.html": {
+				"resources": [
+					"dist/images/node/搜索.png"
+				],
+				"refer": [
+					"view/node/standardNode/organizeTeamNode/joinOrganize.html"
+				],
+				"priority": 0
+			},
+			"view/node/standardNode/organizeTeamNode/joinOrganize.html": {
+				"resources": [],
+				"refer": [
+					"view/node/standardNode/personalelection/lockingWhouse.html"
 				],
 				"priority": 0
 			}

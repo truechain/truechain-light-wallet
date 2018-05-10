@@ -17,33 +17,103 @@
 		</header>
 		<div class="mui-content">
 			<div class="main">
-				<div class="signUp signUp_personal">
+				<!--href="javascript:openInfo('personalelection/personalSignup.html')"-->
+				<a class="signUp signUp_personal">
 					<span>个人报名</span>
 					<i class="arrow"></i>
-				</div>
-
-				<ul class="signUp signUp_team">
+				</a>
+				<div>
 					<div class="signUp signUp_team_item">
-						<span>组队列表</span>
-						<i class="search"></i>
+						<div class="signUp_team_search">
+							<span>组队列表</span>
+							<!--<i class="search"></i>-->
+							<form class="signUp_team_search_wid">
+								<div class="mui-input-row mui-search">
+									<input id="search" type="search" class="mui-input-clear" placeholder="搜索">
+								</div>
+							</form>
+						</div>
 						<span class="establish">建立组队</span>
 					</div>
-					<li>
-						<span>1</span>
-						<span>飞虎小分队</span>
-						<i class="arrow"></i>
-					</li>
-					<li>组队列表</li>
-					<li>组队列表</li>
-				</ul>
+
+					<ul class="signUp signUp_team">
+						<li>
+							<div>
+								<span class="serialNum">1</span>
+								<span class="nickName">飞虎小分队</span>
+							</div>
+							<i class="arrow"></i>
+						</li>
+						<li>
+							<div>
+								<span class="serialNum">2</span>
+								<span class="nickName">飞虎小分队</span>
+							</div>
+							<i class="arrow"></i>
+						</li>
+					</ul>
+
+				</div>
 			</div>
 
-		</div>
+			<div class="up-center-windows fail not-view">
+				<div class="title">参选失败
+					<i class="close"></i>
+				</div>
 
+				<div class="fail-box">
+					<div class="succ">抱歉,您未达到2000持币量,暂无法进行个人报名参选 !</div>
+					<button id="joinOrganize">加入组队</button>
+				</div>
+			</div>
+		</div>
 	</body>
 
 </html>
 <script src="../../../lib/js/mui.min.js"></script>
+<script src="../../../lib/js/zepto.min.js"></script>
+<script src="../../../lib/js/h.min.js"></script>
+<script src="../../../src/js/common.js"></script>
 <script type="text/javascript">
-	mui.init()
+	mui.init();
+	/*
+	 验证当前地址中true持币量是否大于2000,否则无法参选
+	 * */
+	(function() {
+		var Validate = {
+			trueNum: null,
+			init() {
+				this.submitForm()
+			},
+			submitForm() {
+				var mask = mui.createMask(function() {
+					return false;
+				})
+
+				$('.signUp_personal').on('tap', function() {
+					let that = this;
+					if(that.trueNum >= 2000) {
+						openInfo('personalelection/personalSignup.html')
+					} else {
+						mask.show();
+						$('.fail').removeClass('not-view');
+					}
+				});
+
+				/*关闭*/
+				h('.close').tap(function() {
+					$('.fail').addClass('not-view');
+					mask._remove();
+				})
+				/*加入组队*/
+
+				h('#joinOrganize').tap(function() {
+					$('.fail').addClass('not-view');
+					mask._remove();
+					//openInfo('organizeTeamNode/joinOrganize.html')
+				})
+			}
+		};
+		Validate.init();
+	})()
 </script>

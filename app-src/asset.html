@@ -149,7 +149,7 @@
 			var balance = web3.fromWei(web3.eth.getBalance(addresses), 'ether');
 			balance = Math.round(balance * 10000) / 10000;
 			h('.balance').html(balance);
-			console.log(balance, '---------')
+			console.log(balance, '---------');
 			let contractAddr = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab';
 			addToken(contractAddr, function(balances) {
 				if(balances) {
