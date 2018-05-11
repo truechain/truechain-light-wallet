@@ -47,11 +47,11 @@
 					let orderWords = h('#orderWord').html();
 					if(orderWords == orderWord + ' ') {
 						mui.toast('助记词验证通过,请妥善保存!');
-						plus.webview.show(plus.webview.create('userinfo.html'));
-						//失效.....
-						//plus.webview.show(plus.webview.getWebviewById('asset'));
+						var all = plus.webview.all();
+						console.log(JSON.stringify(all, '这是怎么的'))
+						plus.webview.show(plus.webview.getWebviewById('index.html'));
 					} else {
-						mui.toast('助记词输入错误,请重新输入!')
+						mui.toast('助记词输入错误,请重新输入!');
 					}
 				})
 			}
