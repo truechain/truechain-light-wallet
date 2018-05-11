@@ -25,7 +25,6 @@
 			<div id='holder' class="mui-locker mui-hidden" data-locker-options='{"ringColor":"rgba(210,210,210,1)","fillColor":"#ffffff","pointColor":"rgba(0,136,204,1)","lineColor":"rgba(0,136,204,1)"}' data-locker-width='300' data-locker-height='300'></div>
 			<div id='alert'></div>
 		</div>
-
 	</body>
 
 </html>
@@ -41,7 +40,7 @@
 			locker = plus.storage.getItem('locker');
 		if(locker) {
 			h('#mySwitch').addClass('mui-active');
-			
+
 		}
 		//处理事件
 		holder.addEventListener('done', function(event) {
