@@ -25,65 +25,67 @@
 				<div class="er-code-img"></div>
 			</div>
 		</div>
-		<div id="assetContent" class="asset-content">
-			<div class="asset-content-top">
-				账户总资产：
-				<div class="total-money">
-					0
-					<!--9999.00-->
+		<div id="refreshContainer">
+			<div id="assetContent" class="asset-content">
+				<div class="asset-content-top">
+					账户总资产：
+					<div class="total-money">
+						0
+						<!--9999.00-->
+					</div>
+					<!--新增币种-->
+					<!--<div class="new-add-btn"></div>-->
 				</div>
-				<!--新增币种-->
-				<!--<div class="new-add-btn"></div>-->
-			</div>
-			<div class="asset-content-list border-1px" id="ethAssets">
-				<a>
-					<!--href="javascript:openInfo('view/asset/currencydetail.html',{'currencyName':'ETH'})"-->
-					<div class="list-left">
-						<img src="dist/images/asset/eth_logo.png" />
-					</div>
-					<div class="list-middle">
-						<div class="title top">ETH</div>
-						<!--<div class="price bottom"><span>0.00</span>CNY</div>-->
-					</div>
-					<div class="list-right">
-						<div class="top balance">
-							0
+
+				<div class="asset-content-list border-1px" id="ethAssets">
+					<a>
+						<!--href="javascript:openInfo('view/asset/currencydetail.html',{'currencyName':'ETH'})"-->
+						<div class="list-left">
+							<img src="dist/images/asset/eth_logo.png" />
 						</div>
-						<!--<div class="price bottom"><span>0.00</span>CNY</div>-->
-					</div>
-				</a>
-			</div>
+						<div class="list-middle">
+							<div class="title top">ETH</div>
+							<!--<div class="price bottom"><span>0.00</span>CNY</div>-->
+						</div>
+						<div class="list-right">
+							<div class="top balance">
+								0
+							</div>
+							<!--<div class="price bottom"><span>0.00</span>CNY</div>-->
+						</div>
+					</a>
+				</div>
 
-			<div class="asset-content-list" id="trueAssets">
-				<a>
-					<!--href="javascript:openInfo('view/asset/currencydetail.html',{'currencyName':'TRUE'})"-->
-					<div class="list-left-true">
-						<img src="src/images/true-logo.png" />
-					</div>
-					<div class="list-middle">
-						<div class="title top">TRUE</div>
-					</div>
-					<div class="list-right">
-						<div class="top trueBalance">0</div>
-					</div>
-				</a>
-			</div>
+				<div class="asset-content-list" id="trueAssets">
+					<a>
+						<!--href="javascript:openInfo('view/asset/currencydetail.html',{'currencyName':'TRUE'})"-->
+						<div class="list-left-true">
+							<img src="src/images/true-logo.png" />
+						</div>
+						<div class="list-middle">
+							<div class="title top">TRUE</div>
+						</div>
+						<div class="list-right">
+							<div class="top trueBalance">0</div>
+						</div>
+					</a>
+				</div>
 
-			<div class="asset-content-list" id="ttrAssets">
-				<a>
-					<div class="list-left-true">
-						<img src="src/images/ttr-logo.png" />
-					</div>
-					<div class="list-middle">
-						<div class="title top">TTR</div>
-					</div>
-					<div class="list-right">
-						<div class="top ttrBalance">0</div>
-					</div>
-				</a>
-			</div>
+				<div class="asset-content-list" id="ttrAssets">
+					<a>
+						<div class="list-left-true">
+							<img src="src/images/ttr-logo.png" />
+						</div>
+						<div class="list-middle">
+							<div class="title top">TTR</div>
+						</div>
+						<div class="list-right">
+							<div class="top ttrBalance">0</div>
+						</div>
+					</a>
+				</div>
 
-			<!--<div class="asset-content-list">
+				<!--<div class="asset-content-list">
 				<a href="javascript:openInfo('view/asset/currencydetail.html')">
 					<div class="list-left"></div>
 					<div class="list-middle">
@@ -97,8 +99,8 @@
 				</a>
 			</div>
 		-->
+			</div>
 		</div>
-
 		<!--<div class="backup-mask mui-hidden">
 			<div class="content">
 				<div class="title">
@@ -126,6 +128,7 @@
 				<button class="large-btn">立即备份</button>
 			</div>
 		</div>-->
+
 	</body>
 	<script src="lib/js/mui.min.js"></script>
 	<script src="lib/js/h.min.js"></script>
@@ -154,13 +157,23 @@
 			let host = plus.storage.getItem('web3Host');
 			if(!host) {
 				host = 'https://mainnet.infura.io/';
-			}
+			};
+			/*刷新*/
+			mui.init({
+				pullRefresh: {
+					container: "#refreshContainer",
+					down: {
+						height: 50, //可选,默认50.触发下拉刷新拖动距离,
+						auto: true, //可选,默认false.首次加载自动下拉刷新一次
+						contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+						contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+						contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+						callback: pullfresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					}
+				}
+			});
 
-			//获取资产   -- 暂不做资产转换
-			var web3 = new Web3(new Web3.providers.HttpProvider(host));
-
-			var addresses = plus.storage.getItem('walletAddress');
-			var balance = show(web3.fromWei(web3.eth.getBalance(addresses), 'ether'));
+			//pullfresh();
 
 			function show(num) {
 				num += '';
@@ -181,8 +194,52 @@
 				return num
 			};
 
-			/*balance = Math.round(balance * 100000) / 100000;*/
-			h('.balance').html(balance);
+			function pullfresh() {
+				//获取资产   -- 暂不做资产转换
+				var web3 = new Web3(new Web3.providers.HttpProvider(host));
+
+				var addresses = plus.storage.getItem('walletAddress');
+				var balance = show(web3.fromWei(web3.eth.getBalance(addresses), 'ether'));
+
+				/*balance = Math.round(balance * 100000) / 100000;*/
+				h('.balance').html(balance);
+				let contractAddrTrue = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab';
+				addToken(contractAddrTrue, function(balances) {
+					if(balances) {
+						h('.trueBalance').html(balances);
+						h('.total-money').html(balances);
+					} else {
+						balances = 0;
+						h('.total-money').html(balances);
+						h('.trueBalance').html(balances);
+					}
+
+					h('#trueAssets').tap(function() {
+						openInfo('view/asset/currencydetail.html', {
+							currencyName: 'TRUE',
+							currencyPrice: balances
+						})
+					});
+					//				h('#ttrAssets').tap(function() {
+					//					openInfo('view/asset/currencydetail.html', {
+					//						currencyName: 'TTR',
+					//						currencyPrice: balances
+					//					})
+					//				})
+				});
+
+				let contractAddrTTR = '0x24026489887342e7615815487ffc33a01e7d2d46';
+				addToken(contractAddrTTR, function(bh) {
+					if(bh) {
+						h('.ttrBalance').html(bh);
+					} else {
+						bh = 0;
+						h('.ttrBalance').html(bh);
+					}
+				})
+
+				mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+			};
 
 			h('#ethAssets').tap(function() {
 				openInfo('view/asset/currencydetail.html', {
@@ -190,40 +247,6 @@
 					currencyPrice: balance
 				})
 			});
-			let contractAddrTrue = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab';
-			addToken(contractAddrTrue, function(balances) {
-				if(balances) {
-					h('.trueBalance').html(balances);
-					h('.total-money').html(balances);
-				} else {
-					balances = 0;
-					h('.total-money').html(balances);
-					h('.trueBalance').html(balances);
-				}
-
-				h('#trueAssets').tap(function() {
-					openInfo('view/asset/currencydetail.html', {
-						currencyName: 'TRUE',
-						currencyPrice: balances
-					})
-				});
-				//				h('#ttrAssets').tap(function() {
-				//					openInfo('view/asset/currencydetail.html', {
-				//						currencyName: 'TTR',
-				//						currencyPrice: balances
-				//					})
-				//				})
-			});
-
-			let contractAddrTTR = '0x24026489887342e7615815487ffc33a01e7d2d46';
-			addToken(contractAddrTTR, function(bh) {
-				if(bh) {
-					h('.ttrBalance').html(bh);
-				} else {
-					bh = 0;
-					h('.ttrBalance').html(bh);
-				}
-			})
 		})
 	</script>
 

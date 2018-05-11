@@ -82,7 +82,8 @@ img {
 
 .asset-content {
 	width: 92%;
-	margin: auto
+	margin: auto;
+	background: #fff;
 }
 
 .asset-content-top {
