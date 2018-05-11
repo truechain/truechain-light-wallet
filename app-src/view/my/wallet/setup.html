@@ -10,8 +10,23 @@
 		<link rel="stylesheet" href="../../../lib/css/mui.min.css" />
 		<link rel="stylesheet" href="../../../dist/css/common/common.css" />
 		<link rel="stylesheet" href="../../../dist/css/my/setup.css" />
-
 	</head>
+	<style type="text/css">
+		label {
+			padding-right: 0 !important;
+		}
+		
+		.agreement {
+			display: flex;
+			align-items: center;
+			justify-content: space-around;
+		}
+		
+		.agreements {
+			color: #007AFF;
+			width: 100%;
+		}
+	</style>
 
 	<body>
 		<header class="mui-bar mui-bar-nav">
@@ -48,7 +63,10 @@
 				</div>
 
 				<div class="mui-input-row mui-checkbox mui-left">
-					<label>我已仔细阅读并同意<a href="">《服务及隐私条款》</a></label>
+					<div class="agreement">
+						<label>我已仔细阅读并同意</label>
+						<a class="agreements" href="javascript:openInfo('../../rules/privacypolicy.html')">《服务及隐私条款》</a>
+					</div>
 					<input name="checkbox1" value="Item 1" type="checkbox">
 				</div>
 			</form>
@@ -69,11 +87,11 @@
 		<script src="../../../lib/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../../dist/js/common.min.js" type="text/javascript"></script>
 		<script src="../../../lib/js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../lib/js/h.min.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../../lib/js/web3.min.js" type="text/javascript"></script>
 		<script src="../../../lib/js/hooked-web3-provider.min.js" type="text/javascript"></script>
 		<script src="../../../lib/js/lightwallet.min.js" type="text/javascript"></script>
 		<script src="../../../dist/js/wallet/setup.min.js" type="text/javascript" charset="utf-8"></script>
-
 	</body>
 
 </html>

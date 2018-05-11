@@ -28,7 +28,12 @@ html {
 	word-wrap: break-word;
 }
 
-@c-mask : rgba(0, 0, 0, .6) //透明背景 //1级状态颜色 @c333-2: rgba(51,51,51,.2);html{height:100%}.mui-table-view-cell{line-height:30px;height:50px}
+@c-mask : rgba(0, 0, 0, .6) //透明背景 //1级状态颜色 @c333-2: rgba(51,51,51,.2);html{height:100%}
+.mui-table-view-cell {
+	line-height: 30px;
+	height: 50px
+}
+
 .mui-table-view-cell span {
 	float: right;
 	margin-right: 20px;

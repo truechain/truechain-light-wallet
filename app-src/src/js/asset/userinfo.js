@@ -42,9 +42,13 @@ mui.plusReady(function() {
 		h('.amend-wallet').addClass('not-view');
 		let newWalletName = h('#newWalletName').val();
 		if(newWalletName) {
-			plus.storage.setItem('walletName', newWalletName);
-			getUserInfo();
-			mui.alert("修改钱包名称成功");
+			if(newWalletName.length > 15) {
+				mui.alert('名称不能大于15位')
+			} else {
+				plus.storage.setItem('walletName', newWalletName);
+				getUserInfo();
+				mui.alert("修改钱包名称成功");
+			}
 		} else {
 			mui.alert('请输入新的钱包名称');
 		}
@@ -52,31 +56,34 @@ mui.plusReady(function() {
 
 	//导出私钥
 	h('.exportkey-cell').tap(function() {
-		mui.prompt('', 'Password', '请输入密码', ['取消', '保存'], function(e) {
-			let password = e.value;
-			if(!password) {
-				mui.alert('请输入密码!')
-			} else {
-				mui.toast('请稍等!')
-				showMask();
-				var serialized_keystore = plus.storage.getItem('keystore'),
-					keystore = lightwallet.keystore.deserialize(serialized_keystore);
-				keystore.keyFromPassword(password, function(err, pwDerivedKey) {
-					if(err) {
-						mui.alert('密码验证错误,请重新输入!');
-						mask._remove();
-						return;
-					} else {
-						keystore.generateNewAddress(pwDerivedKey, 1);
-						var address = keystore.getAddresses();
-						let PrivateKey = keystore.exportPrivateKey(address[0], pwDerivedKey);
-						h('.key-code').html(PrivateKey);
-						showMask();
-						h('.export-key').removeClass('not-view');
-					}
-				});
+		mui.prompt('', 'Password', '请输入密码', ['取消', '确定'], function(e) {
+			if(e.index == 1 && e.value) {
+				let password = e.value;
+				if(!password) {
+					mui.alert('请输入密码!')
+				} else {
+					mui.toast('请稍等!')
+					showMask();
+					var serialized_keystore = plus.storage.getItem('keystore'),
+						keystore = lightwallet.keystore.deserialize(serialized_keystore);
+					keystore.keyFromPassword(password, function(err, pwDerivedKey) {
+						if(err) {
+							mui.alert('密码验证错误,请重新输入!');
+							mask._remove();
+							return;
+						} else {
+							keystore.generateNewAddress(pwDerivedKey, 1);
+							var address = keystore.getAddresses();
+							let PrivateKey = keystore.exportPrivateKey(address[0], pwDerivedKey);
+							h('.key-code').html(PrivateKey);
+							showMask();
+							h('.export-key').removeClass('not-view');
+						}
+					});
+				}
 			}
 		}, 'div');
+		document.querySelector('.mui-popup-input input').type = 'password';
 	})
 	//取消导出私钥
 	h('.close-export-key').tap(function() {
@@ -127,7 +134,7 @@ mui.plusReady(function() {
 
 	//删除钱包
 	h('#delelet-wallet').tap(function() {
-		mui.prompt('', 'Password', '请输入密码', ['取消', '保存'], function(e) {
+		mui.prompt('', 'Password', '请输入密码', ['取消', '确定'], function(e) {
 			let password = e.value;
 			if(!password) {
 				mui.alert('请输入密码!')
@@ -151,5 +158,6 @@ mui.plusReady(function() {
 				});
 			}
 		}, 'div');
+		document.querySelector('.mui-popup-input input').type = 'password';
 	})
 })

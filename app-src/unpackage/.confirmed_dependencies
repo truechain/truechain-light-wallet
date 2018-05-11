@@ -5,8 +5,12 @@
 		],
 		"refer": [
 			"my.html",
+<<<<<<< HEAD
 			"asset.html",
 			"node.html"
+=======
+			"asset.html"
+>>>>>>> master
 		]
 	},
 	"guide.html": {
@@ -45,7 +49,12 @@
 		"refer": [
 			"asset.html",
 			"index.html",
+<<<<<<< HEAD
 			"view/my/wallet/importwallet.html"
+=======
+			"view/my/wallet/importwallet.html",
+			"view/rules/privacypolicy.html"
+>>>>>>> master
 		]
 	},
 	"asset.html": {
@@ -67,7 +76,13 @@
 	"view/my/wallet/importwallet.html": {
 		"refer": [
 			"index.html",
+<<<<<<< HEAD
 			"view/my/wallet/ercode.html"
+=======
+			"view/my/wallet/ercode.html",
+			"view/my/wallet/mnemonicword.html",
+			"view/rules/privacypolicy.html"
+>>>>>>> master
 		]
 	},
 	"view/my/about/about.html": {
@@ -91,7 +106,12 @@
 	"view/asset/transfer.html": {
 		"refer": [
 			"view/asset/currencydetail.html",
+<<<<<<< HEAD
 			"view/my/wallet/ercode.html"
+=======
+			"view/my/wallet/ercode.html",
+			"view/asset/transfer.html"
+>>>>>>> master
 		]
 	},
 	"view/asset/userinfo.html": {
@@ -128,6 +148,7 @@
 			"view/my/record/switchaccount.html",
 			"view/my/record/record.html"
 		]
+<<<<<<< HEAD
 	},
 	"node.html": {
 		"refer": [
@@ -151,5 +172,7 @@
 		"refer": [
 			"view/node/standardNode/personalelection/lockingWhouse.html"
 		]
+=======
+>>>>>>> master
 	}
 }
