@@ -44,7 +44,8 @@
 		"refer": [
 			"asset.html",
 			"index.html",
-			"view/my/wallet/importwallet.html"
+			"view/my/wallet/importwallet.html",
+			"view/rules/privacypolicy.html"
 		]
 	},
 	"asset.html": {
@@ -67,7 +68,8 @@
 		"refer": [
 			"index.html",
 			"view/my/wallet/ercode.html",
-			"view/my/wallet/mnemonicword.html"
+			"view/my/wallet/mnemonicword.html",
+			"view/rules/privacypolicy.html"
 		]
 	},
 	"view/my/about/about.html": {

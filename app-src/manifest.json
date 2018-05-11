@@ -282,7 +282,8 @@
 				"refer": [
 					"asset.html",
 					"index.html",
-					"view/my/wallet/importwallet.html"
+					"view/my/wallet/importwallet.html",
+					"view/rules/privacypolicy.html"
 				],
 				"priority": 0
 			},
@@ -311,7 +312,8 @@
 				"refer": [
 					"index.html",
 					"view/my/wallet/ercode.html",
-					"view/my/wallet/mnemonicword.html"
+					"view/my/wallet/mnemonicword.html",
+					"view/rules/privacypolicy.html"
 				],
 				"priority": 0
 			},
