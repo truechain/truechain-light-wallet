@@ -165,17 +165,15 @@ function addToken(contractAddr, callback) {
 
 		let keyStore = plus.storage.getItem('keystore');
 		setWeb3Provider(keyStore);
-//		if(contract.symbol() && contract.symbol()) {
-//			console.log('哈哈呼呼虎虎')
-//			symbol = contract.symbol();
-//			name = contract.symbol();
-//			return;
-//		}
+		//		if(contract.symbol() && contract.symbol()) {
+		//			symbol = contract.symbol();
+		//			name = contract.symbol();
+		//			return;
+		//		}
 
 		//decimals = contract.decimals(); //小数点位数
 
 		balances = show(Number(contract.balanceOf(fromAddr) / 1.0e18)); //查地址的余额	
-		console.log(balances + '呼呼哈哈')
 
 		function show(num) {
 			num += '';
