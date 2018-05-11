@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
 	"index.html": {
 		"resources": [
 			"asset.html"
@@ -175,4 +176,147 @@
 =======
 >>>>>>> master
 	}
+=======
+  "index.html": {
+    "resources": [
+      "asset.html"
+    ],
+    "refer": [
+      "my.html",
+      "asset.html"
+    ]
+  },
+  "guide.html": {
+    "refer": [
+      "index.html",
+      "view/my/wallet/importwallet.html",
+      "view/my/wallet/setup.html",
+      "view/my/system/lockerVerification.html"
+    ],
+    "resources": [
+      "lib/js/mui.min.js",
+      "src/images/logo.png",
+      "lib/css/mui.min.css",
+      "dist/css/common/guide.css",
+      "dist/css/common/common.css"
+    ]
+  },
+  "my.html": {
+    "resources": [
+      "/dist/css/common/guide.css",
+      "/dist/css/common/common.css",
+      "/lib/css/mui.min.css"
+    ],
+    "refer": [
+      "view/my/wallet/wallet.html",
+      "view/my/help/help.html",
+      "view/my/record/record.html",
+      "view/my/about/about.html",
+      "view/my/system/setting.html"
+    ]
+  },
+  "view/my/wallet/wallet.html": {
+    "refer": [
+      "view/my/wallet/setup.html",
+      "view/my/wallet/importwallet.html",
+      "view/asset/userinfo.html"
+    ],
+    "resources": [
+      "view/my/wallet/setup.html"
+    ]
+  },
+  "view/my/wallet/setup.html": {
+    "refer": [
+      "asset.html",
+      "index.html",
+      "view/my/wallet/importwallet.html",
+      "view/rules/privacypolicy.html"
+    ]
+  },
+  "asset.html": {
+    "refer": [
+      "view/asset/userinfo.html",
+      "view/asset/currencydetail.html",
+      "view/asset/receipt.html",
+      "view/asset/newcurrency.html"
+    ]
+  },
+  "view/my/help/help.html": {
+    "refer": [
+      "view/my/help/contact.html",
+      "view/my/wallet/keystore.html",
+      "view/my/wallet/mnemonicword.html",
+      "view/my/wallet/privateKey.html"
+    ]
+  },
+  "view/my/wallet/importwallet.html": {
+    "refer": [
+      "index.html",
+      "view/my/wallet/ercode.html",
+      "view/my/wallet/mnemonicword.html",
+      "view/rules/privacypolicy.html"
+    ]
+  },
+  "view/my/about/about.html": {
+    "refer": [
+      "view/my/about/versionlog.html",
+      "view/rules/privacypolicy.html",
+      "view/rules/useragreement.html"
+    ]
+  },
+  "view/asset/receipt.html": {
+    "refer": [
+      "view/asset/currencydetail.html"
+    ]
+  },
+  "view/asset/currencydetail.html": {
+    "refer": [
+      "view/asset/transfer.html",
+      "view/asset/receipt.html"
+    ]
+  },
+  "view/asset/transfer.html": {
+    "refer": [
+      "view/asset/currencydetail.html",
+      "view/my/wallet/ercode.html",
+      "view/asset/transfer.html",
+      "view/asset/dealsuccessful.html"
+    ]
+  },
+  "view/asset/userinfo.html": {
+    "refer": [
+      "view/asset/amendpaw.html",
+      "view/asset/exportkeystore.html",
+      "view/asset/exportmw.html",
+      "guide.html"
+    ]
+  },
+  "view/my/system/setting.html": {
+    "refer": [
+      "view/my/system/locker.html",
+      "view/my/system/web3.html"
+    ]
+  },
+  "view/my/system/lockerVerification.html": {
+    "refer": [
+      "index.html"
+    ]
+  },
+  "view/asset/exportkeystore.html": {
+    "refer": [
+      "view/asset/userinfo.html"
+    ]
+  },
+  "view/asset/exportmw.html": {
+    "refer": [
+      "view/asset/userinfo.html"
+    ]
+  },
+  "view/my/record/record.html": {
+    "refer": [
+      "view/my/record/switchaccount.html",
+      "view/my/record/record.html"
+    ]
+  }
+>>>>>>> master
 }

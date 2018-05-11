@@ -139,25 +139,12 @@
 	<script type="text/javascript" src="lib/js/addToken.js"></script>
 	<script type="text/javascript" src="src/js/asset/asset.js"></script>
 	<script type="text/javascript">
-		//将子页面添加到index.html中
-		//		mui.plusReady(function() {
-		//			var wvs = plus.webview.all();
-		//			for(var i = 0; i < wvs.length; i++) {
-		//				console.log('webview' + i + ': ' + wvs[i].getURL());
-		//			}
-		//
-		//			var ws = plus.webview.currentWebview();
-		//			console.log('窗口标识: ' + ws.id);
-		//
-		//			var h = plus.webview.getWebviewById(plus.runtime.appid);
-		//			console.log("应用首页Webview窗口：" + h.getURL());
-		//		})
-
 		mui.plusReady(function() {
 			let host = plus.storage.getItem('web3Host');
 			if(!host) {
 				host = 'https://mainnet.infura.io/';
 			};
+
 			/*刷新*/
 			mui.init({
 				pullRefresh: {
@@ -173,7 +160,7 @@
 				}
 			});
 
-			//pullfresh();
+			pullfresh();
 
 			function show(num) {
 				num += '';
@@ -195,11 +182,21 @@
 			};
 
 			function pullfresh() {
-				//获取资产   -- 暂不做资产转换
+				host = plus.storage.getItem('web3Host');
 				var web3 = new Web3(new Web3.providers.HttpProvider(host));
+				h('.my-wallet').html(plus.storage.getItem('walletName'));
+				h('.walletAddress').html(plus.storage.getItem('walletAddress'));
+				//获取资产   -- 暂不做资产转换
 
 				var addresses = plus.storage.getItem('walletAddress');
 				var balance = show(web3.fromWei(web3.eth.getBalance(addresses), 'ether'));
+				console.log(balance + 'hi hi')
+				h('#ethAssets').tap(function() {
+					openInfo('view/asset/currencydetail.html', {
+						currencyName: 'ETH',
+						currencyPrice: balance
+					})
+				});
 
 				/*balance = Math.round(balance * 100000) / 100000;*/
 				h('.balance').html(balance);
@@ -220,33 +217,25 @@
 							currencyPrice: balances
 						})
 					});
-					//				h('#ttrAssets').tap(function() {
-					//					openInfo('view/asset/currencydetail.html', {
-					//						currencyName: 'TTR',
-					//						currencyPrice: balances
-					//					})
-					//				})
 				});
 
-				let contractAddrTTR = '0x24026489887342e7615815487ffc33a01e7d2d46';
-				addToken(contractAddrTTR, function(bh) {
-					if(bh) {
-						h('.ttrBalance').html(bh);
+				let contractAddrTTR = '0xF2bb016e8C9C8975654dcd62f318323A8A79D48E';
+				addToken(contractAddrTTR, function(ban) {
+					if(ban) {
+						h('.ttrBalance').html(ban);
 					} else {
-						bh = 0;
-						h('.ttrBalance').html(bh);
-					}
+						ban = 0;
+						h('.ttrBalance').html(ban);
+					};
+					h('#ttrAssets').tap(function() {
+						openInfo('view/asset/currencydetail.html', {
+							currencyName: 'TTR',
+							currencyPrice: ban
+						})
+					})
 				})
-
 				mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
 			};
-
-			h('#ethAssets').tap(function() {
-				openInfo('view/asset/currencydetail.html', {
-					currencyName: 'ETH',
-					currencyPrice: balance
-				})
-			});
 		})
 	</script>
 
