@@ -66,7 +66,8 @@
 	"view/my/wallet/importwallet.html": {
 		"refer": [
 			"index.html",
-			"view/my/wallet/ercode.html"
+			"view/my/wallet/ercode.html",
+			"view/my/wallet/mnemonicword.html"
 		]
 	},
 	"view/my/about/about.html": {

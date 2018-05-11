@@ -8,6 +8,23 @@
 		<link rel="stylesheet" href="../../../lib/css/mui.min.css" />
 		<link rel="stylesheet" type="text/css" href="../../../dist/css/common/common.css" />
 		<link rel="stylesheet" href="../../../dist/css/my/importwallet.css" />
+
+		<style type="text/css">
+			label {
+				padding-right: 0 !important;
+			}
+			
+			.agreement {
+				display: flex;
+				align-items: center;
+				justify-content: space-around;
+			}
+			
+			.agreements {
+				color: #007AFF;
+				width: 100%;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -58,7 +75,10 @@
 						</ul>
 
 						<div class="mui-input-row mui-checkbox mui-left">
-							<label>我已仔细阅读并同意<a href="">《服务及隐私条款》</a></label>
+							<div class="agreement">
+								<label>我已仔细阅读并同意</label>
+								<a class="agreements" href="javascript:openInfo('../../rules/privacypolicy.html')">《服务及隐私条款》</a>
+							</div>
 							<input name="checkbox1" value="Item 1" type="checkbox">
 						</div>
 						<button class="star-import1">开始导入</button>
@@ -82,7 +102,10 @@
 						</div>
 
 						<div class="mui-input-row mui-checkbox mui-left">
-							<label>我已仔细阅读并同意<a href="">《服务及隐私条款》</a></label>
+							<div class="agreement">
+								<label>我已仔细阅读并同意</label>
+								<a class="agreements" href="javascript:openInfo('../../rules/privacypolicy.html')">《服务及隐私条款》</a>
+							</div>
 							<input name="checkbox2" value="Item 1" type="checkbox">
 						</div>
 
@@ -91,7 +114,7 @@
 						<a href="javascript:openInfo('mnemonicword.html')" class="what-mnemonic-word">什么是助记词?</a>
 					</div>
 
-					<div id="item3mobile" class="md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
+					<!--<div id="item3mobile" class="md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
 						<div class="keystore-box">
 							<textarea class="privateContent" name="func" rows="6" cols="5" placeholder="明文私钥"></textarea>
 						</div>
@@ -111,15 +134,14 @@
 						</ul>
 
 						<div class="mui-input-row mui-checkbox mui-left">
-							<label>我已仔细阅读并同意<a href="">《服务及隐私条款》</a></label>
+							<label>我已仔细阅读并同意<a class="clause">《服务及隐私条款》</a></label>
 							<input name="checkbox3" value="Item 1" type="checkbox">
 						</div>
 
 						<button class="star-import3">开始导入</button>
 
 						<a href="javascript:openInfo('mnemonicword.html')" class="what-mnemonic-word">什么是助记词?</a>
-					</div>
-
+					</div>-->
 				</div>
 			</div>
 		</div>
@@ -133,8 +155,8 @@
 	</body>
 	<script type="text/javascript" src="../../../lib/js/mui.min.js"></script>
 	<script type="text/javascript" src="../../../dist/js/common.min.js"></script>
-	<script type="text/javascript" src="../../../lib/js/h.min.js"></script>
 	<script type="text/javascript" src="../../../lib/js/zepto.min.js"></script>
+	<script type="text/javascript" src="../../../lib/js/h.min.js"></script>
 
 	<script type="text/javascript" src="../../../lib/js/lightwallet.min.js"></script>
 	<script type="text/javascript" src="../../../lib/js/web3.min.js"></script>

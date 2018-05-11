@@ -310,7 +310,8 @@
 				"resources": [],
 				"refer": [
 					"index.html",
-					"view/my/wallet/ercode.html"
+					"view/my/wallet/ercode.html",
+					"view/my/wallet/mnemonicword.html"
 				],
 				"priority": 0
 			},
