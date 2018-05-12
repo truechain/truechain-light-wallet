@@ -168,7 +168,6 @@
 
 				if(/^0+/) {
 					num = num.replace(/^0+/, '');
-
 				};
 				if(!/\./.test(num)) {
 					num += '.00000';
@@ -190,7 +189,8 @@
 
 				var addresses = plus.storage.getItem('walletAddress');
 				var balance = show(web3.fromWei(web3.eth.getBalance(addresses), 'ether'));
-				console.log(balance + 'hi hi')
+				//var balance = web3.fromWei(web3.eth.getBalance(addresses), 'ether');
+
 				h('#ethAssets').tap(function() {
 					openInfo('view/asset/currencydetail.html', {
 						currencyName: 'ETH',
@@ -228,6 +228,7 @@
 						ban = 0;
 						h('.ttrBalance').html(ban);
 					};
+
 					h('#ttrAssets').tap(function() {
 						openInfo('view/asset/currencydetail.html', {
 							currencyName: 'TTR',

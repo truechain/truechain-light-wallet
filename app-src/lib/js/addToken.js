@@ -173,26 +173,29 @@ function addToken(contractAddr, callback) {
 
 		//decimals = contract.decimals(); //小数点位数
 
-		balances = show(Number(contract.balanceOf(fromAddr) / 1.0e18)); //查地址的余额	
+		balances = contract.balanceOf(fromAddr) / 1.0e18; //查地址的余额	
 
-		function show(num) {
-			num += '';
-			num = num.replace(/[^0-9|\.]/g, '');
+		//balances = web3.fromWei(balances, 'ether');
 
-			if(/^0+/) {
-				num = num.replace(/^0+/, '');
+		console.log(balances + 'popopopo')
 
-			};
-			if(!/\./.test(num)) {
-				num += '.00000';
-			};
-			if(/^\./.test(num)) {
-				num = '0' + num;
-			};
-			num += '00000';
-			num = num.match(/\d+\.\d{5}/)[0];
-			return num
-		};
+		//		function show(num) {
+		//			num += '';
+		//			num = num.replace(/[^0-9|\.]/g, '');
+		//
+		//			if(/^0+/) {
+		//				num = num.replace(/^0+/, '');
+		//			};
+		//			if(!/\./.test(num)) {
+		//				num += '.00000';
+		//			};
+		//			if(/^\./.test(num)) {
+		//				num = '0' + num;
+		//			};
+		//			num += '00000';
+		//			num = num.match(/\d+\.\d{5}/)[0];
+		//			return num
+		//		};
 
 		/*balances = Number(balances) / 1000000000000000000;*/
 		setTimeout(function() {
