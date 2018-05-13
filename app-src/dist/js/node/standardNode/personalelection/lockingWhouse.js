@@ -1,9 +1,12 @@
 (function() {
 
 	var Validate = {
-		minAmount: 2000,
+		personalName: null,
+		personalDeclaration: null,
+		type: null,
+		amount: null,
 		fromAddress: null,
-		toAddress: null,
+		toAddress: '0x08C62C32226CE2D9148A80F71A03dDB73B673792',
 		amountFlag: false,
 		pwd: null,
 		init: function init() {
@@ -11,49 +14,88 @@
 		},
 		submitForm: function submitForm() {
 			var that = this,
-				flag = false,
 				mask = mui.createMask(function() {
-					return flag;
+					return false;
 				});
-			/*下一步*/
-			$('#next').on('tap', function() {
-				flag = false;
-				mask.show();
-				$('#modal').addClass('mui-active')
-			});
-
-			/*取消*/
-			$('.cancel').on('tap', function() {
-				flag = true;
-				mask.close();
-				$('#modal').removeClass('mui-active');
-			});
-
-			/*确认*/
-			$('.comfirm').on('tap', function() {
-				$('#modal').removeClass('mui-active')
-				h('.signUpsucc').removeClass('not-view');
+			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
-				if(self.type == 0) {
-					$('.title').html('报名成功!')
-					$('.succ').html('恭喜你,个人报名成功!')
-				} else if(self.type == 1) {
-					$('.title').html('加入组队成功!')
-					$('.succ').html('恭喜你,加入组队成功!')
-				} else {
-					$('.title').html('报名成功!')
-					$('.succ').html('恭喜您创建组队成功!')
-				}
-				/*that.pwd = $('.psw').val();
-				alert('锁仓操作' + that.pwd)*/
-			});
+				that.type = self.type;
+				that.personalName = self.personalName;
+				that.personalDeclaration = self.personalDeclaration;
 
-			/*返回*/
-			$('#back-btn').on('tap', function() {
-				flag = true;
-				mask.close();
-				h('.signUpsucc').addClass('not-view');
-				plus.webview.show(plus.webview.getWebviewById('index.html'));
+				/*下一步*/
+				$('#next').on('tap', function() {
+					mask.show();
+					$('#modal').addClass('mui-active')
+				});
+
+				/*确认*/
+				$('.comfirm').on('tap', function() {
+					//mask._remove();
+					that.amount = $('.lockingNum').val();
+					$('#modal').removeClass('mui-active');
+					switch(that.type) {
+						case 1.1:
+							{
+								if(that.amount < 2000) {
+									mui.alert('个人报名标准节点最小锁仓数量为2000true');
+									mask._remove();
+									return;
+								} else {
+									mask.show();
+									h('.signUpsucc').removeClass('not-view');
+								}
+								$('.title').html('报名成功!');
+								$('.succ').html('恭喜你,个人报名标准节点成功!');
+								break;
+							}
+						case 1.2:
+							{
+								/*进行转账操作*/
+								mask.show();
+								h('.signUpsucc').removeClass('not-view');
+								$('.title').html('报名成功!');
+								$('.succ').html('恭喜你,创建标准节点组队成功!');
+								break;
+							}
+						case 2.1:
+							{
+								if(that.amount < 50000) {
+									mui.alert('个人报名全节点最小锁仓数量为50000true');
+									mask._remove();
+									return
+								} else {
+									mask.show();
+									h('.signUpsucc').removeClass('not-view');
+								}
+								$('.title').html('报名成功!');
+								$('.succ').html('恭喜你,个人报名全节点成功!');
+								break;
+							}
+						case 2.2:
+							{
+								/*进行转账操作*/
+								mask.show();
+								h('.signUpsucc').removeClass('not-view');
+								$('.title').html('报名成功!');
+								$('.succ').html('恭喜你,创建全节点组队成功!');
+								break;
+							}
+					};
+					/*返回*/
+					$('#back-btn').on('tap', function() {
+						mask._remove();
+						h('.signUpsucc').addClass('not-view');
+						plus.webview.show(plus.webview.getWebviewById('index.html'));
+					})
+				});
+
+				/*取消*/
+				$('.cancel').on('tap', function() {
+					mask._remove();
+					$('#modal').removeClass('mui-active');
+				});
+
 			})
 		}
 	};

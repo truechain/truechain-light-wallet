@@ -101,23 +101,34 @@
 			},
 			submitForm() {
 				var that = this;
-				$('.join').on('tap', function() {
-					that.checkNickName('.nickName');
-					that.checkReason('.reason')
-					if(that.nickNameFlag) {
-						if(that.reason) {
-							$(this).html('已申请');
-							$(this).addClass('joined mui-disabled');
-							flag = false;
-							mask.show();
-							$('.applySucc').removeClass('not-view');
-						}
-					}
-				});
+				mui.plusReady(function() {
+					let self = plus.webview.currentWebview();
+					let teamName = self.teamName;
+					teamAddress = self.teamAddress;
 
-				/*关闭*/
-				$('#back-btn').on('tap', that.close)
-				$('.close').on('tap', that.close)
+				
+
+					/*申请加入*/
+					$('.join').on('tap', function() {
+						that.checkNickName('.nickName');
+						that.checkReason('.reason');
+						if(that.nickNameFlag) {
+							if(that.reason) {
+								/*进行请求上传保存数据*/
+
+								$(this).html('已申请');
+								$(this).addClass('joined mui-disabled');
+								flag = false;
+								mask.show();
+								$('.applySucc').removeClass('not-view');
+							}
+						}
+					});
+
+					/*关闭*/
+					$('#back-btn').on('tap', that.close);
+					$('.close').on('tap', that.close);
+				})
 			}
 		};
 		Validata.init();

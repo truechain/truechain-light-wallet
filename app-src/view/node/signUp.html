@@ -35,7 +35,7 @@
 						</a>
 					</li>
 					<li>
-						<a>
+						<a class="fullNode">
 							<div class="nodeType">
 								<div class="nodeType_title">
 									<span>
@@ -65,12 +65,19 @@
 	/*判断是否报名成功*/
 
 	if(true) {
-		h('.standardNode').attr('href', "javascript:openInfo('standardNode/standardNode.html')");
+		//报名标准节点
+		h('.standardNode').tap(function() {
+			openInfo('node.html', {
+				type: 1
+			})
+		});
+		//报名全节点
+		h('.fullNode').tap(function() {
+			openInfo('node.html', {
+				type: 2
+			})
+		})
 	} else {
 		h('.standardNode').attr('href', "javascript:openInfo('signUpSuccess.html')");
 	}
-
-	$('.standardNode').on('tap', function() {
-		console.log('报名  74--')
-	})
 </script>

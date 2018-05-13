@@ -1,0 +1,179 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>节点</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/node/node.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title"><!--节点类型--></h1>
+		</header>
+		<div class="mui-content">
+			<div class="main">
+				<!--href="javascript:openInfo('personalelection/personalSignup.html')"-->
+				<a class="signUp signUp_personal">
+					<span>个人报名</span>
+					<i class="arrow"></i>
+				</a>
+				<div>
+					<div class="signUp signUp_team_item">
+						<div class="signUp_team_search">
+							<span>组队列表</span>
+							<!--<i class="search"></i>-->
+							<form class="signUp_team_search_wid">
+								<div class="mui-input-row mui-search">
+									<input id="search" type="search" class="mui-input-clear" placeholder="搜索">
+								</div>
+							</form>
+						</div>
+						<span class="establish">建立组队</span>
+					</div>
+
+					<ul class="signUp signUp_team">
+						<li>
+							<div>
+								<span class="serialNum">1</span>
+								<span class="nickName">飞虎小分队11111</span>
+							</div>
+							<i class="arrow"></i>
+						</li>
+						<li>
+							<div>
+								<span class="serialNum">2</span>
+								<span class="nickName">飞虎小分队22222</span>
+							</div>
+							<i class="arrow"></i>
+						</li>
+					</ul>
+				</div>
+			</div>
+
+			<!--参选失败-->
+			<div class="up-center-windows fail not-view">
+				<div class="title">参选失败
+					<i class="close"></i>
+				</div>
+				<div class="fail-box">
+					<div class="succ">抱歉,您未达到2000持币量,暂无法进行个人报名参选 !</div>
+					<button id="joinOrganize">加入组队</button>
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="../../lib/js/mui.min.js"></script>
+<script src="../../lib/js/zepto.min.js"></script>
+<script src="../../lib/js/h.min.js"></script>
+<script src="../../src/js/common.js"></script>
+<script type="text/javascript">
+	(function() {
+		var Validate = {
+			trueNum: null,
+			init() {
+				this.submitForm()
+			},
+			submitForm() {
+				let that = this;
+				var mask = mui.createMask(function() {
+					return false;
+				});
+				mui.plusReady(function() {
+					let self = plus.webview.currentWebview();
+					switch(self.type) {
+						case 1:
+							{
+								h('.mui-title').html('标准节点');
+								/*获取标准节点的报名情况*/
+
+								/*****************/
+
+								//个人报名标准节点
+								$('.signUp_personal').on('tap', function() {
+									if(that.trueNum >= 2000) {
+										openInfo('personalelection/personalSignup.html', {
+											type: 1.1
+										});
+									} else {
+										mask.show();
+										$('.fail').removeClass('not-view');
+									}
+								});
+
+								/*标准节点建立组队*/
+								h('.establish').tap(function() {
+									if(true) { //that.trueNum >= 3000
+										openInfo('createTeam/createTeam.html', {
+											type: 1.2
+										});
+									} else {
+										mui.alert('组队竞选需要3000持币量')
+									}
+								});
+								break;
+							}
+						case 2:
+							{
+								h('.mui-title').html('全节点');
+								/*获取全节点的报名情况-*/
+
+								/***************/
+								//个人报名全节点
+								$('.signUp_personal').on('tap', function() {
+									if(that.trueNum !== 2000) {
+										openInfo('personalelection/personalSignup.html', {
+											type: 2.1
+										});
+									} else {
+										mask.show();
+										$('.fail').removeClass('not-view');
+									}
+								});
+
+								/*全节点建立组队*/
+								h('.establish').tap(function() {
+									if(true) { //that.trueNum >= 3000
+										openInfo('createTeam/createTeam.html', {
+											type: 2.2
+										});
+									} else {
+										mui.alert('组队竞选需要10万持币量');
+									}
+								});
+								break;
+							}
+					};
+
+					/*关闭*/
+					h('.close').tap(close);
+
+					/*加入组队 ---> 关闭遮罩重新选择*/
+					h('#joinOrganize').tap(close);
+
+					function close() {
+						$('.fail').addClass('not-view');
+						mask._remove();
+					}
+					//					申请加入组队
+					//					$('.signUp_team').on('tap', 'li', function(e) {
+					//						let teamName = e.target.children[0].children[1].innerText;
+					//						console.log(teamName)
+					//
+					//						openInfo('organizeTeamNode/joinOrganize.html', {
+					//							teamName: teamName
+					//						});
+					//					})
+				})
+
+			}
+		};
+		Validate.init();
+	})()
+</script>

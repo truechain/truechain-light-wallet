@@ -5,9 +5,9 @@
 		<meta charset="UTF-8">
 		<title></title>
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
-		<link href="../../../../css/mui.min.css" rel="stylesheet" />
-		<link rel="stylesheet" type="text/css" href="../../../../dist/css/common/common.css" />
-		<link rel="stylesheet" type="text/css" href="../../../../dist/css/node/standardNode/personalelection/lockingWhouse.css" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/node/standardNode/personalelection/lockingWhouse.css" />
 	</head>
 
 	<body>
@@ -18,8 +18,9 @@
 
 		<div class="mui-content">
 			<div class="main">
-				<input type="text" class="lockWhouseAdd" placeholder="锁仓地址" />
-				<input type="text" class="lockingNum" placeholder="2000true" />
+				<!--<input type="text" class="lockWhouseAdd" disabled="disabled" value="0x08C62C32226CE2D9148A80F71A03dDB73B673792" />-->
+				<p class="lockWhouseAdd">0x08C62C32226CE2D9148A80F71A03dDB73B673792</p>
+				<input type="text" class="lockingNum" placeholder="锁仓数量" />
 				<div class="mui-input-row mui-input-range">
 					<input type="range" min="0.00002520" max="0.00251999" value="0.00017640" step="0.00000001">
 					<span class="mui-tooltip" id="minerCost">0.00017640</span>
@@ -64,11 +65,8 @@
 	</body>
 
 </html>
-<script src="../../../../lib/js/mui.min.js"></script>
-<script src="../../../../lib/js/zepto.min.js"></script>
-<script src="../../../../lib/js/h.min.js"></script>
-<script src="../../../../src/js/common.js"></script>
-<script src="../../../../dist/js/node/standardNode/personalelection/lockingWhouse.js"></script>
-<script type="text/javascript">
-	mui.init();
-</script>
+<script src="../../../lib/js/mui.min.js"></script>
+<script src="../../../lib/js/zepto.min.js"></script>
+<script src="../../../lib/js/h.min.js"></script>
+<script src="../../../src/js/common.js"></script>
+<script src="../../../dist/js/node/standardNode/personalelection/lockingWhouse.js"></script>

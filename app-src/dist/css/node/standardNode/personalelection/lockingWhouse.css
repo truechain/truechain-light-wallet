@@ -10,6 +10,15 @@ input[type=text] {
 	border-bottom: 1px solid rgba(153, 153, 153, 1) !important;
 }
 
+.lockWhouseAdd {
+	width: 100%;
+	display: inline-block;
+	height: 30px;
+	line-height: 25px;
+	overflow: scroll;
+	border-bottom: 1px solid rgba(153, 153, 153, 1) !important;
+}
+
 .main {
 	background: #fff;
 	padding: 20px;
