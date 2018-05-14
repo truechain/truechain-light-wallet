@@ -16,7 +16,7 @@
 			<h1 class="mui-title">登录</h1>
 		</header>
 		<div class="mui-content">
-			<form class="main" action="" method="post">
+			<form class="main">
 				<a class="country-or-region" href="###">
 					<span>
 						国家/地区
@@ -25,7 +25,6 @@
 						中国
 					</span>
 				</a>
-
 				<div class="tel">
 					+<label for="telNum">86</label>
 					<input type="number" id="telNum" placeholder="输入手机号" />
@@ -33,17 +32,15 @@
 
 				<div class="vCode">
 					<input type="text" id="vCode" placeholder="输入图形验证码" />
-					<label class="vCodeItem" for="vCode">hdke</label>
+					<label class="vCodeItem"><!--ghuy--></label>
 				</div>
-
 				<div class="phoneCode">
 					<input type="text" id="phoneCode" placeholder="输入手机验证码" />
-					<label class="phoneCodeItem" for="phoneCode">
-						<a class="blue">获取验证码</a>
-					</label>
+					<!--<label class="phoneCodeItem" for="phoneCode">-->
+					<button type="button" class="blue getCode">获取验证码</button>
+					<!--</label>-->
 				</div>
 			</form>
-
 			<div class="login">
 				登录
 			</div>
@@ -53,6 +50,167 @@
 
 </html>
 <script src="../../../lib/js/mui.min.js"></script>
+<script src="../../../lib/js/h.min.js"></script>
+<script src="../../../lib/js/zepto.min.js"></script>
 <script type="text/javascript">
-	mui.init()
+	mui.init();
+	let countdown = 60;
+	(function() {
+		var Validata = {
+			phoneNumber: null,
+			vCode: null,
+			gvInCode: null,
+			captcha: null,
+			vCodeFlag: false,
+			phoneCode: null,
+			isEmpty: false,
+			isClick: false,
+			phoneFlag: false,
+			regPhone: /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/,
+			gvCode: function gvCode() {
+				let that = this;
+				mui.ajax('http://192.168.31.66:7001/captcha', {
+					type: 'GET',
+					dataType: 'json',
+					headers: {
+						Accept: "application/json; charset=utf-8"
+					},
+					success: function(res) {
+						console.log(res)
+						$('.vCodeItem').html(res.body);
+						that.gvInCode = res.code;
+					},
+					error: function(err) {
+						console.log(err)
+					}
+				});
+			},
+			checkEmpty: function checkEmpty(val) {
+				if(val) {
+					this.isEmpty = true;
+				} else {
+					mui.alert('请输入图片验证码')
+					this.isEmpty = false;
+				}
+			},
+			checkPhone: function checkPhone(val) {
+				if(this.regPhone.test(val)) {
+					this.phoneFlag = true;
+				} else {
+					this.phoneFlag = false;
+					mui.alert('请输入正确手机号');
+				}
+			},
+			init: function init() {
+				this.submitForm();
+			},
+			settime: function settime(ele) { //倒计时								
+				if(countdown == 0) {
+					$(ele).removeAttr("disabled");
+					$(ele).text("获取验证码");
+					countdown = 60;
+					return;
+				} else {
+					$(ele).attr("disabled", true);
+					$(ele).text(countdown + "s 重新发送 ");
+					countdown--;
+				};
+
+				setTimeout(function() {
+					settime(ele);
+				}, 1000)
+			},
+			submitForm: function submitForm() {
+				this.gvCode();
+				let that = this;
+				//请求图片验证码
+				h('.vCodeItem').tap(function() {
+					that.gvCode();
+				})
+
+				/*获取手机验证码进行图形验证码校验*/
+				h('.getCode').tap(function(e) {
+					e.preventDefault();
+					that.phoneNumber = $('#telNum').val();
+					that.vCode = $('#vCode').val();
+					that.checkPhone(that.phoneNumber);
+					if(that.phoneFlag) {
+						that.checkEmpty(that.vCode);
+						if(that.isEmpty) {
+							if(that.vCode == that.gvInCode) {
+								that.vCodeFlag = true;
+								that.isClick = true;
+								that.settime('.getCode');
+
+								mui.ajax('http://192.168.31.66:7001/smsCaptcha', {
+									type: 'GET',
+									dataType: 'json',
+									data: {
+										mobile: that.phoneNumber
+									},
+									success: function(res) {
+										console.log(res)
+									},
+									error: function(err) {
+										console.log(err);
+									}
+								})
+							} else {
+								that.vCodeFlag = false;
+								that.isClick = false;
+								mui.alert('图形验证码错误,请重新输入')
+							};
+							//							mui.ajax('http://192.168.31.66:7001/smsCaptcha', {
+							//								type: 'GET',
+							//								dataType: 'json',
+							//								data: {
+							//									mobile: that.phoneNumber,
+							//									captcha: that.vCode
+							//								},
+							//								success: function(res) {
+							//									console.log(res)
+							//									if(res.body.code != 202) {
+							//										that.vCodeFlag = false;
+							//										that.isClick = false;
+							//										alert('图形验证码错误!');
+							//									} else {
+							//										that.vCodeFlag = true;
+							//										that.isClick = true;
+							//										that.settime('.getCode');
+							//										alert('图形验证码正确,获取手机验证码');
+							//										/*登录*/
+							//									}
+							//								},
+							//								error: function(err) {
+							//									console.log(err);
+							//								}
+							//							})
+						}
+					}
+				});
+				h('.login').tap(function() {
+					that.captcha = $('#phoneCode').val();
+					if(that.isClick && that.vCodeFlag) {
+						mui.ajax('http://192.168.31.66:7001/login', {
+							type: 'GET',
+							dataType: 'json',
+							data: {
+								mobile: that.phoneNumber,
+								captcha: that.captcha
+							},
+							success: function(res) {
+								console.log(res)
+							},
+							error: function(err) {
+								console.log(err);
+							}
+						});
+					} else {
+						mui.alert('请先进行验证!');
+					}
+				})
+			}
+		};
+		Validata.init();
+	})();
 </script>

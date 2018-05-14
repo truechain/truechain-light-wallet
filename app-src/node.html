@@ -36,8 +36,8 @@
 			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
 			<div class="mui-slider-group">
 				<div id="item1mobile" class="base-info md-f1 mui-slider-item mui-control-content detailInfos md-box md-ver mui-active">
-					<ul class="mui-table-view">
-						<li class="mui-table-view-cell">
+					<ul class="mui-table-view standardNode">
+						<!--<li class="mui-table-view-cell">
 							<div class="view-cell-left">
 								<img class="ranking" src="dist/images/common/one@2x.png" />
 							</div>
@@ -80,7 +80,7 @@
 							<div class="view-cell-right voteNum">
 								12000票
 							</div>
-						</li>
+						</li>-->
 					</ul>
 				</div>
 				<!--<div id="item2mobile" class="process bg md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
@@ -116,14 +116,15 @@
 							</div>
 						</li>
 					</ul>
-				</div>
-			--></div>
+				</div>-->
+			</div>
 		</div>
 	</body>
 
 </html>
 <script src="lib/js/mui.min.js"></script>
 <script src="lib/js/h.min.js"></script>
+<script type="text/javascript" src="lib/js/zepto.min.js"></script>
 <script src="src/js/common.js"></script>
 
 <script type="text/javascript">
@@ -134,4 +135,132 @@
 	h('.vote').tap(function() {
 		openInfo('view/node/vote.html');
 	});
+
+	let Data = [{
+			name: '全力以赴',
+			type: 0,
+			id: 0,
+			trueNum: 1000,
+			voteNum: 5000
+		},
+		{
+			name: '全力22222以赴',
+			type: 0,
+			id: 1,
+			trueNum: 2000,
+			voteNum: 8000
+		},
+		{
+			name: '全力33333以赴',
+			type: 1,
+			id: 2,
+			trueNum: 3000,
+			voteNum: 3000
+		},
+		{
+			name: '全力44444以赴',
+			type: 1,
+			id: 3,
+			trueNum: 2000,
+			voteNum: 9000
+		},
+		{
+			name: '全力55555以赴',
+			type: 0,
+			id: 4,
+			trueNum: 4000,
+			voteNum: 2000
+		},
+	];
+	/*
+	 
+	 * 标准节点列表排序*/
+	//前三名
+	Data = Data.sort(function(a, b) {
+		return b.voteNum - a.voteNum
+	});
+
+	let rankingArr = Data.splice(0, 3);
+
+	rankingArr.forEach(function(item, index) {
+		let str;
+		if(item.type == 0) {
+			str = `<li class="mui-table-view-cell">
+												<div class="view-cell-left">
+													<img class="ranking" src="dist/images/common/${index}@2x.png" />
+												</div>
+												<div class="view-cell-center nickName">
+													<span>${item.name}</span>
+													<img class="type" src="dist/images/common/geren.png" />
+												</div>
+												<div class="view-cell-center-item">
+													${item.trueNum}true
+												</div>
+												<div class="view-cell-right voteNum">
+													${item.voteNum}票
+												</div>
+											</li>`;
+		} else {
+			str = `<li class="mui-table-view-cell">
+												<div class="view-cell-left">
+													<img class="ranking" src="dist/images/common/${index}@2x.png" />
+												</div>
+												<div class="view-cell-center nickName">
+													<span>${item.name}</span>
+												</div>
+												<div class="view-cell-center-item">
+													${item.trueNum}true
+												</div>
+												<div class="view-cell-right voteNum">
+													${item.voteNum}票
+												</div>
+											</li>`;
+		};
+		$('.standardNode').append(str);
+	});
+
+	//之后
+	let huhu = Data.sort(function(a, b) {
+		return b.voteNum - a.voteNum;
+	});
+
+	huhu.forEach(function(item, index) {
+		let strAf;
+		if(item.type == 0) {
+			strAf = `<li class="mui-table-view-cell">
+												<div class="view-cell-left">
+													${index+4}
+												</div>
+												<div class="view-cell-center nickName">
+													<span>${item.name}</span>
+													<img class="type" src="dist/images/common/geren.png" />
+												</div>
+												<div class="view-cell-center-item">
+													${item.trueNum}true
+												</div>
+												<div class="view-cell-right voteNum">
+													${item.voteNum}票
+												</div>
+											</li>`;
+		} else {
+			strAf = `<li class="mui-table-view-cell">
+												<div class="view-cell-left">
+													${index+4}
+												</div>
+												<div class="view-cell-center nickName">
+													<span>${item.name}</span>
+												</div>
+												<div class="view-cell-center-item">
+													${item.trueNum}true
+												</div>
+												<div class="view-cell-right voteNum">
+													${item.voteNum}票
+												</div>
+											</li>`;
+		};
+
+		$('.standardNode').append(strAf);
+	})
+
+	/*********************************/
 </script>

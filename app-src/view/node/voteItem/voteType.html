@@ -1,0 +1,185 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/my/node.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">标准节点<!--节点类型--></h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="mui-input-row mui-search">
+				<input type="search" class="mui-input-clear" placeholder="搜索">
+			</div>
+
+			<ul class="mui-table-view nodeType">
+
+			</ul>
+		</div>
+
+	</body>
+
+</html>
+<script src="../../../lib/js/mui.min.js"></script>
+<script src="../../../lib/js/h.min.js"></script>
+<script src="../../../lib/js/zepto.min.js"></script>
+<script src="../../../src/js/common.js"></script>
+<script type="text/javascript">
+	mui.init();
+	let Data = [{
+			name: '全力以赴',
+			type: 0,
+			id: 0,
+			trueNum: 1000,
+			voteNum: 5000
+		},
+		{
+			name: '全力22222以赴',
+			type: 0,
+			id: 1,
+			trueNum: 2000,
+			voteNum: 8000
+		},
+		{
+			name: '全力33333以赴',
+			type: 1,
+			id: 2,
+			trueNum: 3000,
+			voteNum: 3000
+		},
+		{
+			name: '全力44444以赴',
+			type: 1,
+			id: 3,
+			trueNum: 2000,
+			voteNum: 9000
+		},
+		{
+			name: '全力55555以赴',
+			type: 0,
+			id: 4,
+			trueNum: 4000,
+			voteNum: 2000
+		}
+	];
+
+	mui.plusReady(function() {
+		let self = plus.webview.currentWebview();
+		switch(self.type) {
+			case 1:
+				{
+					h('.mui-title').html('标准节点');
+					//获取标准节点列表信息
+					//前三名
+					Data = Data.sort(function(a, b) {
+						return b.voteNum - a.voteNum
+					});
+
+					let rankingArr = Data.splice(0, 3);
+
+					rankingArr.forEach(function(item, index) {
+						let str;
+						if(item.type == 0) {
+							str = `<li class="mui-table-view-cell">
+												<div class="view-cell-left">
+													<img class="ranking" src="../../../dist/images/common/${index}@2x.png" />
+												</div>
+												<div class="view-cell-center nickName">
+													<span>${item.name}</span>
+													<img class="type" src="../../../dist/images/common/geren.png" />
+												</div>
+												<div class="view-cell-center-item">
+													${item.trueNum}true
+												</div>
+												<div class="view-cell-right voteNum">
+													${item.voteNum}票
+												</div>
+											</li>`;
+						} else {
+							str = `<li class="mui-table-view-cell">
+												<div class="view-cell-left">
+													<img class="ranking" src="../../../dist/images/common/${index}@2x.png" />
+												</div>
+												<div class="view-cell-center nickName">
+													<span>${item.name}</span>
+												</div>
+												<div class="view-cell-center-item">
+													${item.trueNum}true
+												</div>
+												<div class="view-cell-right voteNum">
+													${item.voteNum}票
+												</div>
+											</li>`;
+						};
+						$('.nodeType').append(str);
+					});
+
+					//之后
+					let huhu = Data.sort(function(a, b) {
+						return b.voteNum - a.voteNum;
+					});
+
+					huhu.forEach(function(item, index) {
+						let strAf;
+						if(item.type == 0) {
+							strAf = `<li class="mui-table-view-cell">
+												<div class="view-cell-left">
+													${index+4}
+												</div>
+												<div class="view-cell-center nickName">
+													<span>${item.name}</span>
+													<img class="type" src="../../../dist/images/common/geren.png" />
+												</div>
+												<div class="view-cell-center-item">
+													${item.trueNum}true
+												</div>
+												<div class="view-cell-right voteNum">
+													${item.voteNum}票
+												</div>
+											</li>`;
+						} else {
+							strAf = `<li class="mui-table-view-cell">
+												<div class="view-cell-left">
+													${index+4}
+												</div>
+												<div class="view-cell-center nickName">
+													<span>${item.name}</span>
+												</div>
+												<div class="view-cell-center-item">
+													${item.trueNum}true
+												</div>
+												<div class="view-cell-right voteNum">
+													${item.voteNum}票
+												</div>
+											</li>`;
+						};
+
+						$('.nodeType').append(strAf);
+					})
+
+					$('.nodeType').on('tap', 'li', function(e) {
+						let nickName = this.children[1].innerText;
+						openInfo('baseInfo.html', {
+							nickName: nickName
+						});
+					})
+
+					break;
+				}
+			case 2:
+				{
+					h('.mui-title').html('全节点');
+					break;
+				}
+		}
+	})
+</script>
