@@ -37,20 +37,13 @@
 					</div>
 
 					<ul class="signUp signUp_team">
-						<li>
+						<!--<li>
 							<div>
 								<span class="serialNum">1</span>
 								<span class="nickName">飞虎小分队11111</span>
 							</div>
 							<i class="arrow"></i>
-						</li>
-						<li>
-							<div>
-								<span class="serialNum">2</span>
-								<span class="nickName">飞虎小分队22222</span>
-							</div>
-							<i class="arrow"></i>
-						</li>
+						</li>-->
 					</ul>
 				</div>
 			</div>
@@ -61,7 +54,9 @@
 					<i class="close"></i>
 				</div>
 				<div class="fail-box">
-					<div class="succ">抱歉,您未达到2000持币量,暂无法进行个人报名参选 !</div>
+					<div class="succ">
+						<!---->
+					</div>
 					<button id="joinOrganize">加入组队</button>
 				</div>
 			</div>
@@ -73,105 +68,140 @@
 <script src="../../lib/js/zepto.min.js"></script>
 <script src="../../lib/js/h.min.js"></script>
 <script src="../../src/js/common.js"></script>
-<script type="text/javascript">(function() {
-	var Validate = {
-		trueNum: null,
-		init() {
-			this.submitForm()
-		},
-		submitForm() {
-			let that = this;
-			var mask = mui.createMask(function() {
-				return false;
-			});
-			mui.plusReady(function() {
-				let self = plus.webview.currentWebview();
-				switch(self.type) {
-					case 1:
-						{
-							h('.mui-title').html('标准节点');
-							/*获取标准节点的报名情况*/
+<script type="text/javascript" src="../../lib/js/web3.min.js"></script>
+<script type="text/javascript" src="../../lib/js/addToken.js"></script>
+<script type="text/javascript">
+	(function() {
+		var Validate = {
+			trueNum: null,
+			init() {
+				this.submitForm()
+			},
+			submitForm() {
+				let that = this;
+				var mask = mui.createMask(function() {
+					return false;
+				});
 
-							/*****************/
+				addToken('0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab', function(balances) {
+					that.trueNum = balances;
+				})
 
-							//个人报名标准节点
-							$('.signUp_personal').on('tap', function() {
-								if(that.trueNum >= 2000) {
-									openInfo('personalelection/personalSignup.html', {
-										type: 1.1
-									});
-								} else {
-									mask.show();
-									$('.fail').removeClass('not-view');
-								}
-							});
+				mui.plusReady(function() {
+					let self = plus.webview.currentWebview();
+					let teamData = '';
+					switch(self.node_type) {
+						case 1:
+							{
+								h('.mui-title').html('标准节点');
+								/*获取标准节点的报名情况,进行列表数据渲染*/
+								mui.ajax('http://192.168.31.2:7001/nodeRank', {
+									type: 'get',
+									dataType: 'json',
+									success: function(res) {
+										res.data.forEach(function(item, index) {
+											teamData += `
+										<li id='huhu' data-teamAdd='0x1235678912356789'>
+											<div>
+													<span class="serialNum">${index+1}</span>
+													<span class="nickName">${item.nickname}</span>
+											</div>
+											<i class="arrow"></i>
+											</li>`;
 
-							/*标准节点建立组队*/
-							h('.establish').tap(function() {
-								if(true) { //that.trueNum >= 3000
-									openInfo('createTeam/createTeam.html', {
-										type: 1.2
-									});
-								} else {
-									mui.alert('组队竞选需要3000持币量')
-								}
-							});
-							break;
-						}
-					case 2:
-						{
-							h('.mui-title').html('全节点');
-							/*获取全节点的报名情况-*/
+										})
+										$('.signUp_team').append(teamData);
+									},
+									error: function(err) {
+										console.log(err)
+									}
+								})
+								/*****************/
 
-							/***************/
-							//个人报名全节点
-							$('.signUp_personal').on('tap', function() {
-								if(that.trueNum !== 2000) {
-									openInfo('personalelection/personalSignup.html', {
-										type: 2.1
-									});
-								} else {
-									mask.show();
-									$('.fail').removeClass('not-view');
-								}
-							});
+								//个人报名标准节点
+								$('.signUp_personal').on('tap', function() {
+									if(that.trueNum == 0) {
+										openInfo('personalelection/personalSignup.html', {
+											node_type: 1,
+											type: 1
+										});
+									} else {
+										mask.show();
+										$('.succ').html('抱歉,您未达到2000持币量,暂无法进行个人报名参选 !');
+										$('.fail').removeClass('not-view');
+									}
+								});
 
-							/*全节点建立组队*/
-							h('.establish').tap(function() {
-								if(true) { //that.trueNum >= 3000
-									openInfo('createTeam/createTeam.html', {
-										type: 2.2
-									});
-								} else {
-									mui.alert('组队竞选需要10万持币量');
-								}
-							});
-							break;
-						}
-				};
+								/*标准节点建立组队*/
+								h('.establish').tap(function() {
+									if(that.trueNum == 0) {
+										openInfo('createTeam/createTeam.html', {
+											node_type: 1,
+											type: 2
+										});
+									} else {
+										mui.alert('创建组队需要3000持币量')
+									}
+								});
+								break;
+							}
+						case 2:
+							{
+								h('.mui-title').html('全节点');
+								/*获取全节点的报名情况,进行列表数据进行渲染*/
 
-				/*关闭*/
-				h('.close').tap(close);
+								/***************/
+								//个人报名全节点
+								$('.signUp_personal').on('tap', function() {
+									if(that.trueNum == 0) {
+										openInfo('personalelection/personalSignup.html', {
+											node_type: 2,
+											type: 1
+										});
+									} else {
+										mask.show();
+										$('.succ').html('抱歉,您未达到50000持币量,暂无法进行个人报名参选 !');
+										$('.fail').removeClass('not-view');
+									}
+								});
 
-				/*加入组队 ---> 关闭遮罩重新选择*/
-				h('#joinOrganize').tap(close);
+								/*全节点建立组队*/
+								1
+								h('.establish').tap(function() {
+									if(true) { //that.trueNum >= 3000
+										openInfo('createTeam/createTeam.html', {
+											node_type: 2,
+											type: 2
+										});
+									} else {
+										mui.alert('组队竞选需要10万持币量');
+									}
+								});
+								break;
+							}
+					};
 
-				function close() {
-					$('.fail').addClass('not-view');
-					mask._remove();
-				}
-				//					申请加入组队
-				//					$('.signUp_team').on('tap', 'li', function(e) {
-				//						let teamName = e.target.children[0].children[1].innerText;
-				//						console.log(teamName)
-				//
-				//						openInfo('organizeTeamNode/joinOrganize.html', {
-				//							teamName: teamName
-				//						});
-				//					})
-			})
+					/*关闭*/
+					h('.close').tap(close);
 
-		}
-	};
-	Validate.init();
-})()</script>
+					/*加入组队 ---> 关闭遮罩重新选择*/
+					h('#joinOrganize').tap(close);
+
+					function close() {
+						$('.fail').addClass('not-view');
+						mask._remove();
+					}
+
+					//					申请加入组队
+					$('.signUp_team').on('tap', 'li', function(e) {
+						let teamAdd = $(this).data('teamadd')
+						openInfo('organizeTeamNode/joinOrganize.html', {
+							teamAdd: teamAdd
+						});
+					});
+				})
+			}
+		};
+		Validate.init();
+	})()
+</script>

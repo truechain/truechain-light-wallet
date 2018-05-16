@@ -17,7 +17,7 @@
 		</header>
 		<div class="mui-content">
 			<form class="main">
-				<a class="country-or-region" href="###">
+				<a class="country-or-region">
 					<span>
 						国家/地区
 					</span>
@@ -57,10 +57,13 @@
 	let countdown = 60;
 	(function() {
 		var Validata = {
+			getVcodeUrl: 'http://192.168.31.2:7001/',
+			getcodeUrl: 'http://192.168.31.2:7001/smsCaptcha',
+			loginUrl: 'http://45.40.243.125:7001/login',
 			phoneNumber: null,
 			vCode: null,
-			gvInCode: null,
 			captcha: null,
+			code: null,
 			vCodeFlag: false,
 			phoneCode: null,
 			isEmpty: false,
@@ -69,16 +72,13 @@
 			regPhone: /^(13[0-9]|14[579]|15[0-3,5-9]|16[6]|17[0135678]|18[0-9]|19[89])\d{8}$/,
 			gvCode: function gvCode() {
 				let that = this;
-				mui.ajax('http://192.168.31.66:7001/captcha', {
+				mui.ajax(that.getVcodeUrl, { //获取图形验证码
 					type: 'GET',
 					dataType: 'json',
-					headers: {
-						Accept: "application/json; charset=utf-8"
-					},
 					success: function(res) {
 						console.log(res)
 						$('.vCodeItem').html(res.body);
-						that.gvInCode = res.code;
+						that.captcha = res.code;
 					},
 					error: function(err) {
 						console.log(err)
@@ -115,10 +115,9 @@
 					$(ele).text(countdown + "s 重新发送 ");
 					countdown--;
 				};
-
 				setTimeout(function() {
 					settime(ele);
-				}, 1000)
+				}, 1000);
 			},
 			submitForm: function submitForm() {
 				this.gvCode();
@@ -137,30 +136,55 @@
 					if(that.phoneFlag) {
 						that.checkEmpty(that.vCode);
 						if(that.isEmpty) {
-							if(that.vCode == that.gvInCode) {
-								that.vCodeFlag = true;
-								that.isClick = true;
-								that.settime('.getCode');
-
-								mui.ajax('http://192.168.31.66:7001/smsCaptcha', {
-									type: 'GET',
-									dataType: 'json',
-									data: {
-										mobile: that.phoneNumber
-									},
-									success: function(res) {
-										console.log(res)
-									},
-									error: function(err) {
-										console.log(err);
+							//if(that.vCode == that.captcha) {
+							//if(eval("/^" + that.captcha + "$/i").test(that.vCode)) {
+							that.vCodeFlag = true;
+							that.isClick = true;
+							that.settime('.getCode');
+							mui.ajax(that.getcodeUrl, {
+								type: 'GET',
+								dataType: 'json',
+								data: {
+									mobile: that.phoneNumber,
+									captcha: that.vCode
+								},
+								success: function(res) {
+									console.log(res);
+									if(res.body.status != 202) {
+										that.vCodeFlag = false;
+										that.isClick = false;
+										alert('图形验证码错误!');
+									} else {
+										that.vCodeFlag = true;
+										that.isClick = true;
+										that.settime('.getCode');
+										alert('图形验证码正确,获取手机验证码');
+										/*登录*/
 									}
-								})
-							} else {
+								},
+								error: function(err) {
+									console.log(err + '错误');
+								}
+							})
+							//								mui.ajax(that.getcodeUrl, { //获取手机验证码
+							//									type: 'GET',
+							//									dataType: 'json',
+							//									data: {
+							//										mobile: that.phoneNumber
+							//									},
+							//									success: function(res) {
+							//										console.log(res)
+							//									},
+							//									error: function(err) {
+							//										console.log(err);
+							//									}
+							//								})
+							/*} else {
 								that.vCodeFlag = false;
 								that.isClick = false;
 								mui.alert('图形验证码错误,请重新输入')
-							};
-							//							mui.ajax('http://192.168.31.66:7001/smsCaptcha', {
+							};*/
+							//							mui.ajax('http://192.168.31.2:7001/smsCaptcha', {
 							//								type: 'GET',
 							//								dataType: 'json',
 							//								data: {
@@ -189,20 +213,25 @@
 					}
 				});
 				h('.login').tap(function() {
-					that.captcha = $('#phoneCode').val();
+					that.code = $('#phoneCode').val();
 					if(that.isClick && that.vCodeFlag) {
-						mui.ajax('http://192.168.31.66:7001/login', {
+						mui.ajax(that.loginUrl, { //进行验证登录操作
 							type: 'GET',
 							dataType: 'json',
 							data: {
 								mobile: that.phoneNumber,
-								captcha: that.captcha
+								code: that.code,
+								address: '456456'
 							},
 							success: function(res) {
-								console.log(res)
+								console.log(JSON.stringify(res))
+								if(res.body.status == 200) {
+									plus.storage.setItem("token", res.body.data.token)
+									plus.webview.show(plus.webview.getWebviewById('index.html'));
+								}
 							},
 							error: function(err) {
-								console.log(err);
+								console.log('Error+' + JSON.stringify(err));
 							}
 						});
 					} else {

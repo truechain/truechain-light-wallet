@@ -27,7 +27,7 @@
 							</p>
 						</div>
 						<div class="voteNum">
-							1000票
+							<!--1000票-->
 						</div>
 					</div>
 					<div class="baseInfo_declaration">
@@ -64,7 +64,7 @@
 				<p class="adopt not-view">申请已经通过,请进行下一步操作! </p>
 				<p class="refuse not-view">申请失败,队长拒绝了你的申请</p>
 				<div id="next" class="apply">
-					下一步
+					<!--下一步-->
 				</div>
 			</div>
 		</div>
@@ -80,41 +80,52 @@
 	mui.plusReady(function() {
 		/*获取组队信息*/
 		let self = plus.webview.currentWebview();
+		let token = plus.storage.getItem('token');
+		let teamAdd = self.teamAdd;
+		let teamInfoUrl = 'http://45.40.243.125:7001/teamInfo';
+		mui.ajax(teamInfoUrl, {
+			type: 'get',
+			headers: {
+				token: token
+			},
+			dataType: 'json',
+			success: function(res) {
+				let data = res.data[0]
+				$('.nickName').html(data.nickname);
+				$('.baseInfo_declaration').html('竞选宣言数据暂时搁置')
+				$('.voteNum').html('票数数据暂时搁置')
+			},
+			error: function(err) {
+				console.log(err)
+			}
+		});
 
-		$('.nickName').html(self.teamName);
-
-		/*判断该地址是否申请过组队*/
-		//		if(!true) {
-		//			$('#next').addClass('mui-disabled applyed');
-		//			$('#next').html('已申请');
-		//		} else {
-		//			$('#next').on('tap', function() {
-		//				openInfo('InfoFilling.html', {
-		//					teamName: self.teamName,
-		//					teamAddress: self.teamAddress
-		//				})
-		//			})
-		//		};
-
-		/*判断队长是否同意申请*/
-		/*type = 0 为个人参选  type = 1 为组队参选*/
-		if(true) {
+		/*判断该地址申请组队状态*/
+		if(self.state == 1) {
+			$('.mui-title').html('已申请');
+			$('#next').html('已申请');
+			$('#next').attr("disabled", "disabled");
+			$('#next').addClass("applyed");
+			/*进行数据展示*/
+			return;
+		} else if(self.state == 2) {
 			$('.adopt').removeClass('not-view');
 			$('.apply').removeClass('mui-disabled applyed');
 			$('#next').on('tap', function() {
 				console.log('同意申请,进行锁仓操作');
 				openInfo('../personalelection/lockingWhouse.html', {
-					type: 1
+					node_type: 1
 				})
 			})
-		} else {
+			/*申请通过, 进行页面队伍信息展示,并进行下一步锁仓操作*/
+		} else if(self.state == 3) {
+			$('.mui-title').html('已拒绝');
 			$('.refuse').removeClass('not-view');
 			$('#next').html('加入其他组队');
 			$('#next').on('tap', function() {
-				console.log('拒绝申请,选择加入其他组队');
-				plus.webview.show(plus.webview.getWebviewById('index.html'));
-			})
-		}
-
+				mui.back();
+				//plus.webview.show(plus.webview.getWebviewById('index.html'));
+			});
+		};
 	})
 </script>

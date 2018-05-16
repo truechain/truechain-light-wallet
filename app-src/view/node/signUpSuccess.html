@@ -90,7 +90,6 @@
 						我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是
 					</div>
 				</div>
-
 			</div>
 		</div>
 	</body>
@@ -98,5 +97,27 @@
 </html>
 <script src="../../lib/js/mui.min.js"></script>
 <script type="text/javascript">
-	mui.init()
+	mui.init();
+	let successUrl = 'http://45.40.243.125:7001/teamInfo';
+	mui.plusReady(function() {
+		let self = plus.webview.currentWebview();
+		let token = plus.storage.getItem('token'),
+			type = self.type,
+			state = self.state;
+
+		mui.ajax(successUrl, {
+			type: 'get',
+			headers: {
+				token: token
+			},
+			dataType: 'json',
+			success: function(res) {
+				//报名状态
+				console.log(JSON.stringify(res));
+			},
+			error: function(error) {
+
+			}
+		})
+	});
 </script>

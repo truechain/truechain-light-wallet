@@ -83,8 +83,8 @@ body {
 
 @media(-webkit-min-device-pixel-ratio:3),
 (min-device-pixel-ratio:3) {
-	.vot	e-icon {
-	background-image: url(../../images/common/toupiao@3x.png)
+	.vot e-icon {
+		background-image: url(../../images/common/toupiao@3x.png)
 	}
 }
 
@@ -128,7 +128,10 @@ body {
 
 .nickName {
 	font-family: PingFangSC-Regular;
-	color: rgba(102, 102, 102, 1)
+	color: rgba(102, 102, 102, 1);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .voteNum {

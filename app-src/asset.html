@@ -25,7 +25,7 @@
 				<div class="er-code-img"></div>
 			</div>
 		</div>
-		<div id="refreshContainer mui-scroll">
+		<div id="refreshContainer">
 			<div id="assetContent" class="asset-content">
 				<div class="asset-content-top">
 					账户总资产：
@@ -112,19 +112,16 @@
 					<p>你必须自己保管好钱包的私钥和交易密码，任何意外 发生都会导致资产丢失。</p>
 					<p>我们建议先做好双重备份，再打入小额测试，最好开 始愉快使用。</p>
 				</div>
-
 				<section class="clearfix">
 					<i class="icon-key"></i>
 					<p class="sub-title">备份助记词</p>
 					<p>丢失钱包或忘记密码时，可帮助恢复钱包</p>
 				</section>
-
 				<section class="clearfix">
 					<i class="icon-word"></i>
 					<p class="sub-title">备份 keystore 文件</p>
 					<p>官方钱包格式，交易密码保护的私钥文件</p>
 				</section>
-
 				<button class="large-btn">立即备份</button>
 			</div>
 		</div>-->
@@ -137,6 +134,7 @@
 	<script type="text/javascript" src="lib/js/hooked-web3-provider.min.js"></script>
 	<script type="text/javascript" src="src/js/common.js"></script>
 	<script type="text/javascript" src="lib/js/addToken.js"></script>
+	<script type="text/javascript" src="lib/js/bigNumber.js"></script>
 	<script type="text/javascript" src="src/js/asset/asset.js"></script>
 	<script type="text/javascript">
 		mui.plusReady(function() {
@@ -144,7 +142,6 @@
 			if(!host) {
 				host = 'https://mainnet.infura.io/';
 			};
-
 			/*刷新*/
 			mui.init({
 				pullRefresh: {
@@ -159,16 +156,13 @@
 					}
 				}
 			});
-
 			pullfresh();
 
 			function show(num) {
 				num += '';
 				num = num.replace(/[^0-9|\.]/g, '');
-
 				if(/^0+/) {
 					num = num.replace(/^0+/, '');
-
 				};
 				if(!/\./.test(num)) {
 					num += '.00000';
@@ -186,19 +180,20 @@
 				h('.my-wallet').html(plus.storage.getItem('walletName'));
 				h('.walletAddress').html(plus.storage.getItem('walletAddress'));
 				//获取资产   -- 暂不做资产转换
-
 				var addresses = plus.storage.getItem('walletAddress');
-				var balance = show(web3.fromWei(web3.eth.getBalance(addresses), 'ether'));
-				console.log(balance + 'hi hi')
-				h('#ethAssets').tap(function() {
-					openInfo('view/asset/currencydetail.html', {
-						currencyName: 'ETH',
-						currencyPrice: balance
-					})
+				//var balance = show(web3.fromWei(web3.eth.getBalance(addresses), 'ether'));
+				web3.eth.getBalance(addresses).then(function(res) {
+					balance = res;
+					balance = show(web3.utils.fromWei(balance, 'ether'));
+					h('.balance').html(balance);
+					h('#ethAssets').tap(function() {
+						openInfo('view/asset/currencydetail.html', {
+							currencyName: 'ETH',
+							currencyPrice: balance
+						})
+					});
 				});
 
-				/*balance = Math.round(balance * 100000) / 100000;*/
-				h('.balance').html(balance);
 				let contractAddrTrue = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab';
 				addToken(contractAddrTrue, function(balances) {
 					if(balances) {
@@ -209,7 +204,6 @@
 						h('.total-money').html(balances);
 						h('.trueBalance').html(balances);
 					}
-
 					h('#trueAssets').tap(function() {
 						openInfo('view/asset/currencydetail.html', {
 							currencyName: 'TRUE',
@@ -217,7 +211,6 @@
 						})
 					});
 				});
-
 				let contractAddrTTR = '0xF2bb016e8C9C8975654dcd62f318323A8A79D48E';
 				addToken(contractAddrTTR, function(ban) {
 					if(ban) {

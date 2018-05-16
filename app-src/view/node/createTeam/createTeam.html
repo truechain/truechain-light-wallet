@@ -37,6 +37,7 @@
 	mui.init();
 	(function() {
 		var Validata = {
+			createTeamUrl: '',
 			nickName: null,
 			declaration: null,
 			flag: false,
@@ -82,51 +83,40 @@
 			submitForm() {
 				var that = this;
 				mui.plusReady(function() {
+					let token = plus.storage.getItem('token');
 					let self = plus.webview.currentWebview();
-
-					switch(self.type) {
-						case 1.2:
-							{
-								//下一步
-								$('.next').on('tap', function() {
-									that.nickName = $('.nickName').val();
-									that.declaration = $('.declaration').val();
-									that.checkNickName('.nickName');
-									that.checkDeclaration('.declaration');
-									if(that.nickNameFlag) {
-										if(that.declarationFlag) {
-											openInfo('../personalelection/lockingWhouse.html', {
-												type: 1.2,
-												nickName: that.nickName,
-												declaration: that.declaration
-											})
-										}
+					$('.next').on('tap', function() {
+						that.nickName = $('.nickName').val();
+						that.declaration = $('.declaration').val();
+						that.checkNickName('.nickName');
+						that.checkDeclaration('.declaration');
+						if(that.nickNameFlag) {
+							if(that.declarationFlag) {
+								mui.ajax(that.createTeamUrl, {
+									type: 'get',
+									dataType: 'json',
+									data: {
+										token: token,
+										node_type: self.node_type,
+										type: self.type,
+										nickName: that.nickName,
+										declaration: that.declaration
+									},
+									success: function(res) {
+										console.log(res);
+									},
+									eroor: function(err) {
+										console.log(err);
 									}
 								});
-								break;
-							}
-						case 2.2:
-							{
-								//下一步
-								$('.next').on('tap', function() {
-									that.nickName = $('.nickName').val();
-									that.declaration = $('.declaration').val();
-									that.checkNickName('.nickName');
-									that.checkDeclaration('.declaration');
-									if(that.nickNameFlag) {
-										if(that.declarationFlag) {
-											openInfo('../personalelection/lockingWhouse.html', {
-												type: 2.2,
-												nickName: that.nickName,
-												declaration: that.declaration
-											})
-										}
-									}
-								});
-								break;
-							}
-					}
 
+								openInfo('../personalelection/lockingWhouse.html', {
+									node_type: self.node_type,
+									type: self.type
+								});
+							}
+						}
+					});
 				})
 			}
 		};

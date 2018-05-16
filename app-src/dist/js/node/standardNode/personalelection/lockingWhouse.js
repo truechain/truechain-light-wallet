@@ -1,8 +1,7 @@
 (function() {
 
 	var Validate = {
-		personalName: null,
-		personalDeclaration: null,
+		node_type: null,
 		type: null,
 		amount: null,
 		fromAddress: null,
@@ -17,71 +16,62 @@
 				mask = mui.createMask(function() {
 					return false;
 				});
+
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
+				that.node_type = self.node_type;
 				that.type = self.type;
-				that.personalName = self.personalName;
-				that.personalDeclaration = self.personalDeclaration;
+
+				if(that.node_type == 1 && that.type == 1) {
+					$('.lockingNum').val(2000);
+				} else if(that.node_type == 2 && that.type == 1) {
+					$('.lockingNum').val(3000);
+				} else if(that.type == 2) {
+					$('.lockingNum').val(2000);
+				};
 
 				/*下一步*/
 				$('#next').on('tap', function() {
+					that.amount = $('.lockingNum').val();
 					mask.show();
-					$('#modal').addClass('mui-active')
+					//$('#modal').addClass('mui-active');
+
+					if(that.node_type == 1 && that.type == 1) {
+						if(that.amount < 2000) {
+							mui.alert('个人报名标准节点最小锁仓数量为2000true');
+							mask._remove();
+							return;
+						} else {
+							$('#modal').addClass('mui-active');
+						}
+					} else if(that.node_type == 2 && that.type == 1) {
+						if(that.amount < 3000) {
+							mui.alert('个人报名标准节点最小锁仓数量为3000true');
+							mask._remove();
+							return;
+						} else {
+							$('#modal').addClass('mui-active');
+						}
+					}
 				});
 
 				/*确认*/
 				$('.comfirm').on('tap', function() {
-					//mask._remove();
-					that.amount = $('.lockingNum').val();
 					$('#modal').removeClass('mui-active');
-					switch(that.type) {
-						case 1.1:
-							{
-								if(that.amount < 2000) {
-									mui.alert('个人报名标准节点最小锁仓数量为2000true');
-									mask._remove();
-									return;
-								} else {
-									mask.show();
-									h('.signUpsucc').removeClass('not-view');
-								}
-								$('.title').html('报名成功!');
-								$('.succ').html('恭喜你,个人报名标准节点成功!');
-								break;
-							}
-						case 1.2:
-							{
-								/*进行转账操作*/
-								mask.show();
-								h('.signUpsucc').removeClass('not-view');
-								$('.title').html('报名成功!');
-								$('.succ').html('恭喜你,创建标准节点组队成功!');
-								break;
-							}
-						case 2.1:
-							{
-								if(that.amount < 50000) {
-									mui.alert('个人报名全节点最小锁仓数量为50000true');
-									mask._remove();
-									return
-								} else {
-									mask.show();
-									h('.signUpsucc').removeClass('not-view');
-								}
-								$('.title').html('报名成功!');
-								$('.succ').html('恭喜你,个人报名全节点成功!');
-								break;
-							}
-						case 2.2:
-							{
-								/*进行转账操作*/
-								mask.show();
-								h('.signUpsucc').removeClass('not-view');
-								$('.title').html('报名成功!');
-								$('.succ').html('恭喜你,创建全节点组队成功!');
-								break;
-							}
-					};
+					h('.signUpsucc').removeClass('not-view');
+
+					/*进行转账交易  成功之后 显示状态信息*/
+					/*
+					 进行转账
+					 * 
+					 * 
+					 * 
+					 * */
+					$('.title').html('完成!');
+					$('.succ').html('发送锁仓交易成功!');
+
+					/****************************************/
+
 					/*返回*/
 					$('#back-btn').on('tap', function() {
 						mask._remove();
@@ -95,7 +85,6 @@
 					mask._remove();
 					$('#modal').removeClass('mui-active');
 				});
-
 			})
 		}
 	};

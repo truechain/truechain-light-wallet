@@ -62,22 +62,19 @@
 <script src="../../src/js/common.js"></script>
 <script type="text/javascript">
 	mui.init();
-	/*判断是否报名成功*/
 
-	if(true) {
+	mui.plusReady(function() {
 		//报名标准节点
 		h('.standardNode').tap(function() {
 			openInfo('node.html', {
-				type: 1
+				node_type: 1
 			})
 		});
 		//报名全节点
 		h('.fullNode').tap(function() {
 			openInfo('node.html', {
-				type: 2
+				node_type: 2
 			})
 		})
-	} else {
-		h('.standardNode').attr('href', "javascript:openInfo('signUpSuccess.html')");
-	}
+	});
 </script>

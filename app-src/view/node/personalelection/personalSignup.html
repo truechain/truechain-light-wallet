@@ -34,15 +34,16 @@
 <script src="../../../src/js/common.js"></script>
 <script type="text/javascript">
 	mui.init();
-
 	(function() {
 		var Validata = {
+			token: null,
 			nickName: null,
 			declaration: null,
 			flag: false,
 			isEmpty: true,
 			nickNameFlag: false,
 			declarationFlag: false,
+			beforehandUrl: '',
 			checkEmpty: function checkEmpty(val) {
 				if(val) {
 					this.isEmpty = false;
@@ -83,50 +84,40 @@
 				var that = this;
 				mui.plusReady(function() {
 					let self = plus.webview.currentWebview();
-					let type = self.type;
-
-					switch(self.type) {
-						case 1.1:
-							{
-								console.log('标准节点个人报名')
-								$('.next').on('tap', function() {
-									that.nickName = $('.nickName').val();
-									that.declaration = $('.declaration').val();
-									that.checkNickName('.nickName');
-									that.checkDeclaration('.declaration');
-									if(that.nickNameFlag) {
-										if(that.declarationFlag) {
-											openInfo('lockingWhouse.html', {
-												type: 1.1,
-												personalName: that.nickName,
-												personalDeclaration: that.declaration
-											});
-										}
+					that.token = plus.storage.getItem('token');
+					$('.next').on('tap', function() {
+						that.nickName = $('.nickName').val();
+						that.declaration = $('.declaration').val();
+						that.checkNickName('.nickName');
+						that.checkDeclaration('.declaration');
+						if(that.nickNameFlag) {
+							if(that.declarationFlag) {
+								/*发送请求报名状态为预报名*/
+								mui.ajax(that.beforehandUrl, {
+									type: 'get',
+									data: {
+										token: that.token,
+										nickName: that.nickName,
+										declaration: that.declaration,
+										node_type: self.node_type,
+										type: self.type,
+										state: 1
+									},
+									dataType: 'json',
+									success: function(res) {
+										console.log(res);
+									},
+									error: function(err) {
+										console.log(err);
 									}
 								});
-								break;
-							}
-						case 2.1:
-							{
-								console.log('全节点个人报名')
-								$('.next').on('tap', function() {
-									that.nickName = $('.nickName').val();
-									that.declaration = $('.declaration').val();
-									that.checkNickName('.nickName');
-									that.checkDeclaration('.declaration');
-									if(that.nickNameFlag) {
-										if(that.declarationFlag) {
-											openInfo('lockingWhouse.html', {
-												type: 2.1,
-												personalName: that.nickName,
-												personalDeclaration: that.declaration
-											});
-										}
-									}
+								openInfo('lockingWhouse.html', {
+									node_type: self.node_type,
+									type: self.type
 								});
-								break;
 							}
-					}
+						}
+					});
 				});
 			}
 		};
