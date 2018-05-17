@@ -84,14 +84,11 @@
 			(function() {
 				let initialized = plus.storage.getItem('initialized'),
 					locker = plus.storage.getItem('locker');
-
 				if(initialized && locker) {
 					mui.openWindow('view/my/system/lockerVerification.html');
 				} else if(initialized) {
 					mui.openWindow('index.html');
 				}
-				//				plus.storage.getItem('initialized') ? mui.openWindow('index.html') : null;
-				//				plus.storage.getItem('locker') ? mui.openWindow('') : null;
 			})()
 		});
 

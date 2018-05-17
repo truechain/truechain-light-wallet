@@ -73,27 +73,35 @@
 			]
 		});
 
-		h('#tab1').tap(function() {
-			changSub(1);
-			//		    mui.plusReady(function(){
-			//		    	var robj = plus.webview.getWebviewById("regstep2.html");
-			//		    	robj.evalJS("myrefresh()");
-			//		    });
-		});
-		h('#tab2').tap(function() {
-			changSub(2);
-			//		mui.plusReady(function(){
-			//	    	var robj = plus.webview.getWebviewById("regstep2.html");
-			//	    	robj.evalJS("myrefresh()");
-			//	    });
-		});
-		h('#tab3').tap(function() {
-			changSub(3);
-			//		mui.plusReady(function(){
-			//	    	var robj = plus.webview.getWebviewById("regstep2.html");
-			//	    	robj.evalJS("myrefresh()");
-			//	    });
-		});
+		mui.plusReady(function() {
+			let token = plus.storage.getItem('token');
+			h('#tab1').tap(function() {
+				changSub(1);
+				//		    mui.plusReady(function(){
+				//		    	var robj = plus.webview.getWebviewById("regstep2.html");
+				//		    	robj.evalJS("myrefresh()");
+				//		    });
+			});
+			h('#tab2').tap(function() {
+				if(!token) {
+					mui.alert('请先登录!');
+				} else {
+					changSub(2);
+					//		mui.plusReady(function(){
+					//	    	var robj = plus.webview.getWebviewById("regstep2.html");
+					//	    	robj.evalJS("myrefresh()");
+					//	    });
+				}
+			});
+			h('#tab3').tap(function() {
+				changSub(3);
+				//		mui.plusReady(function(){
+				//	    	var robj = plus.webview.getWebviewById("regstep2.html");
+				//	    	robj.evalJS("myrefresh()");
+				//	    });
+			});
+
+		})
 
 		function changSub(index) {
 			var sub1 = plus.webview.getWebviewById('asset');

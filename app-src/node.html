@@ -55,7 +55,7 @@
 					</ul>
 				</div>
 				<div id="item2mobile" class="process bg md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
-					<ul class="mui-table-view">
+					<ul class="mui-table-view fullNode">
 						<!--<li class="mui-table-view-cell">
 							<div class="view-cell-left">
 								<img class="ranking" src="dist/images/common/one@2x.png" />
@@ -85,47 +85,37 @@
 <script src="src/js/common.js"></script>
 
 <script type="text/javascript">
-	let nodeDataUrl = 'http://45.40.243.125:7001/nodeRank',
+	let nodeDataUrl = 'http://192.168.31.2:7001/nodeRank',
 		isSuccessUrl = '';
 
 	mui.plusReady(function() {
 		let token = plus.storage.getItem('token');
-
-		mui.ajax(nodeDataUrl, {
-			type: 'get',
-			dataType: 'json',
-			success: function(res) {
-				/*点击报名参选判断是否报名成功*/
-				h('.signUP').tap(function() {
-					if(true) { //res.state==0 -- > 初始状态
-						openInfo('view/node/signUp.html', {
-							token: token,
-							state: 0
-						})
-						return;
-					} else if(!true) { //res.state==1 -- > 报名申请中
-						openInfo('view/node/organizeTeamNode/joinOrganize.html', {
-							token: token,
-							state: 1
-						})
-						return;
-					} else if(!true) { //res.state==2 报名成功
-						openInfo('view/node/signUpSuccess.html', {
-							token: token,
-							//type:res.data.type,
-							state: 2
-						});
-						return
-					} else { //res.state==3 报名失败 -- > 继续选择报名
-						openInfo('view/node/organizeTeamNode/joinOrganize.html', {
-							token: token,
-							state: 3
-						})
-					}
+		let keystore = plus.storage.getItem('keystore');
+		h('.signUP').tap(function() {
+			if(true) { //res.state==0 -- > 初始状态
+				openInfo('view/node/signUp.html', {
+					token: token,
+					state: 0
+				})
+				return;
+			} else if(!true) { //res.state==1 -- > 报名申请中
+				openInfo('view/node/organizeTeamNode/joinOrganize.html', {
+					token: token,
+					state: 1
+				})
+				return;
+			} else if(!true) { //res.state==2 报名成功
+				openInfo('view/node/signUpSuccess.html', {
+					token: token,
+					//type:res.data.type,
+					state: 2
 				});
-			},
-			error: function(err) {
-				console.log(err)
+				return
+			} else { //res.state==3 报名失败 -- > 继续选择报名
+				openInfo('view/node/organizeTeamNode/joinOrganize.html', {
+					token: token,
+					state: 3
+				})
 			}
 		});
 
@@ -135,113 +125,125 @@
 				token: token
 			});
 		});
-	})
 
-	/*请求数据列表渲染*/
-	var getAjaxPromise = function(option) {
-		return new Promise(function(resolve, reject) {
-			mui.ajax(option.url, {
-				type: 'get',
-				dataType: 'json',
-				async: true,
-				success: function(res) {
-					resolve(res)
-				},
-				error: function(error) {
-					reject(error)
-				}
+		/*请求数据列表渲染*/
+		var getAjaxPromise = function(option) {
+			return new Promise(function(resolve, reject) {
+				mui.ajax(option.url, {
+					type: 'get',
+					dataType: 'json',
+					headers: {
+						token: token
+					},
+					data: {
+						node_type: option.node_type
+					},
+					async: true,
+					success: function(res) {
+						resolve(res)
+					},
+					error: function(error) {
+						reject(error)
+					}
+				});
+			})
+		}
+
+		request(1, '.standardNode');
+		request(2, '.fullNode');
+
+		function request(node_type, element) {
+			getAjaxPromise({
+				url: nodeDataUrl,
+				node_type: node_type
+			}).then((res) => {
+				Data = res.data.sort(function(a, b) {
+					return b.tickets - a.tickets
+				});
+				let rankingBeArr = Data.splice(0, 3);
+				//前三名
+				rankingBeArr.forEach(function(item, index) {
+					let str;
+					if(item.type == 1) {
+						str = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																		<img class="type" src="dist/images/common/geren.png" />
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.tickets}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+					} else {
+						str = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.tickets}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+					};
+					$(element).append(str);
+				});
+
+				//之后
+				let ranking = Data.sort(function(a, b) {
+					return b.voteNum - a.voteNum;
+				});
+
+				ranking.forEach(function(item, index) {
+					let strAf;
+					if(item.type == 1) {
+						strAf = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																		${index+4}
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																		<img class="type" src="dist/images/common/geren.png" />
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.tickets}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+					} else {
+						strAf = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																		${index+4}
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.tickets}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+					};
+					$(element).append(strAf);
+				})
+			}).catch((err) => {
+				console.log('Error' + JSON.stringify(err))
 			});
-		})
-	}
+		}
 
-	getAjaxPromise({
-		url: nodeDataUrl
-	}).then((res) => {
-		Data = res.data.sort(function(a, b) {
-			return b.tickets - a.tickets
-		});
-		let rankingBeArr = Data.splice(0, 3);
-		//前三名
-		rankingBeArr.forEach(function(item, index) {
-			let str;
-			if(item.type == 1) {
-				str = `<li class="mui-table-view-cell">
-																	<div class="view-cell-left">
-																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																		<img class="type" src="dist/images/common/geren.png" />
-																	</div>
-																	<div class="view-cell-center-item">
-																		${item.type}true
-																	</div>
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>
-																</li>`;
-			} else {
-				str = `<li class="mui-table-view-cell">
-																	<div class="view-cell-left">
-																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																	</div>
-																	<div class="view-cell-center-item">
-																		${item.type}true
-																	</div>
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>
-																</li>`;
-			};
-			$('.standardNode').append(str);
-		});
-
-		//之后
-		let ranking = Data.sort(function(a, b) {
-			return b.voteNum - a.voteNum;
-		});
-
-		ranking.forEach(function(item, index) {
-			let strAf;
-			if(item.type == 1) {
-				strAf = `<li class="mui-table-view-cell">
-																	<div class="view-cell-left">
-																		${index+4}
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																		<img class="type" src="dist/images/common/geren.png" />
-																	</div>
-																	<div class="view-cell-center-item">
-																		${item.type}true
-																	</div>
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>
-																</li>`;
-			} else {
-				strAf = `<li class="mui-table-view-cell">
-																	<div class="view-cell-left">
-																		${index+4}
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																	</div>
-																	<div class="view-cell-center-item">
-																		${item.type}true
-																	</div>
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>
-																</li>`;
-			};
-
-			$('.standardNode').append(strAf);
-		})
-	}).catch((err) => {
-		console.log('Error' + err)
 	})
 </script>

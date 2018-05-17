@@ -28,9 +28,10 @@
 							<span>组队列表</span>
 							<!--<i class="search"></i>-->
 							<form class="signUp_team_search_wid">
-								<div class="mui-input-row mui-search">
+								<!--搜索-->
+								<!--<div class="mui-input-row mui-search">
 									<input id="search" type="search" class="mui-input-clear" placeholder="搜索">
-								</div>
+								</div>-->
 							</form>
 						</div>
 						<span class="establish">建立组队</span>
@@ -74,8 +75,39 @@
 	(function() {
 		var Validate = {
 			trueNum: null,
+			teamRankUrl: 'http://192.168.31.2:7001/nodeRank',
 			init() {
 				this.submitForm()
+			},
+			getTeamData: function getTeamData(node_type) {
+				let token = plus.storage.getItem('token'),
+					teamData = '';
+				mui.ajax(this.teamRankUrl, {
+					type: 'get',
+					dataType: 'json',
+					headers: {
+						token: token
+					},
+					data: {
+						node_type: node_type
+					},
+					success: function(res) {
+						res.data.forEach(function(item, index) {
+							teamData += `
+										<li id='huhu' data-teamAdd=${item.address}>
+											<div>
+													<span class="serialNum">${index+1}</span>
+													<span class="nickName">${item.nickname}</span>
+											</div>
+											<i class="arrow"></i>
+											</li>`;
+						});
+						$('.signUp_team').append(teamData);
+					},
+					error: function(err) {
+						console.log(err)
+					}
+				})
 			},
 			submitForm() {
 				let that = this;
@@ -89,35 +121,12 @@
 
 				mui.plusReady(function() {
 					let self = plus.webview.currentWebview();
-					let teamData = '';
 					switch(self.node_type) {
 						case 1:
 							{
 								h('.mui-title').html('标准节点');
-								/*获取标准节点的报名情况,进行列表数据渲染*/
-								mui.ajax('http://192.168.31.2:7001/nodeRank', {
-									type: 'get',
-									dataType: 'json',
-									success: function(res) {
-										res.data.forEach(function(item, index) {
-											teamData += `
-										<li id='huhu' data-teamAdd='0x1235678912356789'>
-											<div>
-													<span class="serialNum">${index+1}</span>
-													<span class="nickName">${item.nickname}</span>
-											</div>
-											<i class="arrow"></i>
-											</li>`;
-
-										})
-										$('.signUp_team').append(teamData);
-									},
-									error: function(err) {
-										console.log(err)
-									}
-								})
-								/*****************/
-
+								/*标准节点的报名数据*/
+								that.getTeamData(1);
 								//个人报名标准节点
 								$('.signUp_personal').on('tap', function() {
 									if(that.trueNum == 0) {
@@ -148,9 +157,8 @@
 						case 2:
 							{
 								h('.mui-title').html('全节点');
-								/*获取全节点的报名情况,进行列表数据进行渲染*/
-
-								/***************/
+								/*全节点的组队数据*/
+								that.getTeamData(2);
 								//个人报名全节点
 								$('.signUp_personal').on('tap', function() {
 									if(that.trueNum == 0) {
@@ -166,7 +174,6 @@
 								});
 
 								/*全节点建立组队*/
-								1
 								h('.establish').tap(function() {
 									if(true) { //that.trueNum >= 3000
 										openInfo('createTeam/createTeam.html', {
@@ -194,7 +201,7 @@
 
 					//					申请加入组队
 					$('.signUp_team').on('tap', 'li', function(e) {
-						let teamAdd = $(this).data('teamadd')
+						let teamAdd = $(this).data('teamadd');
 						openInfo('organizeTeamNode/joinOrganize.html', {
 							teamAdd: teamAdd
 						});

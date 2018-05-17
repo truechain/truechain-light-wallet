@@ -43,7 +43,7 @@
 			isEmpty: true,
 			nickNameFlag: false,
 			declarationFlag: false,
-			beforehandUrl: '',
+			uploadUrl: 'http://192.168.31.2:7001/createTeam',
 			checkEmpty: function checkEmpty(val) {
 				if(val) {
 					this.isEmpty = false;
@@ -80,6 +80,28 @@
 			init() {
 				this.submitForm();
 			},
+			upload: function upload(node_type, type) {
+				let that = this;
+				mui.ajax(that.uploadUrl, {
+					type: 'get',
+					headers: {
+						token: that.token
+					},
+					data: {
+						nickname: that.nickName,
+						declaration: that.declaration,
+						node_type: node_type,
+						type: type
+					},
+					dataType: 'json',
+					success: function(res) {
+						console.log(JSON.stringify(res));
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err));
+					}
+				});
+			},
 			submitForm() {
 				var that = this;
 				mui.plusReady(function() {
@@ -92,25 +114,7 @@
 						that.checkDeclaration('.declaration');
 						if(that.nickNameFlag) {
 							if(that.declarationFlag) {
-								/*发送请求报名状态为预报名*/
-								mui.ajax(that.beforehandUrl, {
-									type: 'get',
-									data: {
-										token: that.token,
-										nickName: that.nickName,
-										declaration: that.declaration,
-										node_type: self.node_type,
-										type: self.type,
-										state: 1
-									},
-									dataType: 'json',
-									success: function(res) {
-										console.log(res);
-									},
-									error: function(err) {
-										console.log(err);
-									}
-								});
+								that.upload(self.node_type, self.type)
 								openInfo('lockingWhouse.html', {
 									node_type: self.node_type,
 									type: self.type

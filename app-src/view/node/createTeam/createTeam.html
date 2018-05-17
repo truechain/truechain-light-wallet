@@ -37,9 +37,12 @@
 	mui.init();
 	(function() {
 		var Validata = {
-			createTeamUrl: '',
+			createTeamUrl: 'http://192.168.31.2:7001/createTeam',
 			nickName: null,
 			declaration: null,
+			node_type: null,
+			type: null,
+			token: null,
 			flag: false,
 			isEmpty: true,
 			nickNameFlag: false,
@@ -50,6 +53,28 @@
 				} else {
 					this.isEmpty = true;
 				}
+			},
+			createTeam: function createTeam() {
+				let that = this;
+				mui.ajax(that.createTeamUrl, {
+					type: 'get',
+					dataType: 'json',
+					headers: {
+						token: that.token
+					},
+					data: {
+						node_type: that.node_type,
+						type: that.type,
+						nickname: that.nickName,
+						declaration: that.declaration
+					},
+					success: function(res) {
+						console.log(res);
+					},
+					eroor: function(err) {
+						console.log(err);
+					}
+				});
 			},
 			checkNickName: function checkNickName(elements) {
 				this.nickNameFlag = false;
@@ -83,8 +108,10 @@
 			submitForm() {
 				var that = this;
 				mui.plusReady(function() {
-					let token = plus.storage.getItem('token');
+					that.token = plus.storage.getItem('token');
 					let self = plus.webview.currentWebview();
+					that.node_type = self.node_type;
+					that.type = self.type;
 					$('.next').on('tap', function() {
 						that.nickName = $('.nickName').val();
 						that.declaration = $('.declaration').val();
@@ -92,27 +119,10 @@
 						that.checkDeclaration('.declaration');
 						if(that.nickNameFlag) {
 							if(that.declarationFlag) {
-								mui.ajax(that.createTeamUrl, {
-									type: 'get',
-									dataType: 'json',
-									data: {
-										token: token,
-										node_type: self.node_type,
-										type: self.type,
-										nickName: that.nickName,
-										declaration: that.declaration
-									},
-									success: function(res) {
-										console.log(res);
-									},
-									eroor: function(err) {
-										console.log(err);
-									}
-								});
-
+								that.createTeam();
 								openInfo('../personalelection/lockingWhouse.html', {
-									node_type: self.node_type,
-									type: self.type
+									node_type: that.node_type,
+									type: that.type
 								});
 							}
 						}

@@ -59,11 +59,11 @@
 		var Validata = {
 			getVcodeUrl: 'http://192.168.31.2:7001/',
 			getcodeUrl: 'http://192.168.31.2:7001/smsCaptcha',
-			loginUrl: 'http://45.40.243.125:7001/login',
+			loginUrl: 'http://192.168.31.2:7001/login',
 			phoneNumber: null,
 			vCode: null,
-			captcha: null,
 			code: null,
+			walletAddress: null,
 			vCodeFlag: false,
 			phoneCode: null,
 			isEmpty: false,
@@ -76,9 +76,7 @@
 					type: 'GET',
 					dataType: 'json',
 					success: function(res) {
-						console.log(res)
-						$('.vCodeItem').html(res.body);
-						that.captcha = res.code;
+						$('.vCodeItem').html(res.data);
 					},
 					error: function(err) {
 						console.log(err)
@@ -120,123 +118,85 @@
 				}, 1000);
 			},
 			submitForm: function submitForm() {
-				this.gvCode();
 				let that = this;
-				//请求图片验证码
-				h('.vCodeItem').tap(function() {
+				mui.plusReady(function() {
 					that.gvCode();
-				})
+					that.walletAddress = plus.storage.getItem('walletAddress')
+					//请求图片验证码
+					h('.vCodeItem').tap(function() {
+						that.gvCode();
+					})
 
-				/*获取手机验证码进行图形验证码校验*/
-				h('.getCode').tap(function(e) {
-					e.preventDefault();
-					that.phoneNumber = $('#telNum').val();
-					that.vCode = $('#vCode').val();
-					that.checkPhone(that.phoneNumber);
-					if(that.phoneFlag) {
-						that.checkEmpty(that.vCode);
-						if(that.isEmpty) {
-							//if(that.vCode == that.captcha) {
-							//if(eval("/^" + that.captcha + "$/i").test(that.vCode)) {
-							that.vCodeFlag = true;
-							that.isClick = true;
-							that.settime('.getCode');
-							mui.ajax(that.getcodeUrl, {
+					/*获取手机验证码进行图形验证码校验*/
+					h('.getCode').tap(function(e) {
+						e.preventDefault();
+						that.phoneNumber = $('#telNum').val();
+						that.vCode = $('#vCode').val();
+						that.checkPhone(that.phoneNumber);
+						if(that.phoneFlag) {
+							that.checkEmpty(that.vCode);
+							if(that.isEmpty) {
+								//if(that.vCode == that.captcha) {
+								//if(eval("/^" + that.captcha + "$/i").test(that.vCode)) {
+								that.vCodeFlag = true;
+								that.isClick = true;
+								that.settime('.getCode');
+								mui.ajax(that.getcodeUrl, {
+									type: 'GET',
+									dataType: 'json',
+									data: {
+										mobile: that.phoneNumber,
+										captcha: that.vCode
+									},
+									success: function(res) {
+										console.log(JSON.stringify(res));
+										if(res.body.status == 202) {
+											that.vCodeFlag = false;
+											that.isClick = false;
+											mui.alert('图形验证码错误,请重新验证!');
+											return;
+										} else {
+											that.vCodeFlag = true;
+											that.isClick = true;
+											that.settime('.getCode');
+											mui.alert('图形验证码正确');
+											/*登录*/
+										}
+									},
+									error: function(err) {
+										console.log(err + '错误');
+									}
+								})
+							}
+						}
+					});
+					h('.login').tap(function() {
+						that.code = $('#phoneCode').val();
+						if(that.isClick && that.vCodeFlag) {
+							mui.ajax(that.loginUrl, { //进行验证登录操作
 								type: 'GET',
 								dataType: 'json',
 								data: {
 									mobile: that.phoneNumber,
-									captcha: that.vCode
+									code: that.code,
+									address: that.walletAddress
 								},
 								success: function(res) {
-									console.log(res);
-									if(res.body.status != 202) {
-										that.vCodeFlag = false;
-										that.isClick = false;
-										alert('图形验证码错误!');
-									} else {
-										that.vCodeFlag = true;
-										that.isClick = true;
-										that.settime('.getCode');
-										alert('图形验证码正确,获取手机验证码');
-										/*登录*/
+									if(res.body.status == 200) {
+										plus.storage.setItem("token", res.body.data.token);
+										plus.runtime.restart();
+										//									plus.webview.show(plus.webview.getWebviewById('index.html'));
 									}
 								},
 								error: function(err) {
-									console.log(err + '错误');
+									console.log('Error+' + JSON.stringify(err));
 								}
-							})
-							//								mui.ajax(that.getcodeUrl, { //获取手机验证码
-							//									type: 'GET',
-							//									dataType: 'json',
-							//									data: {
-							//										mobile: that.phoneNumber
-							//									},
-							//									success: function(res) {
-							//										console.log(res)
-							//									},
-							//									error: function(err) {
-							//										console.log(err);
-							//									}
-							//								})
-							/*} else {
-								that.vCodeFlag = false;
-								that.isClick = false;
-								mui.alert('图形验证码错误,请重新输入')
-							};*/
-							//							mui.ajax('http://192.168.31.2:7001/smsCaptcha', {
-							//								type: 'GET',
-							//								dataType: 'json',
-							//								data: {
-							//									mobile: that.phoneNumber,
-							//									captcha: that.vCode
-							//								},
-							//								success: function(res) {
-							//									console.log(res)
-							//									if(res.body.code != 202) {
-							//										that.vCodeFlag = false;
-							//										that.isClick = false;
-							//										alert('图形验证码错误!');
-							//									} else {
-							//										that.vCodeFlag = true;
-							//										that.isClick = true;
-							//										that.settime('.getCode');
-							//										alert('图形验证码正确,获取手机验证码');
-							//										/*登录*/
-							//									}
-							//								},
-							//								error: function(err) {
-							//									console.log(err);
-							//								}
-							//							})
+							});
+						} else {
+							mui.alert('请先进行验证!');
 						}
-					}
-				});
-				h('.login').tap(function() {
-					that.code = $('#phoneCode').val();
-					if(that.isClick && that.vCodeFlag) {
-						mui.ajax(that.loginUrl, { //进行验证登录操作
-							type: 'GET',
-							dataType: 'json',
-							data: {
-								mobile: that.phoneNumber,
-								code: that.code,
-								address: '456456'
-							},
-							success: function(res) {
-								console.log(JSON.stringify(res))
-								if(res.body.status == 200) {
-									plus.storage.setItem("token", res.body.data.token)
-									plus.webview.show(plus.webview.getWebviewById('index.html'));
-								}
-							},
-							error: function(err) {
-								console.log('Error+' + JSON.stringify(err));
-							}
-						});
-					} else {
-						mui.alert('请先进行验证!');
-					}
+					})
+
 				})
 			}
 		};
