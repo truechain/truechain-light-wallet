@@ -8,7 +8,6 @@
 		<link href="../../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../../dist/css/common/common.css" />
 		<link rel="stylesheet" type="text/css" href="../../../dist/css/node/standardNode/personalelection/personalSignup.css" />
-
 	</head>
 
 	<body>
@@ -19,10 +18,15 @@
 
 		<div class="mui-content">
 			<div class="main">
+				<h2>个人信息</h2>
+				<input type="text" class="personalNickName" placeholder="个人昵称" />
+			</div>
+			<div class="main">
 				<h2>组队信息</h2>
-				<input type="text" class="nickName" placeholder="组队昵称" />
+				<input type="text" class="teamNickName" placeholder="组队昵称" />
 				<input type="text" class="declaration" placeholder="竞选宣言" />
 			</div>
+
 			<div class="next">
 				下一步
 			</div>
@@ -37,15 +41,18 @@
 	mui.init();
 	(function() {
 		var Validata = {
-			createTeamUrl: 'http://192.168.31.2:7001/createTeam',
-			nickName: null,
+			writeUserInfoUrl: 'http://45.40.243.125:7001/writeUserInfo',
+			createTeamUrl: 'http://45.40.243.125:7001/createTeam',
+			personalNickName: null,
+			teamNickName: null,
 			declaration: null,
 			node_type: null,
 			type: null,
 			token: null,
 			flag: false,
 			isEmpty: true,
-			nickNameFlag: false,
+			TnickNameFlag: false,
+			PnickNameFlag: false,
 			declarationFlag: false,
 			checkEmpty: function checkEmpty(val) {
 				if(val) {
@@ -53,6 +60,25 @@
 				} else {
 					this.isEmpty = true;
 				}
+			},
+			writeUserInfo: function() {
+				let that = this;
+				mui.ajax(that.writeUserInfoUrl, {
+					type: 'get',
+					dataType: 'json',
+					headers: {
+						token: that.token
+					},
+					data: {
+						nickname: that.personalNickName
+					},
+					success: function(res) {
+						console.log(res);
+					},
+					eroor: function(err) {
+						console.log(err);
+					}
+				});
 			},
 			createTeam: function createTeam() {
 				let that = this;
@@ -65,7 +91,7 @@
 					data: {
 						node_type: that.node_type,
 						type: that.type,
-						nickname: that.nickName,
+						nickname: that.teamNickName,
 						declaration: that.declaration
 					},
 					success: function(res) {
@@ -76,15 +102,28 @@
 					}
 				});
 			},
-			checkNickName: function checkNickName(elements) {
-				this.nickNameFlag = false;
-				this.nickName = $(elements).val();
-				this.checkEmpty(this.nickName);
+			checkTNickName: function checkNickName(elements) {
+				this.TnickNameFlag = false;
+				this.teamNickName = $(elements).val();
+				this.checkEmpty(this.teamNickName);
 				if(this.isEmpty) {
 					mui.toast('昵称不能为空');
 					return
 				} else {
-					this.nickNameFlag = true;
+					this.TnickNameFlag = true;
+					return
+				}
+				return this
+			},
+			checkPNickName: function checkNickName(elements) {
+				this.PnickNameFlag = false;
+				this.personalNickName = $(elements).val();
+				this.checkEmpty(this.personalNickName);
+				if(this.isEmpty) {
+					mui.toast('昵称不能为空');
+					return
+				} else {
+					this.PnickNameFlag = true;
 					return
 				}
 				return this
@@ -113,17 +152,23 @@
 					that.node_type = self.node_type;
 					that.type = self.type;
 					$('.next').on('tap', function() {
-						that.nickName = $('.nickName').val();
+
+						that.personalNickName = $('.personalNickName').val();
+						that.teamNickName = $('.teamNickName').val();
 						that.declaration = $('.declaration').val();
-						that.checkNickName('.nickName');
+						that.checkTNickName('.teamNickName');
+						that.checkPNickName('.personalNickName');
 						that.checkDeclaration('.declaration');
-						if(that.nickNameFlag) {
-							if(that.declarationFlag) {
-								that.createTeam();
-								openInfo('../personalelection/lockingWhouse.html', {
-									node_type: that.node_type,
-									type: that.type
-								});
+						if(that.PnickNameFlag) {
+							if(that.TnickNameFlag) {
+								if(that.declarationFlag) {
+									that.createTeam();
+									that.writeUserInfo();
+									openInfo('../personalelection/lockingWhouse.html', {
+										node_type: that.node_type,
+										type: that.type
+									});
+								}
 							}
 						}
 					});

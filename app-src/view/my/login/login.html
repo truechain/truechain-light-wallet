@@ -57,9 +57,9 @@
 	let countdown = 60;
 	(function() {
 		var Validata = {
-			getVcodeUrl: 'http://192.168.31.2:7001/',
-			getcodeUrl: 'http://192.168.31.2:7001/smsCaptcha',
-			loginUrl: 'http://192.168.31.2:7001/login',
+			getVcodeUrl: 'http://45.40.243.125:7001/',
+			getcodeUrl: 'http://45.40.243.125:7001/smsCaptcha',
+			loginUrl: 'http://45.40.243.125:7001/login',
 			phoneNumber: null,
 			vCode: null,
 			code: null,
@@ -183,9 +183,11 @@
 								},
 								success: function(res) {
 									if(res.body.status == 200) {
+										plus.storage.setItem("isLogin", 'true');
 										plus.storage.setItem("token", res.body.data.token);
-										plus.runtime.restart();
-										//									plus.webview.show(plus.webview.getWebviewById('index.html'));
+										setTimeout(function() {
+											plus.runtime.restart();
+										}, 1000)
 									}
 								},
 								error: function(err) {

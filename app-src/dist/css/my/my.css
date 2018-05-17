@@ -130,6 +130,17 @@
 	}
 }
 
+.lock-cell {
+	background-image: url(../../../dist/images/my/suocang@2x.png)
+}
+
+@media (-webkit-min-device-pixel-ratio:3),
+(min-device-pixel-ratio:3) {
+	.lock-cell {
+		background-image: url(../../../dist/images/my/suocang@3x.png)
+	}
+}
+
 .setting-cell {
 	background-image: url(../../../dist/images/my/setting-icon@2x.png)
 }

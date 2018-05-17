@@ -16,7 +16,6 @@
 				mask = mui.createMask(function() {
 					return false;
 				});
-
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				that.node_type = self.node_type;
@@ -53,7 +52,7 @@
 							$('#modal').addClass('mui-active');
 						}
 					}
-				});
+				});	
 
 				/*确认*/
 				$('.comfirm').on('tap', function() {

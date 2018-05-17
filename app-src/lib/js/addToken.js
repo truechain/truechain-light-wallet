@@ -2,8 +2,22 @@ function addToken(contractAddr, callback) {
 	let symbol, contract, name, decimals, balances;
 	mui.plusReady(function() {
 		let fromAddr = plus.storage.getItem('walletAddress');
+		let trueContractAddr, ttrContractAddr;
+		let host = plus.storage.getItem('web3Host');
+		let reg = /https:\/\/ropsten.infura.io/;
+		if(!host) {
+			host = 'https://mainnet.infura.io/';
+			trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+			ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
+		} else if(reg.test(host)) {
+			trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
+			ttrContractAddr = "0x635AfeB8739f908A37b3d312cB4958CB2033F456";
+		} else {
+			trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+			ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
+		}
 
-		var web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/'));
+		var web3 = new Web3(new Web3.providers.HttpProvider(host));
 
 		var abi = [{
 			"constant": true,
@@ -149,8 +163,11 @@ function addToken(contractAddr, callback) {
 
 		myContract.methods.balanceOf(fromAddr).call().then(function(res) {
 			balances = show(web3.utils.fromWei(res, 'ether'));
+
 			callback(balances);
-		}).catch(console.log);
+		}).catch(function(res) {
+			console.log(res)
+		});
 
 		function show(num) {
 			num += '';

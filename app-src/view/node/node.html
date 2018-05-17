@@ -75,7 +75,7 @@
 	(function() {
 		var Validate = {
 			trueNum: null,
-			teamRankUrl: 'http://192.168.31.2:7001/nodeRank',
+			teamRankUrl: 'http://45.40.243.125:7001/nodeRank',
 			init() {
 				this.submitForm()
 			},
@@ -94,7 +94,7 @@
 					success: function(res) {
 						res.data.forEach(function(item, index) {
 							teamData += `
-										<li id='huhu' data-teamAdd=${item.address}>
+										<li id='huhu' data-teamAdd=${item.address} data-type=${item.type}>
 											<div>
 													<span class="serialNum">${index+1}</span>
 													<span class="nickName">${item.nickname}</span>
@@ -114,8 +114,19 @@
 				var mask = mui.createMask(function() {
 					return false;
 				});
+				let host = plus.storage.getItem('web3Host');
+				let trueContractAddr, ttrContractAddr;
+				let reg = /https:\/\/ropsten.infura.io/;
+				if(!host) {
+					host = 'https://mainnet.infura.io/';
+					trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+				} else if(reg.test(host)) {
+					trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
+				} else {
+					trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+				}
 
-				addToken('0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab', function(balances) {
+				addToken(trueContractAddr, function(balances) {
 					that.trueNum = balances;
 				})
 
@@ -202,8 +213,10 @@
 					//					申请加入组队
 					$('.signUp_team').on('tap', 'li', function(e) {
 						let teamAdd = $(this).data('teamadd');
+						let type = $(this).data('type');
 						openInfo('organizeTeamNode/joinOrganize.html', {
-							teamAdd: teamAdd
+							teamAdd: teamAdd,
+							type: type
 						});
 					});
 				})

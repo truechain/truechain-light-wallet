@@ -81,17 +81,23 @@
 		/*获取组队信息*/
 		let self = plus.webview.currentWebview();
 		let token = plus.storage.getItem('token');
+		console.log(token)
 		let teamAdd = self.teamAdd;
+		let type = self.type;
 		let teamInfoUrl = 'http://45.40.243.125:7001/teamInfo';
 		mui.ajax(teamInfoUrl, {
 			type: 'get',
 			headers: {
 				token: token
 			},
+			data: {
+				address: teamAdd
+			},
 			dataType: 'json',
 			success: function(res) {
+				console.log(JSON.stringify(res))
 				let data = res.data[0]
-				$('.nickName').html(data.nickname);
+				//$('.nickName').html(data.nickname);
 				$('.baseInfo_declaration').html('竞选宣言数据暂时搁置')
 				$('.voteNum').html('票数数据暂时搁置')
 			},

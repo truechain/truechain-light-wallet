@@ -127,7 +127,6 @@ mui.plusReady(function() {
 	}
 
 	//导出助记词
-
 	h('.setting-cell').tap(function() {
 		mui.openWindow('exportmw.html', 'exportmw');
 	})
@@ -141,7 +140,7 @@ mui.plusReady(function() {
 			} else {
 				mui.toast('请稍等!')
 				showMask();
-				var serialized_keystore = plus.storage.getItem('keystore'),
+				var serialized_keystore = plus.storage.getItem('keystore2'),
 					keystore = lightwallet.keystore.deserialize(serialized_keystore);
 				keystore.keyFromPassword(password, function(err, pwDerivedKey) {
 					if(err) {

@@ -85,165 +85,171 @@
 <script src="src/js/common.js"></script>
 
 <script type="text/javascript">
-	let nodeDataUrl = 'http://192.168.31.2:7001/nodeRank',
-		isSuccessUrl = '';
+	(function() {
+		var Validate = {
+			token: null,
+			nodeDataUrl: 'http://45.40.243.125:7001/nodeRank',
+			getAjaxPromise: function getAjaxPromise(option) {
+				let that = this;
+				return new Promise(function(resolve, reject) {
+					mui.ajax(option.url, {
+						type: 'get',
+						dataType: 'json',
+						headers: {
+							token: that.token
+						},
+						data: {
+							node_type: option.node_type
+						},
+						async: true,
+						success: function(res) {
+							resolve(res)
+						},
+						error: function(error) {
+							reject(error)
+						}
+					});
+				})
+			},
+			request: function(node_type, element) {
+				let that = this;
+				that.getAjaxPromise({
+					url: that.nodeDataUrl,
+					node_type: node_type
+				}).then((res) => {
+					Data = res.data.sort(function(a, b) {
+						return b.tickets - a.tickets
+					});
+					let rankingBeArr = Data.splice(0, 3);
+					//前三名
+					rankingBeArr.forEach(function(item, index) {
+						let str;
+						if(item.type == 1) {
+							str = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																		<img class="type" src="dist/images/common/geren.png" />
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.tickets}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+						} else {
+							str = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.tickets}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+						};
+						$(element).append(str);
+					});
 
-	mui.plusReady(function() {
-		let token = plus.storage.getItem('token');
-		let keystore = plus.storage.getItem('keystore');
-		h('.signUP').tap(function() {
-			if(true) { //res.state==0 -- > 初始状态
-				openInfo('view/node/signUp.html', {
-					token: token,
-					state: 0
-				})
-				return;
-			} else if(!true) { //res.state==1 -- > 报名申请中
-				openInfo('view/node/organizeTeamNode/joinOrganize.html', {
-					token: token,
-					state: 1
-				})
-				return;
-			} else if(!true) { //res.state==2 报名成功
-				openInfo('view/node/signUpSuccess.html', {
-					token: token,
-					//type:res.data.type,
-					state: 2
+					//之后
+					let ranking = Data.sort(function(a, b) {
+						return b.voteNum - a.voteNum;
+					});
+
+					ranking.forEach(function(item, index) {
+						let strAf;
+						if(item.type == 1) {
+							strAf = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																		${index+4}
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																		<img class="type" src="dist/images/common/geren.png" />
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.tickets}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+						} else {
+							strAf = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																		${index+4}
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.tickets}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+						};
+						$(element).append(strAf);
+					})
+				}).catch((err) => {
+					console.log(JSON.stringify(err))
 				});
-				return
-			} else { //res.state==3 报名失败 -- > 继续选择报名
-				openInfo('view/node/organizeTeamNode/joinOrganize.html', {
-					token: token,
-					state: 3
+			},
+			init() {
+				this.submitForm();
+			},
+			submitForm: function submitForm() {
+				let that = this;
+				mui.plusReady(function() {
+					that.token = plus.storage.getItem('token');
+					that.request(1, '.standardNode');
+					that.request(2, '.fullNode');
+					h('.signUP').tap(function() {
+						if(true) { //res.state==0 -- > 初始状态
+							openInfo('view/node/signUp.html', {
+								token: that.token,
+								state: 0
+							})
+							return;
+						} else if(!true) { //res.state==1 -- > 报名申请中
+							openInfo('view/node/organizeTeamNode/joinOrganize.html', {
+								token: that.token,
+								state: 1
+							})
+							return;
+						} else if(!true) { //res.state==2 报名成功
+							openInfo('view/node/signUpSuccess.html', {
+								token: that.token,
+								//type:res.data.type,
+								state: 2
+							});
+							return
+						} else { //res.state==3 报名失败 -- > 继续选择报名
+							openInfo('view/node/organizeTeamNode/joinOrganize.html', {
+								token: that.token,
+								state: 3
+							})
+						}
+					});
+
+					//投票
+					h('.vote').tap(function() {
+						openInfo('view/node/vote.html', {
+							token: that.token
+						});
+					});
 				})
 			}
-		});
-
-		//投票
-		h('.vote').tap(function() {
-			openInfo('view/node/vote.html', {
-				token: token
-			});
-		});
-
-		/*请求数据列表渲染*/
-		var getAjaxPromise = function(option) {
-			return new Promise(function(resolve, reject) {
-				mui.ajax(option.url, {
-					type: 'get',
-					dataType: 'json',
-					headers: {
-						token: token
-					},
-					data: {
-						node_type: option.node_type
-					},
-					async: true,
-					success: function(res) {
-						resolve(res)
-					},
-					error: function(error) {
-						reject(error)
-					}
-				});
-			})
-		}
-
-		request(1, '.standardNode');
-		request(2, '.fullNode');
-
-		function request(node_type, element) {
-			getAjaxPromise({
-				url: nodeDataUrl,
-				node_type: node_type
-			}).then((res) => {
-				Data = res.data.sort(function(a, b) {
-					return b.tickets - a.tickets
-				});
-				let rankingBeArr = Data.splice(0, 3);
-				//前三名
-				rankingBeArr.forEach(function(item, index) {
-					let str;
-					if(item.type == 1) {
-						str = `<li class="mui-table-view-cell">
-																	<div class="view-cell-left">
-																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																		<img class="type" src="dist/images/common/geren.png" />
-																	</div>
-																	<div class="view-cell-center-item">
-																		${item.tickets}true
-																	</div>
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>
-																</li>`;
-					} else {
-						str = `<li class="mui-table-view-cell">
-																	<div class="view-cell-left">
-																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																	</div>
-																	<div class="view-cell-center-item">
-																		${item.tickets}true
-																	</div>
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>
-																</li>`;
-					};
-					$(element).append(str);
-				});
-
-				//之后
-				let ranking = Data.sort(function(a, b) {
-					return b.voteNum - a.voteNum;
-				});
-
-				ranking.forEach(function(item, index) {
-					let strAf;
-					if(item.type == 1) {
-						strAf = `<li class="mui-table-view-cell">
-																	<div class="view-cell-left">
-																		${index+4}
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																		<img class="type" src="dist/images/common/geren.png" />
-																	</div>
-																	<div class="view-cell-center-item">
-																		${item.tickets}true
-																	</div>
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>
-																</li>`;
-					} else {
-						strAf = `<li class="mui-table-view-cell">
-																	<div class="view-cell-left">
-																		${index+4}
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																	</div>
-																	<div class="view-cell-center-item">
-																		${item.tickets}true
-																	</div>
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>
-																</li>`;
-					};
-					$(element).append(strAf);
-				})
-			}).catch((err) => {
-				console.log('Error' + JSON.stringify(err))
-			});
-		}
-
-	})
+		};
+		Validate.init();
+	})();
 </script>

@@ -5,9 +5,20 @@ function addToken(contractAddr, callback) {
 		var web3 = new Web3();
 
 		let host = plus.storage.getItem('web3Host');
+		let trueContractAddr, ttrContractAddr;
+		let trueContractAddr, ttrContractAddr;
+		let reg = /https:\/\/ropsten.infura.io/;
 		if(!host) {
 			host = 'https://mainnet.infura.io/';
-		};
+			trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+			ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";			
+		} else if(reg.test(host)) {
+			trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
+			ttrContractAddr = "0x635AfeB8739f908A37b3d312cB4958CB2033F456";			
+		} else {
+			trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+			ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
+		}
 
 		function setWeb3Provider(keystore) {
 			var web3Provider = new HookedWeb3Provider({
