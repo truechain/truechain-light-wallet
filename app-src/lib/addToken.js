@@ -5,8 +5,7 @@ function addToken(contractAddr, callback) {
 		var web3 = new Web3();
 
 		let host = plus.storage.getItem('web3Host');
-		let trueContractAddr, ttrContractAddr;
-		let trueContractAddr, ttrContractAddr;
+		let trueContractAddr, ttrContractAddr;		
 		let reg = /https:\/\/ropsten.infura.io/;
 		if(!host) {
 			host = 'https://mainnet.infura.io/';

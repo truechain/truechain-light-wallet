@@ -111,26 +111,26 @@
 			},
 			submitForm() {
 				let that = this;
-				var mask = mui.createMask(function() {
-					return false;
-				});
-				let host = plus.storage.getItem('web3Host');
-				let trueContractAddr, ttrContractAddr;
-				let reg = /https:\/\/ropsten.infura.io/;
-				if(!host) {
-					host = 'https://mainnet.infura.io/';
-					trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
-				} else if(reg.test(host)) {
-					trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
-				} else {
-					trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
-				}
-
-				addToken(trueContractAddr, function(balances) {
-					that.trueNum = balances;
-				})
-
 				mui.plusReady(function() {
+					var mask = mui.createMask(function() {
+						return false;
+					});
+					let host = plus.storage.getItem('web3Host');
+					let trueContractAddr, ttrContractAddr;
+					let reg = /https:\/\/ropsten.infura.io/;
+					if(!host) {
+						host = 'https://mainnet.infura.io/';
+						trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+					} else if(reg.test(host)) {
+						trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
+					} else {
+						trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+					}
+
+					addToken(trueContractAddr, function(balances) {
+						that.trueNum = balances;
+					})
+
 					let self = plus.webview.currentWebview();
 					switch(self.node_type) {
 						case 1:
@@ -140,7 +140,7 @@
 								that.getTeamData(1);
 								//个人报名标准节点
 								$('.signUp_personal').on('tap', function() {
-									if(that.trueNum == 0) {
+									if(that.trueNum >= 2000) {
 										openInfo('personalelection/personalSignup.html', {
 											node_type: 1,
 											type: 1
@@ -154,7 +154,7 @@
 
 								/*标准节点建立组队*/
 								h('.establish').tap(function() {
-									if(that.trueNum == 0) {
+									if(that.trueNum >= 3000) {
 										openInfo('createTeam/createTeam.html', {
 											node_type: 1,
 											type: 2
@@ -172,7 +172,7 @@
 								that.getTeamData(2);
 								//个人报名全节点
 								$('.signUp_personal').on('tap', function() {
-									if(that.trueNum == 0) {
+									if(that.trueNum >= 50000) {
 										openInfo('personalelection/personalSignup.html', {
 											node_type: 2,
 											type: 1
@@ -186,7 +186,7 @@
 
 								/*全节点建立组队*/
 								h('.establish').tap(function() {
-									if(true) { //that.trueNum >= 3000
+									if(that.trueNum >= 3000) { //
 										openInfo('createTeam/createTeam.html', {
 											node_type: 2,
 											type: 2
@@ -211,14 +211,14 @@
 					}
 
 					//					申请加入组队
-					$('.signUp_team').on('tap', 'li', function(e) {
-						let teamAdd = $(this).data('teamadd');
-						let type = $(this).data('type');
-						openInfo('organizeTeamNode/joinOrganize.html', {
-							teamAdd: teamAdd,
-							type: type
-						});
-					});
+					//					$('.signUp_team').on('tap', 'li', function(e) {
+					//						let teamAdd = $(this).data('teamadd');
+					//						let type = $(this).data('type');
+					//						openInfo('organizeTeamNode/joinOrganize.html', {
+					//							teamAdd: teamAdd,
+					//							type: type
+					//						});
+					//					});
 				})
 			}
 		};

@@ -1,5 +1,4 @@
-function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress, mask, showLoading, gas = "110000", gasPrice = "18000000000", env = "ropsten") {
-	console.log(JSON.stringify(showLoading))
+function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress, mask, gas = "150000", gasPrice = "18000000000") {
 
 	let host = plus.storage.getItem('web3Host');
 	let trueContractAddr, ttrContractAddr;
@@ -420,6 +419,8 @@ function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress
 				});
 			}
 		}).catch(function(error) {
+			mui.alert('交易失败!');
+			mask._remove();
 			console.log(JSON.stringify(error))
 		})
 	} catch(error) {

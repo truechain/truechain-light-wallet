@@ -5,8 +5,11 @@
 		type: null,
 		amount: null,
 		fromAddress: null,
+		password: null,
+		value: 2000,
 		toAddress: '0x08C62C32226CE2D9148A80F71A03dDB73B673792',
 		amountFlag: false,
+		keystore: null,
 		pwd: null,
 		init: function init() {
 			this.submitForm();
@@ -16,10 +19,29 @@
 				mask = mui.createMask(function() {
 					return false;
 				});
+
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
+				that.fromAddress = plus.storage.getItem('walletAddress');
+				that.keystore = plus.storage.getItem('keystore3');
 				that.node_type = self.node_type;
 				that.type = self.type;
+				let host = plus.storage.getItem('web3Host');
+				let trueContractAddr, ttrContractAddr;
+				let reg = /https:\/\/ropsten.infura.io/;
+				if(!host) {
+					host = 'https://mainnet.infura.io/';
+					trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+					ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
+				} else if(reg.test(host)) {
+					trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
+					ttrContractAddr = "0x635AfeB8739f908A37b3d312cB4958CB2033F456";
+				} else {
+					trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+					ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
+				}
+
+				var web3 = new Web3(new Web3.providers.HttpProvider(host));
 
 				if(that.node_type == 1 && that.type == 1) {
 					$('.lockingNum').val(2000);
@@ -52,22 +74,26 @@
 							$('#modal').addClass('mui-active');
 						}
 					}
-				});	
+				});
 
 				/*确认*/
 				$('.comfirm').on('tap', function() {
+					mask.show();
 					$('#modal').removeClass('mui-active');
-					h('.signUpsucc').removeClass('not-view');
+					//h('.signUpsucc').removeClass('not-view');
+					that.password = $('.psw').val();
+					that.value = $('.lockingNum').val();
 
-					/*进行转账交易  成功之后 显示状态信息*/
-					/*
-					 进行转账
-					 * 
-					 * 
-					 * 
-					 * */
-					$('.title').html('完成!');
-					$('.succ').html('发送锁仓交易成功!');
+					if(that.password) {
+						let amountWei = parseFloat(web3.utils.toWei(that.value.toString(), 'ether'));
+						sendTokens(that.fromAddress, that.toAddress, amountWei, that.password, that.keystore, trueContractAddr, mask)
+
+						$('.title').html('完成!');
+						$('.succ').html('发送锁仓交易成功!');
+					} else {
+						mui.alert('请输入密码!');
+						mask._remove();
+					}
 
 					/****************************************/
 
