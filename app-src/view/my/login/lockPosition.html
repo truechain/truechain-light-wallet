@@ -90,27 +90,56 @@
 				<div class="account_item">
 					<img class="headPortrait" src="../../../dist/images/asset/head@2x.png" alt="" /> +86
 					<span class="tel">
-						199********
+						<!--188****8888-->
 					</span>
 				</div>
 				<i>></i>
 			</div>
 			<div class="lock">
 				<p class="white">TRUE</p>
-				<p class="white">9999.00锁仓</p>
+				<p class="white trueNum">0.00000</p>
 			</div>
 
 			<div class="function">
 				<button class="bottom enter">转入</button>
 				<button class="bottom out mui-disabled">转出</button>
 			</div>
-
 		</div>
-
 	</body>
 
 </html>
 <script src="../../../lib/js/mui.min.js"></script>
+<script src="../../../lib/js/zepto.min.js"></script>
+<script src="../../../lib/js/h.min.js"></script>
+<script src="../../../src/js/common.js"></script>
 <script type="text/javascript">
-	mui.init()
+	mui.init();
+	mui.plusReady(function() {
+		let getTrueCoin = 'http://192.168.31.19:7001/getTrueCoin',
+			token = plus.storage.getItem('token');
+
+		h('.account').tap(function() {
+			openInfo('signOut.html', 'signOut')
+		});
+
+		mui.ajax(getTrueCoin, {
+			type: 'get',
+			headers: {
+				token: token
+			},
+			dataType: 'json',
+			success: function(res) {
+				let phone = res.data.mobile,
+					mPhone = phone.substr(3, 4),
+					selectPhone = phone.replace(mPhone, '****'),
+					trueNum = res.data.true_num;
+				$('.tel').html(selectPhone);
+				$('.trueNum').html(trueNum);
+			},
+			error: function(err) {
+				console.log(JSON.stringify(err))
+			}
+		})
+
+	})
 </script>

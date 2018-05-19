@@ -17,6 +17,11 @@ input[type=text] {
 	border-radius: 10px;
 }
 
+.declaration {
+	border-bottom: 1px solid rgba(153, 153, 153, 1) !important;
+	min-height: 50px
+}
+
 .next {
 	color: #fff;
 	display: flex;

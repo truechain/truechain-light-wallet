@@ -20,7 +20,8 @@
 			<div class="main">
 				<h2>个人信息</h2>
 				<input type="text" class="nickName" placeholder="昵称" />
-				<input type="text" class="declaration" placeholder="竞选宣言" />
+				<textarea class="declaration" placeholder="竞选宣言"></textarea>
+				<!--<input type="text" class="declaration" placeholder="竞选宣言" />-->
 			</div>
 			<div class="next">
 				下一步
@@ -43,7 +44,7 @@
 			isEmpty: true,
 			nickNameFlag: false,
 			declarationFlag: false,
-			uploadUrl: 'http://45.40.243.125:7001/createTeam',
+			uploadUrl: 'http://192.168.31.19:7001/createTeam',
 			checkEmpty: function checkEmpty(val) {
 				if(val) {
 					this.isEmpty = false;

@@ -57,9 +57,9 @@
 	let countdown = 60;
 	(function() {
 		var Validata = {
-			getVcodeUrl: 'http://45.40.243.125:7001/',
-			getcodeUrl: 'http://45.40.243.125:7001/smsCaptcha',
-			loginUrl: 'http://45.40.243.125:7001/login',
+			getVcodeUrl: 'http://192.168.31.19:7001/',
+			getcodeUrl: 'http://192.168.31.19:7001/smsCaptcha',
+			loginUrl: 'http://192.168.31.19:7001/login',
 			phoneNumber: null,
 			vCode: null,
 			code: null,
@@ -136,8 +136,6 @@
 						if(that.phoneFlag) {
 							that.checkEmpty(that.vCode);
 							if(that.isEmpty) {
-								//if(that.vCode == that.captcha) {
-								//if(eval("/^" + that.captcha + "$/i").test(that.vCode)) {
 								that.vCodeFlag = true;
 								that.isClick = true;
 								that.settime('.getCode');
@@ -160,7 +158,6 @@
 											that.isClick = true;
 											that.settime('.getCode');
 											mui.alert('图形验证码正确');
-											/*登录*/
 										}
 									},
 									error: function(err) {
@@ -182,12 +179,15 @@
 									address: that.walletAddress
 								},
 								success: function(res) {
-									if(res.body.status == 200) {
+									console.log(JSON.stringify(res) + '已绑定');
+									if(res.body.status == 0) {
 										plus.storage.setItem("isLogin", 'true');
 										plus.storage.setItem("token", res.body.data.token);
 										setTimeout(function() {
 											plus.runtime.restart();
 										}, 1000)
+									} else if(res.body.status == 202) {
+										mui.alert('该手机号已绑定钱包地址');
 									}
 								},
 								error: function(err) {
@@ -198,7 +198,6 @@
 							mui.alert('请先进行验证!');
 						}
 					})
-
 				})
 			}
 		};

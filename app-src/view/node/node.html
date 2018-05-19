@@ -41,7 +41,7 @@
 						<!--<li>
 							<div>
 								<span class="serialNum">1</span>
-								<span class="nickName">飞虎小分队11111</span>
+								<span class="nickName">飞虎小分队</span>
 							</div>
 							<i class="arrow"></i>
 						</li>-->
@@ -75,18 +75,19 @@
 	(function() {
 		var Validate = {
 			trueNum: null,
-			teamRankUrl: 'http://45.40.243.125:7001/nodeRank',
+			token: null,
+			teamRankUrl: 'http://192.168.31.19:7001/teamRank',
 			init() {
-				this.submitForm()
+				this.submitForm();
 			},
 			getTeamData: function getTeamData(node_type) {
-				let token = plus.storage.getItem('token'),
-					teamData = '';
-				mui.ajax(this.teamRankUrl, {
+				let that = this;
+				let teamData = '';
+				mui.ajax(that.teamRankUrl, {
 					type: 'get',
 					dataType: 'json',
 					headers: {
-						token: token
+						token: that.token
 					},
 					data: {
 						node_type: node_type
@@ -115,6 +116,7 @@
 					var mask = mui.createMask(function() {
 						return false;
 					});
+					that.token = plus.storage.getItem('token');
 					let host = plus.storage.getItem('web3Host');
 					let trueContractAddr, ttrContractAddr;
 					let reg = /https:\/\/ropsten.infura.io/;
@@ -140,7 +142,7 @@
 								that.getTeamData(1);
 								//个人报名标准节点
 								$('.signUp_personal').on('tap', function() {
-									if(that.trueNum >= 2000) {
+									if(that.trueNum >= 0) {
 										openInfo('personalelection/personalSignup.html', {
 											node_type: 1,
 											type: 1
@@ -154,13 +156,13 @@
 
 								/*标准节点建立组队*/
 								h('.establish').tap(function() {
-									if(that.trueNum >= 3000) {
+									if(that.trueNum >= 1) {
 										openInfo('createTeam/createTeam.html', {
 											node_type: 1,
 											type: 2
 										});
 									} else {
-										mui.alert('创建组队需要3000持币量')
+										mui.alert('创建组队至少需要1持币量')
 									}
 								});
 								break;
@@ -210,15 +212,15 @@
 						mask._remove();
 					}
 
-					//					申请加入组队
-					//					$('.signUp_team').on('tap', 'li', function(e) {
-					//						let teamAdd = $(this).data('teamadd');
-					//						let type = $(this).data('type');
-					//						openInfo('organizeTeamNode/joinOrganize.html', {
-					//							teamAdd: teamAdd,
-					//							type: type
-					//						});
-					//					});
+					//		申请加入组队
+					$('.signUp_team').on('tap', 'li', function(e) {
+						let teamAdd = $(this).data('teamadd');
+						let type = $(this).data('type');
+						openInfo('organizeTeamNode/joinOrganize.html', {
+							teamAdd: teamAdd,
+							type: type
+						});
+					});
 				})
 			}
 		};

@@ -35,144 +35,38 @@
 <script src="../../../src/js/common.js"></script>
 <script type="text/javascript">
 	mui.init();
-	let Data = [{
-			name: '全力以赴',
-			type: 0,
-			id: 0,
-			trueNum: 1000,
-			voteNum: 5000
-		},
-		{
-			name: '全力22222以赴',
-			type: 0,
-			id: 1,
-			trueNum: 2000,
-			voteNum: 8000
-		},
-		{
-			name: '全力33333以赴',
-			type: 1,
-			id: 2,
-			trueNum: 3000,
-			voteNum: 3000
-		},
-		{
-			name: '全力44444以赴',
-			type: 1,
-			id: 3,
-			trueNum: 2000,
-			voteNum: 9000
-		},
-		{
-			name: '全力55555以赴',
-			type: 0,
-			id: 4,
-			trueNum: 4000,
-			voteNum: 2000
-		}
-	];
 
 	mui.plusReady(function() {
 		let self = plus.webview.currentWebview();
-		switch(self.type) {
+		let token = plus.storage.getItem('token');
+		let Data;
+		switch(self.node_type) {
 			case 1:
 				{
 					h('.mui-title').html('标准节点');
 					//获取标准节点列表信息
-					//前三名
-					Data = Data.sort(function(a, b) {
-						return b.voteNum - a.voteNum
-					});
-
-					let rankingArr = Data.splice(0, 3);
-
-					rankingArr.forEach(function(item, index) {
-						let str;
-						if(item.type == 0) {
-							str = `<li class="mui-table-view-cell">
-												<div class="view-cell-left">
-													<img class="ranking" src="../../../dist/images/common/${index}@2x.png" />
-												</div>
-												<div class="view-cell-center nickName">
-													<span>${item.name}</span>
-													<img class="type" src="../../../dist/images/common/geren.png" />
-												</div>
-												<div class="view-cell-center-item">
-													${item.trueNum}true
-												</div>
-												<div class="view-cell-right voteNum">
-													${item.voteNum}票
-												</div>
-											</li>`;
-						} else {
-							str = `<li class="mui-table-view-cell">
-												<div class="view-cell-left">
-													<img class="ranking" src="../../../dist/images/common/${index}@2x.png" />
-												</div>
-												<div class="view-cell-center nickName">
-													<span>${item.name}</span>
-												</div>
-												<div class="view-cell-center-item">
-													${item.trueNum}true
-												</div>
-												<div class="view-cell-right voteNum">
-													${item.voteNum}票
-												</div>
-											</li>`;
-						};
-						$('.nodeType').append(str);
-					});
-
-					//之后
-					let huhu = Data.sort(function(a, b) {
-						return b.voteNum - a.voteNum;
-					});
-
-					huhu.forEach(function(item, index) {
-						let strAf;
-						if(item.type == 0) {
-							strAf = `<li class="mui-table-view-cell">
-												<div class="view-cell-left">
-													${index+4}
-												</div>
-												<div class="view-cell-center nickName">
-													<span>${item.name}</span>
-													<img class="type" src="../../../dist/images/common/geren.png" />
-												</div>
-												<div class="view-cell-center-item">
-													${item.trueNum}true
-												</div>
-												<div class="view-cell-right voteNum">
-													${item.voteNum}票
-												</div>
-											</li>`;
-						} else {
-							strAf = `<li class="mui-table-view-cell">
-												<div class="view-cell-left">
-													${index+4}
-												</div>
-												<div class="view-cell-center nickName">
-													<span>${item.name}</span>
-												</div>
-												<div class="view-cell-center-item">
-													${item.trueNum}true
-												</div>
-												<div class="view-cell-right voteNum">
-													${item.voteNum}票
-												</div>
-											</li>`;
-						};
-
-						$('.nodeType').append(strAf);
+					mui.ajax('http://192.168.31.19:7001/nodeRank', {
+						type: 'get',
+						dataType: 'json',
+						headers: {
+							token: token
+						},
+						data: {
+							node_type: 1
+						},
+						success: function(res) {
+							Data = res.data;
+						},
+						error: function(err) {
+							console.log(JSON.stringify(err))
+						}
 					})
 
 					$('.nodeType').on('tap', 'li', function(e) {
-						let nickName = this.children[1].innerText;
 						openInfo('baseInfo.html', {
-							nickName: nickName
+							address: $(this).data('address')
 						});
 					})
-
 					break;
 				}
 			case 2:
@@ -181,5 +75,94 @@
 					break;
 				}
 		}
+
+		setTimeout(function() {
+			let DataItem = Data.sort(function(a, b) {
+				return a.tickets - b.tickets
+			});
+
+			let rankingArr = Data.splice(0, 3);
+			console.log(JSON.stringify(rankingArr))
+			rankingArr.forEach(function(item, index) {
+				let str;
+				if(item.type == 1) {
+					str = `<li class="mui-table-view-cell" data-address=${item.address}>
+																						<div class="view-cell-left">
+																							<img class="ranking" src="../../../dist/images/common/${index}@2x.png" />
+																						</div>
+																						<div class="view-cell-center nickName">
+																							<span>${item.nickname}</span>
+																							<img class="type" src="../../../dist/images/common/geren.png" />
+																						</div>
+																						<div class="view-cell-center-item">
+																							${item.lock_num}true
+																						</div>
+																						<div class="view-cell-right voteNum">
+																							${item.tickets}票
+																						</div>
+																					</li>`;
+				} else {
+					str = `<li class="mui-table-view-cell" data-address=${item.address}>
+																						<div class="view-cell-left">
+																							<img class="ranking" src="../../../dist/images/common/${index}@2x.png" />
+																						</div>
+																						<div class="view-cell-center nickName">
+																							<span>${item.nickname}</span>
+																						</div>
+																						<div class="view-cell-center-item">
+																							${item.lock_num}true
+																						</div>
+																						<div class="view-cell-right voteNum">
+																							${item.tickets}票
+																						</div>
+																					</li>`;
+				};
+				$('.nodeType').append(str);
+			});
+
+			//之后
+			let after = Data.sort(function(a, b) {
+				return b.voteNum - a.voteNum;
+			});
+
+			after.forEach(function(item, index) {
+				let strAf;
+				if(item.type == 1) {
+					strAf = `<li class="mui-table-view-cell" data-address=${item.address}>
+																														<div class="view-cell-left">
+																															${index+4}
+																														</div>
+																														<div class="view-cell-center nickName">
+																															<span>${item.nickname}</span>
+																															<img class="type" src="../../../dist/images/common/geren.png" />
+																														</div>
+																														<div class="view-cell-center-item">
+																															${item.lock_num}true
+																														</div>
+																														<div class="view-cell-right voteNum">
+																															${item.tickets}票
+																														</div>
+																													</li>`;
+				} else {
+					strAf = `<li class="mui-table-view-cell" data-address=${item.address}>
+																														<div class="view-cell-left">
+																															${index+4}
+																														</div>
+																														<div class="view-cell-center nickName">
+																															<span>${item.nickname}</span>
+																														</div>
+																														<div class="view-cell-center-item">
+																															${item.lock_num}true
+																														</div>
+																														<div class="view-cell-right voteNum">
+																															${item.tickets}票
+																														</div>
+																													</li>`;
+				};
+				$('.nodeType').append(strAf);
+			})
+
+		}, 2000)
+
 	})
 </script>

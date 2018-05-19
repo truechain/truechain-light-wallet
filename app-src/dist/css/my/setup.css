@@ -29,4 +29,91 @@ label {
 	width: 100%;
 }
 
-@c-mask : rgba(0, 0, 0, .6) //透明背景 //1级状态颜色 @c333-2: rgba(51,51,51,.2);.tip{height:50px;padding:10px 15px;background:#528bf7}.tip p{color:#fff;font-size:12px;line-height:1.4}.tip p i{margin-right:5px;vertical-align:1px;display:inline-block;width:5px;height:5px;border:1px solid #fff;border-radius:50%}.mui-input-group:after,.mui-input-group:before{background-color:transparent}.mui-input-group .mui-input-row{margin-top:10px}.mui-input-group .mui-input-row:after{right:15px;background-color:#F5F5F5}.mui-input-group .mui-checkbox{margin-top:20px;font-size:12px}.mui-input-group .mui-checkbox label{color:#999}.mui-input-group .mui-checkbox label a{color:#528bf7}.mui-input-group .mui-checkbox.mui-left input[type=checkbox]{left:15px}.mui-input-group .mui-checkbox.mui-left label{padding-left:46px}.mui-input-group .mui-checkbox input[type=checkbox]{top:5px}.mui-input-group .mui-checkbox input[type=checkbox]:before{font-size:21px}.mui-input-group .mui-checkbox:after{background:0 0}.mui-input-row .mui-input-password~.mui-icon-eye{right:6px}.error{margin:5px 15px;font-size:11px;color:#e55045;text-align:right}.btn-area{text-align:center}.btn-area #star-setup{width:96%;height:45px;border-radius:20px;margin-left:2%;margin-top:10%;border:none;background:#528bf7;color:#FFF}.btn-area .channel{color:#35ccbf;margin-top:15%}
+@c-mask : rgba(0, 0, 0, .6) //透明背景 //1级状态颜色 @c333-2: rgba(51,51,51,.2);.tip{height:50px;padding:10px 15px;background:#528bf7}.tip p{color:#fff;font-size:12px;line-height:1.4}
+.tip p i {
+	margin-right: 5px;
+	vertical-align: 1px;
+	display: inline-block;
+	width: 5px;
+	height: 5px;
+	border: 1px solid #fff;
+	border-radius: 50%
+}
+
+.mui-input-group:after,
+.mui-input-group:before {
+	background-color: transparent
+}
+
+.mui-input-group .mui-input-row {
+	margin-top: 10px
+}
+
+.mui-input-group .mui-input-row:after {
+	right: 15px;
+	background-color: #F5F5F5
+}
+
+.mui-input-group .mui-checkbox {
+	margin-top: 20px;
+	font-size: 12px
+}
+
+.mui-input-group .mui-checkbox label {
+	color: #999
+}
+
+.mui-input-group .mui-checkbox label a {
+	color: #528bf7
+}
+
+.mui-input-group .mui-checkbox.mui-left input[type=checkbox] {
+	left: 15px
+}
+
+.mui-input-group .mui-checkbox.mui-left label {
+	padding-left: 46px
+}
+
+.mui-input-group .mui-checkbox input[type=checkbox] {
+	top: 5px
+}
+
+.mui-input-group .mui-checkbox input[type=checkbox]:before {
+	font-size: 21px
+}
+
+.mui-input-group .mui-checkbox:after {
+	background: 0 0
+}
+
+.mui-input-row .mui-input-password~.mui-icon-eye {
+	right: 6px
+}
+
+.error {
+	margin: 5px 15px;
+	font-size: 11px;
+	color: #e55045;
+	text-align: right
+}
+
+.btn-area {
+	text-align: center
+}
+
+.btn-area #star-setup {
+	width: 96%;
+	height: 45px;
+	border-radius: 20px;
+	margin-left: 2%;
+	margin-top: 10%;
+	border: none;
+	background: #528bf7;
+	color: #FFF
+}
+
+.btn-area .channel {
+	color: #35ccbf;
+	margin-top: 15%
+}

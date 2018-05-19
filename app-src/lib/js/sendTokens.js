@@ -1,10 +1,17 @@
 function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress, mask, gas = "150000", gasPrice = "18000000000") {
-
 	let host = plus.storage.getItem('web3Host');
 	let trueContractAddr, ttrContractAddr;
 	let reg = /https:\/\/ropsten.infura.io/;
 	if(!host) {
 		host = 'https://mainnet.infura.io/';
+		trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+		ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
+	} else if(reg.test(host)) {
+		trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
+		ttrContractAddr = "0x635AfeB8739f908A37b3d312cB4958CB2033F456";
+	} else {
+		trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+		ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
 	}
 	var web3 = new Web3(new Web3.providers.HttpProvider(host));
 	const iterface = [{
@@ -401,31 +408,46 @@ function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress
 	try {
 		const account = web3.eth.accounts.decrypt(keystore, password);
 		web3.eth.accounts.wallet.add(account);
-		contract.methods.transfer(toAddr, value).send({
-			from: fromAddr,
-			gas: gas,
-			gasPrice: gasPrice
-		}).then(res => {
-			console.log(JSON.stringify(res));
-			if(res) {
-				mask._remove();
-				mui.openWindow({
-					url: 'dealsuccessful.html',
-					extras: {
-						fromAddress: fromAddr,
-						toAddress: toAddr,
-						price: web3.utils.fromWei(value.toString(), 'ether')
-					}
-				});
-			}
-		}).catch(function(error) {
-			mui.alert('交易失败!');
-			mask._remove();
-			console.log(JSON.stringify(error))
-		})
+
+		value_wei = web3.utils.toWei(value, 'ether');
+		data = contract.methods.transfer(toAddr, value_wei).encodeABI();
+		web3.eth.sendTransaction({
+				from: fromAddr,
+				to: contractAddress,
+				value: '0x00',
+				gasPrice: gasPrice,
+				gas: gas,
+				data: data
+			},
+			function(error, txhash) {
+				if(txhash) {
+					mask._remove();
+					mui.openWindow({
+						url: 'dealsuccessful.html',
+						extras: {
+							fromAddress: fromAddr,
+							toAddress: toAddr,
+							price: value
+						}
+					});
+				} else {
+					mui.alert('交易失败');
+					mask._remove();
+				}
+				console.log('error: ' + error);
+				console.log('txhash: ' + txhash);
+			})
+
 	} catch(error) {
-		console.log(JSON.stringify(error))
-		mui.alert('交易失败!');
-		mask._remove();
+		let addReg = /Error: Provided address is invalid,| the capitalization checksum test failed, |or its an indrect IBAN address which can't be converted./
+
+		if(error == 'Error: Key derivation failed - possibly wrong password') {
+			mui.alert('密码错误,请重新输入!');
+			mask._remove();
+		} else if(addReg.test(error)) {
+			mask._remove();
+			mui.alert('无效地址,请重新输入!')
+		}
+		console.log('error: ' + error);
 	}
 }

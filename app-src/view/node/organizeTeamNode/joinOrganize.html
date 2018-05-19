@@ -31,35 +31,20 @@
 						</div>
 					</div>
 					<div class="baseInfo_declaration">
-						我们的竞选宣言是什么什么什么
+						<!--我们的竞选宣言是-->
 					</div>
 				</div>
 
-				<ul>
-					<li class="member">
+				<ul class="teamInfo">
+					<!--<li class="member">
 						<div class="memberInfo">
 							<i></i>
-							<span>大虎</span>
+							<span>大虎法师法师打</span>
 						</div>
 						<span class="trueNum">2000TRUE</span>
-					</li>
-					<li class="member">
-						<div class="memberInfo">
-							<i></i>
-							<span>大虎</span>
-						</div>
-						<span class="trueNum">2000TRUE</span>
-					</li>
-					<li class="member">
-						<div class="memberInfo">
-							<i></i>
-							<span>大虎</span>
-						</div>
-						<span class="trueNum">2000TRUE</span>
-					</li>
+					</li>-->
 				</ul>
 			</div>
-
 			<div class="adopt_next">
 				<p class="adopt not-view">申请已经通过,请进行下一步操作! </p>
 				<p class="refuse not-view">申请失败,队长拒绝了你的申请</p>
@@ -73,65 +58,171 @@
 </html>
 <script src="../../../lib/js/mui.min.js"></script>
 <script src="../../../lib/js/zepto.min.js"></script>
+<script src="../../../lib/js/h.min.js"></script>
 <script src="../../../src/js/common.js"></script>
+
 <script type="text/javascript">
-	mui.init();
+	(function() {
+		var Validate = {
+			trueNum: null,
+			token: null,
+			teamAdd: null,
+			type: null,
+			status: null,
+			teamInfoUrl: 'http://192.168.31.19:7001/teamInfo',
+			getTeamMemberUrl: 'http://192.168.31.19:7001/getTeamMember',
+			initStatusUrl: 'http://192.168.31.19:7001/initStatus',
+			getTeamAddressUrl: 'http://192.168.31.19:7001/getTeamAddress',
+			init() {
+				this.submitForm();
+			},
+			getTeamMember: function getTeamMember(url, callback) {
+				let that = this;
+				mui.ajax(url, {
+					type: 'get',
+					headers: {
+						token: that.token
+					},
+					data: {
+						team_address: that.teamAdd
+					},
+					dataType: 'json',
+					success: function(res) {
+						callback(res)
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err))
+					}
+				});
+			},
+			getInfoReq: function getInfoReq(url, callback) {
+				let that = this;
+				mui.ajax(url, {
+					type: 'GET',
+					headers: {
+						token: that.token
+					},
+					data: {
+						type: that.type,
+						address: that.teamAdd
+					},
+					dataType: 'json',
+					success: function(res) {
+						callback(res)
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err) + '错误');
+					}
+				});
+			},
+			submitForm: function submitForm() {
+				let that = this;
+				mui.plusReady(function() {
+					let self = plus.webview.currentWebview();
+					that.type = self.type;
+					that.status = self.status;
+					if(self.teamAdd) {
+						that.teamAdd = self.teamAdd;
+					}
+					that.token = plus.storage.getItem('token');
+					setTimeout(function() {
+						that.getInfoReq(that.teamInfoUrl, function(res) {
+							console.log(JSON.stringify(res.data) + '队伍信息');
+							$('.nickName').html(res.data[0].nickname);
+							$('.voteNum').html(res.data[0].tickets);
+							$('.baseInfo_declaration').html(res.data[0].declaration);
+						});
+						that.getTeamMember(that.getTeamMemberUrl, function(res) {
+							console.log(JSON.stringify(res.data[0]) + '成员信息');
+							let string = '';
+							if(res.data[0].role) {
+								if(res.data[0].role == 2) { //队长
+									res.data.forEach(function(item, index) {
+										string = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span> 
+					</li>`;
+										$('.teamInfo').append(string);
+									})
+								} else if(res.data[0].role == 1) { //组员
+									res.data.forEach(function(item, index) {
+										string = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span>
+					</li>`;
+										$('.teamInfo').append(string);
+									})
+								}
+							}
+						});
+					}, 2000)
 
-	mui.plusReady(function() {
-		/*获取组队信息*/
-		let self = plus.webview.currentWebview();
-		let token = plus.storage.getItem('token');
-		console.log(token)
-		let teamAdd = self.teamAdd;
-		let type = self.type;
-		let teamInfoUrl = 'http://45.40.243.125:7001/teamInfo';
-		mui.ajax(teamInfoUrl, {
-			type: 'get',
-			headers: {
-				token: token
-			},
-			data: {
-				address: teamAdd
-			},
-			dataType: 'json',
-			success: function(res) {
-				console.log(JSON.stringify(res))
-				let data = res.data[0]
-				//$('.nickName').html(data.nickname);
-				$('.baseInfo_declaration').html('竞选宣言数据暂时搁置')
-				$('.voteNum').html('票数数据暂时搁置')
-			},
-			error: function(err) {
-				console.log(err)
-			}
-		});
+					$('.mui-title').html('加入组队');
+					$('#next').html('下一步');
+					$('#next').on('tap', function() {
+						openInfo('InfoFilling.html', {
+							teamAddress: that.teamAdd,
+							node_type: 1
+						})
+					})
 
-		/*判断该地址申请组队状态*/
-		if(self.state == 1) {
-			$('.mui-title').html('已申请');
-			$('#next').html('已申请');
-			$('#next').attr("disabled", "disabled");
-			$('#next').addClass("applyed");
-			/*进行数据展示*/
-			return;
-		} else if(self.state == 2) {
-			$('.adopt').removeClass('not-view');
-			$('.apply').removeClass('mui-disabled applyed');
-			$('#next').on('tap', function() {
-				console.log('同意申请,进行锁仓操作');
-				openInfo('../personalelection/lockingWhouse.html', {
-					node_type: 1
+					let status = self.status;
+					switch(status) {
+						case 1:
+							{
+								$('.mui-title').html('已申请');
+								$('#next').html('已申请');
+								h('#next').attr("disabled", 'disabled');
+								$('#next').addClass("applyed");
+								mui.ajax(that.getTeamAddressUrl, {
+									type: 'get',
+									dataType: 'json',
+									headers: {
+										token: that.token
+									},
+									success: function(res) {
+										//console.log(JSON.stringify(res));
+										that.teamAdd = res.data[0].team_address;
+									},
+									error: function(err) {
+										console.log(JSON.stringify(err));
+									}
+								})
+								break;
+							}
+						case 3:
+							{
+								$('.mui-title').html('已拒绝');
+								$('.refuse').removeClass('not-view');
+								$('#next').html('加入其他组队');
+								$('#next').on('tap', function() {
+									mui.back();
+									mui.ajax(that.initStatusUrl, {
+										type: 'get',
+										dataType: 'json',
+										headers: {
+											token: that.token
+										},
+										success: function(res) {
+											console.log(res);
+										},
+										error: function(err) {
+											console.log(err);
+										}
+									})
+								});
+								break;
+							}
+					}
 				})
-			})
-			/*申请通过, 进行页面队伍信息展示,并进行下一步锁仓操作*/
-		} else if(self.state == 3) {
-			$('.mui-title').html('已拒绝');
-			$('.refuse').removeClass('not-view');
-			$('#next').html('加入其他组队');
-			$('#next').on('tap', function() {
-				mui.back();
-				//plus.webview.show(plus.webview.getWebviewById('index.html'));
-			});
-		};
-	})
+			}
+		}
+		Validate.init();
+	})()
 </script>

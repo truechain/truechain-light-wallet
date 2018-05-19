@@ -1,5 +1,4 @@
 (function() {
-
 	var Validate = {
 		node_type: null,
 		type: null,
@@ -56,7 +55,6 @@
 					that.amount = $('.lockingNum').val();
 					mask.show();
 					//$('#modal').addClass('mui-active');
-
 					if(that.node_type == 1 && that.type == 1) {
 						if(that.amount < 2000) {
 							mui.alert('个人报名标准节点最小锁仓数量为2000true');
@@ -76,20 +74,22 @@
 					}
 				});
 
+				let callback = function() {
+					mask.show();
+					$('.signUpsucc').removeClass('not-view');
+					$('.title').html('完成!');
+					$('.succ').html('发送锁仓交易成功!');
+				};
+
 				/*确认*/
 				$('.comfirm').on('tap', function() {
-					mask.show();
 					$('#modal').removeClass('mui-active');
-					//h('.signUpsucc').removeClass('not-view');
+					//mask.show();				
 					that.password = $('.psw').val();
 					that.value = $('.lockingNum').val();
-
 					if(that.password) {
-						let amountWei = parseFloat(web3.utils.toWei(that.value.toString(), 'ether'));
-						sendTokens(that.fromAddress, that.toAddress, amountWei, that.password, that.keystore, trueContractAddr, mask)
-
-						$('.title').html('完成!');
-						$('.succ').html('发送锁仓交易成功!');
+						let amountWei = that.value.toString();
+						sendTokens(that.fromAddress, that.toAddress, amountWei, that.password, that.keystore, trueContractAddr, mask, callback)
 					} else {
 						mui.alert('请输入密码!');
 						mask._remove();

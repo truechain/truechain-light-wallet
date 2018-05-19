@@ -63,6 +63,41 @@
 			color: #8f8f94;
 			margin-top: 10px;
 		}
+		
+		.member {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			min-height: 35px;
+			border-bottom: 1px solid rgba(245, 245, 245, 1);
+		}
+		
+		.member:nth-child(1)>div>i {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			background: url(../../dist/images/node/duizhang.png) no-repeat;
+			background-size: 100% 100%;
+		}
+		
+		.member>div>i {
+			display: inline-block;
+			width: 20px;
+			height: 20px;
+			margin-right: 10px;
+			background: url(../../dist/images/node/duiyuan.png) no-repeat;
+			background-size: 100% 100%;
+		}
+		
+		.memberInfo {
+			display: flex;
+			align-items: center;
+			min-width: 100px;
+		}
+		
+		.mtrueNum {
+			color: #528BF7ff;
+		}
 	</style>
 
 	<body>
@@ -77,7 +112,7 @@
 					<div class="baseInfo_top">
 						<div class="baseInfo_item">
 							<div>
-								<span>个人信息</span>
+								<span class="infoType">个人信息</span>
 								<span class="trueNum">6000TRUE</span>
 							</div>
 							<p class="nickName">飞虎小分队</p>
@@ -90,34 +125,125 @@
 						我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是
 					</div>
 				</div>
+				<ul class="teamInfo">
+					<!--<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>大虎法师法师打</span>
+						</div>
+						<span class="mtrueNum">2000TRUE</span>
+					</li>
+					<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>大虎法师法师222222打</span>
+						</div>
+						<span class="mtrueNum">2000TRUE</span>
+					</li>
+					<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>大虎法师法师打</span>
+						</div>
+						<span class="mtrueNum">2000TRUE</span>
+					</li>-->
+				</ul>
 			</div>
 		</div>
 	</body>
 
 </html>
 <script src="../../lib/js/mui.min.js"></script>
+<script src="../../lib/js/zepto.min.js"></script>
+
 <script type="text/javascript">
-	mui.init();
-	let successUrl = 'http://45.40.243.125:7001/teamInfo';
-	mui.plusReady(function() {
-		let self = plus.webview.currentWebview();
-		let token = plus.storage.getItem('token'),
-			type = self.type,
-			state = self.state;
-
-		mui.ajax(successUrl, {
-			type: 'get',
-			headers: {
-				token: token
+	(function() {
+		var Validate = {
+			getInfoReqUrl: 'http://192.168.31.19:7001/teamInfo',
+			getTeamMemberUrl: 'http://192.168.31.19:7001/getTeamMember',
+			teamAdd: null,
+			token: null,
+			type: null,
+			status: null,
+			tole: null,
+			getTeamMember: function getTeamMember(url) {
+				let that = this;
+				mui.ajax(url, {
+					type: 'get',
+					headers: {
+						token: that.token
+					},
+					data: {
+						team_address: that.teamAdd,
+						type: that.type
+					},
+					dataType: 'json',
+					success: function(res) {
+						console.log(JSON.stringify(res));
+						if(res.data) {
+							$('.nickName').html(res.data[0].nickname);
+							$('.baseInfo_declaration').html(res.data[0].declaration)
+						}
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err));
+					}
+				})
 			},
-			dataType: 'json',
-			success: function(res) {
-				//报名状态
-				console.log(JSON.stringify(res));
+			getInfoReq: function getInfoReq(url) {
+				let that = this;
+				mui.ajax(url, {
+					type: 'GET',
+					headers: {
+						token: that.token
+					},
+					data: {
+						type: that.type,
+						address: that.teamAdd
+					},
+					dataType: 'json',
+					success: function(res) {
+						console.log(JSON.stringify(res));
+						if(res.data) {
+							if(res.data[0].role == 2) {
+								let stringEle = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${res.data[0].nickname}</span>
+						</div>
+						<span class="mtrueNum">${res.data[0].tickets}TRUE</span>
+					</li>`;
+								$('.teamInfo').append(stringEle);
+							}
+						}
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err));
+					}
+				})
 			},
-			error: function(error) {
-
+			init: function init() {
+				this.submitForm();
+			},
+			submitForm: function submitForm() {
+				let that = this;
+				mui.plusReady(() => {
+					that.teamAdd = plus.storage.getItem('walletAddress');
+					let self = plus.webview.currentWebview();
+					this.token = plus.storage.getItem('token');
+					this.type = self.type;
+					this.status = self.status;
+					if(this.type == 2) {
+						$('.infoType').html('组队信息');
+						that.getInfoReq(that.getInfoReqUrl);
+						that.getTeamMember(that.getTeamMemberUrl)
+					} else {
+						$('.infoType').html('个人信息');
+						that.getTeamMember(that.getTeamMemberUrl);
+					}
+				})
 			}
-		})
-	});
+		};
+		Validate.init()
+	})()
 </script>

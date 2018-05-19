@@ -163,10 +163,9 @@ function addToken(contractAddr, callback) {
 
 		myContract.methods.balanceOf(fromAddr).call().then(function(res) {
 			balances = show(web3.utils.fromWei(res, 'ether'));
-
 			callback(balances);
-		}).catch(function(res) {
-			console.log(res)
+		}).catch(function(err) {
+			console.log(err)
 		});
 
 		function show(num) {

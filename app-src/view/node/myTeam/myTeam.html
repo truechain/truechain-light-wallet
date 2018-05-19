@@ -1,0 +1,155 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/node/standardNode/myTeam/myTeam.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">我的战队</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="manage">
+				待加入人员管理
+				<i>></i>
+			</div>
+
+			<div class="member">
+				<div class="baseInfo">
+					<div class="baseInfo_top">
+						<div class="baseInfo_item">
+							<div class="flex">
+								<span>组队信息</span>
+								<span class="trueNum"><!--6000TRUE--></span>
+							</div>
+							<p class="nickName">
+								<!--飞虎小分队-->
+							</p>
+						</div>
+						<div class="voteNum">
+							<!--1000票-->
+						</div>
+					</div>
+					<div class="baseInfo_declaration">
+						<!--宣言-->
+					</div>
+				</div>
+				<ul class="memberInfo">
+					<!--<li class="member_info">
+						<div class="member_info">
+							<i></i>
+							<span>队员名称</span>
+						</div>
+						<span class="mtrueNum">34TRUE</span>
+					</li>-->
+				</ul>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="../../../lib/js/mui.min.js"></script>
+<script src="../../../src/js/common.js"></script>
+<script src="../../../lib/js/h.min.js"></script>
+<script src="../../../lib/js/zepto.min.js"></script>
+<script type="text/javascript">
+	mui.init();
+
+	(function() {
+		var Validate = {
+			token: null,
+			teamAdd: null,
+			getTeamMemberUrl: 'http://192.168.31.19:7001/getTeamMember',
+			getTeamInfoUrl: 'http://192.168.31.19:7001/teamInfo',
+			getTeamMember: function getTeamMember() {
+				let that = this;
+				mui.ajax(this.getTeamMemberUrl, {
+					type: 'get',
+					datatype: 'json',
+					headers: {
+						token: that.token
+					},
+					data: {
+						team_address: that.teamAdd
+					},
+					success: function(res) {
+						console.log('队员信息' + JSON.stringify(res));
+						let string = '';
+						res.data.forEach(function(item, index) {
+							if(item.role == 2) { //队长									
+								string = `<li class="member_info">
+						<div class="member_info">
+							<i></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="mtrueNum">${item.lock_num}TRUE</span>
+					</li>`;
+							} else if(item.role == 1) { //队员								
+								string = `<li class="member_info">
+																			<div class="member_info">
+																				<i></i>
+																				<span>${item.nickname}</span>
+																			</div>
+																			<span class="mtrueNum">${item.lock_num}TRUE</span>
+																		</li>`;
+							}
+							$('.memberInfo').append(string);
+						})
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err));
+					}
+				})
+			},
+			getTeamInfo: function getTeamInfo() {
+				let that = this;
+				mui.ajax(this.getTeamInfoUrl, {
+					type: 'get',
+					dataType: 'json',
+					headers: {
+						token: that.token
+					},
+					data: {
+						address: that.teamAdd,
+						type: 2
+					},
+					success: function(res) {
+						console.log(JSON.stringify(res) + 'kkkk');
+						$('.nickName').html(res.data[0].nickname);
+						$('.baseInfo_declaration').html(res.data[0].declaration);
+						$('.voteNum').html(res.data[0].tickets);
+						$('.trueNum').html(res.data[0].lock_num ? res.data[0].lock_num + 'TRUE' : 0 + 'TRUE');
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err));
+					}
+				})
+			},
+			init: function() {
+				this.submitForm();
+			},
+			submitForm: function() {
+				let that = this;
+				mui.plusReady(function() {
+					that.token = plus.storage.getItem('token');
+					that.teamAdd = plus.storage.getItem('walletAddress');
+					that.getTeamInfo() //队伍信息
+					that.getTeamMember() //队员信息
+
+					h('.manage').tap(() => {
+						openInfo('aManagement.html')
+					})
+				})
+			}
+		};
+		Validate.init();
+	})()
+</script>

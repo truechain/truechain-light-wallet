@@ -5,9 +5,9 @@
 		"iPad"
 	],
 	"id": "H58040C5A",/*应用的标识，创建应用时自动生成，勿手动修改*/
-	"name": "True",/*应用名称，程序桌面图标名称*/
+	"name": "True测试版",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "1.0.3",/*应用版本名称*/
+		"name": "2.0.0",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "初链",/*应用描述信息*/
@@ -235,10 +235,13 @@
 		"pages": {
 			"index.html": {
 				"resources": [
-					"asset.html"
+					"asset.html",
+					"dist/images/common/jiedian_selected@2x.png",
+					"dist/images/common/asset1@2x.png"
 				],
 				"refer": [
-					"my.html"
+					"my.html",
+					"node.html"
 				],
 				"priority": 0
 			},
@@ -269,7 +272,9 @@
 					"view/my/help/help.html",
 					"view/my/record/record.html",
 					"view/my/about/about.html",
-					"view/my/system/setting.html"
+					"view/my/system/setting.html",
+					"view/my/login/login.html",
+					"view/my/login/lockPosition.html"
 				],
 				"priority": 0
 			},
@@ -403,6 +408,82 @@
 					"view/my/record/record.html"
 				],
 				"priority": 0
+			},
+			"node.html": {
+				"resources": [],
+				"refer": [
+					"view/node/signUp.html",
+					"view/node/organizeTeamNode/joinOrganize.html",
+					"view/node/signUpSuccess.html",
+					"view/node/myTeam/myTeam.html",
+					"view/node/vote.html"
+				],
+				"priority": 0
+			},
+			"view/node/signUp.html": {
+				"resources": [],
+				"refer": [
+					"view/node/node.html"
+				],
+				"priority": 0
+			},
+			"view/node/node.html": {
+				"resources": [],
+				"refer": [
+					"view/node/personalelection/personalSignup.html",
+					"view/node/organizeTeamNode/joinOrganize.html",
+					"view/node/createTeam/createTeam.html"
+				],
+				"priority": 0
+			},
+			"view/node/personalelection/personalSignup.html": {
+				"resources": [],
+				"refer": [
+					"view/node/personalelection/lockingWhouse.html"
+				],
+				"priority": 0
+			},
+			"view/node/createTeam/createTeam.html": {
+				"resources": [],
+				"refer": [
+					"view/node/personalelection/lockingWhouse.html"
+				],
+				"priority": 0
+			},
+			"view/node/organizeTeamNode/joinOrganize.html": {
+				"resources": [],
+				"refer": [
+					"view/node/organizeTeamNode/InfoFilling.html"
+				],
+				"priority": 0
+			},
+			"view/my/login/lockPosition.html": {
+				"resources": [],
+				"refer": [
+					"view/my/login/signOut.html"
+				],
+				"priority": 0
+			},
+			"view/node/myTeam/myTeam.html": {
+				"resources": [],
+				"refer": [
+					"view/node/myTeam/aManagement.html"
+				],
+				"priority": 0
+			},
+			"view/node/vote.html": {
+				"resources": [],
+				"refer": [
+					"view/node/voteItem/voteType.html"
+				],
+				"priority": 0
+			},
+			"view/node/voteItem/voteType.html": {
+				"resources": [],
+				"refer": [
+					"view/node/voteItem/baseInfo.html"
+				],
+				"priority": 0
 			}
 		},
 		"idle": {
@@ -429,7 +510,6 @@
 				"dist/css/asset/asset.css",
 				"src/images/common/my2@2x.png",
 				"dist/images/common/my1@2x.png",
-				"dist/images/common/asset1@2x.png",
 				"dist/images/common/asset2@2x.png",
 				"src/images/asset/ercode@3x.png",
 				"dist/images/common/my2@3x.png",

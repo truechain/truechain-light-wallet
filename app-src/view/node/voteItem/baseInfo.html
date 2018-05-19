@@ -18,6 +18,8 @@
 		.vertical {
 			min-height: 40px;
 			line-height: 40px;
+			width: 95%;
+			overflow: auto;
 		}
 		
 		.main {
@@ -173,26 +175,32 @@
 							<div>
 								<span>基本信息</span>
 							</div>
-							<p class="nickName">飞虎小分队</p>
+							<p class="nickName">
+								<!--飞虎小分队-->
+							</p>
 						</div>
 						<div class="voteNum">
-							1000票
+							<!--1000票-->
 						</div>
 					</div>
 					<div class="bottom baseInfo_declaration">
-						我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是
+						<!--我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是-->
 					</div>
 					<div class="bottom baseInfo_address">
-						0x487ghr75jfkic92kfir7fjfucjeh49dirhjn7rhtugjfl
+						<!--0x487ghr75jfkic92kfir7fjfucjeh49dirhjn7rhtugjfl-->
 					</div>
 				</div>
 			</div>
 
 			<div class="personal_Info">
 				<h2 class="vertical">个人信息</h2>
-				<p class="personalAddress vertical">0x487ghr75jfkic92kfir7fjfucjeh49dirhjn7rhtugjfl</p>
-				<p class="available vertical">可用2000TTR</p>
-				<input type="number" class="Esix" placeholder="2000TTR" />
+				<p class="personalAddress vertical">
+					<!--0x487ghr75jfkic92kfir7fjfucjeh49dirhjn7rhtugjfl-->
+				</p>
+				<p class="available vertical">
+					<!--可用2000TTR-->
+				</p>
+				<input type="number" class="Esix" />
 			</div>
 
 			<div id="next">
@@ -218,33 +226,93 @@
 </html>
 <script src="../../../lib/js/mui.min.js"></script>
 <script src="../../../lib/js/zepto.min.js"></script>
+<script src="../../../lib/js/web3.min.js"></script>
 <script src="../../../lib/js/h.min.js"></script>
+<script src="../../../getVote.js"></script>
+<script src="../../../lib/js/voteToken.js"></script>
+
 <script type="text/javascript">
-	mui.init();
+	(function() {
+		var Validate = {
+			surplusTickets: null,
+			token: null,
+			address: null,
+			teamAddress: null,
+			getsurplusTickets: function() {
+				let that = this;
+				getVote(that.address, function(num) {
+					that.surplusTickets = Math.floor(num);
+					$('.available').html('可用' + Math.floor(num));
+				});
+			},
+			getTeamInfo: function() {
+				let that = this;
+				mui.ajax('http://192.168.31.19:7001/teamInfo', {
+					type: 'get',
+					dataType: 'json',
+					headers: {
+						token: that.token
+					},
+					data: {
+						address: that.teamAddress
+					},
+					success: function(res) {
+						console.log(JSON.stringify(res))
+						h('.nickName').html(res.data[0].nickname);
+						h('.baseInfo_declaration').html(res.data[0].declaration);
+						h('.voteNum').html(res.data[0].tickets + '票');
+					},
+					error: function(err) {
+						console.log(JSON.stringify(res))
+					}
+				})
+			},
+			init: function() {
+				this.submitForm();
+			},
+			submitForm: function() {
+				var mask = mui.createMask(function() {
+					return false;
+				})
+				let that = this;
+				mui.plusReady(function() {
+					that.token = plus.storage.getItem('token');
+					that.address = plus.storage.getItem('walletAddress');
+					h('.personalAddress').html(that.address);
 
-	mui.plusReady(function() {
-		var mask = mui.createMask(function() {
-			return false;
-		})
+					that.getsurplusTickets();
 
-		let self = plus.webview.currentWebview();
-		let nickName = self.nickName;
-		h('.nickName').html(nickName);
+					let self = plus.webview.currentWebview();
+					that.teamAddress = self.address;
+					that.getTeamInfo();
+					h('.baseInfo_address').html(that.teamAddress)
 
-		h('#next').tap(function() {
-			mask.show();
-			$('#modal').addClass('mui-active');
-		});
+					h('#next').tap(function() {
+						mask.show();
+						$('#modal').addClass('mui-active');
+					});
 
-		/*取消*/
-		$('.cancel').on('tap', function() {
-			mask._remove();
-			$('#modal').removeClass('mui-active');
-		});
+					/*确认*/
+					$('.comfirm').on('tap', function() {
+						let fromAddr = plus.storage.getItem('walletAddress'),
+							toAddr = self.address,
+							value = $('.Esix').val(),
+							password = $('.psw').val(),
+							keystore = plus.storage.getItem('keystore3');
 
-		/*确认*/
-		$('.comfirm').on('tap', function() {
-			mui.alert('确认投票')
-		})
-	});
+						sendTokens(fromAddr, toAddr, value, password, keystore)
+					});
+
+					/*取消*/
+					$('.cancel').on('tap', function() {
+						mask._remove();
+						$('#modal').removeClass('mui-active');
+					});
+
+				})
+			}
+
+		}
+		Validate.init();
+	})()
 </script>
