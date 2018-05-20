@@ -16,7 +16,7 @@
 			<h1 class="mui-title"><!--节点类型--></h1>
 		</header>
 		<div class="mui-content">
-			<div class="main">				
+			<div class="main">
 				<a class="signUp signUp_personal">
 					<span>个人报名</span>
 					<i class="arrow"></i>
@@ -187,13 +187,13 @@
 
 								/*全节点建立组队*/
 								h('.establish').tap(function() {
-									if(that.trueNum >= 3000) { //
+									if(that.trueNum >= 1) {
 										openInfo('createTeam/createTeam.html', {
 											node_type: 2,
 											type: 2
 										});
 									} else {
-										mui.alert('组队竞选需要10万持币量');
+										mui.alert('创建组队至少需要1持币量');
 									}
 								});
 								break;

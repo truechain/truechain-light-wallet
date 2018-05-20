@@ -165,14 +165,12 @@
 
 					$('.mui-title').html('加入组队');
 					$('#next').html('下一步');
-
 					let status = self.status;
 					switch(status) {
 						case 1:
 							{
 								$('.mui-title').html('已申请');
 								$('#next').html('已申请');
-								h('#next').attr("disabled", 'disabled');
 								$('#next').addClass("applyed");
 								mui.ajax(that.getTeamAddressUrl, {
 									type: 'get',

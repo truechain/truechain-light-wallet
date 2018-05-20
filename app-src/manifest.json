@@ -275,7 +275,8 @@
 					"view/my/about/about.html",
 					"view/my/system/setting.html",
 					"view/my/login/login.html",
-					"view/my/login/lockPosition.html"
+					"view/my/login/lockPosition.html",
+					"view/asset/userinfo.html"
 				],
 				"priority": 0
 			},
