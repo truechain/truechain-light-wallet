@@ -2,19 +2,22 @@
 	"asset.html": {
 		"refer": [
 			"view/asset/userinfo.html",
-			"view/asset/currencydetail.html"
+			"view/asset/currencydetail.html",
+			"view/asset/receipt.html"
 		]
 	},
 	"index.html": {
 		"resources": [
 			"asset.html",
 			"dist/images/common/jiedian_selected@2x.png",
-			"dist/images/common/asset1@2x.png"
+			"dist/images/common/asset1@2x.png",
+			"node.html"
 		],
 		"refer": [
 			"my.html",
 			"asset.html",
-			"node.html"
+			"node.html",
+			"view/my/login/login.html"
 		]
 	},
 	"guide.html": {
@@ -55,7 +58,9 @@
 			"view/my/login/lockPosition.html",
 			"view/my/wallet/wallet.html",
 			"view/my/system/setting.html",
-			"view/my/record/record.html"
+			"view/my/record/record.html",
+			"view/my/about/about.html",
+			"view/my/help/help.html"
 		]
 	},
 	"view/my/wallet/wallet.html": {
@@ -72,7 +77,8 @@
 	},
 	"view/my/wallet/importwallet.html": {
 		"refer": [
-			"index.html"
+			"index.html",
+			"view/my/wallet/ercode.html"
 		]
 	},
 	"view/asset/currencydetail.html": {
@@ -110,7 +116,9 @@
 	},
 	"view/my/login/lockPosition.html": {
 		"refer": [
-			"view/my/login/signOut.html"
+			"view/my/login/signOut.html",
+			"view/node/personalelection/lockingWhouse.html",
+			"view/node/personalelection/lockingWhouseItem.html"
 		]
 	},
 	"view/node/myTeam/myTeam.html": {
@@ -126,6 +134,19 @@
 	"view/node/voteItem/voteType.html": {
 		"refer": [
 			"view/node/voteItem/baseInfo.html"
+		]
+	},
+	"view/my/about/about.html": {
+		"refer": [
+			"view/rules/privacypolicy.html",
+			"view/my/about/versionlog.html"
+		]
+	},
+	"view/my/help/help.html": {
+		"refer": [
+			"view/my/wallet/privateKey.html",
+			"view/my/wallet/keystore.html",
+			"view/my/wallet/mnemonicword.html"
 		]
 	}
 }

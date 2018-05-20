@@ -184,7 +184,7 @@
 						</div>
 					</div>
 					<div class="bottom baseInfo_declaration">
-						<!--我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是-->
+						<!--我们的竞选宣言-->
 					</div>
 					<div class="bottom baseInfo_address">
 						<!--0x487ghr75jfkic92kfir7fjfucjeh49dirhjn7rhtugjfl-->
@@ -247,7 +247,7 @@
 			},
 			getTeamInfo: function() {
 				let that = this;
-				mui.ajax('http://192.168.31.19:7001/teamInfo', {
+				mui.ajax('http://192.168.31.11:7001/teamInfo', {
 					type: 'get',
 					dataType: 'json',
 					headers: {
@@ -299,7 +299,6 @@
 							value = $('.Esix').val(),
 							password = $('.psw').val(),
 							keystore = plus.storage.getItem('keystore3');
-
 						sendTokens(fromAddr, toAddr, value, password, keystore)
 					});
 
@@ -308,10 +307,8 @@
 						mask._remove();
 						$('#modal').removeClass('mui-active');
 					});
-
 				})
 			}
-
 		}
 		Validate.init();
 	})()

@@ -102,7 +102,7 @@
 
 			<div class="function">
 				<button class="bottom enter">转入</button>
-				<button class="bottom out mui-disabled">转出</button>
+				<button class="bottom out">转出</button>
 			</div>
 		</div>
 	</body>
@@ -115,13 +115,8 @@
 <script type="text/javascript">
 	mui.init();
 	mui.plusReady(function() {
-		let getTrueCoin = 'http://192.168.31.19:7001/getTrueCoin',
+		let getTrueCoin = 'http://192.168.31.11:7001/getTrueCoin',
 			token = plus.storage.getItem('token');
-
-		h('.account').tap(function() {
-			openInfo('signOut.html', 'signOut')
-		});
-
 		mui.ajax(getTrueCoin, {
 			type: 'get',
 			headers: {
@@ -135,11 +130,23 @@
 					trueNum = res.data.true_num;
 				$('.tel').html(selectPhone);
 				$('.trueNum').html(trueNum);
+
+				h('.enter').tap(function() {
+					openInfo('../../node/personalelection/lockingWhouseItem.html')
+				})
+				h('.out').tap(function() {
+					mui.alert('优先节点投票期间暂不提供转出功能!')
+				})
+
+				h('.account').tap(function() {
+					openInfo('signOut.html', {
+						phone: selectPhone
+					})
+				});
 			},
 			error: function(err) {
 				console.log(JSON.stringify(err))
 			}
 		})
-
 	})
 </script>

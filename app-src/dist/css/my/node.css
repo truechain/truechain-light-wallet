@@ -49,6 +49,11 @@ body {
 	margin-top: 15px
 }
 
+.serialNum {
+	width: 20px;
+	height: 20px;
+}
+
 .my-module>div {
 	-webkit-box-flex: 1;
 	-ms-flex: 1;

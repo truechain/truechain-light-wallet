@@ -86,6 +86,11 @@
 		display: none
 	}
 	
+	.reason {
+		border-bottom: 1px solid rgba(153, 153, 153, 1) !important;
+		min-height: 50px
+	}
+	
 	.close {
 		background-size: 100%;
 		float: right;

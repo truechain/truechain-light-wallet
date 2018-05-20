@@ -29,6 +29,7 @@
 	</body>
 	<script src="lib/js/mui.min.js"></script>
 	<script src="lib/js/h.min.js"></script>
+	<script src="dist/js/common.min.js"></script>
 	<script type="text/javascript" charset="utf-8">
 		mui.back = function() {
 			var btnArray = ['是', '否'];
@@ -84,7 +85,7 @@
 			});
 			h('#tab2').tap(function() {
 				if(!token) {
-					mui.alert('请先登录!');
+					openInfo('view/my/login/login.html')
 				} else {
 					changSub(2);
 					//		mui.plusReady(function(){

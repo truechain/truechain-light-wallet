@@ -421,7 +421,7 @@ function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress
 			},
 			function(error, txhash) {
 				if(txhash) {
-					mask._remove();
+					//mask._remove();
 					callback();
 				} else {
 					mui.alert('交易失败');

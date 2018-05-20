@@ -112,17 +112,19 @@
 					<div class="baseInfo_top">
 						<div class="baseInfo_item">
 							<div>
-								<span class="infoType">个人信息</span>
-								<span class="trueNum">6000TRUE</span>
+								<span class="infoType"><!--个人信息--></span>
+								<span class="trueNum">0TRUE</span>
 							</div>
-							<p class="nickName">飞虎小分队</p>
+							<p class="nickName">
+								<!--飞虎小分队-->
+							</p>
 						</div>
 						<div class="voteNum">
-							1000票
+							<!--1000票-->
 						</div>
 					</div>
 					<div class="baseInfo_declaration">
-						我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是
+						<!--我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是我们的竞选宣言是-->
 					</div>
 				</div>
 				<ul class="teamInfo">
@@ -159,8 +161,8 @@
 <script type="text/javascript">
 	(function() {
 		var Validate = {
-			getInfoReqUrl: 'http://192.168.31.19:7001/teamInfo',
-			getTeamMemberUrl: 'http://192.168.31.19:7001/getTeamMember',
+			getInfoReqUrl: 'http://192.168.31.11:7001/teamInfo',
+			getTeamMemberUrl: 'http://192.168.31.11:7001/getTeamMember',
 			teamAdd: null,
 			token: null,
 			type: null,
@@ -190,7 +192,7 @@
 					}
 				})
 			},
-			getInfoReq: function getInfoReq(url) {
+			getInfoReq: function getInfoReq(url, callback) {
 				let that = this;
 				mui.ajax(url, {
 					type: 'GET',
@@ -204,18 +206,7 @@
 					dataType: 'json',
 					success: function(res) {
 						console.log(JSON.stringify(res));
-						if(res.data) {
-							if(res.data[0].role == 2) {
-								let stringEle = `<li class="member">
-						<div class="memberInfo">
-							<i></i>
-							<span>${res.data[0].nickname}</span>
-						</div>
-						<span class="mtrueNum">${res.data[0].tickets}TRUE</span>
-					</li>`;
-								$('.teamInfo').append(stringEle);
-							}
-						}
+						callback(res)
 					},
 					error: function(err) {
 						console.log(JSON.stringify(err));
@@ -235,11 +226,32 @@
 					this.status = self.status;
 					if(this.type == 2) {
 						$('.infoType').html('组队信息');
-						that.getInfoReq(that.getInfoReqUrl);
+						that.getInfoReq(that.getInfoReqUrl, function(res) {
+							if(res.data) {
+								if(res.data[0].role == 2) {
+									let stringEle = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${res.data[0].nickname}</span>
+						</div>
+						<span class="mtrueNum">${res.data[0].lock_num}TRUE</span>
+					</li>`;
+									$('.teamInfo').append(stringEle);
+								}
+							}
+						});
 						that.getTeamMember(that.getTeamMemberUrl)
 					} else {
 						$('.infoType').html('个人信息');
-						that.getTeamMember(that.getTeamMemberUrl);
+						//that.getTeamMember(that.getTeamMemberUrl);
+						that.getInfoReq(that.getInfoReqUrl, function(res) {
+							$('.infoType').html('个人信息')
+							$('.voteNum').html(res.data[0].tickets + '票')
+							$('.nickName').html(res.data[0].nickname);
+							$('.baseInfo_declaration').html(res.data[0].declaration)
+
+							$('.trueNum').html(res.data[0].lock_num + 'TRUE')
+						});
 					}
 				})
 			}

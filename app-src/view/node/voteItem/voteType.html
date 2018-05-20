@@ -13,17 +13,14 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">标准节点<!--节点类型--></h1>
+			<h1 class="mui-title"><!--节点类型--></h1>
 		</header>
 
 		<div class="mui-content">
 			<div class="mui-input-row mui-search">
 				<input type="search" class="mui-input-clear" placeholder="搜索">
 			</div>
-
-			<ul class="mui-table-view nodeType">
-
-			</ul>
+			<ul class="mui-table-view nodeType"></ul>
 		</div>
 
 	</body>
@@ -33,136 +30,153 @@
 <script src="../../../lib/js/h.min.js"></script>
 <script src="../../../lib/js/zepto.min.js"></script>
 <script src="../../../src/js/common.js"></script>
-<script type="text/javascript">
-	mui.init();
 
-	mui.plusReady(function() {
-		let self = plus.webview.currentWebview();
-		let token = plus.storage.getItem('token');
-		let Data;
-		switch(self.node_type) {
-			case 1:
-				{
-					h('.mui-title').html('标准节点');
-					//获取标准节点列表信息
-					mui.ajax('http://192.168.31.19:7001/nodeRank', {
+<script type="text/javascript">
+	(function() {
+		var Validate = {
+			token: null,
+			nodeDataUrl: 'http://192.168.31.11:7001/nodeRank',
+			getAjaxPromise: function getAjaxPromise(option) {
+				let that = this;
+				return new Promise(function(resolve, reject) {
+					mui.ajax(option.url, {
 						type: 'get',
 						dataType: 'json',
 						headers: {
-							token: token
+							token: that.token
 						},
 						data: {
-							node_type: 1
+							node_type: option.node_type
 						},
+						async: true,
 						success: function(res) {
-							Data = res.data;
+							resolve(res)
 						},
-						error: function(err) {
-							console.log(JSON.stringify(err))
+						error: function(error) {
+							reject(error)
 						}
+					});
+				})
+			},
+			request: function(node_type, element) {
+				let that = this;
+				that.getAjaxPromise({
+					url: that.nodeDataUrl,
+					node_type: node_type
+				}).then((res) => {
+					console.log(JSON.stringify(res) + 'hdjkfhj')
+					Data = res.data.sort(function(a, b) {
+						return b.tickets - a.tickets
+					});
+					let rankingBeArr = Data.splice(0, 3);
+					//前三名
+					rankingBeArr.forEach(function(item, index) {
+						let str;
+						if(item.type == 1) {
+							str = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																	<img class="serialNum" src="../../../dist/images/common/${index}@2x.png"/>																		
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																		<img class="type" src="../../../dist/images/common/geren.png" />
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.lock_num}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+						} else {
+							str = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																	<img class="serialNum" src="../../../dist/images/common/${index}@2x.png"/>																		
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.lock_num}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+						};
+						$(element).append(str);
+					});
+
+					//之后
+					let ranking = Data.sort(function(a, b) {
+						return b.voteNum - a.voteNum;
+					});
+
+					ranking.forEach(function(item, index) {
+						let strAf;
+						if(item.type == 1) {
+							strAf = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																		${index+4}
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																		<img class="type" src="../../../dist/images/common/geren.png" />
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.lock_num}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+						} else {
+							strAf = `<li class="mui-table-view-cell">
+																	<div class="view-cell-left">
+																		${index+4}
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																	</div>
+																	<div class="view-cell-center-item">
+																		${item.lock_num}true
+																	</div>
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+																</li>`;
+						};
+						$(element).append(strAf);
 					})
-
-					$('.nodeType').on('tap', 'li', function(e) {
-						openInfo('baseInfo.html', {
-							address: $(this).data('address')
-						});
-					})
-					break;
-				}
-			case 2:
-				{
-					h('.mui-title').html('全节点');
-					break;
-				}
-		}
-
-		setTimeout(function() {
-			let DataItem = Data.sort(function(a, b) {
-				return a.tickets - b.tickets
-			});
-
-			let rankingArr = Data.splice(0, 3);
-			console.log(JSON.stringify(rankingArr))
-			rankingArr.forEach(function(item, index) {
-				let str;
-				if(item.type == 1) {
-					str = `<li class="mui-table-view-cell" data-address=${item.address}>
-																						<div class="view-cell-left">
-																							<img class="ranking" src="../../../dist/images/common/${index}@2x.png" />
-																						</div>
-																						<div class="view-cell-center nickName">
-																							<span>${item.nickname}</span>
-																							<img class="type" src="../../../dist/images/common/geren.png" />
-																						</div>
-																						<div class="view-cell-center-item">
-																							${item.lock_num}true
-																						</div>
-																						<div class="view-cell-right voteNum">
-																							${item.tickets}票
-																						</div>
-																					</li>`;
-				} else {
-					str = `<li class="mui-table-view-cell" data-address=${item.address}>
-																						<div class="view-cell-left">
-																							<img class="ranking" src="../../../dist/images/common/${index}@2x.png" />
-																						</div>
-																						<div class="view-cell-center nickName">
-																							<span>${item.nickname}</span>
-																						</div>
-																						<div class="view-cell-center-item">
-																							${item.lock_num}true
-																						</div>
-																						<div class="view-cell-right voteNum">
-																							${item.tickets}票
-																						</div>
-																					</li>`;
-				};
-				$('.nodeType').append(str);
-			});
-
-			//之后
-			let after = Data.sort(function(a, b) {
-				return b.voteNum - a.voteNum;
-			});
-
-			after.forEach(function(item, index) {
-				let strAf;
-				if(item.type == 1) {
-					strAf = `<li class="mui-table-view-cell" data-address=${item.address}>
-																														<div class="view-cell-left">
-																															${index+4}
-																														</div>
-																														<div class="view-cell-center nickName">
-																															<span>${item.nickname}</span>
-																															<img class="type" src="../../../dist/images/common/geren.png" />
-																														</div>
-																														<div class="view-cell-center-item">
-																															${item.lock_num}true
-																														</div>
-																														<div class="view-cell-right voteNum">
-																															${item.tickets}票
-																														</div>
-																													</li>`;
-				} else {
-					strAf = `<li class="mui-table-view-cell" data-address=${item.address}>
-																														<div class="view-cell-left">
-																															${index+4}
-																														</div>
-																														<div class="view-cell-center nickName">
-																															<span>${item.nickname}</span>
-																														</div>
-																														<div class="view-cell-center-item">
-																															${item.lock_num}true
-																														</div>
-																														<div class="view-cell-right voteNum">
-																															${item.tickets}票
-																														</div>
-																													</li>`;
-				};
-				$('.nodeType').append(strAf);
-			})
-
-		}, 2000)
-
-	})
+				}).catch((err) => {
+					console.log(JSON.stringify(err))
+				});
+			},
+			init: function() {
+				this.submitForm();
+			},
+			submitForm: function() {
+				let that = this;
+				mui.plusReady(function() {
+					let self = plus.webview.currentWebview();
+					that.token = plus.storage.getItem('token');
+					switch(self.node_type) {
+						case 1:
+							{
+								$('.mui-title').html('标准节点');
+								that.request(1, '.nodeType');
+								break;
+							}
+						case 2:
+							{
+								$('.mui-title').html('全节点');
+								that.request(2, '.nodeType');
+								break
+							}
+					}
+				})
+			}
+		};
+		Validate.init();
+	})()
 </script>

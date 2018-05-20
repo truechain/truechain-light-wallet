@@ -1,7 +1,5 @@
 (function() {
 	var Validate = {
-		node_type: null,
-		type: null,
 		amount: null,
 		fromAddress: null,
 		password: null,
@@ -20,12 +18,9 @@
 				});
 
 			mui.plusReady(function() {
-				var self = plus.webview.currentWebview();
 				that.fromAddress = plus.storage.getItem('walletAddress');
 				that.keystore = plus.storage.getItem('keystore3');
-				that.node_type = self.node_type;
-				that.type = self.type;
-				console.log(self.type + '合法的身份是的疯狂')
+
 				let host = plus.storage.getItem('web3Host');
 				let trueContractAddr, ttrContractAddr;
 				let reg = /https:\/\/ropsten.infura.io/;
@@ -43,39 +38,12 @@
 
 				var web3 = new Web3(new Web3.providers.HttpProvider(host));
 
-				if(that.node_type == 1 && that.type == 1) {
-					$('.lockingNum').val(2000);
-				} else if(that.node_type == 2 && that.type == 1) {
-					$('.lockingNum').val(50000);
-				} else if(that.type == 2) {
-					$('.lockingNum').val(1);
-				};
-
 				/*下一步*/
 				$('#next').on('tap', function() {
 					that.amount = $('.lockingNum').val();
 					mask.show();
 					$('#modal').removeClass('mui-hidden');
 					$('#modal').addClass('mui-active');
-					if(that.node_type == 1 && that.type == 1) {
-						if(that.amount < 2000) {
-							mui.alert('个人报名标准节点最小锁仓数量为2000true');
-							mask._remove();
-							return;
-						} else {
-							$('#modal').removeClass('mui-hidden');
-							$('#modal').addClass('mui-active');
-						}
-					} else if(that.node_type == 2 && that.type == 1) {
-						if(that.amount < 50000) {
-							mui.alert('个人报名全节点最小锁仓数量为50000true');
-							mask._remove();
-							return;
-						} else {
-							$('#modal').removeClass('mui-hidden');
-							$('#modal').addClass('mui-active');
-						}
-					}
 				});
 
 				let callback = function() {

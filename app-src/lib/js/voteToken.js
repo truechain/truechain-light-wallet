@@ -413,11 +413,6 @@ function sendTokens(fromAddr, toAddr, value, password, keystore, gas = "150000",
 		value_wei = web3.utils.toWei(value, 'ether');
 		data = contract.methods.vote(toAddr, value_wei).encodeABI();
 
-		/********************************************************************/
-		voteNum = contract.methods.ticketsOf(fromAddr).call(); //剩余的票
-
-		/**********************************************/
-
 		web3.eth.sendTransaction({
 				from: fromAddr,
 				to: contractAddress,

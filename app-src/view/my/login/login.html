@@ -54,12 +54,13 @@
 <script src="../../../lib/js/zepto.min.js"></script>
 <script type="text/javascript">
 	mui.init();
-	let countdown = 60;
+
 	(function() {
+		var countdown = 60;
 		var Validata = {
-			getVcodeUrl: 'http://192.168.31.19:7001/',
-			getcodeUrl: 'http://192.168.31.19:7001/smsCaptcha',
-			loginUrl: 'http://192.168.31.19:7001/login',
+			getVcodeUrl: 'http://192.168.31.11:7001/',
+			getcodeUrl: 'http://192.168.31.11:7001/smsCaptcha',
+			loginUrl: 'http://192.168.31.11:7001/login',
 			phoneNumber: null,
 			vCode: null,
 			code: null,
@@ -102,7 +103,7 @@
 			init: function init() {
 				this.submitForm();
 			},
-			settime: function settime(ele) { //倒计时								
+			settime: function settime(ele) { //倒计时						
 				if(countdown == 0) {
 					$(ele).removeAttr("disabled");
 					$(ele).text("获取验证码");
@@ -157,7 +158,7 @@
 											that.vCodeFlag = true;
 											that.isClick = true;
 											that.settime('.getCode');
-											mui.alert('图形验证码正确');
+											//mui.alert('图形验证码正确');
 										}
 									},
 									error: function(err) {
@@ -181,7 +182,6 @@
 								success: function(res) {
 									console.log(JSON.stringify(res) + '已绑定');
 									if(res.body.status == 0) {
-										plus.storage.setItem("isLogin", 'true');
 										plus.storage.setItem("token", res.body.data.token);
 										setTimeout(function() {
 											plus.runtime.restart();

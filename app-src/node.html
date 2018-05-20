@@ -27,16 +27,16 @@
 		<div id="slider" class="mui-slider">
 			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted bg-w">
 				<a class="mui-control-item mui-active" href="#item1mobile">
-					标准节点排行
+					全节点排行
 				</a>
 				<a class="mui-control-item" href="#item2mobile">
-					全节点排行
+					标准节点排行
 				</a>
 			</div>
 			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
 			<div class="mui-slider-group">
 				<div id="item1mobile" class="base-info md-f1 mui-slider-item mui-control-content detailInfos md-box md-ver mui-active">
-					<ul class="mui-table-view standardNode">
+					<ul class="mui-table-view fullNode">
 						<!--						
 						<li class="mui-table-view-cell">
 							<div class="view-cell-left">
@@ -55,7 +55,7 @@
 					</ul>
 				</div>
 				<div id="item2mobile" class="process bg md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
-					<ul class="mui-table-view fullNode">
+					<ul class="mui-table-view standardNode">
 						<!--<li class="mui-table-view-cell">
 							<div class="view-cell-left">
 								<img class="ranking" src="dist/images/common/one@2x.png" />
@@ -88,8 +88,8 @@
 	(function() {
 		var Validate = {
 			token: null,
-			nodeDataUrl: 'http://192.168.31.19:7001/nodeRank',
-			statusUrl: 'http://192.168.31.19:7001/getMemberStatus',
+			nodeDataUrl: 'http://192.168.31.11:7001/nodeRank',
+			statusUrl: 'http://192.168.31.11:7001/getMemberStatus',
 			getAjaxPromise: function getAjaxPromise(option) {
 				let that = this;
 				return new Promise(function(resolve, reject) {
@@ -135,7 +135,7 @@
 																		<img class="type" src="dist/images/common/geren.png" />
 																	</div>
 																	<div class="view-cell-center-item">
-																		${item.tickets}true
+																		${item.lock_num}true
 																	</div>
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
@@ -150,7 +150,7 @@
 																		<span>${item.nickname}</span>
 																	</div>
 																	<div class="view-cell-center-item">
-																		${item.tickets}true
+																		${item.lock_num}true
 																	</div>
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
@@ -238,9 +238,10 @@
 									case 2:
 										{
 											console.log('申请通过');
-											if(res.data[0].role == 2) {
+											if(res.data[0].role == 2 && res.data[0].role == 2) {
 												openInfo('view/node/myTeam/myTeam.html', {
-													status: 2
+													status: 2,
+													type: 2
 												});
 											} else if(res.data[0].role == 1) {
 												openInfo('view/node/signUpSuccess.html', {

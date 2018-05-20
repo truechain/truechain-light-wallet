@@ -59,15 +59,16 @@
 	<script type="text/javascript">
 		mui.plusReady(function() {
 			h('.left').tap(function() {
-				openInfo('view/my/wallet/wallet.html');
+				//openInfo('view/my/wallet/wallet.html');
+				openInfo('view/asset/userinfo.html');
 			});
 			h('.right').tap(function() {
 				openInfo('view/my/record/record.html');
 			});
 
 			h('.lockPosition').tap(function() {
-				let isLogin = plus.storage.getItem('isLogin');
-				if(!isLogin) {
+				let token = plus.storage.getItem('token');
+				if(!token) {
 					openInfo('view/my/login/login.html');
 				} else {
 					openInfo('view/my/login/lockPosition.html');

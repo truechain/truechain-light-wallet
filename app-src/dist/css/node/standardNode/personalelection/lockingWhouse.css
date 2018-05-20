@@ -104,18 +104,12 @@ input[type=text] {
 	background-color: #528bf7
 }
 
-.cancel,
 .comfirm {
 	color: #fff;
 }
 
-.cancel {
-	background: rgba(53, 204, 191, 1);
-	border-radius: 22.5px 0 0 22.5px;
-}
-
 .comfirm {
-	border-radius: 0 22.5px 22.5px 0;
+	border-radius: 22.5px;
 }
 
 .signUpsucc-box {
@@ -154,4 +148,8 @@ input[type=text] {
 
 .not-view {
 	display: none
+}
+
+.mui-input-group:after {
+	height: 0;
 }

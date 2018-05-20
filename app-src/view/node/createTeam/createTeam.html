@@ -24,7 +24,8 @@
 			<div class="main">
 				<h2>组队信息</h2>
 				<input type="text" class="teamNickName" placeholder="组队昵称" />
-				<input type="text" class="declaration" placeholder="竞选宣言" />
+				<textarea class="declaration" placeholder="竞选宣言"></textarea>
+				<!--<input type="text" class="declaration" placeholder="竞选宣言" />-->
 			</div>
 
 			<div class="next">
@@ -41,8 +42,8 @@
 	mui.init();
 	(function() {
 		var Validata = {
-			writeUserInfoUrl: 'http://192.168.31.19:7001/writeUserInfo',
-			createTeamUrl: 'http://192.168.31.19:7001/createTeam',
+			writeUserInfoUrl: 'http://192.168.31.11:7001/writeUserInfo',
+			createTeamUrl: 'http://192.168.31.11:7001/createTeam',
 			personalNickName: null,
 			teamNickName: null,
 			declaration: null,

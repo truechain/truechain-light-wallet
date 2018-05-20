@@ -1,5 +1,11 @@
 mui.plusReady(function() {
-	let web3 = new Web3();
+
+	let host = plus.storage.getItem('web3Host');
+
+	if(!host) {
+		host = 'https://mainnet.infura.io/';
+	}
+	var web3 = new Web3(new Web3.providers.HttpProvider(host));
 
 	function getUserInfo() {
 		h('.walletName').html(plus.storage.getItem('walletName'))
@@ -64,7 +70,7 @@ mui.plusReady(function() {
 				} else {
 					mui.toast('请稍等!')
 					showMask();
-					var serialized_keystore = plus.storage.getItem('keystore'),
+					var serialized_keystore = plus.storage.getItem('keystore2'),
 						keystore = lightwallet.keystore.deserialize(serialized_keystore);
 					keystore.keyFromPassword(password, function(err, pwDerivedKey) {
 						if(err) {
@@ -75,7 +81,7 @@ mui.plusReady(function() {
 							keystore.generateNewAddress(pwDerivedKey, 1);
 							var address = keystore.getAddresses();
 							let PrivateKey = keystore.exportPrivateKey(address[0], pwDerivedKey);
-							h('.key-code').html(PrivateKey);
+							h('.key-code').html('0x' + PrivateKey);
 							showMask();
 							h('.export-key').removeClass('not-view');
 						}
@@ -89,10 +95,7 @@ mui.plusReady(function() {
 	h('.close-export-key').tap(function() {
 		flag = true;
 		copyFlag = false;
-		console.log('mask');
-		console.log(mask);
 		mask.close();
-		console.log(mask);
 		h('.export-key').addClass('not-view');
 	})
 	//复制私钥

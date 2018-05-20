@@ -83,7 +83,19 @@
 							<div class="agreement">
 								<label class="memberNickName">dsaf</label>
 							</div>
-							<input name="checkbox1" value="Item 1" type="checkbox">
+							<input class="checks" name="checkbox1" data-address='1111' value="Item 1" type="checkbox">
+							<span class="open">></span>
+						</div>
+					</div>
+					<p class="reason"></p>
+				</li>
+				<li class="member_info">
+					<div class="baseInfo">
+						<div class="mui-input-row mui-checkbox mui-left baseInfoTop">
+							<div class="agreement">
+								<label class="memberNickName">dsaf</label>
+							</div>
+							<input class="checks" data-address='22222' name="checkbox1" value="Item 1" type="checkbox">
 							<span class="open">></span>
 						</div>
 					</div>
@@ -102,11 +114,10 @@
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
 <script type="text/javascript">
 	mui.init();
-
 	(function() {
 		var Validate = {
 			token: null,
-			getMemberListUrl: 'http://192.168.31.19:7001/getMemberList',
+			getMemberListUrl: 'http://192.168.31.11:7001/getMemberList',
 			init: function() {
 				this.submitForm()
 			},
@@ -147,6 +158,30 @@
 			},
 			submitForm: function() {
 				let that = this;
+				let aggreAddress,
+					refuseAddress;
+
+				let checks = document.getElementsByClassName('checks');
+
+				$('.agree').on('click', function() {
+					for(let i = 0; i < checks.length; i++) {
+						if(checks[i].checked) {
+							aggreAddress = checks[i].dataset.address;
+							//同意申请的人员管理
+						}
+					}
+				})
+
+				$('.refuse').on('click', function() {
+					for(let i = 0; i < checks.length; i++) {
+						if(checks[i].checked) {
+							refuseAddress = checks[i].dataset.address;
+							//拒绝的人员管理
+						}
+					};
+
+				});
+
 				mui.plusReady(function() {
 					that.token = plus.storage.getItem('token');
 					that.teamAdd = plus.storage.getItem('walletAddress');

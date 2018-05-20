@@ -237,11 +237,12 @@
 				"resources": [
 					"asset.html",
 					"dist/images/common/jiedian_selected@2x.png",
-					"dist/images/common/asset1@2x.png"
+					"dist/images/common/asset1@2x.png",
+					"node.html"
 				],
 				"refer": [
 					"my.html",
-					"node.html"
+					"view/my/login/login.html"
 				],
 				"priority": 0
 			},
@@ -460,7 +461,9 @@
 			"view/my/login/lockPosition.html": {
 				"resources": [],
 				"refer": [
-					"view/my/login/signOut.html"
+					"view/my/login/signOut.html",
+					"view/node/personalelection/lockingWhouse.html",
+					"view/node/personalelection/lockingWhouseItem.html"
 				],
 				"priority": 0
 			},

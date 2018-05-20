@@ -44,7 +44,7 @@
 	<body>
 		<header class="mui-bar mui-bar-nav">
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
-			<h1 class="mui-title">账户管理</h1>
+			<h1 class="mui-title">锁仓账户</h1>
 		</header>
 
 		<div class="mui-content">
@@ -66,14 +66,12 @@
 <script type="text/javascript">
 	mui.init();
 	mui.plusReady(function() {
-		let Phone = '17611223665',
-			mPhone = Phone.substr(3, 4),
-			selectPhone = Phone.replace(mPhone, '****');
+		let self = plus.webview.currentWebview();
+		let selectPhone = self.phone;
 		h('.phone').html(selectPhone);
-
 		h('.signOut').tap(() => {
-			plus.storage.clear('token');
+			plus.storage.removeItem('token');
 			plus.runtime.restart();
 		})
-	})
+	});
 </script>

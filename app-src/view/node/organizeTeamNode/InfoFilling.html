@@ -19,7 +19,8 @@
 			<div class="main">
 				<h2>个人信息</h2>
 				<input type="text" class="nickName" placeholder="昵称" />
-				<input type="text" class="reason" placeholder="申请理由" />
+				<textarea class="reason" placeholder="申请理由"></textarea>
+				<!--<input type="text" class="reason" placeholder="申请理由" />-->
 			</div>
 			<div class="join">
 				申请加入
@@ -59,8 +60,8 @@
 			isEmpty: true,
 			nickNameFlag: false,
 			reasonFlag: false,
-			writeUserInfoUrl: 'http://192.168.31.19:7001/writeUserInfo',
-			joinTeamRequestUrl: 'http://192.168.31.19:7001/joinTeamRequest',
+			writeUserInfoUrl: 'http://192.168.31.11:7001/writeUserInfo',
+			joinTeamRequestUrl: 'http://192.168.31.11:7001/joinTeamRequest',
 			checkEmpty: function checkEmpty(val) {
 				if(val) {
 					this.isEmpty = false;
@@ -129,10 +130,10 @@
 										reason: that.reason
 									},
 									success: function(res) {
-										console.log(JSON.stringify(res) + '588');
+										console.log(JSON.stringify(res));
 									},
 									error: function(err) {
-										console.log(JSON.stringify(err) + '777');
+										console.log(JSON.stringify(err));
 									}
 								});
 
@@ -147,10 +148,10 @@
 										node_type: that.node_type
 									},
 									success: function(res) {
-										console.log(JSON.stringify(res) + '588');
+										console.log(JSON.stringify(res));
 									},
 									error: function(err) {
-										console.log(JSON.stringify(err) + '777');
+										console.log(JSON.stringify(err));
 									}
 								});
 								$(this).html('已申请');
