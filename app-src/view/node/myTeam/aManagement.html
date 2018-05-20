@@ -111,14 +111,14 @@
 
 </html>
 <script src="../../../lib/js/mui.min.js"></script>
-<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.js"></script>
+<script src="../../../lib/js/jquery.js"></script>
 <script type="text/javascript">
 	mui.init();
 	(function() {
 		var Validate = {
 			token: null,
 			getMemberListUrl: 'http://192.168.31.11:7001/getMemberList',
-			isJoinTeam: 'http://192.168.31.11/7001/isJoinTeam',
+			isJoinTeam: 'http://192.168.31.11:7001/isJoinTeam',
 			init: function() {
 				this.submitForm()
 			},
@@ -140,7 +140,7 @@
 							<div class="agreement">
 								<label class="memberNickName">${item.nickname}</label>
 							</div>
-							<input id='che' data-address=${item.address} name="checkbox" value="Item" type="checkbox">
+							<input class='checks' data-address=${item.address} name="checkbox" value="Item" type="checkbox">
 							<span class="open">></span>
 						</div>
 					</div>
@@ -161,22 +161,21 @@
 				let that = this;
 				let aggreAddress,
 					refuseAddress;
-
-				let checks = document.getElementsByClassName('checks');
-
 				$('.agree').on('click', function() {
 					let aggreAddress = [];
+					const checks = $('.checks'); 
 					for(let i = 0; i < checks.length; i++) {
 						if(checks[i].checked) {
 							aggreAddress.push(checks[i].dataset.address);
 						}
 					}
+
 					aggreAddress = aggreAddress.join();
 					mui.ajax(that.isJoinTeam, {
 						type: 'get',
 						dataType: 'json',
 						headers: {
-							token: that.token
+							token: that.token 
 						},
 						data: {
 							status: 2,
