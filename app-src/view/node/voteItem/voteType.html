@@ -73,7 +73,7 @@
 					rankingBeArr.forEach(function(item, index) {
 						let str;
 						if(item.type == 1) {
-							str = `<li class="mui-table-view-cell">
+							str = `<li class="mui-table-view-cell" data-address=${item.address}>
 																	<div class="view-cell-left">
 																	<img class="serialNum" src="../../../dist/images/common/${index}@2x.png"/>																		
 																	</div>
@@ -89,7 +89,7 @@
 																	</div>
 																</li>`;
 						} else {
-							str = `<li class="mui-table-view-cell">
+							str = `<li class="mui-table-view-cell" data-address=${item.address}>
 																	<div class="view-cell-left">
 																	<img class="serialNum" src="../../../dist/images/common/${index}@2x.png"/>																		
 																	</div>
@@ -115,7 +115,7 @@
 					ranking.forEach(function(item, index) {
 						let strAf;
 						if(item.type == 1) {
-							strAf = `<li class="mui-table-view-cell">
+							strAf = `<li class="mui-table-view-cell" data-address=${item.address}>
 																	<div class="view-cell-left">
 																		${index+4}
 																	</div>
@@ -131,7 +131,7 @@
 																	</div>
 																</li>`;
 						} else {
-							strAf = `<li class="mui-table-view-cell">
+							strAf = `<li class="mui-table-view-cell" data-address=${item.address}>
 																	<div class="view-cell-left">
 																		${index+4}
 																	</div>
@@ -147,6 +147,11 @@
 																</li>`;
 						};
 						$(element).append(strAf);
+					})
+					$('.mui-table-view-cell').on('tap', function() {
+						openInfo('baseInfo.html', {
+							address: $(this).data('address')
+						})
 					})
 				}).catch((err) => {
 					console.log(JSON.stringify(err))

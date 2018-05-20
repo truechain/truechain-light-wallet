@@ -1,16 +1,14 @@
-function sendTokens(fromAddr, toAddr, value, password, keystore, gas = "150000", gasPrice = "18000000000") {
+function voteTokens(fromAddr, toAddr, value, password, keystore, mask, gas = "150000", gasPrice = "18000000000") {
 	let host = plus.storage.getItem('web3Host');
-	let trueContractAddr, ttrContractAddr;
+	let ttrContractAddr;
 	let reg = /https:\/\/ropsten.infura.io/;
 	if(!host) {
 		host = 'https://mainnet.infura.io/';
-		trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
 		ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
 	} else if(reg.test(host)) {
-		trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
+
 		ttrContractAddr = "0x635AfeB8739f908A37b3d312cB4958CB2033F456";
 	} else {
-		trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
 		ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
 	}
 	var web3 = new Web3(new Web3.providers.HttpProvider(host));
@@ -404,7 +402,7 @@ function sendTokens(fromAddr, toAddr, value, password, keystore, gas = "150000",
 	}];
 
 	let contract = new web3.eth.Contract(iterface);
-	contract.options.address = contractAddress;
+	contract.options.address = ttrContractAddr;
 
 	try {
 		const account = web3.eth.accounts.decrypt(keystore, password);
@@ -415,17 +413,27 @@ function sendTokens(fromAddr, toAddr, value, password, keystore, gas = "150000",
 
 		web3.eth.sendTransaction({
 				from: fromAddr,
-				to: contractAddress,
+				to: ttrContractAddr,
 				value: '0x00',
 				gasPrice: gasPrice,
 				gas: gas,
 				data: data
 			},
 			function(error, txhash) {
+				if(txhash) {
+					mui.alert('投票成功!');
+					mask._remove();
+					plus.webview.show(plus.webview.getWebviewById('index.html'));
+				} else {
+					mui.alert('投票失败,请稍候重试!');
+					mask._remove();
+				}
 				console.log('error: ' + error);
 				console.log('txhash: ' + txhash);
 			})
 	} catch(error) {
+		mui.alert('密码错误,请重试!');
+		mask._remove();
 		console.log('error: ' + error);
 	}
 }

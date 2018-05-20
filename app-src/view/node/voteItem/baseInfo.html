@@ -242,7 +242,7 @@
 				let that = this;
 				getVote(that.address, function(num) {
 					that.surplusTickets = Math.floor(num);
-					$('.available').html('可用' + Math.floor(num));
+					$('.available').html('可投票: ' + Math.floor(num));
 				});
 			},
 			getTeamInfo: function() {
@@ -263,7 +263,7 @@
 						h('.voteNum').html(res.data[0].tickets + '票');
 					},
 					error: function(err) {
-						console.log(JSON.stringify(res))
+						console.log(JSON.stringify(err))
 					}
 				})
 			},
@@ -288,8 +288,13 @@
 					h('.baseInfo_address').html(that.teamAddress)
 
 					h('#next').tap(function() {
-						mask.show();
-						$('#modal').addClass('mui-active');
+						let value = $('.Esix').val();
+						if(!value) {
+							mui.alert('请输入投票数')
+						} else {
+							mask.show();
+							$('#modal').addClass('mui-active');
+						}
 					});
 
 					/*确认*/
@@ -299,7 +304,17 @@
 							value = $('.Esix').val(),
 							password = $('.psw').val(),
 							keystore = plus.storage.getItem('keystore3');
-						sendTokens(fromAddr, toAddr, value, password, keystore)
+						if(!password) {
+							mui.alert('请输入密码');
+							mask._remove();
+						} else {
+							$('#modal').removeClass('mui-active');
+							mask.show();
+							mui.toast('正在进行,请稍候!')
+							setTimeout(function() {
+								voteTokens(fromAddr, toAddr, value, password, keystore, mask);
+							}, 500)
+						}
 					});
 
 					/*取消*/

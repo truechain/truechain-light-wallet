@@ -163,36 +163,56 @@
 		var Validate = {
 			getInfoReqUrl: 'http://192.168.31.11:7001/teamInfo',
 			getTeamMemberUrl: 'http://192.168.31.11:7001/getTeamMember',
+			getTeamAddressUrl: 'http://192.168.31.11:7001/getTeamAddress',
 			teamAdd: null,
 			token: null,
 			type: null,
 			status: null,
 			tole: null,
-			getTeamMember: function getTeamMember(url) {
+			getTeamAddress: function() {
 				let that = this;
-				mui.ajax(url, {
+				mui.ajax(that.getTeamAddressUrl, {
 					type: 'get',
+					dataType: 'json',
 					headers: {
 						token: that.token
 					},
-					data: {
-						team_address: that.teamAdd,
-						type: that.type
-					},
-					dataType: 'json',
 					success: function(res) {
+						that.teamAdd = res.data[0].team_address;
 						console.log(JSON.stringify(res));
-						if(res.data) {
-							$('.nickName').html(res.data[0].nickname);
-							$('.baseInfo_declaration').html(res.data[0].declaration)
-						}
 					},
 					error: function(err) {
 						console.log(JSON.stringify(err));
 					}
 				})
 			},
-			getInfoReq: function getInfoReq(url, callback) {
+			getTeamMember: function getTeamMember(url) {
+				let that = this;
+				if(that.teamAddress) {
+					mui.ajax(url, {
+						type: 'get',
+						headers: {
+							token: that.token
+						},
+						data: {
+							team_address: that.teamAdd,
+							type: that.type
+						},
+						dataType: 'json',
+						success: function(res) {
+							console.log(JSON.stringify(res));
+							if(res.data) {
+								$('.nickName').html(res.data[0].nickname);
+								$('.baseInfo_declaration').html(res.data[0].declaration)
+							}
+						},
+						error: function(err) {
+							console.log(JSON.stringify(err));
+						}
+					})
+				}
+			},
+			getInfoReq: function getInfoReq(url, teamAdd, callback) {
 				let that = this;
 				mui.ajax(url, {
 					type: 'GET',
@@ -201,7 +221,7 @@
 					},
 					data: {
 						type: that.type,
-						address: that.teamAdd
+						address: teamAdd
 					},
 					dataType: 'json',
 					success: function(res) {
@@ -219,14 +239,14 @@
 			submitForm: function submitForm() {
 				let that = this;
 				mui.plusReady(() => {
-					that.teamAdd = plus.storage.getItem('walletAddress');
 					let self = plus.webview.currentWebview();
 					this.token = plus.storage.getItem('token');
+					this.getTeamAddress();
 					this.type = self.type;
 					this.status = self.status;
-					if(this.type == 2) {
+					if(that.type == 2) {
 						$('.infoType').html('组队信息');
-						that.getInfoReq(that.getInfoReqUrl, function(res) {
+						that.getInfoReq(that.getInfoReqUrl, that.teamAdd, function(res) {
 							if(res.data) {
 								if(res.data[0].role == 2) {
 									let stringEle = `<li class="member">
@@ -243,13 +263,13 @@
 						that.getTeamMember(that.getTeamMemberUrl)
 					} else {
 						$('.infoType').html('个人信息');
-						//that.getTeamMember(that.getTeamMemberUrl);
-						that.getInfoReq(that.getInfoReqUrl, function(res) {
+						//that.getTeamMember(that.getTeamMemberUrl);		
+						console.log(that.teamAdd + '分哈萨克建立符合几号放假啊看')
+						that.getInfoReq(that.getInfoReqUrl, that.teamadd, function(res) {
 							$('.infoType').html('个人信息')
 							$('.voteNum').html(res.data[0].tickets + '票')
 							$('.nickName').html(res.data[0].nickname);
 							$('.baseInfo_declaration').html(res.data[0].declaration)
-
 							$('.trueNum').html(res.data[0].lock_num + 'TRUE')
 						});
 					}

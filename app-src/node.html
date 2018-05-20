@@ -10,6 +10,7 @@
 	</head>
 
 	<body>
+
 		<div class="bg-top">
 			<div class="top-title">节点</div>
 			<div class="my-module">
@@ -75,6 +76,7 @@
 				</div>
 			</div>
 		</div>
+
 	</body>
 
 </html>
@@ -126,7 +128,7 @@
 					rankingBeArr.forEach(function(item, index) {
 						let str;
 						if(item.type == 1) {
-							str = `<li class="mui-table-view-cell">
+							str = `<li class="mui-table-view-cell" data-address=${item.address}>
 																	<div class="view-cell-left">
 																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
 																	</div>
@@ -135,14 +137,14 @@
 																		<img class="type" src="dist/images/common/geren.png" />
 																	</div>
 																	<div class="view-cell-center-item">
-																		${item.lock_num}true
+																		${Math.floor(item.lock_num)} true
 																	</div>
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
 																	</div>
 																</li>`;
 						} else {
-							str = `<li class="mui-table-view-cell">
+							str = `<li class="mui-table-view-cell" data-address=${item.address}>
 																	<div class="view-cell-left">
 																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
 																	</div>
@@ -150,7 +152,7 @@
 																		<span>${item.nickname}</span>
 																	</div>
 																	<div class="view-cell-center-item">
-																		${item.lock_num}true
+																		${Math.floor(item.lock_num)} true
 																	</div>
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
@@ -168,7 +170,7 @@
 					ranking.forEach(function(item, index) {
 						let strAf;
 						if(item.type == 1) {
-							strAf = `<li class="mui-table-view-cell">
+							strAf = `<li class="mui-table-view-cell" data-address=${item.address}>
 																	<div class="view-cell-left">
 																		${index+4}
 																	</div>
@@ -177,14 +179,14 @@
 																		<img class="type" src="dist/images/common/geren.png" />
 																	</div>
 																	<div class="view-cell-center-item">
-																		${item.tickets}true
+																		${Math.floor(item.lock_num)} true
 																	</div>
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
 																	</div>
 																</li>`;
 						} else {
-							strAf = `<li class="mui-table-view-cell">
+							strAf = `<li class='mui-table-view-cell' data-address=${item.address}>
 																	<div class="view-cell-left">
 																		${index+4}
 																	</div>
@@ -192,7 +194,7 @@
 																		<span>${item.nickname}</span>
 																	</div>
 																	<div class="view-cell-center-item">
-																		${item.tickets}true
+																		${Math.floor(item.lock_num)} true
 																	</div>
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
@@ -200,6 +202,11 @@
 																</li>`;
 						};
 						$(element).append(strAf);
+					})
+					$('.mui-table-view-cell').on('tap', function() {
+						openInfo('view/node/voteItem/baseInfo.html', {
+							address: $(this).data('address')
+						})
 					})
 				}).catch((err) => {
 					console.log(JSON.stringify(err))
@@ -289,11 +296,10 @@
 					that.request(2, '.fullNode');
 					//投票
 					h('.vote').tap(function() {
-						openInfo('view/node/vote.html', {
-							token: that.token
-						});
+						openInfo('view/node/vote.html');
 					});
-				})
+				});
+
 			}
 		};
 		Validate.init();
