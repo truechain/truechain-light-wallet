@@ -169,7 +169,7 @@
 			type: null,
 			status: null,
 			tole: null,
-			getTeamAddress: function() {
+			getTeamAddress: function(callback) {
 				let that = this;
 				mui.ajax(that.getTeamAddressUrl, {
 					type: 'get',
@@ -178,39 +178,37 @@
 						token: that.token
 					},
 					success: function(res) {
-						that.teamAdd = res.data[0].team_address;
-						console.log(JSON.stringify(res));
+						callback(res.data[0].team_address)
+						//that.teamAdd = res.data[0].team_address;
 					},
 					error: function(err) {
 						console.log(JSON.stringify(err));
 					}
 				})
 			},
-			getTeamMember: function getTeamMember(url) {
+			getTeamMember: function getTeamMember(url, teamAdd) {
 				let that = this;
-				if(that.teamAddress) {
-					mui.ajax(url, {
-						type: 'get',
-						headers: {
-							token: that.token
-						},
-						data: {
-							team_address: that.teamAdd,
-							type: that.type
-						},
-						dataType: 'json',
-						success: function(res) {
-							console.log(JSON.stringify(res));
-							if(res.data) {
-								$('.nickName').html(res.data[0].nickname);
-								$('.baseInfo_declaration').html(res.data[0].declaration)
-							}
-						},
-						error: function(err) {
-							console.log(JSON.stringify(err));
+				mui.ajax(url, {
+					type: 'get',
+					headers: {
+						token: that.token
+					},
+					data: {
+						team_address: teamAdd,
+						type: that.type
+					},
+					dataType: 'json',
+					success: function(res) {
+						if(res.data) {
+							$('.nickName').html(res.data[0].nickname);
+							$('.baseInfo_declaration').html(res.data[0].declaration)
 						}
-					})
-				}
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err));
+					}
+				})
+
 			},
 			getInfoReq: function getInfoReq(url, teamAdd, callback) {
 				let that = this;
@@ -225,7 +223,6 @@
 					},
 					dataType: 'json',
 					success: function(res) {
-						console.log(JSON.stringify(res));
 						callback(res)
 					},
 					error: function(err) {
@@ -241,14 +238,14 @@
 				mui.plusReady(() => {
 					let self = plus.webview.currentWebview();
 					this.token = plus.storage.getItem('token');
-					this.getTeamAddress();
 					this.type = self.type;
-					this.status = self.status;
-					if(that.type == 2) {
-						$('.infoType').html('组队信息');
-						that.getInfoReq(that.getInfoReqUrl, that.teamAdd, function(res) {
-							if(res.data) {
-								if(res.data[0].role == 2) {
+
+					that.getTeamAddress(function(teamAddress) {
+						if(that.type == 2) {
+							$('.infoType').html('组队信息');
+							that.getInfoReq(that.getInfoReqUrl, teamAddress, function(res) {
+								if(res.data) {
+									//if(res.data[0].role == 2) {
 									let stringEle = `<li class="member">
 						<div class="memberInfo">
 							<i></i>
@@ -257,22 +254,22 @@
 						<span class="mtrueNum">${res.data[0].lock_num}TRUE</span>
 					</li>`;
 									$('.teamInfo').append(stringEle);
+									//}
 								}
-							}
-						});
-						that.getTeamMember(that.getTeamMemberUrl)
-					} else {
-						$('.infoType').html('个人信息');
-						//that.getTeamMember(that.getTeamMemberUrl);		
-						console.log(that.teamAdd + '分哈萨克建立符合几号放假啊看')
-						that.getInfoReq(that.getInfoReqUrl, that.teamadd, function(res) {
-							$('.infoType').html('个人信息')
-							$('.voteNum').html(res.data[0].tickets + '票')
-							$('.nickName').html(res.data[0].nickname);
-							$('.baseInfo_declaration').html(res.data[0].declaration)
-							$('.trueNum').html(res.data[0].lock_num + 'TRUE')
-						});
-					}
+							});
+							that.getTeamMember(that.getTeamMemberUrl, teamAddress)
+						} else {
+							//							$('.infoType').html('个人信息');
+							//							that.getTeamMember(that.getTeamMemberUrl, teamAddress);
+							//							that.getInfoReq(that.getInfoReqUrl, teamAddress, function(res) {
+							//								$('.infoType').html('个人信息')
+							//								$('.voteNum').html(res.data[0].tickets + '票')
+							//								$('.nickName').html(res.data[0].nickname);
+							//								$('.baseInfo_declaration').html(res.data[0].declaration)
+							//								$('.trueNum').html(res.data[0].lock_num + 'TRUE')
+							//							});
+						}
+					})
 				})
 			}
 		};

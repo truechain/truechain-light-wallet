@@ -94,10 +94,6 @@
 			min-height: 200px;
 		}
 		
-		.Esix {
-			background: #E6E6E6 !important;
-		}
-		
 		#next {
 			color: #fff;
 			display: flex;
@@ -151,13 +147,8 @@
 			color: #fff;
 		}
 		
-		.cancel {
-			background: rgba(53, 204, 191, 1);
-			border-radius: 22.5px 0 0 22.5px;
-		}
-		
 		.comfirm {
-			border-radius: 0 22.5px 22.5px 0;
+			border-radius: 22.5px;
 		}
 	</style>
 
@@ -210,12 +201,12 @@
 			<!--输入密码-->
 			<div id="modal" class="mui-modal">
 				<header class="mui-bar mui-bar-nav">
+					<a class="modal_item mui-icon mui-icon-close mui-pull-right close" href="###"></a>
 					<h1 class="mui-title">输入密码</h1>
 				</header>
 				<div class="mui-content options">
 					<input type="password" class="mui-input-clear psw" placeholder="请输入你的密码">
 					<div class="options_item">
-						<a class="options_item_bg cancel bs white comfirmPsw">取消</a>
 						<a class="options_item_bg comfirm bs white comfirmPsw">确认</a>
 					</div>
 				</div>
@@ -318,7 +309,7 @@
 					});
 
 					/*取消*/
-					$('.cancel').on('tap', function() {
+					$('.close').on('tap', function() {
 						mask._remove();
 						$('#modal').removeClass('mui-active');
 					});

@@ -122,7 +122,6 @@
 						type: 2
 					},
 					success: function(res) {
-						console.log(JSON.stringify(res) + 'kkkk');
 						$('.nickName').html(res.data[0].nickname);
 						$('.baseInfo_declaration').html(res.data[0].declaration);
 						$('.voteNum').html(res.data[0].tickets);

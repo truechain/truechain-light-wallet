@@ -165,12 +165,6 @@
 
 					$('.mui-title').html('加入组队');
 					$('#next').html('下一步');
-					$('#next').on('tap', function() {
-						openInfo('InfoFilling.html', {
-							teamAddress: that.teamAdd,
-							node_type: 1
-						})
-					})
 
 					let status = self.status;
 					switch(status) {
@@ -218,6 +212,15 @@
 									})
 								});
 								break;
+							}
+						default:
+							{
+								$('#next').on('tap', function() {
+									openInfo('InfoFilling.html', {
+										teamAddress: that.teamAdd,
+										node_type: 1
+									})
+								})
 							}
 					}
 				})
