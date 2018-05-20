@@ -85,7 +85,18 @@
 <script src="src/js/common.js"></script>
 
 <script type="text/javascript">
+	
+//	setTimeout(function() {
+//	location.reload();
+	
+//	},2000)
+
+
 	(function() {
+//		alert('dd')
+//history.go(0);
+console.log('dddddd')
+//		location.reload();
 		var Validate = {
 			token: null,
 			nodeDataUrl: 'http://192.168.31.11:7001/nodeRank',
@@ -283,6 +294,16 @@
 				})
 			},
 			init() {
+//				alert('sss')
+//				history.go(0) 
+//		 console.log(JSON.stringify(plus.webview.currentWebview()), null, 2)
+//
+//		 		var primaryBack = mui.back;  
+//		        mui.back = function() {  
+//		           var wobj = plus.webview.getWebviewById("node");     
+//		           wobj.reload(true);  
+//		           primaryBack();  
+//		       }  
 				this.submitForm();
 			},
 			submitForm: function submitForm() {
