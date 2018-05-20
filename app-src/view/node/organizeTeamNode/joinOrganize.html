@@ -62,6 +62,7 @@
 <script src="../../../src/js/common.js"></script>
 
 <script type="text/javascript">
+	
 	(function() {
 		var Validate = {
 			trueNum: null,
@@ -165,12 +166,7 @@
 
 					$('.mui-title').html('加入组队');
 					$('#next').html('下一步');
-					$('#next').on('tap', function() {
-						openInfo('InfoFilling.html', {
-							teamAddress: that.teamAdd,
-							node_type: 1
-						})
-					})
+//					console.log(`${status}`，'阿斯达所多撒大萨达所方式开会')
 
 					let status = self.status;
 					switch(status) {
@@ -178,7 +174,9 @@
 							{
 								$('.mui-title').html('已申请');
 								$('#next').html('已申请');
-								h('#next').attr("disabled", 'disabled');
+								$('#next').click(function(e){
+									alert('你不能再点击了') 
+								})
 								$('#next').addClass("applyed");
 								mui.ajax(that.getTeamAddressUrl, {
 									type: 'get',
@@ -219,6 +217,15 @@
 								});
 								break;
 							}
+						default:
+						{
+							$('#next').on('tap', function() {
+								openInfo('InfoFilling.html', {
+									teamAddress: that.teamAdd,
+									node_type: 1
+								})
+							})
+						}
 					}
 				})
 			}
