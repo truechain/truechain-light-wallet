@@ -117,8 +117,8 @@
 	(function() {
 		var Validate = {
 			token: null,
-			getMemberListUrl: 'http://192.168.31.11:7001/getMemberList',
-			isJoinTeam: 'http://192.168.31.11:7001/isJoinTeam',
+			getMemberListUrl: 'http://api.truechain.pro/getMemberList',
+			isJoinTeam: 'http://api.truechain.pro/isJoinTeam',
 			init: function() {
 				this.submitForm()
 			},
@@ -163,7 +163,7 @@
 					refuseAddress;
 				$('.agree').on('click', function() {
 					let aggreAddress = [];
-					const checks = $('.checks'); 
+					const checks = $('.checks');
 					for(let i = 0; i < checks.length; i++) {
 						if(checks[i].checked) {
 							aggreAddress.push(checks[i].dataset.address);
@@ -175,13 +175,19 @@
 						type: 'get',
 						dataType: 'json',
 						headers: {
-							token: that.token 
+							token: that.token
 						},
 						data: {
 							status: 2,
 							user_address: aggreAddress
 						},
 						success: function(res) {
+							mui.back = function() {
+								var wobj = plus.webview.getWebviewById("view/node/myTeam/myTeam.html");
+								wobj.reload(true);
+							}
+							mui.back();
+							//plus.webview.show(plus.webview.getWebviewById('index.html'));
 							console.log(JSON.stringify(res) + '请求通过还是拒绝');
 						},
 						error: function(err) {
@@ -192,6 +198,7 @@
 
 				$('.refuse').on('click', function() {
 					let refuseAddress = [];
+					const checks = $('.checks');
 					for(let i = 0; i < checks.length; i++) {
 						if(checks[i].checked) {
 							refuseAddress.push(checks[i].dataset.address)
@@ -209,6 +216,14 @@
 							user_address: refuseAddress
 						},
 						success: function(res) {
+
+							mui.back = function() {
+								var wobj = plus.webview.getWebviewById("view/node/myTeam/myTeam.html");
+								wobj.reload(true);
+
+							}
+							mui.back();
+							//plus.webview.show(plus.webview.getWebviewById('index.html'));
 							console.log(JSON.stringify(res) + '请求通过还是拒绝');
 						},
 						error: function(err) {

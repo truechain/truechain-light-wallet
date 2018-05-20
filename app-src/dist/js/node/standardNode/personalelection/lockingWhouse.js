@@ -92,7 +92,9 @@
 					that.value = $('.lockingNum').val();
 					if(that.password) {
 						let amountWei = that.value.toString();
-						sendTokens(that.fromAddress, that.toAddress, amountWei, that.password, that.keystore, trueContractAddr, mask, callback)
+						setTimeout(function() {
+							sendTokens(that.fromAddress, that.toAddress, amountWei, that.password, that.keystore, trueContractAddr, mask, callback)
+						}, 500)
 					} else {
 						mui.alert('请输入密码!');
 						mask._remove();
@@ -105,7 +107,6 @@
 						mask._remove();
 						h('.signUpsucc').addClass('not-view');
 						plus.runtime.restart();
-						//plus.webview.show(plus.webview.getWebviewById('index.html'));
 					})
 				});
 

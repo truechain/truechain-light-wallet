@@ -67,8 +67,8 @@
 		var Validate = {
 			token: null,
 			teamAdd: null,
-			getTeamMemberUrl: 'http://192.168.31.11:7001/getTeamMember',
-			getTeamInfoUrl: 'http://192.168.31.11:7001/teamInfo',
+			getTeamMemberUrl: 'http://api.truechain.pro/getTeamMember',
+			getTeamInfoUrl: 'http://api.truechain.pro/teamInfo',
 			getTeamMember: function getTeamMember() {
 				let that = this;
 				mui.ajax(this.getTeamMemberUrl, {
@@ -124,7 +124,7 @@
 					success: function(res) {
 						$('.nickName').html(res.data[0].nickname);
 						$('.baseInfo_declaration').html(res.data[0].declaration);
-						$('.voteNum').html(res.data[0].tickets);
+						$('.voteNum').html(res.data[0].tickets + '票');
 						$('.trueNum').html(res.data[0].lock_num ? res.data[0].lock_num + 'TRUE' : 0 + 'TRUE');
 					},
 					error: function(err) {
@@ -138,6 +138,7 @@
 			submitForm: function() {
 				let that = this;
 				mui.plusReady(function() {
+
 					that.token = plus.storage.getItem('token');
 					that.teamAdd = plus.storage.getItem('walletAddress');
 					that.getTeamInfo() //队伍信息
@@ -150,5 +151,5 @@
 			}
 		};
 		Validate.init();
-	})()
+	})();
 </script>
