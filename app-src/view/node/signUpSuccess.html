@@ -259,15 +259,15 @@
 							});
 							that.getTeamMember(that.getTeamMemberUrl, teamAddress)
 						} else {
-							//							$('.infoType').html('个人信息');
-							//							that.getTeamMember(that.getTeamMemberUrl, teamAddress);
-							//							that.getInfoReq(that.getInfoReqUrl, teamAddress, function(res) {
-							//								$('.infoType').html('个人信息')
-							//								$('.voteNum').html(res.data[0].tickets + '票')
-							//								$('.nickName').html(res.data[0].nickname);
-							//								$('.baseInfo_declaration').html(res.data[0].declaration)
-							//								$('.trueNum').html(res.data[0].lock_num + 'TRUE')
-							//							});
+							$('.infoType').html('个人信息');
+							that.getTeamMember(that.getTeamMemberUrl, teamAddress);
+							that.getInfoReq(that.getInfoReqUrl, teamAddress, function(res) {
+								$('.infoType').html('个人信息');
+								$('.voteNum').html(res.data[0].tickets + '票');
+								$('.nickName').html(res.data[0].nickname);
+								$('.baseInfo_declaration').html(res.data[0].declaration);
+								$('.trueNum').html(res.data[0].lock_num + 'TRUE');
+							});
 						}
 					})
 				})

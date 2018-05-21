@@ -85,16 +85,7 @@
 <script src="src/js/common.js"></script>
 
 <script type="text/javascript">
-	//	setTimeout(function() {
-	//	location.reload();
-
-	//	},2000)
-
 	(function() {
-		//		alert('dd')
-		//history.go(0);
-		console.log('dddddd')
-		//		location.reload();
 		var Validate = {
 			token: null,
 			nodeDataUrl: 'http://api.truechain.pro/nodeRank',
@@ -230,8 +221,8 @@
 					success: function(res) {
 						console.log('申请状态:' + JSON.stringify(res));
 						h('.signUP').tap(function() {
-							if(res.data[0]) {
-								switch(res.data[0].status) { //res.data[0].status
+							if(res.data.status) {
+								switch(res.data.status) { //res.data[0].status
 									case 0:
 										{
 											console.log('初始状态');
@@ -252,15 +243,15 @@
 									case 2:
 										{
 											console.log('申请通过');
-											if(res.data[0].role == 2) {
+											if(res.data.role == 2 && res.data.type == 2) {
 												openInfo('view/node/myTeam/myTeam.html', {
 													status: 2,
 													type: 2
 												});
-											} else if(res.data[0].role == 1) {
+											} else if(res.data.role == 1 && res.data.type == 1) {
 												openInfo('view/node/signUpSuccess.html', {
 													status: 2,
-													type: 2
+													type: 1
 												});
 											} else {
 												openInfo('view/node/signUpSuccess.html', {
@@ -284,6 +275,60 @@
 									status: 0
 								})
 							}
+							//							if(res.data[0]) {
+							//								switch(res.data[0].status) { //res.data[0].status
+							//									case 0:
+							//										{
+							//											console.log('初始状态');
+							//											openInfo('view/node/signUp.html', {
+							//												status: 0
+							//											})
+							//											break;
+							//										}
+							//									case 1:
+							//										{
+							//											console.log('已申请');
+							//											openInfo('view/node/organizeTeamNode/joinOrganize.html', {
+							//												status: 1,
+							//												type: 2
+							//											})
+							//											break;
+							//										}
+							//									case 2:
+							//										{
+							//											console.log('申请通过');
+							//											if(res.data[0].role == 2) {
+							//												openInfo('view/node/myTeam/myTeam.html', {
+							//													status: 2,
+							//													type: 2
+							//												});
+							//											} else if(res.data[0].role == 1) {
+							//												openInfo('view/node/signUpSuccess.html', {
+							//													status: 2,
+							//													type: 2
+							//												});
+							//											} else {
+							//												openInfo('view/node/signUpSuccess.html', {
+							//													status: 2,
+							//													type: 1
+							//												});
+							//											}
+							//											break;
+							//										}
+							//									case 3:
+							//										{
+							//											console.log('被拒绝');
+							//											openInfo('view/node/organizeTeamNode/joinOrganize.html', {
+							//												status: 3
+							//											})
+							//											break;
+							//										}
+							//								}
+							//							} else {
+							//								openInfo('view/node/signUp.html', {
+							//									status: 0
+							//								})
+							//							}
 						});
 					},
 					error: function(err) {
@@ -292,16 +337,6 @@
 				})
 			},
 			init() {
-				//				alert('sss')
-				//				history.go(0) 
-				//		 console.log(JSON.stringify(plus.webview.currentWebview()), null, 2)
-				//
-				//		 		var primaryBack = mui.back;  
-				//		        mui.back = function() {  
-				//		           var wobj = plus.webview.getWebviewById("node");     
-				//		           wobj.reload(true);  
-				//		           primaryBack();  
-				//		       }  
 				this.submitForm();
 			},
 			submitForm: function submitForm() {
@@ -316,7 +351,6 @@
 						openInfo('view/node/vote.html');
 					});
 				});
-
 			}
 		};
 		Validate.init();

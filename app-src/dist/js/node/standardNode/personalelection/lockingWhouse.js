@@ -7,7 +7,6 @@
 		password: null,
 		value: 2000,
 		toAddress: '0x08C62C32226CE2D9148A80F71A03dDB73B673792',
-		amountFlag: false,
 		keystore: null,
 		pwd: null,
 		init: function init() {
@@ -18,7 +17,6 @@
 				mask = mui.createMask(function() {
 					return false;
 				});
-
 			mui.plusReady(function() {
 				var self = plus.webview.currentWebview();
 				that.fromAddress = plus.storage.getItem('walletAddress');
@@ -54,30 +52,37 @@
 				/*下一步*/
 				$('#next').on('tap', function() {
 					that.amount = $('.lockingNum').val();
-					mask.show();
-					$('#modal').removeClass('mui-hidden');
-					$('#modal').addClass('mui-active');
-					if(that.node_type == 1 && that.type == 1) {
-						if(that.amount < 2000) {
-							mui.alert('个人报名标准节点最小锁仓数量为2000true');
-							mask._remove();
-							return;
-						} else {
-							$('#modal').removeClass('mui-hidden');
-							$('#modal').addClass('mui-active');
+					if(that.amount >= 0) {
+						mask.show();
+						$('#modal').removeClass('mui-hidden');
+						$('#modal').addClass('mui-active');
+						if(that.node_type == 1 && that.type == 1) {
+							if(that.amount < 2000) {
+								mui.alert('个人报名标准节点最小锁仓数量为2000true');
+								$('#modal').addClass('mui-hidden');
+								$('#modal').removeClass('mui-active');
+								mask._remove();
+								return;
+							} else {
+								$('#modal').removeClass('mui-hidden');
+								$('#modal').addClass('mui-active');
+							}
+						} else if(that.node_type == 2 && that.type == 1) {
+							if(that.amount < 50000) {
+								mui.alert('个人报名全节点最小锁仓数量为50000true');
+								$('#modal').addClass('mui-hidden');
+								$('#modal').removeClass('mui-active');
+								mask._remove();
+								return;
+							} else {
+								$('#modal').removeClass('mui-hidden');
+								$('#modal').addClass('mui-active');
+							}
 						}
-					} else if(that.node_type == 2 && that.type == 1) {
-						if(that.amount < 50000) {
-							mui.alert('个人报名全节点最小锁仓数量为50000true');
-							mask._remove();
-							return;
-						} else {
-							$('#modal').removeClass('mui-hidden');
-							$('#modal').addClass('mui-active');
-						}
+					} else {
+						mui.alert('锁仓数量不能为空!')
 					}
 				});
-
 				let callback = function() {
 					$('.signUpsucc').removeClass('not-view');
 					$('.title').html('完成!');

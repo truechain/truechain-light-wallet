@@ -39,7 +39,8 @@
 				mui('.my-word').on('tap', 'span', function() {
 					var oWord = this.innerText;
 					var html = '<span>' + oWord + '</span><br/>';
-					document.getElementById('orderWord').append(oWord + ' ');
+					$('#orderWord').append(oWord + ' ');
+					//document.getElementById('orderWord').append(oWord + ' ');
 				})
 
 				h('#complete-btn').tap(function() {

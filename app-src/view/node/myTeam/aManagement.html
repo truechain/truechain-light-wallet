@@ -132,7 +132,7 @@
 					},
 					success: function(res) {
 						let string = '';
-						console.log(JSON.stringify(res));
+						console.log(JSON.stringify(res) + 'fhjskhfjksdhjfkhj ');
 						res.data.forEach(function(item, index) {
 							string = `<li class="member_info">
 					<div class="baseInfo">
@@ -169,7 +169,6 @@
 							aggreAddress.push(checks[i].dataset.address);
 						}
 					}
-
 					aggreAddress = aggreAddress.join();
 					mui.ajax(that.isJoinTeam, {
 						type: 'get',
@@ -188,10 +187,10 @@
 							}
 							mui.back();
 							//plus.webview.show(plus.webview.getWebviewById('index.html'));
-							console.log(JSON.stringify(res) + '请求通过还是拒绝');
+							console.log(JSON.stringify(res));
 						},
 						error: function(err) {
-							console.log(JSON.stringify(err) + '请求管理信息');
+							console.log(JSON.stringify(err));
 						}
 					})
 				})
@@ -216,22 +215,19 @@
 							user_address: refuseAddress
 						},
 						success: function(res) {
-
 							mui.back = function() {
 								var wobj = plus.webview.getWebviewById("view/node/myTeam/myTeam.html");
 								wobj.reload(true);
-
 							}
 							mui.back();
 							//plus.webview.show(plus.webview.getWebviewById('index.html'));
-							console.log(JSON.stringify(res) + '请求通过还是拒绝');
+							console.log(JSON.stringify(res));
 						},
 						error: function(err) {
-							console.log(JSON.stringify(err) + '请求管理信息');
+							console.log(JSON.stringify(err));
 						}
 					})
 				});
-
 				mui.plusReady(function() {
 					that.token = plus.storage.getItem('token');
 					that.teamAdd = plus.storage.getItem('walletAddress');

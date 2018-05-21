@@ -68,7 +68,7 @@ input[type=text] {
 }
 
 .mui-modal {
-	top: 60%!important;
+	top: 40%!important;
 	left: 0;
 	min-height: 0;
 }

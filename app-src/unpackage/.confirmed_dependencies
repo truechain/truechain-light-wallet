@@ -24,7 +24,8 @@
 		"refer": [
 			"index.html",
 			"view/my/wallet/setup.html",
-			"view/my/wallet/importwallet.html"
+			"view/my/wallet/importwallet.html",
+			"view/my/system/lockerVerification.html"
 		]
 	},
 	"node.html": {
@@ -44,7 +45,8 @@
 	"view/asset/userinfo.html": {
 		"refer": [
 			"view/asset/exportmw.html",
-			"guide.html"
+			"guide.html",
+			"view/asset/exportkeystore.html"
 		]
 	},
 	"view/my/wallet/setup.html": {
@@ -84,7 +86,8 @@
 	},
 	"view/asset/currencydetail.html": {
 		"refer": [
-			"view/asset/transfer.html"
+			"view/asset/transfer.html",
+			"view/asset/receipt.html"
 		]
 	},
 	"view/asset/transfer.html": {
@@ -148,6 +151,21 @@
 			"view/my/wallet/privateKey.html",
 			"view/my/wallet/keystore.html",
 			"view/my/wallet/mnemonicword.html"
+		]
+	},
+	"view/asset/exportkeystore.html": {
+		"refer": [
+			"view/asset/userinfo.html"
+		]
+	},
+	"view/my/system/lockerVerification.html": {
+		"refer": [
+			"index.html"
+		]
+	},
+	"view/asset/receipt.html": {
+		"refer": [
+			"view/asset/currencydetail.html"
 		]
 	}
 }

@@ -4,8 +4,8 @@
 		fromAddress: null,
 		password: null,
 		value: 2000,
+		valueFlag: true,
 		toAddress: '0x08C62C32226CE2D9148A80F71A03dDB73B673792',
-		amountFlag: false,
 		keystore: null,
 		pwd: null,
 		init: function init() {
@@ -41,26 +41,36 @@
 				/*下一步*/
 				$('#next').on('tap', function() {
 					that.amount = $('.lockingNum').val();
-					mask.show();
-					$('#modal').removeClass('mui-hidden');
-					$('#modal').addClass('mui-active');
+					console.log(that.amount)
+					if(that.amount >= 1) {
+						mask.show();
+						$('#modal').removeClass('mui-hidden');
+						$('#modal').addClass('mui-active');
+					} else {
+						mui.alert('锁仓最小为1');
+						$('#modal').addClass('mui-hidden');
+						$('#modal').removeClass('mui-active');
+					}
 				});
-
 				let callback = function() {
 					$('.signUpsucc').removeClass('not-view');
 					$('.title').html('完成!');
 					$('.succ').html('发送锁仓交易成功!');
+					plus.nativeUI.closeWaiting();
 				};
 
 				/*确认*/
 				$('.comfirm').on('tap', function() {
 					$('#modal').removeClass('mui-active');
 					mask.show();
+					plus.nativeUI.showWaiting("正在投票,请稍侯...");
 					that.password = $('.psw').val();
 					that.value = $('.lockingNum').val();
 					if(that.password) {
 						let amountWei = that.value.toString();
-						sendTokens(that.fromAddress, that.toAddress, amountWei, that.password, that.keystore, trueContractAddr, mask, callback)
+						setTimeout(function() {
+							sendTokens(that.fromAddress, that.toAddress, amountWei, that.password, that.keystore, trueContractAddr, mask, callback)
+						}, 500)
 					} else {
 						mui.alert('请输入密码!');
 						mask._remove();

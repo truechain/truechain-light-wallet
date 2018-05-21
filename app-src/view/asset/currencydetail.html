@@ -150,7 +150,7 @@
 			},
 			getRecord: function getRecord(url) {
 				let that = this;
-//				let url = 'https://api-ropsten.etherscan.io/api?module=account&action=tokentx&contractaddress=' + contractaddress + '&address=' + address + '&sort=desc&apikey=YourApiKeyToken';
+				//				let url = 'https://api-ropsten.etherscan.io/api?module=account&action=tokentx&contractaddress=' + contractaddress + '&address=' + address + '&sort=desc&apikey=YourApiKeyToken';
 				mui.ajax(url, {
 					type: 'get',
 					dataType: 'json',
@@ -203,7 +203,7 @@
 			},
 			submitForm: function() {
 				let that = this;
-				mui.plusReady(function() { 
+				mui.plusReady(function() {
 					that.selfAddress = plus.storage.getItem('walletAddress');
 					var self = plus.webview.currentWebview();
 					document.getElementsByClassName('mui-title')[0].innerText = self.currencyName;
@@ -214,42 +214,36 @@
 					let trueContractAddr, ttrContractAddr;
 					let reg = /https:\/\/ropsten.infura.io/;
 					let apiUrl = '';
-					if(!host) {
-						host = 'https://mainnet.infura.io/';
-						trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
-						ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
-						apiUrl = 'https://api.etherscan.io/api?';
-					} else if(reg.test(host)) {
-						apiUrl = 'https://api-ropsten.etherscan.io/api?';
+
+					if(host.includes('ropsten')) {
+						apiUrl = 'http://api-ropsten.etherscan.io/api?';
 						trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
 						ttrContractAddr = "0x635AfeB8739f908A37b3d312cB4958CB2033F456";
 					} else {
-						apiUrl = 'https://api.etherscan.io/api?';
+						apiUrl = 'http://api.etherscan.io/api?';
 						trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
 						ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
 					}
-					
 					switch(self.currencyName) {
 						case 'ETH':
 							{
-								let url = ''+ apiUrl +'module=account&action=txlist&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
+								let url = '' + apiUrl + 'module=account&action=txlist&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
 								that.getRecord(url);
 								break;
 							}
 						case 'TRUE':
 							{
-								let url = ''+ apiUrl +'module=account&action=tokentx&contractaddress=' + trueContractAddr + '&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
+								let url = '' + apiUrl + 'module=account&action=tokentx&contractaddress=' + trueContractAddr + '&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
 								that.getRecord(url);
 								break;
 							}
 						case 'TTR':
 							{
-								let url = ''+ apiUrl +'module=account&action=tokentx&contractaddress=' + ttrContractAddr + '&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
+								let url = '' + apiUrl + 'module=account&action=tokentx&contractaddress=' + ttrContractAddr + '&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
 								that.getRecord(url)
 								break
 							}
 					}
-
 				})
 			}
 		};
