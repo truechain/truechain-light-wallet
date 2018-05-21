@@ -340,7 +340,12 @@
 				type = '其它' + type;
 				break;
 		}
-		mui.openWindow(`../../asset/transfer.html?name=&scanningAddress=${result}`)
+
+		openInfo('../../asset/transfer.html', {
+			address: result
+		})
+
+		//mui.openWindow(`../../asset/transfer.html?name=&scanningAddress=${result}`)
 
 		//result = result.replace(/\n/g, '');
 		//back();
