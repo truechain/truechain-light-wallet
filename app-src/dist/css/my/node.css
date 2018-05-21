@@ -95,6 +95,7 @@ body {
 
 .mui-table-view-cell {
 	display: flex;
+	justify-content: space-around;
 	max-height: 50px
 }
 
@@ -107,18 +108,18 @@ body {
 }
 
 .view-cell-left {
-	width: 10%
+	/*width: 10%*/
 }
 
 .view-cell-center {
-	width: 45%;
+	/*width: 45%;*/
 	display: flex;
 	align-items: center;
 }
 
 .view-cell-center-item,
 .view-cell-right {
-	width: 22.5%
+	/*width: 22.5%*/
 }
 
 .ranking {

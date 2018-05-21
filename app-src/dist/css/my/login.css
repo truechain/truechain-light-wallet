@@ -35,6 +35,11 @@ input[type=text] {
 	border-bottom: 1px solid #E6E6E6;
 }
 
+#telNum {
+	border: none !important;
+	margin: 0 !important;
+}
+
 .vCode,
 .phoneCode {
 	border-bottom: 1px solid #E6E6E6;

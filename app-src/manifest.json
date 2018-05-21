@@ -418,7 +418,8 @@
 					"view/node/organizeTeamNode/joinOrganize.html",
 					"view/node/signUpSuccess.html",
 					"view/node/myTeam/myTeam.html",
-					"view/node/vote.html"
+					"view/node/vote.html",
+					"view/node/voteItem/baseInfo.html"
 				],
 				"priority": 0
 			},

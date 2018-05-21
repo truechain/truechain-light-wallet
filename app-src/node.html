@@ -24,54 +24,76 @@
 			</div>
 		</div>
 
-		<div id="slider" class="mui-slider">
-			<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted bg-w">
-				<a class="mui-control-item mui-active" href="#item1mobile">
-					全节点排行
-				</a>
-				<a class="mui-control-item" href="#item2mobile">
-					标准节点排行
-				</a>
-			</div>
-			<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
-			<div class="mui-slider-group">
-				<div id="item1mobile" class="base-info md-f1 mui-slider-item mui-control-content detailInfos md-box md-ver mui-active">
-					<ul class="mui-table-view fullNode">
-						<!--						
-						<li class="mui-table-view-cell">
-							<div class="view-cell-left">
-								<img class="ranking" src="dist/images/common/three@2x.png" />
-							</div>
-							<div class="view-cell-center nickName">
-								<span>全力以赴全力以赴</span>
-							</div>
-							<div class="view-cell-center-item">
-								1200true
-							</div>
-							<div class="view-cell-right voteNum">
-								12000票
-							</div>
-						</li>-->
-					</ul>
+		<div id="refreshContainer">
+			<div id="slider" class="mui-slider">
+				<div id="sliderSegmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted bg-w">
+					<a class="mui-control-item mui-active" href="#item1mobile">
+						全节点排行
+					</a>
+					<a class="mui-control-item" href="#item2mobile">
+						标准节点排行
+					</a>
 				</div>
-				<div id="item2mobile" class="process bg md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
-					<ul class="mui-table-view standardNode">
-						<!--<li class="mui-table-view-cell">
-							<div class="view-cell-left">
-								<img class="ranking" src="dist/images/common/one@2x.png" />
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+				<div class="mui-slider-group">
+					<div id="item1mobile" class="base-info md-f1 mui-slider-item mui-control-content detailInfos md-box md-ver mui-active">
+						<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<!--数据列表-->
+								<ul class="mui-table-view mui-table-view-chevron fullNode">
+									<!--<li class="mui-table-view-cell">
+										<div class="view-cell-left">
+											<img class="ranking" src="dist/images/common/three@2x.png" />
+										</div>
+										<div class="view-cell-center nickName">
+											<span>全力以赴全力以赴</span>
+										</div>
+										<div class="view-cell-center-item">
+											1200true
+										</div>
+										<div class="view-cell-right voteNum">
+											12000票
+										</div>
+									</li>-->
+								</ul>
 							</div>
-							<div class="view-cell-center nickName">
-								<span>全力以赴全力以赴</span>
-								<img class="type" src="dist/images/common/geren.png" />
-							</div>
-							<div class="view-cell-center-item">
-								1200true
-							</div>
-							<div class="view-cell-right voteNum">
-								12000票
-							</div>
-						</li>-->
-					</ul>
+						</div>
+						<!--<ul class="mui-table-view fullNode">
+							<li class="mui-table-view-cell">
+								<div class="view-cell-left">
+									<img class="ranking" src="dist/images/common/three@2x.png" />
+								</div>
+								<div class="view-cell-center nickName">
+									<span>全力以赴全力以赴</span>
+								</div>
+								<div class="view-cell-center-item">
+									1200true
+								</div>
+								<div class="view-cell-right voteNum">
+									12000票
+								</div>
+							</li>
+						</ul>-->
+					</div>
+					<div id="item2mobile" class="process bg md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
+						<ul class="mui-table-view standardNode">
+							<!--<li class="mui-table-view-cell">
+								<div class="view-cell-left">
+									<img class="ranking" src="dist/images/node/one.png" />
+								</div>
+								<div class="view-cell-center nickName">
+									<span>全力以赴全力以赴</span>
+									<img class="type" src="dist/images/common/geren.png" />
+								</div>
+								!--<div class="view-cell-center-item">
+									12055550true
+								</div>
+								<div class="view-cell-right voteNum">
+									12055555500票
+								</div>
+							</li>-->
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -118,6 +140,7 @@
 					url: that.nodeDataUrl,
 					node_type: node_type
 				}).then((res) => {
+					console.log(JSON.stringify(res) + '和等级划分和将客户经理')
 					Data = res.data.sort(function(a, b) {
 						return b.tickets - a.tickets
 					});
@@ -134,9 +157,6 @@
 																		<span>${item.nickname}</span>
 																		<img class="type" src="dist/images/common/geren.png" />
 																	</div>
-																	<div class="view-cell-center-item">
-																		${Math.floor(item.lock_num)} true
-																	</div>
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
 																	</div>
@@ -148,13 +168,10 @@
 																	</div>
 																	<div class="view-cell-center nickName">
 																		<span>${item.nickname}</span>
-																	</div>
-																	<div class="view-cell-center-item">
-																		${Math.floor(item.lock_num)} true
-																	</div>
+																	</div>																	
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
-																	</div>
+																	</div>																	
 																</li>`;
 						};
 						$(element).append(str);
@@ -175,10 +192,7 @@
 																	<div class="view-cell-center nickName">
 																		<span>${item.nickname}</span>
 																		<img class="type" src="dist/images/common/geren.png" />
-																	</div>
-																	<div class="view-cell-center-item">
-																		${Math.floor(item.lock_num)} true
-																	</div>
+																	</div>		
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
 																	</div>
@@ -190,10 +204,7 @@
 																	</div>
 																	<div class="view-cell-center nickName">
 																		<span>${item.nickname}</span>
-																	</div>
-																	<div class="view-cell-center-item">
-																		${Math.floor(item.lock_num)} true
-																	</div>
+																	</div>	
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
 																	</div>
@@ -220,7 +231,7 @@
 					dataType: 'json',
 					success: function(res) {
 						console.log('申请状态:' + JSON.stringify(res));
-						h('.signUP').tap(function() {
+						h('.signUP').tap(function(e) {
 							if(res.data.status) {
 								switch(res.data.status) { //res.data[0].status
 									case 0:
@@ -233,6 +244,7 @@
 										}
 									case 1:
 										{
+											e.preventDefault();
 											console.log('已申请');
 											openInfo('view/node/organizeTeamNode/joinOrganize.html', {
 												status: 1,
@@ -275,60 +287,6 @@
 									status: 0
 								})
 							}
-							//							if(res.data[0]) {
-							//								switch(res.data[0].status) { //res.data[0].status
-							//									case 0:
-							//										{
-							//											console.log('初始状态');
-							//											openInfo('view/node/signUp.html', {
-							//												status: 0
-							//											})
-							//											break;
-							//										}
-							//									case 1:
-							//										{
-							//											console.log('已申请');
-							//											openInfo('view/node/organizeTeamNode/joinOrganize.html', {
-							//												status: 1,
-							//												type: 2
-							//											})
-							//											break;
-							//										}
-							//									case 2:
-							//										{
-							//											console.log('申请通过');
-							//											if(res.data[0].role == 2) {
-							//												openInfo('view/node/myTeam/myTeam.html', {
-							//													status: 2,
-							//													type: 2
-							//												});
-							//											} else if(res.data[0].role == 1) {
-							//												openInfo('view/node/signUpSuccess.html', {
-							//													status: 2,
-							//													type: 2
-							//												});
-							//											} else {
-							//												openInfo('view/node/signUpSuccess.html', {
-							//													status: 2,
-							//													type: 1
-							//												});
-							//											}
-							//											break;
-							//										}
-							//									case 3:
-							//										{
-							//											console.log('被拒绝');
-							//											openInfo('view/node/organizeTeamNode/joinOrganize.html', {
-							//												status: 3
-							//											})
-							//											break;
-							//										}
-							//								}
-							//							} else {
-							//								openInfo('view/node/signUp.html', {
-							//									status: 0
-							//								})
-							//							}
 						});
 					},
 					error: function(err) {
@@ -341,11 +299,31 @@
 			},
 			submitForm: function submitForm() {
 				let that = this;
+
 				mui.plusReady(function() {
 					that.token = plus.storage.getItem('token');
-					that.getStatus();
+					mui.init({
+						pullRefresh: {
+							container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+							down: {
+								height: 500, //可选,默认50.触发下拉刷新拖动距离,
+								auto: true, //可选,默认false.首次加载自动下拉刷新一次
+								contentdown: "下拉刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+								contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+								contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+								callback: pullfresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+							}
+						}
+					});
+
+					function pullfresh() {
+						that.getStatus();
+						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+					}
 					that.request(1, '.standardNode');
 					that.request(2, '.fullNode');
+					pullfresh();
+
 					//投票
 					h('.vote').tap(function() {
 						openInfo('view/node/vote.html');
