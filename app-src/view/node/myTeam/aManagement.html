@@ -1,0 +1,240 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../../dist/css/common/common.css" />
+	</head>
+
+	<style>
+		.mui-content {
+			position: fixed;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			overflow-y: auto;
+		}
+		/*.member {
+			margin-top: 20px;
+		}
+		*/
+		
+		.memberNickName {
+			min-height: 40px;
+		}
+		
+		.member_info {··
+			padding: 0 20px;
+			border-bottom: 1px solid #E6E6E6;
+		}
+		
+		.baseInfoTop {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+		}
+		
+		.reason {
+			padding: 20px;
+		}
+		
+		.function {
+			position: absolute;
+			bottom: 0;
+			width: 100%;
+			height: 50px;
+			display: flex;
+			align-items: center;
+		}
+		
+		.bottom {
+			width: 50%;
+			height: 50px;
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+		
+		.refuse {
+			background: #e86565;
+		}
+		
+		.agree {
+			background: #528BF7;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">人员管理</h1>
+		</header>
+
+		<div class="mui-content">
+			<ul class="member">
+				<!--<li class="member_info">
+					<div class="baseInfo">
+						<div class="mui-input-row mui-checkbox mui-left baseInfoTop">
+							<div class="agreement">
+								<label class="memberNickName">dsaf</label>
+							</div>
+							<input class="checks" name="checkbox1" data-address='1111' value="Item 1" type="checkbox">
+							<span class="open">></span>
+						</div>
+					</div>
+					<p class="reason"></p>
+				</li>
+				<li class="member_info">
+					<div class="baseInfo">
+						<div class="mui-input-row mui-checkbox mui-left baseInfoTop">
+							<div class="agreement">
+								<label class="memberNickName">dsaf</label>
+							</div>
+							<input class="checks" data-address='22222' name="checkbox1" value="Item 1" type="checkbox">
+							<span class="open">></span>
+						</div>
+					</div>
+					<p class="reason"></p>
+				</li>-->
+			</ul>
+			<div class="function">
+				<button class="bottom refuse">拒绝</button>
+				<button class="bottom agree">同意</button>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="../../../lib/js/mui.min.js"></script>
+<script src="../../../lib/js/jquery.js"></script>
+<script type="text/javascript">
+	mui.init();
+	(function() {
+		var Validate = {
+			token: null,
+			getMemberListUrl: 'http://api.truechain.pro/getMemberList',
+			isJoinTeam: 'http://api.truechain.pro/isJoinTeam',
+			init: function() {
+				this.submitForm()
+			},
+			getMemberList: function getMemberList() {
+				let that = this;
+				mui.ajax(this.getMemberListUrl, {
+					type: 'get',
+					dataType: 'json',
+					headers: {
+						token: that.token
+					},
+					success: function(res) {
+						let string = '';
+						console.log(JSON.stringify(res) + 'fhjskhfjksdhjfkhj ');
+						res.data.forEach(function(item, index) {
+							string = `<li class="member_info">
+					<div class="baseInfo">
+						<div class="mui-input-row mui-checkbox mui-left baseInfoTop">
+							<div class="agreement">
+								<label class="memberNickName">${item.nickname}</label>
+							</div>
+							<input class='checks' data-address=${item.address} name="checkbox" value="Item" type="checkbox">
+							<span class="open">></span>
+						</div>
+					</div>
+					<p class="reason">${item.reason}</p>
+				</li>`;
+							$('.member').append(string);
+						})
+						$('.open').on('click', function() {
+							$('.reason').toggle('slow');
+						})
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err))
+					}
+				})
+			},
+			submitForm: function() {
+				let that = this;
+				let aggreAddress,
+					refuseAddress;
+				$('.agree').on('click', function() {
+					let aggreAddress = [];
+					const checks = $('.checks');
+					for(let i = 0; i < checks.length; i++) {
+						if(checks[i].checked) {
+							aggreAddress.push(checks[i].dataset.address);
+						}
+					}
+					aggreAddress = aggreAddress.join();
+					mui.ajax(that.isJoinTeam, {
+						type: 'get',
+						dataType: 'json',
+						headers: {
+							token: that.token
+						},
+						data: {
+							status: 2,
+							user_address: aggreAddress
+						},
+						success: function(res) {
+							mui.back = function() {
+								var wobj = plus.webview.getWebviewById("view/node/myTeam/myTeam.html");
+								wobj.reload(true);
+							}
+							mui.back();
+							//plus.webview.show(plus.webview.getWebviewById('index.html'));
+							console.log(JSON.stringify(res));
+						},
+						error: function(err) {
+							console.log(JSON.stringify(err));
+						}
+					})
+				})
+
+				$('.refuse').on('click', function() {
+					let refuseAddress = [];
+					const checks = $('.checks');
+					for(let i = 0; i < checks.length; i++) {
+						if(checks[i].checked) {
+							refuseAddress.push(checks[i].dataset.address)
+						}
+					};
+					refuseAddress = refuseAddress.join();
+					mui.ajax(that.isJoinTeam, {
+						type: 'get',
+						dataType: 'json',
+						headers: {
+							token: that.token
+						},
+						data: {
+							status: 3,
+							user_address: refuseAddress
+						},
+						success: function(res) {
+							mui.back = function() {
+								var wobj = plus.webview.getWebviewById("view/node/myTeam/myTeam.html");
+								wobj.reload(true);
+							}
+							mui.back();
+							//plus.webview.show(plus.webview.getWebviewById('index.html'));
+							console.log(JSON.stringify(res));
+						},
+						error: function(err) {
+							console.log(JSON.stringify(err));
+						}
+					})
+				});
+				mui.plusReady(function() {
+					that.token = plus.storage.getItem('token');
+					that.teamAdd = plus.storage.getItem('walletAddress');
+					that.getMemberList();
+				});
+			}
+		};
+		Validate.init();
+	})()
+</script>

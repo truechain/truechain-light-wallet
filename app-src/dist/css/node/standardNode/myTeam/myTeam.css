@@ -1,0 +1,107 @@
+.mui-content {
+	padding: 30px;
+	margin-top: 20px;
+	background: #F5F5F5;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	overflow-x: auto;
+}
+
+.manage {
+	background: #fff;
+	padding: 0 10px;
+	display: flex;
+	min-height: 50px;
+	border-radius: 5px;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.member {
+	padding: 10px;
+	background: #fff;
+	margin-top: 20px;
+	border-radius: 10px;
+}
+
+.baseInfo {
+	margin-bottom: 20px;
+}
+
+.baseInfo_top {
+	display: flex;
+	justify-content: space-between;
+}
+
+.baseInfo_item {
+	display: flex;
+	flex-direction: column;
+	min-height: 50px;
+	justify-content: space-around;
+}
+
+.trueNum {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #fff;
+	min-width: 20px;
+	max-height: 35px;
+	padding: 3px 10px;
+	background: rgba(82, 139, 247, 1);
+	border-radius: 30px;
+}
+
+.voteNum {
+	display: flex;
+	color: #fff;
+	min-width: 100px;
+	max-height: 35px;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	background: rgba(82, 139, 247, 1);
+	border-radius: 30px;
+}
+
+.baseInfo_declaration {
+	color: #8f8f94;
+	margin-top: 10px;
+}
+
+.member_info {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 35px;
+	border-bottom: 1px solid rgba(245, 245, 245, 1);
+}
+
+.member_info:nth-child(1)>div>i {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url(../../../../images/node/duizhang.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.member_info>div>i {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	margin-right: 10px;
+	background: url(../../../../images/node/duiyuan.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}
+
+.mtrueNum {
+	color: #528BF7;
+}

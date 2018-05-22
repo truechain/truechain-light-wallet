@@ -1,0 +1,308 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/node/standardNode/organizeTeamNode/joinOrganize.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">加入组队</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="main">
+				<div class="baseInfo">
+					<div class="baseInfo_top">
+						<div class="baseInfo_item">
+							组队信息
+							<p class="nickName">
+								<!--团队名称-->
+							</p>
+						</div>
+						<div class="voteNum">
+							<!--1000票-->
+						</div>
+					</div>
+					<div class="baseInfo_declaration">
+						<!--我们的竞选宣言是-->
+					</div>
+				</div>
+
+				<ul class="teamInfo">
+					<!--<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>哈哈哈哈</span>
+						</div>
+						<span class="trueNum">2000TRUE</span>
+					</li>-->
+				</ul>
+			</div>
+			<div class="adopt_next">
+				<p class="adopt not-view">申请已经通过,请进行下一步操作! </p>
+				<p class="refuse not-view">申请失败,队长拒绝了你的申请</p>
+				<div id="next" class="apply">
+					<!--下一步-->
+				</div>
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="../../../lib/js/mui.min.js"></script>
+<script src="../../../lib/js/zepto.min.js"></script>
+<script src="../../../lib/js/h.min.js"></script>
+<script src="../../../src/js/common.js"></script>
+
+<script type="text/javascript">
+	(function() {
+		var Validate = {
+			trueNum: null,
+			token: null,
+			teamAdd: null,
+			type: null,
+			status: null,
+			teamInfoUrl: 'http://api.truechain.pro/teamInfo',
+			getTeamMemberUrl: 'http://api.truechain.pro/getTeamMember',
+			initStatusUrl: 'http://api.truechain.pro/initStatus',
+			getTeamAddressUrl: 'http://api.truechain.pro/getTeamAddress',
+			init() {
+				this.submitForm();
+			},
+			getTeamMember: function getTeamMember(url, callback) {
+				let that = this;
+				mui.ajax(url, {
+					type: 'get',
+					headers: {
+						token: that.token
+					},
+					data: {
+						team_address: that.teamAdd
+					},
+					dataType: 'json',
+					success: function(res) {
+						callback(res)
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err))
+					}
+				});
+			},
+			getInfoReq: function getInfoReq(url, callback) {
+				let that = this;
+				mui.ajax(url, {
+					type: 'GET',
+					headers: {
+						token: that.token
+					},
+					data: {
+						type: that.type,
+						address: that.teamAdd
+					},
+					dataType: 'json',
+					success: function(res) {
+						callback(res)
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err) + '错误');
+					}
+				});
+			},
+
+			submitForm: function submitForm() {
+				let that = this;
+				mui.plusReady(function() {
+					let self = plus.webview.currentWebview();
+					that.type = self.type;
+					that.status = self.status;
+					if(self.teamAdd) {
+						that.teamAdd = self.teamAdd;
+					}
+					that.token = plus.storage.getItem('token');
+					//					setTimeout(function() {
+					//						that.getInfoReq(that.teamInfoUrl, function(res) {
+					//							$('.nickName').html(res.data[0].nickname);
+					//							$('.voteNum').html(res.data[0].tickets);
+					//							$('.baseInfo_declaration').html(res.data[0].declaration);
+					//						});
+					//						that.getTeamMember(that.getTeamMemberUrl, function(res) {
+					//							let string = '';
+					//							if(res.data[0].role) {
+					//								if(res.data[0].role == 2) {
+					//									res.data.forEach(function(item, index) {
+					//										string = `<li class="member">
+					//						<div class="memberInfo">
+					//							<i></i>
+					//							<span>${item.nickname}</span>
+					//						</div>
+					//						<span class="trueNum">${item.lock_num}TRUE</span> 
+					//					</li>`;
+					//										$('.teamInfo').append(string);
+					//									})
+					//								} else if(res.data[0].role == 1) {
+					//									res.data.forEach(function(item, index) {
+					//										string = `<li class="member">
+					//						<div class="memberInfo">
+					//							<i></i>
+					//							<span>${item.nickname}</span>
+					//						</div>
+					//						<span class="trueNum">${item.lock_num}TRUE</span>
+					//					</li>`;
+					//										$('.teamInfo').append(string);
+					//									})
+					//								}
+					//							}
+					//						});
+					//					}, 2000)
+
+					$('.mui-title').html('加入组队');
+					$('#next').html('下一步');
+					let status = self.status;
+					switch(status) {
+						case 1:
+							{
+								$('.mui-title').html('已申请');
+								$('#next').html('已申请');
+								$('#next').addClass("applyed");
+								mui.ajax(that.getTeamAddressUrl, {
+									type: 'get',
+									dataType: 'json',
+									headers: {
+										token: that.token
+									},
+									success: function(res) {
+										that.teamAdd = res.data[0].team_address;
+										that.getInfoReq(that.teamInfoUrl, function(res) {
+											$('.nickName').html(res.data[0].nickname);
+											$('.voteNum').html(res.data[0].tickets);
+											$('.baseInfo_declaration').html(res.data[0].declaration);
+										});
+										that.getTeamMember(that.getTeamMemberUrl, function(res) {
+											let string = '';
+											if(res.data[0].role) {
+												if(res.data[0].role == 2) {
+													res.data.forEach(function(item, index) {
+														string = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span> 
+					</li>`;
+														$('.teamInfo').append(string);
+													})
+												} else if(res.data[0].role == 1) {
+													res.data.forEach(function(item, index) {
+														string = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span>
+					</li>`;
+														$('.teamInfo').append(string);
+													})
+												}
+											}
+										});
+									},
+									error: function(err) {
+										console.log(JSON.stringify(err));
+									}
+								})
+								break;
+							}
+						case 3:
+							{
+								$('.mui-title').html('已拒绝');
+								$('.refuse').removeClass('not-view');
+								$('#next').html('加入其他组队');
+								mui.ajax(that.getTeamAddressUrl, {
+									type: 'get',
+									dataType: 'json',
+									headers: {
+										token: that.token
+									},
+									success: function(res) {
+										that.teamAdd = res.data[0].team_address;
+										that.getInfoReq(that.teamInfoUrl, function(res) {
+											$('.nickName').html(res.data[0].nickname);
+											$('.voteNum').html(res.data[0].tickets);
+											$('.baseInfo_declaration').html(res.data[0].declaration);
+										});
+										that.getTeamMember(that.getTeamMemberUrl, function(res) {
+											let string = '';
+											if(res.data[0].role) {
+												if(res.data[0].role == 2) {
+													res.data.forEach(function(item, index) {
+														string = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span> 
+					</li>`;
+														$('.teamInfo').append(string);
+													})
+												} else if(res.data[0].role == 1) {
+													res.data.forEach(function(item, index) {
+														string = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span>
+					</li>`;
+														$('.teamInfo').append(string);
+													})
+												}
+											}
+										});
+									},
+									error: function(err) {
+										console.log(JSON.stringify(err));
+									}
+								})
+
+								$('#next').on('tap', function() {
+									mui.back();
+									mui.ajax(that.initStatusUrl, {
+										type: 'get',
+										dataType: 'json',
+										headers: {
+											token: that.token
+										},
+										success: function(res) {
+											console.log(res);
+										},
+										error: function(err) {
+											console.log(err);
+										}
+									})
+									plus.runtime.restart();
+								});
+								break;
+							}
+						default:
+							{
+								$('#next').on('tap', function() {
+									openInfo('InfoFilling.html', {
+										teamAddress: that.teamAdd,
+										node_type: 1
+									})
+								})
+							}
+					}
+				})
+			}
+		}
+		Validate.init();
+	})()
+</script>

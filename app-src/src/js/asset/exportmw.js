@@ -4,9 +4,8 @@
 ! function showSeed() {
 
 	mui.prompt('', 'Password', '请输入密码', ['取消', '确定'], function(e) {
-
 		let password = e.value;
-		var serialized_keystore = plus.storage.getItem('keystore');
+		var serialized_keystore = plus.storage.getItem('keystore2');
 		global_keystore = lightwallet.keystore.deserialize(serialized_keystore); //将序列号的keystore转换为对象 
 
 		global_keystore.keyFromPassword(password, function(err, pwDerivedKey) {
@@ -40,7 +39,8 @@
 				mui('.my-word').on('tap', 'span', function() {
 					var oWord = this.innerText;
 					var html = '<span>' + oWord + '</span><br/>';
-					document.getElementById('orderWord').append(oWord + ' ');
+					$('#orderWord').append(oWord + ' ');
+					//document.getElementById('orderWord').append(oWord + ' ');
 				})
 
 				h('#complete-btn').tap(function() {
@@ -58,4 +58,4 @@
 		});
 	}, 'div');
 	document.querySelector('.mui-popup-input input').type = 'password';
-}()
+}();

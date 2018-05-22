@@ -1,0 +1,227 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/my/login.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">登录</h1>
+		</header>
+		<div class="mui-content">
+			<form class="main">
+				<a class="country-or-region">
+					<span>
+						国家/地区
+					</span>
+					<span>
+						中国
+					</span>
+				</a>
+				<div class="tel">
+					+<label for="telNum">86</label>
+					<input type="tel" id="telNum" maxlength="11" placeholder="输入手机号" />
+				</div>
+
+				<div class="vCode">
+					<input type="text" id="vCode" placeholder="输入图形验证码" />
+					<label class="vCodeItem"><!--ghuy--></label>
+				</div>
+				<div class="phoneCode">
+					<input type="text" id="phoneCode" placeholder="输入手机验证码" />
+					<!--<label class="phoneCodeItem" for="phoneCode">-->
+					<button type="button" class="blue getCode">获取验证码</button>
+					<!--</label>-->
+				</div>
+			</form>
+			<div class="login">
+				登录
+			</div>
+			<p class="prompt">未注册过的手机号将自动创建账号</p>
+		</div>
+	</body>
+
+</html>
+<script src="../../../lib/js/mui.min.js"></script>
+<script src="../../../lib/js/h.min.js"></script>
+<script src="../../../lib/js/zepto.min.js"></script>
+<script type="text/javascript">
+	mui.init();
+
+	(function() {
+		var countdown = 60;
+		var Validata = {
+			getVcodeUrl: 'http://api.truechain.pro/',
+			getcodeUrl: 'http://api.truechain.pro/smsCaptcha',
+			loginUrl: 'http://api.truechain.pro/login',
+			phoneNumber: null,
+			vCode: null,
+			code: null,
+			walletAddress: null,
+			vCodeFlag: false,
+			phoneCode: null,
+			isEmpty: false,
+			isClick: false,
+			phoneFlag: false,
+			regPhone: /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/,
+			gvCode: function gvCode() {
+				let that = this;
+				mui.ajax(that.getVcodeUrl, { //获取图形验证码
+					type: 'GET',
+					dataType: 'json',
+					success: function(res) {
+						$('.vCodeItem').html(res.data);
+					},
+					error: function(err) {
+						console.log(err)
+					}
+				});
+			},
+			checkEmpty: function checkEmpty(val) {
+				if(val) {
+					this.isEmpty = true;
+				} else {
+					mui.alert('请输入图片验证码')
+					this.isEmpty = false;
+				}
+			},
+			checkPhone: function checkPhone(val) {
+				if(this.regPhone.test(val)) {
+					return true;
+				} else {
+					this.phoneFlag = false;
+					mui.alert('请输入正确手机号');
+				}
+			},
+			init: function init() {
+				this.submitForm();
+			},
+			settime: function settime(ele) { //倒计时						
+				if(countdown == 0) {
+					$(ele).removeAttr("disabled");
+					$(ele).text("获取验证码");
+					countdown = 60;
+					return;
+				} else {
+					$(ele).attr("disabled", true);
+					$(ele).text(countdown + "s 重新发送 ");
+					countdown--;
+				};
+				setTimeout(function() {
+					settime(ele);
+				}, 1000);
+			},
+			submitForm: function submitForm() {
+				let that = this;
+				mui.plusReady(function() {
+					that.gvCode();
+					that.walletAddress = plus.storage.getItem('walletAddress')
+					//请求图片验证码
+					h('.vCodeItem').tap(function() {
+						that.gvCode();
+					})
+
+					/*获取手机验证码进行图形验证码校验*/
+					h('.getCode').tap(function(e) {
+						e.preventDefault();
+						that.phoneNumber = $('#telNum').val();
+						let PhoneNumber = $('#telNum').val();
+						that.vCode = $('#vCode').val();
+						if(!that.regPhone.test(that.phoneNumber)) {
+							mui.alert('请输入合法手机号码');
+							return false;
+						} else {
+							that.checkEmpty(that.vCode);
+							if(that.isEmpty) {
+								that.vCodeFlag = true;
+								that.isClick = true;
+								mui.ajax(that.getcodeUrl, {
+									type: 'GET',
+									dataType: 'json',
+									data: {
+										mobile: PhoneNumber,
+										captcha: that.vCode
+									},
+									success: function(res) {
+										console.log(JSON.stringify(res));
+										if(res.body.status == 202) {
+											that.vCodeFlag = false;
+											that.isClick = false;
+											mui.alert('图形验证码错误,请重新验证!');
+											return;
+										} else {
+											var timecount = 60;
+											var value = $('.getCode').val() || 0;
+											console.log(value, 'value')
+											if(value == 0) {
+												$('.getCode').val(1)
+												$('.getCode').attr("disabled", true);
+												var s = setInterval(function() {
+													$('.getCode').text(timecount-- + "s 重新发送 ");
+													if(timecount === -2) {
+														$('.getCode').removeAttr("disabled");
+														$('.getCode').text("获取验证码");
+														$('.getCode').val(0)
+														clearInterval(s);
+													}
+												}, 1000)
+											}
+											that.vCodeFlag = true;
+											that.isClick = true;
+											that.settime('.getCode');
+											//mui.alert('图形验证码正确');
+										}
+									},
+									error: function(err) {
+										console.log(err + '错误');
+									}
+								})
+							}
+						}
+					});
+					h('.login').tap(function() {
+						that.code = $('#phoneCode').val();
+						let PhoneNumber = $('#telNum').val()
+						if(that.isClick && that.vCodeFlag) {
+							mui.ajax(that.loginUrl, { //进行验证登录操作
+								type: 'GET',
+								dataType: 'json',
+								data: {
+									mobile: PhoneNumber,
+									code: that.code,
+									address: that.walletAddress
+								},
+								success: function(res) {
+									console.log(JSON.stringify(res) + '已绑定');
+									if(res.body.status == 0) {
+										plus.storage.setItem("token", res.body.data.token);
+										setTimeout(function() {
+											plus.runtime.restart();
+										}, 1000)
+									} else if(res.body.status == 202) {
+										mui.alert('手机验证码错误');
+									} else if(res.body.status == 203) {
+										mui.alert('该手机号已绑定钱包地址');
+									}
+								},
+								error: function(err) {
+									console.log('Error+' + JSON.stringify(err));
+								}
+							});
+						} else {
+							mui.alert('请输入手机号码进行验证登录');
+						}
+					})
+				})
+			}
+		};
+		Validata.init();
+	})();
+</script>

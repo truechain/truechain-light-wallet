@@ -24,12 +24,13 @@
 				<!--<p class="val white">市值: <span>2555.26</span>CNY</p>-->
 			</div>
 			<p class="top">近期交易记录</p>
-			<!--<ul class="mui-table-view">
-				<li class="mui-table-view-cell mui-media subli">
+			<ul class="mui-table-view transactionRecord">
+				<!--<li class="mui-table-view-cell mui-media subli">
 					<a href="javascript:;">
 						<div class="expend_icon"></div>
 						<div class="mui-media-body">
-							<p>sjkjljflsdhaf...hfdshjlkds
+							<p>
+								<span>sjkjljflsdhaf...hfdshjlkds</span>
 								<span class="sub right">-10000 ether</span>
 							</p>
 							<p class="mui-ellipsis">3秒前
@@ -120,9 +121,9 @@
 					<div id="demo1" class="mui-progressbar">
 						<span></span>
 					</div>
-				</li>
+				</li>-->
 			</ul>
-		-->
+
 		</div>
 		<div class="func">
 			<a class="b bs white" id="transfer">转账</a>
@@ -139,20 +140,113 @@
 <script type="text/javascript" src="../../lib/js/lightwallet.min.js"></script>
 
 <script type="text/javascript" src="../../lib/js/addToken.js"></script>
-<script type="text/javascript">
-	mui.init();
-	//	mui('#demo1').progressbar({
-	//		progress: 20
-	//	}).show();
-	//	mui('#demo2').progressbar({
-	//		progress: 50
-	//	}).show();
 
-	mui.plusReady(function() {
-		var self = plus.webview.currentWebview();
-		document.getElementsByClassName('mui-title')[0].innerText = self.currencyName;
-		document.getElementsByClassName('price')[0].innerText = self.currencyPrice;
-		document.getElementById('transfer').href = `transfer.html?name=${self.currencyName}`
-		//		document.getElementsByClassName('val')[0].innerText = '市值 : ' + self.currencyVal;
-	})
+<script type="text/javascript">
+	(function() {
+		var Validate = {
+			selfAddress: null,
+			init: function() {
+				this.submitForm();
+			},
+			getRecord: function getRecord(url) {
+				let that = this;
+				//				let url = 'https://api-ropsten.etherscan.io/api?module=account&action=tokentx&contractaddress=' + contractaddress + '&address=' + address + '&sort=desc&apikey=YourApiKeyToken';
+				mui.ajax(url, {
+					type: 'get',
+					dataType: 'json',
+					success: function(data) {
+						console.log(JSON.stringify(data));
+						let result = data.result;
+						if(result) {
+							result.forEach(function(item, index) {
+								let string = '';
+								if(item.from == that.selfAddress) {
+									string = `<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="expend_icon"></div>
+						<div class="mui-media-body">
+							<p>
+							<span class='address'>${item.to}</span>
+								<span class="sub right">-${item.value/1000000000000000000}</span>
+							</p>							
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>`;
+								} else {
+									string = `<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="income_icon"></div>
+						<div class="mui-media-body">
+							<p>
+							<span class='address'>${item.to}</span>
+								<span class="sub right">+${item.value/1000000000000000000}</span>
+							</p>							
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>`;
+								}
+								$('.transactionRecord').append(string)
+							})
+						}
+
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err))
+					}
+				})
+			},
+			submitForm: function() {
+				let that = this;
+				mui.plusReady(function() {
+					that.selfAddress = plus.storage.getItem('walletAddress');
+					var self = plus.webview.currentWebview();
+					document.getElementsByClassName('mui-title')[0].innerText = self.currencyName;
+					document.getElementsByClassName('price')[0].innerText = self.currencyPrice;
+					document.getElementById('transfer').href = `transfer.html?name=${self.currencyName}`;
+
+					let host = plus.storage.getItem('web3Host');
+					let trueContractAddr, ttrContractAddr;
+					let reg = /https:\/\/ropsten.infura.io/;
+					let apiUrl = '';
+
+					if(reg.test('ropsten')) {
+						apiUrl = 'http://api-ropsten.etherscan.io/api?';
+						trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
+						ttrContractAddr = "0x635AfeB8739f908A37b3d312cB4958CB2033F456";
+					} else {
+						apiUrl = 'http://api.etherscan.io/api?';
+						trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+						ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
+					}
+					switch(self.currencyName) {
+						case 'ETH':
+							{
+								let url = '' + apiUrl + 'module=account&action=txlist&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
+								that.getRecord(url);
+								break;
+							}
+						case 'TRUE':
+							{
+								let url = '' + apiUrl + 'module=account&action=tokentx&contractaddress=' + trueContractAddr + '&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
+								that.getRecord(url);
+								break;
+							}
+						case 'TTR':
+							{
+								let url = '' + apiUrl + 'module=account&action=tokentx&contractaddress=' + ttrContractAddr + '&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
+								that.getRecord(url)
+								break
+							}
+					}
+				})
+			}
+		};
+		Validate.init();
+	})()
 </script>

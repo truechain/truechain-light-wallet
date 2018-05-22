@@ -49,7 +49,7 @@
 						</div>
 						<div class="list-right">
 							<div class="top balance">
-								0
+								-
 							</div>
 							<!--<div class="price bottom"><span>0.00</span>CNY</div>-->
 						</div>
@@ -66,7 +66,7 @@
 							<div class="title top">TRUE</div>
 						</div>
 						<div class="list-right">
-							<div class="top trueBalance">0</div>
+							<div class="top trueBalance">-</div>
 						</div>
 					</a>
 				</div>
@@ -80,7 +80,7 @@
 							<div class="title top">TTR</div>
 						</div>
 						<div class="list-right">
-							<div class="top ttrBalance">0</div>
+							<div class="top ttrBalance">-</div>
 						</div>
 					</a>
 				</div>
@@ -112,19 +112,16 @@
 					<p>你必须自己保管好钱包的私钥和交易密码，任何意外 发生都会导致资产丢失。</p>
 					<p>我们建议先做好双重备份，再打入小额测试，最好开 始愉快使用。</p>
 				</div>
-
 				<section class="clearfix">
 					<i class="icon-key"></i>
 					<p class="sub-title">备份助记词</p>
 					<p>丢失钱包或忘记密码时，可帮助恢复钱包</p>
 				</section>
-
 				<section class="clearfix">
 					<i class="icon-word"></i>
 					<p class="sub-title">备份 keystore 文件</p>
 					<p>官方钱包格式，交易密码保护的私钥文件</p>
 				</section>
-
 				<button class="large-btn">立即备份</button>
 			</div>
 		</div>-->
@@ -137,14 +134,24 @@
 	<script type="text/javascript" src="lib/js/hooked-web3-provider.min.js"></script>
 	<script type="text/javascript" src="src/js/common.js"></script>
 	<script type="text/javascript" src="lib/js/addToken.js"></script>
+	<script type="text/javascript" src="lib/js/bigNumber.js"></script>
 	<script type="text/javascript" src="src/js/asset/asset.js"></script>
 	<script type="text/javascript">
 		mui.plusReady(function() {
 			let host = plus.storage.getItem('web3Host');
+			let trueContractAddr, ttrContractAddr;
+			let reg = /https:\/\/ropsten.infura.io/;
 			if(!host) {
 				host = 'https://mainnet.infura.io/';
+				trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+				ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
+			} else if(reg.test(host)) {
+				trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
+				ttrContractAddr = "0x635AfeB8739f908A37b3d312cB4958CB2033F456";
+			} else {
+				trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+				ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
 			};
-
 			/*刷新*/
 			mui.init({
 				pullRefresh: {
@@ -159,13 +166,11 @@
 					}
 				}
 			});
-
 			pullfresh();
 
 			function show(num) {
 				num += '';
 				num = num.replace(/[^0-9|\.]/g, '');
-
 				if(/^0+/) {
 					num = num.replace(/^0+/, '');
 				};
@@ -185,22 +190,21 @@
 				h('.my-wallet').html(plus.storage.getItem('walletName'));
 				h('.walletAddress').html(plus.storage.getItem('walletAddress'));
 				//获取资产   -- 暂不做资产转换
-
 				var addresses = plus.storage.getItem('walletAddress');
-				var balance = show(web3.fromWei(web3.eth.getBalance(addresses), 'ether'));
-				//var balance = web3.fromWei(web3.eth.getBalance(addresses), 'ether');
-
-				h('#ethAssets').tap(function() {
-					openInfo('view/asset/currencydetail.html', {
-						currencyName: 'ETH',
-						currencyPrice: balance
-					})
+				//var balance = show(web3.fromWei(web3.eth.getBalance(addresses), 'ether'));
+				web3.eth.getBalance(addresses).then(function(res) {
+					balance = res;
+					balance = show(web3.utils.fromWei(balance, 'ether'));
+					h('.balance').html(balance);
+					h('#ethAssets').tap(function() {
+						openInfo('view/asset/currencydetail.html', {
+							currencyName: 'ETH',
+							currencyPrice: balance
+						})
+					});
 				});
 
-				/*balance = Math.round(balance * 100000) / 100000;*/
-				h('.balance').html(balance);
-				let contractAddrTrue = '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab';
-				addToken(contractAddrTrue, function(balances) {
+				addToken(trueContractAddr, function(balances) {
 					if(balances) {
 						h('.trueBalance').html(balances);
 						h('.total-money').html(balances);
@@ -209,25 +213,21 @@
 						h('.total-money').html(balances);
 						h('.trueBalance').html(balances);
 					}
-
 					h('#trueAssets').tap(function() {
 						openInfo('view/asset/currencydetail.html', {
 							currencyName: 'TRUE',
 							currencyPrice: balances
 						})
 					});
-
 				});
 
-				let contractAddrTTR = '0xF2bb016e8C9C8975654dcd62f318323A8A79D48E';
-				addToken(contractAddrTTR, function(ban) {
+				addToken(ttrContractAddr, function(ban) {
 					if(ban) {
 						h('.ttrBalance').html(ban);
 					} else {
 						ban = 0;
 						h('.ttrBalance').html(ban);
 					};
-
 					h('#ttrAssets').tap(function() {
 						openInfo('view/asset/currencydetail.html', {
 							currencyName: 'TTR',
@@ -235,10 +235,8 @@
 						})
 					})
 				})
-
 				mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
 			};
-
 		})
 	</script>
 

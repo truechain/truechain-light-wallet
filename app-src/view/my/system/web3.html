@@ -74,15 +74,17 @@
 <script type="text/javascript">
 	mui.plusReady(function() {
 		let host = plus.storage.getItem('web3Host');
-		if(host) {
-			h('#web3Host').val(host)
+if(host) {
+	h('#web3Host').val(host)
 		}
 		h('#saveWeb3Setting').tap(function() {
 			plus.storage.setItem('web3Host', h('#web3Host').val());
-			let aaa = plus.storage.getItem('web3Host');
-			if(aaa) {
+			let host = plus.storage.getItem('web3Host');
+			if(host) {
 				mui.toast('设置成功');
-				mui.back();
+				setTimeout(function() {
+					plus.runtime.restart();
+				}, 1000)
 			}
 		})
 	});
