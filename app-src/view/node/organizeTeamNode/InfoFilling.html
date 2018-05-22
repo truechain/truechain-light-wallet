@@ -18,8 +18,8 @@
 		<div class="mui-content">
 			<div class="main">
 				<h2>个人信息</h2>
-				<input type="text" class="nickName" placeholder="昵称" />
-				<textarea class="reason" placeholder="申请理由"></textarea>
+				<input type="text" class="nickName" maxlength="10" placeholder="昵称" />
+				<textarea class="reason" maxlength="20" placeholder="申请理由"></textarea>
 				<!--<input type="text" class="reason" placeholder="申请理由" />-->
 			</div>
 			<div class="join">
@@ -34,7 +34,7 @@
 
 				<div class="applySucc-box">
 					<div class="succ">申请已提交成功,请等待队长处理!</div>
-					<button id="back-btn">返回</button>
+					<button id="back-button">返回</button>
 				</div>
 			</div>
 		</div>
@@ -102,7 +102,8 @@
 				flag = true;
 				mask.close();
 				$('.applySucc').addClass('not-view');
-				plus.webview.show(plus.webview.getWebviewById('index.html'));
+				plus.runtime.restart();
+				//plus.webview.show(plus.webview.getWebviewById('index.html'));
 			},
 			submitForm() {
 				var that = this;
@@ -164,7 +165,7 @@
 					});
 
 					/*关闭*/
-					$('#back-btn').on('tap', that.close);
+					$('#back-button').on('tap', that.close);
 					$('.close').on('tap', that.close);
 				})
 			}

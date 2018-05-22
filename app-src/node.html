@@ -9,6 +9,12 @@
 		<link rel="stylesheet" type="text/css" href="dist/css/my/node.css" />
 	</head>
 
+	<style type="text/css">
+		.mui-slider {
+			background: #fff;
+		}
+	</style>
+
 	<body>
 		<div class="bg-top">
 			<div class="top-title">节点</div>
@@ -35,8 +41,11 @@
 					</a>
 				</div>
 				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+
 				<div class="mui-slider-group">
 					<div id="item1mobile" class="base-info md-f1 mui-slider-item mui-control-content detailInfos md-box md-ver mui-active">
+						<!--<div id="refreshContainer" class="mui-content mui-scroll-wrapper">
+							<div class="mui-scroll">-->
 						<ul class="mui-table-view  fullNode">
 							<!--<li class="mui-table-view-cell">
 								<div class="view-cell-left">
@@ -53,6 +62,8 @@
 								</div>
 							</li>-->
 						</ul>
+						<!--</div>
+						</div>-->
 					</div>
 					<div id="item2mobile" class="process bg md-f1 mui-slider-item mui-control-content detailInfos1 md-box md-ver">
 						<ul class="mui-table-view standardNode">
@@ -63,9 +74,6 @@
 								<div class="view-cell-center nickName">
 									<span>全力以赴全力以赴</span>
 									<img class="type" src="dist/images/common/geren.png" />
-								</div>
-								!--<div class="view-cell-center-item">
-									12055550true
 								</div>
 								<div class="view-cell-right voteNum">
 									12055555500票
@@ -153,7 +161,7 @@
 																	</div>																	
 																</li>`;
 						};
-						$(element).html(str);
+						$(element).append(str);
 					});
 
 					//之后
@@ -189,7 +197,7 @@
 																	</div>
 																</li>`;
 						};
-						$(element).html(strAf);
+						$(element).append(strAf);
 					})
 					$('.mui-table-view-cell').on('tap', function() {
 						openInfo('view/node/voteItem/baseInfo.html', {
@@ -235,25 +243,21 @@
 										{
 											console.log('申请通过');
 											if(res.data.role == 2 && res.data.type == 2) {
-												console.log('组队')
 												openInfo('view/node/myTeam/myTeam.html', {
 													status: 2,
 													type: 2
 												});
 											} else if(res.data.role == 1 && res.data.type == 1) {
-												console.log('个人成功')
 												openInfo('view/node/signUpSuccess.html', {
 													status: 2,
 													type: 1
 												});
 											} else if(res.data.role == 1 && !res.data.type) {
-												console.log('个人加入队伍')
 												openInfo('view/node/myTeam/teamInfo.html', {
 													status: 2,
 													type: 2
 												});
 											} else {
-												console.log('红豆沙客户')
 												openInfo('view/node/signUpSuccess.html', {
 													status: 2,
 													type: 1
@@ -289,13 +293,27 @@
 				let that = this;
 				mui.plusReady(function() {
 					that.token = plus.storage.getItem('token');
+					//					mui.init({
+					//						pullRefresh: {
+					//							container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+					//							down: {
+					//								height: 500, //可选,默认50.触发下拉刷新拖动距离,
+					//								auto: true, //可选,默认false.首次加载自动下拉刷新一次
+					//								contentdown: "下拉iiiii刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+					//								contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+					//								contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+					//								callback: pullfresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+					//							}
+					//						}
+					//					});
+
 					mui.init({
 						pullRefresh: {
-							container: "#refreshContainer", //下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+							container: "#refreshContainer",
 							down: {
-								height: 500, //可选,默认50.触发下拉刷新拖动距离,
+								height: 50, //可选,默认50.触发下拉刷新拖动距离,
 								auto: true, //可选,默认false.首次加载自动下拉刷新一次
-								contentdown: "下拉iiiii刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+								contentdown: "下拉可以刷新", //可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
 								contentover: "释放立即刷新", //可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
 								contentrefresh: "正在刷新...", //可选，正在刷新状态时，下拉刷新控件上显示的标题内容
 								callback: pullfresh //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
@@ -309,13 +327,13 @@
 					});
 
 					function pullfresh() {
-						console.log('呼呼哈的回复即可和交换机客户手机打开即可哈')
+						console.log('呼呼哈的回复即可和交')
 						that.getStatus();
-						that.request(1, '.standardNode');
-						that.request(2, '.fullNode');
 						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
 					}
 					pullfresh();
+					that.request(1, '.standardNode');
+					that.request(2, '.fullNode');
 				});
 			}
 		};

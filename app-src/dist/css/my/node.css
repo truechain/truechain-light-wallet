@@ -95,8 +95,8 @@ body {
 
 .mui-table-view-cell {
 	display: flex;
-	justify-content: space-around;
-	max-height: 50px
+	justify-content: space-between;
+	max-height: 50px;
 }
 
 .view-cell-left,

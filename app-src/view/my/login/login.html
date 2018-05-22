@@ -132,6 +132,7 @@
 					h('.getCode').tap(function(e) {
 						e.preventDefault();
 						that.phoneNumber = $('#telNum').val();
+						let PhoneNumber = $('#telNum').val();
 						that.vCode = $('#vCode').val();
 						if(!that.regPhone.test(that.phoneNumber)) {
 							mui.alert('请输入合法手机号码');
@@ -145,7 +146,7 @@
 									type: 'GET',
 									dataType: 'json',
 									data: {
-										mobile: that.phoneNumber,
+										mobile: PhoneNumber,
 										captcha: that.vCode
 									},
 									success: function(res) {
@@ -182,20 +183,18 @@
 										console.log(err + '错误');
 									}
 								})
-
 							}
-
 						}
-
 					});
 					h('.login').tap(function() {
 						that.code = $('#phoneCode').val();
+						let PhoneNumber = $('#telNum').val()
 						if(that.isClick && that.vCodeFlag) {
 							mui.ajax(that.loginUrl, { //进行验证登录操作
 								type: 'GET',
 								dataType: 'json',
 								data: {
-									mobile: that.phoneNumber,
+									mobile: PhoneNumber,
 									code: that.code,
 									address: that.walletAddress
 								},

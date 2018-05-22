@@ -115,6 +115,7 @@
 					}
 				});
 			},
+
 			submitForm: function submitForm() {
 				let that = this;
 				mui.plusReady(function() {
@@ -125,43 +126,41 @@
 						that.teamAdd = self.teamAdd;
 					}
 					that.token = plus.storage.getItem('token');
-					setTimeout(function() {
-						that.getInfoReq(that.teamInfoUrl, function(res) {
-							console.log(JSON.stringify(res.data) + '队伍信息');
-							$('.nickName').html(res.data[0].nickname);
-							$('.voteNum').html(res.data[0].tickets);
-							$('.baseInfo_declaration').html(res.data[0].declaration);
-						});
-						that.getTeamMember(that.getTeamMemberUrl, function(res) {
-							console.log(JSON.stringify(res.data[0]) + '成员信息');
-							let string = '';
-							if(res.data[0].role) {
-								if(res.data[0].role == 2) { //队长
-									res.data.forEach(function(item, index) {
-										string = `<li class="member">
-						<div class="memberInfo">
-							<i></i>
-							<span>${item.nickname}</span>
-						</div>
-						<span class="trueNum">${item.lock_num}TRUE</span> 
-					</li>`;
-										$('.teamInfo').append(string);
-									})
-								} else if(res.data[0].role == 1) { //组员
-									res.data.forEach(function(item, index) {
-										string = `<li class="member">
-						<div class="memberInfo">
-							<i></i>
-							<span>${item.nickname}</span>
-						</div>
-						<span class="trueNum">${item.lock_num}TRUE</span>
-					</li>`;
-										$('.teamInfo').append(string);
-									})
-								}
-							}
-						});
-					}, 2000)
+					//					setTimeout(function() {
+					//						that.getInfoReq(that.teamInfoUrl, function(res) {
+					//							$('.nickName').html(res.data[0].nickname);
+					//							$('.voteNum').html(res.data[0].tickets);
+					//							$('.baseInfo_declaration').html(res.data[0].declaration);
+					//						});
+					//						that.getTeamMember(that.getTeamMemberUrl, function(res) {
+					//							let string = '';
+					//							if(res.data[0].role) {
+					//								if(res.data[0].role == 2) {
+					//									res.data.forEach(function(item, index) {
+					//										string = `<li class="member">
+					//						<div class="memberInfo">
+					//							<i></i>
+					//							<span>${item.nickname}</span>
+					//						</div>
+					//						<span class="trueNum">${item.lock_num}TRUE</span> 
+					//					</li>`;
+					//										$('.teamInfo').append(string);
+					//									})
+					//								} else if(res.data[0].role == 1) {
+					//									res.data.forEach(function(item, index) {
+					//										string = `<li class="member">
+					//						<div class="memberInfo">
+					//							<i></i>
+					//							<span>${item.nickname}</span>
+					//						</div>
+					//						<span class="trueNum">${item.lock_num}TRUE</span>
+					//					</li>`;
+					//										$('.teamInfo').append(string);
+					//									})
+					//								}
+					//							}
+					//						});
+					//					}, 2000)
 
 					$('.mui-title').html('加入组队');
 					$('#next').html('下一步');
@@ -179,8 +178,40 @@
 										token: that.token
 									},
 									success: function(res) {
-										//console.log(JSON.stringify(res));
 										that.teamAdd = res.data[0].team_address;
+										that.getInfoReq(that.teamInfoUrl, function(res) {
+											$('.nickName').html(res.data[0].nickname);
+											$('.voteNum').html(res.data[0].tickets);
+											$('.baseInfo_declaration').html(res.data[0].declaration);
+										});
+										that.getTeamMember(that.getTeamMemberUrl, function(res) {
+											let string = '';
+											if(res.data[0].role) {
+												if(res.data[0].role == 2) {
+													res.data.forEach(function(item, index) {
+														string = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span> 
+					</li>`;
+														$('.teamInfo').append(string);
+													})
+												} else if(res.data[0].role == 1) {
+													res.data.forEach(function(item, index) {
+														string = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span>
+					</li>`;
+														$('.teamInfo').append(string);
+													})
+												}
+											}
+										});
 									},
 									error: function(err) {
 										console.log(JSON.stringify(err));
@@ -193,6 +224,53 @@
 								$('.mui-title').html('已拒绝');
 								$('.refuse').removeClass('not-view');
 								$('#next').html('加入其他组队');
+								mui.ajax(that.getTeamAddressUrl, {
+									type: 'get',
+									dataType: 'json',
+									headers: {
+										token: that.token
+									},
+									success: function(res) {
+										that.teamAdd = res.data[0].team_address;
+										that.getInfoReq(that.teamInfoUrl, function(res) {
+											$('.nickName').html(res.data[0].nickname);
+											$('.voteNum').html(res.data[0].tickets);
+											$('.baseInfo_declaration').html(res.data[0].declaration);
+										});
+										that.getTeamMember(that.getTeamMemberUrl, function(res) {
+											let string = '';
+											if(res.data[0].role) {
+												if(res.data[0].role == 2) {
+													res.data.forEach(function(item, index) {
+														string = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span> 
+					</li>`;
+														$('.teamInfo').append(string);
+													})
+												} else if(res.data[0].role == 1) {
+													res.data.forEach(function(item, index) {
+														string = `<li class="member">
+						<div class="memberInfo">
+							<i></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span>
+					</li>`;
+														$('.teamInfo').append(string);
+													})
+												}
+											}
+										});
+									},
+									error: function(err) {
+										console.log(JSON.stringify(err));
+									}
+								})
+
 								$('#next').on('tap', function() {
 									mui.back();
 									mui.ajax(that.initStatusUrl, {
