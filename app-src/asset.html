@@ -181,7 +181,6 @@
 			};
 
 			function pullfresh() {
-				host = plus.storage.getItem('web3Host');
 				var web3 = new Web3(new Web3.providers.HttpProvider(host));
 				h('.my-wallet').html(plus.storage.getItem('walletName'));
 				h('.walletAddress').html(plus.storage.getItem('walletAddress'));
