@@ -1,4 +1,4 @@
-function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress, mask, callback, gas = "150000", gasPrice = "18000000000") {
+function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress, mask, callback, feedback, gas = "150000", gasPrice = "18000000000") {
 	let host = plus.storage.getItem('web3Host');
 	let trueContractAddr, ttrContractAddr;
 	let reg = /https:\/\/ropsten.infura.io/;
@@ -421,11 +421,12 @@ function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress
 			},
 			function(error, txhash) {
 				if(txhash) {
-					//mask._remove();
 					callback();
+					feedback();
 				} else {
-					mui.alert('交易失败');
+					mui.alert('ETH不足');
 					mask._remove();
+					feedback();
 				}
 				console.log('error: ' + error);
 				console.log('txhash: ' + txhash);
@@ -437,9 +438,11 @@ function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress
 		if(error == 'Error: Key derivation failed - possibly wrong password') {
 			mui.alert('密码错误,请重新输入!');
 			mask._remove();
+			feedback();
 		} else if(addReg.test(error)) {
 			mask._remove();
-			mui.alert('无效地址,请重新输入!')
+			feedback();
+			mui.alert('无效地址,请重新输入!');
 		}
 		console.log('error: ' + error);
 	}

@@ -35,7 +35,8 @@
 			"view/node/signUpSuccess.html",
 			"view/node/myTeam/myTeam.html",
 			"view/node/vote.html",
-			"view/node/voteItem/baseInfo.html"
+			"view/node/voteItem/baseInfo.html",
+			"view/node/myTeam/teamInfo.html"
 		]
 	},
 	"view/node/signUp.html": {

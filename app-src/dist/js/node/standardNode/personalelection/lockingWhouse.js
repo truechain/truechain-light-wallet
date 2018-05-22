@@ -84,10 +84,15 @@
 					}
 				});
 				let callback = function() {
+					$('.psw').val('');
 					$('.signUpsucc').removeClass('not-view');
 					$('.title').html('完成!');
 					$('.succ').html('发送锁仓交易成功!');
 				};
+
+				let feedback = function() {
+					plus.nativeUI.closeWaiting();
+				}
 
 				/*确认*/
 				$('.comfirm').on('tap', function() {
@@ -96,9 +101,10 @@
 					that.password = $('.psw').val();
 					that.value = $('.lockingNum').val();
 					if(that.password) {
+						plus.nativeUI.showWaiting("交易进行中,请稍侯...");
 						let amountWei = that.value.toString();
 						setTimeout(function() {
-							sendTokens(that.fromAddress, that.toAddress, amountWei, that.password, that.keystore, trueContractAddr, mask, callback)
+							sendTokens(that.fromAddress, that.toAddress, amountWei, that.password, that.keystore, trueContractAddr, mask, callback, feedback)
 						}, 500)
 					} else {
 						mui.alert('请输入密码!');

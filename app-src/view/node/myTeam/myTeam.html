@@ -138,15 +138,13 @@
 			submitForm: function() {
 				let that = this;
 				mui.plusReady(function() {
-
 					that.token = plus.storage.getItem('token');
 					that.teamAdd = plus.storage.getItem('walletAddress');
 					that.getTeamInfo() //队伍信息
 					that.getTeamMember() //队员信息
-
 					h('.manage').tap(() => {
 						openInfo('aManagement.html')
-					})
+					});
 				})
 			}
 		};

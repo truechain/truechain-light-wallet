@@ -78,7 +78,7 @@
 			teamRankUrl: 'http://api.truechain.pro/teamRank',
 			init() {
 				this.submitForm();
-//		 console.log(JSON.stringify(plus.webview.currentWebview()), null, 2)
+				//		 console.log(JSON.stringify(plus.webview.currentWebview()), null, 2)
 			},
 			getTeamData: function getTeamData(node_type) {
 				let that = this;
@@ -142,7 +142,7 @@
 								that.getTeamData(1);
 								//个人报名标准节点
 								$('.signUp_personal').on('tap', function() {
-									if(that.trueNum >= 0) {
+									if(that.trueNum >= 2000) {
 										openInfo('personalelection/personalSignup.html', {
 											node_type: 1,
 											type: 1
