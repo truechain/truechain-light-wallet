@@ -128,7 +128,7 @@
 					</div>
 				</div>
 				<ul class="teamInfo">
-					<!--<li class="member">
+					<li class="member">
 						<div class="memberInfo">
 							<i></i>
 							<span>大虎法师法师打</span>
@@ -148,7 +148,7 @@
 							<span>大虎法师法师打</span>
 						</div>
 						<span class="mtrueNum">2000TRUE</span>
-					</li>-->
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -161,9 +161,9 @@
 <script type="text/javascript">
 	(function() {
 		var Validate = {
-			getInfoReqUrl: 'http://api.truechain.pro/teamInfo',
-			getTeamMemberUrl: 'http://api.truechain.pro/getTeamMember',
-			getTeamAddressUrl: 'http://api.truechain.pro/getTeamAddress',
+			getInfoReqUrl: 'http://39.105.125.189:7001/teamInfo',
+			getTeamMemberUrl: 'http://39.105.125.189:7001/getTeamMember',
+			getTeamAddressUrl: 'http://39.105.125.189:7001/getTeamAddress',
 			teamAdd: null,
 			token: null,
 			type: null,
@@ -208,7 +208,6 @@
 						console.log(JSON.stringify(err));
 					}
 				})
-
 			},
 			getInfoReq: function getInfoReq(url, teamAdd, callback) {
 				let that = this;
@@ -239,13 +238,11 @@
 					let self = plus.webview.currentWebview();
 					this.token = plus.storage.getItem('token');
 					this.type = self.type;
-
 					that.getTeamAddress(function(teamAddress) {
 						if(that.type == 2) {
 							$('.infoType').html('组队信息');
 							that.getInfoReq(that.getInfoReqUrl, teamAddress, function(res) {
 								if(res.data) {
-									//if(res.data[0].role == 2) {
 									let stringEle = `<li class="member">
 						<div class="memberInfo">
 							<i></i>
@@ -254,7 +251,6 @@
 						<span class="mtrueNum">${res.data[0].lock_num}TRUE</span>
 					</li>`;
 									$('.teamInfo').append(stringEle);
-									//}
 								}
 							});
 							that.getTeamMember(that.getTeamMemberUrl, teamAddress)
