@@ -11,6 +11,7 @@
 - 优化导入助记词验证提示
 - 资产页面增加下拉刷新
 
+```
 ├── asset
 │   ├── amendpaw.html		
 │   ├── currencydetail.html
@@ -79,3 +80,5 @@
 └── rules
     ├── privacypolicy.html
     └── useragreement.html
+    
+ ```
