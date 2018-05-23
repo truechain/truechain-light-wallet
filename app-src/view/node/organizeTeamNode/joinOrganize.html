@@ -38,7 +38,7 @@
 				<ul class="teamInfo">
 					<!--<li class="member">
 						<div class="memberInfo">
-							<i></i>
+							<i class="duizhang"></i>
 							<span>哈哈哈哈</span>
 						</div>
 						<span class="trueNum">2000TRUE</span>
@@ -68,7 +68,6 @@
 			token: null,
 			teamAdd: null,
 			type: null,
-			status: null,
 			teamInfoUrl: 'http://api.truechain.pro/teamInfo',
 			getTeamMemberUrl: 'http://api.truechain.pro/getTeamMember',
 			initStatusUrl: 'http://api.truechain.pro/initStatus',
@@ -115,55 +114,55 @@
 					}
 				});
 			},
-
 			submitForm: function submitForm() {
 				let that = this;
 				mui.plusReady(function() {
 					let self = plus.webview.currentWebview();
 					that.type = self.type;
-					that.status = self.status;
+
 					if(self.teamAdd) {
 						that.teamAdd = self.teamAdd;
 					}
 					that.token = plus.storage.getItem('token');
-					//					setTimeout(function() {
-					//						that.getInfoReq(that.teamInfoUrl, function(res) {
-					//							$('.nickName').html(res.data[0].nickname);
-					//							$('.voteNum').html(res.data[0].tickets);
-					//							$('.baseInfo_declaration').html(res.data[0].declaration);
-					//						});
-					//						that.getTeamMember(that.getTeamMemberUrl, function(res) {
-					//							let string = '';
-					//							if(res.data[0].role) {
-					//								if(res.data[0].role == 2) {
-					//									res.data.forEach(function(item, index) {
-					//										string = `<li class="member">
-					//						<div class="memberInfo">
-					//							<i></i>
-					//							<span>${item.nickname}</span>
-					//						</div>
-					//						<span class="trueNum">${item.lock_num}TRUE</span> 
-					//					</li>`;
-					//										$('.teamInfo').append(string);
-					//									})
-					//								} else if(res.data[0].role == 1) {
-					//									res.data.forEach(function(item, index) {
-					//										string = `<li class="member">
-					//						<div class="memberInfo">
-					//							<i></i>
-					//							<span>${item.nickname}</span>
-					//						</div>
-					//						<span class="trueNum">${item.lock_num}TRUE</span>
-					//					</li>`;
-					//										$('.teamInfo').append(string);
-					//									})
-					//								}
-					//							}
-					//						});
-					//					}, 2000)
 
 					$('.mui-title').html('加入组队');
 					$('#next').html('下一步');
+
+					if(that.type == 2) {
+						that.teamAdd = self.teamAddress;
+						that.getInfoReq(that.teamInfoUrl, function(res) {
+							$('.nickName').html(res.data[0].nickname);
+							$('.voteNum').html(res.data[0].tickets);
+							$('.baseInfo_declaration').html(res.data[0].declaration);
+						});
+						that.getTeamMember(that.getTeamMemberUrl, function(res) {
+							res.data.sort(function(a, b) {
+								return b.role - a.role
+							})
+							let string = '';
+							res.data.forEach(function(item, index) {
+								if(item.role == 2) {
+									string = `<li class="member">
+						<div class="memberInfo">
+							<i class='duizhang'></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span> 
+					</li>`;
+									$('.teamInfo').append(string);
+								} else if(item.role == 1) {
+									string = `<li class="member">
+						<div class="memberInfo">
+							<i class='duiyuan'></i>
+							<span>${item.nickname}</span>
+						</div>
+						<span class="trueNum">${item.lock_num}TRUE</span>
+					</li>`;
+									$('.teamInfo').append(string);
+								}
+							})
+						});
+					}
 					let status = self.status;
 					switch(status) {
 						case 1:

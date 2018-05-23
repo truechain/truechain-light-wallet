@@ -55,6 +55,24 @@ body,
 	border-bottom: 1px solid rgba(245, 245, 245, 1);
 }
 
+.duizhang {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url(../../../../images/node/duizhang.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.duiyuan {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url(../../../../images/node/duiyuan.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+
+/*
 .member:nth-child(1)>div>i {
 	display: inline-block;
 	width: 20px;
@@ -69,7 +87,7 @@ body,
 	height: 20px;
 	background: url(../../../../images/node/duiyuan.png) no-repeat;
 	background-size: 100% 100%;
-}
+}*/
 
 .memberInfo {
 	display: flex;
