@@ -68,10 +68,10 @@
 			token: null,
 			teamAdd: null,
 			type: null,
-			teamInfoUrl: 'http://39.105.125.189:7001/teamInfo',
-			getTeamMemberUrl: 'http://39.105.125.189:7001/getTeamMember',
-			initStatusUrl: 'http://39.105.125.189:7001/initStatus',
-			getTeamAddressUrl: 'http://39.105.125.189:7001/getTeamAddress',
+			teamInfoUrl: 'http://45.40.243.125:7001/teamInfo',
+			getTeamMemberUrl: 'http://45.40.243.125:7001/getTeamMember',
+			initStatusUrl: 'http://45.40.243.125:7001/initStatus',
+			getTeamAddressUrl: 'http://45.40.243.125:7001/getTeamAddress',
 			init() {
 				this.submitForm();
 			},
@@ -185,31 +185,27 @@
 										});
 										that.getTeamMember(that.getTeamMemberUrl, function(res) {
 											let string = '';
-											if(res.data[0].role) {
-												if(res.data[0].role == 2) {
-													res.data.forEach(function(item, index) {
-														string = `<li class="member">
-						<div class="memberInfo">
-							<i></i>
-							<span>${item.nickname}</span>
-						</div>
-						<span class="trueNum">${item.lock_num}TRUE</span> 
-					</li>`;
-														$('.teamInfo').append(string);
-													})
-												} else if(res.data[0].role == 1) {
-													res.data.forEach(function(item, index) {
-														string = `<li class="member">
-						<div class="memberInfo">
-							<i></i>
-							<span>${item.nickname}</span>
-						</div>
-						<span class="trueNum">${item.lock_num}TRUE</span>
-					</li>`;
-														$('.teamInfo').append(string);
-													})
+											res.data.forEach(function(item, index) {
+												if(item.role == 2) {
+													string = `<li class="member">
+											<div class="memberInfo">
+																		<i class="duizhang"></i>
+																			<span>${item.nickname}</span>
+																		</div>
+																			<span class="trueNum">${item.lock_num}TRUE</span> 
+																		</li>`;
+													$('.teamInfo').append(string);
+												} else if(item.role == 1) {
+													string = `<li class="member">
+																	<div class="memberInfo">
+																		<i class="duiyuan"></i>
+																		<span>${item.nickname}</span>
+																	</div>
+																	<span class="trueNum">${item.lock_num}TRUE</span>
+																</li>`;
+													$('.teamInfo').append(string);
 												}
-											}
+											})
 										});
 									},
 									error: function(err) {
@@ -220,6 +216,7 @@
 							}
 						case 3:
 							{
+								console.log('kkkkk')
 								$('.mui-title').html('已拒绝');
 								$('.refuse').removeClass('not-view');
 								$('#next').html('加入其他组队');
@@ -238,38 +235,33 @@
 										});
 										that.getTeamMember(that.getTeamMemberUrl, function(res) {
 											let string = '';
-											if(res.data[0].role) {
-												if(res.data[0].role == 2) {
-													res.data.forEach(function(item, index) {
-														string = `<li class="member">
-						<div class="memberInfo">
-							<i></i>
-							<span>${item.nickname}</span>
-						</div>
-						<span class="trueNum">${item.lock_num}TRUE</span> 
-					</li>`;
-														$('.teamInfo').append(string);
-													})
-												} else if(res.data[0].role == 1) {
-													res.data.forEach(function(item, index) {
-														string = `<li class="member">
-						<div class="memberInfo">
-							<i></i>
-							<span>${item.nickname}</span>
-						</div>
-						<span class="trueNum">${item.lock_num}TRUE</span>
-					</li>`;
-														$('.teamInfo').append(string);
-													})
+											res.data.forEach(function(item, index) {
+												if(item.role == 2) {
+													string = `<li class="member">
+																	<div class="memberInfo">
+																		<i class="duizhang"></i>
+																		<span>${item.nickname}</span>
+																	</div>
+																	<span class="trueNum">${item.lock_num}TRUE</span> 
+																</li>`;
+													$('.teamInfo').append(string);
+												} else if(item.role == 1) {
+													string = `<li class="member">
+																	<div class="memberInfo">
+																		<i class="duiyuan"></i>
+																		<span>${item.nickname}</span>
+																	</div>
+																	<span class="trueNum">${item.lock_num}TRUE</span>
+																</li>`;
+													$('.teamInfo').append(string);
 												}
-											}
+											})
 										});
 									},
 									error: function(err) {
 										console.log(JSON.stringify(err));
 									}
 								})
-
 								$('#next').on('tap', function() {
 									mui.back();
 									mui.ajax(that.initStatusUrl, {
