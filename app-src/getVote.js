@@ -440,9 +440,21 @@ function getVote(fromAddr, callback) {
 			"type": "event"
 		}
 	];
-	var web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/"));
+
+	let host = plus.storage.getItem('web3Host');
+	let reg = /https:\/\/ropsten.infura.io/;
+	let ttrContractAddr;
+	if(!host) {
+		host = 'https://mainnet.infura.io/';
+		ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
+	} else if(reg.test(host)) {
+		ttrContractAddr = "0x635AfeB8739f908A37b3d312cB4958CB2033F456";
+	} else {
+		ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
+	}
+	var web3 = new Web3(new Web3.providers.HttpProvider(host));
 	let contract = new web3.eth.Contract(iterface);
-	contract.options.address = '0x635AfeB8739f908A37b3d312cB4958CB2033F456';
+	contract.options.address = ttrContractAddr;
 
 	try {
 		contract.methods.ticketsOf(fromAddr).call().then(function(num) {
