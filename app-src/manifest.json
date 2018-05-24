@@ -7,7 +7,7 @@
 	"id": "H58040C5A",/*应用的标识，创建应用时自动生成，勿手动修改*/
 	"name": "True",/*应用名称，程序桌面图标名称*/
 	"version": {
-		"name": "2.0.2",/*应用版本名称*/
+		"name": "2.0.3",/*应用版本名称*/
 		"code": "83"
 	},
 	"description": "初链",/*应用描述信息*/
@@ -296,7 +296,8 @@
 					"asset.html",
 					"index.html",
 					"view/my/wallet/importwallet.html",
-					"view/rules/privacypolicy.html"
+					"view/rules/privacypolicy.html",
+					"view/asset/defaultExportMw.html"
 				],
 				"priority": 0
 			},
@@ -412,7 +413,9 @@
 				"priority": 0
 			},
 			"node.html": {
-				"resources": [],
+				"resources": [
+					"dist/images/common/geren.png"
+				],
 				"refer": [
 					"view/node/signUp.html",
 					"view/node/organizeTeamNode/joinOrganize.html",

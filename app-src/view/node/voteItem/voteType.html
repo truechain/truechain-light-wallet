@@ -20,7 +20,20 @@
 			<!--<div class="mui-input-row mui-search">
 				<input type="search" class="mui-input-clear" placeholder="搜索">
 			</div>-->
-			<ul class="mui-table-view nodeType"></ul>
+			<ul class="mui-table-view nodeType">
+				<!--<li class="mui-table-view-cell" data-address=${item.address}>
+																	<div class="view-cell-left">
+																		${index+4}
+																	</div>
+																	<div class="view-cell-center nickName">
+																		<span>${item.nickname}</span>
+																	</div>
+																	
+																	<div class="view-cell-right voteNum">
+																		${item.tickets}票
+																	</div>
+															</li>-->
+			</ul>
 		</div>
 
 	</body>
@@ -35,7 +48,7 @@
 	(function() {
 		var Validate = {
 			token: null,
-			nodeDataUrl: 'http://45.40.243.125:7001/nodeRank',
+			nodeDataUrl: 'http://39.105.125.189:7001/nodeRank',
 			getAjaxPromise: function getAjaxPromise(option) {
 				let that = this;
 				return new Promise(function(resolve, reject) {
@@ -81,9 +94,7 @@
 																		<span>${item.nickname}</span>
 																		<img class="type" src="../../../dist/images/common/geren.png" />
 																	</div>
-																	<div class="view-cell-center-item">
-																		${item.lock_num}true
-																	</div>
+																	
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
 																	</div>
@@ -96,9 +107,7 @@
 																	<div class="view-cell-center nickName">
 																		<span>${item.nickname}</span>
 																	</div>
-																	<div class="view-cell-center-item">
-																		${item.lock_num}true
-																	</div>
+																	
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
 																	</div>
@@ -112,6 +121,12 @@
 						return b.voteNum - a.voteNum;
 					});
 
+					/*					 
+					 <div class="view-cell-center-item">
+																		${item.lock_num}true
+																	</div>				
+					 */
+
 					ranking.forEach(function(item, index) {
 						let strAf;
 						if(item.type == 1) {
@@ -123,9 +138,7 @@
 																		<span>${item.nickname}</span>
 																		<img class="type" src="../../../dist/images/common/geren.png" />
 																	</div>
-																	<div class="view-cell-center-item">
-																		${item.lock_num}true
-																	</div>
+																	
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
 																	</div>
@@ -138,9 +151,7 @@
 																	<div class="view-cell-center nickName">
 																		<span>${item.nickname}</span>
 																	</div>
-																	<div class="view-cell-center-item">
-																		${item.lock_num}true
-																	</div>
+																	
 																	<div class="view-cell-right voteNum">
 																		${item.tickets}票
 																	</div>

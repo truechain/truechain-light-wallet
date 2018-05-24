@@ -212,10 +212,10 @@
 
 					let host = plus.storage.getItem('web3Host');
 					let trueContractAddr, ttrContractAddr;
-					let reg = /https:\/\/ropsten.infura.io/;
+					let reg = /ropsten/g;
 					let apiUrl = '';
 
-					if(reg.test('ropsten')) {
+					if(reg.test(host)) {
 						apiUrl = 'http://api-ropsten.etherscan.io/api?';
 						trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
 						ttrContractAddr = "0x635AfeB8739f908A37b3d312cB4958CB2033F456";
@@ -224,6 +224,7 @@
 						trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
 						ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
 					}
+
 					switch(self.currencyName) {
 						case 'ETH':
 							{

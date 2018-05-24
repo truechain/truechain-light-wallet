@@ -73,12 +73,29 @@
 <script type="text/javascript">
 	(function() {
 		var Validate = {
-			trueNum: null,
+			trueNum: 0,
 			token: null,
-			teamRankUrl: 'http://45.40.243.125:7001/teamRank',
+			teamRankUrl: 'http://39.105.125.189:7001/teamRank',
+			trueCoinUrl: 'http://39.105.125.189:7001/getTrueCoin',
 			init() {
 				this.submitForm();
-				//		 console.log(JSON.stringify(plus.webview.currentWebview()), null, 2)
+			},
+			getTrueCoin: function getTrueCoin() {
+				let that = this;
+				mui.ajax(this.trueCoinUrl, {
+					type: 'get',
+					dataType: 'json',
+					headers: {
+						token: that.token
+					},
+					success: function(res) {
+						that.trueNum = Number(that.trueNum);
+						that.trueNum += res.data.true_num;
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err) + '获得我的true锁仓数量错误信息');
+					}
+				})
 			},
 			getTeamData: function getTeamData(node_type) {
 				let that = this;
@@ -116,7 +133,6 @@
 					var mask = mui.createMask(function() {
 						return false;
 					});
-					that.token = plus.storage.getItem('token');
 					let host = plus.storage.getItem('web3Host');
 					let trueContractAddr, ttrContractAddr;
 					let reg = /https:\/\/ropsten.infura.io/;
@@ -128,9 +144,10 @@
 					} else {
 						trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
 					}
-
+					that.token = plus.storage.getItem('token');
 					addToken(trueContractAddr, function(balances) {
 						that.trueNum = balances;
+						that.getTrueCoin();
 					})
 
 					let self = plus.webview.currentWebview();

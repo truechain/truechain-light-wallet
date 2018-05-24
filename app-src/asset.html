@@ -49,7 +49,7 @@
 						</div>
 						<div class="list-right">
 							<div class="top balance">
-								-
+								
 							</div>
 							<!--<div class="price bottom"><span>0.00</span>CNY</div>-->
 						</div>
@@ -66,7 +66,7 @@
 							<div class="title top">TRUE</div>
 						</div>
 						<div class="list-right">
-							<div class="top trueBalance">-</div>
+							<div class="top trueBalance"></div>
 						</div>
 					</a>
 				</div>
@@ -78,9 +78,11 @@
 						</div>
 						<div class="list-middle">
 							<div class="title top">TTR</div>
+							<div>剩余票数:</div>
 						</div>
 						<div class="list-right">
 							<div class="top ttrBalance">-</div>
+							<div class="available"></div>
 						</div>
 					</a>
 				</div>
@@ -135,9 +137,11 @@
 	<script type="text/javascript" src="src/js/common.js"></script>
 	<script type="text/javascript" src="lib/js/addToken.js"></script>
 	<script type="text/javascript" src="lib/js/bigNumber.js"></script>
+	<script type="text/javascript" src="getVote.js"></script>
 	<script type="text/javascript" src="src/js/asset/asset.js"></script>
 	<script type="text/javascript">
 		mui.plusReady(function() {
+			let selfAddress = plus.storage.getItem('walletAddress');
 			let host = plus.storage.getItem('web3Host');
 			let trueContractAddr, ttrContractAddr;
 			let reg = /https:\/\/ropsten.infura.io/;
@@ -236,6 +240,12 @@
 					})
 				})
 				mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
+
+				getVote(selfAddress, function(num) {
+					console.log(selfAddress + 'llsdsadsadsdsfdsfllldddd')
+					console.log(num + 'llllldddd')
+					$('.available').html(Math.floor(num));
+				})
 			};
 		})
 	</script>

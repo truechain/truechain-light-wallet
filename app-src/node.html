@@ -7,101 +7,8 @@
 		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
 		<link href="css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="dist/css/my/node.css" />
+		<link rel="stylesheet" type="text/css" href="dist/css/node/indexNode.css" />
 	</head>
-
-	<style type="text/css">
-		.mui-slider {
-			background: #fff;
-			overflow: inherit;
-		}
-		
-		.mui-segmented-control.mui-scroll-wrapper .mui-scroll {
-			width: inherit;
-		}
-		
-		.mui-content {
-			position: fixed;
-			min-height: 100px !important;
-			top: 150px;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			overflow: auto;
-		}
-	</style>
-	<style>
-		html,
-		body {
-			background-color: #efeff4;
-		}
-		
-		.mui-bar~.mui-content .mui-fullscreen {
-			top: 44px;
-			height: auto;
-		}
-		
-		.mui-segmented-control.mui-scroll-wrapper .mui-scroll {
-			width: inherit;
-		}
-		
-		.mui-pull-top-tips {
-			position: absolute;
-			top: -20px;
-			left: 50%;
-			margin-left: -25px;
-			width: 40px;
-			height: 40px;
-			border-radius: 100%;
-			z-index: 1;
-		}
-		
-		.mui-bar~.mui-pull-top-tips {
-			top: 24px;
-		}
-		
-		.mui-pull-top-wrapper {
-			width: 42px;
-			height: 42px;
-			display: block;
-			text-align: center;
-			background-color: #efeff4;
-			border: 1px solid #ddd;
-			border-radius: 25px;
-			background-clip: padding-box;
-			box-shadow: 0 4px 10px #bbb;
-			overflow: hidden;
-		}
-		
-		.mui-pull-top-tips.mui-transitioning {
-			-webkit-transition-duration: 200ms;
-			transition-duration: 200ms;
-		}
-		
-		.mui-pull-top-tips .mui-pull-loading {
-			margin: 0;
-		}
-		
-		.mui-pull-bottom-tips {
-			text-align: center;
-			font-size: 15px;
-			line-height: 40px;
-			color: #777;
-		}
-		
-		.mui-pull-top-canvas {
-			overflow: hidden;
-			background-color: #fafafa;
-			border-radius: 40px;
-			box-shadow: 0 4px 10px #bbb;
-			width: 40px;
-			height: 40px;
-			margin: 0 auto;
-		}
-		
-		.mui-pull-top-canvas canvas {
-			width: 40px;
-		}
-	</style>
 
 	<body>
 		<div class="bg-top">
@@ -135,8 +42,17 @@
 						<div id="scroll1" class="mui-scroll-wrapper">
 							<div class="mui-scroll">
 								<ul class="mui-table-view fullNode">
-									<!--<li class="mui-table-view-cell">
-										第1个选项卡子项-1
+									<!--<li class="mui-table-view-cell" data-address=${item.address}>
+										<div class="view-cell-left">
+											序号
+										</div>
+										<div class="view-cell-center nickName">
+											<span>喀喀喀</span>
+											<img class="type" src="dist/images/common/geren.png" />
+										</div>
+										<div class="view-cell-right voteNum">
+											8989票
+										</div>
 									</li>-->
 								</ul>
 							</div>
@@ -170,9 +86,10 @@
 <script type="text/javascript">
 	(function() {
 		var Validate = {
+			pageIndex: 0,
 			token: null,
-			nodeDataUrl: 'http://45.40.243.125:7001/nodeRank',
-			statusUrl: 'http://45.40.243.125:7001/getMemberStatus',
+			nodeDataUrl: 'http://39.105.125.189:7001/nodeRank',
+			statusUrl: 'http://39.105.125.189:7001/getMemberStatus',
 			getAjaxPromise: function getAjaxPromise(option) {
 				let that = this;
 				return new Promise(function(resolve, reject) {
@@ -183,7 +100,8 @@
 							token: that.token
 						},
 						data: {
-							node_type: option.node_type
+							node_type: option.node_type,
+							pageIndex: option.pageIndex
 						},
 						async: true,
 						success: function(res) {
@@ -195,82 +113,59 @@
 					});
 				})
 			},
-			request: function(node_type, element) {
+			request: function(node_type, element, pageIndex = 0) {
 				let that = this;
 				that.getAjaxPromise({
 					url: that.nodeDataUrl,
-					node_type: node_type
+					node_type: node_type,
+					pageIndex: 0,
+					pageNumber: 100
 				}).then((res) => {
+					//					if(res.data.length == 10) {
+					//						that.pageIndex += 10;
+					//					} else {
+					//						console.log('已无更多')
+					//					}
 					Data = res.data.sort(function(a, b) {
 						return b.tickets - a.tickets
-					});
-					let rankingBeArr = Data.splice(0, 3);
-
-					//前三
-					rankingBeArr.forEach(function(item, index) {
-						let str;
-						if(item.type == 1) {
-							str = `<li class="mui-table-view-cell" data-address=${item.address}>
-																	<div class="view-cell-left">
-																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																		<img class="type" src="dist/images/common/geren.png" />
-																	</div>
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>
-																</li>`;
-						} else {
-							str = `<li class="mui-table-view-cell" data-address=${item.address}>
-																	<div class="view-cell-left">
-																		<img class="ranking" src="dist/images/common/${index}@2x.png" />
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																	</div>																	
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>																	
-																</li>`;
-						};
-						$(element).append(str);
-					});
-
+					}); //之后
 					let ranking = Data.sort(function(a, b) {
 						return b.tickets - a.tickets;
 					});
+					let strAf = '',
+						sortIndex = 1;
+
 					ranking.forEach(function(item, index) {
-						let strAf;
 						if(item.type == 1) {
-							strAf = `<li class="mui-table-view-cell" data-address=${item.address}>
-																	<div class="view-cell-left">
-																		${index+4}
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																		<img class="type" src="dist/images/common/geren.png" />
-																	</div>		
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>
-																</li>`;
+							strAf += `<li class="mui-table-view-cell" data-address=${item.address}>
+																						<div class="view-cell-left">
+																							${index+1}
+																						</div>
+																						<div class="view-cell-center nickName">
+																							<span>${item.nickname}</span>
+																							<img class="type" src="dist/images/common/geren.png" />
+																						</div>		
+																						<div class="view-cell-right voteNum">
+																							${item.tickets}票
+																						</div>
+																					</li>`;
 						} else {
-							strAf = `<li class='mui-table-view-cell' data-address=${item.address}>
-																	<div class="view-cell-left">
-																		${index+4}
-																	</div>
-																	<div class="view-cell-center nickName">
-																		<span>${item.nickname}</span>
-																	</div>	
-																	<div class="view-cell-right voteNum">
-																		${item.tickets}票
-																	</div>
-																</li>`;
+							strAf += `<li class='mui-table-view-cell' data-address=${item.address}>
+																						<div class="view-cell-left">
+																							${index+1}
+																						</div>
+																						<div class="view-cell-center nickName">
+																							<span>${item.nickname}</span>
+																						</div>	
+																						<div class="view-cell-right voteNum">
+																							${item.tickets}票
+																						</div>
+																					</li>`;
 						};
-						$(element).append(strAf);
 					})
+					sortIndex += Data.length;
+					$(element).html(strAf);
+					//点击显示投票信息
 					$('.mui-table-view-cell').on('tap', function() {
 						openInfo('view/node/voteItem/baseInfo.html', {
 							address: $(this).data('address')
@@ -362,10 +257,8 @@
 			},
 			submitForm: function submitForm() {
 				let that = this;
-
 				mui.plusReady(function() {
 					that.token = plus.storage.getItem('token');
-
 					h('.vote').tap(function() {
 						openInfo('view/node/vote.html');
 					});
@@ -380,9 +273,11 @@
 							mui(pullRefreshEl).pullToRefresh({
 								down: {
 									callback: function() {
-										console.log('斤斤计较')
+										console.log('下拉');
 										var self = this;
 										that.getStatus();
+										that.request(1, '.standardNode');
+										that.request(2, '.fullNode');
 										setTimeout(function() {
 											self.endPullDownToRefresh();
 										}, 1000)
@@ -392,6 +287,9 @@
 									callback: function() {
 										var self = this;
 										that.getStatus();
+										that.request(1, '.standardNode', 100);
+										that.request(2, '.fullNode', 100);
+										//that.pageIndex += 10;
 										setTimeout(function() {
 											self.endPullUpToRefresh();
 										}, 1000)
@@ -400,12 +298,7 @@
 							});
 						});
 					});
-
-					//					function pullfresh() {
-					//						that.getStatus();
-					//						mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
-					//					}
-
+					that.getStatus();
 					that.request(1, '.standardNode');
 					that.request(2, '.fullNode');
 				});
@@ -413,40 +306,4 @@
 		};
 		Validate.init();
 	})();
-</script>
-
-<script>
-	//	mui.init();
-	//	(function($) {
-	//	var deceleration = mui.os.ios ? 0.003 : 0.0009;
-	//	mui('.mui-scroll-wrapper').scroll({
-	//		bounce: false,
-	//		indicators: true,
-	//		deceleration: deceleration
-	//	});
-	//	mui.ready(function() {
-	//		mui.each(document.querySelectorAll('.mui-slider-group .mui-scroll'), function(index, pullRefreshEl) {
-	//			mui(pullRefreshEl).pullToRefresh({
-	//				down: {
-	//					callback: function() {
-	//						var self = this;
-	//						console.log('下拉');
-	//						setTimeout(function() {
-	//							self.endPullDownToRefresh();
-	//						}, 1000)
-	//					}
-	//				},
-	//				up: {
-	//					callback: function() {
-	//						var self = this;
-	//						console.log('上拉 ');
-	//						setTimeout(function() {
-	//							self.endPullUpToRefresh();
-	//						}, 1000)
-	//					}
-	//				}
-	//			});
-	//		});
-	//	});
-	//	})(mui);
 </script>

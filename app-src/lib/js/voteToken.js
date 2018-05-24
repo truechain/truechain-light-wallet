@@ -421,7 +421,7 @@ function voteTokens(fromAddr, toAddr, value, password, keystore, mask, gas = "15
 			},
 			function(error, txhash) {
 				if(txhash) {
-					mui.alert('投票成功!');
+					mui.alert('投票打包完成!');
 					mask._remove();
 					plus.webview.show(plus.webview.getWebviewById('index.html'));
 				} else {

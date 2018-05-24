@@ -113,7 +113,7 @@
 						<div class="baseInfo_item">
 							<div>
 								<span class="infoType"><!--个人信息--></span>
-								<span class="trueNum">0TRUE</span>
+								<span class="trueNum">---</span>
 							</div>
 							<p class="nickName">
 								<!--飞虎小分队-->
@@ -133,21 +133,21 @@
 							<i></i>
 							<span>大虎法师法师打</span>
 						</div>
-						<span class="mtrueNum">2000TRUE</span>
+						<span class="mtrueNum">---</span>
 					</li>
 					<li class="member">
 						<div class="memberInfo">
 							<i></i>
-							<span>大虎法师法师222222打</span>
+							<span><!--大虎法师法师222222打--></span>
 						</div>
-						<span class="mtrueNum">2000TRUE</span>
+						<span class="mtrueNum">---</span>
 					</li>
 					<li class="member">
 						<div class="memberInfo">
 							<i></i>
-							<span>大虎法师法师打</span>
+							<span><!--大虎法师法师打--></span>
 						</div>
-						<span class="mtrueNum">2000TRUE</span>
+						<span class="mtrueNum">---</span>
 					</li>
 				</ul>
 			</div>
@@ -161,9 +161,9 @@
 <script type="text/javascript">
 	(function() {
 		var Validate = {
-			getInfoReqUrl: 'http://45.40.243.125:7001/teamInfo',
-			getTeamMemberUrl: 'http://45.40.243.125:7001/getTeamMember',
-			getTeamAddressUrl: 'http://45.40.243.125:7001/getTeamAddress',
+			getInfoReqUrl: 'http://39.105.125.189:7001/teamInfo',
+			getTeamMemberUrl: 'http://39.105.125.189:7001/getTeamMember',
+			getTeamAddressUrl: 'http://39.105.125.189:7001/getTeamAddress',
 			teamAdd: null,
 			token: null,
 			type: null,
@@ -179,7 +179,6 @@
 					},
 					success: function(res) {
 						callback(res.data[0].team_address)
-						//that.teamAdd = res.data[0].team_address;
 					},
 					error: function(err) {
 						console.log(JSON.stringify(err));

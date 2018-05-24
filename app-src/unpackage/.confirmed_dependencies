@@ -37,6 +37,9 @@
       "view/node/vote.html",
       "view/node/voteItem/baseInfo.html",
       "view/node/myTeam/teamInfo.html"
+    ],
+    "resources": [
+      "dist/images/common/geren.png"
     ]
   },
   "view/node/signUp.html": {
@@ -53,7 +56,8 @@
   },
   "view/my/wallet/setup.html": {
     "refer": [
-      "index.html"
+      "index.html",
+      "view/asset/defaultExportMw.html"
     ]
   },
   "my.html": {
