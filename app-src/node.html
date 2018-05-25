@@ -47,11 +47,11 @@
 											序号
 										</div>
 										<div class="view-cell-center nickName">
-											<span>喀喀喀</span>
+											<span>喀恢复的非官方的三个</span>
 											<img class="type" src="dist/images/common/geren.png" />
 										</div>
 										<div class="view-cell-right voteNum">
-											8989票
+											1600000
 										</div>
 									</li>-->
 								</ul>
@@ -121,11 +121,6 @@
 					pageIndex: 0,
 					pageNumber: 100
 				}).then((res) => {
-					//					if(res.data.length == 10) {
-					//						that.pageIndex += 10;
-					//					} else {
-					//						console.log('已无更多')
-					//					}
 					Data = res.data.sort(function(a, b) {
 						return b.tickets - a.tickets
 					}); //之后
@@ -159,6 +154,64 @@
 																						</div>	
 																						<div class="view-cell-right voteNum">
 																							${item.tickets}票
+																						</div>
+																					</li>`;
+						};
+					})
+					sortIndex += Data.length;
+					$(element).html(strAf);
+					//点击显示投票信息
+					$('.mui-table-view-cell').on('tap', function() {
+						openInfo('view/node/voteItem/baseInfo.html', {
+							address: $(this).data('address')
+						})
+					})
+				}).catch((err) => {
+					console.log(JSON.stringify(err))
+				});
+			},
+			standardNode: function(node_type, element, pageIndex = 0) {
+				let that = this;
+				that.getAjaxPromise({
+					url: that.nodeDataUrl,
+					node_type: node_type,
+					pageIndex: 0,
+					pageNumber: 100
+				}).then((res) => {
+					Data = res.data.sort(function(a, b) {
+						return Math.ceil((b.lock_num * 0.8 + b.tickets * 0.2) * 100) - (a.lock_num * 0.8 + a.tickets * 0.2) * 100
+					}); //之后
+					let ranking = Data.sort(function(a, b) {
+						return Math.ceil((b.lock_num * 0.8 + b.tickets * 0.2) * 100) - (a.lock_num * 0.8 + a.tickets * 0.2) * 100
+						//return b.tickets - a.tickets;
+					});
+					let strAf = '',
+						sortIndex = 1;
+					ranking.forEach(function(item, index) {
+						console.log(JSON.stringify(item))
+						if(item.type == 1) {
+							strAf += `<li class="mui-table-view-cell" data-address=${item.address}>
+																						<div class="view-cell-left">
+																							${index+1}
+																						</div>
+																						<div class="view-cell-center nickName">
+																							<span>${item.nickname}</span>
+																							<img class="type" src="dist/images/common/geren.png" />
+																						</div>		
+																						<div class="view-cell-right voteNum">
+																							${Math.ceil((item.lock_num*0.8+item.tickets*0.2)*100)}分
+																						</div>
+																					</li>`;
+						} else {
+							strAf += `<li class='mui-table-view-cell' data-address=${item.address}>
+																						<div class="view-cell-left">
+																							${index+1}
+																						</div>
+																						<div class="view-cell-center nickName">
+																							<span>${item.nickname}</span>
+																						</div>	
+																						<div class="view-cell-right voteNum">
+																							${Math.ceil((item.lock_num*0.8+item.tickets*0.2)*100)}分
 																						</div>
 																					</li>`;
 						};
@@ -276,7 +329,7 @@
 										console.log('下拉');
 										var self = this;
 										that.getStatus();
-										that.request(1, '.standardNode');
+										//that.request(1, '.standardNode');
 										that.request(2, '.fullNode');
 										setTimeout(function() {
 											self.endPullDownToRefresh();
@@ -287,9 +340,8 @@
 									callback: function() {
 										var self = this;
 										that.getStatus();
-										that.request(1, '.standardNode', 100);
+										//that.request(1, '.standardNode', 100);
 										that.request(2, '.fullNode', 100);
-										//that.pageIndex += 10;
 										setTimeout(function() {
 											self.endPullUpToRefresh();
 										}, 1000)
@@ -299,7 +351,8 @@
 						});
 					});
 					that.getStatus();
-					that.request(1, '.standardNode');
+					//that.request(1, '.standardNode');
+					that.standardNode(1, '.standardNode');
 					that.request(2, '.fullNode');
 				});
 			}

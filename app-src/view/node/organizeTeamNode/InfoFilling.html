@@ -19,7 +19,7 @@
 			<div class="main">
 				<h2>个人信息</h2>
 				<input type="text" class="nickName" maxlength="10" placeholder="昵称" />
-				<textarea class="reason" maxlength="20" placeholder="申请理由"></textarea>
+				<textarea class="reason" maxlength="50" placeholder="申请理由"></textarea>
 				<!--<input type="text" class="reason" placeholder="申请理由" />-->
 			</div>
 			<div class="join">
@@ -119,6 +119,7 @@
 						that.checkReason('.reason');
 						if(that.nickNameFlag) {
 							if(that.reason) {
+								console.log(that.reason + '我的理由是什么')
 								mui.ajax(that.writeUserInfoUrl, {
 									type: 'get',
 									dataType: 'json',

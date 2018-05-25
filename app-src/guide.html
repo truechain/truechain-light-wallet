@@ -75,6 +75,7 @@
 		<button id="creat-wallet">创建钱包</button>
 	</body>
 	<script src="lib/js/mui.min.js"></script>
+	<script src="lib/js/zepto.min.js"></script>
 	<script type="text/javascript">
 		mui.back = function() {
 			return false;
@@ -92,11 +93,11 @@
 			})()
 		});
 
-		document.getElementById('creat-wallet').addEventListener('tap', function() {
+		$('#creat-wallet').on('tap', function() {
 			mui.openWindow('view/my/wallet/setup.html');
 		});
 
-		document.getElementById('lead-wallet').addEventListener('tap', function() {
+		$('#lead-wallet').on('tap', function() {
 			mui.openWindow('view/my/wallet/importwallet.html');
 		});
 	</script>

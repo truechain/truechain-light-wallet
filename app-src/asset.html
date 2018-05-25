@@ -241,9 +241,7 @@
 				})
 				mui('#refreshContainer').pullRefresh().endPulldownToRefresh();
 
-				getVote(selfAddress, function(num) {
-					console.log(selfAddress + 'llsdsadsadsdsfdsfllldddd')
-					console.log(num + 'llllldddd')
+				getVote(selfAddress, function(num) {										
 					$('.available').html(Math.floor(num));
 				})
 			};

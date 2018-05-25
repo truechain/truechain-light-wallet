@@ -149,7 +149,7 @@
 						</div>
 						 
 					</li>`;
-									//					<span class="trueNum">${item.lock_num}TRUE</span>
+									//<span class="trueNum">${item.lock_num}TRUE</span>
 									$('.teamInfo').append(string);
 								} else if(item.role == 1) {
 									string = `<li class="member">
@@ -256,22 +256,24 @@
 									error: function(err) {
 										console.log(JSON.stringify(err));
 									}
-								})
+								});
+
+								//拒绝后初始状态
+								mui.ajax(that.initStatusUrl, {
+									type: 'get',
+									dataType: 'json',
+									headers: {
+										token: that.token
+									},
+									success: function(res) {
+										console.log(res);
+									},
+									error: function(err) {
+										console.log(err);
+									}
+								});
+
 								$('#next').on('tap', function() {
-									mui.back();
-									mui.ajax(that.initStatusUrl, {
-										type: 'get',
-										dataType: 'json',
-										headers: {
-											token: that.token
-										},
-										success: function(res) {
-											console.log(res);
-										},
-										error: function(err) {
-											console.log(err);
-										}
-									})
 									plus.runtime.restart();
 								});
 								break;

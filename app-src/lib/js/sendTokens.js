@@ -437,7 +437,6 @@ function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress
 				console.log('error: ' + error);
 				console.log('txhash: ' + txhash);
 			})
-
 	} catch(error) {
 		let addReg = /Error: Provided address is invalid,| the capitalization checksum test failed, |or its an indrect IBAN address which can't be converted./
 
