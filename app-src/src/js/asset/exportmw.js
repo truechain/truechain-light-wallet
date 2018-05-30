@@ -58,7 +58,7 @@
 								string += `<span>${item}</span>`;
 							})
 
-							document.getElementsByClassName('my-word')[0].innerHTML = string;
+							$('.my-word').html(string);
 
 							h('#next-btn').tap(function() {
 								h('.step-1').addClass('not-view');
@@ -69,7 +69,6 @@
 								var oWord = this.innerText;
 								var html = '<span>' + oWord + '</span><br/>';
 								$('#orderWord').append(oWord + ' ');
-								//document.getElementById('orderWord').append(oWord + ' ');
 							})
 
 							h('#complete-btn').tap(function() {
@@ -77,7 +76,6 @@
 								if(orderWords == orderWord + ' ') {
 									mui.toast('助记词验证通过,请妥善保存!');
 									var all = plus.webview.all();
-									console.log(JSON.stringify(all, '这是怎么的'))
 									plus.webview.show(plus.webview.getWebviewById('index.html'));
 								} else {
 									mui.toast('助记词输入错误,请重新输入!');

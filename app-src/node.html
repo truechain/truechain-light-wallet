@@ -88,8 +88,8 @@
 		var Validate = {
 			pageIndex: 0,
 			token: null,
-			nodeDataUrl: 'http://39.105.125.189:7001/nodeRank',
-			statusUrl: 'http://39.105.125.189:7001/getMemberStatus',
+			nodeDataUrl: 'http://101.200.34.20:7001/nodeRank',
+			statusUrl: 'http://101.200.34.20:7001/getMemberStatus',
 			getAjaxPromise: function getAjaxPromise(option) {
 				let that = this;
 				return new Promise(function(resolve, reject) {
@@ -188,7 +188,6 @@
 					let strAf = '',
 						sortIndex = 1;
 					ranking.forEach(function(item, index) {
-						console.log(JSON.stringify(item))
 						if(item.type == 1) {
 							strAf += `<li class="mui-table-view-cell" data-address=${item.address}>
 																						<div class="view-cell-left">

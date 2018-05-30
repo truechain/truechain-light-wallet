@@ -40,7 +40,6 @@
 							$('#next-btn').addClass('mui-hidden');
 							//$('#next-btn').html('请备份助记词!');
 						} else {
-							console.log(pwDerivedKey)
 							//							$('#showseed').html('请稍后!');
 							//							$('#next-btn').html('请备份助记词!');
 							//							$('#next-btn').addClass('mui-disabled');
@@ -67,9 +66,9 @@
 							orderWordsAry.forEach(function(item, index) {
 								string += `<span>${item}</span>`;
 							})
-							//$('.my-word').innerHTML = string;
+							
 
-							document.getElementsByClassName('my-word')[0].innerHTML = string;
+							$('.my-word')[0].html(string);
 
 							h('#next-btn').tap(function() {
 								h('.step-1').addClass('not-view');
@@ -94,7 +93,6 @@
 									$('#orderWord').html('');
 								}
 							});
-
 						}
 					});
 				})
