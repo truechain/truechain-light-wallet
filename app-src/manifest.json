@@ -198,11 +198,11 @@
 				"ios": {
 					"iphone": {
 						"default": "", /*iPhone3启动图片选，分辨率：320x480*/
-						"retina35": "C:/Users/wangqi/Desktop/启动页/01-ios/1-iPhone4.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
-						"retina40": "C:/Users/wangqi/Desktop/启动页/01-ios/2-iPhone5.png",
-						"retina47": "C:/Users/wangqi/Desktop/启动页/01-ios/3-iPhone6.png",
-						"retina55": "C:/Users/wangqi/Desktop/启动页/01-ios/4-iPhone6 plus.png",
-						"iphonex": "C:/Users/wangqi/Desktop/启动页/01-ios/5-iPhone x.png"
+						"retina35": "/Users/see91/True/启动页/ipone4.png",/*3.5英寸设备(iPhone4)启动图片，分辨率：640x960*/
+						"retina40": "/Users/see91/True/启动页/ipone5.png",
+						"retina47": "/Users/see91/True/启动页/ipone6.png",
+						"retina55": "/Users/see91/True/启动页/ipone6s.png",
+						"iphonex": "/Users/see91/True/启动页/iponex.png","iphonexl":"/Users/see91/True/启动页/iponex横.png","retina55l":"/Users/see91/True/启动页/ipone6s横.png"
 					},
 					"ipad": {
 						"portrait": "", /*iPad竖屏启动图片，分辨率：768x1004*/
@@ -218,9 +218,9 @@
 				"android": {
 					"mdpi": "", /*普通屏启动图片，分辨率：240x282*/
 					"ldpi": "", /*大屏启动图片，分辨率：320x442*/
-					"hdpi": "C:/Users/wangqi/Desktop/启动页/02-安卓/480px.png", /*高分屏启动图片，分辨率：480x762*/
-					"xhdpi": "C:/Users/wangqi/Desktop/启动页/02-安卓/720px.png", /*720P高分屏启动图片，分辨率：720x1242*/
-					"xxhdpi": "C:/Users/wangqi/Desktop/启动页/02-安卓/1080px.png"
+					"hdpi": "/Users/see91/True/启动页/高分屏.png", /*高分屏启动图片，分辨率：480x762*/
+					"xhdpi": "/Users/see91/True/启动页/720p高分屏.png", /*720P高分屏启动图片，分辨率：720x1242*/
+					"xxhdpi": "/Users/see91/True/启动页/1080p高分屏.png"
 				}
 			}
 		},
@@ -228,8 +228,7 @@
 			"rp": false,
 			"splash": false,
 			"push": false
-		},
-		"adid": ""
+		}
 	},
 	"dependencies": {
 		"pages": {

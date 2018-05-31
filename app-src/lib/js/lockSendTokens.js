@@ -1,4 +1,4 @@
-function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress, mask, callback, feedback, gas = "150000", gasPrice = "18000000000") {
+function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress, mask, callback, feedback,gasPrice, gas = "150000") {
 	let host = plus.storage.getItem('web3Host');
 	let trueContractAddr, ttrContractAddr;
 	let reg = /https:\/\/ropsten.infura.io/;
@@ -410,7 +410,8 @@ function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress
 		web3.eth.accounts.wallet.add(account);
 
 		value_wei = web3.utils.toWei(value, 'ether');
-		data = contract.methods.transfer(toAddr, value_wei).encodeABI();
+		data = contract.methods.transfer(toAddr, value_wei).encodeABI();	
+		
 		web3.eth.sendTransaction({
 				from: fromAddr,
 				to: contractAddress,

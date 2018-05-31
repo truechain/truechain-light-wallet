@@ -71,11 +71,16 @@
 					mask.show();
 					that.password = $('.psw').val();
 					that.value = $('.lockingNum').val();
+					let minerFees = $('#minerCost').html();
+					let gas = '150000';
+					let gasGwei = web3.utils.fromWei(gas, 'Gwei');
+					let gasP = Math.round((minerFees / gasGwei) * 100) / 100;
+					let gasPrice = web3.utils.toWei(gasP.toString(), 'Gwei');
 					if(that.password) {
 						plus.nativeUI.showWaiting("交易进行中,请稍侯...");
 						let amountWei = that.value.toString();
 						setTimeout(function() {
-							sendTokens(that.fromAddress, that.toAddress, amountWei, that.password, that.keystore, trueContractAddr, mask, callback, feedback)
+							sendTokens(that.fromAddress, that.toAddress, amountWei, that.password, that.keystore, trueContractAddr, mask, callback, feedback,gasPrice)
 						}, 500)
 					} else {
 						mui.alert('请输入密码!');
