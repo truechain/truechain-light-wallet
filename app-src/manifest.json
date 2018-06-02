@@ -84,8 +84,6 @@
 		"Barcode": {
 			"description": "管理二维码扫描插件"
 		},
-
-
 		"Webview": {
 			"description": "窗口管理"
 		},
@@ -108,7 +106,7 @@
 			"waiting": true,
 			"delay": "2000"
 		},
-		"runmode": "liberate",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
+		"runmode": "normal",/*应用的首次启动运行模式，可取liberate或normal，liberate模式在第一次启动时将解压应用资源（Android平台File API才可正常访问_www目录）*/
 		"signature": "Sk9JTiBVUyBtYWlsdG86aHIyMDEzQGRjbG91ZC5pbw==",/*可选，保留给应用签名，暂不使用*/
 		"distribute": {
 			"apple": {
@@ -124,7 +122,7 @@
 				"packagename": "",/*Android应用包名，如io.dcloud.HelloH5*/
 				"keystore": "",/*Android应用打包使用的密钥库文件*/
 				"password": "",/*Android应用打包使用密钥库中证书的密码*/
-				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/
+				"aliasname": "",/*Android应用打包使用密钥库中证书的别名*/	
 				"permissions": [
 					"<uses-feature android:name=\"android.hardware.camera.autofocus\"/>",
 					"<uses-feature android:name=\"android.hardware.camera\"/>",

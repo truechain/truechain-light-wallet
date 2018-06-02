@@ -22,8 +22,11 @@
 
 				$('.comfirmPsw').on('tap', function() {
 					mask._remove();
+					$('#showseed').html('请稍后!');
 					$('#showseed').addClass('mui-disabled');
 					$('#modal').removeClass('mui-active');
+					$('#next-btn').html('请备份您的助记词!');
+					$('#next-btn').addClass('mui-disabled');
 					let password = $('.psw').val();
 					var serialized_keystore = plus.storage.getItem('keystore2');
 					global_keystore = lightwallet.keystore.deserialize(serialized_keystore); //将序列号的keystore转换为对象 
@@ -39,19 +42,14 @@
 							$('#showseed').removeClass('mui-hidden')
 							$('#next-btn').addClass('mui-hidden');
 							//$('#next-btn').html('请备份助记词!');
-						} else {
-							//							$('#showseed').html('请稍后!');
-							//							$('#next-btn').html('请备份助记词!');
-							//							$('#next-btn').addClass('mui-disabled');
-							//							$('.psw').val('');
+						} else {				
 							$('#showseed').addClass('mui-hidden')
 							$('#next-btn').removeClass('mui-hidden');
-							$('#next-btn').html('请备份助记词!');
+//							$('#next-btn').html('请备份助记词!');
 							setTimeout(function() {
 								$('#next-btn').html('下一步');
 								$('#next-btn').removeClass('mui-disabled');
 							}, 10000);
-
 							var orderWord = global_keystore.getSeed(pwDerivedKey);
 							h('#words').html(orderWord);
 
@@ -68,7 +66,7 @@
 							})
 							
 
-							$('.my-word')[0].html(string);
+							$('.my-word').html(string);
 
 							h('#next-btn').tap(function() {
 								h('.step-1').addClass('not-view');
@@ -77,9 +75,7 @@
 
 							$('.my-word').on('tap', 'span', function() {
 								var oWord = this.innerText;
-								var html = '<span>' + oWord + '</span><br/>';
-								console.log(JSON.stringify($('#orderWord')));
-								console.log(oWord)
+								var html = '<span>' + oWord + '</span><br/>';				
 								$('#orderWord').append(oWord + ' ');
 							})
 

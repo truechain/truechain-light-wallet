@@ -13,7 +13,6 @@
 				mask.show();
 				$('#modal').removeClass('mui-hidden')
 				$('#modal').addClass('mui-active');
-
 				$('#showseed').on('tap', function() {
 					mask.show();
 					$('#modal').removeClass('mui-hidden')
@@ -25,7 +24,7 @@
 					$('#showseed').html('请稍后!');
 					$('#showseed').addClass('mui-disabled');
 					$('#modal').removeClass('mui-active');
-					$('#next-btn').html('请稍后!');
+					$('#next-btn').html('请备份您的助记词!');
 					$('#next-btn').addClass('mui-disabled');
 					let password = $('.psw').val();
 					var serialized_keystore = plus.storage.getItem('keystore2');
@@ -41,15 +40,11 @@
 								$('#next-btn').html('下一步');
 								$('#next-btn').removeClass('mui-disabled');
 							}, 10000)
-
-							var orderWord = global_keystore.getSeed(pwDerivedKey);
-							console.log(orderWord + 'llllll')
+							var orderWord = global_keystore.getSeed(pwDerivedKey);							
 							h('#words').html(orderWord);
-
 							function randomSort() {
 								return Math.random() > 0.5 ? -1 : 1;
 							}
-
 							let orderWordsAry = orderWord.split(' '),
 								string = '';
 							orderWordsAry = orderWordsAry.sort(randomSort);
@@ -79,12 +74,12 @@
 									plus.webview.show(plus.webview.getWebviewById('index.html'));
 								} else {
 									mui.toast('助记词输入错误,请重新输入!');
+									$('#orderWord').html('');
 								}
 							})
 						}
 					});
 				})
-
 				$('.close').on('tap', function(e) {
 					mask._remove();
 					$('#modal').removeClass('mui-active');
