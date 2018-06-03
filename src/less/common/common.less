@@ -1,0 +1,288 @@
+@import "../common/base.less";
+
+.fs-3 6{  //1级标题
+	font-size: 36px;
+}
+.fs-28{  //2级标题
+	font-size: 28px;
+}
+.fs-24{  //3级标题
+	font-size: 24px;
+}
+.fs-22{  //4级标题
+	font-size: 22px;
+}
+.h50{
+	height: 50px;
+}
+
+/**********公共样式************/
+//背景mask
+.masker-black{
+    width:100%;height:100%;
+    position:fixed;
+    top:0;left:0;
+    z-index: 10; 
+} 
+.masker-black{
+    background-color: #000000;
+    opacity: .3;
+}
+//旋转icon
+.masker-loading{
+    position:absolute;
+    left:0;right:0;
+    margin:auto;
+    z-index: 1000;
+    top:38.5%;
+    width:35px;
+    height:35px;
+}
+.masker-loading .outer {
+  border: 2px solid #666;
+  opacity: 1;
+  border-right-color: transparent;
+  border-left-color: transparent;
+  width: 35px;
+  height: 35px;
+  margin: 0 auto;
+  border-radius: 50%;
+  -webkit-animation: spin-pulse 1s linear infinite normal;
+  -moz-animation: spin-pulse 1s linear infinite normal;
+  -ms-animation: spin-pulse 1s linear infinite normal;
+  animation: spin-pulse 1s linear infinite normal;
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay: 0;
+  animation-delay: 0;
+}
+.masker-loading .inner {
+  border: 1px solid #666;
+  opacity: 1;
+  border-left-color: transparent;
+  border-right-color: transparent;
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  position: relative;
+  top: -24px;
+  margin: 0 auto;
+  -webkit-animation: spin-right 1s linear infinite normal;
+  -moz-animation: spin-right 1s linear infinite normal;
+  -ms-animation: spin-right 1s linear infinite normal;
+  animation: spin-right 1s linear infinite normal;
+  -webkit-animation-delay: 0;
+  -moz-animation-delay: 0;
+  -o-animation-delay: 0;
+  animation-delay: 0;
+}
+
+@-moz-keyframes spin-right {
+  from {
+    -moz-transform: rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    -moz-transform: rotate(180deg);
+    opacity: 1.0;
+  }
+  to {
+    -moz-transform: rotate(360deg);
+    opacity: 0.2;
+  }
+}
+@-webkit-keyframes spin-right {
+  from {
+    -webkit-transform: rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    -webkit-transform: rotate(180deg);
+    opacity: 1.0;
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    opacity: 0.2;
+  }
+}
+@keyframes spin-pulse {
+  from {
+    transform: rotate(160deg);
+    opacity: 0;
+    box-shadow: 0 0 1px rgba(0, 61, 76, 0.9);
+  }
+  50% {
+    transform: rotate(145deg);
+    opacity: 1;
+  }
+  to {
+    transform: rotate(-320deg);
+    opacity: 0;
+  }
+}
+@-moz-keyframes spin-pulse {
+  from {
+    -moz-transform: rotate(160deg);
+    opacity: 0;
+    box-shadow: 0 0 1px rgba(0, 61, 76, 0.9);
+  }
+  50% {
+    -moz-transform: rotate(145deg);
+    opacity: 1;
+  }
+  to {
+    -moz-transform: rotate(-320deg);
+    opacity: 0;
+  }
+}
+@-webkit-keyframes spin-pulse {
+  from {
+    -webkit-transform: rotate(160deg);
+    opacity: 0;
+    box-shadow: 0 0 1px rgba(0, 61, 76, 0.9);
+  }
+  50% {
+    -webkit-transform: rotate(145deg);
+    opacity: 1;
+  }
+  to {
+    -webkit-transform: rotate(-320deg);
+    opacity: 0;
+  }
+}
+
+/**************修改mui样式************/
+.mui-bar.mui-bar-nav,.mui-content{
+	background: #fff;
+}
+.mui-bar.mui-bar-nav{
+	border-bottom: 1px solid #F5F5F5;
+}
+//修改弹窗按钮颜色
+.mui-popup-button{
+	color: 0076ff;
+}
+.mui-popup-button:last-child{
+	color: #fe3824;
+}
+
+
+/*****************底部选项卡********************/
+.mui-bar {
+    -webkit-box-shadow:none;
+   box-shadow:none;    
+   background-color: #fafafa;
+    border-bottom: 1px solid #E6E6E6;
+}
+.mui-icon{
+    background-position-y: 1px;
+    background-repeat: no-repeat;
+    background-size: 22px;
+}
+/*资产*/
+#tab1 .asset-icon{
+    .bg-image('../../../dist/images/common/asset1');
+}
+#tab1.mui-active .asset-icon{
+    .bg-image('../../../dist/images/common/asset2');
+}
+/*我的*/
+#tab2 .my-icon{
+    .bg-image('../../../dist/images/common/my1');
+}
+#tab2.mui-active .my-icon{
+     .bg-image('../../../dist/images/common/my2');
+}
+
+/***********************end*************************/
+
+/**************reset样式************/
+html,body{
+    width: 100%;
+    font-family: "微软雅黑";
+    font-size: 14px;
+} 
+body{
+	background: #fff;
+}
+
+/* 清除内外边距 */
+body, h1, h2, h3, h4, h5, h6, hr, p, blockquote,
+dl, dt, dd, ul, ol, li,
+pre,
+fieldset, lengend, button, input, textarea,
+th, td,
+article,aside,footer,header,nav,section,figcaption,figure{
+    margin:0;
+    padding:0;
+    border:0;
+    outline:0;
+}
+/*设置默认字体*/
+body,button, input, select, textarea {
+    font: 14px/1 Arial,"Microsoft YaHei",Tahoma, Helvetica,"黑体","\5b8b\4f53",sans-serif;
+}
+/*清除浮动*/
+.clearfix:after{
+    display: block;
+    content: '.';
+    height: 0;
+    line-height: 0;
+    clear: both;
+}
+/*图片设置*/
+img{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+/* img 搭车：让链接里的 img 无边框 */
+fieldset, img {
+    border: none;
+}
+/* 将斜体扶正 */
+address, cite, dfn, em, var, i, th{
+  font-style: normal;
+}
+/*将h1-h6变成正常字体*/
+h1,h2,h3,h4,h5,h6{
+	font-weight: normal;
+}
+h1{ font-size:18px; /*18px/12px=1.5*/}
+h2{ font-size:16px; }
+h3{ font-size:14px; }
+h4,h5,h6{font-size:100%;}
+/*清除文本框的样式*/
+input:focus, select:focus, textarea:focus {
+    outline:0 none;
+}
+input,button{
+    border: none;
+}
+/*清除a标签默认样式*/
+a {
+    text-decoration:none;
+    color: #333;
+    display: inline-block;
+}
+/* 重置列表元素 */
+ul,ol{
+    list-style: none;
+}
+//input-placeholder颜色
+input::-webkit-input-placeholder{
+    color:#999999;
+}
+input::-moz-placeholder{   /* Mozilla Firefox 19+ */
+    color:#999999;
+}
+input:-moz-placeholder{    /* Mozilla Firefox 4 to 18 */
+    color:#999999;
+}
+input:-ms-input-placeholder{  /* Internet Explorer 10-11 */ 
+    color:#999999;
+}
+textarea::-webkit-input-placeholder{ 
+	font-size: 14px;
+	color: #999;
+}

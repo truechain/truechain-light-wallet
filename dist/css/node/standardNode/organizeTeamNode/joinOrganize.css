@@ -1,0 +1,128 @@
+body,
+.mui-content {
+	background: rgba(245, 245, 245, 1);
+}
+
+.mui-content {
+	padding: 20px;
+}
+
+.main {
+	padding: 20px;
+	background: #fff;
+	border-radius: 10px;
+	margin-top: 30px;
+}
+
+.baseInfo {
+	margin-bottom: 20px;
+}
+
+.baseInfo_top {
+	display: flex;
+	justify-content: space-between;
+}
+
+.baseInfo_item {
+	display: flex;
+	flex-direction: column;
+	min-height: 50px;
+	justify-content: space-around;
+}
+
+.voteNum {
+	display: flex;
+	color: #fff;
+	min-width: 100px;
+	max-height: 35px;
+	justify-content: center;
+	align-items: center;
+	padding: 10px;
+	background: rgba(82, 139, 247, 1);
+	border-radius: 30px;
+}
+
+.baseInfo_declaration {
+	color: #8f8f94;
+	margin-top: 10px;
+}
+
+.member {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	min-height: 35px;
+	border-bottom: 1px solid rgba(245, 245, 245, 1);
+}
+
+.duizhang {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url(../../../../images/node/duizhang.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.duiyuan {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url(../../../../images/node/duiyuan.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+
+/*
+.member:nth-child(1)>div>i {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url(../../../../images/node/duizhang.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.member>div>i {
+	display: inline-block;
+	width: 20px;
+	height: 20px;
+	background: url(../../../../images/node/duiyuan.png) no-repeat;
+	background-size: 100% 100%;
+}*/
+
+.memberInfo {
+	display: flex;
+	align-items: center;
+	min-width: 100px;
+}
+
+.trueNum {
+	color: rgba(82, 139, 247, 1);
+}
+
+.adopt_next {
+	margin-top: 50px;
+	display: flex;
+	flex-direction: column;
+	min-height: 100px;
+	align-items: center;
+	justify-content: space-around;
+}
+
+#next {
+	color: #fff;
+	width: 100%;
+	display: flex;
+	min-height: 60px;
+	border-radius: 45px;
+	align-items: center;
+	justify-content: center;
+	background: rgba(82, 139, 247, 1);
+}
+
+.applyed {
+	background-color: rgba(204, 204, 204, 1) !important;
+}
+
+.not-view {
+	display: none;
+}

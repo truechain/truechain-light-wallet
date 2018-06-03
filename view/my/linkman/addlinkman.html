@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<title>新建联系人</title>
+<link rel="stylesheet" href="../../../lib/css/mui.min.css" />
+<link rel="stylesheet" href="../../../dist/css/common/common.css" />
+<link rel="stylesheet" type="text/css" href="../../../dist/css/my/addlinkman.css" />
+</head>
+
+<body>
+	<header class="mui-bar mui-bar-nav">
+    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+    <h1 class="mui-title">新建联系人</h1>
+    <span id="star-setup">完成</span>
+	</header>
+	
+	<div class="mui-content">
+		<section class="clearfix">
+			<i class="icon-linkman"></i>
+			<div class="mui-input-row">
+        <input type="text" class="mui-input-clear e-first-name" placeholder="姓">
+	    </div>
+	    <div class="mui-input-row">
+        <input type="text" class="mui-input-clear e-name" placeholder="名">
+	    </div>
+		</section>
+		
+		<form class="mui-input-group">
+	    <div class="mui-input-row">
+        <input type="text" class="mui-input-clear e-wallet-url" placeholder="收款人钱包地址">
+        <i class="scan-code ercode-icon"></i>
+	    </div>
+	    
+	    <div class="mui-input-row">
+        <input type="text" class="mui-input-clear e-phone" placeholder="手机号码">
+	    </div>
+	    <div class="phone-error error mui-hidden">
+	    	不少于8位字符，建议混合大小写字母、数字、特殊字符
+	    </div>
+	    
+	    <div class="mui-input-row">
+        <input type="text" class="mui-input-clear e-email" placeholder="邮箱">
+	    </div>
+	    
+	    <div class="mui-input-row">
+        <input type="text" class="e-remark" placeholder="备注">
+	    </div>
+	    
+		</form>
+	</div>
+	
+	<!--弹层mask-->
+  <div class="masker-loading mui-hidden">
+	  <div class="outer"></div>
+	  <div class="inner"></div>
+	</div>
+	<div class="masker-black mui-hidden"></div> 
+<script src="../../../lib/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../lib/js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+<script src="../../../dist/js/my/addlinkman.min.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

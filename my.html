@@ -1,0 +1,81 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>我的</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="lib/css/mui.min.css" />
+		<link rel="stylesheet" href="dist/css/my/my.css" />
+	</head>
+
+	<body>
+		<!--我的-->
+		<div class="bg-top">
+			<div class="top-title">我的</div>
+			<div class="my-module">
+				<div class="left">
+					<div class="icon wallet-icon"></div>
+					<div class="text">钱包管理</div>
+				</div>
+				<div class="right">
+					<div class="icon deal-icon"></div>
+					<div class="text">交易记录</div>
+				</div>
+			</div>
+		</div>
+		<div class="mian">
+			<div class="mian-top">
+				<ul class="mui-table-view top">
+					<li class="mui-table-view-cell mui-disabled lock-cell">
+						<a class="mui-navigate-right lockPosition">锁仓账户</a>
+					</li>
+					<!--<li class="mui-table-view-cell mui-disabled massage-cell">
+						<a class="mui-navigate-right" href="javascript:openInfo('view/my/message/message.html')">消息中心</a>
+					</li>
+					<li class="mui-table-view-cell mui-disabled contacts-cell">
+						<a class="mui-navigate-right">联系人</a>
+					</li>-->
+					<li class="mui-table-view-cell mui-disabled setting-cell">
+						<a href="javascript:openInfo('view/my/system/setting.html')" class="mui-navigate-right">系统中心</a>
+					</li>
+				</ul>
+			</div>
+			<div class="mian-bottom">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell mui-disabled help-cell">
+						<a href="javascript:openInfo('view/my/help/help.html')" class="mui-navigate-right">帮助中心</a>
+					</li>
+					<li class="mui-table-view-cell mui-disabled aboutus-cell">
+						<a href="javascript:openInfo('view/my/about/about.html')" class="mui-navigate-right">关于我们</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</body>
+	<script src="lib/js/mui.min.js"></script>
+	<script src="lib/js/h.min.js"></script>
+	<script type="text/javascript" src="src/js/common.js"></script>
+	<script type="text/javascript">
+		mui.plusReady(function() {
+			h('.left').tap(function() {
+				//openInfo('view/my/wallet/wallet.html');
+				openInfo('view/asset/userinfo.html');
+			});
+			h('.right').tap(function() {
+				openInfo('view/my/record/record.html');
+			});
+
+			h('.lockPosition').tap(function() {
+				let token = plus.storage.getItem('token');
+				if(!token) {
+					openInfo('view/my/login/login.html');
+				} else {
+					openInfo('view/my/login/lockPosition.html');
+				}
+			})
+
+		})
+	</script>
+
+</html>

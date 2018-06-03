@@ -1,0 +1,130 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../../dist/css/node/standardNode/personalelection/personalSignup.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">个人报名</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="main">
+				<h2>个人信息</h2>
+				<input type="text" class="nickName" placeholder="昵称" />
+				<textarea class="declaration" placeholder="竞选宣言"></textarea>
+			</div>
+			<div class="next">
+				下一步
+			</div>
+		</div>
+	</body>
+
+</html>
+<script src="../../../lib/js/mui.min.js"></script>
+<script src="../../../lib/js/zepto.min.js"></script>
+<script src="../../../src/js/common.js"></script>
+<script type="text/javascript">
+	mui.init();
+	(function() {
+		var Validata = {
+			token: null,
+			nickName: null,
+			declaration: null,
+			flag: false,
+			isEmpty: true,
+			nickNameFlag: false,
+			declarationFlag: false,
+			uploadUrl: 'http://101.200.34.20:7001/createTeam',
+			checkEmpty: function checkEmpty(val) {
+				if(val) {
+					this.isEmpty = false;
+				} else {
+					this.isEmpty = true;
+				}
+			},
+			checkNickName: function checkNickName(elements) {
+				this.nickNameFlag = false;
+				this.nickName = $(elements).val();
+				this.checkEmpty(this.nickName);
+				if(this.isEmpty) {
+					mui.toast('昵称不能为空');
+					return
+				} else {
+					this.nickNameFlag = true;
+					return
+				}
+				return this
+			},
+			checkDeclaration: function checkDeclaration(elements) {
+				this.declarationFlag = false;
+				this.declaration = $(elements).val();
+				this.checkEmpty(this.declaration);
+				if(this.isEmpty) {
+					mui.toast('竞选宣言不能为空!');
+					return
+				} else {
+					this.declarationFlag = true;
+					return
+				}
+				return this
+			},
+			init() {
+				this.submitForm();
+			},
+			upload: function upload(node_type, type) {
+				let that = this;
+				mui.ajax(that.uploadUrl, {
+					type: 'get',
+					headers: {
+						token: that.token
+					},
+					data: {
+						nickname: that.nickName,
+						declaration: that.declaration,
+						node_type: node_type,
+						type: type
+					},
+					dataType: 'json',
+					success: function(res) {
+						console.log(JSON.stringify(res));
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err));
+					}
+				});
+			},
+			submitForm() {
+				var that = this;
+				mui.plusReady(function() {
+					let self = plus.webview.currentWebview();
+					that.token = plus.storage.getItem('token');
+					$('.next').on('tap', function() {
+						that.nickName = $('.nickName').val();
+						that.declaration = $('.declaration').val();
+						that.checkNickName('.nickName');
+						that.checkDeclaration('.declaration');
+						if(that.nickNameFlag) {
+							if(that.declarationFlag) {
+								that.upload(self.node_type, self.type)
+								openInfo('lockingWhouse.html', {
+									node_type: self.node_type,
+									type: self.type
+								});
+							}
+						}
+					});
+				});
+			}
+		};
+		Validata.init();
+	})()
+</script>

@@ -1,0 +1,179 @@
+.text,
+.top-title {
+	text-align: center
+}
+
+@media (-webkit-min-device-pixel-ratio:1.5),
+(min-device-pixel-ratio:1.5) {
+	.border-1px::after {
+		-webkit-transform: scaleY(.7);
+		transform: scaleY(.7)
+	}
+}
+
+@media (-webkit-min-device-pixel-ratio:2),
+(min-device-pixel-ratio:2) {
+	.border-1px::after {
+		-webkit-transform: scaleY(.5);
+		transform: scaleY(.5)
+	}
+}
+
+@c-mask : rgba(0, 0, 0, .6) //透明背景 //1级状态颜色 @c333-2: rgba(51,51,51,.2);.bg-top{width:100%;height:150px;background-color:#528bf7;color:#FFF}.icon,.mian .mui-table-view-cell{height:50px}
+.top-title {
+	font-size: 18px;
+	padding: 15px 0
+}
+
+.my-module {
+	font-size: 12px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	margin-top: 15px
+}
+
+.my-module>div {
+	-webkit-box-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+	padding: 0 15%
+}
+
+.icon {
+	width: 50px;
+	margin: 0 auto;
+	background-repeat: no-repeat;
+	background-position-x: 12px;
+	background-position-y: 6px
+}
+
+.wallet-icon {
+	background-image: url(../../../dist/images/my/wallet-icon@2x.png);
+	background-size: 25px
+}
+
+@media (-webkit-min-device-pixel-ratio:3),
+(min-device-pixel-ratio:3) {
+	.wallet-icon {
+		background-image: url(../../../dist/images/my/wallet-icon@3x.png)
+	}
+}
+
+.deal-icon {
+	background-image: url(../../../dist/images/my/deal-icon@2x.png);
+	background-size: 30px
+}
+
+@media (-webkit-min-device-pixel-ratio:3),
+(min-device-pixel-ratio:3) {
+	.deal-icon {
+		background-image: url(../../../dist/images/my/deal-icon@3x.png)
+	}
+}
+
+.mian {
+	width: 100%;
+	background: #F5F5F5
+}
+
+.mui-table-view-cell:after,
+.mui-table-view:after {
+	left: 50px;
+	background-color: #E6E6E6
+}
+
+.mian ul {
+	margin-top: 10px
+}
+
+.mian .mui-table-view-cell a {
+	font-size: 14px
+}
+
+.mui-table-view:before {
+	height: 0
+}
+
+.mui-table-view:after {
+	height: 1px
+}
+
+.mui-table-view-cell {
+	line-height: 30px;
+	padding-left: 35px;
+	background-repeat: no-repeat;
+	background-size: 22px;
+	background-position-x: 15px;
+	background-position-y: 15px
+}
+
+.massage-cell {
+	background-image: url(../../../dist/images/my/massage-icon@2x.png)
+}
+
+@media (-webkit-min-device-pixel-ratio:3),
+(min-device-pixel-ratio:3) {
+	.massage-cell {
+		background-image: url(../../../dist/images/my/massage-icon@3x.png)
+	}
+}
+
+.contacts-cell {
+	background-image: url(../../../dist/images/my/contacts-icon@2x.png)
+}
+
+@media (-webkit-min-device-pixel-ratio:3),
+(min-device-pixel-ratio:3) {
+	.contacts-cell {
+		background-image: url(../../../dist/images/my/contacts-icon@3x.png)
+	}
+}
+
+.lock-cell {
+	background-image: url(../../../dist/images/my/suocang@2x.png)
+}
+
+@media (-webkit-min-device-pixel-ratio:3),
+(min-device-pixel-ratio:3) {
+	.lock-cell {
+		background-image: url(../../../dist/images/my/suocang@3x.png)
+	}
+}
+
+.setting-cell {
+	background-image: url(../../../dist/images/my/setting-icon@2x.png)
+}
+
+@media (-webkit-min-device-pixel-ratio:3),
+(min-device-pixel-ratio:3) {
+	.setting-cell {
+		background-image: url(../../../dist/images/my/setting-icon@3x.png)
+	}
+}
+
+.help-cell {
+	background-image: url(../../../dist/images/my/help-icon@2x.png)
+}
+
+@media (-webkit-min-device-pixel-ratio:3),
+(min-device-pixel-ratio:3) {
+	.help-cell {
+		background-image: url(../../../dist/images/my/help-icon@3x.png)
+	}
+}
+
+.aboutus-cell {
+	background-image: url(../../../dist/images/my/aboutus-icon@2x.png)
+}
+
+@media (-webkit-min-device-pixel-ratio:3),
+(min-device-pixel-ratio:3) {
+	.aboutus-cell {
+		background-image: url(../../../dist/images/my/aboutus-icon@3x.png)
+	}
+}
+
+.mui-table-view.top:after {
+	height: 0
+}

@@ -1,0 +1,123 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>TrueChain</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="lib/css/mui.min.css" />
+		<link rel="stylesheet" href="dist/css/common/common.css" />
+	</head>
+
+	<body>
+		<!--index-固定底部-->
+		<!--公共底部选项卡-->
+		<nav class="mui-bar mui-bar-tab" id="navFooter">
+			<a class="mui-tab-item mui-active" id="tab1">
+				<span class="mui-icon asset-icon"></span>
+				<span class="mui-tab-label">资产</span>
+			</a>
+			<a class="mui-tab-item" id="tab2">
+				<span class="mui-icon my-icon"></span>
+				<span class="mui-tab-label">节点</span>
+			</a>
+			<a class="mui-tab-item" id="tab3">
+				<span class="mui-icon my-icon"></span>
+				<span class="mui-tab-label">我的</span>
+			</a>
+		</nav>
+	</body>
+	<script src="lib/js/mui.min.js"></script>
+	<script src="lib/js/h.min.js"></script>
+	<script src="dist/js/common.min.js"></script>
+	<script type="text/javascript" charset="utf-8">
+		mui.back = function() {
+			var btnArray = ['是', '否'];
+			mui.confirm('是否退出应用', 'True', btnArray,
+				function(e) {
+					if(e.index == 0) {
+						plus.runtime.quit()
+					}
+				})
+		}
+
+		mui.init({
+			subpages: [{
+					url: 'asset.html',
+					id: 'asset',
+					styles: {
+						top: '0px',
+						bottom: '50px',
+						width: "100%"
+					}
+				},
+				{
+					url: 'my.html',
+					id: 'my',
+					styles: {
+						top: '0px',
+						bottom: '50px',
+						width: "100%",
+						left: "100%"
+					}
+				},
+				{
+					url: 'node.html',
+					id: 'node',
+					styles: {
+						top: '0px',
+						bottom: '50px',
+						width: "100%",
+						left: "100%"
+					}
+				}
+			]
+		});
+
+		mui.plusReady(function() {
+			let token = plus.storage.getItem('token');
+			h('#tab1').tap(function() {
+				changSub(1);
+				//		    mui.plusReady(function(){
+				//		    	var robj = plus.webview.getWebviewById("regstep2.html");
+				//		    	robj.evalJS("myrefresh()");
+				//		    });
+			});
+			h('#tab2').tap(function() {
+				if(!token) {
+					openInfo('view/my/login/login.html')
+				} else {
+					changSub(2);
+					//		mui.plusReady(function(){
+					//	    	var robj = plus.webview.getWebviewById("regstep2.html");
+					//	    	robj.evalJS("myrefresh()");
+					//	    });
+				}
+			});
+			h('#tab3').tap(function() {
+				changSub(3);
+				//		mui.plusReady(function(){
+				//	    	var robj = plus.webview.getWebviewById("regstep2.html");
+				//	    	robj.evalJS("myrefresh()");
+				//	    });
+			});
+
+		})
+
+		function changSub(index) {
+			var sub1 = plus.webview.getWebviewById('asset');
+			var sub2 = plus.webview.getWebviewById('node');
+			var sub3 = plus.webview.getWebviewById('my');
+			sub1.setStyle({
+				left: (1 - index) * 100 + '%'
+			});
+			sub2.setStyle({
+				left: (2 - index) * 100 + "%"
+			});
+			sub3.setStyle({
+				left: (3 - index) * 100 + "%"
+			});
+		};
+	</script>
+
+</html>

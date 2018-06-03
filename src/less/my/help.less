@@ -1,0 +1,33 @@
+@import "../common/base.less";
+
+.mui-bar-nav{
+	a{
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		font-size: 15px;
+		color: #528bf7;
+	}
+}
+
+.mui-table-view{
+	&:first-child{
+		margin-top: 0 !important;
+	}
+	&:before,&:after{
+		background-color: transparent;
+	}
+	.mui-table-view-cell{
+		padding: 14px 15px;
+		font-size: 15px;
+		&:after{
+			background-color: #F5F5F5;
+		}
+		&:last-child:after{
+			height: 1px;
+		}
+		.mui-navigate-right:after{
+			color: #666;
+		}
+	}
+}

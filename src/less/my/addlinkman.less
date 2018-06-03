@@ -1,0 +1,107 @@
+@import "../common/base.less";
+
+//header右侧样式
+.mui-bar-nav{
+	span{
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		font-size: 15px;
+		color: #528bf7;
+	}
+}
+
+section{
+	margin: 10px 15px;
+	i{
+		float: left;
+		width: 40px;
+		height: 40px;
+		margin-top: 20px;
+	}
+	.icon-linkman{
+		.bg-image('../../../dist/images/my/linkman');
+		background-size: 100%;
+	}
+	.mui-input-row{
+		clear: none;
+		&:after{
+			position: absolute;
+			right: 15px;
+	    bottom: 0;
+	    left: 15px;
+	    height: 1px;
+	    content: '';
+	    -webkit-transform: scaleY(.5);
+	    transform: scaleY(.5);
+	    background-color: #F5F5F5;
+		}
+		&:last-child:after{
+			background-color: transparent;
+		}
+		input{
+			margin-bottom: 0;
+			border: 0;
+		}
+	}
+}
+
+.mui-input-group{
+	&:before,&:after{
+		background-color: transparent;
+	}
+	.mui-input-row{
+		margin-top: 10px;
+		&:after{
+			right: 15px;
+			background-color: #F5F5F5;
+		}
+	}
+	.mui-checkbox{
+		margin-top: 20px;
+		font-size: 12px;
+		label{
+			color: #999;
+			a{
+				color: #528bf7;
+			}
+		}
+		&.mui-left{
+			input[type=checkbox]{
+				left: 15px;
+			}
+			label{
+				padding-left: 46px;
+			}
+		}
+		input[type=checkbox]{
+			top: 5px;
+			&:before{
+				font-size: 21px;
+			}
+		}
+		&:after{
+			background: transparent;
+		}
+	}
+	.mui-input-row{
+		i{
+			position: absolute;
+			width: 21px;
+			height: 20px;
+			right: 15px;
+    	top: 10px;
+		}		
+		.scan-code{
+			.bg-image('../../../dist/images/my/my_scan');
+			background-size: 100%;
+		}
+	}
+}
+.error{
+	margin: 5px 15px;
+	margin-right: 15px;
+	font-size: 11px;
+	color: #e55045;
+	text-align: right;
+}

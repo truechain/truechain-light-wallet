@@ -1,0 +1,253 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../lib/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/common/common.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/asset/currencydetail.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left white"></a>
+			<h1 class="mui-title white"><!--名称--></h1>
+		</header>
+		<div class="mui-content" id="refreshContainer">
+			<div class="marketVal">
+				<p class="price white size balance">
+					0
+					<!--余额-->
+				</p>
+				<!--<p class="val white">市值: <span>2555.26</span>CNY</p>-->
+			</div>
+			<p class="top">近期交易记录</p>
+			<ul class="mui-table-view transactionRecord">
+				<!--<li class="mui-table-view-cell mui-media subli">
+					<a href="javascript:;">
+						<div class="expend_icon"></div>
+						<div class="mui-media-body">
+							<p>
+								<span>sjkjljflsdhaf...hfdshjlkds</span>
+								<span class="sub right">-10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">3秒前
+								<span class="right">1/2</span>
+							</p>
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="income_icon"></div>
+						<div class="mui-media-body">
+							<p>sjkjljflsdhaf...hfdshjlkds
+								<span class="add right">+10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">0秒前
+								<span class="right">等待打包</span>
+							</p>
+						</div>
+					</a>
+					<div id="demo2" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="income_icon"></div>
+						<div class="mui-media-body">
+							<p>sjkjljflsdhaf...hfdshjlkds
+								<span class="add right">+10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">0秒前
+								<span class="right">等待打包</span>
+							</p>
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="expend_icon"></div>
+						<div class="mui-media-body">
+							<p>sjkjljflsdhaf...hfdshjlkds
+								<span class="sub right">-10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">3秒前
+								<span class="right">1/2</span>
+							</p>
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="income_icon"></div>
+						<div class="mui-media-body">
+							<p>sjkjljflsdhaf...hfdshjlkds
+								<span class="add right">+10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">0秒前
+								<span class="right">等待打包</span>
+							</p>
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>
+				<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="expend_icon"></div>
+						<div class="mui-media-body">
+							<p>sjkjljflsdhaf...hfdshjlkds
+								<span class="sub right">-10000 ether</span>
+							</p>
+							<p class="mui-ellipsis">3秒前
+								<span class="right">1/2</span>
+							</p>
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>-->
+			</ul>
+
+		</div>
+		<div class="func">
+			<a class="b bs white" id="transfer">转账</a>
+			<a class="b bsk white" href="receipt.html" id="receipt">收款</span>
+		</div>
+	</body>
+
+</html>
+<script src="../../lib/js/mui.min.js"></script>
+<script type="text/javascript" src="../../lib/js/zepto.min.js">
+</script>
+<script type="text/javascript" src="../../lib/js/web3.min.js"></script>
+<script type="text/javascript" src="../../lib/js/hooked-web3-provider.min.js"></script>
+<script type="text/javascript" src="../../lib/js/lightwallet.min.js"></script>
+
+<script type="text/javascript" src="../../lib/js/addToken.js"></script>
+
+<script type="text/javascript">
+	(function() {
+		var Validate = {
+			selfAddress: null,
+			init: function() {
+				this.submitForm();
+			},
+			getRecord: function getRecord(url) {
+				let that = this;
+				//				let url = 'https://api-ropsten.etherscan.io/api?module=account&action=tokentx&contractaddress=' + contractaddress + '&address=' + address + '&sort=desc&apikey=YourApiKeyToken';
+				mui.ajax(url, {
+					type: 'get',
+					dataType: 'json',
+					success: function(data) {
+						console.log(JSON.stringify(data));
+						let result = data.result;
+						if(result) {
+							result.forEach(function(item, index) {
+								let string = '';
+								if(item.from == that.selfAddress) {
+									string = `<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="expend_icon"></div>
+						<div class="mui-media-body">
+							<p>
+							<span class='address'>${item.to}</span>
+								<span class="sub right">-${item.value/1000000000000000000}</span>
+							</p>							
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>`;
+								} else {
+									string = `<li class="mui-table-view-cell mui-media">
+					<a href="javascript:;">
+						<div class="income_icon"></div>
+						<div class="mui-media-body">
+							<p>
+							<span class='address'>${item.to}</span>
+								<span class="sub right">+${item.value/1000000000000000000}</span>
+							</p>							
+						</div>
+					</a>
+					<div id="demo1" class="mui-progressbar">
+						<span></span>
+					</div>
+				</li>`;
+								}
+								$('.transactionRecord').append(string)
+							})
+						}
+
+					},
+					error: function(err) {
+						console.log(JSON.stringify(err))
+					}
+				})
+			},
+			submitForm: function() {
+				let that = this;
+				mui.plusReady(function() {
+					that.selfAddress = plus.storage.getItem('walletAddress');
+					var self = plus.webview.currentWebview();
+					document.getElementsByClassName('mui-title')[0].innerText = self.currencyName;
+					document.getElementsByClassName('price')[0].innerText = self.currencyPrice;
+					document.getElementById('transfer').href = `transfer.html?name=${self.currencyName}`;
+
+					let host = plus.storage.getItem('web3Host');
+					let trueContractAddr, ttrContractAddr;
+					let reg = /ropsten/g;
+					let apiUrl = '';
+
+					if(reg.test(host)) {
+						apiUrl = 'http://api-ropsten.etherscan.io/api?';
+						trueContractAddr = "0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1";
+						ttrContractAddr = "0x635AfeB8739f908A37b3d312cB4958CB2033F456";
+					} else {
+						apiUrl = 'http://api.etherscan.io/api?';
+						trueContractAddr = "0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab";
+						ttrContractAddr = "0xf2bb016e8c9c8975654dcd62f318323a8a79d48e";
+					}
+
+					switch(self.currencyName) {
+						case 'ETH':
+							{
+								let url = '' + apiUrl + 'module=account&action=txlist&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
+								that.getRecord(url);
+								break;
+							}
+						case 'TRUE':
+							{
+								let url = '' + apiUrl + 'module=account&action=tokentx&contractaddress=' + trueContractAddr + '&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
+								that.getRecord(url);
+								break;
+							}
+						case 'TTR':
+							{
+								let url = '' + apiUrl + 'module=account&action=tokentx&contractaddress=' + ttrContractAddr + '&address=' + that.selfAddress + '&sort=desc&apikey=YourApiKeyToken';
+								that.getRecord(url)
+								break
+							}
+					}
+				})
+			}
+		};
+		Validate.init();
+	})()
+</script>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title>导出助记词</title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link rel="stylesheet" href="../../lib/css/mui.min.css" />
+		<link rel="stylesheet" type="text/css" href="../../dist/css/common/common.css" />
+		<link rel="stylesheet" href="../../dist/css/asset/exportmw.css" />
+	</head>
+
+	<style type="text/css">
+		.mui-table-view-cell,
+		.options_item {
+			display: -webkit-box;
+			display: -ms-flexbox
+		}
+		
+		.options {
+			height: 100%;
+		}
+		
+		.options_item {
+			display: flex;
+			-ms-flex-pack: distribute;
+			justify-content: space-around;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			align-items: center;
+			min-height: 50px;
+			margin-top: 39px
+		}
+		
+		.options_item_bg {
+			width: 100%;
+			border-radius: 50px;
+			min-height: 50px;
+			line-height: 50px;
+			text-align: center
+		}
+		
+		.mui-input-group:after {
+			height: 0;
+		}
+		
+		.bs {
+			background-color: #528bf7
+		}
+		
+		.mui-modal {
+			top: 40%!important;
+			min-height: 0;
+			left: 0;
+		}
+		
+		.mui-modal.mui-active {
+			height: 60%!important
+		}
+		
+		.mui-table-view-cell {
+			display: flex;
+			-webkit-box-align: center;
+			-ms-flex-align: center;
+			align-items: center
+		}
+		
+		.lock {
+			background: #C0C0C0;
+		}
+	</style>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">导出助记词</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="step-1">
+				<div class="block">
+					<div class="title">抄写下你的钱包助记词</div>
+					<div class="content">
+						助记词用于恢复钱包或重置钱包密码，将它准确的抄写到纸上，并存放 在只有你知道的安全地方.
+						<span style="color: #ff0000bd;">(请勿截图，如有人获取你的助记词将直接获取你的资产！)</span>
+					</div>
+				</div>
+				<div class="keystore-box">
+					<textarea id="words" name="func" rows="2" cols="5" disabled="disabled"></textarea>
+				</div>
+				<button id="showseed">显示助记词</button>
+				<button id="next-btn" class="mui-hidden">下一步</button>
+			</div>
+
+			<div id="modal" class="mui-modal mui-hidden">
+				<header class="mui-bar mui-bar-nav">
+					<a class="modal_item mui-icon mui-icon-close mui-pull-right close" href="###"></a>
+					<h1 class="mui-title">钱包密码</h1>
+				</header>
+				<div class="mui-content options">
+					<form class="mui-input-group center top">
+						<div class="mui-input-row">
+							<input type="password" class="mui-input-clear psw" placeholder="请输入你的密码">
+						</div>
+						<div class="err-box err-psw mui-hidden" style="margin-top: 10px;"></div>
+						<div class="options_item">
+							<a class="options_item_bg r bs white comfirmPsw">确认</a>
+						</div>
+					</form>
+				</div>
+			</div>
+
+			<div class="step-2 not-view">
+				<div class="block">
+					<div class="title">确认你的钱包助记词</div>
+					<div class="content">
+						请按顺序点击助记词，以确认你备份的助记词正确。
+					</div>
+				</div>
+				<div class="keystore-box">
+					<textarea id='orderWord' name="func" rows="3" cols="5" placeholder="" disabled="disabled"></textarea>
+				</div>
+
+				<div class="my-word">
+					<!--助记词-->
+				</div>
+
+				<button id="complete-btn">完成</button>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../../lib/js/mui.min.js"></script>
+	<script type="text/javascript" src="../../dist/js/common.min.js"></script>
+	<script type="text/javascript" src="../../lib/js/zepto.min.js"></script>
+	<script type="text/javascript" src="../../lib/js/h.min.js"></script>
+	<script type="text/javascript" src="../../lib/js/lightwallet.min.js"></script>
+	<script type="text/javascript" src="../../src/js/asset/exportmw.js"></script>
+
+</html>

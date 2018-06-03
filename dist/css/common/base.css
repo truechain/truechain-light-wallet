@@ -1,0 +1,1 @@
+@media (-webkit-min-device-pixel-ratio:1.5),(min-device-pixel-ratio:1.5){.border-1px::after{-webkit-transform:scaleY(.7);transform:scaleY(.7)}}@media (-webkit-min-device-pixel-ratio:2),(min-device-pixel-ratio:2){.border-1px::after{-webkit-transform:scaleY(.5);transform:scaleY(.5)}}@c-mask : rgba(0,0,0,.6) //透明背景 //1级状态颜色 @c333-2: rgba(51,51,51,.2);

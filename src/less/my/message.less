@@ -1,0 +1,52 @@
+@import "../common/base.less";
+
+//header右侧样式
+.mui-bar-nav{
+	span{
+		position: absolute;
+		right: 15px;
+		top: 15px;
+		font-size: 15px;
+		color: #528bf7;
+	}
+}
+
+.message-list{
+	padding: 0 15px;
+	li{
+		padding: 15px 0;
+		.border-1px(#f5f5f5);
+		&.active{
+			div{
+				color: #999;
+				p{
+					color: #333;
+				}
+				span{
+					color: #666;
+				}
+			}
+		}
+		div{
+			color: #ccc;
+			&:first-child{
+				margin-bottom: 7px;
+			}
+			&:last-child{
+				font-size: 12px;
+			}
+			p{
+				display: inline-block;
+				width: 80%;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis; 
+				color: #ccc;
+			}
+			span{
+				float: right;
+				font-size: 12px;
+			}
+		}
+	}
+}

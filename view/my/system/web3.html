@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>web3 设置</title>
+		<link rel="stylesheet" href="../../../lib/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../dist/css/common/common.css" />
+		<style type="text/css">
+			.mui-bar-nav span {
+				position: absolute;
+				right: 15px;
+				top: 15px;
+				font-size: 15px;
+				color: #528bf7;
+			}
+			
+			.mui-content {
+				padding: 44px 15px;
+			}
+			
+			.web3-url {
+				margin-top: 40px;
+			}
+			
+			.web3-url p {
+				margin-bottom: 15px;
+				color: #666;
+				font-size: 12px;
+			}
+			
+			.web3-url input {
+				padding: 10px 0;
+				margin-bottom: 40px;
+				color: #333;
+				border-bottom: 1px solid #e5e5e5;
+				border-top: 0;
+				border-left: 0;
+				border-right: 0;
+			}
+			
+			.a-btn {
+				display: block;
+				width: 120px;
+				margin: 0 auto 20px;
+				color: #35ccbf;
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">web3 设置</h1>
+			<span id="saveWeb3Setting">保存</span>
+		</header>
+
+		<div class="mui-content">
+			<div class="web3-url">
+				<p>WALLET SERVICE URL</p>
+				<input id="web3Host" type="text" value="https://mainnet.infura.io/" />
+			</div>
+
+			<!--<a class="a-btn" href="javascript:;">设置默认的 URL</a>-->
+		</div>
+	</body>
+
+</html>
+<script type="text/javascript" src="../../../lib/js/mui.min.js"></script>
+<script type="text/javascript" src="../../../lib/js/h.min.js"></script>
+<script type="text/javascript">
+	mui.plusReady(function() {
+		let host = plus.storage.getItem('web3Host');
+if(host) {
+	h('#web3Host').val(host)
+		}
+		h('#saveWeb3Setting').tap(function() {
+			plus.storage.setItem('web3Host', h('#web3Host').val());
+			let host = plus.storage.getItem('web3Host');
+			if(host) {
+				mui.toast('设置成功');
+				setTimeout(function() {
+					plus.runtime.restart();
+				}, 1000)
+			}
+		})
+	});
+</script>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title>创建钱包</title>
+		<link rel="stylesheet" href="../../../lib/css/mui.min.css" />
+		<link rel="stylesheet" href="../../../dist/css/common/common.css" />
+		<link rel="stylesheet" href="../../../dist/css/my/setup.css" />
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">创建钱包</h1>
+		</header>
+
+		<div class="mui-content">
+			<div class="tip">
+				<p><i class="circle"></i>密码用于加密私钥，强度非常重要！</p>
+				<p><i class="circle"></i>True钱包不会储存密码，也无法帮您找回，请务必牢记！</p>
+			</div>
+
+			<form class="mui-input-group">
+				<div class="mui-input-row">
+					<input type="text" class="mui-input-clear e-wallet-name" placeholder="输入钱包名称">
+				</div>
+				<div class="name-error error mui-hidden">
+					不少于8位字符，建议混合大小写字母、数字、特殊字符
+				</div>
+
+				<div class="mui-input-row">
+					<input type="password" class="mui-input-password e-wallet-pwd" placeholder="输入您的密码">
+				</div>
+				<div class="pwd-error error mui-hidden">
+					不少于8位字符，建议混合大小写字母、数字、特殊字符
+				</div>
+
+				<div class="mui-input-row">
+					<input type="password" class="e-wallet-repwd" placeholder="确认您的密码">
+				</div>
+				<div class="repwd-error error mui-hidden">
+					不少于8位字符，建议混合大小写字母、数字、特殊字符
+				</div>
+
+				<div class="mui-input-row mui-checkbox mui-left">
+					<div class="agreement">
+						<label>我已仔细阅读并同意</label>
+						<a class="agreements" href="javascript:openInfo('../../rules/privacypolicy.html')">《服务及隐私条款》</a>
+					</div>
+					<input name="checkbox1" value="Item 1" type="checkbox">
+				</div>
+			</form>
+
+			<div class="btn-area">
+				<button id="star-setup">开始创建</button>
+				<a href="javascript:openInfo('importwallet.html')" class="channel">导入钱包</a>
+			</div>
+		</div>
+
+		<!--弹层mask-->
+		<div class="masker-loading mui-hidden">
+			<div class="outer"></div>
+			<div class="inner"></div>
+		</div>
+		<div class="masker-black mui-hidden"></div>
+
+		<script src="../../../lib/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../dist/js/common.min.js" type="text/javascript"></script>
+		<script src="../../../lib/js/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../lib/js/h.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../lib/js/web3.min.js" type="text/javascript"></script>
+		<!--<script src="../../../lib/js/hooked-web3-provider.min.js" type="text/javascript"></script>-->
+		<script src="../../../lib/js/lightwallet.min.js" type="text/javascript"></script>
+		<script src="../../../dist/js/wallet/setup.min.js" type="text/javascript" charset="utf-8"></script>
+	</body>
+
+</html>
