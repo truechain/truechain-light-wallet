@@ -133,9 +133,11 @@
 <script type="text/javascript">
 	(function() {
 		var Validate = {
-			pageIndex: 0,
+			sPageIndex: 0,
+			fPageIndex: 0,
 			token: null,
 			isStandCompleted: false,
+			isFullCompleted: false,
 			nodeDataUrl: 'http://192.168.13.36:8989/nodeRank',
 			statusUrl: 'http://192.168.13.36:8989/getMemberStatus',
 			getAjaxPromise: function getAjaxPromise(option) {
@@ -167,15 +169,14 @@
 				that.getAjaxPromise({
 					url: that.nodeDataUrl,
 					node_type: node_type,
-					pageIndex: 0,
-					pageNumber: 100
+					pageIndex: that.fPageIndex,
 				}).then((res) => {
 					let strAf = '';
 					res.data.forEach(function(item, index) {
 						if(item.type == 1) {
-							strAf += `<li class="mui-table-view-cell" data-address=${item.address}>
+							strAf = `<li class="mui-table-view-cell" data-address=${item.address}>
 								<div class="view-cell-left">
-									${index+1}
+									${that.fPageIndex+index+1}
 								</div>
 								<div class="view-cell-center nickName">
 									<span>${item.nickname}</span>
@@ -189,9 +190,9 @@
 								</div>
 							</li>`;
 						} else {
-							strAf += `<li class='mui-table-view-cell' data-address=${item.address}>
+							strAf = `<li class='mui-table-view-cell' data-address=${item.address}>
 								<div class="view-cell-left">
-									${index+1}
+									${that.fPageIndex+index+1}
 								</div>
 								<div class="view-cell-center nickName">
 									<span>${item.nickname}</span>
@@ -204,8 +205,11 @@
 								</div>
 							</li>`;
 						};
+						$(element).append(strAf);
+						setTimeout(function() {
+							that.isFullCompleted = true;
+						}, 500)
 					})
-					$(element).html(strAf);
 					//点击显示投票信息
 					$('.mui-table-view-cell').on('tap', function() {
 						openInfo('view/node/voteItem/baseInfo.html', {
@@ -221,14 +225,14 @@
 				that.getAjaxPromise({
 					url: that.nodeDataUrl,
 					node_type: node_type,
-					pageIndex: that.pageIndex
+					pageIndex: that.sPageIndex
 				}).then((res) => {
 					let strAf = '';
 					res.data.forEach(function(item, index) {
 						if(item.type == 1) {
 							strAf = `<li class="mui-table-view-cell" data-address=${item.address}>
 								<div class="view-cell-left">
-									${that.pageIndex+index+1}
+									${that.sPageIndex+index+1}
 								</div> 
 								<div class="view-cell-center nickName">
 									<span>${item.nickname}</span>
@@ -241,7 +245,7 @@
 						} else {
 							strAf = `<li class='mui-table-view-cell' data-address=${item.address}>
 								<div class="view-cell-left">
-									${that.pageIndex+index+1}
+									${that.sPageIndex+index+1}
 								</div>
 								<div class="view-cell-center nickName">
 									<span>${item.nickname}</span>
@@ -254,8 +258,8 @@
 						$(element).append(strAf);
 						setTimeout(function() {
 							that.isStandCompleted = true;
-						}, 1000)
-					})								
+						}, 500)
+					})
 					//点击显示投票信息
 					$('.mui-table-view-cell').on('tap', function() {
 						openInfo('view/node/voteItem/baseInfo.html', {
@@ -367,8 +371,6 @@
 										console.log('下拉');
 										var self = this;
 										that.getStatus();
-										//that.request(1, '.standardNode');
-										//that.request(2, '.fullNode');
 										setTimeout(function() {
 											self.endPullDownToRefresh();
 										}, 1000)
@@ -377,14 +379,18 @@
 								up: {
 									callback: function() {
 										var self = this;
-										that.getStatus();																				
-										if(that.isStandCompleted) {											
-											that.pageIndex += 10;
+										that.getStatus();
+										if(that.isStandCompleted) {
+											that.sPageIndex += 10;
 											that.standardNode(1, '.standardNode');
 											that.isStandCompleted = false;
 										}
-										//that.request(1, '.standardNode', 100);
-										//that.request(2, '.fullNode', 100);
+
+										if(that.isFullCompleted) {
+											that.fPageIndex += 10;
+											that.request(2, '.fullNode', 100);
+											that.isFullCompleted = false;
+										}
 										setTimeout(function() {
 											self.endPullUpToRefresh();
 										}, 1000)
@@ -394,7 +400,6 @@
 						});
 					});
 					that.getStatus();
-					//that.request(1, '.standardNode');
 					that.standardNode(1, '.standardNode');
 					that.request(2, '.fullNode');
 				});
