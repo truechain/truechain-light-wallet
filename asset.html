@@ -141,18 +141,42 @@
 	<script type="text/javascript" src="src/js/asset/asset.js"></script>
 	<script type="text/javascript">
 		mui.plusReady(function() {
-			/*检测新版本    Start*/
-			var server = localStorage.getItem('deviceurl') + "PosSellSearch!update_app.do";
-			// 获取本地应用资源版本号 
-			//			var wgtVer = null;
-			//
-			//			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
-			//				wgtVer = inf.version;
-			//				mui.alert(wgtVer);
-			//			});
-			
-
-			/*检测新版本    End*/
+			//***********
+			var ver;
+			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+					ver = inf.version;
+				});
+				mui.ajax({
+					type: "get",
+					dataType: 'json',
+					url: 'http://39.105.125.189:7001/checkVersion', //获取当前上架APPStore版本信息
+					success: function(res) {
+						var ver_new = (res.data.version).replace(/\./g, '');
+						var ver_used = ver.replace(/\./g, '');
+						if(ver_new > ver_used) {
+							let btnArray = ['更新', '返回'];
+							mui.confirm(res.data.version, '发现新版本', btnArray, function(e) {
+								if(e.index == 0) {
+									if(mui.os.ios) {
+										plus.runtime.openURL('http://wapxk.com/wapindex-1000-6635.html');
+									} else {
+										plus.runtime.openURL('https://www.truechain.pro/download/true.apk');
+									}
+								} else {
+									console.log('返回')
+								}
+							});
+						} else {
+							//								mui.alert('您当前已经是最新版本', '无需更新')
+						}
+					},
+					error: function(xhr, type, errerThrown) {
+						//mui.toast('网络异常,请稍候检测！');
+					}
+				});
+			})
+			//*******
 
 			let selfAddress = plus.storage.getItem('walletAddress');
 			let host = plus.storage.getItem('web3Host');

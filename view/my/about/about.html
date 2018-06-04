@@ -23,7 +23,7 @@
 			<div class="banner">
 				<div class="logo">
 					<img src="../../../src/images/logo.png" />
-					<span>当前版本：2.0.4</span>
+					<span>当前版本：2.0.5</span>
 				</div>
 				<p>True 是一款移动端轻钱包 APP ，它旨为普通用户提供一款安全放心、简单好用、功能强大的数字资产钱包应用。</p>
 			</div>
@@ -55,8 +55,7 @@
 		<script src="../../../dist/js/common.min.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 	<script type="text/javascript">
-		mui.plusReady(function() {
-			let token = plus.storage.getItem('token');
+		mui.plusReady(function() {			
 			mui('.check-version')[0].addEventListener('tap', function() {
 				var ver;
 				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
@@ -66,7 +65,7 @@
 					mui.ajax({
 						type: "get",
 						dataType: 'json',
-						url: 'http://45.40.243.125:7001/checkVersion', //获取当前上架APPStore版本信息
+						url: 'http://39.105.125.189:7001/checkVersion', //获取当前上架APPStore版本信息
 						success: function(res) {
 							var ver_new = (res.data.version).replace(/\./g, '');
 							var ver_used = ver.replace(/\./g, '');

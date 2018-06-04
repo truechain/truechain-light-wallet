@@ -138,8 +138,8 @@
 			token: null,
 			isStandCompleted: false,
 			isFullCompleted: false,
-			nodeDataUrl: 'http://45.40.243.125:7001/nodeRank',
-			statusUrl: 'http://45.40.243.125:7001/getMemberStatus',
+			nodeDataUrl: 'http://39.105.125.189:7001/nodeRank',
+			statusUrl: 'http://39.105.125.189:7001/getMemberStatus',
 			getAjaxPromise: function getAjaxPromise(option) {
 				let that = this;
 				return new Promise(function(resolve, reject) {
@@ -152,6 +152,7 @@
 						data: {
 							node_type: option.node_type,
 							pageIndex: option.pageIndex,
+							pageNumber:10,
 							isScore: true
 						},
 						async: true,
@@ -225,7 +226,8 @@
 				that.getAjaxPromise({
 					url: that.nodeDataUrl,
 					node_type: node_type,
-					pageIndex: that.sPageIndex
+					pageIndex: that.sPageIndex,
+					isScore: true
 				}).then((res) => {
 					let strAf = '';
 					res.data.forEach(function(item, index) {
@@ -371,6 +373,14 @@
 										console.log('下拉');
 										var self = this;
 										that.getStatus();
+										$('.standardNode').html('')
+										$('.fullNode').html('')
+										setTimeout(function() {
+											that.standardNode(1, '.standardNode');
+											that.request(2, '.fullNode');
+										}, 1000)
+										that.sPageIndex = 0;
+										that.fPageIndex = 0;
 										setTimeout(function() {
 											self.endPullDownToRefresh();
 										}, 1000)
