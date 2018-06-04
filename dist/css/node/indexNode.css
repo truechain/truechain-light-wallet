@@ -89,8 +89,8 @@ body {
 	width: 40px;
 }
 
-.mui-table-view-cell>.view-cell-left {
-	width: 25px;
+.mui-table-view-cell>.view-cell-left {	
+	width:25px;
 	height: 25px;
 	background-size: 100% 100%;
 }

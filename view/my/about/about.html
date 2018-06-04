@@ -51,13 +51,40 @@
 			</ul>
 		</div>
 		<script src="../../../lib/js/mui.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="../../../lib/js/jquery.js" type="text/javascript" charset="utf-8"></script>
 		<script src="../../../dist/js/common.min.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 	<script type="text/javascript">
 		mui('.check-version')[0].addEventListener('tap', function() {
-			mui.alert('无需更新', '您当前已经是最新版本', function(e) {
-				e.index
-			}, 'div')
+			var ver;
+			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+				//				var wgtVer = null;
+				//				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+				//					wgtVer = inf.version;
+				//					mui.alert(wgtVer); //当前版本
+				//				});
+
+				$.ajax({
+					type: "get",
+					dataType: 'jsonp',
+					url: 'www.baidu.com', //获取当前上架APPStore版本信息
+					success: function(data) {
+						var ver_new = (data.version).replace(/\./g, '');
+						var ver_used = ver.replace(/\./g, '');
+						if(ver_new > ver_used) {
+							alert('发现新版本' + data.version + "是否更新");
+							plus.runtime.openURL(data.url);
+						}
+					},
+					error: function(xhr, type, errerThrown) {
+						mui.toast('网络异常,请稍候检测！');
+					}
+				});
+			})
+
+			//			mui.alert('无需更新', '您当前已经是最新版本', function(e) {
+			//				console.log('当前版本')
+			//			}, 'div')
 		});
 	</script>
 

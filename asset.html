@@ -150,28 +150,7 @@
 			//				wgtVer = inf.version;
 			//				mui.alert(wgtVer);
 			//			});
-			var ver;
-			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
-				ver = inf.version; //2.0.4s
-				var client;
-				var ua = navigator.userAgent.toLowerCase();
-				$.ajax({
-					type: "get",
-					dataType: 'jsonp',
-					url: server, //获取当前上架APPStore版本信息
-					success: function(data) {
-						var ver_new = (data.version).replace(/\./g, '');
-						var ver_used = ver.replace(/\./g, '');
-						if(ver_new > ver_used) {
-							alert('发现新版本' + data.version + "是否更新");
-							plus.runtime.openURL(data.url);
-						}
-					},
-					error: function(xhr, type, errerThrown) {
-						mui.toast('网络异常,请稍候检测新版！');
-					}
-				});
-			})
+			
 
 			/*检测新版本    End*/
 
