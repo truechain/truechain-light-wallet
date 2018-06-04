@@ -55,37 +55,46 @@
 		<script src="../../../dist/js/common.min.js" type="text/javascript" charset="utf-8"></script>
 	</body>
 	<script type="text/javascript">
-		mui('.check-version')[0].addEventListener('tap', function() {
-			var ver;
-			plus.runtime.getProperty(plus.runtime.appid, function(inf) {
-				//				var wgtVer = null;
-				//				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
-				//					wgtVer = inf.version;
-				//					mui.alert(wgtVer); //当前版本
-				//				});
-
-				$.ajax({
-					type: "get",
-					dataType: 'jsonp',
-					url: 'www.baidu.com', //获取当前上架APPStore版本信息
-					success: function(data) {
-						var ver_new = (data.version).replace(/\./g, '');
-						var ver_used = ver.replace(/\./g, '');
-						if(ver_new > ver_used) {
-							alert('发现新版本' + data.version + "是否更新");
-							plus.runtime.openURL(data.url);
+		mui.plusReady(function() {
+			let token = plus.storage.getItem('token');
+			mui('.check-version')[0].addEventListener('tap', function() {
+				var ver;
+				plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+					plus.runtime.getProperty(plus.runtime.appid, function(inf) {
+						ver = inf.version;
+					});
+					mui.ajax({
+						type: "get",
+						dataType: 'json',
+						url: 'http://45.40.243.125:7001/checkVersion', //获取当前上架APPStore版本信息
+						success: function(res) {
+							var ver_new = (res.data.version).replace(/\./g, '');
+							var ver_used = ver.replace(/\./g, '');
+							if(ver_new > ver_used) {
+								let btnArray = ['更新', '返回'];
+								mui.confirm(res.data.version, '发现新版本', btnArray, function(e) {
+									console.log(e.index);
+									if(e.index == 0) {
+										if(mui.os.ios) {															
+											plus.runtime.openURL('http://wapxk.com/wapindex-1000-6635.html');
+										}else{
+											plus.runtime.openURL('https://www.truechain.pro/download/true.apk');
+										}
+									} else {
+										console.log('返回')
+									}
+								});
+							} else {
+								mui.alert('您当前已经是最新版本', '无需更新')
+							}
+						},
+						error: function(xhr, type, errerThrown) {
+							mui.toast('网络异常,请稍候检测！');
 						}
-					},
-					error: function(xhr, type, errerThrown) {
-						mui.toast('网络异常,请稍候检测！');
-					}
-				});
-			})
-
-			//			mui.alert('无需更新', '您当前已经是最新版本', function(e) {
-			//				console.log('当前版本')
-			//			}, 'div')
-		});
+					});
+				})
+			});
+		})
 	</script>
 
 </html>
