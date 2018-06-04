@@ -38,7 +38,7 @@
 			align-items: center;
 		}
 		
-		.reason {
+		.reason,.tel {
 			padding: 20px;
 		}
 		
@@ -60,12 +60,22 @@
 			align-items: center;
 		}
 		
+		.trueNum,.open{
+			margin-right: 20px;
+		}
+		
 		.refuse {
 			background: #e86565;
 		}
 		
 		.agree {
 			background: #528BF7;
+		}
+		
+		.reasonAndtel{
+			display: flex;
+			justify-content: space-between;
+			align-items: center;			
 		}
 	</style>
 
@@ -80,27 +90,24 @@
 				<!--<li class="member_info">
 					<div class="baseInfo">
 						<div class="mui-input-row mui-checkbox mui-left baseInfoTop">
+							<div>
 							<div class="agreement">
-								<label class="memberNickName">dsaf</label>
+								<label class="memberNickName">昵称: 就</label>
 							</div>
-							<input class="checks" name="checkbox1" data-address='1111' value="Item 1" type="checkbox">
+							<input class='checks' data-address=${item.address} name="checkbox" value="Item" type="checkbox">
+							</div>							
+							<div>
+								<span class="trueNum">2000 true</span>
 							<span class="open">></span>
+							</div>
 						</div>
 					</div>
-					<p class="reason"></p>
-				</li>
-				<li class="member_info">
-					<div class="baseInfo">
-						<div class="mui-input-row mui-checkbox mui-left baseInfoTop">
-							<div class="agreement">
-								<label class="memberNickName">dsaf</label>
-							</div>
-							<input class="checks" data-address='22222' name="checkbox1" value="Item 1" type="checkbox">
-							<span class="open">></span>
-						</div>
+					<div class="reasonAndtel">
+					<p class="reason">申请理由: ${item.dhfhsdhfh都会放假时间啊回家看电视黑科技见客户德生科技喝咖啡等哈就付款计划代课教师好}</p>	
+					<p class="tel">18827182787878</p>
 					</div>
-					<p class="reason"></p>
-				</li>-->
+					
+				</li>-->				
 			</ul>
 			<div class="function">
 				<button class="bottom refuse">拒绝</button>
@@ -131,24 +138,33 @@
 						token: that.token
 					},
 					success: function(res) {
+						console.log('人员管理',JSON.stringify(res))
 						let string = '';
 						res.data.forEach(function(item, index) {
 							string = `<li class="member_info">
 					<div class="baseInfo">
 						<div class="mui-input-row mui-checkbox mui-left baseInfoTop">
+							<div>
 							<div class="agreement">
-								<label class="memberNickName">${item.nickname}</label>
+								<label class="memberNickName">昵称: ${item.nickname}</label>
 							</div>
 							<input class='checks' data-address=${item.address} name="checkbox" value="Item" type="checkbox">
+							</div>							
+							<div>
+								<span class="trueNum">${item.lock_num} true</span>
 							<span class="open">></span>
+							</div>
 						</div>
 					</div>
-					<p class="reason">${item.reason}</p>
+					<div class="reasonAndtel">
+					<p class="reason">申请理由: ${item.reason}</p>
+					<p class="tel">手机:${item.mobile}</p>
+					</div>
 				</li>`;
 							$('.member').append(string);
 						})
 						$('.open').on('tap', function() {
-							$('.reason').toggle('slow');
+							$('.reasonAndtel').toggle('slow');
 						})
 					},
 					error: function(err) {
@@ -179,7 +195,7 @@
 							status: 2,
 							user_address: aggreAddress
 						},
-						success: function(res) {
+						success: function(res) {							
 							mui.back = function() {
 								var wobj = plus.webview.getWebviewById("view/node/myTeam/myTeam.html");
 								wobj.reload(true);
