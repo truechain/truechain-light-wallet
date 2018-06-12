@@ -199,8 +199,7 @@
 								},
 								success: function(res) {
 									console.log(JSON.stringify(res) + '已绑定');
-									if(res.body.status == 0) {
-										console.log(res.body.data.token,'我的token')
+									if(res.body.status == 0) {										
 										plus.storage.setItem("token", res.body.data.token);
 										setTimeout(function() {
 											plus.runtime.restart();

@@ -8,7 +8,7 @@
 		<link href="../../../css/mui.min.css" rel="stylesheet" />
 		<link rel="stylesheet" type="text/css" href="../../../dist/css/common/common.css" />
 		<link rel="stylesheet" type="text/css" href="../../../dist/css/my/node.css" />
-	</head>
+	</head> 
 
 	<style type="text/css">
 		.mui-table-view-cell>.view-cell-left {
@@ -38,11 +38,12 @@
 			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
 			<h1 class="mui-title"><!--节点类型--></h1>
 		</header>
-
-		<div class="mui-content">			
-			<div class="mui-input-row mui-search">
-				<input type="search" class="mui-input-clear" onkeydown="search(event)" placeholder="搜索">
-			</div>
+		<div class="mui-content">
+			<form action="" onsubmit="return false">
+				<div class="mui-input-row mui-search">
+					<input type="search" id="mySearch" class="mui-input-clear" placeholder="搜索">
+				</div>
+			</form>
 			<ul class="mui-table-view nodeType">
 				<!--<li class="mui-table-view-cell" data-address=${item.address}>
 						<div class="view-cell-left">
@@ -50,8 +51,7 @@
 						</div>
 						<div class="view-cell-center nickName">
 							<span>${item.nickname}</span>
-						</div>
-						
+						</div>						
 						<div class="view-cell-right voteNum">
 							${item.tickets}票
 						</div>
@@ -68,9 +68,6 @@
 <script src="../../../src/js/common.js"></script>
 
 <script type="text/javascript">
-	function search (e){
-		console.log(e.target.value)
-	}
 	(function() {
 		var Validate = {
 			token: null,
@@ -126,16 +123,16 @@
 						</li>`;
 						} else {
 							strAf += `<li class='mui-table-view-cell' data-address=${item.address}>
-						<div class="view-cell-left">
-							${index+1}
-						</div>
-						<div class="view-cell-center nickName">
-							<span>${item.nickname}</span>
-						</div>	
-						<div class="view-cell-right voteNum">
-							${item.tickets}票
-						</div>
-					</li>`;
+									<div class="view-cell-left">
+										${index+1}
+									</div>
+									<div class="view-cell-center nickName">
+										<span>${item.nickname}</span>
+									</div>	
+									<div class="view-cell-right voteNum">
+										${item.tickets}票
+									</div>
+								</li>`;
 						};
 					})
 					$(element).html(strAf);
@@ -199,6 +196,97 @@
 			},
 
 			/***********************************/
+			mySearch: function(node_type) {
+				let that = this;
+				$('#mySearch').bind('search', function(e) {
+					let keyword = e.target.value;
+					mui.ajax('http://39.105.125.189:7001/searchTeam', {
+						type: 'get',
+						dataType: 'json',
+						headers: {
+							token: that.token
+						},
+						data: {
+							node_type: node_type,
+							search_value: keyword
+						},
+						success: function(res) {
+							$('.nodeType').html('');
+							let List = '';
+							if(res.data.length >= 1) {
+								res.data.forEach(function(item, index) {
+									if(item.node_type == 2) {
+										if(item.type == 1) {
+											List += `<li class="mui-table-view-cell" data-address=${item.address}>
+										<div class="view-cell-left">
+											${index+1}
+										</div>
+										<div class="view-cell-center nickName">
+											<span>${item.nickname}</span>
+											<img class="type" src="../../../dist/images/common/geren.png" />
+										</div>		
+										<div class="view-cell-right voteNum">
+											${item.tickets}票
+										</div>
+									</li>`;
+										} else {
+											List += `<li class='mui-table-view-cell' data-address=${item.address}>
+									<div class="view-cell-left">
+										${index+1}
+									</div>
+									<div class="view-cell-center nickName">
+										<span>${item.nickname}</span>
+									</div>	
+									<div class="view-cell-right voteNum">
+										${item.tickets}票
+									</div>
+								</li>`;
+										};
+									} else {
+										if(item.type == 1) {
+											List += `<li class="mui-table-view-cell" data-address=${item.address}>
+										<div class="view-cell-left">
+											${index+1}
+										</div>
+										<div class="view-cell-center nickName">
+											<span>${item.nickname}</span>
+											<img class="type" src="../../../dist/images/common/geren.png" />
+										</div>		
+										<div class="view-cell-right voteNum">
+											${item.score}分
+										</div>
+									</li>`;
+										} else {
+											List += `<li class='mui-table-view-cell' data-address=${item.address}>
+									<div class="view-cell-left">
+										${index+1}
+									</div>
+									<div class="view-cell-center nickName">
+										<span>${item.nickname}</span>
+									</div>	
+									<div class="view-cell-right voteNum">
+										${item.score} 分
+									</div>
+								</li>`;
+										};
+									}
+								});
+								$('.nodeType').html(List);
+								$('.mui-table-view-cell').on('tap', function() {
+									openInfo('baseInfo.html', {
+										address: $(this).data('address')
+									})
+								})
+							} else {
+								$('.nodeType').html('没有数据');
+							}
+						},
+						error: function(err) {
+							console.log(JSON.stringify(err))
+						}
+					})
+				});
+			},
 			init: function() {
 				this.submitForm();
 			},
@@ -212,12 +300,14 @@
 							{
 								$('.mui-title').html('标准节点');
 								that.standardNode(1, '.nodeType');
+								that.mySearch(1)
 								break;
 							}
 						case 2:
 							{
 								$('.mui-title').html('全节点');
 								that.request(2, '.nodeType');
+								that.mySearch(2);
 								break
 							}
 					}
