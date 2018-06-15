@@ -6,6 +6,8 @@ import {
   Image,
   TouchableHighlight
 } from 'react-native';
+import I18n from '../language/i18n';
+
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -14,27 +16,26 @@ export default class App extends Component<Props> {
       <View style={styles.container}>
         <View style={styles.LogoOrWel}>
           <Image style={styles.logo} source={require('./assets/images/logo.png')}></Image>
-          <Text style={styles.welcome}>欢迎来到True</Text>
+          <Text style={styles.welcome}>{I18n.t('guide.welcome')}</Text>
         </View>
-
         <View style={styles.fun}>
           <View style={[styles.funItem, styles.import]}>
             <Text>
-              在已有钱包中导出助记词，点击“导入钱包”，输入导出的助记词；导入钱包后请立即备份助记词。
+            {I18n.t('guide.importInstructions')}
           </Text>
             <TouchableHighlight style={[styles.funRadius, styles.funImport]}>
               <Text style={styles.funText}>
-                导入钱包
+              {I18n.t('guide.import')}
           </Text>
             </TouchableHighlight>
           </View>
           <View style={[styles.funItem, styles.create]}>
             <Text>
-              没有钱包，请点击“创建钱包”，创建钱包时，请牢记您的密码；创建钱包后轻立即备份助记词。
+            {I18n.t('guide.createInstructions')}            
           </Text>
             <TouchableHighlight style={[styles.funRadius, styles.funCreate]}>
               <Text style={styles.funText}>
-                创建钱包
+              {I18n.t('guide.create')}
           </Text>
             </TouchableHighlight>
           </View>
