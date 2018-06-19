@@ -3,7 +3,7 @@ import en from './en';
 import zh from './zh';
 
 I18n.fallbacks = true;
-I18n.locale='zh'
+I18n.locale='zh';
 
 I18n.translations = {
   zh,
