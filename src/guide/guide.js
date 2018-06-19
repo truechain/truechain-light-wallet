@@ -2,20 +2,15 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     Text,
-    View,
+    View,    
     Image,
     TouchableHighlight
 } from 'react-native';
+import { createStackNavigator } from 'react-navigation';
 import I18n from '../../language/i18n';
-import * as types from '../store/actionTypes'
+import ImportWallet from '../components/my/wallet/importWallet';
 
-export default class Guide extends Component {        
-    funImport() {        
-        store.dispatch({
-            type: types.SET_LANGUAGE,
-            language: 'en'
-        });
-    };
+class Guide extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -29,8 +24,8 @@ export default class Guide extends Component {
                             {I18n.t('guide.importInstructions')}
                         </Text>
                         <TouchableHighlight style={[styles.funRadius, styles.funImport]}>
-                            <Text style={styles.funText} onPress={this.funImport}>
-                                {I18n.t('guide.import')}
+                            <Text style={styles.funText} onPress={() => this.props.navigation.navigate('Import')}>
+                                {I18n.t('guide.importWallet')}
                             </Text>
                         </TouchableHighlight>
                     </View>
@@ -40,13 +35,31 @@ export default class Guide extends Component {
                         </Text>
                         <TouchableHighlight style={[styles.funRadius, styles.funCreate]}>
                             <Text style={styles.funText}>
-                                {I18n.t('guide.create')}
+                                {I18n.t('guide.createWallet')}
                             </Text>
                         </TouchableHighlight>
                     </View>
                 </View>
             </View>
         );
+    }
+}
+
+const RootStack = createStackNavigator(
+    {
+        Guide: Guide,
+        Import: ImportWallet
+    },
+    {
+        initialRouteName: 'Guide'
+    }
+);
+
+export default class Home extends Component {
+    render() {
+        return (
+            <RootStack />
+        )
     }
 }
 

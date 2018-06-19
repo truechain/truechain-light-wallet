@@ -3,7 +3,6 @@ const initState={
     language:'zh'
 }
 
-
 export default function(state=initState,action){
     switch(action.type){
         case types.SET_LANGUAGE:

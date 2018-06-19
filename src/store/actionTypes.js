@@ -1,6 +1,4 @@
-const SET_LANGUAGE='SET_LANGUAGE';
-
-
+const SET_LANGUAGE=SET_LANGUAGE;
 
 
 export{
