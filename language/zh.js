@@ -10,6 +10,9 @@ export default {
     mnemonic: '助记词',
     mnemonicPlaceholder:'助记词,按空格分隔',
     officialWallet: '官方钱包',
-    privateKey: '私钥'
+    privateKey: '私钥',
+    path:'路径',
+    enterPwd:'输入您的密码',
+    confirmPwd:'确认您的密码'
   }
 };

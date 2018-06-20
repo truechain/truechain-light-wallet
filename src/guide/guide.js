@@ -51,7 +51,7 @@ const RootStack = createStackNavigator(
         Import: ImportWallet
     },
     {
-        initialRouteName: 'Guide'
+        initialRouteName: 'Import'
     }
 );
 
