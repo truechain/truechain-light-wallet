@@ -3,12 +3,13 @@ import {
     StyleSheet,
     Text,
     View,
+    Alert
 } from 'react-native';
 import I18n from '../../../../language/i18n';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import TextWidget from '../../public/textWidget/textWidget';
-import { CheckBox, Button } from 'react-native-elements'
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { CheckBox, Button, Input } from 'react-native-elements';
 
 export default class ImportWallet extends Component {
     static navigationOptions = {
@@ -19,50 +20,80 @@ export default class ImportWallet extends Component {
     constructor() {
         super();
         this.state = {
-            pwd: null,
-            confirmPwd: null,
+            mnemonic: '',
+            mnemonicFlag: true,
+            pwd: '',
+            confirmPwd: '',
             isAgree: false,
-            isImport: false
+            disabledImport: false
         }
     }
+
     mnemonicArea = {
         placeholder: I18n.t('wallet.mnemonicPlaceholder'),
+        multiline: true,
         style: styles.mnemonicArea,
-        autoFocus: true,
-        multiline: true
+        onChange: (e) => {
+            let mnemonic = e.nativeEvent.text
+            let spaceReg = /(^\s*)|(\s*$)/g;
+            this.setState({
+                mnemonic: mnemonic.replace(spaceReg, '')
+            }, () => {
+                this.setState({
+                    mnemonicFlag: this.state.mnemonic ? false : true
+                })
+            })
+        }
     }
 
     path = {
         placeholder: I18n.t('wallet.path'),
         value: "m/44'/60'/0'/0/0",
-        style: styles.textInput
+        inputContainerStyle: styles.textInput
     }
+
     pwd = {
         placeholder: I18n.t('wallet.enterPwd'),
-        style: styles.textInput,
-        onEndEditing: (e) => {
+        inputContainerStyle: styles.textInput,
+        secureTextEntry: true,
+        onChangeText: (pwd) => {
             this.setState({
-                pwd: e.nativeEvent.text
-            }, () => {
-                console.log('输入的密码:', this.state.pwd);
-            })
-        }
-    }
-    confirmPwd = {
-        placeholder: I18n.t('wallet.confirmPwd'),
-        style: styles.textInput,
-        onEndEditing: (e) => {
-            this.setState({
-                confirmPwd: e.nativeEvent.text
-            }, () => {
-                console.log('确认密码:', this.state.confirmPwd);
+                pwd: pwd
             })
         }
     }
 
-    ImportWallet() {
-        alert('导入钱包事件')
+    confirmPwd = {
+        placeholder: I18n.t('wallet.confirmPwd'),
+        inputContainerStyle: styles.textInput,
+        secureTextEntry: true,
+        onChangeText: (confirmPwd) => {
+            this.setState({
+                confirmPwd: confirmPwd
+            })
+        }
     }
+
+    componentWillUpdate() {
+
+    }
+
+    ImportWallet() {        
+        if (this.state.mnemonicFlag) {
+            Alert.alert('提示', '助记词不能为空')
+        } else if (!this.state.pwd) {
+            Alert.alert('提示', '请输入密码')
+        } else if (this.state.pwd !== this.state.confirmPwd) {
+            Alert.alert('提示', '两次密码输入不一致')
+        } else if (!this.state.isAgree) {
+            Alert.alert('提示', '请同意服务及隐私条款')
+        } else {            
+            let mnemonic = this.state.mnemonic,
+                pwd = this.state.pwd;
+            console.log(mnemonic, pwd);            
+        }
+    }
+
     render() {
         return <ScrollableTabView
             style={{ backgroundColor: '#fff' }}
@@ -74,9 +105,9 @@ export default class ImportWallet extends Component {
             {/* 助记词导入 */}
             <View tabLabel={I18n.t('wallet.mnemonic')} style={styles.padding_10} >
                 <TextWidget {...this.mnemonicArea} />
-                <TextWidget {...this.path} />
-                <TextWidget {...this.pwd} />
-                <TextWidget {...this.confirmPwd} />
+                <Input {...this.path} />
+                <Input {...this.pwd} />
+                <Input {...this.confirmPwd} />
                 <View style={styles.isAgree_flex}>
                     <CheckBox
                         title=''
@@ -96,27 +127,27 @@ export default class ImportWallet extends Component {
 
                 <Button
                     title={I18n.t('guide.importWallet')}
-                    onPress={this.ImportWallet}
+                    onPress={this.ImportWallet.bind(this)}
                     buttonStyle={styles.buttonStyle}
-                    disabled={this.state.isImport}
+                    disabled={this.state.disabledImport}
                     disabledStyle={styles.disabledStyle}
                 ></Button>
             </View>
 
-            <View tabLabel={I18n.t('wallet.officialWallet')}>
+            {/* <View tabLabel={I18n.t('wallet.officialWallet')}>
                 <Text>官方钱包</Text>
             </View>
             <View tabLabel={I18n.t('wallet.privateKey')}>
                 <Text>私钥</Text>
-            </View>
+            </View> */}
         </ScrollableTabView>;
     }
 }
 
 const styles = StyleSheet.create({
     mnemonicArea: {
-        minHeight: 100,
-        maxHeight: 150,
+        minHeight: 150,
+        maxHeight: 350,
         padding: 8,
         borderWidth: 1,
         borderRadius: 7,
@@ -127,7 +158,6 @@ const styles = StyleSheet.create({
         borderColor: '#e6e6e6',
         height: 45,
         padding: 5,
-
     },
     padding_10: {
         padding: 10
@@ -149,7 +179,6 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         backgroundColor: "#007AFF",
-        width: 300,
         height: 45,
         borderColor: "transparent",
         borderWidth: 0,
