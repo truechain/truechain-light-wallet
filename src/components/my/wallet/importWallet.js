@@ -74,6 +74,10 @@ export default class ImportWallet extends Component {
         }
     }
 
+    componentDidMount() {
+
+    }
+
     componentWillUpdate() {
 
     }
@@ -87,10 +91,10 @@ export default class ImportWallet extends Component {
             Alert.alert('提示', '两次密码输入不一致')
         } else if (!this.state.isAgree) {
             Alert.alert('提示', '请同意服务及隐私条款')
-        } else {            
+        } else {
             let mnemonic = this.state.mnemonic,
-                pwd = this.state.pwd;
-            console.log(mnemonic, pwd);            
+                pwd = this.state.pwd;            
+                console.log('密码:'+pwd+'助记词:'+mnemonic)                                              
         }
     }
 
