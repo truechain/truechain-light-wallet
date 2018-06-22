@@ -117,11 +117,6 @@ body {
 	align-items: center;
 }
 
-.view-cell-center-item,
-.view-cell-right {
-	/*width: 22.5%*/
-}
-
 .ranking {
 	width: 20px!important;
 	height: 25px
@@ -141,6 +136,11 @@ body {
 }
 
 .voteNum {
+	font-family: PingFangSC-Regular;
+	color: rgba(82, 139, 247, 1)
+}
+
+.voteNumSt{
 	font-family: PingFangSC-Regular;
 	color: rgba(82, 139, 247, 1)
 }

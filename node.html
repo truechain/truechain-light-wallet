@@ -9,6 +9,27 @@
 		<link rel="stylesheet" type="text/css" href="dist/css/my/node.css" />
 		<link rel="stylesheet" type="text/css" href="dist/css/node/indexNode.css" />
 	</head>
+	<style type="text/css">
+		.nickName{
+			width: 50%;				
+			text-align: center;		
+		}
+		
+		.nickName_item {			
+			width: 80%;
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
+		
+		.trueNum {			
+			width: 20%;			
+		}
+		
+		.voteNum{
+			width: 20%;
+		}
+	</style>
 
 	<body>
 		<div class="bg-top">
@@ -43,10 +64,10 @@
 							<div class="mui-scroll">
 								<ul class="mui-table-view fullNode">
 									<!--<li class="mui-table-view-cell" data-address=${item.address}>
-										<div class="view-cell-left">										序号
+										<div class="view-cell-left"> 序号
 										</div>
 										<div class="view-cell-center nickName">
-											<span>喀恢复的非官方的三个</span>
+											<span class="nickName_item">喀恢复的非官方的三个</span>
 											<img class="type" src="dist/images/common/geren.png" />
 										</div>
 										<div class="view-cell-right trueNum">
@@ -61,7 +82,7 @@
 											序号
 										</div>
 										<div class="view-cell-center nickName">
-											<span>喀恢复的非的三个</span>
+											<span class="nickName_item">三个</span>
 											<img class="type" src="dist/images/common/geren.png" />
 										</div>
 										<div class="view-cell-right trueNum">
@@ -138,8 +159,8 @@
 			token: null,
 			isStandCompleted: false,
 			isFullCompleted: false,
-			nodeDataUrl: 'http://45.40.243.125:7001/nodeRank',
-			statusUrl: 'http://45.40.243.125:7001/getMemberStatus',
+			nodeDataUrl: 'http://39.105.125.189:7001/nodeRank',
+			statusUrl: 'http://39.105.125.189:7001/getMemberStatus',
 			getAjaxPromise: function getAjaxPromise(option) {
 				let that = this;
 				return new Promise(function(resolve, reject) {
@@ -152,7 +173,7 @@
 						data: {
 							node_type: option.node_type,
 							pageIndex: option.pageIndex,
-							pageNumber:10,
+							pageNumber: 10,
 							isScore: true
 						},
 						async: true,
@@ -180,10 +201,10 @@
 									${that.fPageIndex+index+1}
 								</div>
 								<div class="view-cell-center nickName">
-									<span>${item.nickname}</span>
+									<span class="nickName_item">${item.nickname}</span>
 									<img class="type" src="dist/images/common/geren.png" />
 								</div>		
-								<div class="view-cell-center-item">
+								<div class="view-cell-center-item trueNum">
 										${item.lock_num}true
 									</div>	
 								<div class="view-cell-right voteNum">
@@ -196,9 +217,9 @@
 									${that.fPageIndex+index+1}
 								</div>
 								<div class="view-cell-center nickName">
-									<span>${item.nickname}</span>
+									<span class="nickName_item">${item.nickname}</span>
 								</div>																							
-								<div class="view-cell-center-item">
+								<div class="view-cell-center-item trueNum">
 										${item.lock_num}true
 									</div>																																								
 								<div class="view-cell-right voteNum">
@@ -240,7 +261,7 @@
 									<span>${item.nickname}</span>
 									<img class="type" src="dist/images/common/geren.png" />
 								</div>										
-								<div class="view-cell-right voteNum">
+								<div class="view-cell-right voteNumSt">
 									${item.score}分
 								</div>
 							</li>`;
@@ -252,7 +273,7 @@
 								<div class="view-cell-center nickName">
 									<span>${item.nickname}</span>
 								</div>
-								<div class="view-cell-right voteNum">
+								<div class="view-cell-right voteNumSt">
 									${item.score}分
 								</div>
 							</li>`;
