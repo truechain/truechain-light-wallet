@@ -72,7 +72,7 @@
 		var Validate = {
 			token: null,
 			pageIndex: 0,
-			nodeDataUrl: 'http://39.105.125.189:7001/nodeRank',
+			nodeDataUrl: 'http://45.40.243.125:7001/nodeRank',
 			getAjaxPromise: function getAjaxPromise(option) {
 				let that = this;
 				return new Promise(function(resolve, reject) {
@@ -200,7 +200,7 @@
 				let that = this;
 				$('#mySearch').bind('search', function(e) {
 					let keyword = e.target.value;
-					mui.ajax('http://39.105.125.189:7001/searchTeam', {
+					mui.ajax('http://45.40.243.125:7001/searchTeam', {
 						type: 'get',
 						dataType: 'json',
 						headers: {
