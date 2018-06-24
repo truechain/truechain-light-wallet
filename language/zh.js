@@ -14,5 +14,10 @@ export default {
     path:'路径',
     enterPwd:'输入您的密码',
     confirmPwd:'确认您的密码'
+  },
+  tab:{
+    assets: '资产',
+    node: '节点',
+    my:'我的'
   }
 };

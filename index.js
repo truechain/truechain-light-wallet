@@ -1,5 +1,5 @@
 import { AppRegistry } from 'react-native';
-import index from './src';
+import Root from './src';
 import './global'
 
-AppRegistry.registerComponent('True', () => index);
+AppRegistry.registerComponent('True', () => Root);

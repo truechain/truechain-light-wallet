@@ -5,11 +5,15 @@ import {
     View,
     Alert
 } from 'react-native';
-import I18n from '../../../../language/i18n';
-import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
-import TextWidget from '../../public/textWidget/textWidget';
+import I18n from '../../../../../language/i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import TextWidget from '../../../public/textWidget/textWidget';
 import { CheckBox, Button, Input } from 'react-native-elements';
+import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+
+import Asset from '../../../asset/asset'
+import { StackNavigator } from 'react-navigation'
+
 
 export default class ImportWallet extends Component {
     static navigationOptions = {
@@ -74,15 +78,7 @@ export default class ImportWallet extends Component {
         }
     }
 
-    componentDidMount() {
-
-    }
-
-    componentWillUpdate() {
-
-    }
-
-    ImportWallet() {        
+    ImportWallet() {
         if (this.state.mnemonicFlag) {
             Alert.alert('提示', '助记词不能为空')
         } else if (!this.state.pwd) {
@@ -93,8 +89,8 @@ export default class ImportWallet extends Component {
             Alert.alert('提示', '请同意服务及隐私条款')
         } else {
             let mnemonic = this.state.mnemonic,
-                pwd = this.state.pwd;            
-                console.log('密码:'+pwd+'助记词:'+mnemonic)                                              
+                pwd = this.state.pwd;
+                navigate('Asset',{name:'Asset'})
         }
     }
 
@@ -106,7 +102,6 @@ export default class ImportWallet extends Component {
             tabBarInactiveTextColor='#000'
             renderTabBar={() => <DefaultTabBar />}
         >
-            {/* 助记词导入 */}
             <View tabLabel={I18n.t('wallet.mnemonic')} style={styles.padding_10} >
                 <TextWidget {...this.mnemonicArea} />
                 <Input {...this.path} />
