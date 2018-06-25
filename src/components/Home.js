@@ -16,7 +16,7 @@ const IconUrl = {
     my: require('../assets/images/common/my1_3x.png'),
 }
 
-const Tab = TabNavigator(
+const Tab = TabNavigator(    
     {
         Asset: {
             screen: Asset,

@@ -5,13 +5,13 @@ import {
     View,
     Alert
 } from 'react-native';
-import I18n from '../../../../../language/i18n';
+import I18n from '../../../../language/i18n';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import TextWidget from '../../../public/textWidget/textWidget';
+import TextWidget from '../../public/textWidget/textWidget';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 
-import Asset from '../../../asset/asset'
+import Asset from '../../asset/asset'
 import { StackNavigator } from 'react-navigation'
 
 
@@ -90,7 +90,7 @@ export default class ImportWallet extends Component {
         } else {
             let mnemonic = this.state.mnemonic,
                 pwd = this.state.pwd;
-                navigate('Asset',{name:'Asset'})
+            navigate('Asset', { name: 'Asset' })
         }
     }
 

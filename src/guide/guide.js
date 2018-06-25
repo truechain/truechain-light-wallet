@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import I18n from '../../language/i18n';
-import ImportWallet from '../components/asset/my/wallet/importWallet';
+import ImportWallet from '../components/my/wallet/importWallet';
 import Home from '../components/Home'
 
 class Guide extends Component {
