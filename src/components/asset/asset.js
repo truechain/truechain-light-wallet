@@ -13,7 +13,9 @@ import { createStackNavigator,withNavigation } from 'react-navigation';
 
 class CurrencyList extends Component {
     currencyDetail() {
-        this.props.navigate('CurrencyDetail');
+        this.props.navigate('CurrencyDetail',{
+            currencyName:'ETH2018'
+        });
     };
 
     render() {

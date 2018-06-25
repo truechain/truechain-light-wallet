@@ -14,7 +14,6 @@ import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-vi
 import Asset from '../../asset/asset'
 import { StackNavigator } from 'react-navigation'
 
-
 export default class ImportWallet extends Component {
     static navigationOptions = {
         title: `${I18n.t('guide.importWallet')}`,

@@ -5,12 +5,17 @@ import CurrencyDetail from './components/asset/currencyDetail'
 
 export default createStackNavigator(
     {
-        Assets:Assets,
+        Assets:{
+            screen: Assets
+        },
         TabBarPage:TabBarPage,
-        CurrencyDetail:CurrencyDetail
+        CurrencyDetail:{
+            screen: CurrencyDetail,
+            title:'呼呼哈哈'
+        }
     },
     {
-        initialRouteName: 'Assets',
+        initialRouteName: 'TabBarPage',
         navigationOptions: {
             header:null,
             headerStyle: {
@@ -23,6 +28,3 @@ export default createStackNavigator(
         }
     }
 )
-
-
-

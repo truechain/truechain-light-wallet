@@ -10,6 +10,7 @@ import Asset from './components/asset/asset';
 import Node from './components/node/node';
 import My from './components/my/my';
 
+
 const IconUrl = {
     assets: require('./assets/images/common/asset1_3x.png'),
     node: require('./assets/images/common/node1_3x.png'),
