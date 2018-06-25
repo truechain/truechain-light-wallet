@@ -6,10 +6,9 @@ import {
     Image,
     TouchableHighlight
 } from 'react-native';
-import { createStackNavigator } from 'react-navigation';
 import I18n from '../../language/i18n';
 import ImportWallet from '../components/my/wallet/importWallet';
-import Home from '../components/Home'
+import HomeTabRoutes from '../HomeTabRoutes'
 
 class Guide extends Component {
     render() {
@@ -25,7 +24,7 @@ class Guide extends Component {
                             {I18n.t('guide.importInstructions')}
                         </Text>
                         <TouchableHighlight style={[styles.funRadius, styles.funImport]}>
-                            <Text style={styles.funText} onPress={() => this.props.navigation.navigate('Home')}>
+                            <Text style={styles.funText} onPress={() => this.props.navigation.navigate('HomeTabRoutes')}>
                                 {I18n.t('guide.importWallet')}
                             </Text>
                         </TouchableHighlight>
@@ -50,10 +49,10 @@ class Guide extends Component {
 //     {
 //         Guide: Guide,
 //         Import: ImportWallet,
-//         Home:Home     
+//         HomeTabRoutes:HomeTabRoutes
 //     },
 //     {
-//         initialRouteName: 'Home'
+//         initialRouteName: 'HomeTabRoutes'
 //     }
 // );
 

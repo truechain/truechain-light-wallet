@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
+import React,{Component} from 'react';
 import {
     Image,
     StyleSheet
 } from 'react-native';
-import { TabNavigator, TabBarBottom } from 'react-navigation'
-import I18n from '../../language/i18n'
-import Icon from 'react-native-vector-icons/FontAwesome'
-import Asset from './asset/asset'
-import Node from './node/node'
-import My from './my/my'
+import { createBottomTabNavigator } from 'react-navigation';
+import I18n from '../language/i18n';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import Asset from './components/asset/asset';
+import Node from './components/node/node';
+import My from './components/my/my';
 
 const IconUrl = {
-    assets: require('../assets/images/common/asset1_3x.png'),
-    node: require('../assets/images/common/node1_3x.png'),
-    my: require('../assets/images/common/my1_3x.png'),
-}
+    assets: require('./assets/images/common/asset1_3x.png'),
+    node: require('./assets/images/common/node1_3x.png'),
+    my: require('./assets/images/common/my1_3x.png'),
+};
 
-const Tab = TabNavigator(    
+export default createBottomTabNavigator(
     {
         Asset: {
             screen: Asset,
@@ -47,21 +47,10 @@ const Tab = TabNavigator(
         }
     },
     {
-        tabBarComponent: TabBarBottom,
-        tabBarPosition: 'bottom',
         tabBarVisible: false,
         lazy: true
     }
 );
-
-export default class Home extends Component {
-    render() {
-        return (
-            <Tab />
-        );
-    }
-}
-
 
 const styles = StyleSheet.create({
     icon: {

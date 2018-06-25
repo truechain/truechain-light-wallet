@@ -9,15 +9,16 @@ import {
     TouchableHighlight
 } from 'react-native';
 import currencyDetail from './currencyDetail'
-import { createStackNavigator } from 'react-navigation';
+import { createStackNavigator,withNavigation } from 'react-navigation';
 
-class CurrencyList extends Component {  
-    constructor(props) {
-        super(props)
-    }
+class CurrencyList extends Component {
+    currencyDetail() {
+        this.props.navigate('CurrencyDetail');
+    };
+
     render() {
         return (
-                <TouchableHighlight onPress={()=>{alert(this.props.item.key)}}>
+            <TouchableHighlight onPress={() => this.currencyDetail()}>
                 <View style={styles.currency_list}>
                     <View style={styles.currency_left}>
                         <View>
@@ -41,13 +42,15 @@ class CurrencyList extends Component {
                     </View>
                 </View>
             </TouchableHighlight>
-
         )
     }
 }
 
-
-class asset extends Component {
+ class Assets extends Component {
+    constructor(props){
+        super(props);
+        this.navigate=this.props.navigation.navigate;
+    }
     render() {
         return (
             <View style={styles.container}>
@@ -78,28 +81,17 @@ class asset extends Component {
                 </View>
                 <FlatList
                     data={[{ key: 'a' }, { key: 'b' }]}
-                    renderItem={({ item }) => <CurrencyList item={item} />}
+                    renderItem={({ item }) => <CurrencyList
+                        item={item}
+                        navigate={this.navigate}
+                    />}
                 />
             </View>
         );
     }
 }
-let RootStack = createStackNavigator({
-    asset: {
-        screen: asset,
-        navigationOptions: {
-            header: null
-        }
-    },
-    currencyDetail: {
-        screen: currencyDetail,
-        navigationOptions: {
-            title: '币种详情'
-        }
-    }
-})
 
-export default RootStack;
+export default withNavigation(Assets)
 
 const styles = StyleSheet.create({
     marginLeft: {
