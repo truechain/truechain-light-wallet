@@ -5,26 +5,28 @@ import CurrencyDetail from './components/asset/currencyDetail'
 
 export default createStackNavigator(
     {
-        Assets:{
-            screen: Assets
+        Assets: {
+            screen: Assets,            
         },
-        TabBarPage:TabBarPage,
-        CurrencyDetail:{
-            screen: CurrencyDetail,
-            title:'呼呼哈哈'
+        TabBarPage: {
+            screen: TabBarPage,
+            navigationOptions: {
+                header: null
+            }
+        },
+        CurrencyDetail: {
+            screen: CurrencyDetail                      
         }
     },
     {
         initialRouteName: 'TabBarPage',
         navigationOptions: {
-            header:null,
             headerStyle: {
-                backgroundColor: '#f00',
+                backgroundColor: '#fff',
             },
-            headerTintColor: '#fff',
-            headerTitleStyle: {
-                fontWeight: 'bold',
-            },
+            headerTintColor: '#000'            
         }
     }
 )
+
+
