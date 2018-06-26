@@ -1,5 +1,5 @@
 {
-  "name": "True",
+  "name": "True_Wallet",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -12,6 +12,7 @@
     "react-native": "0.55.4",
     "react-native-elements": "^1.0.0-beta5",
     "react-native-i18n": "^2.0.12",
+    "react-native-randombytes": "^3.3.0",
     "react-native-scrollable-tab-view": "^0.8.0",
     "react-native-vector-icons": "^4.6.0",
     "react-redux": "^5.0.7",

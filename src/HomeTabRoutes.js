@@ -10,7 +10,6 @@ import Asset from './components/asset/asset';
 import Node from './components/node/node';
 import My from './components/my/my';
 
-
 const IconUrl = {
     assets: require('./assets/images/common/asset1_3x.png'),
     node: require('./assets/images/common/node1_3x.png'),
@@ -24,7 +23,7 @@ export default createBottomTabNavigator(
             navigationOptions: {
                 tabBarLabel: I18n.t('tab.assets'),
                 tabBarIcon: ({ tintColor }) => (
-                    <Image style={styles.icon} source={IconUrl.assets}></Image>
+                    <Image style={styles.icon} source={IconUrl.assets} />
                 ),
             },
         },
@@ -33,7 +32,7 @@ export default createBottomTabNavigator(
             navigationOptions: {
                 tabBarLabel: I18n.t('tab.node'),
                 tabBarIcon: ({ tintColor }) => (
-                    <Image style={styles.icon} source={IconUrl.node}></Image>
+                    <Image style={styles.icon} source={IconUrl.node} />
                 ),
             },
         },
@@ -42,7 +41,7 @@ export default createBottomTabNavigator(
             navigationOptions: {
                 tabBarLabel: I18n.t('tab.my'),
                 tabBarIcon: ({ tintColor }) => (
-                    <Image style={styles.icon} source={IconUrl.my}></Image>
+                    <Image style={styles.icon} source={IconUrl.my} />
                 ),
             },
         }

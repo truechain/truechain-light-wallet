@@ -1,4 +1,4 @@
-package com.true;
+package com.truewallet;
 
 import android.app.Application;
 
