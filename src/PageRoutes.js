@@ -2,21 +2,21 @@ import { createStackNavigator } from 'react-navigation';
 import TabBarPage from './HomeTabRoutes'
 import Assets from './components/asset/asset'
 import CurrencyDetail from './components/asset/currencyDetail'
+import Transfer from './components/asset/transfer'
+import Receipt from './components/asset/receipt'
 
 export default createStackNavigator(
     {
-        Assets: {
-            screen: Assets,            
-        },
+        Assets: Assets,
         TabBarPage: {
             screen: TabBarPage,
             navigationOptions: {
                 header: null
             }
         },
-        CurrencyDetail: {
-            screen: CurrencyDetail                      
-        }
+        CurrencyDetail: CurrencyDetail,
+        Transfer: Transfer,
+        Receipt: Receipt
     },
     {
         initialRouteName: 'TabBarPage',
@@ -24,7 +24,7 @@ export default createStackNavigator(
             headerStyle: {
                 backgroundColor: '#fff',
             },
-            headerTintColor: '#000'            
+            headerTintColor: '#000'
         }
     }
 )
