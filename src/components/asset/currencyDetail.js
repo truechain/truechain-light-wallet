@@ -2,23 +2,52 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    Button,
-    ActivityIndicator,
+    Image,
+    FlatList,
     Dimensions,
     StyleSheet,
-    FlatList
 } from 'react-native';
+
+class Recording extends Component {
+    render() {
+        return (
+            <View style={styles.recordDetail_item}>
+                <Text>{this.props.to.replace(this.props.to.slice('10', '30'), '......')}</Text>
+                <Text>-{this.props.value / 1e+18}</Text>
+            </View>
+        )
+    }
+}
 
 class TransactionRecord extends Component {
     render() {
+        const Recording_item = {
+            to: this.props.data.item.to,
+            value: this.props.data.item.value
+        }
         return (
             <View>
-                <Text>
-                    {
-                        this.props.data.item.from === '0x5833fa6053e6e781eafb8695d63d90f6b3571e5e' ? '转出' : '转入'
-                    }
-                </Text>
+                {
+                    this.props.data.item.from === '0x5833fa6053e6e781eafb8695d63d90f6b3571e5e' ?
+                        <View style={styles.recordDetail}>
+                            <View>
+                                <Image style={styles.record_icon} source={require('../../assets/images/asset/expend_3x.png')} />
+                            </View>
+                            <Recording
+                                {...Recording_item}
+                            />
+                        </View>
+                        : <View style={styles.recordDetail}>
+                            <View>
+                                <Image style={styles.record_icon} source={require('../../assets/images/asset/add_3x.png')} />
+                            </View>
+                            <Recording
+                                {...Recording_item}
+                            />
+                        </View>
+                }
             </View>
+
         )
     }
 }
@@ -27,6 +56,7 @@ export default class currencyDetail extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            title: null,
             recordData: null
         }
     }
@@ -41,6 +71,7 @@ export default class currencyDetail extends Component {
         //     title: params.currencyName
         // })
     }
+
     componentDidMount() {
         let apiUrl = 'http://api.etherscan.io/api?module=account&action=txlist&address=0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e&sort=desc&apikey=YourApiKeyToken';
         fetch(apiUrl).then((response) => {
@@ -56,7 +87,6 @@ export default class currencyDetail extends Component {
 
     render() {
         return (
-            // <ActivityIndicator size="large" style={{ marginTop: 100 }}></ActivityIndicator>
             <View style={styles.container}>
                 <View style={styles.balance}>
                     <Text style={[styles.color_white, styles.balance_text_big]}>
@@ -70,14 +100,19 @@ export default class currencyDetail extends Component {
                     <Text>
                         近期交易记录
                     </Text>
-                    <FlatList
-                        style={styles.marginTop_20}
-                        data={this.state.recordData}
-                        renderItem={(item) =>
-                            <TransactionRecord
-                                data={item}
-                            />}
-                    />
+                    {
+                        this.state.recordData ?
+                            <FlatList
+                                style={styles.marginTop_20}
+                                data={this.state.recordData}
+                                renderItem={(item) =>
+                                    <TransactionRecord
+                                        data={item}
+                                    />}
+                            /> :
+                            <Text style={styles.textAlign}>~</Text>
+                    }
+
                 </View>
                 <View style={styles.bottom_fun}>
                     <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_transfer]}>
@@ -93,6 +128,9 @@ export default class currencyDetail extends Component {
 }
 
 const styles = StyleSheet.create({
+    textAlign: {
+        textAlign: 'center'
+    },
     color_white: {
         color: '#fff'
     },
@@ -113,14 +151,28 @@ const styles = StyleSheet.create({
         fontWeight: 'bold'
     },
     record: {
-        borderWidth: 2,
-        borderColor: 'red',
         padding: 20,
         position: 'absolute',
         top: 150,
         bottom: 50,
         left: 0,
         right: 0
+    },
+    recordDetail: {
+        height: 75,
+        flexDirection: 'row',
+        alignItems: 'center'
+    },
+    record_icon: {
+        width: 50,
+        height: 50
+    },
+    recordDetail_item: {
+        flex: 1,
+        height: 75,
+        padding: 10,
+        flexDirection: 'row',
+        justifyContent: 'space-between'
     },
     bottom_fun: {
         position: 'absolute',

@@ -8,13 +8,12 @@ import {
     Dimensions,
     TouchableHighlight
 } from 'react-native';
-import currencyDetail from './currencyDetail'
-import { createStackNavigator,withNavigation } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 
 class CurrencyList extends Component {
     currencyDetail() {
-        this.props.navigate('CurrencyDetail',{
-            currencyName:'ETH2018'
+        this.props.navigate('CurrencyDetail', {
+            currencyName: 'ETH2018'
         });
     };
 
@@ -48,10 +47,10 @@ class CurrencyList extends Component {
     }
 }
 
- class Assets extends Component {
-    constructor(props){
+class Assets extends Component {
+    constructor(props) {
         super(props);
-        this.navigate=this.props.navigation.navigate;
+        this.navigate = this.props.navigation.navigate;
     }
     render() {
         return (
