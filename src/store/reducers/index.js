@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux'
-import guide from './guide';
+import createWallet from './createWallet';
 const reducers=combineReducers({
-    guide
+ createWallet
 })
 
 export default  reducers

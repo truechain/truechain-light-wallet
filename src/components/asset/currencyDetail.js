@@ -5,8 +5,9 @@ import {
     Image,
     FlatList,
     Dimensions,
-    StyleSheet,
+    StyleSheet
 } from 'react-native';
+import { withNavigation } from 'react-navigation'
 
 class Recording extends Component {
     render() {
@@ -52,9 +53,10 @@ class TransactionRecord extends Component {
     }
 }
 
-export default class currencyDetail extends Component {
+class currencyDetail extends Component {
     constructor(props) {
         super(props);
+        this.navigate = this.props.navigation.navigate;
         this.state = {
             title: null,
             recordData: null
@@ -115,10 +117,10 @@ export default class currencyDetail extends Component {
 
                 </View>
                 <View style={styles.bottom_fun}>
-                    <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_transfer]}>
+                    <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_transfer]} onPress={() => { this.navigate('Transfer') }}>
                         转账
                     </Text>
-                    <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_receipt]}>
+                    <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_receipt]} onPress={() => { this.navigate('Receipt') }}>
                         收款
                     </Text>
                 </View>
@@ -126,6 +128,8 @@ export default class currencyDetail extends Component {
         );
     }
 }
+
+export default withNavigation(currencyDetail)
 
 const styles = StyleSheet.create({
     textAlign: {

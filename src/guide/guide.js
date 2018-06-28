@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import {
     StyleSheet,
     Text,
-    View,    
+    View,
     Image,
     TouchableHighlight
 } from 'react-native';
 import I18n from '../../language/i18n';
-import ImportWallet from '../components/my/wallet/importWallet';
-import HomeTabRoutes from '../HomeTabRoutes'
+import { withNavigation } from 'react-navigation'
 
 class Guide extends Component {
     render() {
@@ -23,8 +22,8 @@ class Guide extends Component {
                         <Text>
                             {I18n.t('guide.importInstructions')}
                         </Text>
-                        <TouchableHighlight style={[styles.funRadius, styles.funImport]}>
-                            <Text style={styles.funText} onPress={() => this.props.navigation.navigate('HomeTabRoutes')}>
+                        <TouchableHighlight style={[styles.funRadius, styles.funImport]} onPress={() => this.props.navigation.navigate('ImportWallet')}>
+                            <Text style={styles.funText}>
                                 {I18n.t('guide.importWallet')}
                             </Text>
                         </TouchableHighlight>
@@ -33,7 +32,7 @@ class Guide extends Component {
                         <Text>
                             {I18n.t('guide.createInstructions')}
                         </Text>
-                        <TouchableHighlight style={[styles.funRadius, styles.funCreate]}>
+                        <TouchableHighlight style={[styles.funRadius, styles.funCreate]} onPress={() => this.props.navigation.navigate('CreateWallet')}>
                             <Text style={styles.funText}>
                                 {I18n.t('guide.createWallet')}
                             </Text>
@@ -44,26 +43,7 @@ class Guide extends Component {
         );
     }
 }
-
-// const RootStack = createStackNavigator(
-//     {
-//         Guide: Guide,
-//         Import: ImportWallet,
-//         HomeTabRoutes:HomeTabRoutes
-//     },
-//     {
-//         initialRouteName: 'HomeTabRoutes'
-//     }
-// );
-
-export default class App extends Component {
-    render() {
-        return (
-            <Guide/>
-            // <RootStack />
-        )
-    }
-}
+export default withNavigation(Guide)
 
 const styles = StyleSheet.create({
     container: {
