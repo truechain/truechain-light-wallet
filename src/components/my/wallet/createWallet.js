@@ -120,17 +120,17 @@ class CreateWallet extends Component {
                 </View>
                 <View style={styles.padding_10}>
                     <Input {...this.nameInput}
-                        errorMessage={this.state.walletName ? '' : '请输入钱包名称'}
+                        errorMessage={this.state.walletName ? ' ' : '请输入钱包名称'}
                     />
                     <Input {...this.pwd}
-                        errorMessage={this.state.pwd ? '' : '不少于8位字符，建议混合大小写字母、数字、特殊字符'}
+                        errorMessage={this.state.pwd ? ' ' : '不少于8位字符，建议混合大小写字母、数字、特殊字符'}
                     />
                     <Input {...this.confirmPwd}
-                        errorMessage={this.state.pwd === this.state.confirmPwd ? '' : '两次密码输入不一致'}
+                        errorMessage={this.state.pwd === this.state.confirmPwd ? ' ' : '两次密码输入不一致'}
                     />
                     <View style={styles.isAgree_flex}>
                         <CheckBox
-                            title=''
+                            title=' '
                             iconType='material'
                             checkedIcon='check-circle'
                             uncheckedIcon='check-circle'

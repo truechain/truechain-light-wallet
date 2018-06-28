@@ -19,10 +19,10 @@ export default class ImportWallet extends Component {
     constructor() {
         super();
         this.state = {
-            mnemonic: '',
+            mnemonic: null,
             mnemonicFlag: true,
-            pwd: '',
-            confirmPwd: '',
+            pwd: null,
+            confirmPwd: null,
             isAgree: false,
             disabledImport: false
         }
@@ -36,7 +36,7 @@ export default class ImportWallet extends Component {
             let mnemonic = e.nativeEvent.text
             let spaceReg = /(^\s*)|(\s*$)/g;
             this.setState({
-                mnemonic: mnemonic.replace(spaceReg, '')
+                mnemonic: mnemonic.replace(spaceReg, ' ')
             }, () => {
                 this.setState({
                     mnemonicFlag: this.state.mnemonic ? false : true
@@ -104,7 +104,7 @@ export default class ImportWallet extends Component {
                 <Input {...this.confirmPwd} />
                 <View style={styles.isAgree_flex}>
                     <CheckBox
-                        title=''
+                        title=' '
                         iconType='material'
                         checkedIcon='check-circle'
                         uncheckedIcon='check-circle'
