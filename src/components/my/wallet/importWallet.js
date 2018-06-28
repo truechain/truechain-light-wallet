@@ -6,13 +6,9 @@ import {
     Alert
 } from 'react-native';
 import I18n from '../../../../language/i18n';
-import Icon from 'react-native-vector-icons/FontAwesome';
 import TextWidget from '../../public/textWidget/textWidget';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
-
-import Asset from '../../asset/asset'
-import { StackNavigator } from 'react-navigation'
 
 export default class ImportWallet extends Component {
     static navigationOptions = {

@@ -21,41 +21,42 @@ export default class Receipt extends Component {
 
     render() {
         return (
-            <View style={styles.container}>
-                <View style={styles.bg}>
-                </View>
-                <View style={styles.avatar}>
-                    <Image style={styles.avatar_item} source={require('../../assets/images/asset/head_3x.png')} />
-                </View>
-                <View style={styles.walletAddress}>
-                    <Text style={styles.walletAddress_item}>
-                        0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e
-                    </Text>
-                </View>
-
-                <View style={styles.customAmount}>
-                    <Input
-                        placeholder='自定义收款'
-                        containerStyle={styles.containerStyle}
-                    />
-                </View>
-
-                <View style={styles.qrcode}>
-                    <View style={styles.qrcode_item}>
-                    {/* 二维码区域 */}
+            <View style={styles.container}>                
+                    <View style={styles.bg}>
                     </View>
-                </View>
+                    <View style={styles.avatar}>
+                        <Image style={styles.avatar_item} source={require('../../assets/images/asset/head_3x.png')} />
+                    </View>
+                    <View style={styles.walletAddress}>
+                        <Text style={styles.walletAddress_item}>
+                            0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e
+                    </Text>
+                    </View>
 
-                <View style={styles.copyAddress}>
-                    <Button
-                        title='复制收款地址'
-                        buttonStyle={styles.buttonStyle}
-                        onPress={() => {
-                            alert('复制收款地址')
-                        }}
-                    />
-                </View>
+                    <View style={styles.customAmount}>
+                        <Input
+                            placeholder='自定义收款'
+                            containerStyle={styles.containerStyle}
+                        />
+                    </View>
+
+                    <View style={styles.qrcode}>
+                        <View style={styles.qrcode_item}>
+                            {/* 二维码区域 */}
+                        </View>
+                    </View>
+
+                    <View style={styles.copyAddress}>
+                        <Button
+                            title='复制收款地址'
+                            buttonStyle={styles.buttonStyle}
+                            onPress={() => {
+                                alert('复制收款地址')
+                            }}
+                        />
+                    </View>
             </View>
+
         );
     }
 }
@@ -94,10 +95,10 @@ const styles = StyleSheet.create({
     containerStyle: {
         width: screen.width * 0.6
     },
-    qrcode:{
+    qrcode: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginTop:20
+        marginTop: 20
     },
     qrcode_item: {
         borderWidth: 1,
@@ -105,9 +106,9 @@ const styles = StyleSheet.create({
         width: 200,
         height: 200
     },
-    copyAddress:{
+    copyAddress: {
         alignItems: 'center',
-        marginTop:30
+        marginTop: 30
     },
     buttonStyle: {
         backgroundColor: '#528bf7',
