@@ -10,7 +10,12 @@ import ImportWallet from './components/my/wallet/importWallet'
 
 export default createStackNavigator(
     {
-        Guide: Guide,
+        Guide: {
+            screen: Guide,
+            navigationOptions: {
+                header: null
+            }
+        },
         Assets: Assets,
         TabBarPage: {
             screen: TabBarPage,

@@ -10,9 +10,10 @@ import {
 } from 'react-native';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import lightwallet from 'eth-lightwallet'
+import LoadingView from '../../public/loadingView'
 const Web3 = require('web3');
-var web3 = new Web3(new Web3.providers.HttpProvider('https:mainnet.infura.io/'));
 
+var web3 = new Web3(new Web3.providers.HttpProvider('https:mainnet.infura.io/'));
 
 const screen = Dimensions.get('window');
 class CreateWallet extends Component {
@@ -28,7 +29,8 @@ class CreateWallet extends Component {
             pwd: null,
             confirmPwd: null,
             isAgree: false,
-            disabledImport: false
+            disabledImport: false,
+            showLoading: false
         }
     }
 
@@ -78,36 +80,45 @@ class CreateWallet extends Component {
         } else if (!this.state.isAgree) {
             Alert.alert('提示', '请同意服务及隐私条款')
         } else {
-            var randomSeed = lightwallet.keystore.generateRandomSeed();
-            lightwallet.keystore.createVault({
-                password: this.state.pwd,
-                seedPhrase: randomSeed,
-                hdPathString: "m/44'/60'/0'/0"
-            }, (err, ks) => {
-                ks.keyFromPassword(this.state.pwd, (err, pwDerivedKey) => {
-                    ks.generateNewAddress(pwDerivedKey, 1);
-                    var address = ks.getAddresses();
-                    let keystoreV3 = web3.eth.accounts.privateKeyToAccount('0x' + ks.exportPrivateKey(address[0], pwDerivedKey)).encrypt(this.state.pwd);
-                    this.props.walletInfo(this.state.walletName, address[0], keystoreV3);
+            this.setState({
+                showLoading: true
+            });
+            setTimeout(() => {
+                var randomSeed = lightwallet.keystore.generateRandomSeed();
+                lightwallet.keystore.createVault({
+                    password: this.state.pwd,
+                    seedPhrase: randomSeed,
+                    hdPathString: "m/44'/60'/0'/0"
+                }, (err, ks) => {
+                    ks.keyFromPassword(this.state.pwd, (err, pwDerivedKey) => {
+                        ks.generateNewAddress(pwDerivedKey, 1);
+                        var address = ks.getAddresses();
+                        let keystoreV3 = web3.eth.accounts.privateKeyToAccount('0x' + ks.exportPrivateKey(address[0], pwDerivedKey)).encrypt(this.state.pwd);
+                        this.props.walletInfo(this.state.walletName, address[0], keystoreV3);
+                        setTimeout(() => {
+                            this.setState({
+                                showLoading: false
+                            });
+                        }, 2000);
+                    })
                 })
-            })
+            }, 100);
         }
     }
 
     render() {
         return (
             <View style={styles.container}>
+                <LoadingView showLoading={this.state.showLoading} />
                 <View style={styles.warning}>
                     <Text style={styles.color_white}>
                         ·密码用于加密私钥，强度非常重要！
-                </Text>
+                            </Text>
                     <Text style={styles.color_white}>
                         ·True钱包不会储存密码，也无法帮您找回，请务必牢记！
-                </Text>
+                            </Text>
                 </View>
-
                 <View style={styles.padding_10}>
-
                     <Input {...this.nameInput}
                         errorMessage={this.state.walletName ? '' : '请输入钱包名称'}
                     />
@@ -139,20 +150,17 @@ class CreateWallet extends Component {
                         buttonStyle={styles.buttonStyle}
                         disabled={this.state.disabledImport}
                         disabledStyle={styles.disabledStyle}
-                    >
-                    </Button>
+                    />
                 </View>
             </View>
         );
     }
 }
 
-
 export default connect(
     state => state.createWallet,
     actions
 )(CreateWallet)
-
 
 const styles = StyleSheet.create({
     color_white: {
