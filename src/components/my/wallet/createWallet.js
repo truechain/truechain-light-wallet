@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import actions from '../../../store/action/createWallet'
 import {
     StyleSheet,
     Text,
     View,
-    Image,
     Alert,
-    Dimensions,
-    TouchableHighlight
+    Dimensions
 } from 'react-native';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import lightwallet from 'eth-lightwallet'
@@ -15,8 +15,7 @@ var web3 = new Web3(new Web3.providers.HttpProvider('https:mainnet.infura.io/'))
 
 
 const screen = Dimensions.get('window');
-export default class CreateWallet extends Component {
-
+class CreateWallet extends Component {
     static navigationOptions = {
         title: '创建钱包',
         headerTintColor: '#000'
@@ -89,6 +88,7 @@ export default class CreateWallet extends Component {
                     ks.generateNewAddress(pwDerivedKey, 1);
                     var address = ks.getAddresses();
                     let keystoreV3 = web3.eth.accounts.privateKeyToAccount('0x' + ks.exportPrivateKey(address[0], pwDerivedKey)).encrypt(this.state.pwd);
+                    this.props.walletInfo(this.state.walletName, address[0], keystoreV3);
                 })
             })
         }
@@ -146,6 +146,12 @@ export default class CreateWallet extends Component {
         );
     }
 }
+
+
+export default connect(
+    state => state.createWallet,
+    actions
+)(CreateWallet)
 
 
 const styles = StyleSheet.create({
