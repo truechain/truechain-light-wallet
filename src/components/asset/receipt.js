@@ -19,42 +19,56 @@ export default class Receipt extends Component {
         headerTitle: '收款码'
     };
 
+    constructor(props) {
+        super(props);
+        this.state = ({
+            walletAddress: ' '
+        })
+    }
+
+    componentDidMount() {
+        let walletAddress = store.getState().createWallet.walletAddress;
+        this.setState({
+            walletAddress: walletAddress
+        })
+    }
+
     render() {
         return (
-            <View style={styles.container}>                
-                    <View style={styles.bg}>
-                    </View>
-                    <View style={styles.avatar}>
-                        <Image style={styles.avatar_item} source={require('../../assets/images/asset/head_3x.png')} />
-                    </View>
-                    <View style={styles.walletAddress}>
-                        <Text style={styles.walletAddress_item}>
-                            0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e
+            <View style={styles.container}>
+                <View style={styles.bg}>
+                </View>
+                <View style={styles.avatar}>
+                    <Image style={styles.avatar_item} source={require('../../assets/images/asset/head_3x.png')} />
+                </View>
+                <View style={styles.walletAddress}>
+                    <Text style={styles.walletAddress_item}>
+                        {this.state.walletAddress}
                     </Text>
-                    </View>
+                </View>
 
-                    <View style={styles.customAmount}>
-                        <Input
-                            placeholder='自定义收款'
-                            containerStyle={styles.containerStyle}
-                        />
-                    </View>
+                <View style={styles.customAmount}>
+                    <Input
+                        placeholder='自定义收款'
+                        containerStyle={styles.containerStyle}
+                    />
+                </View>
 
-                    <View style={styles.qrcode}>
-                        <View style={styles.qrcode_item}>
-                            {/* 二维码区域 */}
-                        </View>
+                <View style={styles.qrcode}>
+                    <View style={styles.qrcode_item}>
+                        {/* 二维码区域 */}
                     </View>
+                </View>
 
-                    <View style={styles.copyAddress}>
-                        <Button
-                            title='复制收款地址'
-                            buttonStyle={styles.buttonStyle}
-                            onPress={() => {
-                                alert('复制收款地址')
-                            }}
-                        />
-                    </View>
+                <View style={styles.copyAddress}>
+                    <Button
+                        title='复制收款地址'
+                        buttonStyle={styles.buttonStyle}
+                        onPress={() => {
+                            alert('复制收款地址')
+                        }}
+                    />
+                </View>
             </View>
 
         );

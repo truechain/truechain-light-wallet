@@ -7,6 +7,7 @@ import Receipt from './components/asset/receipt'
 import Guide from './guide/guide'
 import CreateWallet from './components/my/wallet/createWallet'
 import ImportWallet from './components/my/wallet/importWallet'
+import WalletInfo from './components/asset/walletInfo'
 
 export default createStackNavigator(
     {
@@ -16,18 +17,26 @@ export default createStackNavigator(
                 header: null
             }
         },
-        Assets: Assets,
+        Assets: {
+            screen: Assets,
+            navigationOptions: {
+                header: null,
+                gesturesEnabled: false
+            }
+        },
         TabBarPage: {
             screen: TabBarPage,
             navigationOptions: {
-                header: null
+                header: null,
+                gesturesEnabled: false
             }
         },
         CurrencyDetail: CurrencyDetail,
         Transfer: Transfer,
         Receipt: Receipt,
         CreateWallet: CreateWallet,
-        ImportWallet: ImportWallet
+        ImportWallet: ImportWallet,
+        WalletInfo: WalletInfo,
     },
     {
         initialRouteName: 'Guide',

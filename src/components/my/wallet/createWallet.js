@@ -98,11 +98,13 @@ class CreateWallet extends Component {
                         setTimeout(() => {
                             this.setState({
                                 showLoading: false
+                            },()=>{
+                                this.props.navigation.navigate('TabBarPage')
                             });
                         }, 2000);
                     })
                 })
-            }, 100);
+            }, 50);
         }
     }
 

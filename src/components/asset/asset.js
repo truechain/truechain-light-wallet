@@ -51,29 +51,70 @@ class Assets extends Component {
     constructor(props) {
         super(props);
         this.navigate = this.props.navigation.navigate;
+        this.state = ({
+            walletName: ' ',
+            walletAddress: ' ',
+            balance: '--'
+        })
+    }
+
+    show(num) {
+        num += '';
+        num = num.replace(/[^0-9|\.]/g, '');
+        if (/^0+/) {
+            num = num.replace(/^0+/, '');
+        };
+        if (!/\./.test(num)) {
+            num += '.00000';
+        };
+        if (/^\./.test(num)) {
+            num = '0' + num;
+        };
+        num += '00000';
+        num = num.match(/\d+\.\d{5}/)[0];
+        return num
+    };
+
+    componentDidMount() {
+        let walletAddress = store.getState().createWallet.walletAddress,
+            walletName = store.getState().createWallet.walletName;
+        web3.eth.getBalance(walletAddress).then((res) => {
+            let balance = this.show(web3.utils.fromWei(res, 'ether'));
+            this.setState({
+                balance: balance
+            })
+        })
+        this.setState({
+            walletAddress: walletAddress,
+            walletName: walletName
+        })
     }
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.walletInfo}>
                     <View style={styles.walletInfo_item}>
-                        <Image style={styles.avatar} source={require('../../assets/images/asset/head_2x.png')} />
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('WalletInfo')}>
+                            <Image style={styles.avatar} source={require('../../assets/images/asset/head_2x.png')} />
+                        </TouchableHighlight>
                         <Text style={styles.walletName}>
-                            My Wallet
-                         </Text>
-                        <View style={styles.walletAddress}>
-                            <Text style={styles.walletAddress_item}>
-                                0x1782730......b1970F9f4A89f
+                            {this.state.walletName}
+                        </Text>
+                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Receipt')}>
+                            <View style={styles.walletAddress}>
+                                <Text style={styles.walletAddress_item}>
+                                    {this.state.walletAddress.replace(this.state.walletAddress.slice('9', '35'), '......')}
                                 </Text>
-                            <Image style={styles.addressErcode} source={require('../../assets/images/asset/ercode_2x.png')} />
-                        </View>
+                                <Image style={styles.addressErcode} source={require('../../assets/images/asset/ercode_2x.png')} />
+                            </View>
+                        </TouchableHighlight>
                     </View>
                 </View>
                 <View style={styles.addCurrency}>
                     <View style={styles.addCurrency_item}>
                         <View>
                             <Text style={styles.currency_text}>账户总资产(￥)</Text>
-                            <Text>9999.00</Text>
+                            <Text>{this.state.balance}</Text>
                         </View>
                         <TouchableHighlight style={styles.currency_item}>
                             <Text style={styles.currency_item_text}>新增币种</Text>
