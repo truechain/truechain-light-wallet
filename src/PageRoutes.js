@@ -7,6 +7,10 @@ import Receipt from './components/asset/receipt'
 import Guide from './guide/guide'
 import CreateWallet from './components/my/wallet/createWallet'
 import ImportWallet from './components/my/wallet/importWallet'
+import AboutUs from './components/my/aboutus'
+import UserPolicy from './components/my/userpolicy'
+import PrivacyPolicy from './components/my/privacypolicy'
+import Versions from './components/my/versions'
 
 export default createStackNavigator(
     {
@@ -27,10 +31,14 @@ export default createStackNavigator(
         Transfer: Transfer,
         Receipt: Receipt,
         CreateWallet: CreateWallet,
-        ImportWallet: ImportWallet
+        ImportWallet: ImportWallet,
+        AboutUs,
+        UserPolicy,
+        PrivacyPolicy,
+        Versions
     },
     {
-        initialRouteName: 'Guide',
+        initialRouteName: 'TabBarPage',
         navigationOptions: {
             headerStyle: {
                 backgroundColor: '#fff',

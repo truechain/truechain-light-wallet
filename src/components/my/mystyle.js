@@ -13,8 +13,9 @@ const styles = StyleSheet.create({
         color:"white",
         fontSize:20,
         textAlign:"center",
+        paddingTop:10,
         height:40,
-        lineHeight:40
+        lineHeight:30
     },
     myTopBanCon:{
         flexDirection:"row",

@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import styles from './mystyle';
 import { 
     View, Text,StyleSheet, 
-    Image
+    Image,TouchableHighlight
 } from 'react-native';
 
+
 export default class My extends Component {
+        
     render() {
         return (
             <View style={styles.myPage}>
@@ -75,17 +77,19 @@ export default class My extends Component {
                                 </View>
                             </View>
                         </View>
-                        <View style={styles.myColsConPartRow}>
-                            <View style={styles.myColsConPartRowLf}>
-                                <Image style={[styles.icon22,styles.iconAbout]} resizeMode={Image.resizeMode.stretch} source={require('../../assets/images/my/aboutus-icon_2x.png')} />
-                            </View>
-                            <View style={[styles.myColsConPartRowRi,styles.noSplitLine]}>
-                                <Text>关于我们</Text>
-                                <View style={styles.myColsConPartRowRi2R}>
-                                    <Image style={styles.iconArr2R} resizeMode={Image.resizeMode.stretch} source={require('../../assets/images/common/arr2ri.png')} />
+                        <TouchableHighlight onPress={ ()=>this.props.navigation.navigate('AboutUs') } underlayColor={"#ddd"} activeOpacity={0.5} >
+                            <View style={styles.myColsConPartRow}>
+                                <View style={styles.myColsConPartRowLf}>
+                                    <Image style={[styles.icon22,styles.iconAbout]} resizeMode={Image.resizeMode.stretch} source={require('../../assets/images/my/aboutus-icon_2x.png')} />
+                                </View>                            
+                                <View style={[styles.myColsConPartRowRi,styles.noSplitLine]}>
+                                    <Text>关于我们</Text>
+                                    <View style={styles.myColsConPartRowRi2R}>
+                                        <Image style={styles.iconArr2R} resizeMode={Image.resizeMode.stretch} source={require('../../assets/images/common/arr2ri.png')} />
+                                    </View>
                                 </View>
                             </View>
-                        </View>
+                        </TouchableHighlight>
                     </View>
                 </View>
             </View>
