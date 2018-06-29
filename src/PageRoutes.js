@@ -8,6 +8,7 @@ import Guide from './guide/guide'
 import CreateWallet from './components/my/wallet/createWallet'
 import ImportWallet from './components/my/wallet/importWallet'
 import WalletInfo from './components/asset/walletInfo'
+import ExportMnemonic from './components/asset/exportMnemonic'
 
 export default createStackNavigator(
     {
@@ -36,7 +37,18 @@ export default createStackNavigator(
         Receipt: Receipt,
         CreateWallet: CreateWallet,
         ImportWallet: ImportWallet,
-        WalletInfo: WalletInfo,
+        WalletInfo: {
+            screen: WalletInfo,
+            navigationOptions: {
+                headerTitle: '账户信息'
+            }
+        },
+        ExportMnemonic: {
+            screen: ExportMnemonic,
+            navigationOptions: {
+                headerTitle: '导出助记词'
+            }
+        },
     },
     {
         initialRouteName: 'Guide',

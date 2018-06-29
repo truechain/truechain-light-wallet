@@ -12,7 +12,8 @@ export default function (state = initState, action) {
                 ...state,
                 walletName: action.walletName,
                 walletAddress: action.walletAddress,
-                keystoreV3: action.keystoreV3
+                keystoreV3: action.keystoreV3,
+                mneKeystore: action.mneKeystore
             };
         default:
             return state

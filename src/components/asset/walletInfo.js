@@ -5,28 +5,58 @@ import {
     Image,
     StyleSheet,
     Dimensions,
-    ScrollView,
     TouchableHighlight
 } from 'react-native';
-
+import { Button, Input } from 'react-native-elements';
+import { withNavigation } from 'react-navigation';
+import Modal from 'react-native-modalbox';
 const screen = Dimensions.get('window');
 
-export default class WalletInfo extends Component {
-    static navigationOptions = {
-        headerTitle: '账户信息'
-    };
+class ListFun extends Component {
+    render() {
+        return (
+            <TouchableHighlight onPress={this.props.onPress}>
+                <View style={styles.fun}>
+                    <Text style={styles.fun_text}>
+                        {this.props.fun_name}
+                    </Text>
+                    <Text style={styles.color_bbb}>
+                        >
+                </Text>
+                </View>
+            </TouchableHighlight>
+        )
+    }
+}
+
+class WalletInfo extends Component {
     constructor(props) {
         super(props);
+        this.navigate = this.props.navigation.navigate;
         this.state = ({
-            walletAddress: ' '
+            walletAddress: ' ',
+            walletPassword: ' ',
+            keystoreV3: ' '
         })
     }
 
     componentDidMount() {
-        let walletAddress = store.getState().createWallet.walletAddress;
+        let walletAddress = store.getState().createWallet.walletAddress,
+            keystoreV3 = store.getState().createWallet.keystoreV3;
         this.setState({
-            walletAddress: walletAddress
+            walletAddress: walletAddress,
+            keystoreV3: keystoreV3
         })
+    }
+    pwd = {
+        placeholder: '输入您的密码',
+        inputContainerStyle: styles.textInput,
+        secureTextEntry: true,
+        onChangeText: (walletPassword) => {
+            this.setState({
+                walletPassword: walletPassword
+            })
+        }
     }
 
     render() {
@@ -42,16 +72,74 @@ export default class WalletInfo extends Component {
                     </View>
                 </View>
 
-                <View style={styles.fun}>
-
-                </View>
+                <ListFun
+                    fun_name='钱包名称'
+                    onPress={() => {
+                        alert('修改钱包名称');
+                    }}
+                />
+                <ListFun
+                    fun_name='导出私钥'
+                    onPress={() => {
+                        alert('导出私钥');
+                    }}
+                />
+                <ListFun
+                    fun_name='导出keystore'
+                    onPress={() => {
+                        alert('导出keystore');
+                    }}
+                />
+                <ListFun
+                    fun_name='导出助记词'
+                    onPress={() => {
+                        this.refs.codeInput.open()
+                    }}
+                />
+                <Button
+                    title='删除钱包'
+                    onPress={() => { alert('删除钱包') }}
+                    buttonStyle={styles.buttonStyle}
+                // disabled={this.state.disabledImport}
+                // disabledStyle={styles.disabledStyle}
+                />
+                <Modal style={styles.modalCode} position={"bottom"} ref={"codeInput"} swipeArea={20}>
+                    <View style={styles.InputPwd_title}>
+                        <Text>
+                            验证密码
+                                </Text>
+                    </View>
+                    <Input {...this.pwd} />
+                    <View style={styles.confirm}>
+                        <Button
+                            title='确定'
+                            buttonStyle={styles.confirmButtonStyle}
+                            onPress={() => {
+                                setTimeout(() => {
+                                    try {
+                                        web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
+                                        this.navigate('ExportMnemonic', { walletPassword: this.state.walletPassword });
+                                        this.refs.codeInput.close();
+                                    } catch (error) {
+                                        alert('密码错误,请重新输入')
+                                    }
+                                }, 50);
+                            }}
+                        />
+                    </View>
+                </Modal>
             </View>
         );
     }
 }
 
+export default withNavigation(WalletInfo)
+
 
 const styles = StyleSheet.create({
+    color_bbb: {
+        color: '#bbb'
+    },
     container: {
         flex: 1,
         padding: 10,
@@ -73,8 +161,52 @@ const styles = StyleSheet.create({
         justifyContent: 'space-around'
     },
     fun: {
-        flex:1,
-        borderWidth: 1,
-        borderColor: 'red',
+        height: 50,
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        borderBottomWidth: 1,
+        borderBottomColor: '#e6e0df'
+    },
+    fun_text: {
+        color: '#000'
+    },
+    buttonStyle: {
+        backgroundColor: "#bbb",
+        height: 45,
+        borderColor: "transparent",
+        borderWidth: 0,
+        borderRadius: 50,
+        marginTop: 30
+    },
+    modalCode: {
+        alignItems: 'center',
+        width: screen.width,
+        height: screen.height * 0.5
+    },
+    InputPwd_title: {
+        width: screen.width,
+        height: 50,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderBottomWidth: 1,
+        borderBottomColor: '#c8c7cc'
+    },
+    textInput: {
+        borderBottomWidth: 1,
+        borderColor: '#e6e6e6',
+        height: 45,
+        padding: 5
+    },
+    confirm: {
+        alignItems: 'center',
+        position: 'relative',
+        top: 80
+    },
+    confirmButtonStyle: {
+        backgroundColor: '#528bf7',
+        width: 300,
+        height: 45,
+        borderRadius: 30
     }
 })
