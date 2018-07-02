@@ -41,12 +41,18 @@ class WalletInfo extends Component {
     }
 
     componentDidMount() {
-        let walletAddress = store.getState().createWallet.walletAddress,
-            keystoreV3 = store.getState().createWallet.keystoreV3;
-        this.setState({
-            walletAddress: walletAddress,
-            keystoreV3: keystoreV3
-        })
+        storage.load({
+            key: 'walletInfo'
+        }).then(walletInfo => {
+            let walletAddress = walletInfo.walletAddress,
+                walletName = walletInfo.walletName,
+                keystoreV3 = walletInfo.keystoreV3;
+            this.setState({
+                walletAddress: walletAddress,
+                walletName: walletName,
+                keystoreV3: keystoreV3
+            })
+        });
     }
     pwd = {
         placeholder: '输入您的密码',

@@ -76,18 +76,22 @@ class Assets extends Component {
     };
 
     componentDidMount() {
-        let walletAddress = store.getState().createWallet.walletAddress,
-            walletName = store.getState().createWallet.walletName;
-        web3.eth.getBalance(walletAddress).then((res) => {
-            let balance = this.show(web3.utils.fromWei(res, 'ether'));
-            this.setState({
-                balance: balance
+        storage.load({
+            key: 'walletInfo'
+        }).then(walletInfo => {
+            let walletAddress = walletInfo.walletAddress,
+                walletName = walletInfo.walletName;
+            web3.eth.getBalance(walletAddress).then((res) => {
+                let balance = this.show(web3.utils.fromWei(res, 'ether'));
+                this.setState({
+                    balance: balance
+                })
             })
-        })
-        this.setState({
-            walletAddress: walletAddress,
-            walletName: walletName
-        })
+            this.setState({
+                walletAddress: walletAddress,
+                walletName: walletName
+            })
+        });
     }
     render() {
         return (
