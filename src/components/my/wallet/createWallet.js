@@ -5,8 +5,7 @@ import {
     StyleSheet,
     Text,
     View,
-    Alert,
-    Dimensions
+    Alert
 } from 'react-native';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import lightwallet from 'eth-lightwallet'
@@ -14,8 +13,6 @@ import LoadingView from '../../public/loadingView'
 const Web3 = require('web3');
 
 var web3 = new Web3(new Web3.providers.HttpProvider('https:mainnet.infura.io/'));
-
-const screen = Dimensions.get('window');
 class CreateWallet extends Component {
     static navigationOptions = {
         title: '创建钱包',
@@ -89,16 +86,26 @@ class CreateWallet extends Component {
                     password: this.state.pwd,
                     seedPhrase: randomSeed,
                     hdPathString: "m/44'/60'/0'/0"
-                }, (err, ks) => {                    
+                }, (err, ks) => {
                     ks.keyFromPassword(this.state.pwd, (err, pwDerivedKey) => {
                         ks.generateNewAddress(pwDerivedKey, 1);
                         var address = ks.getAddresses();
                         let keystoreV3 = web3.eth.accounts.privateKeyToAccount('0x' + ks.exportPrivateKey(address[0], pwDerivedKey)).encrypt(this.state.pwd);
-                        this.props.walletInfo(this.state.walletName, address[0], keystoreV3,ks);
+                        storage.save({
+                            key: 'walletInfo',
+                            data: {
+                                walletAddress: address[0],
+                                walletName: this.state.walletName,
+                                keystoreV3: keystoreV3,
+                                ks: ks
+                            },
+                            expires: null
+                        })
+                        // this.props.walletInfo(this.state.walletName, address[0], keystoreV3,ks);
                         setTimeout(() => {
                             this.setState({
                                 showLoading: false
-                            },()=>{
+                            }, () => {
                                 this.props.navigation.navigate('TabBarPage')
                             });
                         }, 2000);
@@ -196,7 +203,7 @@ const styles = StyleSheet.create({
     checkBox: {
         padding: 0,
         width: 26,
-        borderColor: 'transparent',
+        backgroundColor: 'transparent'
     },
     color_999: {
         color: '#999'

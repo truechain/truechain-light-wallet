@@ -5,6 +5,7 @@ import {
     StyleSheet,
     TouchableHighlight
 } from 'react-native';
+import lightwallet from 'eth-lightwallet'
 
 export default class ExportMnemonic extends Component {
     constructor(props) {
@@ -13,14 +14,16 @@ export default class ExportMnemonic extends Component {
             Mnemonic: ' '
         })
     }
-    
+
     componentDidMount() {
         const { params } = this.props.navigation.state;
-        let mneKeystore = store.getState().createWallet.mneKeystore;
-        mneKeystore.keyFromPassword(params.walletPassword, (err, pwDerivedKey) => {
-            var Mnemonic = mneKeystore.getSeed(pwDerivedKey);
-            this.setState({
-                Mnemonic: Mnemonic
+        storage.load({ key: 'walletInfo' }).then(res => {
+            let mneKeystore = lightwallet.keystore.deserialize(JSON.stringify(res.ks));
+            mneKeystore.keyFromPassword(params.walletPassword, (err, pwDerivedKey) => {
+                var Mnemonic = mneKeystore.getSeed(pwDerivedKey);
+                this.setState({
+                    Mnemonic: Mnemonic
+                })
             })
         })
     }
