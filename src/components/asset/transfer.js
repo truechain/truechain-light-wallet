@@ -4,8 +4,7 @@ import {
     Text,
     StyleSheet,
     Dimensions,
-    ScrollView,
-    TouchableHighlight
+    ScrollView
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {

@@ -89,20 +89,22 @@ class CreateWallet extends Component {
                     password: this.state.pwd,
                     seedPhrase: randomSeed,
                     hdPathString: "m/44'/60'/0'/0"
-                }, (err, ks) => {
+                }, (err, ks) => {                    
                     ks.keyFromPassword(this.state.pwd, (err, pwDerivedKey) => {
                         ks.generateNewAddress(pwDerivedKey, 1);
                         var address = ks.getAddresses();
                         let keystoreV3 = web3.eth.accounts.privateKeyToAccount('0x' + ks.exportPrivateKey(address[0], pwDerivedKey)).encrypt(this.state.pwd);
-                        this.props.walletInfo(this.state.walletName, address[0], keystoreV3);
+                        this.props.walletInfo(this.state.walletName, address[0], keystoreV3,ks);
                         setTimeout(() => {
                             this.setState({
                                 showLoading: false
+                            },()=>{
+                                this.props.navigation.navigate('TabBarPage')
                             });
                         }, 2000);
                     })
                 })
-            }, 100);
+            }, 50);
         }
     }
 
