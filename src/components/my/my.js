@@ -6,6 +6,11 @@ import {
 
 
 export default class My extends Component {
+
+    constructor(props) {
+        super(props);
+        this.navigate = this.props.navigation.navigate;
+    }
         
     render() {
         return (
@@ -64,7 +69,9 @@ export default class My extends Component {
                             </View>
                         </View>
                     </View>
+                    
                     <View style={styles.myColsConPart}>
+                    <TouchableHighlight onPress={ ()=>this.props.navigation.navigate('HelperCenter') } underlayColor={"#ddd"} activeOpacity={0.5} >
                         <View style={styles.myColsConPartRow}>
                             <View style={styles.myColsConPartRowLf}>
                                 <Image style={[styles.icon22,styles.iconHelper]} resizeMode={Image.resizeMode.stretch} source={require('../../assets/images/my/help-icon_2x.png')} />
@@ -76,6 +83,7 @@ export default class My extends Component {
                                 </View>
                             </View>
                         </View>
+                    </TouchableHighlight>
                         <TouchableHighlight onPress={ ()=>this.props.navigation.navigate('AboutUs') } underlayColor={"#ddd"} activeOpacity={0.5} >
                             <View style={styles.myColsConPartRow}>
                                 <View style={styles.myColsConPartRowLf}>

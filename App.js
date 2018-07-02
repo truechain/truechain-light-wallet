@@ -14,6 +14,12 @@ import CurrencyDetail from './src/components/asset/currencyDetail';
 import CreateWallet from './src/components/my/wallet/createWallet';
 import ImportWallet from './src/components/my/wallet/importWallet';
 import ExportMnemonic from './src/components/asset/exportMnemonic';
+import AboutUs from './src/components/my/aboutus'
+import UserPolicy from './src/components/my/userpolicy'
+import PrivacyPolicy from './src/components/my/privacypolicy'
+import Versions from './src/components/my/versions'
+import HelperCenter from './src/components/my/helpercenter'
+import ContactUs from './src/components/my/contactus'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import {
     Image,
@@ -131,7 +137,13 @@ export default class App extends Component {
                     navigationOptions: {
                         headerTitle: '导出助记词'
                     }
-                }
+                },
+                AboutUs,
+                UserPolicy,
+                PrivacyPolicy,
+                Versions,
+                HelperCenter,
+                ContactUs,
             },
             {
                 initialRouteName: this.state.isWallet ? 'TabBarPage' : 'Guide',
