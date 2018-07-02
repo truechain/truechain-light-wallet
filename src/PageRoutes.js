@@ -38,7 +38,7 @@ export default createStackNavigator(
         Versions
     },
     {
-        initialRouteName: 'TabBarPage',
+        initialRouteName: 'Guide',
         navigationOptions: {
             headerStyle: {
                 backgroundColor: '#fff',
