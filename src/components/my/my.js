@@ -57,6 +57,7 @@ export default class My extends Component {
                                 </View>
                             </View>
                         </View>
+                        <TouchableHighlight onPress={ ()=>{ this.props.navigation.navigate('SysSet') } } underlayColor={"#ddd"} activeOpacity={0.5} >
                         <View style={styles.myColsConPartRow}>
                             <View style={styles.myColsConPartRowLf}>
                                 <Image style={styles.iconSettings} source={require('../../assets/images/my/setting-icon_2x.png')} />
@@ -68,6 +69,7 @@ export default class My extends Component {
                                 </View>
                             </View>
                         </View>
+                        </TouchableHighlight>
                     </View>
                     
                     <View style={styles.myColsConPart}>

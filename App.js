@@ -20,6 +20,7 @@ import PrivacyPolicy from './src/components/my/privacypolicy'
 import Versions from './src/components/my/versions'
 import HelperCenter from './src/components/my/helpercenter'
 import ContactUs from './src/components/my/contactus'
+import SysSet from './src/components/my/sysset'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import {
     Image,
@@ -144,6 +145,7 @@ export default class App extends Component {
                 Versions,
                 HelperCenter,
                 ContactUs,
+                SysSet
             },
             {
                 initialRouteName: this.state.isWallet ? 'TabBarPage' : 'Guide',
