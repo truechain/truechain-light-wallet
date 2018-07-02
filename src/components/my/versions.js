@@ -9,9 +9,15 @@ import {
 
 import { withNavigation } from 'react-navigation'
 
+const versionData = [
+    {id:1, key: 'a', version:"1.01", con:["优化了APP性能","新增联系人"] }, 
+    {id:2, key: 'b', version:"1.02", con:["优化了AP能","联系人"] },
+    {id:2, key: 'c', version:"1.03", con:["优化了AP能","联系人"] }
+];
+
 export class Versions extends Component {
 
-    _keyExtractor = (item, index) => item.id;
+    _keyExtractor = (item, index) => item;
 
     static navigationOptions = {
         headerTitle:"版本日志",
@@ -19,30 +25,27 @@ export class Versions extends Component {
 
     render(){
         return(
-            <ScrollView>
-            <View style={styles.versionsPage}>   
-            <FlatList 
-            data={[{id:"1",ver: "1.01"}, {id:"2",ver: "1.20"}]} 
-            keyExtractor={ this._keyExtractor } 
-            renderItem={
-                ({item}) =>{
+            <View style={styles.versionsPage}>
+            <ScrollView>               
+            <FlatList
+                data={versionData}
+                renderItem={ ({item}) =>( 
                     <View style={styles.version}>
-                        <Text style={styles.versionTitle}>{item.ver}</Text>
+                        <Text style={styles.versionTitle}>{item.version}</Text>
+                        <FlatList 
+                            data={item.con} 
+                            keyExtractor={this._keyExtractor} 
+                            renderItem={ ({item}) =>(
+                                <View style={styles.versionDescrCon}>
+                                    <Text style={styles.versionDescr}>* {item}</Text>
+                                </View>
+                            ) }
+                        />
                     </View>
-                }
-            }
-            />
-                <View style={styles.version}>
-                    <Text style={styles.versionTitle}>1.01</Text>
-                    <View>
-                        <Text>* 优化了App性能</Text>
-                    </View>
-                    <View>
-                        <Text>* 新增联系人</Text>
-                    </View>
-                </View>                 
-            </View>
+                )}
+            />            
             </ScrollView>
+            </View>
         )
     }
 }
@@ -52,18 +55,23 @@ export default withNavigation(Versions)
 const styles = StyleSheet.create({
     versionsPage:{
         flex:1,
-        backgroundColor:"white"
+        backgroundColor:"white",
+        paddingLeft:15
     },
     version:{
-        flexDirection:"row",
-        paddingLeft:15
+        borderBottomWidth:1,
+        borderColor:"#eee",
+        backgroundColor:"white",
+        paddingBottom:15     
     },
     versionTitle:{
         fontSize:28,
         lineHeight:40
     },
-    textCon:{
-        fontSize:15,
-        lineHeight:26
-    }
+    versionDescrCon:{},
+    versionDescr:{
+        height:30,
+        lineHeight:30,
+        fontSize:15
+    },
 });
