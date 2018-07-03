@@ -5,4 +5,4 @@ import App from './App';
 YellowBox.ignoreWarnings(['Warning: isMounted(...) is deprecated', 'Module RCTImageLoader']);
 console.ignoredYellowBox = ['Remote debugger'];
 
-AppRegistry.registerComponent('True', () => App);
+AppRegistry.registerComponent('truewallet', () => App);
