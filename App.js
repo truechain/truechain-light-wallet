@@ -22,6 +22,8 @@ import Versions from './src/components/my/versions'
 import HelperCenter from './src/components/my/helpercenter'
 import ContactUs from './src/components/my/contactus'
 import SysSet from './src/components/my/sysset'
+import Login from './src/components/my/login'
+
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import {
     Image,
@@ -145,7 +147,13 @@ export default class App extends Component {
                 Versions,
                 HelperCenter,
                 ContactUs,
-                SysSet
+                SysSet,
+                Login: {
+                    screen: Login,
+                    navigationOptions: {
+                        headerTitle: '登录'
+                    }
+                }
             },
             {
                 initialRouteName: this.state.isWallet ? 'TabBarPage' : 'Guide',

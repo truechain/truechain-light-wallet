@@ -1,5 +1,6 @@
 import axios from 'axios'
-let NodeRankUrl = 'http://45.40.243.125:7001/nodeRank';
+axios.defaults.baseURL = 'http://45.40.243.125:7001';
+let NodeRankUrl = '/nodeRank';
 //请求节点排行
 let getNodeRank = (nodeType) => {
     return axios.get(NodeRankUrl, {
@@ -12,8 +13,13 @@ let getNodeRank = (nodeType) => {
     })
 }
 
+let getCaptcha = () => {
+    return axios.get('http://45.40.243.125:7001/')
+}
+
 export {
-    getNodeRank
+    getNodeRank,
+    getCaptcha
 }
 
 
