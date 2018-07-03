@@ -15,6 +15,13 @@ import CreateWallet from './src/components/my/wallet/createWallet';
 import ImportWallet from './src/components/my/wallet/importWallet';
 import ExportMnemonic from './src/components/asset/exportMnemonic';
 import ExportKeystore from './src/components/asset/exportKeystore';
+import AboutUs from './src/components/my/aboutus'
+import UserPolicy from './src/components/my/userpolicy'
+import PrivacyPolicy from './src/components/my/privacypolicy'
+import Versions from './src/components/my/versions'
+import HelperCenter from './src/components/my/helpercenter'
+import ContactUs from './src/components/my/contactus'
+import SysSet from './src/components/my/sysset'
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import {
     Image,
@@ -139,6 +146,13 @@ export default class App extends Component {
                         headerTitle: '导出Keystore'
                     }
                 },
+                AboutUs,
+                UserPolicy,
+                PrivacyPolicy,
+                Versions,
+                HelperCenter,
+                ContactUs,
+                SysSet
             },
             {
                 initialRouteName: this.state.isWallet ? 'TabBarPage' : 'Guide',

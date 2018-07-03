@@ -3,10 +3,12 @@ import React, { Component } from 'react';
 import {
     Text,View,
     Image,StyleSheet,
-    TouchableHighlight
+    TouchableHighlight,
+    Modal
 } from 'react-native';
 
 import { withNavigation } from 'react-navigation'
+import { CLIENT_RENEG_LIMIT } from 'tls';
 
 export class AboutUs extends Component {
 
@@ -14,9 +16,54 @@ export class AboutUs extends Component {
         headerTitle:"关于我们",
     }
 
+    constructor(props) {
+        super(props);
+        this.state = {modalVisible: false};
+        this.setModalVisible = this.setModalVisible.bind(this);
+    }
+    
+    setModalVisible(visible) {
+        this.setState({modalVisible: visible});
+    }
+
+    
+
     render(){
         return(
             <View style={styles.aboutusPage}>
+                <Modal 
+                animationType={"fade"}
+                transparent={true}
+                visible={this.state.modalVisible}
+                onRequestClose={ () => { this.setState({modalVisible: false}); } }
+            >
+                    <View style={styles.modalCon}>
+                        <View style={styles.modal}>
+                            <Text style={styles.modalTitle}>发现True 1.01版本</Text>
+                            <View>
+                                <Text style={styles.versionText}>
+                                    版本更新说明版本更新说明版本更新说明
+                                    版本更新说明版本更新说明版本更新说
+                                </Text>
+                            </View>
+                            <TouchableHighlight 
+                            underlayColor={"#ddd"} activeOpacity={0.5} 
+                            onPress={() => {
+                            this.setModalVisible(!this.state.modalVisible)
+                            }}>
+                                <View style={styles.modalBottomBtn}>
+                                    <View style={styles.modalBottomBtnNo}>
+                                        <Text style={styles.modalBottomBtnNoText}>暂不升级</Text>
+                                    </View>
+                                    <View style={styles.modalBottomBtnYes}>
+                                        <Text style={styles.modalBottomBtnYesText}>立即升级</Text>
+                                    </View>
+                                    
+                                </View>
+                            </TouchableHighlight>
+                        </View>
+                    </View>
+                </Modal>
                 <View style={styles.topCon}>
                     <Image 
                     resizeMode={Image.resizeMode.stretch} 
@@ -84,6 +131,10 @@ export class AboutUs extends Component {
                         </View>
                     </View>
                     </TouchableHighlight>
+                    <TouchableHighlight 
+                    underlayColor={"#ddd"} activeOpacity={0.5} 
+                    onPress={ ()=>{ this.setModalVisible(true) } }
+                    >
                     <View style={styles.row}>
                         <View style={styles.rowLf}>
                             <Text style={styles.rowLfText}>检测新版</Text>
@@ -96,6 +147,7 @@ export class AboutUs extends Component {
                             />
                         </View>
                     </View>
+                    </TouchableHighlight>
                 </View>
             </View>
         )
@@ -158,5 +210,54 @@ const styles = StyleSheet.create({
     rowLfText:{
         fontSize:15,
         color:"#222"
-    }
+    },
+    modalCon:{
+        backgroundColor:"rgba(0,0,0,0.5)",
+        flex:1,
+        justifyContent:"center",
+        alignItems:"center"
+    },
+    modal:{
+        backgroundColor:"white",
+        width:260,
+        borderRadius:10,
+    },
+    modalTitle:{
+        fontSize:16,
+        color:"#222",
+        lineHeight:50,
+        height:50,
+        textAlign:"center",
+        paddingLeft:15,
+        paddingRight:15
+    },
+    versionText:{
+        paddingLeft:15,
+        paddingRight:15,
+        paddingBottom:20
+    },
+    modalBottomBtn:{
+        flexDirection:"row",
+        justifyContent:"space-between",
+        borderTopWidth:1,
+        borderColor:"#eee",
+        alignItems:"center",
+        height:50
+    },
+    modalBottomBtnNo:{   
+        flex:1
+    },
+    modalBottomBtnNoText:{
+        color:"rgb(0,118,255)",
+        fontSize:16,
+        textAlign:"center"
+    },
+    modalBottomBtnYes:{
+        flex:1,        
+    },
+    modalBottomBtnYesText:{
+        color:"rgb(254,56,36)",
+        fontSize:16,
+        textAlign:"center"
+    },
 });
