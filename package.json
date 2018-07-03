@@ -11,6 +11,7 @@
     "node-libs-browser": "^2.1.0",
     "react": "16.3.1",
     "react-native": "0.55.4",
+    "react-native-easy-toast": "^1.1.0",
     "react-native-elements": "^1.0.0-beta5",
     "react-native-i18n": "^2.0.12",
     "react-native-modalbox": "^1.5.0",
@@ -31,6 +32,7 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react-native": "4.0.0",
     "jest": "23.1.0",
+    "react-native-qrcode": "^0.2.6",
     "react-navigation": "^2.3.1",
     "react-test-renderer": "16.3.1"
   },

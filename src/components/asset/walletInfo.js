@@ -36,7 +36,9 @@ class WalletInfo extends Component {
         this.state = ({
             walletAddress: ' ',
             walletPassword: ' ',
-            keystoreV3: ' '
+            keystoreV3: ' ',
+            onPress: null,
+            modalTitle: null
         })
     }
 
@@ -93,35 +95,33 @@ class WalletInfo extends Component {
                 <ListFun
                     fun_name='导出keystore'
                     onPress={() => {
-                        alert('导出keystore');
+                        this.setState({
+                            modalTitle: '验证密码'
+                        }, () => {
+                            this.refs.codeInput.open();
+                            this.setState({
+                                onPress: () => {
+                                    try {
+                                        web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
+                                        this.navigate('ExportKeystore', { keystoreV3: this.state.keystoreV3 });
+                                        this.refs.codeInput.close();
+                                    } catch (error) {
+                                        alert('密码错误,请重新输入')
+                                    }
+                                }
+                            })
+                        })
                     }}
                 />
                 <ListFun
                     fun_name='导出助记词'
                     onPress={() => {
-                        this.refs.codeInput.open()
-                    }}
-                />
-                <Button
-                    title='删除钱包'
-                    onPress={() => { alert('删除钱包') }}
-                    buttonStyle={styles.buttonStyle}
-                // disabled={this.state.disabledImport}
-                // disabledStyle={styles.disabledStyle}
-                />
-                <Modal style={styles.modalCode} position={"bottom"} ref={"codeInput"} swipeArea={20}>
-                    <View style={styles.InputPwd_title}>
-                        <Text>
-                            验证密码
-                                </Text>
-                    </View>
-                    <Input {...this.pwd} />
-                    <View style={styles.confirm}>
-                        <Button
-                            title='确定'
-                            buttonStyle={styles.confirmButtonStyle}
-                            onPress={() => {
-                                setTimeout(() => {
+                        this.setState({
+                            modalTitle: '验证密码'
+                        }, () => {
+                            this.refs.codeInput.open();
+                            this.setState({
+                                onPress: () => {
                                     try {
                                         web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
                                         this.navigate('ExportMnemonic', { walletPassword: this.state.walletPassword });
@@ -129,8 +129,48 @@ class WalletInfo extends Component {
                                     } catch (error) {
                                         alert('密码错误,请重新输入')
                                     }
-                                }, 50);
-                            }}
+                                }
+                            })
+                        })
+                    }}
+                />
+                <Button
+                    title='删除钱包'
+                    buttonStyle={styles.buttonStyle}
+                    onPress={() => {
+                        this.setState({
+                            modalTitle: '验证密码'
+                        }, () => {
+                            this.refs.codeInput.open();
+                            this.setState({
+                                onPress: () => {
+                                    this.navigate('TabbarPage');
+
+                                    // try {
+                                    //     web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
+                                    //     storage.remove({
+                                    //         key: 'walletInfo'
+                                    //     });
+                                    // } catch (error) {
+                                    //     alert('密码错误,请重新输入')
+                                    // }
+                                }
+                            })
+                        })
+                    }}
+                />
+                <Modal style={styles.modalCode} position={"bottom"} ref={"codeInput"} swipeArea={20}>
+                    <View style={styles.InputPwd_title}>
+                        <Text>
+                            {this.state.modalTitle}
+                        </Text>
+                    </View>
+                    <Input {...this.pwd} />
+                    <View style={styles.confirm}>
+                        <Button
+                            title='确定'
+                            buttonStyle={styles.confirmButtonStyle}
+                            onPress={this.state.onPress}
                         />
                     </View>
                 </Modal>

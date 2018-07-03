@@ -48,7 +48,6 @@ class TransactionRecord extends Component {
                         </View>
                 }
             </View>
-
         )
     }
 }
