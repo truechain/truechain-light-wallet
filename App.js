@@ -116,13 +116,6 @@ export default class App extends Component {
                         header: null
                     }
                 },
-                Assets: {
-                    screen: Assets,
-                    navigationOptions: {
-                        header: null,
-                        gesturesEnabled: false
-                    }
-                },
                 CurrencyDetail: CurrencyDetail,
                 Transfer: Transfer,
                 Receipt: Receipt,

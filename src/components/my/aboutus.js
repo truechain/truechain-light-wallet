@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 
 import { withNavigation } from 'react-navigation'
-import { CLIENT_RENEG_LIMIT } from 'tls';
 
 export class AboutUs extends Component {
 

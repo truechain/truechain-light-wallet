@@ -7,6 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
+    "axios": "^0.18.0",
     "eth-lightwallet": "^3.0.1",
     "node-libs-browser": "^2.1.0",
     "react": "16.3.1",
@@ -23,7 +24,6 @@
     "redux": "^4.0.0",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
-    "tls": "0.0.1",
     "web3": "^1.0.0-beta.34"
   },
   "devDependencies": {
