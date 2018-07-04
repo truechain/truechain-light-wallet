@@ -23,6 +23,7 @@ import HelperCenter from './src/components/my/helpercenter'
 import ContactUs from './src/components/my/contactus'
 import SysSet from './src/components/my/sysset'
 import Login from './src/components/my/login'
+import PersonalApply from './src/components/node/personalapply'
 
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import {
@@ -148,6 +149,7 @@ export default class App extends Component {
                 HelperCenter,
                 ContactUs,
                 SysSet,
+                PersonalApply,
                 Login: {
                     screen: Login,
                     navigationOptions: {
