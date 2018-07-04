@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import DeviceInfo from 'react-native-device-info'
 import {
     StyleSheet,
     Text,
@@ -11,7 +10,6 @@ import {
 } from 'react-native'
 import CountryPicker from 'react-native-country-picker-modal';
 import { Button } from 'react-native-elements';
-import { getCaptcha } from '../../api/index'
 
 const screen = Dimensions.get('window');
 
@@ -39,7 +37,6 @@ export default class Login extends React.Component {
         fetch('http://45.40.243.125:7001/').then(res => {
             return res.json()
         }).then(ret => {
-            console.log(ret.data);
             this.setState({
                 captcha: ret.data
             })
@@ -88,8 +85,9 @@ export default class Login extends React.Component {
     }
 
     setTime = () => {
-        // console.log(this.state.tel, this.state.cap_code)
-        if (!this.regPhone.test(this.state.tel)) {
+        if (!this.state.tel) {
+            alert('请输入手机号')
+        } else if (!this.regPhone.test(this.state.tel)) {
             alert('请输入合法手机号')
         } else if (!this.state.cap_code_flag) {
             alert('请正确输入图形验证码')
@@ -97,6 +95,9 @@ export default class Login extends React.Component {
             this.setCountdown(60);
             this.startCountDown();
             alert('进行发送短信验证码')
+            this.setState({
+                disabledLogin: false
+            })
         }
     }
 
