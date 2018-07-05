@@ -23,21 +23,12 @@ import HelperCenter from './src/components/my/helpercenter'
 import ContactUs from './src/components/my/contactus'
 import SysSet from './src/components/my/sysset'
 import Login from './src/components/my/login'
-<<<<<<< HEAD
 
 import SignUp from './src/components/node/signUp'
 import SignUpNode from './src/components/node/signUpNode'
 
 import PersonalApply from './src/components/node/personalapply'
 import PersonalLockPosition from './src/components/node/personallockposition'
-=======
-import SignUp from './src/components/node/signUp'
-import SignUpNode from './src/components/node/signUpNode'
-
-
-
-import PersonalApply from './src/components/node/personalapply'
->>>>>>> e2445eea70e6b6a504b47b41f65ea7fdee3252f3
 
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import {
