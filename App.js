@@ -23,12 +23,14 @@ import HelperCenter from './src/components/my/helpercenter'
 import ContactUs from './src/components/my/contactus'
 import SysSet from './src/components/my/sysset'
 import Login from './src/components/my/login'
+
 import SignUp from './src/components/node/signUp'
 import SignUpNode from './src/components/node/signUpNode'
 import QRscanner from './src/components/public/QRscanner'
 
 
 import PersonalApply from './src/components/node/personalapply'
+import PersonalLockPosition from './src/components/node/personallockposition'
 
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import {
@@ -36,6 +38,7 @@ import {
     StyleSheet,
     AsyncStorage
 } from 'react-native';
+
 const Web3 = require('web3');
 
 const IconUrl = {
@@ -160,6 +163,7 @@ export default class App extends Component {
                 ContactUs,
                 SysSet,
                 PersonalApply,
+                PersonalLockPosition,
                 Login: {
                     screen: Login,
                     navigationOptions: {

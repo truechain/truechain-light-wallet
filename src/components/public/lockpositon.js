@@ -5,8 +5,18 @@ import {
     StyleSheet
 } from 'react-native';
 
+/**
+ * 这是抽象出来的锁仓界面组件
+ * 使用时传入相应属性的数据
+ * 示例:
+ * 
+ */
+
 class LockPosition extends Component {   
-    
+    constructor(props) {
+        super(props);
+    }
+
     render() {
         return (
             <View style={styles.inputPage}>
@@ -20,7 +30,7 @@ class LockPosition extends Component {
                     />
                 </View>
                 <Button 
-                title={this.props.inputPageBtnText} 
+                title={this.props.bottomBtnText} 
                 onPress={this.props.pressBtn()}
                 />
             </View>
