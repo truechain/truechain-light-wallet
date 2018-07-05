@@ -200,12 +200,12 @@ class Transfer extends Component {
                         />
                         <Detail
                             key_k='转入地址'
-                            val='0x1782730Ce1234......34b1970F9f4A89f'
+                            val={store.getState().walletInfo.wallet_address.replace(store.getState().walletInfo.wallet_address.slice('10', '25'), '......')}
                             style={styles.marginLeft_20}
                         />
                         <Detail
                             key_k='转出地址'
-                            val='0x1782730Ce1234......34b1970F9f4A89f'
+                            val={this.state.toAddress.replace(this.state.toAddress.slice('10', '25'), '......')}
                             style={styles.marginLeft_20}
                         />
                         <Detail
