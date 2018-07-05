@@ -2,9 +2,11 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
+    Image,
     StyleSheet,
     Dimensions,
-    ScrollView
+    ScrollView,
+    TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
 import {
@@ -16,7 +18,6 @@ import {
 import Modal from 'react-native-modalbox'
 
 const screen = Dimensions.get('window');
-
 
 class Detail extends Component {
     constructor(props) {
@@ -40,7 +41,20 @@ export default class Transfer extends Component {
         })
     }
     static navigationOptions = {
-        headerTitle: '转账'
+        headerTitle: '转账',
+        headerRight: (
+            <TouchableHighlight underlayColor={'transparent'} onPress={()=>{
+                alert('扫描')
+            }}>
+            <Image style={{
+                width:20,
+                height:20,
+                marginRight:10
+            }} 
+            source={require('../../assets/images/common/ercodeicon.png')} 
+            />
+            </TouchableHighlight>
+        )
     };
     render() {
         return (
