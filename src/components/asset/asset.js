@@ -11,6 +11,8 @@ import {
 import { connect } from 'react-redux';
 import actions from '../../store/action/walletInfo'
 import { withNavigation } from 'react-navigation';
+import getBalance from '../../utils/addTokens'
+import iterface from '../../utils/trueIter'
 
 class CurrencyList extends Component {
     currencyDetail(title) {
@@ -26,7 +28,7 @@ class CurrencyList extends Component {
                     <View style={styles.currency_left}>
                         <View>
                             <TouchableHighlight style={styles.currency_logo}>
-                                <Image style={styles.currency_logo_item} source={require('../../assets/images/currency_logo/eth_logo.png')} />
+                                <Image style={styles.currency_logo_item} source={this.props.item.logo_url} />
                             </TouchableHighlight>
                         </View>
                         <View style={styles.marginLeft}>
@@ -37,10 +39,10 @@ class CurrencyList extends Component {
                     </View>
                     <View>
                         <Text style={styles.alignRight}>
-                            1.0000
-                    </Text>
+                            {this.props.item.balance}
+                        </Text>
                         <Text style={[styles.alignRight, styles.currency]}>
-                            9999.0000CNY
+                            ***** CNY
                     </Text>
                     </View>
                 </View>
@@ -58,7 +60,8 @@ class Assets extends Component {
             walletAddress: ' ',
             eth_balance: '--',
             true_banlance: '--',
-            ttr_banlance: '--'
+            ttr_banlance: '--',
+            currency_logo: []
         })
     }
 
@@ -96,7 +99,22 @@ class Assets extends Component {
                 this.props.walletInfo({ wallet_address: this.state.walletAddress })
                 console.log(store.getState())
             })
+            getBalance(iterface, walletAddress, '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab', (true_banlance) => {
+                true_banlance = this.show(true_banlance);
+                this.setState({ true_banlance });
+            })
+            getBalance(iterface, walletAddress, '0xf2bb016e8c9c8975654dcd62f318323a8a79d48e', (ttr_banlance) => {
+                ttr_banlance = this.show(ttr_banlance);
+                this.setState({ ttr_banlance });
+            })
         });
+        this.setState({
+            currency_logo: {
+                eth_logo: require('../../assets/images/currency_logo/eth_logo.png'),
+                true_logo: require('../../assets/images/currency_logo/true_logo.png'),
+                ttr_logo: require('../../assets/images/currency_logo/ttr_logo.png')
+            }
+        })
     }
     render() {
         return (
@@ -122,8 +140,8 @@ class Assets extends Component {
                 <View style={styles.addCurrency}>
                     <View style={styles.addCurrency_item}>
                         <View>
-                            <Text style={styles.currency_text}>账户总资产(￥)</Text>
-                            <Text>{this.state.eth_balance}</Text>
+                            <Text style={styles.currency_text}>账户总资产</Text>
+                            <Text>{this.state.true_banlance}</Text>
                         </View>
                         <TouchableHighlight style={styles.currency_item}>
                             <Text style={styles.currency_item_text}>新增币种</Text>
@@ -131,7 +149,24 @@ class Assets extends Component {
                     </View>
                 </View>
                 <FlatList
-                    data={[{ currency_name: 'ETH' }, { currency_name: 'TRUE' }]}
+                    data={
+                        [
+                            {
+                                currency_name: 'ETH',
+                                balance: this.state.eth_balance,
+                                logo_url: this.state.currency_logo.eth_logo
+                            },
+                            {
+                                currency_name: 'TRUE',
+                                balance: this.state.true_banlance,
+                                logo_url: this.state.currency_logo.true_logo
+                            },
+                            {
+                                currency_name: 'TTR',
+                                balance: this.state.ttr_banlance,
+                                logo_url: this.state.currency_logo.ttr_logo
+                            }]
+                    }
                     renderItem={({ item }) => <CurrencyList
                         item={item}
                         navigate={this.navigate}

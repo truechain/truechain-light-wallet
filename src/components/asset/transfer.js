@@ -14,8 +14,9 @@ import {
     Slider,
     Button
 } from 'react-native-elements';
+import Modal from 'react-native-modalbox';
+import { withNavigation } from 'react-navigation';
 
-import Modal from 'react-native-modalbox'
 
 const screen = Dimensions.get('window');
 
@@ -33,70 +34,142 @@ class Detail extends Component {
     }
 }
 
-export default class Transfer extends Component {
+class Transfer extends Component {
     constructor(props) {
         super(props);
         this.state = ({
-            value: 0.00042840
+            toAddress: null,
+            amount: 0,
+            remarks: null,
+            cost: 0.00042840,
+            disabledNext: true,
+            toAddressFlag: false,
         })
     }
-    static navigationOptions = {
+
+    static navigationOptions = ({ navigation }) => ({
         headerTitle: '转账',
         headerRight: (
-            <TouchableHighlight underlayColor={'transparent'} onPress={()=>{
-                alert('扫描')
+            <TouchableHighlight underlayColor={'transparent'} onPress={() => {
+                navigation.state.params.navigate('QRscanner');
             }}>
-            <Image style={{
-                width:20,
-                height:20,
-                marginRight:10
-            }} 
-            source={require('../../assets/images/common/ercodeicon.png')} 
-            />
+                <Image style={{
+                    width: 20,
+                    height: 20,
+                    marginRight: 10
+                }}
+                    source={require('../../assets/images/common/ercodeicon.png')}
+                />
             </TouchableHighlight>
         )
+    });
+
+    show(num) {
+        num += '';
+        num = num.replace(/[^0-9|\.]/g, '');
+        if (/^0+/) {
+            num = num.replace(/^0+/, '');
+        };
+        if (!/\./.test(num)) {
+            num += '.00000';
+        };
+        if (/^\./.test(num)) {
+            num = '0' + num;
+        };
+        num += '00000';
+        num = num.match(/\d+\.\d{8}/)[0];
+        return num
     };
+
+    componentDidMount() {
+        const { params } = this.props.navigation.state;
+        if (params.currencyName !== 'ETH') {
+            console.log('777777');
+        }
+    }
+
+    componentWillUpdate(prev, next) {
+        if (next.toAddressFlag && this.state.amountFlag) {
+            setTimeout(() => {
+                this.setState({
+                    disabledNext: false
+                })
+            }, 13);
+        } else {
+            setTimeout(() => {
+                this.setState({
+                    disabledNext: true
+                })
+            }, 13);
+        }
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <Input
                     placeholder='收款人钱包地址'
-                    rightIcon={
-                        <Icon
-                            name='user'
-                            size={25}
-                            onPress={() => {
-                                alert('联系人')
-                            }}
-                        />
-                    }
+                    // rightIcon={
+                    //     <Icon
+                    //         name='user'
+                    //         size={25}
+                    //         onPress={() => {
+                    //             alert('联系人')
+                    //         }}
+                    //     />
+                    // }
+                    onChangeText={(toAddress) => this.setState({ toAddress })}
+                    onEndEditing={(event) => {
+                        if (!web3.utils.isAddress(event.nativeEvent.text)) {
+                            this.setState({
+                                toAddressFlag: false
+                            })
+                            alert('地址无效，请仔细检查！')
+                        } else {
+                            this.setState({
+                                toAddressFlag: true
+                            })
+                        }
+                    }}
                     inputContainerStyle={styles.inputContainerStyle}
                 />
                 <Input
                     placeholder='转账金额'
+                    onChangeText={(amount) => this.setState({ amount })}
+                    onEndEditing={(event) => {
+                        if (event.nativeEvent.text) {
+                            this.setState({
+                                amountFlag: true
+                            })
+                        } else {
+                            this.setState({
+                                amountFlag: false
+                            })
+                        }
+                    }}
                     inputContainerStyle={styles.inputContainerStyle}
                 />
                 <Input
                     placeholder='备注'
+                    onChangeText={(remarks) => this.setState({ remarks })}
                     inputContainerStyle={styles.inputContainerStyle}
                 />
                 <Text style={styles.minerCosts_text}>矿工费用</Text>
                 <Slider
-                    value={this.state.value}
-                    onValueChange={(value) => this.setState({ value })}
+                    value={this.state.cost}
+                    onValueChange={(cost) => this.setState({ cost })}
                     minimumTrackTintColor='#528bf7'
                     thumbTintColor='#528bf7'
                     minimumValue={0.00022932}
-                    step={0.00000001}
+                    step={0.0000001}
                     maximumValue={0.00251999}
                 />
-
                 <View style={styles.gasPrice}>
                     <Text>
                         慢
                     </Text>
                     <Text style={styles.textAlign}>
-                        {this.state.value} ether
+                        {this.show(this.state.cost)}ether
                     </Text>
                     <Text>
                         快
@@ -106,6 +179,8 @@ export default class Transfer extends Component {
                     <Button
                         title='下一步'
                         buttonStyle={styles.buttonStyle}
+                        disabled={this.state.disabledNext}
+                        // disabledStyle={styles.disabledStyle}
                         onPress={() => {
                             this.refs.transferDetail.open()
                         }}
@@ -136,16 +211,14 @@ export default class Transfer extends Component {
                         <Detail
                             key_k='矿工费用'
                             gasPrice='666'
-                            val='22000'
+                            val={'≈ Gas(25200) * Gas Price(' + Math.round((this.state.cost / 0.00002520) * 100) / 100 + 'gwei)'}
                             style={styles.paymentDetails_item_gasPOramount}
                         />
-
                         <Detail
                             key_k='金额'
-                            val='10.0000'
+                            val={this.state.amount}
                             style={styles.paymentDetails_item_gasPOramount}
                         />
-
                         <View style={styles.next}>
                             <Button
                                 title='下一步'
@@ -178,13 +251,14 @@ export default class Transfer extends Component {
                                 </View>
                             </ScrollView>
                         </Modal>
-
                     </ScrollView>
                 </Modal>
             </View>
         );
     }
 }
+
+export default withNavigation(Transfer)
 
 const styles = StyleSheet.create({
     textAlign: {
@@ -227,9 +301,7 @@ const styles = StyleSheet.create({
     },
     paymentDetails: {
         width: screen.width,
-        height: screen.height * 0.6,
-        borderWidth: 1,
-        borderColor: 'green'
+        height: screen.height * 0.6
     },
     modal: {
         justifyContent: 'center',
