@@ -36,6 +36,7 @@ import {
     StyleSheet,
     AsyncStorage
 } from 'react-native';
+
 const Web3 = require('web3');
 
 const IconUrl = {
