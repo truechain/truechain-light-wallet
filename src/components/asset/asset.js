@@ -8,18 +8,20 @@ import {
     Dimensions,
     TouchableHighlight
 } from 'react-native';
+import { connect } from 'react-redux';
+import actions from '../../store/action/walletInfo'
 import { withNavigation } from 'react-navigation';
 
 class CurrencyList extends Component {
-    currencyDetail() {
+    currencyDetail(title) {
         this.props.navigate('CurrencyDetail', {
-            currencyName: 'ETH2018'
+            title: title
         });
     };
 
     render() {
         return (
-            <TouchableHighlight onPress={() => this.currencyDetail()}>
+            <TouchableHighlight underlayColor={'#fff'} onPress={() => this.currencyDetail(this.props.item.currency_name)}>
                 <View style={styles.currency_list}>
                     <View style={styles.currency_left}>
                         <View>
@@ -29,8 +31,8 @@ class CurrencyList extends Component {
                         </View>
                         <View style={styles.marginLeft}>
                             <Text>
-                                ETH
-                    </Text>
+                                {this.props.item.currency_name}
+                            </Text>
                         </View>
                     </View>
                     <View>
@@ -54,7 +56,9 @@ class Assets extends Component {
         this.state = ({
             walletName: ' ',
             walletAddress: ' ',
-            balance: '--'
+            eth_balance: '--',
+            true_banlance: '--',
+            ttr_banlance: '--'
         })
     }
 
@@ -82,14 +86,15 @@ class Assets extends Component {
             let walletAddress = walletInfo.walletAddress,
                 walletName = walletInfo.walletName;
             web3.eth.getBalance(walletAddress).then((res) => {
-                let balance = this.show(web3.utils.fromWei(res, 'ether'));
-                this.setState({
-                    balance: balance
-                })
+                let eth_balance = this.show(web3.utils.fromWei(res, 'ether'));
+                this.setState({ eth_balance });
             })
             this.setState({
                 walletAddress: walletAddress,
                 walletName: walletName
+            }, () => {
+                this.props.walletInfo({ wallet_address: this.state.walletAddress })
+                console.log(store.getState())
             })
         });
     }
@@ -118,7 +123,7 @@ class Assets extends Component {
                     <View style={styles.addCurrency_item}>
                         <View>
                             <Text style={styles.currency_text}>账户总资产(￥)</Text>
-                            <Text>{this.state.balance}</Text>
+                            <Text>{this.state.eth_balance}</Text>
                         </View>
                         <TouchableHighlight style={styles.currency_item}>
                             <Text style={styles.currency_item_text}>新增币种</Text>
@@ -126,7 +131,7 @@ class Assets extends Component {
                     </View>
                 </View>
                 <FlatList
-                    data={[{ key: 'a' }, { key: 'b' }]}
+                    data={[{ currency_name: 'ETH' }, { currency_name: 'TRUE' }]}
                     renderItem={({ item }) => <CurrencyList
                         item={item}
                         navigate={this.navigate}
@@ -137,7 +142,15 @@ class Assets extends Component {
     }
 }
 
-export default withNavigation(Assets)
+export default connect(
+    state => state.walletInfo,
+    actions
+)(Assets)
+
+// export default connect(
+//     state => state.walletInfo,
+//     actions
+// )(CreateWallet)
 
 const styles = StyleSheet.create({
     marginLeft: {
@@ -218,8 +231,6 @@ const styles = StyleSheet.create({
     //币种列表
     currency_list: {
         height: 80,
-        // borderWidth: 2,
-        // borderColor: 'green',
         marginTop: 5,
         paddingLeft: 20,
         paddingRight: 20,

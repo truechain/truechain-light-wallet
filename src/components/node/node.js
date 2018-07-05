@@ -7,9 +7,12 @@ import {
     StyleSheet,
     ScrollView,
     RefreshControl,
+    TouchableHighlight
 } from 'react-native';
+import { withNavigation } from 'react-navigation'
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
-import { getNodeRank } from '../../api/index'
+import { getNodeRank, getMemberStatus } from '../../api/index'
+
 
 const screen = Dimensions.get('window');
 
@@ -70,18 +73,23 @@ class NodeItem extends Component {
     }
 }
 
-export default class Node extends Component {
+class Node extends Component {
     constructor(props) {
         super(props)
         this.state = ({
             isRefreshing: false,
             standardNodeData: [],
             fullNodeData: []
-        })
+        });
+        this.navigate = this.props.navigation.navigate;
     }
 
     componentDidMount() {
-        this._getNodeRank()
+        this._getNodeRank()//获取节点排行
+        //获取申请状态
+        getMemberStatus().then(res => {
+            console.log(res);
+        })
     }
 
     _getNodeRank() {
@@ -97,8 +105,6 @@ export default class Node extends Component {
             nodeType: 1,
             pageIndex: 0
         }).then(res => {
-            console.log(res.data.data);
-
             this.setState({
                 standardNodeData: res.data.data
             })
@@ -117,18 +123,23 @@ export default class Node extends Component {
                         节点
                         </Text>
                     <View style={styles.header_item}>
-                        <View style={styles.fun}>
-                            <Image source={require('../../assets/images/node/baoming_2x.png')} style={styles.fun_icon} />
-                            <Text style={styles.color_white}>
-                                报名参选
+                        <TouchableHighlight onPress={() => { this.navigate('SignUp') }}>
+                            <View style={styles.fun}>
+                                <Image source={require('../../assets/images/node/baoming_2x.png')} style={styles.fun_icon} />
+                                <Text style={styles.color_white}>
+                                    报名参选
                         </Text>
-                        </View>
-                        <View style={styles.fun}>
-                            <Image source={require('../../assets/images/node/toupiao_2x.png')} style={styles.fun_icon} />
-                            <Text style={styles.color_white}>
-                                投票
+                            </View>
+                        </TouchableHighlight>
+                        <TouchableHighlight>
+                            <View style={styles.fun}>
+                                <Image source={require('../../assets/images/node/toupiao_2x.png')} style={styles.fun_icon} />
+                                <Text style={styles.color_white}>
+                                    投票
                         </Text>
-                        </View>
+                            </View>
+                        </TouchableHighlight>
+
                     </View>
                 </View>
 
@@ -186,6 +197,7 @@ export default class Node extends Component {
         );
     }
 }
+export default withNavigation(Node)
 
 const styles = StyleSheet.create({
     color_white: {

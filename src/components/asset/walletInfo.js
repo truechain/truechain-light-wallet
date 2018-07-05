@@ -144,16 +144,15 @@ class WalletInfo extends Component {
                             this.refs.codeInput.open();
                             this.setState({
                                 onPress: () => {
-                                    this.navigate('TabbarPage');
-
-                                    // try {
-                                    //     web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
-                                    //     storage.remove({
-                                    //         key: 'walletInfo'
-                                    //     });
-                                    // } catch (error) {
-                                    //     alert('密码错误,请重新输入')
-                                    // }
+                                    try {
+                                        web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
+                                        storage.remove({
+                                            key: 'walletInfo'
+                                        });
+                                        this.navigate('Guide');
+                                    } catch (error) {
+                                        alert('密码错误,请重新输入')
+                                    }
                                 }
                             })
                         })
