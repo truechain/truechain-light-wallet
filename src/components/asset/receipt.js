@@ -4,21 +4,21 @@ import {
     Text,
     Image,
     Dimensions,
-    StyleSheet
+    StyleSheet,
+    Clipboard
 } from "react-native";
 
 import {
     Input,
     Button
-} from 'react-native-elements'
+} from 'react-native-elements';
+import QRCode from 'react-native-qrcode'
+import Toast from 'react-native-easy-toast';
+
 
 const screen = Dimensions.get('window');
 
 export default class Receipt extends Component {
-    static navigationOptions = {
-        headerTitle: '收款码'
-    };
-
     constructor(props) {
         super(props);
         this.state = ({
@@ -27,11 +27,20 @@ export default class Receipt extends Component {
     }
 
     componentDidMount() {
-        let walletAddress = store.getState().createWallet.walletAddress;
         this.setState({
-            walletAddress: walletAddress
+            walletAddress: store.getState().walletInfo.wallet_address
         })
     }
+
+    _setClipboardContent = async () => {
+        Clipboard.setString(this.state.walletAddress);
+        try {
+            var content = await Clipboard.getString();
+            this.refs.toast.show('复制成功!');
+        } catch (e) {
+            this.refs.toast.show('复制失败!');
+        }
+    };
 
     render() {
         return (
@@ -47,16 +56,19 @@ export default class Receipt extends Component {
                     </Text>
                 </View>
 
-                <View style={styles.customAmount}>
+                {/* <View style={styles.customAmount}>
                     <Input
                         placeholder='自定义收款'
                         containerStyle={styles.containerStyle}
                     />
-                </View>
+                </View> */}
 
                 <View style={styles.qrcode}>
                     <View style={styles.qrcode_item}>
-                        {/* 二维码区域 */}
+                        <QRCode
+                            value={store.getState().walletInfo.wallet_address}
+                            size={200}
+                        />
                     </View>
                 </View>
 
@@ -64,10 +76,9 @@ export default class Receipt extends Component {
                     <Button
                         title='复制收款地址'
                         buttonStyle={styles.buttonStyle}
-                        onPress={() => {
-                            alert('复制收款地址')
-                        }}
+                        onPress={this._setClipboardContent.bind(this)}
                     />
+                    <Toast ref="toast" position='center' />
                 </View>
             </View>
 
@@ -115,8 +126,6 @@ const styles = StyleSheet.create({
         marginTop: 20
     },
     qrcode_item: {
-        borderWidth: 1,
-        borderColor: 'red',
         width: 200,
         height: 200
     },

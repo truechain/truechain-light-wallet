@@ -16,7 +16,7 @@ const screen = Dimensions.get('window');
 class TeamList extends Component {
     render() {
         return (
-            <TouchableHighlight underlayColor={'#fff'} onPress={() => { alert(this.props.item.address) }}>
+            <TouchableHighlight underlayColor={'transparent'} onPress={() => { alert(this.props.item.address) }}>
                 <View style={styles.teamList_item}>
                     <View style={styles.teamList_item_sort}>
                         <Text>
@@ -70,7 +70,7 @@ class SignUpNode extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableHighlight style={[styles.spacing, styles.personalReg]} underlayColor={'#fff'} onPress={() => this._personalReg()}>
+                <TouchableHighlight style={[styles.spacing, styles.personalReg]} underlayColor={'transparent'} onPress={() => this._personalReg()}>
                     <View style={styles.personalReg_item}>
                         <Text>
                             个人报名

@@ -123,7 +123,7 @@ class Node extends Component {
                         节点
                         </Text>
                     <View style={styles.header_item}>
-                        <TouchableHighlight onPress={() => { this.navigate('SignUp') }}>
+                        <TouchableHighlight underlayColor={'transparent'} onPress={() => { this.navigate('SignUp') }}>
                             <View style={styles.fun}>
                                 <Image source={require('../../assets/images/node/baoming_2x.png')} style={styles.fun_icon} />
                                 <Text style={styles.color_white}>
@@ -131,7 +131,7 @@ class Node extends Component {
                         </Text>
                             </View>
                         </TouchableHighlight>
-                        <TouchableHighlight>
+                        <TouchableHighlight underlayColor={'transparent'} onPress={() => { alert('投票') }}>
                             <View style={styles.fun}>
                                 <Image source={require('../../assets/images/node/toupiao_2x.png')} style={styles.fun_icon} />
                                 <Text style={styles.color_white}>
