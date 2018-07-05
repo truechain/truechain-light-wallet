@@ -23,6 +23,10 @@ import HelperCenter from './src/components/my/helpercenter'
 import ContactUs from './src/components/my/contactus'
 import SysSet from './src/components/my/sysset'
 import Login from './src/components/my/login'
+
+import SignUp from './src/components/node/signUp'
+import SignUpNode from './src/components/node/signUpNode'
+
 import PersonalApply from './src/components/node/personalapply'
 import PersonalLockPosition from './src/components/node/personallockposition'
 
@@ -157,7 +161,14 @@ export default class App extends Component {
                     navigationOptions: {
                         headerTitle: '登录'
                     }
-                }
+                },
+                SignUp: {
+                    screen: SignUp,
+                    navigationOptions: {
+                        headerTitle: '报名参选'
+                    }
+                },
+                SignUpNode
             },
             {
                 initialRouteName: this.state.isWallet ? 'TabBarPage' : 'Guide',

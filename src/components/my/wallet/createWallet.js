@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import actions from '../../../store/action/createWallet'
 import {
     StyleSheet,
     Text,
@@ -13,7 +11,7 @@ import LoadingView from '../../public/loadingView'
 const Web3 = require('web3');
 
 var web3 = new Web3(new Web3.providers.HttpProvider('https:mainnet.infura.io/'));
-class CreateWallet extends Component {
+export default class CreateWallet extends Component {
     static navigationOptions = {
         title: '创建钱包',
         headerTintColor: '#000'
@@ -41,6 +39,7 @@ class CreateWallet extends Component {
             })
         }
     }
+    
     pwd = {
         placeholder: '输入您的密码',
         inputContainerStyle: styles.textInput,
@@ -101,7 +100,7 @@ class CreateWallet extends Component {
                             },
                             expires: null
                         })
-                        // this.props.walletInfo(this.state.walletName, address[0], keystoreV3,ks);
+                        // this.props.walletInfo({ wallet_address: address[0]});
                         setTimeout(() => {
                             this.setState({
                                 showLoading: false
@@ -166,10 +165,6 @@ class CreateWallet extends Component {
     }
 }
 
-export default connect(
-    state => state.createWallet,
-    actions
-)(CreateWallet)
 
 const styles = StyleSheet.create({
     color_white: {

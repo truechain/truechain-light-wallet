@@ -7,14 +7,32 @@ import {
     Dimensions,
     StyleSheet
 } from 'react-native';
-import { withNavigation } from 'react-navigation'
+import { withNavigation } from 'react-navigation';
+import { getTransactionRecord } from '../../api/index'
 
 class Recording extends Component {
+    show(num) {
+        num += '';
+        num = num.replace(/[^0-9|\.]/g, '');
+        if (/^0+/) {
+            num = num.replace(/^0+/, '');
+        };
+        if (!/\./.test(num)) {
+            num += '.00000';
+        };
+        if (/^\./.test(num)) {
+            num = '0' + num;
+        };
+        num += '00000';
+        num = num.match(/\d+\.\d{4}/)[0];
+        return num
+    };
+
     render() {
         return (
             <View style={styles.recordDetail_item}>
                 <Text>{this.props.to.replace(this.props.to.slice('10', '30'), '......')}</Text>
-                <Text>-{this.props.value / 1e+18}</Text>
+                <Text>{this.show(this.props.value / 1e+18)}</Text>
             </View>
         )
     }
@@ -22,20 +40,17 @@ class Recording extends Component {
 
 class TransactionRecord extends Component {
     render() {
-        const Recording_item = {
-            to: this.props.data.item.to,
-            value: this.props.data.item.value
-        }
         return (
             <View>
                 {
-                    this.props.data.item.from === '0x5833fa6053e6e781eafb8695d63d90f6b3571e5e' ?
+                    this.props.data.item.from === store.getState().walletInfo.wallet_address ?
                         <View style={styles.recordDetail}>
                             <View>
                                 <Image style={styles.record_icon} source={require('../../assets/images/asset/expend_3x.png')} />
                             </View>
                             <Recording
-                                {...Recording_item}
+                                to={this.props.data.item.to}
+                                value={this.props.data.item.value}
                             />
                         </View>
                         : <View style={styles.recordDetail}>
@@ -43,7 +58,8 @@ class TransactionRecord extends Component {
                                 <Image style={styles.record_icon} source={require('../../assets/images/asset/add_3x.png')} />
                             </View>
                             <Recording
-                                {...Recording_item}
+                                to={this.props.data.item.to}
+                                value={this.props.data.item.value}
                             />
                         </View>
                 }
@@ -58,31 +74,21 @@ class currencyDetail extends Component {
         this.navigate = this.props.navigation.navigate;
         this.state = {
             title: null,
-            recordData: null
+            recordData: []
         }
     }
 
-    static navigationOptions = {
-        headerTitle: '币种名称'
-    };
+    static navigationOptions = ({ navigation }) => ({
+        headerTitle: navigation.state.params.title
+    });
 
-    componentWillMount() {
-        // const { params } = this.props.navigation.state;
-        // this.setState({
-        //     title: params.currencyName
-        // })
-    }
+
 
     componentDidMount() {
-        let apiUrl = 'http://api.etherscan.io/api?module=account&action=txlist&address=0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e&sort=desc&apikey=YourApiKeyToken';
-        fetch(apiUrl).then((response) => {
-            return response.json()
-        }).then((responseData) => {
+        getTransactionRecord(store.getState().walletInfo.wallet_address).then(res => {
             this.setState({
-                recordData: responseData.result
+                recordData: res.data.result
             })
-        }).catch((e) => {
-            console.log(e);
         })
     }
 
@@ -102,7 +108,7 @@ class currencyDetail extends Component {
                         近期交易记录
                     </Text>
                     {
-                        this.state.recordData ?
+                        this.state.recordData.length > 1 ?
                             <FlatList
                                 style={styles.marginTop_20}
                                 data={this.state.recordData}
@@ -113,7 +119,6 @@ class currencyDetail extends Component {
                             /> :
                             <Text style={styles.textAlign}>~</Text>
                     }
-
                 </View>
                 <View style={styles.bottom_fun}>
                     <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_transfer]} onPress={() => { this.navigate('Transfer') }}>
