@@ -21,7 +21,7 @@ class CurrencyList extends Component {
 
     render() {
         return (
-            <TouchableHighlight underlayColor={'#fff'} onPress={() => this.currencyDetail(this.props.item.currency_name)}>
+            <TouchableHighlight underlayColor={'transparent'} onPress={() => this.currencyDetail(this.props.item.currency_name)}>
                 <View style={styles.currency_list}>
                     <View style={styles.currency_left}>
                         <View>
@@ -103,13 +103,13 @@ class Assets extends Component {
             <View style={styles.container}>
                 <View style={styles.walletInfo}>
                     <View style={styles.walletInfo_item}>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('WalletInfo')}>
+                        <TouchableHighlight underlayColor={'transparent'} onPress={() => this.props.navigation.navigate('WalletInfo')}>
                             <Image style={styles.avatar} source={require('../../assets/images/asset/head_2x.png')} />
                         </TouchableHighlight>
                         <Text style={styles.walletName}>
                             {this.state.walletName}
                         </Text>
-                        <TouchableHighlight onPress={() => this.props.navigation.navigate('Receipt')}>
+                        <TouchableHighlight underlayColor={'transparent'} onPress={() => this.props.navigation.navigate('Receipt')}>
                             <View style={styles.walletAddress}>
                                 <Text style={styles.walletAddress_item}>
                                     {this.state.walletAddress.replace(this.state.walletAddress.slice('9', '35'), '......')}

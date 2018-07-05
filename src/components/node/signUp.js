@@ -18,7 +18,7 @@ class SignUp extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <TouchableHighlight style={styles.standardNode} underlayColor={'#fff'} onPress={() => this.navigate('SignUpNode', { nodeType: '2', title: '全节点' })}>
+                <TouchableHighlight style={styles.standardNode} underlayColor={'transparent'} onPress={() => this.navigate('SignUpNode', { nodeType: '2', title: '全节点' })}>
                     <View style={styles.standardNode_item}>
                         <View style={styles.title}>
                             <Text>
@@ -32,7 +32,7 @@ class SignUp extends Component {
                     </View>
                 </TouchableHighlight>
 
-                <TouchableHighlight style={styles.standardNode} underlayColor={'#fff'} onPress={() => this.navigate('SignUpNode', { nodeType: '1', title: '标准节点' })}>
+                <TouchableHighlight style={styles.standardNode} underlayColor={'transparent'} onPress={() => this.navigate('SignUpNode', { nodeType: '1', title: '标准节点' })}>
                     <View style={styles.standardNode_item}>
                         <View style={styles.title}>
                             <Text>
