@@ -24,6 +24,7 @@ import ContactUs from './src/components/my/contactus'
 import SysSet from './src/components/my/sysset'
 import Login from './src/components/my/login'
 import PersonalApply from './src/components/node/personalapply'
+import PersonalLockPosition from './src/components/node/personallockposition'
 
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import {
@@ -150,6 +151,7 @@ export default class App extends Component {
                 ContactUs,
                 SysSet,
                 PersonalApply,
+                PersonalLockPosition,
                 Login: {
                     screen: Login,
                     navigationOptions: {

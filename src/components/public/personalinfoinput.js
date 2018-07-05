@@ -4,8 +4,23 @@ import {
     TextInput,Button,Text,
     StyleSheet
 } from 'react-native';
+/**
+ * 这是抽象出来的个人报名界面组件
+ * 使用时传入相应属性的数据
+ * 示例:
+ * <PersonalInfoInput 
+        line1TextHoloder="昵称" 
+        line2TextHoloder="竞选宣言" 
+        inputPageBtnText="下一步" 
+        pressBtn={this.pressBtn}        
+    />
+ */
 
 class PersonalInfoInput extends Component {   
+
+    constructor(props) {
+        super(props);
+    }
     
     render() {
         return (
@@ -34,7 +49,9 @@ const styles = StyleSheet.create({
         paddingBottom:30
     },
     infoBox:{
-        backgroundColor:"white"
+        backgroundColor:"white",
+        marginBottom:30,
+        borderRadius:10
     },
     infoBoxTitle:{
         fontSize:15,

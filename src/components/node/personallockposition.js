@@ -5,14 +5,14 @@ import {
     TouchableHighlight
 } from 'react-native';
 
-import PersonalInfoInput from '../public/personalinfoinput'
+import LockPosition from '../public/lockpositon'
 
 import { withNavigation } from 'react-navigation'
 
-export class PersonalApply extends Component {
+export class PersonalLockPosition extends Component {
 
     static navigationOptions = {
-        headerTitle:"个人报名" 
+        headerTitle:"锁仓" 
     }
 
     pressBtn(){
@@ -21,17 +21,15 @@ export class PersonalApply extends Component {
 
     render() {
         return (
-           <PersonalInfoInput 
-           line1TextHoloder="昵称" 
-           line2TextHoloder="竞选宣言" 
-           inputPageBtnText="下一步" 
-           pressBtn={this.pressBtn}        
+           <LockPosition 
+           bottomBtnText="下一步" 
+           pressBtn={ this.pressBtn }        
            />
         );
     }
 }
 
-export default withNavigation(PersonalApply)
+export default withNavigation(PersonalLockPosition)
 
 const styles = StyleSheet.create({
     
