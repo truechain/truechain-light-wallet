@@ -89,7 +89,9 @@ class currencyDetail extends Component {
             this.setState({
                 recordData: res.data.result
             })
-        })
+        });
+        const { params } = this.props.navigation.state;
+        this.currencyName = params.title;
     }
 
     render() {
@@ -121,7 +123,7 @@ class currencyDetail extends Component {
                     }
                 </View>
                 <View style={styles.bottom_fun}>
-                    <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_transfer]} onPress={() => { this.navigate('Transfer') }}>
+                    <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_transfer]} onPress={() => { this.navigate('Transfer', { navigate: this.navigate, currencyName: this.currencyName }) }}>
                         转账
                     </Text>
                     <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_receipt]} onPress={() => { this.navigate('Receipt') }}>

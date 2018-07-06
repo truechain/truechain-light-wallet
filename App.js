@@ -26,6 +26,8 @@ import Login from './src/components/my/login'
 
 import SignUp from './src/components/node/signUp'
 import SignUpNode from './src/components/node/signUpNode'
+import QRscanner from './src/components/public/QRscanner'
+
 
 import PersonalApply from './src/components/node/personalapply'
 import PersonalLockPosition from './src/components/node/personallockposition'
@@ -94,7 +96,7 @@ global.web3 = web3;
 
 export default class App extends Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             isWallet: false
         }
@@ -174,7 +176,8 @@ export default class App extends Component {
                         headerTitle: '报名参选'
                     }
                 },
-                SignUpNode
+                SignUpNode,
+                QRscanner
             },
             {
                 initialRouteName: this.state.isWallet ? 'TabBarPage' : 'Guide',
