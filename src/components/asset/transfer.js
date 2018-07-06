@@ -16,7 +16,7 @@ import {
 } from 'react-native-elements';
 import Modal from 'react-native-modalbox';
 import { withNavigation } from 'react-navigation';
-
+import sendTokens from '../../utils/sendTokens'
 
 const screen = Dimensions.get('window');
 
@@ -38,7 +38,8 @@ class Transfer extends Component {
     constructor(props) {
         super(props);
         this.state = ({
-            toAddress: null,
+            fromAddr: '',
+            toAddress: '',
             amount: 0,
             remarks: null,
             cost: 0.00042840,
@@ -82,6 +83,9 @@ class Transfer extends Component {
     };
 
     componentDidMount() {
+        this.setState({
+            fromAddr: store.getState().walletInfo.wallet_address
+        })
         const { params } = this.props.navigation.state;
         if (params.currencyName !== 'ETH') {
             console.log('777777');
@@ -200,7 +204,7 @@ class Transfer extends Component {
                         />
                         <Detail
                             key_k='转入地址'
-                            val={store.getState().walletInfo.wallet_address.replace(store.getState().walletInfo.wallet_address.slice('10', '25'), '......')}
+                            val={this.state.fromAddr.replace(this.state.fromAddr.slice('10', '25'), '......')}
                             style={styles.marginLeft_20}
                         />
                         <Detail
@@ -245,7 +249,8 @@ class Transfer extends Component {
                                         title='下一步'
                                         buttonStyle={styles.buttonStyle}
                                         onPress={() => {
-                                            alert('转账结果')
+                                            sendTokens(this.state.fromAddr,this.state.toAddress,'1','1','33333','合约地址')
+                                            // alert('转账结果')
                                         }}
                                     />
                                 </View>

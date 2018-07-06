@@ -82,8 +82,6 @@ class currencyDetail extends Component {
         headerTitle: navigation.state.params.title
     });
 
-
-
     componentDidMount() {
         getTransactionRecord(store.getState().walletInfo.wallet_address).then(res => {
             this.setState({
@@ -91,7 +89,8 @@ class currencyDetail extends Component {
             })
         });
         const { params } = this.props.navigation.state;
-        this.currencyName = params.title;
+        this.state.currencyName = params.title;
+        this.state.banlance = params.banlance
     }
 
     render() {
@@ -99,10 +98,10 @@ class currencyDetail extends Component {
             <View style={styles.container}>
                 <View style={styles.balance}>
                     <Text style={[styles.color_white, styles.balance_text_big]}>
-                        1.0000
-                   </Text>
+                        {this.state.banlance}
+                    </Text>
                     <Text style={[styles.color_white, styles.marginTop_20]}>
-                        市值：9999.00CNY
+                        市值：*****
                    </Text>
                 </View>
                 <View style={styles.record}>
@@ -123,7 +122,7 @@ class currencyDetail extends Component {
                     }
                 </View>
                 <View style={styles.bottom_fun}>
-                    <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_transfer]} onPress={() => { this.navigate('Transfer', { navigate: this.navigate, currencyName: this.currencyName }) }}>
+                    <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_transfer]} onPress={() => { this.navigate('Transfer', { navigate: this.navigate, currencyName: this.state.currencyName }) }}>
                         转账
                     </Text>
                     <Text style={[styles.bottom_fun_item, styles.bottom_fun_item_receipt]} onPress={() => { this.navigate('Receipt') }}>

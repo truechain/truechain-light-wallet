@@ -10,6 +10,7 @@ export default function (state = initState, action) {
         case 'WALLETINFO':
             return {
                 ...state,
+                eth_banlance: action.eth_banlance,
                 true_banlance: action.true_banlance,
                 ttr_banlance: action.ttr_banlance,
                 wallet_address: action.wallet_address,

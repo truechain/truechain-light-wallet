@@ -15,15 +15,16 @@ import getBalance from '../../utils/addTokens'
 import iterface from '../../utils/trueIter'
 
 class CurrencyList extends Component {
-    currencyDetail(title) {
+    currencyDetail(title, banlance) {
         this.props.navigate('CurrencyDetail', {
-            title: title
+            title: title,
+            banlance: banlance
         });
     };
 
     render() {
         return (
-            <TouchableHighlight underlayColor={'transparent'} onPress={() => this.currencyDetail(this.props.item.currency_name)}>
+            <TouchableHighlight underlayColor={'transparent'} onPress={() => this.currencyDetail(this.props.item.currency_name, this.props.item.balance)}>
                 <View style={styles.currency_list}>
                     <View style={styles.currency_left}>
                         <View>
@@ -58,7 +59,7 @@ class Assets extends Component {
         this.state = ({
             walletName: ' ',
             walletAddress: ' ',
-            eth_balance: '--',
+            eth_banlance: '--',
             true_banlance: '--',
             ttr_banlance: '--',
             currency_logo: []
@@ -82,6 +83,15 @@ class Assets extends Component {
         return num
     };
 
+    componentWillUpdate() {
+        this.props.walletInfo({
+            wallet_address: this.state.walletAddress,
+            eth_banlance: this.state.eth_banlance,
+            true_banlance: this.state.true_banlance,
+            ttr_banlance: this.state.ttr_banlance
+        })
+    }
+
     componentDidMount() {
         storage.load({
             key: 'walletInfo'
@@ -89,15 +99,12 @@ class Assets extends Component {
             let walletAddress = walletInfo.walletAddress,
                 walletName = walletInfo.walletName;
             web3.eth.getBalance(walletAddress).then((res) => {
-                let eth_balance = this.show(web3.utils.fromWei(res, 'ether'));
-                this.setState({ eth_balance });
+                let eth_banlance = this.show(web3.utils.fromWei(res, 'ether'));
+                this.setState({ eth_banlance });
             })
             this.setState({
                 walletAddress: walletAddress,
                 walletName: walletName
-            }, () => {
-                this.props.walletInfo({ wallet_address: this.state.walletAddress })
-                console.log(store.getState())
             })
             getBalance(iterface, walletAddress, '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab', (true_banlance) => {
                 true_banlance = this.show(true_banlance);
@@ -114,7 +121,7 @@ class Assets extends Component {
                 true_logo: require('../../assets/images/currency_logo/true_logo.png'),
                 ttr_logo: require('../../assets/images/currency_logo/ttr_logo.png')
             }
-        })
+        });
     }
     render() {
         return (
@@ -153,7 +160,7 @@ class Assets extends Component {
                         [
                             {
                                 currency_name: 'ETH',
-                                balance: this.state.eth_balance,
+                                balance: this.state.eth_banlance,
                                 logo_url: this.state.currency_logo.eth_logo
                             },
                             {
@@ -181,11 +188,6 @@ export default connect(
     state => state.walletInfo,
     actions
 )(Assets)
-
-// export default connect(
-//     state => state.walletInfo,
-//     actions
-// )(CreateWallet)
 
 const styles = StyleSheet.create({
     marginLeft: {
