@@ -31,10 +31,10 @@ class PersonalInfoInput extends Component {
                     <Text style={styles.infoBoxTitle}>个人信息</Text>
                     <TextInput 
                         style={styles.textInput} placeholder={this.props.line1TextHoloder} 
-                        selectionColor="#528BF7"
+                        selectionColor="#528BF7"  underlineColorAndroid="#528BF7"
                     ></TextInput>
                     <TextInput style={styles.textInput} placeholder={this.props.line2TextHoloder} 
-                    multiline = {true} selectionColor="#528BF7"               
+                    multiline = {true} selectionColor="#528BF7" underlineColorAndroid="#528BF7"            
                     ></TextInput>
                 </View>
                 <RadiusBtn 

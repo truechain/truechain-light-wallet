@@ -47,10 +47,6 @@ class RadiusBtn extends Component {
         )
     }
 }
-const styles = StyleSheet.create({
-    
-})
-
 
 
 export default RadiusBtn

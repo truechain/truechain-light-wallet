@@ -35,7 +35,7 @@ export class AboutUs extends Component {
                 transparent={true}
                 visible={this.state.modalVisible}
                 onRequestClose={ () => { this.setState({modalVisible: false}); } }
-            >
+                >
                     <View style={styles.modalCon}>
                         <View style={styles.modal}>
                             <Text style={styles.modalTitle}>发现True 1.01版本</Text>
