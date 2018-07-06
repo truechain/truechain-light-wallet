@@ -8,7 +8,7 @@ import {
     StyleSheet
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { getTransactionRecord } from '../../api/index'
+import { getTransactionRecord, getERC20TransactionRecord } from '../../api/index'
 
 class Recording extends Component {
     show(num) {
@@ -74,7 +74,8 @@ class currencyDetail extends Component {
         this.navigate = this.props.navigation.navigate;
         this.state = {
             title: null,
-            recordData: []
+            recordData: [],
+            ContractAddr: null
         }
     }
 
@@ -83,14 +84,27 @@ class currencyDetail extends Component {
     });
 
     componentDidMount() {
-        getTransactionRecord(store.getState().walletInfo.wallet_address).then(res => {
-            this.setState({
-                recordData: res.data.result
-            })
-        });
         const { params } = this.props.navigation.state;
         this.state.currencyName = params.title;
-        this.state.banlance = params.banlance
+        this.state.banlance = params.banlance;
+        let ContractAddr = params.title + 'ContractAddr';
+        this.setState({
+            ContractAddr: store.getState().contractAddr[ContractAddr]
+        }, () => {
+            if (params.title === 'ETH') {
+                getTransactionRecord(store.getState().walletInfo.wallet_address).then(res => {
+                    this.setState({
+                        recordData: res.data.result
+                    })
+                });
+            } else {
+                getERC20TransactionRecord(store.getState().walletInfo.wallet_address, this.state.ContractAddr).then(res => {
+                    this.setState({
+                        recordData: res.data.result
+                    })
+                });
+            }
+        })
     }
 
     render() {

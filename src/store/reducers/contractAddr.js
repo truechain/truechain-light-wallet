@@ -1,6 +1,6 @@
 const initState = {
-    trueContractAddr: '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab',
-    ttrContractAddr: '0xf2bb016e8c9c8975654dcd62f318323a8a79d48e'
+    TRUEContractAddr: '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab',
+    TTRContractAddr: '0xf2bb016e8c9c8975654dcd62f318323a8a79d48e'
 }
 
 export default function (state = initState, action) {
@@ -8,8 +8,8 @@ export default function (state = initState, action) {
         case 'CONTRACTADDR':
             return {
                 ...state,
-                trueContractAddr: action.trueContractAddr,
-                ttrContractAddr: action.ttrContractAddr
+                TRUEContractAddr: action.TRUEContractAddr,
+                TTRContractAddr: action.TTRContractAddr
             }
         default:
             return state

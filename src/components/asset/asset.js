@@ -93,17 +93,16 @@ class Assets extends Component {
         })
     }
 
-
     getAllBalance() {
         web3.eth.getBalance(this.state.walletAddress).then((res) => {
             let eth_banlance = this.show(web3.utils.fromWei(res, 'ether'));
             this.setState({ eth_banlance });
         });
-        getBalance(iterface, this.state.walletAddress, store.getState().contractAddr.trueContractAddr, (true_banlance) => {
+        getBalance(iterface, this.state.walletAddress, store.getState().contractAddr.TRUEContractAddr, (true_banlance) => {
             true_banlance = this.show(true_banlance);
             this.setState({ true_banlance });
         })
-        getBalance(iterface, this.state.walletAddress, store.getState().contractAddr.ttrContractAddr, (ttr_banlance) => {
+        getBalance(iterface, this.state.walletAddress, store.getState().contractAddr.TTRContractAddr, (ttr_banlance) => {
             ttr_banlance = this.show(ttr_banlance);
             this.setState({ ttr_banlance });
         })

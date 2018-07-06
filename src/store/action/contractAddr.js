@@ -3,8 +3,8 @@ let actions = {
         return function (dispatch, getState) {
             dispatch({
                 type: 'CONTRACTADDR',
-                trueContractAddr: option.trueContractAddr,
-                ttrContractAddr: option.ttrContractAddr
+                TRUEContractAddr: option.trueContractAddr,
+                TTRContractAddr: option.ttrContractAddr
             })
         }
     }

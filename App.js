@@ -91,12 +91,13 @@ const storage = new Storage({
 })
 global.storage = storage;
 
-let host = 'https://mainnet.infura.io/';
+let host = 'https://ropsten.infura.io/';
+global.host = host;
 if (host.includes('ropsten')) {
     store.dispatch({
         type: 'CONTRACTADDR',
-        trueContractAddr: '0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1',
-        ttrContractAddr: '0x635AfeB8739f908A37b3d312cB4958CB2033F456'
+        TRUEContractAddr: '0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1',
+        TTRContractAddr: '0x635AfeB8739f908A37b3d312cB4958CB2033F456'
     })
 }
 
@@ -133,7 +134,8 @@ export default class App extends Component {
                 Guide: {
                     screen: Guide,
                     navigationOptions: {
-                        header: null
+                        header: null,
+                        gesturesEnabled: false
                     }
                 },
                 CurrencyDetail: CurrencyDetail,

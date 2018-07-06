@@ -6,6 +6,7 @@ import {
     StyleSheet,
     Dimensions,
     ScrollView,
+    ActivityIndicator,
     TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -48,7 +49,10 @@ class Transfer extends Component {
             disabledNext: true,
             toAddressFlag: false,
             keystoreV3: null,
-            password: null
+            password: null,
+            ContractAddr: null,
+            gas: 25200,
+            gasPrice: null
         })
     }
 
@@ -87,20 +91,41 @@ class Transfer extends Component {
     };
 
     componentDidMount() {
-        //sendTokens(iterface, this.state.fromAddr, this.state.toAddress, this.state.amount,this.state.password,this.state.keystoreV3)
         storage.load({ key: 'walletInfo' }).then(res => {
             this.setState({
                 fromAddr: res.walletAddress,
                 keystoreV3: res.keystoreV3
             })
         })
-
         const { params } = this.props.navigation.state;
         if (params.currencyName == 'ETH') {
             console.log('ETH 转账');
+            this.setState({
+                gas: 25200
+            })
         } else {
-            console.log('ERC20 转账')
+            this.setState({
+                gas: 80000
+            })
+            let ContractAddr = params.currencyName + 'ContractAddr';
+            this.setState({
+                ContractAddr: store.getState().contractAddr[ContractAddr]
+            })
         }
+    }
+
+    _sendTokens() {
+        sendTokens(iterface, this.state.fromAddr, this.state.toAddress, this.state.amount, this.state.password, this.state.keystoreV3, this.state.ContractAddr, this.state.gas.toString(), web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'), (err, tx) => {
+            if (err) {
+                this.refs.transferDetail.close();
+                alert(err);
+                console.log(err, '------');
+            } else {
+                this.refs.transferDetail.close();
+                // this.refs.transferPwd.close();
+                console.log(tx, '=======');
+            }
+        }, )
     }
 
     componentWillUpdate(prev, next) {
@@ -116,15 +141,18 @@ class Transfer extends Component {
                     disabledNext: true
                 })
             }, 13);
-        }
+        };
     }
 
     render() {
         return (
             <View style={styles.container}>
+
+                <ActivityIndicator
+                    color='red'
+                />
                 <Input
                     placeholder='收款人钱包地址'
-                    // rightIcon={
                     //     <Icon
                     //         name='user'
                     //         size={25}
@@ -172,7 +200,13 @@ class Transfer extends Component {
                 <Text style={styles.minerCosts_text}>矿工费用</Text>
                 <Slider
                     value={this.state.cost}
-                    onValueChange={(cost) => this.setState({ cost })}
+                    onValueChange={(cost) => {
+                        this.setState({ cost }, () => {
+                            this.setState({
+                                gasPrice: Math.round((this.state.cost / web3.utils.fromWei(this.state.gas.toString(), 'Gwei')) * 100) / 100
+                            })
+                        })
+                    }}
                     minimumTrackTintColor='#528bf7'
                     thumbTintColor='#528bf7'
                     minimumValue={0.00022932}
@@ -196,7 +230,12 @@ class Transfer extends Component {
                         buttonStyle={styles.buttonStyle}
                         disabled={this.state.disabledNext}
                         onPress={() => {
-                            this.refs.transferDetail.open()
+                            setTimeout(() => {
+                                this.refs.transferDetail.open();
+                                this.setState({
+                                    gasPrice: Math.round((this.state.cost / web3.utils.fromWei(this.state.gas.toString(), 'Gwei')) * 100) / 100
+                                })
+                            }, 100);
                         }}
                     />
                 </View>
@@ -225,7 +264,7 @@ class Transfer extends Component {
                         <Detail
                             key_k='矿工费用'
                             gasPrice='666'
-                            val={'≈ Gas(25200) * Gas Price(' + Math.round((this.state.cost / 0.00002520) * 100) / 100 + 'gwei)'}
+                            val={'≈ Gas(' + this.state.gas + ') * Gas Price(' + this.state.gasPrice + 'gwei)'}
                             style={styles.paymentDetails_item_gasPOramount}
                         />
                         <Detail
@@ -238,7 +277,9 @@ class Transfer extends Component {
                                 title='下一步'
                                 buttonStyle={styles.buttonStyle}
                                 onPress={() => {
-                                    this.refs.transferPwd.open()
+                                    setTimeout(() => {
+                                        this.refs.transferPwd.open();
+                                    }, 100);
                                 }}
                             />
                         </View>
@@ -260,9 +301,20 @@ class Transfer extends Component {
                                         title='下一步'
                                         buttonStyle={styles.buttonStyle}
                                         onPress={() => {
-                                            // sendTokens(this.state.fromAddr, this.state.toAddress, '1', '1', '33333', '合约地址')
-                                            sendTokens(iterface, this.state.fromAddr, this.state.toAddress, this.state.amount, this.state.password, this.state.keystoreV3,'0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1')
-                                            // alert('转账结果')
+                                            if (!this.state.password) {
+                                                alert('请输入密码')
+                                            } else {
+                                                try {
+                                                    web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.password);
+                                                    this._sendTokens();
+                                                    this.setState({
+                                                        password: null
+                                                    })
+                                                } catch (error) {
+                                                    console.log(error)
+                                                    alert('密码错误,请重新输入')
+                                                }
+                                            }
                                         }}
                                     />
                                 </View>
