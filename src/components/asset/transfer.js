@@ -16,7 +16,9 @@ import {
 } from 'react-native-elements';
 import Modal from 'react-native-modalbox';
 import { withNavigation } from 'react-navigation';
+import iterfece from '../../utils/iterface'
 import sendTokens from '../../utils/sendTokens'
+import iterface from '../../utils/trueIterface';
 
 const screen = Dimensions.get('window');
 
@@ -45,6 +47,8 @@ class Transfer extends Component {
             cost: 0.00042840,
             disabledNext: true,
             toAddressFlag: false,
+            keystoreV3: null,
+            password: null
         })
     }
 
@@ -83,12 +87,19 @@ class Transfer extends Component {
     };
 
     componentDidMount() {
-        this.setState({
-            fromAddr: store.getState().walletInfo.wallet_address
+        //sendTokens(iterface, this.state.fromAddr, this.state.toAddress, this.state.amount,this.state.password,this.state.keystoreV3)
+        storage.load({ key: 'walletInfo' }).then(res => {
+            this.setState({
+                fromAddr: res.walletAddress,
+                keystoreV3: res.keystoreV3
+            })
         })
+
         const { params } = this.props.navigation.state;
-        if (params.currencyName !== 'ETH') {
-            console.log('777777');
+        if (params.currencyName == 'ETH') {
+            console.log('ETH 转账');
+        } else {
+            console.log('ERC20 转账')
         }
     }
 
@@ -184,7 +195,6 @@ class Transfer extends Component {
                         title='下一步'
                         buttonStyle={styles.buttonStyle}
                         disabled={this.state.disabledNext}
-                        // disabledStyle={styles.disabledStyle}
                         onPress={() => {
                             this.refs.transferDetail.open()
                         }}
@@ -241,7 +251,8 @@ class Transfer extends Component {
                                 </View>
                                 <Input
                                     placeholder='请输入你的密码'
-                                    secureTextEntry='true'
+                                    secureTextEntry={true}
+                                    onChangeText={(password) => this.setState({ password })}
                                     inputContainerStyle={[styles.inputContainerStyle, styles.pwdStyle]}
                                 />
                                 <View style={styles.pwdNext}>
@@ -249,7 +260,8 @@ class Transfer extends Component {
                                         title='下一步'
                                         buttonStyle={styles.buttonStyle}
                                         onPress={() => {
-                                            sendTokens(this.state.fromAddr,this.state.toAddress,'1','1','33333','合约地址')
+                                            // sendTokens(this.state.fromAddr, this.state.toAddress, '1', '1', '33333', '合约地址')
+                                            sendTokens(iterface, this.state.fromAddr, this.state.toAddress, this.state.amount, this.state.password, this.state.keystoreV3,'0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1')
                                             // alert('转账结果')
                                         }}
                                     />

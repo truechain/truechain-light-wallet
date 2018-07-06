@@ -1,5 +1,6 @@
-const iterface = require('./iterface');
-function sendTokens(fromAddr, toAddr, value, password, keystore, contractAddress, callabck, gas = "150000", gasPrice = "18000000000") {
+function sendTokens(iterface, fromAddr, toAddr, value, password, keystore, contractAddress, callabck, gas = "150000", gasPrice = "18000000000") {
+    console.log(arguments);
+
     // let host = 'https:ropsten.infura.io/';
     // var web3 = new Web3(new Web3.providers.HttpProvider(host));
     // let contract = new web3.eth.Contract(iterface);

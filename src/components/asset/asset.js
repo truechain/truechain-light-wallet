@@ -6,13 +6,15 @@ import {
     FlatList,
     StyleSheet,
     Dimensions,
+    ScrollView,
+    RefreshControl,
     TouchableHighlight
 } from 'react-native';
 import { connect } from 'react-redux';
-import actions from '../../store/action/walletInfo'
+import actions from '../../store/action/walletInfo';
 import { withNavigation } from 'react-navigation';
-import getBalance from '../../utils/addTokens'
-import iterface from '../../utils/trueIter'
+import getBalance from '../../utils/addTokens';
+import iterface from '../../utils/iterface';
 
 class CurrencyList extends Component {
     currencyDetail(title, banlance) {
@@ -61,8 +63,7 @@ class Assets extends Component {
             walletAddress: ' ',
             eth_banlance: '--',
             true_banlance: '--',
-            ttr_banlance: '--',
-            currency_logo: []
+            ttr_banlance: '--'
         })
     }
 
@@ -92,38 +93,54 @@ class Assets extends Component {
         })
     }
 
+
+    getAllBalance() {
+        web3.eth.getBalance(this.state.walletAddress).then((res) => {
+            let eth_banlance = this.show(web3.utils.fromWei(res, 'ether'));
+            this.setState({ eth_banlance });
+        });
+        getBalance(iterface, this.state.walletAddress, store.getState().contractAddr.trueContractAddr, (true_banlance) => {
+            true_banlance = this.show(true_banlance);
+            this.setState({ true_banlance });
+        })
+        getBalance(iterface, this.state.walletAddress, store.getState().contractAddr.ttrContractAddr, (ttr_banlance) => {
+            ttr_banlance = this.show(ttr_banlance);
+            this.setState({ ttr_banlance });
+        })
+    }
+
     componentDidMount() {
         storage.load({
             key: 'walletInfo'
         }).then(walletInfo => {
             let walletAddress = walletInfo.walletAddress,
                 walletName = walletInfo.walletName;
-            web3.eth.getBalance(walletAddress).then((res) => {
-                let eth_banlance = this.show(web3.utils.fromWei(res, 'ether'));
-                this.setState({ eth_banlance });
-            })
             this.setState({
                 walletAddress: walletAddress,
                 walletName: walletName
+            }, () => {
+                this.getAllBalance();
             })
-            getBalance(iterface, walletAddress, '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab', (true_banlance) => {
-                true_banlance = this.show(true_banlance);
-                this.setState({ true_banlance });
-            })
-            getBalance(iterface, walletAddress, '0xf2bb016e8c9c8975654dcd62f318323a8a79d48e', (ttr_banlance) => {
-                ttr_banlance = this.show(ttr_banlance);
-                this.setState({ ttr_banlance });
-            })
-        });
-        this.setState({
-            currency_logo: {
-                eth_logo: require('../../assets/images/currency_logo/eth_logo.png'),
-                true_logo: require('../../assets/images/currency_logo/true_logo.png'),
-                ttr_logo: require('../../assets/images/currency_logo/ttr_logo.png')
-            }
         });
     }
+
     render() {
+        const currencyData = [{
+            currency_name: 'ETH',
+            balance: this.state.eth_banlance,
+            logo_url: require('../../assets/images/currency_logo/eth_logo.png')
+        },
+        {
+            currency_name: 'TRUE',
+            balance: this.state.true_banlance,
+            logo_url: require('../../assets/images/currency_logo/true_logo.png')
+        },
+        {
+            currency_name: 'TTR',
+            balance: this.state.ttr_banlance,
+            logo_url: require('../../assets/images/currency_logo/ttr_logo.png')
+        }];
+
         return (
             <View style={styles.container}>
                 <View style={styles.walletInfo}>
@@ -155,30 +172,27 @@ class Assets extends Component {
                         </TouchableHighlight>
                     </View>
                 </View>
-                <FlatList
-                    data={
-                        [
-                            {
-                                currency_name: 'ETH',
-                                balance: this.state.eth_banlance,
-                                logo_url: this.state.currency_logo.eth_logo
-                            },
-                            {
-                                currency_name: 'TRUE',
-                                balance: this.state.true_banlance,
-                                logo_url: this.state.currency_logo.true_logo
-                            },
-                            {
-                                currency_name: 'TTR',
-                                balance: this.state.ttr_banlance,
-                                logo_url: this.state.currency_logo.ttr_logo
-                            }]
+
+                <ScrollView
+                    style={styles.scrollview}
+                    refreshControl={
+                        <RefreshControl
+                            refreshing={false}
+                            onRefresh={() => {
+                                this.getAllBalance();
+                            }}
+                            tintColor='green'
+                            title="Loading..."
+                            titleColor="green"
+                            colors={['#ff0000', '#00ff00', '#0000ff']}
+                            progressBackgroundColor="#ffff00"
+                        />}>
+                    {
+                        currencyData.map((item, index) => {
+                            return <CurrencyList item={item} index={index} key={index} navigate={this.navigate} />
+                        })
                     }
-                    renderItem={({ item }) => <CurrencyList
-                        item={item}
-                        navigate={this.navigate}
-                    />}
-                />
+                </ScrollView>
             </View>
         );
     }
