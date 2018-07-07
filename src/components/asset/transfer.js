@@ -6,7 +6,6 @@ import {
     StyleSheet,
     Dimensions,
     ScrollView,
-    ActivityIndicator,
     TouchableHighlight
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -17,7 +16,7 @@ import {
 } from 'react-native-elements';
 import Modal from 'react-native-modalbox';
 import { withNavigation } from 'react-navigation';
-import iterfece from '../../utils/iterface'
+import sendEth from '../../utils/sendEth'
 import sendTokens from '../../utils/sendTokens'
 import iterface from '../../utils/trueIterface';
 
@@ -52,7 +51,7 @@ class Transfer extends Component {
             password: null,
             ContractAddr: null,
             gas: 25200,
-            gasPrice: null
+            gasPrice: 17000000000
         })
     }
 
@@ -99,11 +98,32 @@ class Transfer extends Component {
         })
         const { params } = this.props.navigation.state;
         if (params.currencyName == 'ETH') {
-            console.log('ETH 转账');
+            this._sendTokens = () => sendEth(this.state.fromAddr, this.state.toAddress, this.state.amount, this.state.password, this.state.keystoreV3, this.state.gas.toString(), web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'), (err, tx) => {
+                if (err) {
+                    this.refs.transferDetail.close();
+                    alert('发布交易失败，请稍后重试！');
+                    console.log(err);
+                } else {
+                    this.refs.transferDetail.close();
+                    alert('发布交易成功！')
+                    console.log(tx, '=======');
+                }
+            });
             this.setState({
                 gas: 25200
             })
         } else {
+            this._sendTokens = () => sendTokens(iterface, this.state.fromAddr, this.state.toAddress, this.state.amount, this.state.password, this.state.keystoreV3, this.state.ContractAddr, this.state.gas.toString(), web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'), (err, tx) => {
+                if (err) {
+                    this.refs.transferDetail.close();
+                    alert('发布交易失败，请稍后重试！');
+                    console.log(err);
+                } else {
+                    this.refs.transferDetail.close();
+                    alert('发布交易成功！')
+                    console.log(tx, '=======');
+                }
+            }, );
             this.setState({
                 gas: 80000
             })
@@ -111,46 +131,23 @@ class Transfer extends Component {
             this.setState({
                 ContractAddr: store.getState().contractAddr[ContractAddr]
             })
-        }
-    }
-
-    _sendTokens() {
-        sendTokens(iterface, this.state.fromAddr, this.state.toAddress, this.state.amount, this.state.password, this.state.keystoreV3, this.state.ContractAddr, this.state.gas.toString(), web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'), (err, tx) => {
-            if (err) {
-                this.refs.transferDetail.close();
-                alert(err);
-                console.log(err, '------');
-            } else {
-                this.refs.transferDetail.close();
-                // this.refs.transferPwd.close();
-                console.log(tx, '=======');
-            }
-        }, )
-    }
-
-    componentWillUpdate(prev, next) {
-        if (next.toAddressFlag && this.state.amountFlag) {
-            setTimeout(() => {
-                this.setState({
-                    disabledNext: false
-                })
-            }, 13);
-        } else {
-            setTimeout(() => {
-                this.setState({
-                    disabledNext: true
-                })
-            }, 13);
         };
+
+
+        setTimeout(() => {
+            console.log(this._sendTokens);
+
+        }, 5000);
+
     }
+
+    // _sendTokens() {
+
+    // }
 
     render() {
         return (
             <View style={styles.container}>
-
-                <ActivityIndicator
-                    color='red'
-                />
                 <Input
                     placeholder='收款人钱包地址'
                     //     <Icon
@@ -165,12 +162,19 @@ class Transfer extends Component {
                     onEndEditing={(event) => {
                         if (!web3.utils.isAddress(event.nativeEvent.text)) {
                             this.setState({
-                                toAddressFlag: false
+                                toAddressFlag: false,
+                                disabledNext: true
                             })
                             alert('地址无效，请仔细检查！')
                         } else {
                             this.setState({
                                 toAddressFlag: true
+                            }, () => {
+                                if (this.state.toAddressFlag && this.state.amountFlag) {
+                                    this.setState({
+                                        disabledNext: false
+                                    })
+                                }
                             })
                         }
                     }}
@@ -178,15 +182,22 @@ class Transfer extends Component {
                 />
                 <Input
                     placeholder='转账金额'
-                    onChangeText={(amount) => this.setState({ amount })}
-                    onEndEditing={(event) => {
-                        if (event.nativeEvent.text) {
+                    onChangeText={(amount) => {
+                        this.setState({ amount });
+                        if (amount) {
                             this.setState({
                                 amountFlag: true
+                            }, () => {
+                                if (this.state.toAddressFlag && this.state.amountFlag) {
+                                    this.setState({
+                                        disabledNext: false
+                                    })
+                                }
                             })
                         } else {
                             this.setState({
-                                amountFlag: false
+                                amountFlag: false,
+                                disabledNext: true
                             })
                         }
                     }}

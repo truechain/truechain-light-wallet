@@ -18,4 +18,4 @@ function sendTokens(iterface, fromAddr, toAddr, value, password, keystore, contr
         })
 }
 
-export default sendTokens
+export default sendTokens;

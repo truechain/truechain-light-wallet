@@ -15,22 +15,22 @@ import CreateWallet from './src/components/my/wallet/createWallet';
 import ImportWallet from './src/components/my/wallet/importWallet';
 import ExportMnemonic from './src/components/asset/exportMnemonic';
 import ExportKeystore from './src/components/asset/exportKeystore';
-import AboutUs from './src/components/my/aboutus'
-import UserPolicy from './src/components/my/userpolicy'
-import PrivacyPolicy from './src/components/my/privacypolicy'
-import Versions from './src/components/my/versions'
-import HelperCenter from './src/components/my/helpercenter'
-import ContactUs from './src/components/my/contactus'
-import SysSet from './src/components/my/sysset'
-import Login from './src/components/my/login'
+import AboutUs from './src/components/my/aboutus';
+import UserPolicy from './src/components/my/userpolicy';
+import PrivacyPolicy from './src/components/my/privacypolicy';
+import Versions from './src/components/my/versions';
+import HelperCenter from './src/components/my/helpercenter';
+import ContactUs from './src/components/my/contactus';
+import SysSet from './src/components/my/sysset';
+import Login from './src/components/my/login';
 
-import SignUp from './src/components/node/signUp'
-import SignUpNode from './src/components/node/signUpNode'
-import QRscanner from './src/components/public/QRscanner'
+import SignUp from './src/components/node/signUp';
+import SignUpNode from './src/components/node/signUpNode';
+import QRscanner from './src/components/public/QRscanner';
 
 
-import PersonalApply from './src/components/node/personalapply'
-import PersonalLockPosition from './src/components/node/personallockposition'
+import PersonalApply from './src/components/node/personalapply';
+import PersonalLockPosition from './src/components/node/personallockposition';
 
 import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 import {
@@ -91,7 +91,7 @@ const storage = new Storage({
 })
 global.storage = storage;
 
-let host = 'https://ropsten.infura.io/';
+let host = 'https://mainnet.infura.io/';
 global.host = host;
 if (host.includes('ropsten')) {
     store.dispatch({

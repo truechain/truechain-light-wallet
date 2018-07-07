@@ -83,7 +83,7 @@ export default class CreateWallet extends Component {
                 var randomSeed = lightwallet.keystore.generateRandomSeed();
                 lightwallet.keystore.createVault({
                     password: this.state.pwd,
-                    seedPhrase: 'have fix code stool text antenna kite awful bullet kind lecture teach',//randomSeed,
+                    seedPhrase: randomSeed,
                     hdPathString: "m/44'/60'/0'/0"
                 }, (err, ks) => {
                     ks.keyFromPassword(this.state.pwd, (err, pwDerivedKey) => {
@@ -100,7 +100,6 @@ export default class CreateWallet extends Component {
                             },
                             expires: null
                         })
-                        // this.props.walletInfo({ wallet_address: address[0]});
                         setTimeout(() => {
                             this.setState({
                                 showLoading: false
