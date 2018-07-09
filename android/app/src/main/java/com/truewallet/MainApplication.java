@@ -3,6 +3,10 @@ package com.truewallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.bitgo.randombytes.RandomBytesPackage;
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import org.reactnative.camera.RNCameraPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -17,14 +21,17 @@ public class MainApplication extends Application implements ReactApplication {
   private final ReactNativeHost mReactNativeHost = new ReactNativeHost(this) {
     @Override
     public boolean getUseDeveloperSupport() {
-      return true;
-      // return BuildConfig.DEBUG;
+      return BuildConfig.DEBUG;
     }
 
     @Override
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
+            new RandomBytesPackage(),
+            new RNI18nPackage(),
+            new RNDeviceInfo(),
             new RNCameraPackage()
       );
     }

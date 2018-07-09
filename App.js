@@ -26,7 +26,7 @@ import Login from './src/components/my/login';
 
 import SignUp from './src/components/node/signUp';
 import SignUpNode from './src/components/node/signUpNode';
-import QRscanner from './src/components/public/QRscanner';
+// import QRscanner from './src/components/public/QRscanner';
 
 
 import PersonalApply from './src/components/node/personalapply';
@@ -188,7 +188,7 @@ export default class App extends Component {
                     }
                 },
                 SignUpNode,
-                QRscanner
+                // QRscanner
             },
             {
                 initialRouteName: this.state.isWallet ? 'TabBarPage' : 'Guide',

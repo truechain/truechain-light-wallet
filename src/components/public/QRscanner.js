@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {StyleSheet, View} from 'react-native';
-import {QRscanner} from 'react-native-qr-scanner';
+import React, { Component } from 'react';
+import { StyleSheet, View, Text } from 'react-native';
+// import {QRscanner} from 'react-native-qr-scanner';
 
 export default class Scanner extends Component {
   constructor(props) {
@@ -10,7 +10,10 @@ export default class Scanner extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <QRscanner onRead={this.onRead} finderY={-20}/>
+        {/* <QRscanner onRead={this.onRead} finderY={-20}/> */}
+        <Text>
+          扫描
+</Text>
       </View>
     );
   }

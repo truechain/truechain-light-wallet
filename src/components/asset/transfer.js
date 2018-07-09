@@ -59,7 +59,8 @@ class Transfer extends Component {
         headerTitle: '转账',
         headerRight: (
             <TouchableHighlight underlayColor={'transparent'} onPress={() => {
-                navigation.state.params.navigate('QRscanner');
+                alert('暂停')
+                // navigation.state.params.navigate('QRscanner');
             }}>
                 <Image style={{
                     width: 20,
