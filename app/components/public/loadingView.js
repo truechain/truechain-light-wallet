@@ -57,12 +57,4 @@ const styles = StyleSheet.create({
     }
 })
 
-// LoadingView.propTypes = {
-//     loadingViewClick: React.PropTypes.func,
-//     showLoading: React.PropTypes.bool.isRequired,
-//     opacity: React.PropTypes.number,
-//     backgroundColor: React.PropTypes.string
-// }
-
-
 export default LoadingView

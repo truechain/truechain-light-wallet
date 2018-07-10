@@ -81,7 +81,7 @@ class SignUpNode extends Component {
                     alert('个人报名全节点需要不少于5万TRUE')
                 } else {
                     this.navigate('SignUpInput', {
-                        title:'个人报名',
+                        title: '个人报名',
                         nodeType: this.state.nodeType,
                         type: '1'
                     });
@@ -91,7 +91,9 @@ class SignUpNode extends Component {
     }
 
     _createTeam() {
-        alert('建立组队')
+        this.navigate('CreateTeam', {
+            nodeType: this.state.nodeType
+        });
     }
 
     render() {

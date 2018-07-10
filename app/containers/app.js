@@ -5,7 +5,7 @@ import {
     StyleSheet,
     AsyncStorage
 } from 'react-native';
-import {createStackNavigator, createBottomTabNavigator} from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator } from 'react-navigation';
 
 //TabBar
 import Splash from '../pages/Splash'
@@ -35,6 +35,7 @@ import SignUp from '../components/node/signUp'
 import SignUpNode from '../components/node/signUpNode'
 import SignUpInput from '../components/public/signUpInput'
 import Lockpositon from '../components/public/lockpositon'
+import CreateTeam from '../components/node/createTeam'
 
 
 
@@ -68,17 +69,17 @@ const TabBarPage = createBottomTabNavigator(
             screen: Assets,
             navigationOptions: {
                 tabBarLabel: I18n.t('tab.assets'),
-                tabBarIcon: ({tintColor}) => (
-                    <Image style={styles.icon} source={IconUrl.assets}/>
+                tabBarIcon: ({ tintColor }) => (
+                    <Image style={styles.icon} source={IconUrl.assets} />
                 ),
-            },
+            }
         },
         Node: {
             screen: Node,
             navigationOptions: {
                 tabBarLabel: I18n.t('tab.node'),
-                tabBarIcon: ({tintColor}) => (
-                    <Image style={styles.icon} source={IconUrl.node}/>
+                tabBarIcon: ({ tintColor }) => (
+                    <Image style={styles.icon} source={IconUrl.node} />
                 ),
             },
         },
@@ -86,8 +87,8 @@ const TabBarPage = createBottomTabNavigator(
             screen: My,
             navigationOptions: {
                 tabBarLabel: I18n.t('tab.my'),
-                tabBarIcon: ({tintColor}) => (
-                    <Image style={styles.icon} source={IconUrl.my}/>
+                tabBarIcon: ({ tintColor }) => (
+                    <Image style={styles.icon} source={IconUrl.my} />
                 ),
             },
         }
@@ -115,7 +116,7 @@ const TabBarPage = createBottomTabNavigator(
 
 const App = createStackNavigator(
     {
-        Splash: {screen: Splash},
+        Splash: { screen: Splash },
         Home: {
             screen: TabBarPage,
             navigationOptions: {
@@ -179,19 +180,25 @@ const App = createStackNavigator(
         },
         SignUpNode,
         SignUpInput,
-        Lockpositon
+        Lockpositon,
+        CreateTeam: {
+            screen: CreateTeam,
+            navigationOptions: {
+                headerTitle: '创建组队'
+            }
+        },
     },
     {
         headerMode: 'screen',
         navigationOptions: {
             headerStyle: {
-                backgroundColor: '#528bf7'
+                backgroundColor: '#fff'
             },
-            // headerTitleStyle: {
-            //     color: '#fff',
-            //     fontSize: 20
-            // },
-            headerTintColor: '#fff'
+            headerTitleStyle: {
+                color: '#000',
+                fontSize: 18
+            },
+            headerTintColor: '#000'
         }
     }
 );

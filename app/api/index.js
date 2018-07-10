@@ -9,6 +9,7 @@ let MemberStatusUrl = '/getMemberStatus';
 let teamRankUrl = '/teamRank';
 let trueCoinUrl = '/getTrueCoin';
 let createTeamUrl = '/createTeam';
+let writeUserInfoUrl = '/writeUserInfo';
 
 //获取eth交易记录
 let getTransactionRecord = (walletAddress, contractaddress) => {
@@ -61,6 +62,15 @@ let getTrueCoin = () => {
     return axios.get(trueCoinUrl, { headers })
 }
 
+let writeUserInfo = (option) => {
+    return axios.get(writeUserInfoUrl, {
+        headers,
+        params: {
+            nickname: option.nickName
+        }
+    })
+}
+
 //创建报名信息
 let createTeam = (option) => {
     return axios.get(createTeamUrl, {
@@ -78,8 +88,9 @@ export {
     createTeam,
     getTrueCoin,
     getNodeRank,
-    getMemberStatus,
     getTeamRank,
+    writeUserInfo,
+    getMemberStatus,
     getTransactionRecord,
     getERC20TransactionRecord
 }

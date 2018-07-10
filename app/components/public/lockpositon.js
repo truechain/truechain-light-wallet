@@ -7,14 +7,13 @@ import {
     StyleSheet,
     Modal,
     Dimensions,
-    TouchableHighlight,
-    TouchableOpacity,
-    DeviceEventEmitter
+    TouchableOpacity
 } from 'react-native';
 import RadiusBtn from './radiusbtn';
 import sendTokens from '../../utils/sendTokens'
 import iterface from '../../utils/iterface';
-import { withNavigation } from 'react-navigation'
+import { withNavigation } from 'react-navigation';
+import LoadingView from '../public/loadingView'
 
 /**
  * 这是抽象出来的锁仓界面组件
@@ -39,7 +38,8 @@ class LockPosition extends Component {
             pwd: null,
             keystoreV3: null,
             ContractAddr: null,
-            isSuccess: false
+            isSuccess: false,
+            showLoading: false
         };
     }
 
@@ -85,15 +85,20 @@ class LockPosition extends Component {
     }
 
     _sendTokens() {
-        console.log(web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'));
         sendTokens(iterface, this.state.fromAddress, this.state.toAddress, this.state.lock_num, this.state.pwd, this.state.keystoreV3, this.state.ContractAddr, this.state.gas.toString(), web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'), (err, tx) => {
             if (err) {
-                alert('发布交易失败，请稍后重试！');
+                this.setState({
+                    showLoading: false
+                }, () => {
+                    setTimeout(() => {
+                        alert('发布交易失败，请稍后重试！');
+                    }, 100);
+                })
                 console.log(err);
             } else {
-                this.setModalVisible(false)
                 this.setState({
-                    isSuccess: false
+                    isSuccess: true,
+                    showLoading: false
                 })
                 console.log(tx);
             }
@@ -123,6 +128,7 @@ class LockPosition extends Component {
     render() {
         return (
             <View style={styles.inputPage}>
+                <LoadingView showLoading={this.state.showLoading} />
                 <View style={styles.infoBox}>
                     <Text style={styles.infoBoxTitle}>锁仓地址</Text>
                     <View style={styles.splitLine}></View>
@@ -189,8 +195,6 @@ class LockPosition extends Component {
                     </View>
                 </Modal>
 
-
-
                 <Modal
                     animationType={"fade"}
                     transparent={true}
@@ -202,6 +206,7 @@ class LockPosition extends Component {
                             <Text style={styles.modalTitle}>输入密码</Text>
                             <View style={styles.modalInput}>
                                 <TextInput
+                                    style={{ height: 50 }}
                                     placeholder="输入密码"
                                     secureTextEntry={true}
                                     underlineColorAndroid="transparent"
@@ -228,17 +233,27 @@ class LockPosition extends Component {
                                     underlayColor={"#ddd"}
                                     activeOpacity={0.5}
                                     onPress={() => {
-                                        if (!this.state.pwd) {
-                                            alert('请输入密码!')
-                                        } else {
-                                            try {
-                                                web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.pwd);
-                                                this._sendTokens();
-                                            } catch (error) {
-                                                console.log(error);
-                                                alert('密码错误,请重新输入')
+                                        this.setModalVisible(false);
+                                        this.setState({
+                                            showLoading: true
+                                        });
+                                        setTimeout(() => {
+                                            if (!this.state.pwd) {
+                                                this.setState({ showLoading: false }, () => {
+                                                    alert('请输入密码!');
+                                                })
+                                            } else {
+                                                try {
+                                                    web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.pwd);
+                                                    this._sendTokens();
+                                                } catch (error) {
+                                                    console.log(error);
+                                                    this.setState({ showLoading: false }, () => {
+                                                        alert('密码错误,请重新输入')
+                                                    })
+                                                }
                                             }
-                                        }
+                                        }, 1000);
                                     }}>
                                     <View style={styles.modalBottomBtnYes}>
                                         <Text style={styles.modalBottomBtnYesText}>确认</Text>
@@ -314,7 +329,7 @@ const styles = StyleSheet.create({
         borderRadius: 4,
         paddingLeft: 15,
         paddingRight: 15,
-        marginBottom: 50,
+        marginBottom: 50
     },
     modalBottomBtn: {
         flexDirection: "row",
