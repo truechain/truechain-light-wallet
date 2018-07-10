@@ -11,7 +11,6 @@ import LockPosition from '../public/lockpositon'
 import { withNavigation } from 'react-navigation'
 
 export class PersonalLockPosition extends Component {
-
     static navigationOptions = {
         headerTitle:"锁仓" 
     }

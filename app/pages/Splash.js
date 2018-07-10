@@ -21,17 +21,18 @@ class Splash extends React.Component {
 
 
     componentDidMount() {
-        SplashScreen.hide();
-        // this.props.navigation.navigate('Guide');
-        storage.load({
-            key: 'walletInfo'
-        }).then(res => {
-            if (res) {
-                this.props.navigation.navigate('Home');
-            } else {
-                this.props.navigation.navigate('Guide');
-            }
-        })
+        setTimeout(() => {
+            SplashScreen.hide();   
+            storage.load({
+                key: 'walletInfo'
+            }).then(res => {
+                if (res) {
+                    this.props.navigation.navigate('Home');
+                } else {
+                    this.props.navigation.navigate('Guide');
+                }
+            })         
+        }, 1000);    
     }
 
     render() {

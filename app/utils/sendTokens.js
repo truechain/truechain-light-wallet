@@ -1,4 +1,6 @@
 function sendTokens(iterface, fromAddr, toAddr, value, password, keystore, contractAddress, gas, gasPrice, callabck) {
+    console.log(arguments);
+    
     let contract = new web3.eth.Contract(iterface);
     contract.options.address = contractAddress;
     const account = web3.eth.accounts.decrypt(keystore, password);

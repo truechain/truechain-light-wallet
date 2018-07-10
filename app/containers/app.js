@@ -33,6 +33,10 @@ import ContactUs from '../components/my/contactus'
 import Login from '../components/my/login'
 import SignUp from '../components/node/signUp'
 import SignUpNode from '../components/node/signUpNode'
+import SignUpInput from '../components/public/signUpInput'
+import Lockpositon from '../components/public/lockpositon'
+
+
 
 
 //rely
@@ -174,6 +178,8 @@ const App = createStackNavigator(
             }
         },
         SignUpNode,
+        SignUpInput,
+        Lockpositon
     },
     {
         headerMode: 'screen',

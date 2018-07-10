@@ -1,8 +1,8 @@
 const initState = {
-    true_banlance: '--',
-    ttr_banlance: '--',
+    true_banlance: 0,
+    ttr_banlance: 0,
     wallet_address: null,
-    lock_num: '--'
+    lock_num: 0
 }
 
 export default function (state = initState, action) {

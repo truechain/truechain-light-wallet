@@ -43,7 +43,8 @@ class SignUpNode extends Component {
         this.state = ({
             nodeType: null,
             teamList: []
-        })
+        });
+        this.navigate = this.props.navigation.navigate;
     }
 
     componentWillMount() {
@@ -60,7 +61,33 @@ class SignUpNode extends Component {
     }
 
     _personalReg() {
-        alert('个人报名')
+        const lock_num = Number(store.getState().walletInfo.lock_num),
+            true_banlance = Number(store.getState().walletInfo.true_banlance);
+
+        switch (this.state.nodeType) {
+            case '1':
+                if (true_banlance + lock_num < 2000) {
+                    alert('个人报名标准节点需要不少于2千TRUE')
+                } else {
+                    this.navigate('SignUpInput', {
+                        title: '个人报名',
+                        nodeType: this.state.nodeType,
+                        type: '1'
+                    });
+                }
+                break;
+            case '2':
+                if (true_banlance + lock_num < 50000) {
+                    alert('个人报名全节点需要不少于5万TRUE')
+                } else {
+                    this.navigate('SignUpInput', {
+                        title:'个人报名',
+                        nodeType: this.state.nodeType,
+                        type: '1'
+                    });
+                }
+                break;
+        }
     }
 
     _createTeam() {
