@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     View,
     Text,
@@ -15,7 +15,7 @@ import {
     Button
 } from 'react-native-elements';
 import Modal from 'react-native-modalbox';
-import { withNavigation } from 'react-navigation';
+import {withNavigation} from 'react-navigation';
 import sendEth from '../../utils/sendEth'
 import sendTokens from '../../utils/sendTokens'
 import iterface from '../../utils/trueIterface';
@@ -26,6 +26,7 @@ class Detail extends Component {
     constructor(props) {
         super(props);
     }
+
     render() {
         return (
             <View style={styles.paymentDetails_item}>
@@ -55,7 +56,7 @@ class Transfer extends Component {
         })
     }
 
-    static navigationOptions = ({ navigation }) => ({
+    static navigationOptions = ({navigation}) => ({
         headerTitle: '转账',
         headerRight: (
             <TouchableHighlight underlayColor={'transparent'} onPress={() => {
@@ -67,7 +68,7 @@ class Transfer extends Component {
                     height: 20,
                     marginRight: 10
                 }}
-                    source={require('../../assets/images/common/ercodeicon.png')}
+                       source={require('../../assets/images/common/ercodeicon.png')}
                 />
             </TouchableHighlight>
         )
@@ -78,26 +79,29 @@ class Transfer extends Component {
         num = num.replace(/[^0-9|\.]/g, '');
         if (/^0+/) {
             num = num.replace(/^0+/, '');
-        };
+        }
+        ;
         if (!/\./.test(num)) {
             num += '.00000';
-        };
+        }
+        ;
         if (/^\./.test(num)) {
             num = '0' + num;
-        };
+        }
+        ;
         num += '00000';
         num = num.match(/\d+\.\d{8}/)[0];
         return num
     };
 
     componentDidMount() {
-        storage.load({ key: 'walletInfo' }).then(res => {
+        storage.load({key: 'walletInfo'}).then(res => {
             this.setState({
                 fromAddr: res.walletAddress,
                 keystoreV3: res.keystoreV3
             })
         })
-        const { params } = this.props.navigation.state;
+        const {params} = this.props.navigation.state;
         if (params.currencyName == 'ETH') {
             this._sendTokens = () => sendEth(this.state.fromAddr, this.state.toAddress, this.state.amount, this.state.password, this.state.keystoreV3, this.state.gas.toString(), web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'), (err, tx) => {
                 if (err) {
@@ -106,7 +110,7 @@ class Transfer extends Component {
                     console.log(err);
                 } else {
                     this.refs.transferDetail.close();
-                    alert('发布交易成功！')
+                    alert('发布交易成功！');
                     console.log(tx, '=======');
                 }
             });
@@ -124,27 +128,16 @@ class Transfer extends Component {
                     alert('发布交易成功！')
                     console.log(tx, '=======');
                 }
-            }, );
+            },);
             this.setState({
                 gas: 80000
-            })
+            });
             let ContractAddr = params.currencyName + 'ContractAddr';
             this.setState({
                 ContractAddr: store.getState().contractAddr[ContractAddr]
             })
-        };
-
-
-        setTimeout(() => {
-            console.log(this._sendTokens);
-
-        }, 5000);
-
+        }
     }
-
-    // _sendTokens() {
-
-    // }
 
     render() {
         return (
@@ -159,7 +152,7 @@ class Transfer extends Component {
                     //         }}
                     //     />
                     // }
-                    onChangeText={(toAddress) => this.setState({ toAddress })}
+                    onChangeText={(toAddress) => this.setState({toAddress})}
                     onEndEditing={(event) => {
                         if (!web3.utils.isAddress(event.nativeEvent.text)) {
                             this.setState({
@@ -184,7 +177,7 @@ class Transfer extends Component {
                 <Input
                     placeholder='转账金额'
                     onChangeText={(amount) => {
-                        this.setState({ amount });
+                        this.setState({amount});
                         if (amount) {
                             this.setState({
                                 amountFlag: true
@@ -206,14 +199,14 @@ class Transfer extends Component {
                 />
                 <Input
                     placeholder='备注'
-                    onChangeText={(remarks) => this.setState({ remarks })}
+                    onChangeText={(remarks) => this.setState({remarks})}
                     inputContainerStyle={styles.inputContainerStyle}
                 />
                 <Text style={styles.minerCosts_text}>矿工费用</Text>
                 <Slider
                     value={this.state.cost}
                     onValueChange={(cost) => {
-                        this.setState({ cost }, () => {
+                        this.setState({cost}, () => {
                             this.setState({
                                 gasPrice: Math.round((this.state.cost / web3.utils.fromWei(this.state.gas.toString(), 'Gwei')) * 100) / 100
                             })
@@ -234,7 +227,7 @@ class Transfer extends Component {
                     </Text>
                     <Text>
                         快
-                     </Text>
+                    </Text>
                 </View>
                 <View style={styles.next}>
                     <Button
@@ -251,12 +244,12 @@ class Transfer extends Component {
                         }}
                     />
                 </View>
-                <Modal style={[styles.modal, styles.modal4, styles.paymentDetails]} position={"bottom"} ref={"transferDetail"} swipeArea={20}>
+                <Modal style={styles.modal} position={"bottom"} ref={"transferDetail"} swipeArea={20}>
                     <ScrollView>
                         <View style={styles.paymentDetails_title}>
                             <Text>
                                 支付详情
-                                </Text>
+                            </Text>
                         </View>
                         <Detail
                             key_k='订单信息'
@@ -295,7 +288,7 @@ class Transfer extends Component {
                                 }}
                             />
                         </View>
-                        <Modal style={[styles.modal, styles.modal4, styles.paymentDetails]} position={"bottom"} ref={"transferPwd"} swipeArea={20}>
+                        <Modal style={styles.modal} position={"bottom"} ref={"transferPwd"} swipeArea={20}>
                             <ScrollView>
                                 <View style={styles.paymentDetails_title}>
                                     <Text>
@@ -305,7 +298,7 @@ class Transfer extends Component {
                                 <Input
                                     placeholder='请输入你的密码'
                                     secureTextEntry={true}
-                                    onChangeText={(password) => this.setState({ password })}
+                                    onChangeText={(password) => this.setState({password})}
                                     inputContainerStyle={[styles.inputContainerStyle, styles.pwdStyle]}
                                 />
                                 <View style={styles.pwdNext}>
@@ -323,7 +316,6 @@ class Transfer extends Component {
                                                         password: null
                                                     })
                                                 } catch (error) {
-                                                    console.log(error)
                                                     alert('密码错误,请重新输入')
                                                 }
                                             }
@@ -376,20 +368,15 @@ const styles = StyleSheet.create({
     },
     buttonStyle: {
         backgroundColor: '#528bf7',
-        width: 300,
+        width: 260,
         height: 45,
         borderRadius: 30
     },
-    paymentDetails: {
-        width: screen.width,
-        height: screen.height * 0.6
-    },
     modal: {
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    modal4: {
-        height: screen.height * 0.6
+        // width: screen.width,
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        height: screen.height * 0.65
     },
     paymentDetails_title: {
         width: screen.width,
@@ -430,4 +417,4 @@ const styles = StyleSheet.create({
         position: 'relative',
         top: 100
     }
-})
+});

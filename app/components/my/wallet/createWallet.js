@@ -38,7 +38,7 @@ export default class CreateWallet extends Component {
                 walletName: walletName
             })
         }
-    }
+    };
 
     pwd = {
         placeholder: '输入您的密码',
@@ -50,7 +50,7 @@ export default class CreateWallet extends Component {
                 pwd: pwd
             })
         }
-    }
+    };
 
     confirmPwd = {
         placeholder: '确认您的密码',
@@ -62,7 +62,7 @@ export default class CreateWallet extends Component {
                 confirmPwd: confirmPwd
             })
         }
-    }
+    };
 
     CreateWallet() {
         if (!this.state.walletName) {
@@ -80,7 +80,7 @@ export default class CreateWallet extends Component {
                 showLoading: true
             });
             setTimeout(() => {
-                var randomSeed = lightwallet.keystore.generateRandomSeed();
+                let randomSeed = lightwallet.keystore.generateRandomSeed();
                 lightwallet.keystore.createVault({
                     password: this.state.pwd,
                     seedPhrase: randomSeed,
@@ -99,12 +99,12 @@ export default class CreateWallet extends Component {
                                 ks: ks
                             },
                             expires: null
-                        })
+                        });
                         setTimeout(() => {
                             this.setState({
                                 showLoading: false
                             }, () => {
-                                this.props.navigation.navigate('TabBarPage')
+                                this.props.navigation.navigate('Home')
                             });
                         }, 2000);
                     })

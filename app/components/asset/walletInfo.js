@@ -333,7 +333,7 @@ const styles = StyleSheet.create({
     },
     privateKey: {
         width: screen.width * 0.9,
-        height: screen.height * 0.35,
+        height: screen.height * 0.5,
         borderRadius: 10,
         padding: 15,
         justifyContent: 'space-between'
@@ -367,4 +367,4 @@ const styles = StyleSheet.create({
         height: 40,
         borderRadius: 30
     },
-})
+});

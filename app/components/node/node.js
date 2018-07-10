@@ -13,7 +13,6 @@ import { withNavigation } from 'react-navigation'
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import { getNodeRank, getMemberStatus } from '../../api/index'
 
-
 const screen = Dimensions.get('window');
 
 class NodeItem extends Component {
@@ -34,7 +33,7 @@ class NodeItem extends Component {
                         </View>
                 }
                 <View style={styles.nickName}>
-                    <Text>
+                    <Text style={styles.font_12}>
                         {this.props.item.nickname}
                     </Text>
                     {
@@ -49,12 +48,12 @@ class NodeItem extends Component {
                 {
                     this.props.item.lock_num ?
                         <View style={styles.lockNum}>
-                            <Text>
+                            <Text style={styles.font_12}>
                                 {this.props.item.lock_num} true
                     </Text>
                         </View> :
                         <View style={styles.lockNum}>
-                            <Text style={styles.node_text}>
+                            <Text style={[styles.node_text,styles.font_12]}>
                                 {this.props.item.score} 分
                     </Text>
                         </View>
@@ -63,7 +62,7 @@ class NodeItem extends Component {
                 {
                     this.props.item.tickets ?
                         <View style={styles.tickets}>
-                            <Text style={styles.node_text}>
+                            <Text style={[styles.node_text,styles.font_12]}>
                                 {this.props.item.tickets} 票
                     </Text>
                         </View> : null
@@ -74,8 +73,11 @@ class NodeItem extends Component {
 }
 
 class Node extends Component {
+
+
+
     constructor(props) {
-        super(props)
+        super(props);
         this.state = ({
             isRefreshing: false,
             standardNodeData: [],
@@ -85,7 +87,7 @@ class Node extends Component {
     }
 
     componentDidMount() {
-        this._getNodeRank()//获取节点排行
+        this._getNodeRank();    //获取节点排行
         //获取申请状态
         getMemberStatus().then(res => {
             console.log(res);
@@ -200,6 +202,9 @@ class Node extends Component {
 export default withNavigation(Node)
 
 const styles = StyleSheet.create({
+    font_12:{
+        fontSize:12
+    },
     color_white: {
         color: '#fff'
     },

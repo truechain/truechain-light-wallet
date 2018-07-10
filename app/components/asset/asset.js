@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import {
     View,
     Text,
@@ -10,9 +10,9 @@ import {
     RefreshControl,
     TouchableHighlight
 } from 'react-native';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import actions from '../../store/action/walletInfo';
-import { withNavigation } from 'react-navigation';
+import {withNavigation} from 'react-navigation';
 import getBalance from '../../utils/addTokens';
 import iterface from '../../utils/iterface';
 
@@ -26,12 +26,13 @@ class CurrencyList extends Component {
 
     render() {
         return (
-            <TouchableHighlight underlayColor={'transparent'} onPress={() => this.currencyDetail(this.props.item.currency_name, this.props.item.balance)}>
+            <TouchableHighlight underlayColor={'transparent'}
+                                onPress={() => this.currencyDetail(this.props.item.currency_name, this.props.item.balance)}>
                 <View style={styles.currency_list}>
                     <View style={styles.currency_left}>
                         <View>
                             <TouchableHighlight style={styles.currency_logo}>
-                                <Image style={styles.currency_logo_item} source={this.props.item.logo_url} />
+                                <Image style={styles.currency_logo_item} source={this.props.item.logo_url}/>
                             </TouchableHighlight>
                         </View>
                         <View style={styles.marginLeft}>
@@ -46,7 +47,7 @@ class CurrencyList extends Component {
                         </Text>
                         <Text style={[styles.alignRight, styles.currency]}>
                             ***** CNY
-                    </Text>
+                        </Text>
                     </View>
                 </View>
             </TouchableHighlight>
@@ -72,13 +73,16 @@ class Assets extends Component {
         num = num.replace(/[^0-9|\.]/g, '');
         if (/^0+/) {
             num = num.replace(/^0+/, '');
-        };
+        }
+        ;
         if (!/\./.test(num)) {
             num += '.00000';
-        };
+        }
+        ;
         if (/^\./.test(num)) {
             num = '0' + num;
-        };
+        }
+        ;
         num += '00000';
         num = num.match(/\d+\.\d{5}/)[0];
         return num
@@ -96,15 +100,15 @@ class Assets extends Component {
     getAllBalance() {
         web3.eth.getBalance(this.state.walletAddress).then((res) => {
             let eth_banlance = this.show(web3.utils.fromWei(res, 'ether'));
-            this.setState({ eth_banlance });
+            this.setState({eth_banlance});
         });
         getBalance(iterface, this.state.walletAddress, store.getState().contractAddr.TRUEContractAddr, (true_banlance) => {
             true_banlance = this.show(true_banlance);
-            this.setState({ true_banlance });
+            this.setState({true_banlance});
         })
         getBalance(iterface, this.state.walletAddress, store.getState().contractAddr.TTRContractAddr, (ttr_banlance) => {
             ttr_banlance = this.show(ttr_banlance);
-            this.setState({ ttr_banlance });
+            this.setState({ttr_banlance});
         })
     }
 
@@ -129,33 +133,36 @@ class Assets extends Component {
             balance: this.state.eth_banlance,
             logo_url: require('../../assets/images/currency_logo/eth_logo.png')
         },
-        {
-            currency_name: 'TRUE',
-            balance: this.state.true_banlance,
-            logo_url: require('../../assets/images/currency_logo/true_logo.png')
-        },
-        {
-            currency_name: 'TTR',
-            balance: this.state.ttr_banlance,
-            logo_url: require('../../assets/images/currency_logo/ttr_logo.png')
-        }];
+            {
+                currency_name: 'TRUE',
+                balance: this.state.true_banlance,
+                logo_url: require('../../assets/images/currency_logo/true_logo.png')
+            },
+            {
+                currency_name: 'TTR',
+                balance: this.state.ttr_banlance,
+                logo_url: require('../../assets/images/currency_logo/ttr_logo.png')
+            }];
 
         return (
             <View style={styles.container}>
                 <View style={styles.walletInfo}>
                     <View style={styles.walletInfo_item}>
-                        <TouchableHighlight underlayColor={'transparent'} onPress={() => this.props.navigation.navigate('WalletInfo')}>
-                            <Image style={styles.avatar} source={require('../../assets/images/asset/head_2x.png')} />
+                        <TouchableHighlight underlayColor={'transparent'}
+                                            onPress={() => this.props.navigation.navigate('WalletInfo')}>
+                            <Image style={styles.avatar} source={require('../../assets/images/asset/head_2x.png')}/>
                         </TouchableHighlight>
                         <Text style={styles.walletName}>
                             {this.state.walletName}
                         </Text>
-                        <TouchableHighlight underlayColor={'transparent'} onPress={() => this.props.navigation.navigate('Receipt')}>
+                        <TouchableHighlight underlayColor={'transparent'}
+                                            onPress={() => this.props.navigation.navigate('Receipt')}>
                             <View style={styles.walletAddress}>
                                 <Text style={styles.walletAddress_item}>
                                     {this.state.walletAddress.replace(this.state.walletAddress.slice('9', '35'), '......')}
                                 </Text>
-                                <Image style={styles.addressErcode} source={require('../../assets/images/asset/ercode_2x.png')} />
+                                <Image style={styles.addressErcode}
+                                       source={require('../../assets/images/asset/ercode_2x.png')}/>
                             </View>
                         </TouchableHighlight>
                     </View>
@@ -188,7 +195,7 @@ class Assets extends Component {
                         />}>
                     {
                         currencyData.map((item, index) => {
-                            return <CurrencyList item={item} index={index} key={index} navigate={this.navigate} />
+                            return <CurrencyList item={item} index={index} key={index} navigate={this.navigate}/>
                         })
                     }
                 </ScrollView>

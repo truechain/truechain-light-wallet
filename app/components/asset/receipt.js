@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     bg: {
-        height: 150,
+        height: 75,
         backgroundColor: '#528bf7'
     },
     avatar: {

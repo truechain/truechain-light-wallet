@@ -9,6 +9,12 @@ import {
 import { withNavigation } from 'react-navigation'
 
 class My extends Component {
+
+    static navigationOptions = {
+        headerTitle:"隐私条款",
+        // tabBarVisible:false
+    }
+
     constructor(props) {
         super(props);
         this.navigate = this.props.navigation.navigate;
