@@ -2,23 +2,24 @@ import axios from 'axios'
 // axios.defaults.baseURL = 'http://39.105.125.189:7001/';
 axios.defaults.baseURL = 'http://45.40.243.125:7001/';
 
-
 const headers = {
     token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhZGRyZXNzIjoiMHhmYTJmMGI2ZGJlMzVjMzFmYzIzODZkNGViODlkNGJjNjk1ZmQ1ODIyIiwibW9iaWxlIjoiMTUxMDE2NjEzODAifQ.fkmPeVC617sKGKlhqxkCouxJmQNeffemRFlyj8hOHjo'
 }
 
-let NodeRankUrl = '/nodeRank';
-let MemberStatusUrl = '/getMemberStatus';
-let teamRankUrl = '/teamRank';
-let trueCoinUrl = '/getTrueCoin';
-let createTeamUrl = '/createTeam';
-let writeUserInfoUrl = '/writeUserInfo';
-let teamInfoUrl = '/teamInfo';
-let teamMemberUrl = '/getTeamMember';
-let joinTeamRequestUrl = '/joinTeamRequest';
+const NodeRankUrl = '/nodeRank';
+const MemberStatusUrl = '/getMemberStatus';
+const teamRankUrl = '/teamRank';
+const trueCoinUrl = '/getTrueCoin';
+const createTeamUrl = '/createTeam';
+const writeUserInfoUrl = '/writeUserInfo';
+const teamInfoUrl = '/teamInfo';
+const teamMemberUrl = '/getTeamMember';
+const joinTeamRequestUrl = '/joinTeamRequest';
+const getcodeUrl = '/smsCaptcha';
+const loginUrl = '/login';
 
 //获取eth交易记录
-let getTransactionRecord = (walletAddress, contractaddress) => {
+const getTransactionRecord = (walletAddress, contractaddress) => {
     if (host.includes('ropsten')) {
         return axios.get('http://api-ropsten.etherscan.io/api?module=account&action=txlist&address=' + walletAddress + '&sort=desc&apikey=YourApiKeyToken')
     } else {
@@ -27,7 +28,7 @@ let getTransactionRecord = (walletAddress, contractaddress) => {
 }
 
 //获取ERC20交易记录
-let getERC20TransactionRecord = (walletAddress, contractaddress) => {
+const getERC20TransactionRecord = (walletAddress, contractaddress) => {
     if (host.includes('ropsten')) {
         return axios.get('https://api-ropsten.etherscan.io/api?module=account&action=tokentx&contractaddress=' + contractaddress + '&address=' + walletAddress + '&sort=desc&apikey=YourApiKeyToken')
     } else {
@@ -36,7 +37,7 @@ let getERC20TransactionRecord = (walletAddress, contractaddress) => {
 }
 
 //请求节点排行
-let getNodeRank = (option) => {
+const getNodeRank = (option) => {
     return axios.get(NodeRankUrl, {
         headers,
         params: {
@@ -49,12 +50,12 @@ let getNodeRank = (option) => {
 }
 
 //获取申请状态
-let getMemberStatus = () => {
+const getMemberStatus = () => {
     return axios.get(MemberStatusUrl, { headers })
 }
 
 //获取组队排行
-let getTeamRank = (option) => {
+const getTeamRank = (option) => {
     return axios.get(teamRankUrl, {
         headers,
         params: {
@@ -64,11 +65,11 @@ let getTeamRank = (option) => {
 }
 
 //获取锁仓数量
-let getTrueCoin = () => {
+const getTrueCoin = () => {
     return axios.get(trueCoinUrl, { headers })
 }
 
-let writeUserInfo = (option) => {
+const writeUserInfo = (option) => {
     return axios.get(writeUserInfoUrl, {
         headers,
         params: {
@@ -78,7 +79,7 @@ let writeUserInfo = (option) => {
 }
 
 //创建报名信息
-let createTeam = (option) => {
+const createTeam = (option) => {
     return axios.get(createTeamUrl, {
         headers,
         params: {
@@ -91,7 +92,7 @@ let createTeam = (option) => {
 }
 
 //获取组队信息
-let getTeamInfo = (option) => {
+const getTeamInfo = (option) => {
     return axios.get(teamInfoUrl, {
         headers,
         params: {
@@ -103,7 +104,7 @@ let getTeamInfo = (option) => {
 
 //获取组队成员
 
-let getTeamMember = (option) => {
+const getTeamMember = (option) => {
     return axios.get(teamMemberUrl, {
         headers,
         params: {
@@ -113,7 +114,7 @@ let getTeamMember = (option) => {
 }
 
 //请求加入组队
-let joinTeamRequest = (option) => {
+const joinTeamRequest = (option) => {
     return axios.get(joinTeamRequestUrl, {
         headers,
         params: {
@@ -123,13 +124,38 @@ let joinTeamRequest = (option) => {
     })
 }
 
+//获取手机验证码
+const getCode = (option) => {
+    console.log(option);
+
+    return axios.get(getcodeUrl, {
+        params: {
+            mobile: option.mobile,
+            captcha: option.captcha
+        }
+    })
+}
+
+//登录
+const login = (option) => {
+    return axios.get(loginUrl, {
+        params: {
+            mobile: option.mobile,
+            code: option.code,
+            address: option.address
+        }
+    })
+}
+
 export {
+    login,
+    getCode,
     createTeam,
     getTrueCoin,
     getNodeRank,
     getTeamRank,
-    writeUserInfo,
     getTeamInfo,
+    writeUserInfo,
     getTeamMember,
     getMemberStatus,
     joinTeamRequest,

@@ -10,6 +10,7 @@ import {
 } from 'react-native'
 import CountryPicker from 'react-native-country-picker-modal';
 import { Button } from 'react-native-elements';
+import { getCode, login } from '../../api/index'
 
 const screen = Dimensions.get('window');
 import Svg, {
@@ -30,17 +31,20 @@ export default class Login extends React.Component {
             v_code: null,
             disabledLogin: false,
             cap_code_flag: false,
-
-
-            pathArr: []
+            pathArr: [],
+            address: null
         };
         this.backgroundTime = 0;
         this.regPhone = /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/;
     }
 
     componentWillMount() {
-        this._fetchCode()
+        this._fetchCode();
+        this.setState({
+            address: store.getState().walletInfo.wallet_address
+        })
     }
+
     _fetchCode() {
         fetch('http://39.105.125.189:7001/').then(x => {
             return x.json();
@@ -59,6 +63,35 @@ export default class Login extends React.Component {
         this.setState({
             countdown: countdown
         });
+    }
+    _getCode() {
+        getCode({
+            mobile: this.state.tel,
+            captcha: this.state.cap_code
+        }).then(res => {
+            if (res.data.body.status == 202) {
+                alert('图形验证码错误,请重新验证!');
+            } else {
+                this.setCountdown(60);
+                this.startCountDown();
+            }
+        })
+    }
+
+    _login() {
+        login({
+            mobile: this.state.tel,
+            code: this.state.v_code,
+            address: this.state.address
+        }).then(res => {
+            if (res.data.body.status == 0) {
+                // plus.storage.setItem("token", res.body.data.token);
+            } else if (res.body.status == 202) {
+                alert('手机验证码错误');
+            } else if (res.body.status == 203) {
+                alert('该手机号已绑定钱包地址');
+            }
+        })
     }
 
     getCountdown() {
@@ -100,16 +133,20 @@ export default class Login extends React.Component {
             alert('请输入手机号')
         } else if (!this.regPhone.test(this.state.tel)) {
             alert('请输入合法手机号')
-        } else if (!this.state.cap_code_flag) {
-            alert('请正确输入图形验证码')
+        } else if (!this.state.cap_code) {
+            alert('请输入图形验证码');
         } else {
-            this.setCountdown(60);
-            this.startCountDown();
-            alert('进行发送短信验证码')
-            this.setState({
-                disabledLogin: false
-            })
+            this._getCode()
         }
+
+        // else {
+        //     this.setCountdown(60);
+        //     this.startCountDown();
+        //     alert('进行发送短信验证码')
+        //     this.setState({
+        //         disabledLogin: false
+        //     })
+        // }
     }
 
     render() {
@@ -144,7 +181,6 @@ export default class Login extends React.Component {
                 </View>
 
                 <View style={[styles.input, styles.cap, styles.line_bottom]}>
-
                     <TextInput
                         maxLength={4}
                         onChangeText={(cap_code) => this.setState({ cap_code })}
@@ -174,6 +210,7 @@ export default class Login extends React.Component {
                     <TextInput
                         maxLength={6}
                         style={[styles.input_item, styles.cap_input]}
+                        onChangeText={(v_code) => this.setState({ v_code })}
                         placeholder='输入手机验证码'
                     />
                     <TouchableOpacity disabled={this.state.disabled} onPress={this.setTime}>
@@ -190,7 +227,7 @@ export default class Login extends React.Component {
 
                 <Button
                     title='登录'
-                    onPress={() => { alert('huhu') }}
+                    onPress={() => { this._login() }}
                     buttonStyle={styles.buttonStyle}
                     disabled={this.state.disabledLogin}
                     disabledStyle={styles.disabledStyle}
