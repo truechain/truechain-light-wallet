@@ -37,31 +37,22 @@ export default class Login extends React.Component {
     }
 
     componentWillMount() {
-        fetch('http://45.40.243.125:7001/').then(res => {
-            return res.json()
-        }).then(ret => {
-            this.setState({
-                captcha: ret.data
-            })
-        })
-
+        this._fetchCode()
+    }
+    _fetchCode () {
         fetch('http://39.105.125.189:7001/').then(x => {
             return x.json();
             }).then(x => {
             const arr = x.data.match(/<path.*?\/>/g);
-            console.log(x.data);
-            let pathArr = []
+            let pathArr = [];
             arr.forEach(ele => {
                 pathArr.push(ele.match(/(?<=\s*.*\w+=")[^"]*(?=")/g));
             });
             this.setState({
                 pathArr: pathArr
             })
-            console.log(this.state.pathArr);
-
-            })
+        })
     }
-
     setCountdown(countdown) {
         this.setState({
             countdown: countdown
@@ -102,7 +93,6 @@ export default class Login extends React.Component {
             disabled: enable
         });
     }
-
     setTime = () => {
         if (!this.state.tel) {
             alert('请输入手机号')
@@ -152,6 +142,7 @@ export default class Login extends React.Component {
                 </View>
 
                 <View style={[styles.input, styles.cap, styles.line_bottom]}>
+
                     <TextInput
                         maxLength={4}
                         onChangeText={(cap_code) => this.setState({ cap_code })}
@@ -159,6 +150,7 @@ export default class Login extends React.Component {
                         placeholder='输入图片验证码'
                     />
                     <View>
+                        <Text onPress={() => this._fetchCode()} style={styles.authCode}></Text>
                         <Svg
                             height="50"
                             width="150"
@@ -210,6 +202,12 @@ export default class Login extends React.Component {
 }
 
 const styles = StyleSheet.create({
+    authCode: {
+        width: 150,
+        height: 50,
+        zIndex: 999,
+        position: 'absolute'
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
