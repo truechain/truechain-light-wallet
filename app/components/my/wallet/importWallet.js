@@ -33,7 +33,6 @@ class ImportWallet extends Component {
         }
     }
 
-
     componentWillMount() {
         this.path = {
             placeholder: I18n.t('wallet.path'),
@@ -45,8 +44,6 @@ class ImportWallet extends Component {
                 })
             }
         }
-
-
     }
 
     mnemonicArea = {
@@ -134,7 +131,7 @@ class ImportWallet extends Component {
                         this.setState({
                             showLoading: false
                         }, () => {
-                            this.props.navigation.navigate('TabBarPage')
+                            this.props.navigation.navigate('Home')
                         });
                     }, 2000);
                 })
@@ -157,7 +154,6 @@ class ImportWallet extends Component {
                 password: this.state.pwd,
                 hdPathString: this.state.hdPathString
             })
-            //this.props.navigation.navigate('Asset');
         }
     }
 
