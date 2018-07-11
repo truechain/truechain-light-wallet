@@ -359,8 +359,7 @@ const styles = StyleSheet.create({
         color: "white",
         height: 45,
         lineHeight: 45,
-        textAlign: "center",
-
+        textAlign: "center"
     },
     minerCosts_text: {
         marginTop: 15,

@@ -16,7 +16,13 @@ const screen = Dimensions.get('window');
 class TeamList extends Component {
     render() {
         return (
-            <TouchableHighlight underlayColor={'transparent'} onPress={() => { alert(this.props.item.address) }}>
+            <TouchableHighlight underlayColor={'transparent'} onPress={() => {
+                this.props.navigate('TeamInfo', {
+                    teamAddress: this.props.item.address,
+                    title: '加入组队',
+                    nodeType: this.props.nodeType
+                })
+            }}>
                 <View style={styles.teamList_item}>
                     <View style={styles.teamList_item_sort}>
                         <Text>
@@ -122,10 +128,10 @@ class SignUpNode extends Component {
                             </Text>
                         </TouchableHighlight>
                     </View>
-                    <ScrollView>
+                    <ScrollView style={styles.marginBottom_50}>
                         {
                             this.state.teamList.map((item, index) => {
-                                return <TeamList item={item} index={index} key={index} />
+                                return <TeamList item={item} index={index} key={index} navigate={this.navigate} nodeType={this.state.nodeType} />
                             })
                         }
                     </ScrollView>
@@ -193,5 +199,8 @@ const styles = StyleSheet.create({
     },
     marginLeft_20: {
         marginLeft: 20
+    },
+    marginBottom_50: {
+        marginBottom: 50
     }
 })

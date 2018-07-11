@@ -36,6 +36,8 @@ import SignUpNode from '../components/node/signUpNode'
 import SignUpInput from '../components/public/signUpInput'
 import Lockpositon from '../components/public/lockpositon'
 import CreateTeam from '../components/node/createTeam'
+import TeamInfo from '../components/node/teamInfo'
+import FillInfo from '../components/node/fillInfo'
 
 
 
@@ -187,6 +189,12 @@ const App = createStackNavigator(
                 headerTitle: '创建组队'
             }
         },
+        TeamInfo: {
+            screen: TeamInfo
+        },
+        FillInfo: {
+            screen: FillInfo
+        }
     },
     {
         headerMode: 'screen',

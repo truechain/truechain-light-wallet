@@ -1,7 +1,7 @@
 import axios from 'axios'
 axios.defaults.baseURL = 'http://45.40.243.125:7001/';
 const headers = {
-    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhZGRyZXNzIjoiMHg1ODMzZmE2MDUzZTZlNzgxZWFmYjg2OTVkNjNkOTBmNmIzNTcxZTVlIiwibW9iaWxlIjoiMTc2MTEyMjM2NjUifQ.VRVfQm61jVRLJHKV8hFm0T2BeXSDHkkmTqhIZprNeCU'
+    token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhZGRyZXNzIjoiMHhmYTJmMGI2ZGJlMzVjMzFmYzIzODZkNGViODlkNGJjNjk1ZmQ1ODIyIiwibW9iaWxlIjoiMTUxMDE2NjEzODAifQ.fkmPeVC617sKGKlhqxkCouxJmQNeffemRFlyj8hOHjo'
 }
 
 let NodeRankUrl = '/nodeRank';
@@ -10,6 +10,9 @@ let teamRankUrl = '/teamRank';
 let trueCoinUrl = '/getTrueCoin';
 let createTeamUrl = '/createTeam';
 let writeUserInfoUrl = '/writeUserInfo';
+let teamInfoUrl = '/teamInfo';
+let teamMemberUrl = '/getTeamMember';
+let joinTeamRequestUrl = '/joinTeamRequest';
 
 //获取eth交易记录
 let getTransactionRecord = (walletAddress, contractaddress) => {
@@ -84,13 +87,49 @@ let createTeam = (option) => {
     })
 }
 
+//获取组队信息
+let getTeamInfo = (option) => {
+    return axios.get(teamInfoUrl, {
+        headers,
+        params: {
+            type: option.type,
+            address: option.address
+        }
+    })
+}
+
+//获取组队成员
+
+let getTeamMember = (option) => {
+    return axios.get(teamMemberUrl, {
+        headers,
+        params: {
+            team_address: option.teamAddress
+        }
+    })
+}
+
+//请求加入组队
+let joinTeamRequest = (option) => {
+    return axios.get(joinTeamRequestUrl, {
+        headers,
+        params: {
+            address: option.teamAddress,
+            node_type: option.nodeType
+        }
+    })
+}
+
 export {
     createTeam,
     getTrueCoin,
     getNodeRank,
     getTeamRank,
     writeUserInfo,
+    getTeamInfo,
+    getTeamMember,
     getMemberStatus,
+    joinTeamRequest,
     getTransactionRecord,
     getERC20TransactionRecord
 }
