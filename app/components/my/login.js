@@ -10,14 +10,11 @@ import {
 } from 'react-native'
 import CountryPicker from 'react-native-country-picker-modal';
 import { Button } from 'react-native-elements';
-// import Svg, {
-//     Path,
-//     Circle,
-//     Rect
-// } from 'react-native-svg';
 
 const screen = Dimensions.get('window');
-
+// import Svg,{
+//     Path
+// } from 'react-native-svg';
 export default class Login extends React.Component {
     constructor(props) {
         super(props)
@@ -48,27 +45,23 @@ export default class Login extends React.Component {
             this.setState({
                 captcha: ret.data
             })
-        });
+        })
 
-        //************** */
+        fetch('http://39.105.125.189:7001/').then(x => {
+            return x.json();
+            }).then(x => {
+            const arr = x.data.match(/<path.*?\/>/g);
+            console.log(x.data);
+            let pathArr = []
+            arr.forEach(ele => {
+                pathArr.push(ele.match(/(?<=\s*.*\w+=")[^"]*(?=")/g));
+            });
+            this.setState({
+                pathArr: pathArr
+            })
+            console.log(this.state.pathArr);
 
-
-        // fetch('http://39.105.125.189:7001/').then(x => {
-        //     return x.json();
-        // }).then(x => {
-        //     const arr = x.data.match(/<path.*?\/>/g);
-        //     console.log(x.data);
-        //     let pathArr = []
-        //     arr.forEach(ele => {
-        //         pathArr.push(ele.match(/(?<=\s*.*\w+=")[^"]*(?=")/g));
-        //     });
-        //     this.setState({
-        //         pathArr: pathArr
-        //     })
-        //     console.log(this.state.pathArr);
-
-        // })
-        //************** */
+            })
     }
 
     setCountdown(countdown) {
@@ -167,16 +160,14 @@ export default class Login extends React.Component {
                         style={[styles.input_item, styles.cap_input]}
                         placeholder='输入图片验证码'
                     />
-                    {/* <Text>图形验证码</Text> */}
-
                     <View>
                         {/* <Svg
-                            width="150"
                             height="50"
+                            width="150"
                         >
                             {
-                                this.state.pathArr.map((item, index) => {
-                                    if (item.length === 3) {
+                            this.state.pathArr.map((item, index) => {
+                                    if(item.length === 3) {
                                         return <Path fill="#222" d={item[0]} key={index} stroke={item[1]} fill={item[2]} />;
                                     } else {
                                         return <Path fill="#222" d={item[1]} key={index} />;

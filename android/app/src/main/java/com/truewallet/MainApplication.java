@@ -3,7 +3,10 @@ package com.truewallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+<<<<<<< HEAD
 import com.mehcode.reactnative.splashscreen.SplashScreenPackage;
+=======
+>>>>>>> d971282615cd8dd1093c31bc6edb8ef385e660b4
 import com.horcrux.svg.SvgPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
