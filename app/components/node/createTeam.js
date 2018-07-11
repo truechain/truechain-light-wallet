@@ -21,7 +21,10 @@ class CreateTeam extends Component {
             nodeType: null,
             personalNickName: null,
             teamNickName: null,
-            declaration: null
+            declaration: null,
+            personalNickNameFlag: true,
+            teamNickNameFlag: true,
+            declarationFlag: true
         })
         this.navigate = this.props.navigation.navigate;
     }
@@ -64,10 +67,20 @@ class CreateTeam extends Component {
                     </Text>
                     <Input
                         placeholder='个人昵称'
+                        maxLength={15}
                         onChangeText={(personalNickName) => {
                             this.setState({
                                 personalNickName
                             })
+                            if (personalNickName) {
+                                this.setState({
+                                    personalNickNameFlag: false
+                                })
+                            } else {
+                                this.setState({
+                                    personalNickNameFlag: true
+                                })
+                            }
                         }}
                         inputContainerStyle={[styles.inputContainerStyle, styles.marginTop_10]}
                     />
@@ -79,33 +92,54 @@ class CreateTeam extends Component {
                     </Text>
                     <Input
                         placeholder='组队昵称'
+                        maxLength={15}
                         onChangeText={(teamNickName) => {
                             this.setState({
                                 teamNickName
                             })
+                            if (teamNickName) {
+                                this.setState({
+                                    teamNickNameFlag: false
+                                })
+                            } else {
+                                this.setState({
+                                    teamNickNameFlag: true
+                                })
+                            }
                         }}
                         inputContainerStyle={[styles.inputContainerStyle, styles.marginTop_10]}
                     />
                     <Input
                         placeholder='竞选宣言'
+                        maxLength={50}
                         onChangeText={(declaration) => {
                             this.setState({
                                 declaration
                             })
+                            if (declaration) {
+                                this.setState({
+                                    declarationFlag: false
+                                })
+                            } else {
+                                this.setState({
+                                    declarationFlag: true
+                                })
+                            }
                         }}
                         inputContainerStyle={[styles.inputContainerStyle, styles.marginTop_10]}
                     />
                 </View>
 
-                <View style={styles.next}>
+                <TouchableHighlight style={styles.next}>
                     <Button
                         title='下一步'
+                        disabled={this.state.personalNickNameFlag || this.state.teamNickNameFlag || this.state.declarationFlag}
                         buttonStyle={styles.buttonStyle}
                         onPress={() => {
                             this._signUp();
                         }}
                     />
-                </View>
+                </TouchableHighlight>
             </View>
         );
     }
