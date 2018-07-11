@@ -53,7 +53,7 @@ class NodeItem extends Component {
                     </Text>
                         </View> :
                         <View style={styles.lockNum}>
-                            <Text style={[styles.node_text,styles.font_12]}>
+                            <Text style={[styles.node_text, styles.font_12]}>
                                 {this.props.item.score} 分
                     </Text>
                         </View>
@@ -62,7 +62,7 @@ class NodeItem extends Component {
                 {
                     this.props.item.tickets ?
                         <View style={styles.tickets}>
-                            <Text style={[styles.node_text,styles.font_12]}>
+                            <Text style={[styles.node_text, styles.font_12]}>
                                 {this.props.item.tickets} 票
                     </Text>
                         </View> : null
@@ -73,9 +73,6 @@ class NodeItem extends Component {
 }
 
 class Node extends Component {
-
-
-
     constructor(props) {
         super(props);
         this.state = ({
@@ -88,10 +85,6 @@ class Node extends Component {
 
     componentDidMount() {
         this._getNodeRank();    //获取节点排行
-        //获取申请状态
-        getMemberStatus().then(res => {
-            console.log(res);
-        })
     }
 
     _getNodeRank() {
@@ -117,6 +110,42 @@ class Node extends Component {
         this._getNodeRank()
     }
 
+    _signUp() {
+        //获取申请状态
+        getMemberStatus().then(res => {
+            let data = res.data.data;
+            switch (res.data.data.status) {
+                case 0:
+                    this.navigate('SignUp');
+                    break;
+                case 1:
+                    console.log('已申请');
+                    // this.navigate('TeamInfo', {
+                    //     status: '1'
+                    // });
+                    break;
+                case 2:
+                    // console.log(res, '已通过');
+                    if (data.role === 1) {
+                        console.log('个人报名');
+                    } else if (data.role === 2) {
+                        console.log('个人创建组队,我的队伍');
+                    }
+                    // this.navigate('TeamInfo', {
+                    //     status: '2'
+                    // });
+                    break;
+                case 3:
+                    console.log('已拒绝');
+                    // this.navigate('TeamInfo', {
+                    //     status: '3'
+                    // });
+                    break;
+            }
+        })
+        // this.navigate('SignUp');
+    }
+
     render() {
         return (
             <View style={styles.container}>
@@ -125,7 +154,9 @@ class Node extends Component {
                         节点
                         </Text>
                     <View style={styles.header_item}>
-                        <TouchableHighlight underlayColor={'transparent'} onPress={() => { this.navigate('SignUp') }}>
+                        <TouchableHighlight underlayColor={'transparent'} onPress={() => {
+                            this._signUp()
+                        }}>
                             <View style={styles.fun}>
                                 <Image source={require('../../assets/images/node/baoming_2x.png')} style={styles.fun_icon} />
                                 <Text style={styles.color_white}>
@@ -202,8 +233,8 @@ class Node extends Component {
 export default withNavigation(Node)
 
 const styles = StyleSheet.create({
-    font_12:{
-        fontSize:12
+    font_12: {
+        fontSize: 12
     },
     color_white: {
         color: '#fff'

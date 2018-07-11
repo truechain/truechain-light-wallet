@@ -10,6 +10,11 @@ import {
 } from 'react-native'
 import CountryPicker from 'react-native-country-picker-modal';
 import { Button } from 'react-native-elements';
+// import Svg, {
+//     Path,
+//     Circle,
+//     Rect
+// } from 'react-native-svg';
 
 const screen = Dimensions.get('window');
 
@@ -27,7 +32,10 @@ export default class Login extends React.Component {
             cap_code: null,
             v_code: null,
             disabledLogin: false,
-            cap_code_flag: false
+            cap_code_flag: false,
+
+
+            pathArr: []
         };
         this.backgroundTime = 0;
         this.regPhone = /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/;
@@ -40,7 +48,27 @@ export default class Login extends React.Component {
             this.setState({
                 captcha: ret.data
             })
-        })
+        });
+
+        //************** */
+
+
+        // fetch('http://39.105.125.189:7001/').then(x => {
+        //     return x.json();
+        // }).then(x => {
+        //     const arr = x.data.match(/<path.*?\/>/g);
+        //     console.log(x.data);
+        //     let pathArr = []
+        //     arr.forEach(ele => {
+        //         pathArr.push(ele.match(/(?<=\s*.*\w+=")[^"]*(?=")/g));
+        //     });
+        //     this.setState({
+        //         pathArr: pathArr
+        //     })
+        //     console.log(this.state.pathArr);
+
+        // })
+        //************** */
     }
 
     setCountdown(countdown) {
@@ -139,7 +167,24 @@ export default class Login extends React.Component {
                         style={[styles.input_item, styles.cap_input]}
                         placeholder='输入图片验证码'
                     />
-                    <Text>图形验证码</Text>
+                    {/* <Text>图形验证码</Text> */}
+
+                    <View>
+                        {/* <Svg
+                            width="150"
+                            height="50"
+                        >
+                            {
+                                this.state.pathArr.map((item, index) => {
+                                    if (item.length === 3) {
+                                        return <Path fill="#222" d={item[0]} key={index} stroke={item[1]} fill={item[2]} />;
+                                    } else {
+                                        return <Path fill="#222" d={item[1]} key={index} />;
+                                    }
+                                })
+                            }
+                        </Svg> */}
+                    </View>
                 </View>
 
                 <View style={[styles.input, styles.cap, styles.line_bottom]}>

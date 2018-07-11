@@ -1,5 +1,8 @@
 import axios from 'axios'
+// axios.defaults.baseURL = 'http://39.105.125.189:7001/';
 axios.defaults.baseURL = 'http://45.40.243.125:7001/';
+
+
 const headers = {
     token: 'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJhZGRyZXNzIjoiMHhmYTJmMGI2ZGJlMzVjMzFmYzIzODZkNGViODlkNGJjNjk1ZmQ1ODIyIiwibW9iaWxlIjoiMTUxMDE2NjEzODAifQ.fkmPeVC617sKGKlhqxkCouxJmQNeffemRFlyj8hOHjo'
 }

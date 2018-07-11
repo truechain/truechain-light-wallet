@@ -1,6 +1,6 @@
 import React from 'react';
-import {Dimensions, Animated} from 'react-native';
-import {withNavigation} from 'react-navigation'
+import { Dimensions, Animated } from 'react-native';
+import { withNavigation } from 'react-navigation'
 import SplashScreen from "rn-splash-screen";
 
 const maxHeight = Dimensions.get('window').height;
@@ -19,20 +19,22 @@ class Splash extends React.Component {
         })
     }
 
-
     componentDidMount() {
         setTimeout(() => {
-            SplashScreen.hide();   
+            SplashScreen.hide();
+            // this.props.navigation.navigate('Guide');
             storage.load({
                 key: 'walletInfo'
             }).then(res => {
                 if (res) {
                     this.props.navigation.navigate('Home');
+                    return;
                 } else {
                     this.props.navigation.navigate('Guide');
                 }
-            })         
-        }, 1000);    
+            })
+
+        }, 1000);
     }
 
     render() {

@@ -5656,10 +5656,6 @@ react-native-scrollable-tab-view@^0.8.0:
     prop-types "^15.6.0"
     react-timer-mixin "^0.13.3"
 
-react-native-splash-screen@3.0.6:
-  version "3.0.6"
-  resolved "http://registry.npm.taobao.org/react-native-splash-screen/download/react-native-splash-screen-3.0.6.tgz#c0bbf2c8ae40a313c4c7044f55e569414ff68332"
-
 react-native-storage@^0.2.2:
   version "0.2.2"
   resolved "http://registry.npm.taobao.org/react-native-storage/download/react-native-storage-0.2.2.tgz#4449197f122b2da0650e3704e1f050260ed58d9f"
@@ -6097,6 +6093,10 @@ rlp@^2.0.0:
   resolved "http://registry.npm.taobao.org/rlp/download/rlp-2.1.0.tgz#e4f9886d5a982174f314543831e36e1a658460f9"
   dependencies:
     safe-buffer "^5.1.1"
+
+rn-splash-screen@^5.2.0:
+  version "5.2.0"
+  resolved "http://registry.npm.taobao.org/rn-splash-screen/download/rn-splash-screen-5.2.0.tgz#1ce509e27d14d3dd0949427667fbc3d2a8dd853c"
 
 rsvp@^3.3.3:
   version "3.6.2"

@@ -53,6 +53,9 @@ class TeamInfo extends Component {
 
     componentDidMount() {
         const { params } = this.props.navigation.state;
+
+        console.log(params, '已申请需判断');
+
         this.setState({
             teamAddress: params.teamAddress,
             nodeType: params.nodeType
@@ -112,7 +115,7 @@ class TeamInfo extends Component {
                             buttonStyle={styles.buttonStyle}
                             onPress={() => {
                                 this.navigate('FillInfo', {
-                                    teamAddress:this.state.teamAddress,
+                                    teamAddress: this.state.teamAddress,
                                     nodeType: this.state.nodeType
                                 });
                             }}
