@@ -42,7 +42,9 @@ class SignUpNode extends Component {
         super(props);
         this.state = ({
             nodeType: null,
-            teamList: []
+            teamList: [],
+            lock_num: Number(store.getState().walletInfo.lock_num),
+            true_banlance: Number(store.getState().walletInfo.true_banlance)
         });
         this.navigate = this.props.navigation.navigate;
     }
@@ -61,12 +63,9 @@ class SignUpNode extends Component {
     }
 
     _personalReg() {
-        const lock_num = Number(store.getState().walletInfo.lock_num),
-            true_banlance = Number(store.getState().walletInfo.true_banlance);
-
         switch (this.state.nodeType) {
             case '1':
-                if (true_banlance + lock_num < 2000) {
+                if (this.state.true_banlance + this.state.lock_num < 2000) {
                     alert('个人报名标准节点需要不少于2千TRUE')
                 } else {
                     this.navigate('SignUpInput', {
@@ -77,7 +76,7 @@ class SignUpNode extends Component {
                 }
                 break;
             case '2':
-                if (true_banlance + lock_num < 50000) {
+                if (this.state.true_banlance + this.state.lock_num < 50000) {
                     alert('个人报名全节点需要不少于5万TRUE')
                 } else {
                     this.navigate('SignUpInput', {
@@ -91,9 +90,13 @@ class SignUpNode extends Component {
     }
 
     _createTeam() {
-        this.navigate('CreateTeam', {
-            nodeType: this.state.nodeType
-        });
+        if (this.state.true_banlance + this.state.lock_num < 1) {
+            alert('创建组队需要不少于1TRUE')
+        } else {
+            this.navigate('CreateTeam', {
+                nodeType: this.state.nodeType
+            });
+        }
     }
 
     render() {

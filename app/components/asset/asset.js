@@ -65,7 +65,7 @@ class Assets extends Component {
             eth_banlance: 0,
             true_banlance: 0,
             ttr_banlance: 0,
-            lock_num: 510000
+            lock_num: 0
         })
     }
 
