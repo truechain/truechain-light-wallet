@@ -12,7 +12,7 @@ import CountryPicker from 'react-native-country-picker-modal';
 import { Button } from 'react-native-elements';
 
 const screen = Dimensions.get('window');
-import Svg,{
+import Svg, {
     Path
 } from 'react-native-svg';
 export default class Login extends React.Component {
@@ -41,10 +41,10 @@ export default class Login extends React.Component {
     componentWillMount() {
         this._fetchCode()
     }
-    _fetchCode () {
+    _fetchCode() {
         fetch('http://39.105.125.189:7001/').then(x => {
             return x.json();
-            }).then(x => {
+        }).then(x => {
             const arr = x.data.match(/<path.*?\/>/g);
             let pathArr = [];
             arr.forEach(ele => {
@@ -152,15 +152,14 @@ export default class Login extends React.Component {
                         placeholder='输入图片验证码'
                     />
                     <View>
-                        {/* <Svg
-                        <Text onPress={() => this._fetchCode()} style={styles.authCode}></Text> */}
+                        <Text onPress={() => this._fetchCode()} style={styles.authCode}></Text>
                         <Svg
                             height="50"
                             width="150"
                         >
                             {
-                            this.state.pathArr.map((item, index) => {
-                                    if(item.length === 3) {
+                                this.state.pathArr.map((item, index) => {
+                                    if (item.length === 3) {
                                         return <Path fill="#222" d={item[0]} key={index} stroke={item[1]} fill={item[2]} />;
                                     } else {
                                         return <Path fill="#222" d={item[1]} key={index} />;
