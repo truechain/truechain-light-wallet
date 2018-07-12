@@ -34,6 +34,8 @@ import Lockpositon from '../components/public/lockpositon';
 import CreateTeam from '../components/node/createTeam';
 import TeamInfo from '../components/node/teamInfo';
 import FillInfo from '../components/node/fillInfo';
+import LockAccount from '../components/my/lockAccount';
+import LogOut from '../components/my/logOut';
 
 //rely
 import Storage from 'react-native-storage';
@@ -194,10 +196,7 @@ const App = createStackNavigator(
 		ContactUs,
 		SysSet,
 		Login: {
-			screen: Login,
-			navigationOptions: {
-				headerTitle: '登录'
-			}
+			screen: Login
 		},
 		SignUp: {
 			screen: SignUp,
@@ -207,7 +206,9 @@ const App = createStackNavigator(
 		},
 		SignUpNode,
 		SignUpInput,
-		Lockpositon,
+		Lockpositon: {
+			screen: Lockpositon
+		},
 		CreateTeam: {
 			screen: CreateTeam,
 			navigationOptions: {
@@ -219,7 +220,9 @@ const App = createStackNavigator(
 		},
 		FillInfo: {
 			screen: FillInfo
-		}
+		},
+		LockAccount,
+		LogOut
 	},
 	{
 		headerMode: 'screen',

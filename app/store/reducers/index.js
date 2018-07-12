@@ -1,8 +1,11 @@
-import { combineReducers } from 'redux'
+import { combineReducers } from 'redux';
 import walletInfo from './walletInfo';
 import contractAddr from './contractAddr';
+import lockAccount from './lockAccount';
 const reducers = combineReducers({
-    walletInfo, contractAddr
-})
+	walletInfo,
+	contractAddr,
+	lockAccount
+});
 
-export default reducers
+export default reducers;

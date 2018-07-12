@@ -21,6 +21,7 @@ class My extends Component {
 							/>
 							<Text style={styles.myTopBanConItemText}>钱包管理</Text>
 						</View>
+
 						<View style={styles.myTopBanConItem}>
 							<Image
 								style={styles.myTopBanrecicon}
@@ -56,8 +57,18 @@ class My extends Component {
                             </View>
                         </View> */}
 						<TouchableHighlight
+							underlayColor={'#ddd'}
 							onPress={() => {
-								this.navigate('Login');
+								storage
+									.load({
+										key: 'token'
+									})
+									.then((res) => {
+										this.navigate('LockAccount');
+									})
+									.catch((e) => {
+										this.navigate('Login');
+									});
 							}}
 						>
 							<View style={styles.myColsConPartRow}>
@@ -190,8 +201,6 @@ const styles = StyleSheet.create({
 	},
 	myTopBanConItem: {
 		flex: 1,
-		// borderWidth:1,
-		// borderColor:"yellow",
 		justifyContent: 'center',
 		alignItems: 'center'
 	},

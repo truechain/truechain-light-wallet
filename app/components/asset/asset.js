@@ -133,7 +133,7 @@ class Assets extends Component {
 			eth_banlance: this.state.eth_banlance,
 			true_banlance: this.state.true_banlance,
 			ttr_banlance: this.state.ttr_banlance,
-			lock_num: this.state.lock_num
+			// lock_num: this.state.lock_num
 		});
 	}
 
