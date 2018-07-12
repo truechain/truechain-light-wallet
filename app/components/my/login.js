@@ -46,7 +46,7 @@ export default class Login extends React.Component {
     }
 
     _fetchCode() {
-        fetch('http://39.105.125.189:7001/').then(x => {
+        fetch('http://45.40.243.125:7001/').then(x => {
             return x.json();
         }).then(x => {
             const arr = x.data.match(/<path.*?\/>/g);
@@ -84,11 +84,18 @@ export default class Login extends React.Component {
             code: this.state.v_code,
             address: this.state.address
         }).then(res => {
+            console.log(res);
             if (res.data.body.status == 0) {
-                // plus.storage.setItem("token", res.body.data.token);
-            } else if (res.body.status == 202) {
+                storage.save({
+                    key: 'token',
+                    data: {
+                        token: res.data.body.data.token
+                    }
+                })
+                console.log('存储token进行登录');
+            } else if (res.data.body.status == 202) {
                 alert('手机验证码错误');
-            } else if (res.body.status == 203) {
+            } else if (res.data.body.status == 203) {
                 alert('该手机号已绑定钱包地址');
             }
         })

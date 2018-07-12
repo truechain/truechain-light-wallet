@@ -126,8 +126,6 @@ const joinTeamRequest = (option) => {
 
 //获取手机验证码
 const getCode = (option) => {
-    console.log(option);
-
     return axios.get(getcodeUrl, {
         params: {
             mobile: option.mobile,

@@ -150,9 +150,9 @@ class Node extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.header}>
-                    <Text style={[styles.header_title, styles.color_white]}>
+                    {/* <Text style={[styles.header_title, styles.color_white]}>
                         节点
-                        </Text>
+                        </Text> */}
                     <View style={styles.header_item}>
                         <TouchableHighlight underlayColor={'transparent'} onPress={() => {
                             this._signUp()
