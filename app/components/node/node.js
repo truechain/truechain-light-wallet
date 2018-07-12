@@ -66,6 +66,7 @@ class Node extends Component {
 			fullNodeData: []
 		};
 		this.navigate = this.props.navigation.navigate;
+		this.huhu = true;
 	}
 
 	componentDidMount() {
