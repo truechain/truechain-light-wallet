@@ -12,23 +12,38 @@ class My extends Component {
 		return (
 			<View style={styles.myPage}>
 				<View style={styles.myTopBan}>
-					{/* <Text style={styles.myTopBanTitle}>我的</Text> */}
 					<View style={styles.myTopBanCon}>
-						<View style={styles.myTopBanConItem}>
-							<Image
-								style={styles.myTopBanWalleticon}
-								source={require('../../assets/images/my/wallet-icon_2x.png')}
-							/>
-							<Text style={styles.myTopBanConItemText}>钱包管理</Text>
-						</View>
+						<TouchableHighlight
+							style={styles.myTopBanConItem}
+							underlayColor={'transparent'}
+							onPress={() => {
+								this.navigate('WalletInfo');
+							}}
+						>
+							<View style={styles.center}>
+								<Image
+									style={styles.myTopBanWalleticon}
+									source={require('../../assets/images/my/wallet-icon_2x.png')}
+								/>
+								<Text style={styles.myTopBanConItemText}>钱包管理</Text>
+							</View>
+						</TouchableHighlight>
 
-						<View style={styles.myTopBanConItem}>
-							<Image
-								style={styles.myTopBanrecicon}
-								source={require('../../assets/images/my/deal-icon_2x.png')}
-							/>
-							<Text style={styles.myTopBanConItemText}>交易记录</Text>
-						</View>
+						<TouchableHighlight
+							style={styles.myTopBanConItem}
+							underlayColor={'transparent'}
+							onPress={() => {
+								alert('0000000');
+							}}
+						>
+							<View style={styles.center}>
+								<Image
+									style={styles.myTopBanrecicon}
+									source={require('../../assets/images/my/deal-icon_2x.png')}
+								/>
+								<Text style={styles.myTopBanConItemText}>交易记录</Text>
+							</View>
+						</TouchableHighlight>
 					</View>
 				</View>
 				<View style={styles.myColsCon}>
@@ -289,5 +304,9 @@ const styles = StyleSheet.create({
 	},
 	noSplitLine: {
 		borderWidth: 0
+	},
+	center: {
+		justifyContent: 'center',
+		alignItems: 'center'
 	}
 });

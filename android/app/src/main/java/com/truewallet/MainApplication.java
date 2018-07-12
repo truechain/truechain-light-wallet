@@ -3,12 +3,7 @@ package com.truewallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-<<<<<<< HEAD
-import com.mehcode.reactnative.splashscreen.SplashScreenPackage;
-=======
->>>>>>> d971282615cd8dd1093c31bc6edb8ef385e660b4
 import com.horcrux.svg.SvgPackage;
-import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
@@ -34,9 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new SplashScreenPackage(),
             new SvgPackage(),
-            new SplashScreenReactPackage(),
             new VectorIconsPackage(),
             new RandomBytesPackage(),
             new RNI18nPackage(),
