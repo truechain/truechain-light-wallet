@@ -253,6 +253,7 @@ const App = createStackNavigator(
 		LogOut
 	},
 	{
+		// initialRouteName: 'Login',
 		headerMode: 'screen',
 		navigationOptions: {
 			headerStyle: {

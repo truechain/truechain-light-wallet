@@ -28,11 +28,41 @@ export default class Login extends React.Component {
 		this.backgroundTime = 0;
 		this.regPhone = /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/;
 		this.navigate = this.props.navigation.navigate;
+		this.strHandle = this.strHandle.bind(this);
 	}
 
 	static navigationOptions = {
 		headerTitle: '登录'
 	};
+	
+	strHandle(svgStr){
+		let arr = [];
+		let currentStartIndex = 1;
+		let currentEndIndex = 0;
+		let strFragment = '';
+		
+		while(true){
+			currentStartIndex = svgStr.indexOf('path',currentEndIndex);
+			currentEndIndex = svgStr.indexOf('>',currentStartIndex);
+			if(currentStartIndex < 0){ break; }
+			strFragment = svgStr.substring(currentStartIndex,currentEndIndex);
+	
+			let subArr = [];
+			let subCurrentStartIndex = 1;
+			let subCurrentEndIndex = 0;
+			let subStrFragment = "";
+			subwhile: while(true){
+				subCurrentStartIndex = strFragment.indexOf('"',subCurrentEndIndex+1);
+				subCurrentEndIndex = strFragment.indexOf('"',subCurrentStartIndex+1);
+				if(subCurrentStartIndex < 0){ break subwhile; }
+				subStrFragment = strFragment.substring(subCurrentStartIndex+1,subCurrentEndIndex);
+				subArr.push(subStrFragment);
+			}
+	
+			arr.push(subArr)
+		}
+		return arr;
+	}
 
 	componentWillMount() {
 		this._fetchCode();
@@ -47,11 +77,14 @@ export default class Login extends React.Component {
 				return x.json();
 			})
 			.then((x) => {
-				const arr = x.data.match(/<path.*?\/>/g);
+				// const log = console.log;
+				// log(x);
 				let pathArr = [];
-				arr.forEach((ele) => {
-					pathArr.push(ele.match(/(?<=\s*.*\w+=")[^"]*(?=")/g));
-				});
+				// const arr = x.data.match(/<path.*?\/>/g);
+				// arr.forEach((ele) => {
+				// 	pathArr.push(ele.match(/(?<=\s*.*\w+=")[^"]*(?=")/g));
+				// });
+				pathArr = this.strHandle(x.data);
 				this.setState({
 					pathArr: pathArr
 				});
