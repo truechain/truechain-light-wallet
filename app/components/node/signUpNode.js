@@ -9,7 +9,7 @@ import {
     TouchableHighlight
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { getTeamRank } from '../../api/index'
+import { getTeamRank } from '../../api/loged'
 
 const screen = Dimensions.get('window');
 

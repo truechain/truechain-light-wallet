@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Image, PixelRatio, Dimensions, TextInput, TouchableOpacity } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import actions from '../../store/action/lockAccount';
-import { getTrueCoin } from '../../api/index';
+import { getTrueCoin } from '../../api/loged';
 const screen = Dimensions.get('window');
 class LockAccount extends React.Component {
 	constructor(props) {

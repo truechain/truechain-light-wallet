@@ -9,7 +9,7 @@ import {
     TouchableHighlight
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { getTeamInfo, getTeamMember } from '../../api/index';
+import { getTeamInfo, getTeamMember } from '../../api/loged';
 import { Button } from 'react-native-elements';
 const screen = Dimensions.get('window');
 class TeamMemberList extends Component {

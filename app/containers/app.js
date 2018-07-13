@@ -48,6 +48,20 @@ const storage = new Storage({
 });
 window.storage = storage;
 
+storage
+	.load({
+		key: 'token'
+	})
+	.then((res) => {
+		store.dispatch({
+			type: 'TOKEN',
+			token: res.token
+		});
+	})
+	.catch((e) => {
+		console.log(e);
+	});
+
 const Web3 = require('web3');
 let host = 'https://mainnet.infura.io/';
 window.host = host;
