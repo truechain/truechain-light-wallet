@@ -178,15 +178,6 @@ export default class Login extends React.Component {
 		} else {
 			this._getCode();
 		}
-
-		// else {
-		//     this.setCountdown(60);
-		//     this.startCountDown();
-		//     alert('进行发送短信验证码')
-		//     this.setState({
-		//         disabledLogin: false
-		//     })
-		// }
 	};
 
 	render() {

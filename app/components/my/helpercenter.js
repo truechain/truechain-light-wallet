@@ -27,20 +27,20 @@ export class HelperCenter extends Component {
 
     static navigationOptions = ({ navigation}) =>({
         headerTitle:"帮助中心",
-        headerRight:(
-            <TouchableHighlight underlayColor={"#ddd"} activeOpacity={0.5} 
-            onPress={navigation.state.params?navigation.state.params.headerRightPress:null}
-            > 
-            <Text style={ { 
-                color:"rgb(0,118,255)",
-                fontSize:15,
-                textAlignVertical:"center",
-                paddingRight:15
-            } }>
-            联系我们
-            </Text>
-            </TouchableHighlight>
-        )
+        // headerRight:(
+        //     <TouchableHighlight underlayColor={"#ddd"} activeOpacity={0.5} 
+        //     onPress={navigation.state.params?navigation.state.params.headerRightPress:null}
+        //     > 
+        //     <Text style={ { 
+        //         color:"rgb(0,118,255)",
+        //         fontSize:15,
+        //         textAlignVertical:"center",
+        //         paddingRight:15
+        //     } }>
+        //     联系我们
+        //     </Text>
+        //     </TouchableHighlight>
+        // )
     })
 
     _keyExtractor = (item, index) => item;

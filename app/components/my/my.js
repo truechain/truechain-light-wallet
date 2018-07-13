@@ -23,8 +23,8 @@ class My extends Component {
 						>
 							<View style={styles.center}>
 								<Image
-									style={styles.myTopBanWalleticon}
-									source={require('../../assets/images/my/wallet-icon_2x.png')}
+									style={styles.myTopBanrecicon}
+									source={require('../../assets/images/my/wallet-icon_3x.png')}
 								/>
 								<Text style={styles.myTopBanConItemText}>钱包管理</Text>
 							</View>
@@ -40,7 +40,7 @@ class My extends Component {
 							<View style={styles.center}>
 								<Image
 									style={styles.myTopBanrecicon}
-									source={require('../../assets/images/my/deal-icon_2x.png')}
+									source={require('../../assets/images/my/deal-icon_3x.png')}
 								/>
 								<Text style={styles.myTopBanConItemText}>交易记录</Text>
 							</View>
@@ -206,14 +206,6 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		justifyContent: 'space-around'
 	},
-	myTopBanTitle: {
-		// color: 'white',
-		fontSize: 18
-		// textAlign: 'center',
-		// paddingTop: 10,
-		// height: 40,
-		// lineHeight: 30
-	},
 	myTopBanCon: {
 		flexDirection: 'row',
 		width: screen.width,
@@ -226,13 +218,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-around',
 		alignItems: 'center'
 	},
-	myTopBanWalleticon: {
-		width: 35,
-		height: 28
-	},
 	myTopBanrecicon: {
-		width: 30,
-		height: 25
+		width: 45,
+		height: 40
 	},
 	myTopBanConItemText: {
 		color: 'white',

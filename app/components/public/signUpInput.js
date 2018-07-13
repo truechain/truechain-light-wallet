@@ -8,7 +8,7 @@ import {
 } from 'react-native';
 
 import RadiusBtn from './radiusbtn'
-import { createTeam } from '../../api/index';
+import { createTeam } from '../../api/loged';
 import { withNavigation } from 'react-navigation';
 import { Button } from 'react-native-elements'
 /**

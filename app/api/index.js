@@ -1,10 +1,10 @@
 import axios from 'axios';
-import { serverUrl, token } from '../utils/config';
+import { serverUrl } from '../utils/config';
 axios.defaults.baseURL = serverUrl;
 
-const headers = {
-	token
-};
+// const headers = {
+// 	token
+// };
 
 const NodeRankUrl = '/nodeRank';
 const MemberStatusUrl = '/getMemberStatus';
@@ -56,93 +56,93 @@ const getERC20TransactionRecord = (walletAddress, contractaddress) => {
 	}
 };
 
-//请求节点排行
-const getNodeRank = (option) => {
-	return axios.get(NodeRankUrl, {
-		headers,
-		params: {
-			node_type: option.nodeType,
-			pageIndex: option.pageIndex,
-			pageNumber: 10,
-			isScore: true
-		}
-	});
-};
+// //请求节点排行
+// const getNodeRank = (option) => {
+// 	return axios.get(NodeRankUrl, {
+// 		headers,
+// 		params: {
+// 			node_type: option.nodeType,
+// 			pageIndex: option.pageIndex,
+// 			pageNumber: 10,
+// 			isScore: true
+// 		}
+// 	});
+// };
 
-//获取申请状态
-const getMemberStatus = () => {
-	return axios.get(MemberStatusUrl, { headers });
-};
+// //获取申请状态
+// const getMemberStatus = () => {
+// 	return axios.get(MemberStatusUrl, { headers });
+// };
 
-//获取组队排行
-const getTeamRank = (option) => {
-	return axios.get(teamRankUrl, {
-		headers,
-		params: {
-			node_type: option.nodeType
-		}
-	});
-};
+// //获取组队排行
+// const getTeamRank = (option) => {
+// 	return axios.get(teamRankUrl, {
+// 		headers,
+// 		params: {
+// 			node_type: option.nodeType
+// 		}
+// 	});
+// };
 
-//获取锁仓数量
-const getTrueCoin = () => {
-	return axios.get(trueCoinUrl, { headers });
-};
+// //获取锁仓数量
+// const getTrueCoin = () => {
+// 	return axios.get(trueCoinUrl, { headers });
+// };
 
-const writeUserInfo = (option) => {
-	return axios.get(writeUserInfoUrl, {
-		headers,
-		params: {
-			nickname: option.nickName
-		}
-	});
-};
+// const writeUserInfo = (option) => {
+// 	return axios.get(writeUserInfoUrl, {
+// 		headers,
+// 		params: {
+// 			nickname: option.nickName
+// 		}
+// 	});
+// };
 
-//创建报名信息
-const createTeam = (option) => {
-	return axios.get(createTeamUrl, {
-		headers,
-		params: {
-			nickname: option.nickname,
-			declaration: option.declaration,
-			node_type: option.nodeType,
-			type: option.type
-		}
-	});
-};
+// //创建报名信息
+// const createTeam = (option) => {
+// 	return axios.get(createTeamUrl, {
+// 		headers,
+// 		params: {
+// 			nickname: option.nickname,
+// 			declaration: option.declaration,
+// 			node_type: option.nodeType,
+// 			type: option.type
+// 		}
+// 	});
+// };
 
-//获取组队信息
-const getTeamInfo = (option) => {
-	return axios.get(teamInfoUrl, {
-		headers,
-		params: {
-			type: option.type,
-			address: option.address
-		}
-	});
-};
+// //获取组队信息
+// const getTeamInfo = (option) => {
+// 	return axios.get(teamInfoUrl, {
+// 		headers,
+// 		params: {
+// 			type: option.type,
+// 			address: option.address
+// 		}
+// 	});
+// };
 
-//获取组队成员
+// //获取组队成员
 
-const getTeamMember = (option) => {
-	return axios.get(teamMemberUrl, {
-		headers,
-		params: {
-			team_address: option.teamAddress
-		}
-	});
-};
+// const getTeamMember = (option) => {
+// 	return axios.get(teamMemberUrl, {
+// 		headers,
+// 		params: {
+// 			team_address: option.teamAddress
+// 		}
+// 	});
+// };
 
-//请求加入组队
-const joinTeamRequest = (option) => {
-	return axios.get(joinTeamRequestUrl, {
-		headers,
-		params: {
-			address: option.teamAddress,
-			node_type: option.nodeType
-		}
-	});
-};
+// //请求加入组队
+// const joinTeamRequest = (option) => {
+// 	return axios.get(joinTeamRequestUrl, {
+// 		headers,
+// 		params: {
+// 			address: option.teamAddress,
+// 			node_type: option.nodeType
+// 		}
+// 	});
+// };
 
 //获取手机验证码
 const getCode = (option) => {
@@ -168,15 +168,15 @@ const login = (option) => {
 export {
 	login,
 	getCode,
-	createTeam,
-	getTrueCoin,
-	getNodeRank,
-	getTeamRank,
-	getTeamInfo,
-	writeUserInfo,
-	getTeamMember,
-	getMemberStatus,
-	joinTeamRequest,
+	// createTeam,
+	// getTrueCoin,
+	// getNodeRank,
+	// getTeamRank,
+	// getTeamInfo,
+	// writeUserInfo,
+	// getTeamMember,
+	// getMemberStatus,
+	// joinTeamRequest,
 	getTransactionRecord,
 	getERC20TransactionRecord
 };

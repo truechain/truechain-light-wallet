@@ -11,7 +11,9 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
-import { getNodeRank, getMemberStatus } from '../../api/index';
+import { getNodeRank, getMemberStatus } from '../../api/loged';
+
+// var RefreshableListView = require('react-native-refreshable-listview');
 
 const screen = Dimensions.get('window');
 
@@ -118,10 +120,10 @@ class Node extends Component {
 						break;
 				}
 			});
-		// this.navigate('SignUp');
 	}
 
 	render() {
+		let arr = this.state.fullNodeData;
 		return (
 			<View style={styles.container}>
 				<View style={styles.header}>

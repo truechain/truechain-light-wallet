@@ -9,7 +9,6 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { getTransactionRecord, getERC20TransactionRecord } from '../../api/index'
-
 class Recording extends Component {
     show(num) {
         num += '';

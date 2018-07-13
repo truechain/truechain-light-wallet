@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { Button } from 'react-native-elements';
-import { joinTeamRequest } from '../../api/index';
+import { joinTeamRequest } from '../../api/loged';
 import RadiusBtn from '../public/radiusbtn';
 const screen = Dimensions.get('window');
 
