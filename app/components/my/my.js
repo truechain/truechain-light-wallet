@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableHighlight } from 'react-native';
 import { withNavigation } from 'react-navigation';
+const screen = Dimensions.get('window');
 
 class My extends Component {
 	constructor(props) {
@@ -199,29 +200,35 @@ const styles = StyleSheet.create({
 		flex: 1
 	},
 	myTopBan: {
-		backgroundColor: '#528bf7'
+		padding: 8,
+		height: screen.height * 0.2,
+		backgroundColor: '#528bf7',
+		alignItems: 'center',
+		justifyContent: 'space-around'
 	},
 	myTopBanTitle: {
-		color: 'white',
-		fontSize: 20,
-		textAlign: 'center',
-		paddingTop: 10,
-		height: 40,
-		lineHeight: 30
+		// color: 'white',
+		fontSize: 18
+		// textAlign: 'center',
+		// paddingTop: 10,
+		// height: 40,
+		// lineHeight: 30
 	},
 	myTopBanCon: {
 		flexDirection: 'row',
-		justifyContent: 'space-around',
-		height: 100
+		width: screen.width,
+		alignItems: 'center',
+		justifyContent: 'space-around'
 	},
 	myTopBanConItem: {
-		flex: 1,
-		justifyContent: 'center',
+		width: screen.width * 0.35,
+		height: 80,
+		justifyContent: 'space-around',
 		alignItems: 'center'
 	},
 	myTopBanWalleticon: {
-		width: 25,
-		height: 27
+		width: 35,
+		height: 28
 	},
 	myTopBanrecicon: {
 		width: 30,
@@ -280,8 +287,8 @@ const styles = StyleSheet.create({
 		height: 14
 	},
 	icon22: {
-		width: 22,
-		height: 22
+		width: 35,
+		height: 28
 	},
 	iconHelper: {
 		width: 22,
@@ -307,6 +314,9 @@ const styles = StyleSheet.create({
 	},
 	center: {
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		width: screen.width * 0.35,
+		height: 80,
+		justifyContent: 'space-around'
 	}
 });

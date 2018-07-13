@@ -66,6 +66,7 @@ class Node extends Component {
 			fullNodeData: []
 		};
 		this.navigate = this.props.navigation.navigate;
+		this.huhu = true;
 	}
 
 	componentDidMount() {
@@ -223,7 +224,7 @@ const styles = StyleSheet.create({
 	},
 	header: {
 		padding: 8,
-		height: screen.height * 0.25,
+		height: screen.height * 0.2,
 		backgroundColor: '#528bf7',
 		alignItems: 'center',
 		justifyContent: 'space-around'

@@ -112,7 +112,19 @@ const TabBarPage = createBottomTabNavigator(
 			screen: Node,
 			navigationOptions: {
 				tabBarLabel: I18n.t('tab.node'),
-				tabBarIcon: ({ tintColor }) => <Image style={styles.icon} source={IconUrl.node} />
+				tabBarIcon: ({ tintColor }) => <Image style={styles.icon} source={IconUrl.node} />,
+				tabBarOnPress: ({ navigation, defaultHandler }) => {
+					storage
+						.load({
+							key: 'token'
+						})
+						.then((res) => {
+							navigation.navigate('Node');
+						})
+						.catch((e) => {
+							navigation.navigate('Login');
+						});
+				}
 			}
 		},
 		My: {
@@ -125,6 +137,8 @@ const TabBarPage = createBottomTabNavigator(
 	},
 	{
 		lazy: true,
+		animationEnabled: true,
+		backBehavior: true,
 		tabBarPosition: 'bottom',
 		tabBarOptions: {
 			activeTintColor: '#3e9ce9',

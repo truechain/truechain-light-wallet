@@ -296,8 +296,6 @@ const styles = StyleSheet.create({
     buttonStyle: {
         backgroundColor: "#bbb",
         height: 45,
-        borderColor: "transparent",
-        borderWidth: 0,
         borderRadius: 50,
         marginTop: 30
     },
