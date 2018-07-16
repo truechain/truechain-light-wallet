@@ -11,6 +11,8 @@ const writeUserInfoUrl = '/writeUserInfo';
 const teamInfoUrl = '/teamInfo';
 const teamMemberUrl = '/getTeamMember';
 const joinTeamRequestUrl = '/joinTeamRequest';
+const getMemberListUrl = '/getMemberList';
+const isJoinTeamUrl = '/isJoinTeam';
 
 const getToken = () => {
 	return storage.load({
@@ -26,8 +28,8 @@ const getNodeRank = async (option) => {
 			token: res.token
 		},
 		params: {
-			node_type: 2,
-			pageIndex: 10,
+			node_type: option.nodeType,
+			pageIndex: option.pageIndex,
 			pageNumber: 10,
 			isScore: true
 		}
@@ -74,7 +76,8 @@ const writeUserInfo = async (option) => {
 			token: res.token
 		},
 		params: {
-			nickname: option.nickName
+			nickname: option.nickName,
+			reason: option.reason
 		}
 	});
 };
@@ -114,7 +117,9 @@ const getTeamInfo = async (option) => {
 const getTeamMember = async (option) => {
 	let res = await getToken();
 	return axios.get(teamMemberUrl, {
-		headers,
+		headers: {
+			token: res.token
+		},
 		params: {
 			team_address: option.teamAddress
 		}
@@ -125,10 +130,39 @@ const getTeamMember = async (option) => {
 const joinTeamRequest = async (option) => {
 	let res = await getToken();
 	return axios.get(joinTeamRequestUrl, {
-		headers,
+		headers: {
+			token: res.token
+		},
 		params: {
 			address: option.teamAddress,
 			node_type: option.nodeType
+		}
+	});
+};
+
+//获取申请队伍信息
+const getMemberList = async (option) => {
+	let res = await getToken();
+	return axios.get(getMemberListUrl, {
+		headers: {
+			token: res.token
+		},
+		params: {
+			team_address: option.teamAddress
+		}
+	});
+};
+
+//是否同意加入组队
+const isJoinTeam = async (option) => {
+	let res = await getToken();
+	return axios.get(isJoinTeamUrl, {
+		headers: {
+			token: res.token
+		},
+		params: {
+			status: option.status,
+			user_address: option.userAddress
 		}
 	});
 };
@@ -142,5 +176,7 @@ export {
 	writeUserInfo,
 	getTeamMember,
 	getMemberStatus,
-	joinTeamRequest
+	joinTeamRequest,
+	getMemberList,
+	isJoinTeam
 };

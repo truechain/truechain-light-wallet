@@ -114,9 +114,27 @@ class Node extends Component {
 						break;
 					case 2:
 						console.log(res, '已通过');
+						if (res.type === 1) {
+							console.log('个人报名', res.role);
+							this.navigate('SignUpSuccess', {
+								type: res.type
+							});
+						} else {
+							console.log('组队', res.role);
+							if (res.role === 2) {
+								console.log('自己创建组队');
+								this.navigate('MyTeam', {
+									type: res.type
+								});
+							}
+						}
 						break;
 					case 3:
 						console.log('已拒绝');
+						break;
+					default:
+						console.log('默认');
+						this.navigate('SignUp');
 						break;
 				}
 			});
@@ -173,11 +191,9 @@ class Node extends Component {
 								<RefreshControl
 									refreshing={this.state.isRefreshing}
 									onRefresh={this._onRefresh.bind(this)}
-									tintColor="#ff0000"
+									tintColor="#528bf7"
 									title="Loading..."
-									titleColor="green"
-									colors={[ '#ff0000', '#00ff00', '#0000ff' ]}
-									progressBackgroundColor="#ffff00"
+									titleColor="#528bf7"
 								/>
 							}
 						>
@@ -194,11 +210,9 @@ class Node extends Component {
 								<RefreshControl
 									refreshing={this.state.isRefreshing}
 									onRefresh={this._onRefresh.bind(this)}
-									tintColor="#ff0000"
+									tintColor="#528bf7"
 									title="Loading..."
-									titleColor="green"
-									colors={[ '#ff0000', '#00ff00', '#0000ff' ]}
-									progressBackgroundColor="#ffff00"
+									titleColor="#528bf7"
 								/>
 							}
 						>

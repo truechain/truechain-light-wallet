@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Dimensions, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
 import { withNavigation } from 'react-navigation';
+import { View, Text, Image, StyleSheet, TouchableHighlight, ScrollView } from 'react-native';
 import { getTeamInfo, getTeamMember } from '../../api/loged';
-import { Button } from 'react-native-elements';
-const screen = Dimensions.get('window');
+
 class TeamMemberList extends Component {
 	render() {
 		return (
@@ -22,46 +21,59 @@ class TeamMemberList extends Component {
 	}
 }
 
-class TeamInfo extends Component {
+class MyTeam extends Component {
+	static navigationOptions = ({ navigation }) => ({
+		headerTitle: '我的战队'
+	});
+
 	constructor(props) {
 		super(props);
 		this.state = {
-			type: '2',
-			teamAddress: null,
-			teamInfoData: {},
-			teamMemberData: [],
-			nodeType: null
+			teamAddress: store.getState().walletInfo.wallet_address,
+			type: null,
+			nickName: null,
+			declaration: null,
+			tickets: null,
+			lock_num: null,
+			teamMemberData: []
 		};
 		this.navigate = this.props.navigation.navigate;
 	}
-
-	static navigationOptions = ({ navigation }) => ({
-		headerTitle: navigation.state.params.title
-	});
 
 	componentDidMount() {
 		const { params } = this.props.navigation.state;
 		this.setState(
 			{
-				teamAddress: params.teamAddress,
-				nodeType: params.nodeType
+				type: params.type
 			},
 			() => {
 				getTeamInfo({
 					type: this.state.type,
 					address: this.state.teamAddress
-				}).then((res) => {
-					this.setState({
-						teamInfoData: res.data.data[0]
+				})
+					.then((result) => {
+						return result.data.data[0];
+					})
+					.then((res) => {
+						this.setState({
+							nickName: res.nickname,
+							declaration: res.declaration,
+							tickets: res.tickets,
+							lock_num: res.lock_num
+						});
 					});
-				});
+
 				getTeamMember({
 					teamAddress: this.state.teamAddress
-				}).then((res) => {
-					this.setState({
-						teamMemberData: res.data.data
+				})
+					.then((result) => {
+						return result.data.data;
+					})
+					.then((res) => {
+						this.setState({
+							teamMemberData: res
+						});
 					});
-				});
 			}
 		);
 	}
@@ -69,45 +81,55 @@ class TeamInfo extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<View style={styles.teamInfo}>
+				<TouchableHighlight
+					underlayColor={'transparent'}
+					onPress={() => {
+						this.navigate('PersonnelManagement');
+					}}
+				>
+					<View style={[ styles.personnelManagement, styles.personalInfo ]}>
+						<Text>待加入人员管理</Text>
+						<Image
+							style={{
+								width: 8,
+								height: 14
+							}}
+							resizeMode={Image.resizeMode.stretch}
+							source={require('../../assets/images/common/arr2ri.png')}
+						/>
+					</View>
+				</TouchableHighlight>
+				<View style={styles.personalInfo}>
 					<View style={styles.headerInfo}>
 						<View style={styles.headerInfo_item}>
-							<Text>组队信息</Text>
-							<Text style={styles.color_999}>{this.state.teamInfoData.nickname}</Text>
+							<View style={styles.baseInfo}>
+								<Text>组队信息</Text>
+								<TouchableHighlight style={styles.lock_num}>
+									<Text style={styles.color_fff}>{this.state.lock_num} TRUE</Text>
+								</TouchableHighlight>
+							</View>
+							<Text style={styles.color_999}>{this.state.nickName}</Text>
 						</View>
+
 						<TouchableHighlight style={styles.ticket}>
-							<Text style={styles.color_fff}>{this.state.teamInfoData.lock_num}票</Text>
+							<Text style={styles.color_fff}>{this.state.tickets} 票</Text>
 						</TouchableHighlight>
 					</View>
 					<View>
-						<Text style={[ styles.color_999, styles.marginTop_5 ]}>
-							{this.state.teamInfoData.declaration}
-						</Text>
+						<Text style={[ styles.color_999, styles.marginTop_10 ]}>{this.state.declaration}</Text>
 					</View>
-					<ScrollView style={{ marginTop: 10, height: 200 }}>
+					<ScrollView style={{ marginBottom: 50 }}>
 						{this.state.teamMemberData.map((item, index) => {
 							return <TeamMemberList item={item} key={index} />;
 						})}
 					</ScrollView>
-					<View style={styles.next}>
-						<Button
-							title="下一步"
-							buttonStyle={styles.buttonStyle}
-							onPress={() => {
-								this.navigate('FillInfo', {
-									teamAddress: this.state.teamAddress,
-									nodeType: this.state.nodeType
-								});
-							}}
-						/>
-					</View>
 				</View>
 			</View>
 		);
 	}
 }
 
-export default withNavigation(TeamInfo);
+export default withNavigation(MyTeam);
 
 const styles = StyleSheet.create({
 	color_fff: {
@@ -116,16 +138,21 @@ const styles = StyleSheet.create({
 	color_999: {
 		color: '#999999'
 	},
-	marginTop_5: {
-		marginTop: 5
+	marginTop_10: {
+		marginTop: 10
 	},
 	container: {
 		flex: 1,
-		padding: 15
+		padding: 20
 	},
-	teamInfo: {
+	personnelManagement: {
+		marginBottom: 20,
+		flexDirection: 'row',
+		justifyContent: 'space-between'
+	},
+	personalInfo: {
 		backgroundColor: '#fff',
-		padding: 10,
+		padding: 20,
 		borderRadius: 8
 	},
 	headerInfo: {
@@ -138,6 +165,16 @@ const styles = StyleSheet.create({
 		height: 35
 	},
 	ticket: {
+		backgroundColor: '#528bf7',
+		padding: 6,
+		borderRadius: 50
+	},
+	baseInfo: {
+		flexDirection: 'row',
+		alignItems: 'center'
+	},
+	lock_num: {
+		marginLeft: 10,
 		backgroundColor: '#528bf7',
 		padding: 5,
 		borderRadius: 50
@@ -156,16 +193,5 @@ const styles = StyleSheet.create({
 	avatar: {
 		width: 20,
 		height: 20
-	},
-	next: {
-		alignItems: 'center',
-		position: 'relative',
-		top: 100
-	},
-	buttonStyle: {
-		backgroundColor: '#528bf7',
-		width: 260,
-		height: 45,
-		borderRadius: 30
 	}
 });

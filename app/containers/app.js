@@ -36,6 +36,9 @@ import TeamInfo from '../components/node/teamInfo';
 import FillInfo from '../components/node/fillInfo';
 import LockAccount from '../components/my/lockAccount';
 import LogOut from '../components/my/logOut';
+import SignUpSuccess from '../components/public/signUpSuccess';
+import MyTeam from '../components/node/myTeam';
+import PersonnelManagement from '../components/node/personnelManagement';
 
 //rely
 import Storage from 'react-native-storage';
@@ -250,7 +253,10 @@ const App = createStackNavigator(
 			screen: FillInfo
 		},
 		LockAccount,
-		LogOut
+		LogOut,
+		SignUpSuccess,
+		MyTeam,
+		PersonnelManagement
 	},
 	{
 		// initialRouteName: 'Login',
