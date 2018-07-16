@@ -39,6 +39,7 @@ import LogOut from '../components/my/logOut';
 import SignUpSuccess from '../components/public/signUpSuccess';
 import MyTeam from '../components/node/myTeam';
 import PersonnelManagement from '../components/node/personnelManagement';
+import SetGesturePassword from '../components/my/setgesturepassword';
 
 //rely
 import Storage from 'react-native-storage';
@@ -256,10 +257,11 @@ const App = createStackNavigator(
 		LogOut,
 		SignUpSuccess,
 		MyTeam,
-		PersonnelManagement
+		PersonnelManagement,
+		SetGesturePassword
 	},
 	{
-		// initialRouteName: 'Login',
+		// initialRouteName: 'SetGesturePassword',
 		headerMode: 'screen',
 		navigationOptions: {
 			headerStyle: {
