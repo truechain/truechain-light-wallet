@@ -69,6 +69,20 @@ const getTrueCoin = async () => {
 	});
 };
 
+// const writeUserInfo = async (option) => {
+// 	let res = await getToken();
+// 	return axios.get(writeUserInfoUrl, {
+// 		headers: {
+// 			token: res.token
+// 		},
+// 		params: {
+// 			nickname: option.nickName,
+// 			reason: option.reason
+// 		}
+// 	});
+// };
+
+//请求加入组队
 const writeUserInfo = async (option) => {
 	let res = await getToken();
 	return axios.get(writeUserInfoUrl, {
@@ -76,6 +90,7 @@ const writeUserInfo = async (option) => {
 			token: res.token
 		},
 		params: {
+			team_address: option.teamAddress,
 			nickname: option.nickName,
 			reason: option.reason
 		}
@@ -134,7 +149,7 @@ const joinTeamRequest = async (option) => {
 			token: res.token
 		},
 		params: {
-			address: option.teamAddress,
+			team_address: option.teamAddress,
 			node_type: option.nodeType
 		}
 	});

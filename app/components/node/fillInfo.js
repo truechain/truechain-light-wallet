@@ -38,24 +38,22 @@ class FillInfo extends Component {
 		joinTeamRequest({
 			teamAddress: this.state.teamAddress,
 			nodeType: this.state.nodeType
-		}).then((res) => {
-			console.log(res);
-			if (res.data.status === 200) {
-				this.setState({
-					isSuccess: true
+		})
+			.then((result) => {
+				return result.data.data;
+			})
+			.then((res) => {
+				writeUserInfo({
+					teamAddress: this.state.teamAddress,
+					nickName: this.state.nickName,
+					reason: this.state.reason
+				}).then((res) => {
+					console.log(res.data.message);
+					this.setState({
+						isSuccess: true
+					});
 				});
-			} else {
-				alert(res.data.message);
-			}
-		});
-
-		writeUserInfo({
-			teamUserInfo: this.state.teamAddress,
-			nickName: this.state.nickName,
-			reason: this.state.reason
-		}).then((res) => {
-			console.log(res);
-		});
+			});
 	}
 
 	render() {

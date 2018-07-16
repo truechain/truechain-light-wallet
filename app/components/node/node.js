@@ -113,16 +113,16 @@ class Node extends Component {
 						console.log('已申请');
 						break;
 					case 2:
-						console.log(res, '已通过');
+						// console.log(res, '已通过');
 						if (res.type === 1) {
-							console.log('个人报名', res.role);
+							// console.log('个人报名', res.role);
 							this.navigate('SignUpSuccess', {
 								type: res.type
 							});
 						} else {
 							console.log('组队', res.role);
 							if (res.role === 2) {
-								console.log('自己创建组队');
+								// console.log('自己创建组队');
 								this.navigate('MyTeam', {
 									type: res.type
 								});
