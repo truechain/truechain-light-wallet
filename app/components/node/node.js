@@ -7,6 +7,7 @@ import {
 	StyleSheet,
 	ScrollView,
 	RefreshControl,
+	TouchableOpacity,
 	TouchableHighlight
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
@@ -25,36 +26,48 @@ class NodeItem extends Component {
 			require('../../assets/images/node/sort_3.png')
 		];
 		return (
-			<View style={styles.nodeItem}>
-				{this.props.index <= 2 ? (
-					<Image style={styles.iconSort} source={iconUrl[this.props.index]} />
-				) : (
-					<View style={styles.iconSort}>
-						<Text>{this.props.index + 1}</Text>
+			<TouchableOpacity
+				onPress={() => {
+					this.props.navigate('VoteInfo', {
+						teamAddress: this.props.item.address,
+						type: this.props.item.type
+					});
+				}}
+			>
+				<View style={styles.nodeItem}>
+					{this.props.index <= 2 ? (
+						<Image style={styles.iconSort} source={iconUrl[this.props.index]} />
+					) : (
+						<View style={styles.iconSort}>
+							<Text>{this.props.index + 1}</Text>
+						</View>
+					)}
+					<View style={styles.nickName}>
+						<Text style={styles.font_12}>{this.props.item.nickname}</Text>
+						{this.props.item.type === 1 ? (
+							<Image
+								style={styles.iconPersonal}
+								source={require('../../assets/images/node/geren_3x.png')}
+							/>
+						) : null}
 					</View>
-				)}
-				<View style={styles.nickName}>
-					<Text style={styles.font_12}>{this.props.item.nickname}</Text>
-					{this.props.item.type === 1 ? (
-						<Image style={styles.iconPersonal} source={require('../../assets/images/node/geren_3x.png')} />
+
+					{this.props.item.lock_num ? (
+						<View style={styles.lockNum}>
+							<Text style={styles.font_12}>{this.props.item.lock_num} true</Text>
+						</View>
+					) : (
+						<View style={styles.lockNum}>
+							<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.score} 分</Text>
+						</View>
+					)}
+					{this.props.item.tickets ? (
+						<View style={styles.tickets}>
+							<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.tickets} 票</Text>
+						</View>
 					) : null}
 				</View>
-
-				{this.props.item.lock_num ? (
-					<View style={styles.lockNum}>
-						<Text style={styles.font_12}>{this.props.item.lock_num} true</Text>
-					</View>
-				) : (
-					<View style={styles.lockNum}>
-						<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.score} 分</Text>
-					</View>
-				)}
-				{this.props.item.tickets ? (
-					<View style={styles.tickets}>
-						<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.tickets} 票</Text>
-					</View>
-				) : null}
-			</View>
+			</TouchableOpacity>
 		);
 	}
 }
@@ -69,7 +82,6 @@ class Node extends Component {
 			teamAddress: null
 		};
 		this.navigate = this.props.navigation.navigate;
-		this.huhu = true;
 	}
 
 	componentDidMount() {
@@ -223,7 +235,7 @@ class Node extends Component {
 							}
 						>
 							{this.state.fullNodeData.map((item, index) => {
-								return <NodeItem item={item} index={index} key={index} />;
+								return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
 							})}
 						</ScrollView>
 					</View>
@@ -242,7 +254,7 @@ class Node extends Component {
 							}
 						>
 							{this.state.standardNodeData.map((item, index) => {
-								return <NodeItem item={item} index={index} key={index} />;
+								return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
 							})}
 						</ScrollView>
 					</View>
