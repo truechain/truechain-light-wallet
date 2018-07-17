@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, Dimensions, StyleSheet, ScrollView, TouchableHighlight } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { getTeamInfo, getTeamMember } from '../../api/loged';
+import { getTeamInfo, getTeamMember, initStatus } from '../../api/loged';
 import { Button } from 'react-native-elements';
 const screen = Dimensions.get('window');
 class TeamMemberList extends Component {
@@ -30,7 +30,8 @@ class TeamInfo extends Component {
 			teamAddress: null,
 			teamInfoData: {},
 			teamMemberData: [],
-			nodeType: null
+			nodeType: null,
+			Button: null
 		};
 		this.navigate = this.props.navigation.navigate;
 	}
@@ -44,7 +45,8 @@ class TeamInfo extends Component {
 		this.setState(
 			{
 				teamAddress: params.teamAddress,
-				nodeType: params.nodeType
+				nodeType: params.nodeType || '',
+				status: params.status
 			},
 			() => {
 				getTeamInfo({
@@ -64,6 +66,73 @@ class TeamInfo extends Component {
 				});
 			}
 		);
+
+		switch (params.status) {
+			case 1:
+				this.setState({
+					Button: <Button title="已申请" buttonStyle={[ styles.button, styles.alreadyButton ]} />
+				});
+				break;
+			case 2:
+				this.setState(
+					{
+						Button: (
+							<View style={styles.rejected}>
+								<Text style={styles.applicationReminder_text}>申请已通过，请进行下一步操作</Text>
+								<Button
+									title="下一步"
+									buttonStyle={[ styles.button, styles.buttonStyle ]}
+									onPress={() => {
+										this.navigate('Lockpositon', {
+											type: 1
+										});
+									}}
+								/>
+							</View>
+						)
+					},
+					() => {
+						this.setState({
+							Button: null
+						});
+					}
+				);
+				break;
+			case 3:
+				this.setState({
+					Button: (
+						<View style={styles.rejected}>
+							<Text style={styles.applicationReminder_text}>申请失败，队长拒绝了您的申请</Text>
+							<Button
+								title="加入其它组队"
+								buttonStyle={[ styles.button, styles.buttonStyle ]}
+								onPress={() => {
+									initStatus().then((res) => {
+										this.navigate('Home');
+									});
+								}}
+							/>
+						</View>
+					)
+				});
+				break;
+			default:
+				this.setState({
+					Button: (
+						<Button
+							title="下一步"
+							buttonStyle={[ styles.button, styles.buttonStyle ]}
+							onPress={() => {
+								this.navigate('FillInfo', {
+									teamAddress: this.state.teamAddress,
+									nodeType: this.state.nodeType
+								});
+							}}
+						/>
+					)
+				});
+				break;
+		}
 	}
 
 	render() {
@@ -89,18 +158,7 @@ class TeamInfo extends Component {
 							return <TeamMemberList item={item} key={index} />;
 						})}
 					</ScrollView>
-					<View style={styles.next}>
-						<Button
-							title="下一步"
-							buttonStyle={styles.buttonStyle}
-							onPress={() => {
-								this.navigate('FillInfo', {
-									teamAddress: this.state.teamAddress,
-									nodeType: this.state.nodeType
-								});
-							}}
-						/>
-					</View>
+					<View style={styles.next}>{this.state.Button}</View>
 				</View>
 			</View>
 		);
@@ -162,10 +220,23 @@ const styles = StyleSheet.create({
 		position: 'relative',
 		top: 100
 	},
-	buttonStyle: {
-		backgroundColor: '#528bf7',
+	button: {
 		width: 260,
 		height: 45,
 		borderRadius: 30
+	},
+	buttonStyle: {
+		backgroundColor: '#528bf7'
+	},
+	alreadyButton: {
+		backgroundColor: '#ccc'
+	},
+	rejected: {
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	applicationReminder_text: {
+		marginBottom: 20,
+		color: '#666'
 	}
 });

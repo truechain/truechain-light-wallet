@@ -11,7 +11,7 @@ import {
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
-import { getNodeRank, getMemberStatus } from '../../api/loged';
+import { getNodeRank, getMemberStatus, getTeamAddress } from '../../api/loged';
 
 // var RefreshableListView = require('react-native-refreshable-listview');
 
@@ -65,7 +65,8 @@ class Node extends Component {
 		this.state = {
 			isRefreshing: false,
 			standardNodeData: [],
-			fullNodeData: []
+			fullNodeData: [],
+			teamAddress: null
 		};
 		this.navigate = this.props.navigation.navigate;
 		this.huhu = true;
@@ -98,6 +99,20 @@ class Node extends Component {
 		this._getNodeRank();
 	}
 
+	_getTeamAddress(option) {
+		getTeamAddress()
+			.then((result) => {
+				return result.data.data[0];
+			})
+			.then((res) => {
+				this.navigate('TeamInfo', {
+					status: option.status,
+					title: '组队信息',
+					teamAddress: res.team_address
+				});
+			});
+	}
+
 	_signUp() {
 		//获取申请状态
 		getMemberStatus()
@@ -110,7 +125,10 @@ class Node extends Component {
 						this.navigate('SignUp');
 						break;
 					case 1:
-						console.log('已申请');
+						console.log(res, '已申请');
+						this._getTeamAddress({
+							status: 1
+						});
 						break;
 					case 2:
 						// console.log(res, '已通过');
@@ -126,11 +144,18 @@ class Node extends Component {
 								this.navigate('MyTeam', {
 									type: res.type
 								});
+							} else {
+								this._getTeamAddress({
+									status: 2
+								});
 							}
 						}
 						break;
 					case 3:
 						console.log('已拒绝');
+						this._getTeamAddress({
+							status: 3
+						});
 						break;
 					default:
 						console.log('默认');

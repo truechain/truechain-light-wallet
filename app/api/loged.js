@@ -13,7 +13,8 @@ const teamMemberUrl = '/getTeamMember';
 const joinTeamRequestUrl = '/joinTeamRequest';
 const getMemberListUrl = '/getMemberList';
 const isJoinTeamUrl = '/isJoinTeam';
-
+const getTeamAddressUrl = '/getTeamAddress';
+const initStatusUrl = '/initStatus';
 const getToken = () => {
 	return storage.load({
 		key: 'token'
@@ -182,6 +183,27 @@ const isJoinTeam = async (option) => {
 	});
 };
 
+//获取队长地址
+const getTeamAddress = async (option) => {
+	let res = await getToken();
+	return axios.get(getTeamAddressUrl, {
+		headers: {
+			token: res.token
+		}
+	});
+};
+
+//被拒绝时的初始状态
+
+const initStatus = async (option) => {
+	let res = await getToken();
+	return axios.get(initStatusUrl, {
+		headers: {
+			token: res.token
+		}
+	});
+};
+
 export {
 	createTeam,
 	getTrueCoin,
@@ -193,5 +215,7 @@ export {
 	getMemberStatus,
 	joinTeamRequest,
 	getMemberList,
-	isJoinTeam
+	isJoinTeam,
+	getTeamAddress,
+	initStatus
 };
