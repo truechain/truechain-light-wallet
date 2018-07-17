@@ -40,6 +40,9 @@ import SignUpSuccess from '../components/public/signUpSuccess';
 import MyTeam from '../components/node/myTeam';
 import PersonnelManagement from '../components/node/personnelManagement';
 import SetGesturePassword from '../components/my/setgesturepassword';
+import VoteNode from '../components/node/vote/voteNode';
+import VoteList from '../components/node/vote/voteList';
+import VoteInfo from '../components/node/vote/voteInfo';
 
 //rely
 import Storage from 'react-native-storage';
@@ -258,7 +261,10 @@ const App = createStackNavigator(
 		SignUpSuccess,
 		MyTeam,
 		PersonnelManagement,
-		SetGesturePassword
+		SetGesturePassword,
+		VoteNode,
+		VoteList,
+		VoteInfo
 	},
 	{
 		// initialRouteName: 'SetGesturePassword',

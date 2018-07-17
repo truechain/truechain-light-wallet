@@ -31,7 +31,7 @@ const getNodeRank = async (option) => {
 		params: {
 			node_type: option.nodeType,
 			pageIndex: option.pageIndex,
-			pageNumber: 10,
+			pageNumber: option.pageNumber ? option.pageNumber : 10,
 			isScore: true
 		}
 	});

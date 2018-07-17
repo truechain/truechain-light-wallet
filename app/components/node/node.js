@@ -188,7 +188,7 @@ class Node extends Component {
 						<TouchableHighlight
 							underlayColor={'transparent'}
 							onPress={() => {
-								alert('投票');
+								this.navigate('VoteNode');
 							}}
 						>
 							<View style={styles.fun}>

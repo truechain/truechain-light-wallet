@@ -26,6 +26,7 @@
     "react-native-randombytes": "^3.3.0",
     "react-native-refreshable-listview": "^2.0.0-beta4",
     "react-native-scrollable-tab-view": "^0.8.0",
+    "react-native-search-box": "^0.0.19",
     "react-native-storage": "^0.2.2",
     "react-native-svg": "^6.4.1",
     "react-native-tabbar-navigator": "^0.4.3",
