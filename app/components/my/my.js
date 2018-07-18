@@ -34,7 +34,7 @@ class My extends Component {
 							style={styles.myTopBanConItem}
 							underlayColor={'transparent'}
 							onPress={() => {
-								alert('0000000');
+								this.navigate('TransactionRecord');
 							}}
 						>
 							<View style={styles.center}>

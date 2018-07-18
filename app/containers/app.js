@@ -44,6 +44,7 @@ import VoteNode from '../components/node/vote/voteNode';
 import VoteList from '../components/node/vote/voteList';
 import VoteInfo from '../components/node/vote/voteInfo';
 import SysLanguage from '../components/my/sysLanguage';
+import TransactionRecord from '../components/my/transactionRecord';
 
 //rely
 import Storage from 'react-native-storage';
@@ -274,7 +275,8 @@ const App = createStackNavigator(
 		VoteNode,
 		VoteList,
 		VoteInfo,
-		SysLanguage
+		SysLanguage,
+		TransactionRecord
 	},
 	{
 		// initialRouteName: 'SetGesturePassword',
