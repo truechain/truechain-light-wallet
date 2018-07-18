@@ -14,6 +14,7 @@ import actions from '../../store/action/walletInfo';
 import { withNavigation } from 'react-navigation';
 import getBalance from '../../utils/addTokens';
 import iterface from '../../utils/iterface';
+import { I18n } from '../../../language/i18n';
 class CurrencyList extends Component {
 	currencyDetail(title, banlance) {
 		this.props.navigate('CurrencyDetail', {
@@ -41,7 +42,7 @@ class CurrencyList extends Component {
 					</View>
 					<View>
 						<Text style={styles.alignRight}>{this.props.item.balance}</Text>
-						<Text style={[ styles.alignRight, styles.currency ]}>***** CNY</Text>
+						<Text style={[ styles.alignRight, styles.currency ]} />
 					</View>
 				</View>
 			</TouchableHighlight>
@@ -130,7 +131,7 @@ class Assets extends Component {
 			wallet_address: this.state.walletAddress,
 			eth_banlance: this.state.eth_banlance,
 			true_banlance: this.state.true_banlance,
-			ttr_banlance: this.state.ttr_banlance,
+			ttr_banlance: this.state.ttr_banlance
 		});
 	}
 
@@ -186,12 +187,12 @@ class Assets extends Component {
 				<View style={styles.addCurrency}>
 					<View style={styles.addCurrency_item}>
 						<View>
-							<Text style={styles.currency_text}>账户总资产</Text>
+							<Text style={styles.currency_text}>{I18n.t('assets.totalAssets')}</Text>
 							<Text>{this.state.true_banlance}</Text>
 						</View>
-						<TouchableHighlight style={styles.currency_item}>
+						{/* <TouchableHighlight style={styles.currency_item}>
 							<Text style={styles.currency_item_text}>新增币种</Text>
-						</TouchableHighlight>
+						</TouchableHighlight> */}
 					</View>
 				</View>
 

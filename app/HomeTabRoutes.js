@@ -4,7 +4,7 @@ import {
     StyleSheet
 } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation';
-import I18n from '../language/i18n';
+import {I18n} from '../language/i18n';
 import Asset from './components/asset/asset';
 import Node from './components/node/node';
 import My from './components/my/my';

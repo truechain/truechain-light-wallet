@@ -5,7 +5,7 @@ import {
     View,
     Alert
 } from 'react-native';
-import I18n from '../../../../language/i18n';
+import {I18n} from '../../../../language/i18n';
 import lightWallet from 'eth-lightwallet';
 import { withNavigation } from 'react-navigation';
 import LoadingView from '../../public/loadingView';
