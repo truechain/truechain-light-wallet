@@ -3,7 +3,6 @@ import {
 	View,
 	Text,
 	Image,
-	FlatList,
 	StyleSheet,
 	Dimensions,
 	ScrollView,
@@ -15,7 +14,6 @@ import actions from '../../store/action/walletInfo';
 import { withNavigation } from 'react-navigation';
 import getBalance from '../../utils/addTokens';
 import iterface from '../../utils/iterface';
-
 class CurrencyList extends Component {
 	currencyDetail(title, banlance) {
 		this.props.navigate('CurrencyDetail', {
@@ -133,7 +131,6 @@ class Assets extends Component {
 			eth_banlance: this.state.eth_banlance,
 			true_banlance: this.state.true_banlance,
 			ttr_banlance: this.state.ttr_banlance,
-			// lock_num: this.state.lock_num
 		});
 	}
 
@@ -206,11 +203,9 @@ class Assets extends Component {
 							onRefresh={() => {
 								this.getAllBalance();
 							}}
-							tintColor="green"
+							tintColor="#528bf7"
 							title="Loading..."
-							titleColor="green"
-							colors={[ '#ff0000', '#00ff00', '#0000ff' ]}
-							progressBackgroundColor="#ffff00"
+							titleColor="#528bf7"
 						/>
 					}
 				>

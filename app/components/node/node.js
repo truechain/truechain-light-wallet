@@ -7,13 +7,12 @@ import {
 	StyleSheet,
 	ScrollView,
 	RefreshControl,
+	TouchableOpacity,
 	TouchableHighlight
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
-import { getNodeRank, getMemberStatus } from '../../api/loged';
-
-// var RefreshableListView = require('react-native-refreshable-listview');
+import { getNodeRank, getMemberStatus, getTeamAddress } from '../../api/loged';
 
 const screen = Dimensions.get('window');
 
@@ -25,77 +24,118 @@ class NodeItem extends Component {
 			require('../../assets/images/node/sort_3.png')
 		];
 		return (
-			<View style={styles.nodeItem}>
-				{this.props.index <= 2 ? (
-					<Image style={styles.iconSort} source={iconUrl[this.props.index]} />
-				) : (
-					<View style={styles.iconSort}>
-						<Text>{this.props.index + 1}</Text>
+			<TouchableOpacity
+				onPress={() => {
+					this.props.navigate('VoteInfo', {
+						teamAddress: this.props.item.address,
+						type: this.props.item.type
+					});
+				}}
+			>
+				<View style={styles.nodeItem}>
+					{this.props.index <= 2 ? (
+						<Image style={styles.iconSort} source={iconUrl[this.props.index]} />
+					) : (
+						<View style={styles.iconSort}>
+							<Text>{this.props.index + 1}</Text>
+						</View>
+					)}
+					<View style={styles.nickName}>
+						<Text style={styles.font_12}>{this.props.item.nickname}</Text>
+						{this.props.item.type === 1 ? (
+							<Image
+								style={styles.iconPersonal}
+								source={require('../../assets/images/node/geren_3x.png')}
+							/>
+						) : null}
 					</View>
-				)}
-				<View style={styles.nickName}>
-					<Text style={styles.font_12}>{this.props.item.nickname}</Text>
-					{this.props.item.type === 1 ? (
-						<Image style={styles.iconPersonal} source={require('../../assets/images/node/geren_3x.png')} />
+
+					{this.props.item.lock_num ? (
+						<View style={styles.lockNum}>
+							<Text style={styles.font_12}>{this.props.item.lock_num} true</Text>
+						</View>
+					) : (
+						<View style={styles.lockNum}>
+							<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.score} 分</Text>
+						</View>
+					)}
+					{this.props.item.tickets >= 0 ? (
+						<View style={styles.tickets}>
+							<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.tickets} 票</Text>
+						</View>
 					) : null}
 				</View>
-
-				{this.props.item.lock_num ? (
-					<View style={styles.lockNum}>
-						<Text style={styles.font_12}>{this.props.item.lock_num} true</Text>
-					</View>
-				) : (
-					<View style={styles.lockNum}>
-						<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.score} 分</Text>
-					</View>
-				)}
-				{this.props.item.tickets ? (
-					<View style={styles.tickets}>
-						<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.tickets} 票</Text>
-					</View>
-				) : null}
-			</View>
+			</TouchableOpacity>
 		);
 	}
 }
-
 class Node extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			isRefreshing: false,
 			standardNodeData: [],
-			fullNodeData: []
+			fullNodeData: [],
+			teamAddress: null,
+			standPageIndex: 0,
+			fullPageIndex: 0
 		};
 		this.navigate = this.props.navigation.navigate;
-		this.huhu = true;
 	}
 
 	componentDidMount() {
-		this._getNodeRank(); //获取节点排行
+		this._fullOnRefresh();
+		this._standOnRefresh();
 	}
 
-	_getNodeRank() {
-		getNodeRank({
-			nodeType: 2,
-			pageIndex: 0
-		}).then((res) => {
-			this.setState({
-				fullNodeData: res.data.data
-			});
-		});
-		getNodeRank({
-			nodeType: 1,
-			pageIndex: 0
-		}).then((res) => {
-			this.setState({
-				standardNodeData: res.data.data
-			});
-		});
+	_fullOnRefresh() {
+		this.setState(
+			{
+				fullPageIndex: 0
+			},
+			() => {
+				getNodeRank({
+					nodeType: 2,
+					pageIndex: this.state.fullPageIndex
+				}).then((res) => {
+					this.setState({
+						fullNodeData: res.data.data
+					});
+				});
+			}
+		);
 	}
 
-	_onRefresh() {
-		this._getNodeRank();
+	_standOnRefresh() {
+		this.setState(
+			{
+				standPageIndex: 0
+			},
+			() => {
+				getNodeRank({
+					nodeType: 1,
+					pageIndex: this.state.standPageIndex
+				}).then((res) => {
+					this.setState({
+						standardNodeData: res.data.data
+					});
+				});
+			}
+		);
+	}
+
+	_getTeamAddress(option) {
+		getTeamAddress()
+			.then((result) => {
+				return result.data.data[0];
+			})
+			.then((res) => {
+				this.navigate('TeamInfo', {
+					status: option.status,
+					title: '组队信息',
+					teamAddress: res.team_address
+				});
+			});
 	}
 
 	_signUp() {
@@ -110,16 +150,90 @@ class Node extends Component {
 						this.navigate('SignUp');
 						break;
 					case 1:
-						console.log('已申请');
+						console.log(res, '已申请');
+						this._getTeamAddress({
+							status: 1
+						});
 						break;
 					case 2:
-						console.log(res, '已通过');
+						// console.log(res, '已通过');
+						if (res.type === 1) {
+							// console.log('个人报名', res.role);
+							this.navigate('SignUpSuccess', {
+								type: res.type
+							});
+						} else {
+							console.log('组队', res.role);
+							if (res.role === 2) {
+								// console.log('自己创建组队');
+								this.navigate('MyTeam', {
+									type: res.type
+								});
+							} else {
+								this._getTeamAddress({
+									status: 2
+								});
+							}
+						}
 						break;
 					case 3:
 						console.log('已拒绝');
+						this._getTeamAddress({
+							status: 3
+						});
+						break;
+					default:
+						console.log('默认');
+						this.navigate('SignUp');
 						break;
 				}
 			});
+	}
+
+	_fullOnScroll(evt) {
+		const event = evt['nativeEvent'];
+		const _num =
+			event['contentSize']['height'] - event['layoutMeasurement']['height'] - event['contentOffset']['y'];
+		if (event['contentSize']['height'] > event['layoutMeasurement']['height'] && _num < -50) {
+			this.setState(
+				{
+					fullPageIndex: this.state.fullPageIndex + 10
+				},
+				() => {
+					getNodeRank({
+						nodeType: 2,
+						pageIndex: this.state.fullPageIndex
+					}).then((res) => {
+						this.setState({
+							fullNodeData: this.state.fullNodeData.concat(res.data.data)
+						});
+					});
+				}
+			);
+		}
+	}
+
+	_standOnScroll(evt) {
+		const event = evt['nativeEvent'];
+		const _num =
+			event['contentSize']['height'] - event['layoutMeasurement']['height'] - event['contentOffset']['y'];
+		if (event['contentSize']['height'] > event['layoutMeasurement']['height'] && _num < -50) {
+			this.setState(
+				{
+					standPageIndex: this.state.standPageIndex + 10
+				},
+				() => {
+					getNodeRank({
+						nodeType: 1,
+						pageIndex: this.state.standPageIndex
+					}).then((res) => {
+						this.setState({
+							standardNodeData: this.state.standardNodeData.concat(res.data.data)
+						});
+					});
+				}
+			);
+		}
 	}
 
 	render() {
@@ -145,7 +259,7 @@ class Node extends Component {
 						<TouchableHighlight
 							underlayColor={'transparent'}
 							onPress={() => {
-								alert('投票');
+								this.navigate('VoteNode');
 							}}
 						>
 							<View style={styles.fun}>
@@ -172,17 +286,18 @@ class Node extends Component {
 							refreshControl={
 								<RefreshControl
 									refreshing={this.state.isRefreshing}
-									onRefresh={this._onRefresh.bind(this)}
-									tintColor="#ff0000"
+									onRefresh={this._fullOnRefresh.bind(this)}
+									tintColor="#528bf7"
 									title="Loading..."
-									titleColor="green"
-									colors={[ '#ff0000', '#00ff00', '#0000ff' ]}
-									progressBackgroundColor="#ffff00"
+									titleColor="#528bf7"
 								/>
 							}
+							scrollEventThrottle={200}
+							onScroll={this._fullOnScroll.bind(this)}
 						>
+							>
 							{this.state.fullNodeData.map((item, index) => {
-								return <NodeItem item={item} index={index} key={index} />;
+								return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
 							})}
 						</ScrollView>
 					</View>
@@ -193,17 +308,17 @@ class Node extends Component {
 							refreshControl={
 								<RefreshControl
 									refreshing={this.state.isRefreshing}
-									onRefresh={this._onRefresh.bind(this)}
-									tintColor="#ff0000"
+									onRefresh={this._standOnRefresh.bind(this)}
+									tintColor="#528bf7"
 									title="Loading..."
-									titleColor="green"
-									colors={[ '#ff0000', '#00ff00', '#0000ff' ]}
-									progressBackgroundColor="#ffff00"
+									titleColor="#528bf7"
 								/>
 							}
+							scrollEventThrottle={200}
+							onScroll={this._standOnScroll.bind(this)}
 						>
 							{this.state.standardNodeData.map((item, index) => {
-								return <NodeItem item={item} index={index} key={index} />;
+								return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
 							})}
 						</ScrollView>
 					</View>

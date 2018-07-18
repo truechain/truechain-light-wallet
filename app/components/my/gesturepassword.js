@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
-
 import {StyleSheet} from 'react-native';
-
-import { withNavigation } from 'react-navigation'
-
-import PasswordGesture from 'react-native-gesture-password'
-
-
+import { withNavigation } from 'react-navigation';
+import PasswordGesture from 'react-native-gesture-password';
 export class GesturePassword extends Component {
 
     constructor(props) {

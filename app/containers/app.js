@@ -36,6 +36,13 @@ import TeamInfo from '../components/node/teamInfo';
 import FillInfo from '../components/node/fillInfo';
 import LockAccount from '../components/my/lockAccount';
 import LogOut from '../components/my/logOut';
+import SignUpSuccess from '../components/public/signUpSuccess';
+import MyTeam from '../components/node/myTeam';
+import PersonnelManagement from '../components/node/personnelManagement';
+import SetGesturePassword from '../components/my/setgesturepassword';
+import VoteNode from '../components/node/vote/voteNode';
+import VoteList from '../components/node/vote/voteList';
+import VoteInfo from '../components/node/vote/voteInfo';
 
 //rely
 import Storage from 'react-native-storage';
@@ -250,10 +257,17 @@ const App = createStackNavigator(
 			screen: FillInfo
 		},
 		LockAccount,
-		LogOut
+		LogOut,
+		SignUpSuccess,
+		MyTeam,
+		PersonnelManagement,
+		SetGesturePassword,
+		VoteNode,
+		VoteList,
+		VoteInfo
 	},
 	{
-		// initialRouteName: 'Login',
+		// initialRouteName: 'SetGesturePassword',
 		headerMode: 'screen',
 		navigationOptions: {
 			headerStyle: {
