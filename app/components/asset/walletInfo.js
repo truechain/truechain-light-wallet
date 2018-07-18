@@ -32,8 +32,10 @@ class WalletInfo extends Component {
 			walletPassword: ' ',
 			keystoreV3: ' ',
 			onPress: null,
-			modalTitle: null
+			modalTitle: null,
+			deleteBtnshow: true
 		};
+		this.verifyPwd = this.verifyPwd.bind(this);
 	}
 
 	componentDidMount() {
@@ -70,7 +72,8 @@ class WalletInfo extends Component {
 			this.setState({
 				walletPassword: walletPassword
 			});
-		}
+		},
+		ref: 'pwdInput'
 	};
 	walletName = {
 		placeholder: '输入您的钱包名称',
@@ -81,6 +84,20 @@ class WalletInfo extends Component {
 			});
 		}
 	};
+
+	verifyPwd() {
+		try {
+			web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
+			this.refs.codeInput.close();
+			this.navigate('ExportMnemonic');
+		} catch (e) {
+			alert('密码错误,请重新输入');
+			this.setState({
+				walletPassword: ' '
+			});
+			this.refs.pwdInput.clear();
+		}
+	}
 
 	_setClipboardContent = async () => {
 		Clipboard.setString(this.state.PrivateKey);
@@ -93,6 +110,45 @@ class WalletInfo extends Component {
 	};
 
 	render() {
+		let deleteBtnComponents = this.state.deleteBtnshow ? (
+			<Button
+				title={I18n.t('assets.walletInfo.deleteWallet')}
+				buttonStyle={styles.buttonStyle}
+				onPress={() => {
+					this.setState(
+						{
+							modalTitle: I18n.t('public.verifyPwd')
+						},
+						() => {
+							this.refs.codeInput.open();
+							this.setState({
+								onPress: () => {
+									try {
+										web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
+										storage.remove({
+											key: 'walletInfo'
+										});
+
+										storage.remove({
+											key: 'token'
+										});
+										
+										storage.remove({
+											key: 'walletName'
+										});
+
+										this.navigate('Guide');
+									} catch (error) {
+										alert(I18n.t('public.wrongPwd'));
+									}
+								}
+							});
+						}
+					);
+				}}
+			/>
+		) : null;
+
 		return (
 			<View style={styles.container}>
 				<View style={styles.walletInfo}>
@@ -218,40 +274,22 @@ class WalletInfo extends Component {
 						);
 					}}
 				/>
-				<Button
-					title={I18n.t('assets.walletInfo.deleteWallet')}
-					buttonStyle={styles.buttonStyle}
-					onPress={() => {
-						this.setState(
-							{
-								modalTitle: I18n.t('public.verifyPwd')
-							},
-							() => {
-								this.refs.codeInput.open();
-								this.setState({
-									onPress: () => {
-										try {
-											web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
-											storage.remove({
-												key: 'walletInfo'
-											});
 
-											storage.remove({
-												key: 'token'
-											});
+				{deleteBtnComponents}
 
-											this.navigate('Guide');
-										} catch (error) {
-											alert(I18n.t('public.wrongPwd'));
-										}
-									}
-								});
-							}
-						);
-					}}
-				/>
 				<Toast ref="toast" position="center" />
-				<Modal style={styles.modalCode} position={'bottom'} ref={'codeInput'} swipeArea={20}>
+				<Modal
+					style={styles.modalCode}
+					position={'bottom'}
+					ref={'codeInput'}
+					swipeArea={20}
+					onClosed={() => {
+						this.setState({ deleteBtnshow: true });
+					}}
+					onOpened={() => {
+						this.setState({ deleteBtnshow: false });
+					}}
+				>
 					<View style={styles.InputPwd_title}>
 						<Text>{this.state.modalTitle}</Text>
 					</View>
@@ -368,7 +406,9 @@ const styles = StyleSheet.create({
 		backgroundColor: '#bbb',
 		height: 45,
 		borderRadius: 50,
-		marginTop: 30
+		marginTop: 30,
+		position: 'relative',
+		zIndex: 5
 	},
 	modalCode: {
 		alignItems: 'center',
