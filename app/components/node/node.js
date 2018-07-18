@@ -13,6 +13,7 @@ import {
 import { withNavigation } from 'react-navigation';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import { getNodeRank, getMemberStatus, getTeamAddress } from '../../api/loged';
+import { I18n } from '../../../language/i18n';
 
 const screen = Dimensions.get('window');
 
@@ -56,12 +57,16 @@ class NodeItem extends Component {
 						</View>
 					) : (
 						<View style={styles.lockNum}>
-							<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.score} 分</Text>
+							<Text style={[ styles.node_text, styles.font_12 ]}>
+								{this.props.item.score} {I18n.t('public.score')}
+							</Text>
 						</View>
 					)}
 					{this.props.item.tickets >= 0 ? (
 						<View style={styles.tickets}>
-							<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.tickets} 票</Text>
+							<Text style={[ styles.node_text, styles.font_12 ]}>
+								{this.props.item.tickets} {I18n.t('public.tickets')}
+							</Text>
 						</View>
 					) : null}
 				</View>
@@ -132,7 +137,7 @@ class Node extends Component {
 			.then((res) => {
 				this.navigate('TeamInfo', {
 					status: option.status,
-					title: '组队信息',
+					title: I18n.t('node.teamInfo.teamInfo_Info'),
 					teamAddress: res.team_address
 				});
 			});
@@ -253,7 +258,7 @@ class Node extends Component {
 									source={require('../../assets/images/node/baoming_2x.png')}
 									style={styles.fun_icon}
 								/>
-								<Text style={styles.color_white}>报名参选</Text>
+								<Text style={styles.color_white}>{I18n.t('node.signUp')}</Text>
 							</View>
 						</TouchableHighlight>
 						<TouchableHighlight
@@ -267,7 +272,7 @@ class Node extends Component {
 									source={require('../../assets/images/node/toupiao_2x.png')}
 									style={styles.fun_icon}
 								/>
-								<Text style={styles.color_white}>投票</Text>
+								<Text style={styles.color_white}>{I18n.t('node.vote')}</Text>
 							</View>
 						</TouchableHighlight>
 					</View>
@@ -280,7 +285,7 @@ class Node extends Component {
 					tabBarInactiveTextColor="#000"
 					renderTabBar={() => <DefaultTabBar />}
 				>
-					<View tabLabel="全节点排行">
+					<View tabLabel={I18n.t('node.fullNodeRank')}>
 						<ScrollView
 							style={styles.scrollview}
 							refreshControl={
@@ -302,7 +307,7 @@ class Node extends Component {
 						</ScrollView>
 					</View>
 
-					<View tabLabel="标准节点排行">
+					<View tabLabel={I18n.t('node.standNodeRank')}>
 						<ScrollView
 							style={styles.scrollview}
 							refreshControl={

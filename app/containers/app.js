@@ -1,5 +1,5 @@
 import React from 'react';
-import I18n from '../../language/i18n';
+import { I18n } from '../../language/i18n';
 import { Image, StyleSheet, AsyncStorage } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation';
 
@@ -43,6 +43,7 @@ import SetGesturePassword from '../components/my/setgesturepassword';
 import VoteNode from '../components/node/vote/voteNode';
 import VoteList from '../components/node/vote/voteList';
 import VoteInfo from '../components/node/vote/voteInfo';
+import SysLanguage from '../components/my/sysLanguage';
 
 //rely
 import Storage from 'react-native-storage';
@@ -67,6 +68,14 @@ storage
 	})
 	.catch((e) => {
 		console.log(e);
+	});
+
+storage
+	.load({
+		key: 'localLanguage'
+	})
+	.then((res) => {
+		I18n.locale = res.localLanguage;
 	});
 
 const Web3 = require('web3');
@@ -264,7 +273,8 @@ const App = createStackNavigator(
 		SetGesturePassword,
 		VoteNode,
 		VoteList,
-		VoteInfo
+		VoteInfo,
+		SysLanguage
 	},
 	{
 		// initialRouteName: 'SetGesturePassword',

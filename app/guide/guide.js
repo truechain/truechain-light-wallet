@@ -6,7 +6,7 @@ import {
     Image,
     TouchableHighlight
 } from 'react-native';
-import I18n from '../../language/i18n';
+import {I18n} from '../../language/i18n';
 import { withNavigation } from 'react-navigation'
 
 class Guide extends Component {

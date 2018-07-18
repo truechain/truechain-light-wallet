@@ -47,19 +47,6 @@ class VoteList extends Component {
 				this._OnRefresh();
 			}
 		);
-
-		// getNodeRank({
-		// 	nodeType: params.nodeType,
-		// 	pageIndex: 0
-		// })
-		// 	.then((result) => {
-		// 		return result.data.data;
-		// 	})
-		// 	.then((res) => {
-		// 		this.setState({
-		// 			NodeData: res
-		// 		});
-		// 	});
 	}
 
 	// beforeFocus = () => {
@@ -178,8 +165,6 @@ class VoteList extends Component {
 		return (
 			<View style={styles.container}>
 				<Search ref="search_box" />
-				{/* <FlatList data={this.state.NodeData} renderItem={(item) => this._renderItem(item)} /> */}
-
 				<ScrollView
 					refreshControl={
 						<RefreshControl
@@ -196,7 +181,6 @@ class VoteList extends Component {
 					>
 					{this.state.NodeData.map((item, index) => {
 						return this._renderItem(item, index);
-						// return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
 					})}
 				</ScrollView>
 			</View>

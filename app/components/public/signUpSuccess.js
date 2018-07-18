@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TouchableHighlight } from 'react-native';
 import { getTeamInfo } from '../../api/loged';
+import { I18n } from '../../../language/i18n';
 
 class SignUpSuccess extends Component {
 	static navigationOptions = ({ navigation }) => ({
-		headerTitle: '报名成功'
+		headerTitle: I18n.t('public.signSuccess')
 	});
 
 	constructor(props) {
@@ -52,7 +53,7 @@ class SignUpSuccess extends Component {
 					<View style={styles.headerInfo}>
 						<View style={styles.headerInfo_item}>
 							<View style={styles.baseInfo}>
-								<Text>个人信息</Text>
+								<Text>{I18n.t('node.personSignUp.personSignUp_Info')}</Text>
 								<TouchableHighlight style={styles.lock_num}>
 									<Text style={styles.color_fff}>{this.state.lock_num} TRUE</Text>
 								</TouchableHighlight>
@@ -61,7 +62,9 @@ class SignUpSuccess extends Component {
 						</View>
 
 						<TouchableHighlight style={styles.ticket}>
-							<Text style={styles.color_fff}>{this.state.tickets} 票</Text>
+							<Text style={styles.color_fff}>
+								{this.state.tickets} {I18n.t('public.tickets')}
+							</Text>
 						</TouchableHighlight>
 					</View>
 					<View>

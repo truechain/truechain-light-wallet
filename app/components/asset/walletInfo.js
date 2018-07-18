@@ -5,6 +5,7 @@ import { withNavigation } from 'react-navigation';
 import Modal from 'react-native-modalbox';
 import lightwallet from 'eth-lightwallet';
 import Toast from 'react-native-easy-toast';
+import { I18n } from '../../../language/i18n';
 
 const screen = Dimensions.get('window');
 
@@ -52,7 +53,7 @@ class WalletInfo extends Component {
 			});
 	}
 	pwd = {
-		placeholder: '输入您的密码',
+		placeholder: I18n.t('public.inputPwd'),
 		inputContainerStyle: styles.textInput,
 		secureTextEntry: true,
 		onChangeText: (walletPassword) => {
@@ -66,9 +67,9 @@ class WalletInfo extends Component {
 		Clipboard.setString(this.state.PrivateKey);
 		try {
 			var content = await Clipboard.getString();
-			this.refs.toast.show('复制成功!');
+			this.refs.toast.show(I18n.t('public.copySuccess'));
 		} catch (e) {
-			this.refs.toast.show('复制失败!');
+			this.refs.toast.show(I18n.t('public.copyFailed'));
 		}
 	};
 
@@ -86,17 +87,17 @@ class WalletInfo extends Component {
 				</View>
 
 				<ListFun
-					fun_name="钱包名称"
+					fun_name={I18n.t('assets.walletInfo.walletName')}
 					onPress={() => {
 						alert('修改钱包名称');
 					}}
 				/>
 				<ListFun
-					fun_name="导出私钥"
+					fun_name={I18n.t('assets.walletInfo.exportPrivateKey')}
 					onPress={() => {
 						this.setState(
 							{
-								modalTitle: '导出私钥'
+								modalTitle: I18n.t('assets.walletInfo.exportPrivateKey')
 							},
 							() => {
 								this.refs.codeInput.open();
@@ -128,7 +129,7 @@ class WalletInfo extends Component {
 											this.refs.codeInput.close();
 											this.refs.privateKey.open();
 										} catch (error) {
-											alert('密码错误,请重新输入');
+											alert(I18n.t('public.wrongPwd'));
 										}
 									}
 								});
@@ -137,11 +138,11 @@ class WalletInfo extends Component {
 					}}
 				/>
 				<ListFun
-					fun_name="导出keystore"
+					fun_name={I18n.t('assets.walletInfo.exportKeystore')}
 					onPress={() => {
 						this.setState(
 							{
-								modalTitle: '验证密码'
+								modalTitle: I18n.t('public.verifyPwd')
 							},
 							() => {
 								this.refs.codeInput.open();
@@ -155,7 +156,7 @@ class WalletInfo extends Component {
 											this.navigate('ExportKeystore', { keystoreV3: this.state.keystoreV3 });
 											this.refs.codeInput.close();
 										} catch (error) {
-											alert('密码错误,请重新输入');
+											alert(I18n.t('public.wrongPwd'));
 										}
 									}
 								});
@@ -164,11 +165,11 @@ class WalletInfo extends Component {
 					}}
 				/>
 				<ListFun
-					fun_name="导出助记词"
+					fun_name={I18n.t('assets.walletInfo.exportMnemonic')}
 					onPress={() => {
 						this.setState(
 							{
-								modalTitle: '验证密码'
+								modalTitle: I18n.t('public.verifyPwd')
 							},
 							() => {
 								this.refs.codeInput.open();
@@ -184,7 +185,7 @@ class WalletInfo extends Component {
 											});
 											this.refs.codeInput.close();
 										} catch (error) {
-											alert('密码错误,请重新输入');
+											alert(I18n.t('public.wrongPwd'));
 										}
 									}
 								});
@@ -193,12 +194,12 @@ class WalletInfo extends Component {
 					}}
 				/>
 				<Button
-					title="删除钱包"
+					title={I18n.t('assets.walletInfo.deleteWallet')}
 					buttonStyle={styles.buttonStyle}
 					onPress={() => {
 						this.setState(
 							{
-								modalTitle: '验证密码'
+								modalTitle: I18n.t('public.verifyPwd')
 							},
 							() => {
 								this.refs.codeInput.open();
@@ -216,7 +217,7 @@ class WalletInfo extends Component {
 
 											this.navigate('Guide');
 										} catch (error) {
-											alert('密码错误,请重新输入');
+											alert(I18n.t('public.wrongPwd'));
 										}
 									}
 								});
@@ -236,11 +237,11 @@ class WalletInfo extends Component {
 				</Modal>
 				<Modal style={styles.privateKey} position={'center'} ref={'privateKey'} swipeArea={20}>
 					<View style={styles.privateKeyTitle}>
-						<Text>导出私钥</Text>
+						<Text>{I18n.t('assets.walletInfo.exportPrivateKey')}</Text>
 					</View>
 					<TouchableHighlight style={[ styles.spacing, styles.privateKeyWarning ]}>
 						<View>
-							<Text style={styles.warining_text}>安全警告：私钥未经加密，导出存在风险，建议使用助记词和keystore进行备份。</Text>
+							<Text style={styles.warining_text}>{I18n.t('assets.walletInfo.privateKeyWarning')}</Text>
 						</View>
 					</TouchableHighlight>
 					<TouchableHighlight style={[ styles.spacing, styles.privateKeyArea ]}>
@@ -251,7 +252,7 @@ class WalletInfo extends Component {
 
 					<View style={styles.copy}>
 						<Button
-							title="复制私钥"
+							title={I18n.t('assets.walletInfo.exportPrivateKey')}
 							buttonStyle={styles.copyButtonStyle}
 							onPress={this._setClipboardContent.bind(this)}
 						/>

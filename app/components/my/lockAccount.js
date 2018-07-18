@@ -77,6 +77,7 @@ class LockAccount extends React.Component {
 					<Text style={styles.color_fff}>TRUE</Text>
 					<Text style={[ styles.color_fff, styles.lock_num ]}>{this.state.lock_num} 锁仓</Text>
 				</View>
+
 				<View style={styles.bottom_fun}>
 					<Text
 						style={[ styles.bottom_fun_item, styles.bottom_fun_item_transfer ]}
@@ -144,7 +145,9 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		flexDirection: 'row',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		borderWidth: 1,
+		borderColor: 'transparent'
 	},
 	bottom_fun_item: {
 		height: 50,
