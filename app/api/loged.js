@@ -15,6 +15,8 @@ const getMemberListUrl = '/getMemberList';
 const isJoinTeamUrl = '/isJoinTeam';
 const getTeamAddressUrl = '/getTeamAddress';
 const initStatusUrl = '/initStatus';
+const searchTeamUrl = '/searchTeam';
+
 const getToken = () => {
 	return storage.load({
 		key: 'token'
@@ -204,6 +206,20 @@ const initStatus = async (option) => {
 	});
 };
 
+//搜索组队
+const searchTeam = async (option) => {
+	let res = await getToken();
+	return axios.get(searchTeamUrl, {
+		headers: {
+			token: res.token
+		},
+		params: {
+			node_type: option.nodeType,
+			search_value: option.searchValue
+		}
+	});
+};
+
 export {
 	createTeam,
 	getTrueCoin,
@@ -217,5 +233,6 @@ export {
 	getMemberList,
 	isJoinTeam,
 	getTeamAddress,
-	initStatus
+	initStatus,
+	searchTeam
 };

@@ -11,7 +11,7 @@ import {
 	TouchableOpacity
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
-import { getNodeRank } from '../../../api/loged';
+import { getNodeRank, searchTeam } from '../../../api/loged';
 import Search from 'react-native-search-box';
 const screen = Dimensions.get('window');
 const iconUrl = [
@@ -49,26 +49,6 @@ class VoteList extends Component {
 		);
 	}
 
-	// beforeFocus = () => {
-	// 	return new Promise((resolve, reject) => {
-	// 		console.log('beforeFocus');
-	// 		resolve();
-	// 	});
-	// };
-
-	// onFocus = (text) => {
-	// 	return new Promise((resolve, reject) => {
-	// 		console.log('onFocus', text);
-	// 		resolve();
-	// 	});
-	// };
-
-	// afterFocus = () => {
-	// 	return new Promise((resolve, reject) => {
-	// 		console.log('afterFocus');
-	// 		resolve();
-	// 	});
-	// };
 	_renderItem(item, index) {
 		return (
 			<TouchableOpacity
@@ -164,7 +144,23 @@ class VoteList extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<Search ref="search_box" />
+				<Search
+					ref="search_box"
+					onChangeText={(val) => {
+						searchTeam({
+							nodeType: this.state.nodeType,
+							searchValue: val
+						})
+							.then((result) => {
+								return result.data.data;
+							})
+							.then((res) => {
+								this.setState({
+									NodeData: res
+								});
+							});
+					}}
+				/>
 				<ScrollView
 					refreshControl={
 						<RefreshControl

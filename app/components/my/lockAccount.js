@@ -26,7 +26,7 @@ class LockAccount extends React.Component {
 			})
 			.then((res) => {
 				this.setState({
-					mobile: res.mobile,
+					mobile: res.mobile.replace(res.mobile.substr(3, 4), '****'),
 					lock_num: res.true_num
 				});
 				this.props.lockAccount({
@@ -64,7 +64,7 @@ class LockAccount extends React.Component {
 									source={require('../../assets/images/asset/head_3x.png')}
 								/>
 							</TouchableOpacity>
-							<Text style={{ marginLeft: 15 }}>+86 {this.state.mobile}</Text>
+							<Text style={{ marginLeft: 15 }}>{this.state.mobile}</Text>
 						</View>
 						<Image
 							style={styles.iconArr2R}
