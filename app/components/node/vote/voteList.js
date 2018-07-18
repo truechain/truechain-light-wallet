@@ -1,5 +1,15 @@
 import React, { Component } from 'react';
-import { View, Text, Image, Dimensions, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import {
+	View,
+	Text,
+	Image,
+	Dimensions,
+	StyleSheet,
+	ScrollView,
+	RefreshControl,
+	FlatList,
+	TouchableOpacity
+} from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { getNodeRank } from '../../../api/loged';
 import Search from 'react-native-search-box';
@@ -15,7 +25,10 @@ class VoteList extends Component {
 		super(props);
 		this.state = {
 			NodeData: [],
-			fullNodeData: []
+			fullNodeData: [],
+			isRefreshing: false,
+			PageIndex: 0,
+			nodeType: null
 		};
 		this.navigate = this.props.navigation.navigate;
 	}
@@ -26,18 +39,27 @@ class VoteList extends Component {
 
 	componentDidMount() {
 		const { params } = this.props.navigation.state;
-		getNodeRank({
-			nodeType: params.nodeType,
-			pageIndex: 0
-		})
-			.then((result) => {
-				return result.data.data;
-			})
-			.then((res) => {
-				this.setState({
-					NodeData: res
-				});
-			});
+		this.setState(
+			{
+				nodeType: params.nodeType
+			},
+			() => {
+				this._OnRefresh();
+			}
+		);
+
+		// getNodeRank({
+		// 	nodeType: params.nodeType,
+		// 	pageIndex: 0
+		// })
+		// 	.then((result) => {
+		// 		return result.data.data;
+		// 	})
+		// 	.then((res) => {
+		// 		this.setState({
+		// 			NodeData: res
+		// 		});
+		// 	});
 	}
 
 	// beforeFocus = () => {
@@ -60,27 +82,28 @@ class VoteList extends Component {
 	// 		resolve();
 	// 	});
 	// };
-	_renderItem(item) {
+	_renderItem(item, index) {
 		return (
 			<TouchableOpacity
 				onPress={() => {
 					this.navigate('VoteInfo', {
-						teamAddress: item.item.address,
-						type: item.item.type
+						teamAddress: item.address,
+						type: item.type
 					});
 				}}
+				key={index}
 			>
 				<View style={styles.nodeItem}>
-					{item.index <= 2 ? (
-						<Image style={styles.iconSort} source={iconUrl[item.index]} />
+					{index <= 2 ? (
+						<Image style={styles.iconSort} source={iconUrl[index]} />
 					) : (
 						<View style={styles.iconSort}>
-							<Text>{item.index + 1}</Text>
+							<Text>{index + 1}</Text>
 						</View>
 					)}
 					<View style={styles.nickName}>
-						<Text style={styles.font_12}>{item.item.nickname}</Text>
-						{item.item.type === 1 ? (
+						<Text style={styles.font_12}>{item.nickname}</Text>
+						{item.type === 1 ? (
 							<Image
 								style={styles.iconPersonal}
 								source={require('../../../assets/images/node/geren_3x.png')}
@@ -88,18 +111,18 @@ class VoteList extends Component {
 						) : null}
 					</View>
 
-					{item.item.lock_num ? (
+					{item.lock_num ? (
 						<View style={styles.lockNum}>
-							<Text style={styles.font_12}>{item.item.lock_num} true</Text>
+							<Text style={styles.font_12}>{item.lock_num} true</Text>
 						</View>
 					) : (
 						<View style={styles.lockNum}>
-							<Text style={[ styles.node_text, styles.font_12 ]}>{item.item.score} 分</Text>
+							<Text style={[ styles.node_text, styles.font_12 ]}>{item.score} 分</Text>
 						</View>
 					)}
-					{item.item.tickets ? (
+					{item.tickets >= 0 ? (
 						<View style={styles.tickets}>
-							<Text style={[ styles.node_text, styles.font_12 ]}>{item.item.tickets} 票</Text>
+							<Text style={[ styles.node_text, styles.font_12 ]}>{item.tickets} 票</Text>
 						</View>
 					) : null}
 				</View>
@@ -107,11 +130,75 @@ class VoteList extends Component {
 		);
 	}
 
+	_OnRefresh() {
+		this.setState(
+			{
+				PageIndex: 0
+			},
+			() => {
+				getNodeRank({
+					nodeType: this.state.nodeType,
+					pageIndex: this.state.PageIndex,
+					pageNumber: 15
+				}).then((res) => {
+					this.setState({
+						NodeData: res.data.data
+					});
+				});
+			}
+		);
+	}
+
+	_OnScroll(evt) {
+		const event = evt['nativeEvent'];
+		const _num =
+			event['contentSize']['height'] - event['layoutMeasurement']['height'] - event['contentOffset']['y'];
+
+		if (event['contentSize']['height'] > event['layoutMeasurement']['height'] && _num < -50) {
+			this.setState(
+				{
+					PageIndex: this.state.PageIndex + 15
+				},
+				() => {
+					getNodeRank({
+						nodeType: this.state.nodeType,
+						pageIndex: this.state.PageIndex,
+						pageNumber: 15
+					}).then((res) => {
+						this.setState({
+							NodeData: this.state.NodeData.concat(res.data.data)
+						});
+					});
+				}
+			);
+		}
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
 				<Search ref="search_box" />
-				<FlatList data={this.state.NodeData} renderItem={(item) => this._renderItem(item)} />
+				{/* <FlatList data={this.state.NodeData} renderItem={(item) => this._renderItem(item)} /> */}
+
+				<ScrollView
+					refreshControl={
+						<RefreshControl
+							refreshing={this.state.isRefreshing}
+							onRefresh={this._OnRefresh.bind(this)}
+							tintColor="#528bf7"
+							title="Loading..."
+							titleColor="#528bf7"
+						/>
+					}
+					scrollEventThrottle={200}
+					onScroll={this._OnScroll.bind(this)}
+				>
+					>
+					{this.state.NodeData.map((item, index) => {
+						return this._renderItem(item, index);
+						// return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
+					})}
+				</ScrollView>
 			</View>
 		);
 	}
