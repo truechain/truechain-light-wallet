@@ -104,6 +104,7 @@ class Assets extends Component {
 				this.setState({ ttr_banlance });
 			}
 		);
+		this.updataWalletName();
 	}
 
 	componentDidMount() {
@@ -112,17 +113,29 @@ class Assets extends Component {
 				key: 'walletInfo'
 			})
 			.then((walletInfo) => {
-				let walletAddress = walletInfo.walletAddress,
-					walletName = walletInfo.walletName;
+				let walletAddress = walletInfo.walletAddress;
 				this.setState(
 					{
-						walletAddress: walletAddress,
-						walletName: walletName
+						walletAddress: walletAddress
 					},
 					() => {
 						this.getAllBalance();
 					}
 				);
+			});
+		this.updataWalletName();
+	}
+
+	updataWalletName() {
+		storage
+			.load({
+				key: 'walletName'
+			})
+			.then((res) => {
+				let walletName = res.walletName;
+				this.setState({
+					walletName: walletName
+				});
 			});
 	}
 

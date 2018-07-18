@@ -4,6 +4,7 @@ import { Button, Input } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import Modal from 'react-native-modalbox';
 import lightwallet from 'eth-lightwallet';
+import TextWidget from '../public/textWidget/textWidget';
 import Toast from 'react-native-easy-toast';
 import { I18n } from '../../../language/i18n';
 
@@ -15,7 +16,7 @@ class ListFun extends Component {
 			<TouchableHighlight underlayColor={'transparent'} onPress={this.props.onPress}>
 				<View style={styles.fun}>
 					<Text style={styles.fun_text}>{this.props.fun_name}</Text>
-					<Text style={styles.color_bbb}>></Text>
+					<Image style={styles.arr} source={require('../../assets/images/common/arr2ri.png')} />
 				</View>
 			</TouchableHighlight>
 		);
@@ -42,13 +43,22 @@ class WalletInfo extends Component {
 			})
 			.then((walletInfo) => {
 				let walletAddress = walletInfo.walletAddress,
-					walletName = walletInfo.walletName,
 					keystoreV3 = walletInfo.keystoreV3;
 				this.setState({
 					walletAddress: walletAddress,
-					walletName: walletName,
 					keystoreV3: keystoreV3,
 					PrivateKey: null
+				});
+			});
+
+		storage
+			.load({
+				key: 'walletName'
+			})
+			.then((res) => {
+				let walletName = res.walletName;
+				this.setState({
+					walletName: walletName
 				});
 			});
 	}
@@ -59,6 +69,15 @@ class WalletInfo extends Component {
 		onChangeText: (walletPassword) => {
 			this.setState({
 				walletPassword: walletPassword
+			});
+		}
+	};
+	walletName = {
+		placeholder: '输入您的钱包名称',
+		inputContainerStyle: styles.walletNameStyle,
+		onChangeText: (walletName) => {
+			this.setState({
+				walletName: walletName
 			});
 		}
 	};
@@ -79,17 +98,23 @@ class WalletInfo extends Component {
 				<View style={styles.walletInfo}>
 					<Image style={styles.walletAvatar} source={require('../../assets/images/asset/head_2x.png')} />
 					<View style={styles.walletInfo_item}>
-						<Text>我的钱包</Text>
+						<Text>{this.state.walletName}</Text>
 						<Text>
 							{this.state.walletAddress.replace(this.state.walletAddress.slice('9', '35'), '......')}
 						</Text>
 					</View>
 				</View>
-
 				<ListFun
 					fun_name={I18n.t('assets.walletInfo.walletName')}
 					onPress={() => {
-						alert('修改钱包名称');
+						this.setState(
+							{
+								modalTitle: '钱包名称'
+							},
+							() => {
+								this.refs.changeWalletName.open();
+							}
+						);
 					}}
 				/>
 				<ListFun
@@ -235,6 +260,44 @@ class WalletInfo extends Component {
 						<Button title="确定" buttonStyle={styles.confirmButtonStyle} onPress={this.state.onPress} />
 					</View>
 				</Modal>
+
+				<Modal style={styles.modalCode} position={'bottom'} ref={'changeWalletName'} swipeArea={20}>
+					<View style={styles.InputPwd_title}>
+						<Text>{this.state.modalTitle}</Text>
+					</View>
+					<Input {...this.walletName} />
+
+					<View style={styles.bottom_fun}>
+						<TouchableHighlight style={styles.bottom_fun_item_cancel}>
+							<Text
+								style={styles.bottom_fun_item}
+								onPress={() => {
+									this.refs.changeWalletName.close();
+								}}
+							>
+								取消
+							</Text>
+						</TouchableHighlight>
+						<TouchableHighlight style={styles.bottom_fun_item_done}>
+							<Text
+								style={styles.bottom_fun_item}
+								onPress={() => {
+									storage.save({
+										key: 'walletName',
+										data: {
+											walletName: this.state.walletName
+										},
+										expires: null
+									});
+									this.refs.changeWalletName.close();
+								}}
+							>
+								确定
+							</Text>
+						</TouchableHighlight>
+					</View>
+				</Modal>
+
 				<Modal style={styles.privateKey} position={'center'} ref={'privateKey'} swipeArea={20}>
 					<View style={styles.privateKeyTitle}>
 						<Text>{I18n.t('assets.walletInfo.exportPrivateKey')}</Text>
@@ -252,7 +315,7 @@ class WalletInfo extends Component {
 
 					<View style={styles.copy}>
 						<Button
-							title={I18n.t('assets.walletInfo.exportPrivateKey')}
+							title={I18n.t('assets.walletInfo.copyPrivaateKey')}
 							buttonStyle={styles.copyButtonStyle}
 							onPress={this._setClipboardContent.bind(this)}
 						/>
@@ -266,8 +329,9 @@ class WalletInfo extends Component {
 export default withNavigation(WalletInfo);
 
 const styles = StyleSheet.create({
-	color_bbb: {
-		color: '#bbb'
+	arr: {
+		width: 15,
+		height: 12
 	},
 	container: {
 		flex: 1,
@@ -371,5 +435,38 @@ const styles = StyleSheet.create({
 		width: screen.width * 0.72,
 		height: 40,
 		borderRadius: 30
+	},
+	walletNameStyle: {
+		borderRadius: 5,
+		borderWidth: 1,
+		borderColor: '#ccc',
+		height: 60,
+		marginTop: 20,
+		backgroundColor: '#fafafa'
+	},
+	bottom_fun: {
+		position: 'absolute',
+		bottom: 50,
+		left: 0,
+		right: 0,
+		flexDirection: 'row',
+		justifyContent: 'center'
+	},
+	bottom_fun_item: {
+		height: 50,
+		lineHeight: 50,
+		color: '#fff',
+		textAlign: 'center',
+		width: Dimensions.get('window').width / 2
+	},
+	bottom_fun_item_cancel: {
+		borderTopLeftRadius: 30,
+		borderBottomLeftRadius: 30,
+		backgroundColor: '#35ccbf'
+	},
+	bottom_fun_item_done: {
+		borderTopRightRadius: 30,
+		borderBottomRightRadius: 30,
+		backgroundColor: '#528bf7'
 	}
 });

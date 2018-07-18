@@ -201,12 +201,12 @@ class ImportWallet extends Component {
                 <LoadingView showLoading={this.state.showLoading} />
             </View>
 
-            <View tabLabel={I18n.t('wallet.officialWallet')}>
+            {/* <View tabLabel={I18n.t('wallet.officialWallet')}>
                 <Text>官方钱包</Text>
             </View>
             <View tabLabel={I18n.t('wallet.privateKey')}>
                 <Text>私钥</Text>
-            </View>
+            </View> */}
         </ScrollableTabView>;
     }
 }

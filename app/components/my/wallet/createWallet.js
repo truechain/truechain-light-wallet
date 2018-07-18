@@ -93,9 +93,15 @@ export default class CreateWallet extends Component {
 								key: 'walletInfo',
 								data: {
 									walletAddress: address[0],
-									walletName: this.state.walletName,
 									keystoreV3: keystoreV3,
 									ks: ks
+								},
+								expires: null
+							});
+							storage.save({
+								key: 'walletName',
+								data: {
+									walletName: this.state.walletName
 								},
 								expires: null
 							});
