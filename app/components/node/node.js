@@ -14,8 +14,6 @@ import { withNavigation } from 'react-navigation';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import { getNodeRank, getMemberStatus, getTeamAddress } from '../../api/loged';
 
-// var RefreshableListView = require('react-native-refreshable-listview');
-
 const screen = Dimensions.get('window');
 
 class NodeItem extends Component {
@@ -61,7 +59,7 @@ class NodeItem extends Component {
 							<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.score} 分</Text>
 						</View>
 					)}
-					{this.props.item.tickets ? (
+					{this.props.item.tickets >= 0 ? (
 						<View style={styles.tickets}>
 							<Text style={[ styles.node_text, styles.font_12 ]}>{this.props.item.tickets} 票</Text>
 						</View>
@@ -71,7 +69,6 @@ class NodeItem extends Component {
 		);
 	}
 }
-
 class Node extends Component {
 	constructor(props) {
 		super(props);
@@ -79,36 +76,52 @@ class Node extends Component {
 			isRefreshing: false,
 			standardNodeData: [],
 			fullNodeData: [],
-			teamAddress: null
+			teamAddress: null,
+			standPageIndex: 0,
+			fullPageIndex: 0
 		};
 		this.navigate = this.props.navigation.navigate;
 	}
 
 	componentDidMount() {
-		this._getNodeRank(); //获取节点排行
+		this._fullOnRefresh();
+		this._standOnRefresh();
 	}
 
-	_getNodeRank() {
-		getNodeRank({
-			nodeType: 2,
-			pageIndex: 0
-		}).then((res) => {
-			this.setState({
-				fullNodeData: res.data.data
-			});
-		});
-		getNodeRank({
-			nodeType: 1,
-			pageIndex: 0
-		}).then((res) => {
-			this.setState({
-				standardNodeData: res.data.data
-			});
-		});
+	_fullOnRefresh() {
+		this.setState(
+			{
+				fullPageIndex: 0
+			},
+			() => {
+				getNodeRank({
+					nodeType: 2,
+					pageIndex: this.state.fullPageIndex
+				}).then((res) => {
+					this.setState({
+						fullNodeData: res.data.data
+					});
+				});
+			}
+		);
 	}
 
-	_onRefresh() {
-		this._getNodeRank();
+	_standOnRefresh() {
+		this.setState(
+			{
+				standPageIndex: 0
+			},
+			() => {
+				getNodeRank({
+					nodeType: 1,
+					pageIndex: this.state.standPageIndex
+				}).then((res) => {
+					this.setState({
+						standardNodeData: res.data.data
+					});
+				});
+			}
+		);
 	}
 
 	_getTeamAddress(option) {
@@ -177,6 +190,52 @@ class Node extends Component {
 			});
 	}
 
+	_fullOnScroll(evt) {
+		const event = evt['nativeEvent'];
+		const _num =
+			event['contentSize']['height'] - event['layoutMeasurement']['height'] - event['contentOffset']['y'];
+		if (event['contentSize']['height'] > event['layoutMeasurement']['height'] && _num < -50) {
+			this.setState(
+				{
+					fullPageIndex: this.state.fullPageIndex + 10
+				},
+				() => {
+					getNodeRank({
+						nodeType: 2,
+						pageIndex: this.state.fullPageIndex
+					}).then((res) => {
+						this.setState({
+							fullNodeData: this.state.fullNodeData.concat(res.data.data)
+						});
+					});
+				}
+			);
+		}
+	}
+
+	_standOnScroll(evt) {
+		const event = evt['nativeEvent'];
+		const _num =
+			event['contentSize']['height'] - event['layoutMeasurement']['height'] - event['contentOffset']['y'];
+		if (event['contentSize']['height'] > event['layoutMeasurement']['height'] && _num < -50) {
+			this.setState(
+				{
+					standPageIndex: this.state.standPageIndex + 10
+				},
+				() => {
+					getNodeRank({
+						nodeType: 1,
+						pageIndex: this.state.standPageIndex
+					}).then((res) => {
+						this.setState({
+							standardNodeData: this.state.standardNodeData.concat(res.data.data)
+						});
+					});
+				}
+			);
+		}
+	}
+
 	render() {
 		let arr = this.state.fullNodeData;
 		return (
@@ -227,13 +286,16 @@ class Node extends Component {
 							refreshControl={
 								<RefreshControl
 									refreshing={this.state.isRefreshing}
-									onRefresh={this._onRefresh.bind(this)}
+									onRefresh={this._fullOnRefresh.bind(this)}
 									tintColor="#528bf7"
 									title="Loading..."
 									titleColor="#528bf7"
 								/>
 							}
+							scrollEventThrottle={200}
+							onScroll={this._fullOnScroll.bind(this)}
 						>
+							>
 							{this.state.fullNodeData.map((item, index) => {
 								return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
 							})}
@@ -246,12 +308,14 @@ class Node extends Component {
 							refreshControl={
 								<RefreshControl
 									refreshing={this.state.isRefreshing}
-									onRefresh={this._onRefresh.bind(this)}
+									onRefresh={this._standOnRefresh.bind(this)}
 									tintColor="#528bf7"
 									title="Loading..."
 									titleColor="#528bf7"
 								/>
 							}
+							scrollEventThrottle={200}
+							onScroll={this._standOnScroll.bind(this)}
 						>
 							{this.state.standardNodeData.map((item, index) => {
 								return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
