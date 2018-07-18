@@ -205,11 +205,14 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		flexDirection: 'row',
-		justifyContent: 'center'
+		justifyContent: 'center',
+		borderWidth: 1,
+		borderColor: 'transparent'
 	},
 	bottom_fun_item: {
 		height: 50,
 		lineHeight: 50,
+		color:'#fff',
 		textAlign: 'center',
 		width: Dimensions.get('window').width / 2
 	},

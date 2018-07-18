@@ -94,7 +94,7 @@ const Node = createStackNavigator({
 	Node: {
 		screen: Node_item,
 		navigationOptions: () => ({
-			title: '节点',
+			title: I18n.t('tab.node'),
 			headerBackTitle: null,
 			headerStyle: {
 				backgroundColor: '#528bf7',
@@ -114,7 +114,7 @@ const My = createStackNavigator({
 	My: {
 		screen: My_item,
 		navigationOptions: () => ({
-			title: '我的',
+			title: I18n.t('tab.my'),
 			headerBackTitle: null,
 			headerStyle: {
 				backgroundColor: '#528bf7',

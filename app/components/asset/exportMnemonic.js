@@ -69,8 +69,8 @@ export class ExportMnemonic extends Component {
     // 选择助记词完 点击确认完成
     confirmWords(){
         if( this.state.selectWordsText == this.state.Mnemonic ){
-            console.log('yes-----------')
-            this.navigate('Home');
+            alert('助记词正确,请妥善保管您的助记词！')
+            // this.navigate('Home');
         }
         else{
             alert("助记词有误，请重新输入")
