@@ -212,8 +212,8 @@ export default class Login extends React.Component {
 			<View style={styles.container}>
 				<View style={[ styles.country_select, styles.line_bottom ]}>
 					<Text>国家/地区</Text>
-					<Text>
-						{this.state.countryName}
+					<View>
+						<Text>{this.state.countryName}</Text>
 						<CountryPicker
 							onChange={(value) => {
 								this.setState({
@@ -225,7 +225,7 @@ export default class Login extends React.Component {
 							cca2={this.state.cca2}
 							filterable
 						/>
-					</Text>
+					</View>
 				</View>
 
 				<View style={[ styles.input, styles.line_bottom ]}>

@@ -247,6 +247,7 @@ class Transfer extends Component {
 					<Button
 						title="下一步"
 						buttonStyle={styles.buttonStyle}
+						disabledStyle={styles.borderRadius}
 						disabled={this.state.disabledNext}
 						onPress={() => {
 							setTimeout(() => {
@@ -404,6 +405,9 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		borderBottomWidth: 1,
 		borderBottomColor: '#8f8f94'
+	},
+	borderRadius: {
+		borderRadius: 50
 	},
 	paymentDetails_item_key: {
 		color: '#8f8f94'

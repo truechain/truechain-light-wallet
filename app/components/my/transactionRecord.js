@@ -73,21 +73,21 @@ class TransactionRecord extends Component {
 		};
 	}
 
-	componentDidMount() {
-		getTransactionRecord('0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e').then((res) => {
-			this.setState({
-				recordData: res.data.result
-			});
-		});
-	}
-
 	// componentDidMount() {
-	// 	getTransactionRecord(store.getState().walletInfo.wallet_address).then((res) => {
+	// 	getTransactionRecord('0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e').then((res) => {
 	// 		this.setState({
 	// 			recordData: res.data.result
 	// 		});
 	// 	});
 	// }
+
+	componentDidMount() {
+		getTransactionRecord(store.getState().walletInfo.wallet_address).then((res) => {
+			this.setState({
+				recordData: res.data.result
+			});
+		});
+	}
 
 	render() {
 		return (
