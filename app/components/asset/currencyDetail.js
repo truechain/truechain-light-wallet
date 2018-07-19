@@ -110,7 +110,7 @@ class currencyDetail extends Component {
 			<View style={styles.container}>
 				<View style={styles.balance}>
 					<Text style={[ styles.color_white, styles.balance_text_big ]}>{this.state.banlance}</Text>
-					<Text style={[ styles.color_white, styles.marginTop_20 ]}>市值：*****</Text>
+					{/* <Text style={[ styles.color_white, styles.marginTop_20 ]}>市值：*****</Text> */}
 				</View>
 				<View style={styles.record}>
 					<Text>近期交易记录</Text>

@@ -77,9 +77,13 @@ storage
 	})
 	.then((res) => {
 		I18n.locale = res.localLanguage;
+	})
+	.catch((e) => {
+		console.log(e, '首次设置语言错误');
 	});
 
 const Web3 = require('web3');
+// let host = 'https://ropsten.infura.io/';
 let host = 'https://mainnet.infura.io/';
 window.host = host;
 const web3 = new Web3(new Web3.providers.HttpProvider(host));

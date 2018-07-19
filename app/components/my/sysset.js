@@ -34,12 +34,12 @@ class SysSet extends Component {
 						this.navigate('SetGesturePassword');
 					}}
 				/>
-				<ListFun
+				{/* <ListFun
 					fun_name="web3设置"
 					onPress={() => {
 						alert('web3设置');
 					}}
-				/>
+				/> */}
 				<ListFun
 					fun_name="语言设置"
 					onPress={() => {

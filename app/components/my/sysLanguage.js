@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, Dimensions, TouchableHighlight } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { I18n } from '../../../language/i18n';
-import DeviceInfo from 'react-native-device-info';
 
 class ListFun extends Component {
 	render() {
@@ -29,10 +28,6 @@ class SysLanguage extends Component {
 	static navigationOptions = {
 		headerTitle: '多语言'
 	};
-
-	componentWillMount() {
-		// let locale = DeviceInfo.getDeviceLocale();
-	}
 
 	refreshLanguage = (index) => {
 		switch (index) {

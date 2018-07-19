@@ -23,7 +23,8 @@ export default class Login extends React.Component {
 			disabledLogin: false,
 			cap_code_flag: false,
 			pathArr: [],
-			address: null
+			address: null,
+			smsType: 2
 		};
 		this.backgroundTime = 0;
 		this.regPhone = /^(13[0-9]|14[0-9]|15[0-9]|166|17[0-9]|18[0-9]|19[8|9])\d{8}$/;
@@ -34,34 +35,56 @@ export default class Login extends React.Component {
 	static navigationOptions = {
 		headerTitle: '登录'
 	};
-	
-	strHandle(svgStr){
+
+	strHandle(svgStr) {
 		let arr = [];
 		let currentStartIndex = 1;
 		let currentEndIndex = 0;
 		let strFragment = '';
-		
-		while(true){
-			currentStartIndex = svgStr.indexOf('path',currentEndIndex);
-			currentEndIndex = svgStr.indexOf('>',currentStartIndex);
-			if(currentStartIndex < 0){ break; }
-			strFragment = svgStr.substring(currentStartIndex,currentEndIndex);
-	
+
+		while (true) {
+			currentStartIndex = svgStr.indexOf('path', currentEndIndex);
+			currentEndIndex = svgStr.indexOf('>', currentStartIndex);
+			if (currentStartIndex < 0) {
+				break;
+			}
+			strFragment = svgStr.substring(currentStartIndex, currentEndIndex);
+
 			let subArr = [];
 			let subCurrentStartIndex = 1;
 			let subCurrentEndIndex = 0;
-			let subStrFragment = "";
-			subwhile: while(true){
-				subCurrentStartIndex = strFragment.indexOf('"',subCurrentEndIndex+1);
-				subCurrentEndIndex = strFragment.indexOf('"',subCurrentStartIndex+1);
-				if(subCurrentStartIndex < 0){ break subwhile; }
-				subStrFragment = strFragment.substring(subCurrentStartIndex+1,subCurrentEndIndex);
+			let subStrFragment = '';
+			subwhile: while (true) {
+				subCurrentStartIndex = strFragment.indexOf('"', subCurrentEndIndex + 1);
+				subCurrentEndIndex = strFragment.indexOf('"', subCurrentStartIndex + 1);
+				if (subCurrentStartIndex < 0) {
+					break subwhile;
+				}
+				subStrFragment = strFragment.substring(subCurrentStartIndex + 1, subCurrentEndIndex);
 				subArr.push(subStrFragment);
 			}
-	
-			arr.push(subArr)
+
+			arr.push(subArr);
 		}
 		return arr;
+	}
+
+	componentDidMount() {
+		storage
+			.load({
+				key: 'localLanguage'
+			})
+			.then((res) => {
+				console.log(res, '------90909090909');
+				if (res.localLanguage.includes('zh')) {
+					this.setState({
+						smsType: null
+					});
+				}
+			})
+			.catch((e) => {
+				console.log(e, '首次设置语言错误');
+			});
 	}
 
 	componentWillMount() {
@@ -98,7 +121,9 @@ export default class Login extends React.Component {
 	_getCode() {
 		getCode({
 			mobile: this.state.tel,
-			captcha: this.state.cap_code
+			captcha: this.state.cap_code,
+			countryCode: this.state.callingCode,
+			smsType: this.state.smsType
 		}).then((res) => {
 			if (res.data.body.status == 202) {
 				alert('图形验证码错误,请重新验证!');
@@ -169,9 +194,11 @@ export default class Login extends React.Component {
 		});
 	}
 	setTime = () => {
+		if (this.state.callingCode === '86') {
+		}
 		if (!this.state.tel) {
 			alert('请输入手机号');
-		} else if (!this.regPhone.test(this.state.tel)) {
+		} else if (this.state.callingCode === '86' && !this.regPhone.test(this.state.tel)) {
 			alert('请输入合法手机号');
 		} else if (!this.state.cap_code) {
 			alert('请输入图形验证码');

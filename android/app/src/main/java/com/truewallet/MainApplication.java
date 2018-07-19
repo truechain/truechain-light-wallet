@@ -4,12 +4,10 @@ import android.app.Application;
 
 import com.facebook.react.ReactApplication;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import com.horcrux.svg.SvgPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
-import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import org.reactnative.camera.RNCameraPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
@@ -32,12 +30,10 @@ public class MainApplication extends Application implements ReactApplication {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
             new ReactNativeRestartPackage(),
-            new RNDeviceInfo(),
             new SvgPackage(),
             new VectorIconsPackage(),
             new RandomBytesPackage(),
             new RNI18nPackage(),
-            new RNDeviceInfo(),
             new RNCameraPackage()
       );
     }

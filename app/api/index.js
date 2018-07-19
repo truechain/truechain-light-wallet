@@ -48,7 +48,9 @@ const getCode = (option) => {
 	return axios.get(getcodeUrl, {
 		params: {
 			mobile: option.mobile,
-			captcha: option.captcha
+			captcha: option.captcha,
+			countryCode: option.countryCode,
+			smsType: option.smsType
 		}
 	});
 };

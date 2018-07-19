@@ -91,7 +91,7 @@ export default withNavigation(SetGesturePassword);
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		borderWidth: 1,
-		borderColor: 'red'
+		// borderWidth: 1,
+		// borderColor: 'red'
 	}
 });

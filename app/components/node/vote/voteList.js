@@ -147,18 +147,20 @@ class VoteList extends Component {
 				<Search
 					ref="search_box"
 					onChangeText={(val) => {
-						searchTeam({
-							nodeType: this.state.nodeType,
-							searchValue: val
-						})
-							.then((result) => {
-								return result.data.data;
+						setTimeout(() => {
+							searchTeam({
+								nodeType: this.state.nodeType,
+								searchValue: val
 							})
-							.then((res) => {
-								this.setState({
-									NodeData: res
+								.then((result) => {
+									return result.data.data;
+								})
+								.then((res) => {
+									this.setState({
+										NodeData: res
+									});
 								});
-							});
+						}, 1500);
 					}}
 				/>
 				<ScrollView
