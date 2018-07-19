@@ -9,11 +9,6 @@ import com.bitgo.randombytes.RandomBytesPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import org.reactnative.camera.RNCameraPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
-import com.horcrux.svg.SvgPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
-import com.bitgo.randombytes.RandomBytesPackage;
-import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
-import org.reactnative.camera.RNCameraPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -39,12 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RandomBytesPackage(),
             new RNI18nPackage(),
             new RNCameraPackage(),
-            new ReactNativeRestartPackage(),
-            new SvgPackage(),
-            new VectorIconsPackage(),
-            new RandomBytesPackage(),
-            new RNI18nPackage(),
-            new RNCameraPackage()
+            new ReactNativeRestartPackage()
       );
     }
 
