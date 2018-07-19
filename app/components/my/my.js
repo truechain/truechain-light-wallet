@@ -23,7 +23,7 @@ class My extends Component {
 						>
 							<View style={styles.center}>
 								<Image
-									style={styles.myTopBanrecicon}
+									style={styles.myTopBanrecicon_1}
 									source={require('../../assets/images/my/wallet-icon_3x.png')}
 								/>
 								<Text style={styles.myTopBanConItemText}>钱包管理</Text>
@@ -218,9 +218,13 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-around',
 		alignItems: 'center'
 	},
+	myTopBanrecicon_1: {
+		width: 30,
+		height: 32
+	},
 	myTopBanrecicon: {
-		width: 45,
-		height: 40
+		width: 38,
+		height: 30
 	},
 	myTopBanConItemText: {
 		color: 'white',
