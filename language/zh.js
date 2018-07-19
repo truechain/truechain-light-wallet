@@ -22,8 +22,8 @@ export default {
 	},
 	my: {
 		language: {
-			changeToChinese: '切换到中文',
-			changeToEnglish: '切换到英文'
+			changeToChinese: '简体中文',
+			changeToEnglish: 'English'
 		}
 	},
 	assets: {

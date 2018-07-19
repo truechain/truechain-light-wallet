@@ -9,6 +9,8 @@ class ListFun extends Component {
 			<TouchableHighlight underlayColor={'transparent'} onPress={this.props.onPress}>
 				<View style={styles.fun}>
 					<Text style={styles.fun_text}>{this.props.fun_name}</Text>
+					<Text>{this.props.isSelected ? '✔️' : null}</Text>
+					{/* <Text>{this.props.isSelected ? 'dddd' : 'fgggggg'}</Text> */}
 				</View>
 			</TouchableHighlight>
 		);
@@ -28,6 +30,19 @@ class SysLanguage extends Component {
 	static navigationOptions = {
 		headerTitle: '多语言'
 	};
+
+	componentDidMount() {
+		this.setState(
+			{
+				localeLanguage: I18n.locale
+			},
+			() => {
+				this.setState({
+					isSelected: this.state.localeLanguage.includes('zh')
+				});
+			}
+		);
+	}
 
 	refreshLanguage = (index) => {
 		switch (index) {
@@ -53,6 +68,8 @@ class SysLanguage extends Component {
 				break;
 		}
 
+		this.props.navigation.goBack(null);
+
 		this.setState({
 			localeLanguage: I18n.locale
 		});
@@ -61,8 +78,16 @@ class SysLanguage extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<ListFun fun_name={I18n.t('my.language.changeToEnglish')} onPress={() => this.refreshLanguage(0)} />
-				<ListFun fun_name={I18n.t('my.language.changeToChinese')} onPress={() => this.refreshLanguage(1)} />
+				<ListFun
+					fun_name={I18n.t('my.language.changeToEnglish')}
+					isSelected={!this.state.isSelected}
+					onPress={() => this.refreshLanguage(0)}
+				/>
+				<ListFun
+					fun_name={I18n.t('my.language.changeToChinese')}
+					isSelected={this.state.isSelected}
+					onPress={() => this.refreshLanguage(1)}
+				/>
 			</View>
 		);
 	}

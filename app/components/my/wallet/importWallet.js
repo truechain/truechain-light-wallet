@@ -158,6 +158,8 @@ class ImportWallet extends Component {
 			Alert.alert('提示', '助记词不能为空');
 		} else if (!this.state.pwd) {
 			Alert.alert('提示', '请输入密码');
+		} else if (this.state.pwd.length < 8) {
+			Alert.alert('提示', '建议密码不少于8位字符');
 		} else if (this.state.pwd !== this.state.confirmPwd) {
 			Alert.alert('提示', '两次密码输入不一致');
 		} else if (!this.state.isAgree) {

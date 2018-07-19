@@ -63,7 +63,6 @@ export class ExportMnemonic extends Component {
                 words
             }
         );
-        console.log(this.state.Mnemonic);
     }
 
     // 选择助记词完 点击确认完成
@@ -87,7 +86,6 @@ export class ExportMnemonic extends Component {
         let selectWords = this.state.selectWords
         selectWords.push(word)
         selectWordsText = selectWords.join(' ')
-        console.log(selectWordsText)
         this.setState({
             selectWords,
             selectWordsText

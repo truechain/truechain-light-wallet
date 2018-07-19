@@ -64,6 +64,8 @@ export default class CreateWallet extends Component {
 			Alert.alert('提示', '请输入钱包名称');
 		} else if (!this.state.pwd) {
 			Alert.alert('提示', '请输入密码');
+		} else if (this.state.pwd.length < 8) {
+			Alert.alert('提示', '建议密码不少于8位字符');
 		} else if (!this.state.confirmPwd) {
 			Alert.alert('提示', '请确认您的密码');
 		} else if (this.state.pwd !== this.state.confirmPwd) {
