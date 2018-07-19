@@ -39,7 +39,6 @@
 		3C13CA0320F6083B00BC09F5 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13CA0020F6082B00BC09F5 /* libRCTPushNotification.a */; };
 		3C7151F220F3657C00E63617 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		3C82970220F35D9500CCE45C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		3C82974420F361E500CCE45C /* Images-2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3C82974320F361E500CCE45C /* Images-2.xcassets */; };
 		3C8F15B620FF3BE4008A0251 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8F15B520FF3BCF008A0251 /* libRCTRestart.a */; };
 		3C8F15B720FF3BED008A0251 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8F15B520FF3BCF008A0251 /* libRCTRestart.a */; };
 		3CD5E0CA20F338DD003D2686 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD5E0C920F338A6003D2686 /* libRNVectorIcons.a */; };
@@ -68,11 +67,9 @@
 		3CD5E13720F33ACF003D2686 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CD5E12120F33ACF003D2686 /* EvilIcons.ttf */; };
 		3CD5E13820F33D60003D2686 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
 		3E53F14B9C8B4AEA9F5461FD /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A1A9319B07A494C978279EE /* libRCTRestart.a */; };
-		59538191CB2A4979A47F9DBF /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBACB60D85747109E24F00B /* libRNDeviceInfo.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		5FA67881CF544EC4BDD93ADC /* libRNI18n.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D8F3B7CB1E0C4C15AEC8E3AD /* libRNI18n.a */; };
 		6E6CA199C53048DCA08DFF7E /* libRNDeviceInfo-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B13C9D72632144DE81A1DB37 /* libRNDeviceInfo-tvOS.a */; };
-		6F63BAF6487D43AB9F5C2918 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4AFDA8A98AB24138A28AB73B /* libSplashScreen.a */; };
 		832341BD1AAA6AB300B99B32 /* libRCTText.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 832341B51AAA6A8300B99B32 /* libRCTText.a */; };
 		8922E7A210834D3BB2B6BB3E /* libRNSVG.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B107940C54AB46688B2C8C4B /* libRNSVG.a */; };
 		A4335C4294E44A08B7E3D9FB /* libRNRandomBytes.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 9736573B3B464FFD96F3CDC4 /* libRNRandomBytes.a */; };
@@ -274,20 +271,6 @@
 			remoteGlobalIDString = 4107012F1ACB723B00C6AA39;
 			remoteInfo = RNCamera;
 		};
-		3CD5E0B520F338A5003D2686 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3566D7F8CAC3453F9DBD6972 /* RNDeviceInfo.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = DA5891D81BA9A9FC002B4DB2;
-			remoteInfo = RNDeviceInfo;
-		};
-		3CD5E0B720F338A5003D2686 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 3566D7F8CAC3453F9DBD6972 /* RNDeviceInfo.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E72EC1401F7ABB5A0001BC90;
-			remoteInfo = "RNDeviceInfo-tvOS";
-		};
 		3CD5E0BB20F338A5003D2686 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B222CDDC7A1F4C108C99B100 /* RNI18n.xcodeproj */;
@@ -477,10 +460,8 @@
 		2D02E47B1E0B4A5D006451C7 /* truewallet-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "truewallet-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* truewallet-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "truewallet-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3566D7F8CAC3453F9DBD6972 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		3A1A9319B07A494C978279EE /* libRCTRestart.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTRestart.a; sourceTree = "<group>"; };
 		3C13C9FA20F6082A00BC09F5 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
-		3C82974320F361E500CCE45C /* Images-2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = "Images-2.xcassets"; path = "truewallet/Images-2.xcassets"; sourceTree = "<group>"; };
 		3C8F15B020FF3BCF008A0251 /* RCTRestart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTRestart.xcodeproj; path = "../node_modules/react-native-restart/ios/RCTRestart.xcodeproj"; sourceTree = "<group>"; };
 		3CB4FD7B20FF0CBA00116540 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		3CD5E11720F33ACE003D2686 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -549,12 +530,10 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				36A28248F7F44F23B99DA8DE /* libRNCamera.a in Frameworks */,
-				59538191CB2A4979A47F9DBF /* libRNDeviceInfo.a in Frameworks */,
 				5FA67881CF544EC4BDD93ADC /* libRNI18n.a in Frameworks */,
 				A4335C4294E44A08B7E3D9FB /* libRNRandomBytes.a in Frameworks */,
 				DF92D03634344D18B9895F35 /* libRNVectorIcons.a in Frameworks */,
 				E28F7976DD41406985A02731 /* libRNSVG.a in Frameworks */,
-				6F63BAF6487D43AB9F5C2918 /* libSplashScreen.a in Frameworks */,
 				8922E7A210834D3BB2B6BB3E /* libRNSVG.a in Frameworks */,
 				3E53F14B9C8B4AEA9F5461FD /* libRCTRestart.a in Frameworks */,
 			);
@@ -680,7 +659,6 @@
 				13B07FB61A68108700A75B9A /* Info.plist */,
 				13B07FB11A68108700A75B9A /* LaunchScreen.xib */,
 				13B07FB71A68108700A75B9A /* main.m */,
-				3C82974320F361E500CCE45C /* Images-2.xcassets */,
 			);
 			name = truewallet;
 			sourceTree = "<group>";
@@ -772,15 +750,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3CD5E08520F338A5003D2686 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3CD5E0B620F338A5003D2686 /* libRNDeviceInfo.a */,
-				3CD5E0B820F338A5003D2686 /* libRNDeviceInfo-tvOS.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
 		3CD5E08720F338A5003D2686 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -861,7 +830,6 @@
 				00C302DF1ABCB9EE00DB3ED1 /* RCTVibration.xcodeproj */,
 				139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */,
 				CEC74E0582DD415999D44B99 /* RNCamera.xcodeproj */,
-				3566D7F8CAC3453F9DBD6972 /* RNDeviceInfo.xcodeproj */,
 				B222CDDC7A1F4C108C99B100 /* RNI18n.xcodeproj */,
 				C2A63ACC4DD74CC28A1E66EF /* RNRandomBytes.xcodeproj */,
 				B62E79B8E770474180B1E3B7 /* RNVectorIcons.xcodeproj */,
@@ -1091,10 +1059,6 @@
 					ProjectRef = CEC74E0582DD415999D44B99 /* RNCamera.xcodeproj */;
 				},
 				{
-					ProductGroup = 3CD5E08520F338A5003D2686 /* Products */;
-					ProjectRef = 3566D7F8CAC3453F9DBD6972 /* RNDeviceInfo.xcodeproj */;
-				},
-				{
 					ProductGroup = 3CD5E08720F338A5003D2686 /* Products */;
 					ProjectRef = B222CDDC7A1F4C108C99B100 /* RNI18n.xcodeproj */;
 				},
@@ -1297,20 +1261,6 @@
 			remoteRef = 3CD5E0B120F338A5003D2686 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		3CD5E0B620F338A5003D2686 /* libRNDeviceInfo.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libRNDeviceInfo.a;
-			remoteRef = 3CD5E0B520F338A5003D2686 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		3CD5E0B820F338A5003D2686 /* libRNDeviceInfo-tvOS.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = "libRNDeviceInfo-tvOS.a";
-			remoteRef = 3CD5E0B720F338A5003D2686 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 		3CD5E0BC20F338A5003D2686 /* libRNI18n.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1501,7 +1451,6 @@
 			files = (
 				3CD5E12620F33ACF003D2686 /* Octicons.ttf in Resources */,
 				3CD5E13420F33ACF003D2686 /* Entypo.ttf in Resources */,
-				3C82974420F361E500CCE45C /* Images-2.xcassets in Resources */,
 				3CD5E13220F33ACF003D2686 /* FontAwesome.ttf in Resources */,
 				3CD5E12A20F33ACF003D2686 /* Foundation.ttf in Resources */,
 				3CD5E12C20F33ACF003D2686 /* Ionicons.ttf in Resources */,
