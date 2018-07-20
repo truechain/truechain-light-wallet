@@ -3,10 +3,12 @@ import { StyleSheet, Text, View, Alert } from 'react-native';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import lightwallet from 'eth-lightwallet';
 import LoadingView from '../../public/loadingView';
+import { StackActions, NavigationActions, withNavigation } from 'react-navigation';
+
 const Web3 = require('web3');
 
 var web3 = new Web3(new Web3.providers.HttpProvider('https:mainnet.infura.io/'));
-export default class CreateWallet extends Component {
+class CreateWallet extends Component {
 	static navigationOptions = {
 		title: '创建钱包',
 		headerTintColor: '#000'
@@ -113,7 +115,18 @@ export default class CreateWallet extends Component {
 										showLoading: false
 									},
 									() => {
-										this.props.navigation.navigate('Home');
+										let resetAction = StackActions.reset({
+											index: 0,
+											actions: [
+												NavigationActions.navigate({
+													routeName: 'ExportMnemonic',
+													params: {
+														walletPassword: this.state.pwd
+													}
+												})
+											]
+										});
+										this.props.navigation.dispatch(resetAction);
 									}
 								);
 							}, 2000);
@@ -167,6 +180,8 @@ export default class CreateWallet extends Component {
 		);
 	}
 }
+
+export default withNavigation(CreateWallet);
 
 const styles = StyleSheet.create({
 	color_white: {
