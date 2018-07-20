@@ -122,6 +122,8 @@ class Assets extends Component {
 						this.getAllBalance();
 					}
 				);
+			}).catch(x => {
+				console.log(x);
 			});
 		this.updataWalletName();
 	}
@@ -136,6 +138,8 @@ class Assets extends Component {
 				this.setState({
 					walletName: walletName
 				});
+			}).catch(x => {
+				console.log('没有发现钱包名称');
 			});
 	}
 
