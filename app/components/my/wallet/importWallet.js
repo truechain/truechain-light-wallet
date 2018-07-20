@@ -7,6 +7,7 @@ import LoadingView from '../../public/loadingView';
 import TextWidget from '../../public/textWidget/textWidget';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+var Mnemonic = require('bitcore-mnemonic');
 
 class ImportWallet extends Component {
 	static navigationOptions = {
@@ -102,54 +103,59 @@ class ImportWallet extends Component {
 	};
 
 	_setSeed(option) {
-		this.setState({
-			showLoading: true
-		});
 		setTimeout(() => {
-			lightWallet.keystore.createVault(
-				{
-					password: option.password,
-					seedPhrase: option.mnemonic,
-					hdPathString: option.hdPathString
-				},
-				(err, ks) => {
-					ks.keyFromPassword(option.password, (err, pwDerivedKey) => {
-						ks.generateNewAddress(pwDerivedKey, 1);
-						var address = ks.getAddresses();
-						let keystoreV3 = web3.eth.accounts
-							.privateKeyToAccount('0x' + ks.exportPrivateKey(address[0], pwDerivedKey))
-							.encrypt(option.password);
-						storage.save({
-							key: 'walletInfo',
-							data: {
-								walletAddress: address[0],
-								keystoreV3: keystoreV3,
-								ks: ks
-							},
-							expires: null
-						});
-
-						storage.save({
-							key: 'walletName',
-							data: {
-								walletName: '新钱包'
-							},
-							expires: null
-						});
-
-						setTimeout(() => {
-							this.setState(
-								{
-									showLoading: false
+			var words = this.state.mnemonic.split(' ');
+			if (!Mnemonic.isValid(this.state.mnemonic, Mnemonic.Words.ENGLISH) || words.length !== 12) {
+				alert('助记词无效，请重新输入');
+			} else {
+				this.setState({
+					showLoading: true
+				});
+				lightWallet.keystore.createVault(
+					{
+						password: option.password,
+						seedPhrase: option.mnemonic,
+						hdPathString: option.hdPathString
+					},
+					(err, ks) => {
+						ks.keyFromPassword(option.password, (err, pwDerivedKey) => {
+							ks.generateNewAddress(pwDerivedKey, 1);
+							var address = ks.getAddresses();
+							let keystoreV3 = web3.eth.accounts
+								.privateKeyToAccount('0x' + ks.exportPrivateKey(address[0], pwDerivedKey))
+								.encrypt(option.password);
+							storage.save({
+								key: 'walletInfo',
+								data: {
+									walletAddress: address[0],
+									keystoreV3: keystoreV3,
+									ks: ks
 								},
-								() => {
-									this.props.navigation.navigate('Home');
-								}
-							);
-						}, 2000);
-					});
-				}
-			);
+								expires: null
+							});
+
+							storage.save({
+								key: 'walletName',
+								data: {
+									walletName: '新钱包'
+								},
+								expires: null
+							});
+
+							setTimeout(() => {
+								this.setState(
+									{
+										showLoading: false
+									},
+									() => {
+										this.props.navigation.navigate('Home');
+									}
+								);
+							}, 2000);
+						});
+					}
+				);
+			}
 		}, 50);
 	}
 
