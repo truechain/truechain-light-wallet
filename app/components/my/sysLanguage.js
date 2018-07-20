@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, Dimensions, TouchableHighlight } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { I18n } from '../../../language/i18n';
+import RNRestart from 'react-native-restart'
 
 class ListFun extends Component {
 	render() {
@@ -10,7 +11,6 @@ class ListFun extends Component {
 				<View style={styles.fun}>
 					<Text style={styles.fun_text}>{this.props.fun_name}</Text>
 					<Text>{this.props.isSelected ? '✔️' : null}</Text>
-					{/* <Text>{this.props.isSelected ? 'dddd' : 'fgggggg'}</Text> */}
 				</View>
 			</TouchableHighlight>
 		);
@@ -68,7 +68,8 @@ class SysLanguage extends Component {
 				break;
 		}
 
-		this.props.navigation.goBack(null);
+		RNRestart.Restart();
+		// this.props.navigation.goBack(null);
 
 		this.setState({
 			localeLanguage: I18n.locale
