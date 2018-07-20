@@ -3654,7 +3654,7 @@ is-primitive@^2.0.0:
   version "2.0.0"
   resolved "http://registry.npm.taobao.org/is-primitive/download/is-primitive-2.0.0.tgz#207bab91638499c07b2adf240a41a87210034575"
 
-is-promise@^2.0.0, is-promise@^2.1.0:
+is-promise@^2.1.0:
   version "2.1.0"
   resolved "http://registry.npm.taobao.org/is-promise/download/is-promise-2.1.0.tgz#79a2a9ece7f096e80f36d2b2f3bc16c1ff4bf3fa"
 
@@ -5640,11 +5640,9 @@ react-native-randombytes@^3.3.0:
     buffer "^4.9.1"
     sjcl "^1.0.3"
 
-react-native-refreshable-listview@^2.0.0-beta4:
-  version "2.0.0-beta4"
-  resolved "http://registry.npm.taobao.org/react-native-refreshable-listview/download/react-native-refreshable-listview-2.0.0-beta4.tgz#61cc0b7d15e116c6053937dff1c385bfc10eb3ec"
-  dependencies:
-    is-promise "^2.0.0"
+react-native-restart@0.0.6:
+  version "0.0.6"
+  resolved "http://registry.npm.taobao.org/react-native-restart/download/react-native-restart-0.0.6.tgz#77770d078683947b2c1f2adb876f179269d8443a"
 
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
@@ -7375,7 +7373,7 @@ wordwrap@~0.0.2:
   resolved "http://registry.npm.taobao.org/wordwrap/download/wordwrap-0.0.3.tgz#a3d5da6cd5c0bc0008d37234bbaf1bed63059107"
 
 world-countries@1.8.0:
-  version "1.8.0"
+  version v1.8.0
   resolved "http://registry.npm.taobao.org/world-countries/download/world-countries-1.8.0.tgz#17f48e7e8470ac5a2136ad6938dfc656fc2bcb95"
 
 wrap-ansi@^2.0.0:
