@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import '../../../../shim';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import lightwallet from 'eth-lightwallet';
