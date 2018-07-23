@@ -79,7 +79,7 @@ storage
 		I18n.locale = res.localLanguage;
 	})
 	.catch((e) => {
-		console.log(e, '首次设置语言错误');
+		console.log(e, '首次获取系统语言');
 	});
 
 const Web3 = require('web3');

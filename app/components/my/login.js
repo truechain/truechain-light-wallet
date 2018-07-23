@@ -75,15 +75,20 @@ export default class Login extends React.Component {
 				key: 'localLanguage'
 			})
 			.then((res) => {
-				console.log(res, '------90909090909');
 				if (res.localLanguage.includes('zh')) {
 					this.setState({
 						smsType: null
 					});
+				} else {
+					this.setState({
+						smsType: 2
+					});
 				}
 			})
 			.catch((e) => {
-				console.log(e, '首次设置语言错误');
+				this.setState({
+					smsType: null
+				});
 			});
 	}
 
