@@ -194,14 +194,10 @@ class LockPosition extends Component {
 				</Modal>
 
 				<Modal
+					style={{ height:280 }}
 					isOpen={this.state.modalVisible}
-					position={'bottom'}
-					// animationType={'fade'}
-					// transparent={true}
-					// visible={this.state.modalVisible}
-					// onRequestClose={() => {
-					// 	this.setState({ modalVisible: false });
-					// }}
+					position={'bottom'} 
+					onClosed={ ()=>{ this.setState({modalVisible:false}); } }
 				>
 					<View style={styles.modalCon}>
 						<View style={styles.modal}>
@@ -310,16 +306,16 @@ const styles = StyleSheet.create({
 	},
 	modalCon: {
 		backgroundColor: 'rgba(0,0,0,0.5)',
-		flex: 1,
+		height:280,
 		flexDirection: 'row',
 		justifyContent: 'center',
-		alignItems: 'flex-end'
+		alignItems: 'flex-end',
 	},
 	modal: {
 		flex: 1,
 		backgroundColor: 'white',
 		paddingLeft: 15,
-		paddingRight: 15
+		paddingRight: 15,
 	},
 	modalTitle: {
 		fontSize: 16,
