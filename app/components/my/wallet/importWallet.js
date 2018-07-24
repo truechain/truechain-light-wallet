@@ -19,13 +19,17 @@ class ImportWallet extends Component {
 		super();
 		this.state = {
 			mnemonic: null,
+			privateFile: null,
 			mnemonicFlag: true,
 			hdPathString: "m/44'/60'/0'/0",
-			pwd: null,
-			confirmPwd: null,
-			isAgree: false,
+			mnemonicPwd: null,
+			privatePwd: null,
+			confirmMnemonicPwd: null,
+			mnemonisAgree: false,
+			privateisAgree: false,
 			disabledImport: false,
-			showLoading: false
+			showLoading: false,
+			privateFileFlag: true
 		};
 	}
 
@@ -69,6 +73,24 @@ class ImportWallet extends Component {
 		}
 	};
 
+	privateKeyArea = {
+		placeholder: '明文私钥',
+		multiline: true,
+		style: styles.mnemonicArea,
+		onChange: (e) => {
+			this.setState(
+				{
+					privateFile: e.nativeEvent.text
+				},
+				() => {
+					this.setState({
+						privateFileFlag: this.state.privateFile ? false : true
+					});
+				}
+			);
+		}
+	};
+
 	// path = {
 	//     placeholder: I18n.t('wallet.path'),
 	//     value: this.state.hdPathString,
@@ -80,35 +102,57 @@ class ImportWallet extends Component {
 	//     }
 	// }
 
-	pwd = {
+	mnemonicPwd = {
 		placeholder: I18n.t('wallet.enterPwd'),
 		inputContainerStyle: styles.textInput,
 		secureTextEntry: true,
-		onChangeText: (pwd) => {
+		onChangeText: (mnemonicPwd) => {
 			this.setState({
-				pwd: pwd
+				mnemonicPwd: mnemonicPwd
 			});
 		}
 	};
 
-	confirmPwd = {
+	privatePwd = {
+		placeholder: I18n.t('wallet.enterPwd'),
+		inputContainerStyle: styles.textInput,
+		secureTextEntry: true,
+		onChangeText: (privatePwd) => {
+			this.setState({
+				privatePwd: privatePwd
+			});
+		}
+	};
+
+	confirmMnemonicPwd = {
 		placeholder: I18n.t('wallet.confirmPwd'),
 		inputContainerStyle: styles.textInput,
 		secureTextEntry: true,
-		onChangeText: (confirmPwd) => {
+		onChangeText: (confirmMnemonicPwd) => {
 			this.setState({
-				confirmPwd: confirmPwd
+				confirmMnemonicPwd: confirmMnemonicPwd
+			});
+		}
+	};
+
+	confirmPrivatePwd = {
+		placeholder: I18n.t('wallet.confirmPwd'),
+		inputContainerStyle: styles.textInput,
+		secureTextEntry: true,
+		onChangeText: (confirmPrivatePwd) => {
+			this.setState({
+				confirmPrivatePwd: confirmPrivatePwd
 			});
 		}
 	};
 
 	_setSeed(option) {
 		setTimeout(() => {
-			var words = this.state.mnemonic.split(' ');
-			if (!Mnemonic.isValid(this.state.mnemonic, Mnemonic.Words.ENGLISH) || words.length !== 12) {
+			var words = option.mnemonic.split(' ');
+			if (!Mnemonic.isValid(option.mnemonic, Mnemonic.Words.ENGLISH) || words.length !== 12) {
 				alert('助记词无效，请重新输入');
 			} else {
-				this.setState({
+				option._this.setState({
 					showLoading: true
 				});
 				lightWallet.keystore.createVault(
@@ -143,12 +187,12 @@ class ImportWallet extends Component {
 							});
 
 							setTimeout(() => {
-								this.setState(
+								option._this.setState(
 									{
 										showLoading: false
 									},
 									() => {
-										this.props.navigation.navigate('Home');
+										option._this.props.navigation.navigate('Home');
 									}
 								);
 							}, 2000);
@@ -159,24 +203,75 @@ class ImportWallet extends Component {
 		}, 50);
 	}
 
-	ImportWallet() {
-		if (this.state.mnemonicFlag) {
-			Alert.alert('提示', '助记词不能为空');
-		} else if (!this.state.pwd) {
+	check(option, cb) {
+		if (option.content) {
+			Alert.alert('提示', option.msg);
+		} else if (!option.pwd) {
 			Alert.alert('提示', '请输入密码');
-		} else if (this.state.pwd.length < 8) {
+		} else if (option.pwd.length < 8) {
 			Alert.alert('提示', '建议密码不少于8位字符');
-		} else if (this.state.pwd !== this.state.confirmPwd) {
+		} else if (option.pwd !== option.confirmPwd) {
 			Alert.alert('提示', '两次密码输入不一致');
-		} else if (!this.state.isAgree) {
+		} else if (!option.isAgree) {
 			Alert.alert('提示', '请同意服务及隐私条款');
 		} else {
-			this._setSeed({
+			cb({
 				mnemonic: this.state.mnemonic,
-				password: this.state.pwd,
-				hdPathString: this.state.hdPathString
+				password: this.state.mnemonicPwd,
+				hdPathString: this.state.hdPathString,
+				_this: this
 			});
 		}
+	}
+
+	_mnemonicImport() {
+		this.check(
+			{
+				content: this.state.mnemonicFlag,
+				pwd: this.state.mnemonicPwd,
+				confirmPwd: this.state.confirmMnemonicPwd,
+				isAgree: this.state.mnemonisAgree,
+				msg: '助记词不能为空'
+			},
+			this._setSeed
+		);
+	}
+
+	_privateKeyImport() {
+		this.check(
+			{
+				content: this.state.privateFileFlag,
+				pwd: this.state.privatePwd,
+				confirmPwd: this.state.confirmPrivatePwd,
+				isAgree: this.state.privateisAgree,
+				msg: '私钥不能为空'
+			},
+			() => {
+				try {
+					let keystoreV3 = web3.eth.accounts.encrypt(this.state.privateFile, this.state.privatePwd);
+					storage.save({
+						key: 'walletInfo',
+						data: {
+							walletAddress: '0x' + keystoreV3.address,
+							keystoreV3: keystoreV3
+						},
+						expires: null
+					});
+
+					storage.save({
+						key: 'walletName',
+						data: {
+							walletName: '新钱包'
+						},
+						expires: null
+					});
+
+					this.props.navigation.navigate('Home');
+				} catch (err) {
+					Alert.alert('提示', '私钥无效,请重新输入！');
+				}
+			}
+		);
 	}
 
 	render() {
@@ -191,10 +286,13 @@ class ImportWallet extends Component {
 				<View tabLabel={I18n.t('wallet.mnemonic')} style={styles.padding_10}>
 					<TextWidget {...this.mnemonicArea} />
 					<Input {...this.path} />
-					<Input {...this.pwd} errorMessage={this.state.pwd ? ' ' : '不少于8位字符，建议混合大小写字母、数字、特殊字符'} />
 					<Input
-						{...this.confirmPwd}
-						errorMessage={this.state.pwd === this.state.confirmPwd ? ' ' : '两次密码输入不一致'}
+						{...this.mnemonicPwd}
+						errorMessage={this.state.mnemonicPwd ? ' ' : '不少于8位字符，建议混合大小写字母、数字、特殊字符'}
+					/>
+					<Input
+						{...this.confirmMnemonicPwd}
+						errorMessage={this.state.mnemonicPwd === this.state.confirmMnemonicPwd ? ' ' : '两次密码输入不一致'}
 					/>
 					<View style={styles.isAgree_flex}>
 						<CheckBox
@@ -203,19 +301,26 @@ class ImportWallet extends Component {
 							checkedIcon="check-circle"
 							uncheckedIcon="check-circle"
 							checkedColor="#007AFF"
-							checked={this.state.isAgree}
+							checked={this.state.mnemonisAgree}
 							containerStyle={styles.checkBox}
 							onPress={() => {
-								this.setState({ isAgree: !this.state.isAgree });
+								this.setState({ mnemonisAgree: !this.state.mnemonisAgree });
 							}}
 						/>
 						<Text style={styles.color_999}>我已仔细阅读并同意</Text>
-						<Text style={styles.color_aff}>《服务及隐私条款》</Text>
+						<Text
+							style={styles.color_aff}
+							onPress={() => {
+								this.props.navigation.navigate('UserPolicy');
+							}}
+						>
+							《服务及隐私条款》
+						</Text>
 					</View>
 
 					<Button
 						title={I18n.t('guide.importWallet')}
-						onPress={this.ImportWallet.bind(this)}
+						onPress={this._mnemonicImport.bind(this)}
 						buttonStyle={styles.buttonStyle}
 						disabled={this.state.disabledImport}
 						disabledStyle={styles.disabledStyle}
@@ -223,12 +328,49 @@ class ImportWallet extends Component {
 					<LoadingView showLoading={this.state.showLoading} />
 				</View>
 
-				{/* <View tabLabel={I18n.t('wallet.officialWallet')}>
-                <Text>官方钱包</Text>
-            </View>
-            <View tabLabel={I18n.t('wallet.privateKey')}>
-                <Text>私钥</Text>
-            </View> */}
+				<View tabLabel={I18n.t('wallet.officialWallet')}>
+					<Text>官方钱包</Text>
+				</View>
+				<View tabLabel={I18n.t('wallet.privateKey')} style={styles.padding_10}>
+					<TextWidget {...this.privateKeyArea} />
+					<Input
+						{...this.privatePwd}
+						errorMessage={this.state.privatePwd ? ' ' : '不少于8位字符，建议混合大小写字母、数字、特殊字符'}
+					/>
+					<Input
+						{...this.confirmPrivatePwd}
+						errorMessage={this.state.privatePwd === this.state.confirmPrivatePwd ? ' ' : '两次密码输入不一致'}
+					/>
+					<View style={styles.isAgree_flex}>
+						<CheckBox
+							title=" "
+							iconType="material"
+							checkedIcon="check-circle"
+							uncheckedIcon="check-circle"
+							checkedColor="#007AFF"
+							checked={this.state.privateisAgree}
+							containerStyle={styles.checkBox}
+							onPress={() => {
+								this.setState({ privateisAgree: !this.state.privateisAgree });
+							}}
+						/>
+						<Text style={styles.color_999}>我已仔细阅读并同意</Text>
+						<Text
+							style={styles.color_aff}
+							onPress={() => {
+								this.props.navigation.navigate('UserPolicy');
+							}}
+						>
+							《服务及隐私条款》
+						</Text>
+					</View>
+
+					<Button
+						title={I18n.t('guide.importWallet')}
+						onPress={this._privateKeyImport.bind(this)}
+						buttonStyle={styles.buttonStyle}
+					/>
+				</View>
 			</ScrollableTabView>
 		);
 	}

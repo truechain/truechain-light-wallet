@@ -167,7 +167,9 @@ class CreateWallet extends Component {
 							}}
 						/>
 						<Text style={styles.color_999}>我已仔细阅读并同意</Text>
-						<Text style={styles.color_aff}>《服务及隐私条款》</Text>
+						<Text style={styles.color_aff} onPress={() => {
+							this.props.navigation.navigate('UserPolicy');
+						}}>《服务及隐私条款》</Text>
 					</View>
 					<Button
 						title="创建钱包"

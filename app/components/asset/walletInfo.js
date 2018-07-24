@@ -33,7 +33,8 @@ class WalletInfo extends Component {
 			keystoreV3: ' ',
 			onPress: null,
 			modalTitle: null,
-			deleteBtnshow: true
+			deleteBtnshow: true,
+			selectExportMnemonic: false
 		};
 		this.verifyPwd = this.verifyPwd.bind(this);
 	}
@@ -44,6 +45,18 @@ class WalletInfo extends Component {
 				key: 'walletInfo'
 			})
 			.then((walletInfo) => {
+				console.log(walletInfo, '================lplpplpplp');
+
+				if (walletInfo.ks) {
+					this.setState({
+						selectExportMnemonic: true
+					});
+				} else {
+					this.setState({
+						selectExportMnemonic: false
+					});
+				}
+
 				let walletAddress = walletInfo.walletAddress,
 					keystoreV3 = walletInfo.keystoreV3;
 				this.setState({
@@ -132,7 +145,7 @@ class WalletInfo extends Component {
 										storage.remove({
 											key: 'token'
 										});
-										
+
 										storage.remove({
 											key: 'walletName'
 										});
@@ -186,26 +199,15 @@ class WalletInfo extends Component {
 									onPress: () => {
 										try {
 											web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
-
 											storage.load({ key: 'walletInfo' }).then((res) => {
-												let mneKeystore = lightwallet.keystore.deserialize(
-													JSON.stringify(res.ks)
-												);
-												mneKeystore.keyFromPassword(
-													this.state.walletPassword,
-													(err, pwDerivedKey) => {
-														let PrivateKey =
-															'0x' +
-															mneKeystore.exportPrivateKey(
-																store.getState().walletInfo.wallet_address,
-																pwDerivedKey
-															);
-														this.setState({
-															walletPassword: '',
-															PrivateKey
-														});
-													}
-												);
+												let PrivateKey = web3.eth.accounts.decrypt(
+													JSON.stringify(res.keystoreV3),
+													this.state.walletPassword
+												).privateKey;
+												this.setState({
+													walletPassword: '',
+													PrivateKey
+												});
 											});
 											this.refs.codeInput.close();
 											this.refs.privateKey.open();
@@ -245,35 +247,41 @@ class WalletInfo extends Component {
 						);
 					}}
 				/>
-				<ListFun
-					fun_name={I18n.t('assets.walletInfo.exportMnemonic')}
-					onPress={() => {
-						this.setState(
-							{
-								modalTitle: I18n.t('public.verifyPwd')
-							},
-							() => {
-								this.refs.codeInput.open();
-								this.setState({
-									onPress: () => {
-										try {
-											web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
-											this.navigate('ExportMnemonic', {
-												walletPassword: this.state.walletPassword
-											});
-											this.setState({
-												walletPassword: ''
-											});
-											this.refs.codeInput.close();
-										} catch (error) {
-											alert(I18n.t('public.wrongPwd'));
+
+				{this.state.selectExportMnemonic ? (
+					<ListFun
+						fun_name={I18n.t('assets.walletInfo.exportMnemonic')}
+						onPress={() => {
+							this.setState(
+								{
+									modalTitle: I18n.t('public.verifyPwd')
+								},
+								() => {
+									this.refs.codeInput.open();
+									this.setState({
+										onPress: () => {
+											try {
+												web3.eth.accounts.decrypt(
+													this.state.keystoreV3,
+													this.state.walletPassword
+												);
+												this.navigate('ExportMnemonic', {
+													walletPassword: this.state.walletPassword
+												});
+												this.setState({
+													walletPassword: ''
+												});
+												this.refs.codeInput.close();
+											} catch (error) {
+												alert(I18n.t('public.wrongPwd'));
+											}
 										}
-									}
-								});
-							}
-						);
-					}}
-				/>
+									});
+								}
+							);
+						}}
+					/>
+				) : null}
 
 				{deleteBtnComponents}
 
