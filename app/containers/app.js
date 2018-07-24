@@ -283,7 +283,7 @@ const App = createStackNavigator(
 		TransactionRecord
 	},
 	{
-		// initialRouteName: 'SetGesturePassword',
+		// initialRouteName: 'Guide',
 		headerMode: 'screen',
 		navigationOptions: {
 			headerStyle: {
