@@ -306,7 +306,7 @@ const styles = StyleSheet.create({
 	},
 	modalCon: {
 		backgroundColor: 'rgba(0,0,0,0.5)',
-		height:280,
+		// height:280,
 		flexDirection: 'row',
 		justifyContent: 'center',
 		alignItems: 'flex-end',
