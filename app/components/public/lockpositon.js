@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, Slider, StyleSheet, Modal, Dimensions, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, Slider, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import RadiusBtn from './radiusbtn';
 import sendTokens from '../../utils/sendTokens';
 import iterface from '../../utils/iterface';
 import { withNavigation } from 'react-navigation';
 import LoadingView from '../public/loadingView';
+import Modal from 'react-native-modalbox';
 
 /**
  * 这是抽象出来的锁仓界面组件
@@ -193,12 +194,14 @@ class LockPosition extends Component {
 				</Modal>
 
 				<Modal
-					animationType={'fade'}
-					transparent={true}
-					visible={this.state.modalVisible}
-					onRequestClose={() => {
-						this.setState({ modalVisible: false });
-					}}
+					isOpen={this.state.modalVisible}
+					position={'bottom'}
+					// animationType={'fade'}
+					// transparent={true}
+					// visible={this.state.modalVisible}
+					// onRequestClose={() => {
+					// 	this.setState({ modalVisible: false });
+					// }}
 				>
 					<View style={styles.modalCon}>
 						<View style={styles.modal}>
