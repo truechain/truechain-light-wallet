@@ -33,7 +33,7 @@ class ImportWallet extends Component {
 			keystoreFile: null,
 			keystoreFileFlag: true,
 			keystorePwd: null,
-			keystoreisAgree:false
+			keystoreisAgree: false
 		};
 	}
 
@@ -308,15 +308,36 @@ class ImportWallet extends Component {
 	}
 
 	_keystoreImport() {
-		try{
-		web3.eth.accounts.decrypt(this.state.keystoreFile,this.state.keystorePwd);
-		}catch(e){
-			alert('导入钱包失败, 请检查keystore或者密码是否正确')
+		if (this.state.keystoreFileFlag) {
+			Alert.alert('提示', '请输入keystore信息');
+		} else if (!this.state.keystorePwd) {
+			Alert.alert('提示', '请输入密码');
+		} else if (!this.state.keystoreisAgree) {
+			Alert.alert('提示', '请同意服务及隐私条款');
+		} else {
+			try {
+				let account = web3.eth.accounts.decrypt(this.state.keystoreFile, this.state.keystorePwd);
+				storage.save({
+					key: 'walletInfo',
+					data: {
+						walletAddress: account.address,
+						keystoreV3: JSON.parse(this.state.keystoreFile)
+					},
+					expires: null
+				});
+				storage.save({
+					key: 'walletName',
+					data: {
+						walletName: '新钱包'
+					},
+					expires: null
+				});
+				this.props.navigation.navigate('Home');
+			} catch (e) {
+				alert('导入钱包失败, 请检查keystore或者密码是否正确');
+			}
 		}
 	}
-
-
-	
 
 	render() {
 		return (
@@ -373,9 +394,7 @@ class ImportWallet extends Component {
 				</View>
 
 				<View tabLabel={I18n.t('wallet.officialWallet')} style={styles.padding_10}>
-				<Text style={styles.color_999}>
-					直接复制粘贴以太坊官方钱包keystore文件内容至输入框。
-				</Text>
+					<Text style={styles.color_999}>直接复制粘贴以太坊官方钱包keystore文件内容至输入框。</Text>
 					<TextWidget {...this.keystoreArea} />
 					<Input {...this.keystorePwd} />
 					<View style={styles.isAgree_flex}>

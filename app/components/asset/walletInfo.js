@@ -45,8 +45,6 @@ class WalletInfo extends Component {
 				key: 'walletInfo'
 			})
 			.then((walletInfo) => {
-				console.log(walletInfo, '================lplpplpplp');
-
 				if (walletInfo.ks) {
 					this.setState({
 						selectExportMnemonic: true
