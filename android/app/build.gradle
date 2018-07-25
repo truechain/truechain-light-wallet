@@ -76,6 +76,11 @@ project.ext.react = [
     entryFile: "index.js"
 ]
 
+
+project.ext.vectoricons = [
+    iconFontNames: ['iconfont.ttf' ]
+]
+
 apply from: "../../node_modules/react-native/react.gradle"
 
 /**
@@ -115,19 +120,10 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
-    signingConfigs {
-        release {
-            storeFile file(MYAPP_RELEASE_STORE_FILE)
-            storePassword MYAPP_RELEASE_STORE_PASSWORD
-            keyAlias MYAPP_RELEASE_KEY_ALIAS
-            keyPassword MYAPP_RELEASE_KEY_PASSWORD
-        }
-    }
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
-            signingConfig signingConfigs.release
         }
     }
     // applicationVariants are e.g. debug, release

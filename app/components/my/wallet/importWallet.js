@@ -29,7 +29,11 @@ class ImportWallet extends Component {
 			privateisAgree: false,
 			disabledImport: false,
 			showLoading: false,
-			privateFileFlag: true
+			privateFileFlag: true,
+			keystoreFile: null,
+			keystoreFileFlag: true,
+			keystorePwd: null,
+			keystoreisAgree:false
 		};
 	}
 
@@ -73,6 +77,24 @@ class ImportWallet extends Component {
 		}
 	};
 
+	keystoreArea = {
+		placeholder: 'keystore文件',
+		multiline: true,
+		style: styles.mnemonicArea,
+		onChange: (e) => {
+			this.setState(
+				{
+					keystoreFile: e.nativeEvent.text
+				},
+				() => {
+					this.setState({
+						keystoreFileFlag: this.state.keystoreFile ? false : true
+					});
+				}
+			);
+		}
+	};
+
 	privateKeyArea = {
 		placeholder: '明文私钥',
 		multiline: true,
@@ -109,6 +131,17 @@ class ImportWallet extends Component {
 		onChangeText: (mnemonicPwd) => {
 			this.setState({
 				mnemonicPwd: mnemonicPwd
+			});
+		}
+	};
+
+	keystorePwd = {
+		placeholder: I18n.t('wallet.enterPwd'),
+		inputContainerStyle: styles.textInput,
+		secureTextEntry: true,
+		onChangeText: (keystorePwd) => {
+			this.setState({
+				keystorePwd: keystorePwd
 			});
 		}
 	};
@@ -274,6 +307,17 @@ class ImportWallet extends Component {
 		);
 	}
 
+	_keystoreImport() {
+		try{
+		web3.eth.accounts.decrypt(this.state.keystoreFile,this.state.keystorePwd);
+		}catch(e){
+			alert('导入钱包失败, 请检查keystore或者密码是否正确')
+		}
+	}
+
+
+	
+
 	render() {
 		return (
 			<ScrollableTabView
@@ -328,8 +372,40 @@ class ImportWallet extends Component {
 					<LoadingView showLoading={this.state.showLoading} />
 				</View>
 
-				<View tabLabel={I18n.t('wallet.officialWallet')}>
-					<Text>官方钱包</Text>
+				<View tabLabel={I18n.t('wallet.officialWallet')} style={styles.padding_10}>
+				<Text style={styles.color_999}>
+					直接复制粘贴以太坊官方钱包keystore文件内容至输入框。
+				</Text>
+					<TextWidget {...this.keystoreArea} />
+					<Input {...this.keystorePwd} />
+					<View style={styles.isAgree_flex}>
+						<CheckBox
+							title=" "
+							iconType="material"
+							checkedIcon="check-circle"
+							uncheckedIcon="check-circle"
+							checkedColor="#007AFF"
+							checked={this.state.keystoreisAgree}
+							containerStyle={styles.checkBox}
+							onPress={() => {
+								this.setState({ keystoreisAgree: !this.state.keystoreisAgree });
+							}}
+						/>
+						<Text style={styles.color_999}>我已仔细阅读并同意</Text>
+						<Text
+							style={styles.color_aff}
+							onPress={() => {
+								this.props.navigation.navigate('UserPolicy');
+							}}
+						>
+							《服务及隐私条款》
+						</Text>
+					</View>
+					<Button
+						title={I18n.t('guide.importWallet')}
+						onPress={this._keystoreImport.bind(this)}
+						buttonStyle={styles.buttonStyle}
+					/>
 				</View>
 				<View tabLabel={I18n.t('wallet.privateKey')} style={styles.padding_10}>
 					<TextWidget {...this.privateKeyArea} />
