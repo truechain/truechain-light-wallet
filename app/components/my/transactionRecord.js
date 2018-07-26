@@ -92,7 +92,11 @@ class TransactionRecord extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<FlatList data={this.state.recordData} renderItem={(item) => <TransactionRecordOO data={item} />} />
+				{this.state.recordData ? (
+					<FlatList data={this.state.recordData} renderItem={(item) => <TransactionRecordOO data={item} />} />
+				) : (
+					<Text style={{ textAlign: 'center' }}>~</Text>
+				)}
 			</View>
 		);
 	}
