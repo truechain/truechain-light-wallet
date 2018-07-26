@@ -7,6 +7,8 @@ import LoadingView from '../../public/loadingView';
 import TextWidget from '../../public/textWidget/textWidget';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
+import Loading from 'react-native-whc-loading';
+
 var Mnemonic = require('bitcore-mnemonic');
 
 class ImportWallet extends Component {
@@ -28,7 +30,6 @@ class ImportWallet extends Component {
 			mnemonisAgree: false,
 			privateisAgree: false,
 			disabledImport: false,
-			showLoading: false,
 			privateFileFlag: true,
 			keystoreFile: null,
 			keystoreFileFlag: true,
@@ -180,60 +181,53 @@ class ImportWallet extends Component {
 	};
 
 	_setSeed(option) {
-		setTimeout(() => {
-			var words = option.mnemonic.split(' ');
-			if (!Mnemonic.isValid(option.mnemonic, Mnemonic.Words.ENGLISH) || words.length !== 12) {
+		option._this.refs.loading.show();
+		var words = option.mnemonic.split(' ');
+		if (!Mnemonic.isValid(option.mnemonic, Mnemonic.Words.ENGLISH) || words.length !== 12) {
+			this.refs.loading.close();
+			setTimeout(() => {
 				alert('助记词无效，请重新输入');
-			} else {
-				option._this.setState({
-					showLoading: true
-				});
-				lightWallet.keystore.createVault(
-					{
-						password: option.password,
-						seedPhrase: option.mnemonic,
-						hdPathString: option.hdPathString
-					},
-					(err, ks) => {
-						ks.keyFromPassword(option.password, (err, pwDerivedKey) => {
-							ks.generateNewAddress(pwDerivedKey, 1);
-							var address = ks.getAddresses();
-							let keystoreV3 = web3.eth.accounts
-								.privateKeyToAccount('0x' + ks.exportPrivateKey(address[0], pwDerivedKey))
-								.encrypt(option.password);
-							storage.save({
-								key: 'walletInfo',
-								data: {
-									walletAddress: address[0],
-									keystoreV3: keystoreV3,
-									ks: ks
-								},
-								expires: null
-							});
-
-							storage.save({
-								key: 'walletName',
-								data: {
-									walletName: '新钱包'
-								},
-								expires: null
-							});
-
-							setTimeout(() => {
-								option._this.setState(
-									{
-										showLoading: false
-									},
-									() => {
-										option._this.props.navigation.navigate('Home');
-									}
-								);
-							}, 2000);
+			}, 100);
+		} else {
+			lightWallet.keystore.createVault(
+				{
+					password: option.password,
+					seedPhrase: option.mnemonic,
+					hdPathString: option.hdPathString
+				},
+				(err, ks) => {
+					ks.keyFromPassword(option.password, (err, pwDerivedKey) => {
+						ks.generateNewAddress(pwDerivedKey, 1);
+						var address = ks.getAddresses();
+						let keystoreV3 = web3.eth.accounts
+							.privateKeyToAccount('0x' + ks.exportPrivateKey(address[0], pwDerivedKey))
+							.encrypt(option.password);
+						storage.save({
+							key: 'walletInfo',
+							data: {
+								walletAddress: address[0],
+								keystoreV3: keystoreV3,
+								ks: ks
+							},
+							expires: null
 						});
-					}
-				);
-			}
-		}, 50);
+
+						storage.save({
+							key: 'walletName',
+							data: {
+								walletName: '新钱包'
+							},
+							expires: null
+						});
+
+						setTimeout(() => {
+							option._this.refs.loading.close();
+							option._this.props.navigation.navigate('Home');
+						}, 100);
+					});
+				}
+			);
+		}
 	}
 
 	check(option, cb) {
@@ -280,6 +274,7 @@ class ImportWallet extends Component {
 				msg: '私钥不能为空'
 			},
 			() => {
+				this.refs.loading.show();
 				try {
 					let keystoreV3 = web3.eth.accounts.encrypt(this.state.privateFile, this.state.privatePwd);
 					storage.save({
@@ -298,8 +293,10 @@ class ImportWallet extends Component {
 						},
 						expires: null
 					});
-
-					this.props.navigation.navigate('Home');
+					setTimeout(() => {
+						this.refs.loading.close();
+						this.props.navigation.navigate('Home');
+					}, 100);
 				} catch (err) {
 					Alert.alert('提示', '私钥无效,请重新输入！');
 				}
@@ -315,6 +312,8 @@ class ImportWallet extends Component {
 		} else if (!this.state.keystoreisAgree) {
 			Alert.alert('提示', '请同意服务及隐私条款');
 		} else {
+			this.refs.loading.show();
+
 			try {
 				let account = web3.eth.accounts.decrypt(this.state.keystoreFile, this.state.keystorePwd);
 				storage.save({
@@ -332,7 +331,10 @@ class ImportWallet extends Component {
 					},
 					expires: null
 				});
-				this.props.navigation.navigate('Home');
+				setTimeout(() => {
+					this.refs.loading.close();
+					this.props.navigation.navigate('Home');
+				}, 100);
 			} catch (e) {
 				alert('导入钱包失败, 请检查keystore或者密码是否正确');
 			}
@@ -390,9 +392,8 @@ class ImportWallet extends Component {
 						disabled={this.state.disabledImport}
 						disabledStyle={styles.disabledStyle}
 					/>
-					<LoadingView showLoading={this.state.showLoading} />
+					<Loading ref="loading" />
 				</View>
-
 				<View tabLabel={I18n.t('wallet.officialWallet')} style={styles.padding_10}>
 					<Text style={styles.color_999}>直接复制粘贴以太坊官方钱包keystore文件内容至输入框。</Text>
 					<TextWidget {...this.keystoreArea} />
