@@ -240,6 +240,7 @@ export default class Login extends React.Component {
 						onChangeText={(tel) => this.setState({ tel })}
 						style={[ styles.input_item, styles.tel_input ]}
 						placeholder="请输入手机号"
+						underlineColorAndroid="transparent"
 					/>
 				</View>
 
@@ -249,6 +250,7 @@ export default class Login extends React.Component {
 						onChangeText={(cap_code) => this.setState({ cap_code })}
 						style={[ styles.input_item, styles.cap_input ]}
 						placeholder="输入图片验证码"
+						underlineColorAndroid="transparent"
 					/>
 					<View>
 						<Text onPress={() => this._fetchCode()} style={styles.authCode} />
@@ -270,6 +272,7 @@ export default class Login extends React.Component {
 						style={[ styles.input_item, styles.cap_input ]}
 						onChangeText={(v_code) => this.setState({ v_code })}
 						placeholder="输入手机验证码"
+						underlineColorAndroid="transparent"
 					/>
 					<TouchableOpacity disabled={this.state.disabled} onPress={this.setTime}>
 						{this.state.countdown >= 0 ? (

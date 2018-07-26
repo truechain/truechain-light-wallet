@@ -120,45 +120,6 @@ class WalletInfo extends Component {
 	};
 
 	render() {
-		// let deleteBtnComponents = this.state.deleteBtnshow ? (
-		// 	<Button
-		// 		title={I18n.t('assets.walletInfo.deleteWallet')}
-		// 		buttonStyle={styles.buttonStyle}
-		// 		onPress={() => {
-		// 			this.setState(
-		// 				{
-		// 					modalTitle: I18n.t('public.verifyPwd')
-		// 				},
-		// 				() => {
-		// 					this.refs.codeInput.open();
-		// 					this.setState({
-		// 						onPress: () => {
-		// 							try {
-		// 								web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
-		// 								storage.remove({
-		// 									key: 'walletInfo'
-		// 								});
-
-		// 								storage.remove({
-		// 									key: 'token'
-		// 								});
-
-		// 								storage.remove({
-		// 									key: 'walletName'
-		// 								});
-
-		// 								this.navigate('Guide');
-		// 							} catch (error) {
-		// 								alert(I18n.t('public.wrongPwd'));
-		// 							}
-		// 						}
-		// 					});
-		// 				}
-		// 			);
-		// 		}}
-		// 	/>
-		// ) : null;
-
 		return (
 			<View style={styles.container}>
 				<View style={styles.walletInfo}>
@@ -295,7 +256,7 @@ class WalletInfo extends Component {
 												} catch (error) {
 													this.refs.loading.close();
 													setTimeout(() => {
-														alert(I18n.t('public.wrongPwd'));														
+														alert(I18n.t('public.wrongPwd'));
 													}, 100);
 												}
 											}, 100);
@@ -323,7 +284,10 @@ class WalletInfo extends Component {
 										this.refs.codeInput.close();
 										setTimeout(() => {
 											try {
-												web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
+												web3.eth.accounts.decrypt(
+													this.state.keystoreV3,
+													this.state.walletPassword
+												);
 												storage.remove({
 													key: 'walletInfo'
 												});
@@ -481,12 +445,15 @@ const styles = StyleSheet.create({
 		borderRadius: 50,
 		marginTop: 30,
 		position: 'relative',
-		zIndex: 5
+		zIndex: 5,
+		zIndex: -999
 	},
 	modalCode: {
 		alignItems: 'center',
 		width: screen.width,
-		height: screen.height * 0.5
+		height: screen.height * 0.5,
+		position: 'relative',
+		zIndex: 100
 	},
 	InputPwd_title: {
 		width: screen.width,
