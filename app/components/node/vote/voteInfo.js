@@ -337,8 +337,7 @@ const styles = StyleSheet.create({
 		marginTop: 30
 	},
 	disabledStyle: {
-		borderWidth: 2,
-		backgroundColor: '#ced4da'
+		borderRadius: 50,
 	},
 	modalCon: {
 		backgroundColor: 'rgba(0,0,0,0.5)',

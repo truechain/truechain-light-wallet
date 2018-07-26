@@ -300,7 +300,6 @@ class Node extends Component {
 							scrollEventThrottle={200}
 							onScroll={this._fullOnScroll.bind(this)}
 						>
-							>
 							{this.state.fullNodeData.map((item, index) => {
 								return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
 							})}
