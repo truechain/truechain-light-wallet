@@ -2,14 +2,12 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, TouchableHighlight } from 'react-native';
 import { I18n } from '../../language/i18n';
 import { withNavigation } from 'react-navigation';
-import Icon from '../pages/iconSets'
 
 class Guide extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
 				<View style={styles.LogoOrWel}>
-                    <Icon name='icon-pingguo' size={60} color="#4F8EF7" />
 					<Image style={styles.logo} source={require('../assets/images/logo.png')} />
 					<Text style={styles.welcome}>{I18n.t('guide.welcome')}</Text>
 				</View>
