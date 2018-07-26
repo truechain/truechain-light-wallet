@@ -16,7 +16,9 @@ class TeamMemberList extends Component {
 					)}
 					<Text style={{ marginLeft: 5 }}>{this.props.item.nickname}</Text>
 				</View>
-				<Text style={{ color: '#528BF7' }}>{this.props.item.lock_num} TRUE</Text>
+				{this.props.status === 2 ? (
+					<Text style={{ color: '#528BF7' }}>{this.props.item.lock_num} TRUE</Text>
+				) : null}
 			</View>
 		);
 	}
@@ -155,7 +157,7 @@ class TeamInfo extends Component {
 					</View>
 					<ScrollView style={{ marginTop: 10, height: 200 }}>
 						{this.state.teamMemberData.map((item, index) => {
-							return <TeamMemberList item={item} key={index} />;
+							return <TeamMemberList item={item} key={index} status={this.state.status} />;
 						})}
 					</ScrollView>
 					<View style={styles.next}>{this.state.Button}</View>

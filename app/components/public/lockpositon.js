@@ -4,7 +4,7 @@ import RadiusBtn from './radiusbtn';
 import sendTokens from '../../utils/sendTokens';
 import iterface from '../../utils/iterface';
 import { withNavigation } from 'react-navigation';
-import LoadingView from '../public/loadingView';
+import Loading from 'react-native-whc-loading';
 import Modal from 'react-native-modalbox';
 
 /**
@@ -30,8 +30,7 @@ class LockPosition extends Component {
 			pwd: null,
 			keystoreV3: null,
 			ContractAddr: null,
-			isSuccess: false,
-			showLoading: false
+			isSuccess: false
 		};
 	}
 
@@ -91,23 +90,17 @@ class LockPosition extends Component {
 			web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'),
 			(err, tx) => {
 				if (err) {
-					this.setState(
-						{
-							showLoading: false
-						},
-						() => {
-							setTimeout(() => {
-								this.setState({
-									pwd: null
-								});
-								alert('发布交易失败，请稍后重试！');
-							}, 100);
-						}
-					);
+					this.refs.loading.close();
+					setTimeout(() => {
+						this.setState({
+							pwd: null
+						});
+						alert('发布交易失败，请稍后重试！');
+					}, 100);
 				} else {
+					this.refs.loading.close();
 					this.setState({
-						isSuccess: true,
-						showLoading: false
+						isSuccess: true
 					});
 				}
 			}
@@ -134,7 +127,6 @@ class LockPosition extends Component {
 	render() {
 		return (
 			<View style={styles.inputPage}>
-				<LoadingView showLoading={this.state.showLoading} />
 				<View style={styles.infoBox}>
 					<Text style={styles.infoBoxTitle}>锁仓地址</Text>
 					<View style={styles.splitLine} />
@@ -173,8 +165,9 @@ class LockPosition extends Component {
 						this.setModalVisible(true);
 					}}
 				/>
+				<Loading ref="loading" />
 
-				<Modal animationType={'fade'} transparent={true} visible={this.state.isSuccess}>
+				<Modal animationType={'fade'} transparent={true} isOpen={this.state.isSuccess}>
 					<View style={styles.success}>
 						<View style={styles.success_item}>
 							>
@@ -194,10 +187,12 @@ class LockPosition extends Component {
 				</Modal>
 
 				<Modal
-					style={{ height:280 }}
+					style={{ height: 280 }}
 					isOpen={this.state.modalVisible}
-					position={'bottom'} 
-					onClosed={ ()=>{ this.setState({modalVisible:false}); } }
+					position={'bottom'}
+					onClosed={() => {
+						this.setState({ modalVisible: false });
+					}}
 				>
 					<View style={styles.modalCon}>
 						<View style={styles.modal}>
@@ -234,21 +229,18 @@ class LockPosition extends Component {
 									activeOpacity={0.5}
 									onPress={() => {
 										if (!this.state.pwd) {
-											this.setState({ showLoading: false }, () => {
-												alert('请输入密码!');
-											});
+											alert('请输入密码!');
 										} else {
 											this.setModalVisible(false);
-											this.setState({
-												showLoading: true
-											});
+											this.refs.loading.show();
 
 											setTimeout(() => {
 												try {
 													web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.pwd);
 													this._sendTokens();
 												} catch (error) {
-													this.setState({ showLoading: false, pwd: null }, () => {
+													this.setState({ pwd: null }, () => {
+														this.refs.loading.close();
 														setTimeout(() => {
 															alert('密码错误,请重新输入');
 														}, 100);
@@ -309,13 +301,13 @@ const styles = StyleSheet.create({
 		// height:280,
 		flexDirection: 'row',
 		justifyContent: 'center',
-		alignItems: 'flex-end',
+		alignItems: 'flex-end'
 	},
 	modal: {
 		flex: 1,
 		backgroundColor: 'white',
 		paddingLeft: 15,
-		paddingRight: 15,
+		paddingRight: 15
 	},
 	modalTitle: {
 		fontSize: 16,

@@ -7,6 +7,7 @@ import { withNavigation } from 'react-navigation';
 import sendEth from '../../utils/sendEth';
 import sendTokens from '../../utils/sendTokens';
 import iterface from '../../utils/trueIterface';
+import Loading from 'react-native-whc-loading';
 
 const screen = Dimensions.get('window');
 
@@ -103,12 +104,16 @@ class Transfer extends Component {
 					web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'),
 					(err, tx) => {
 						if (err) {
-							this.refs.transferDetail.close();
-							alert('发布交易失败，请稍后重试！');
+							this.refs.loading.close();
+							setTimeout(() => {
+								alert('发布交易失败，请稍后重试！');
+							}, 100);
 							console.log(err);
 						} else {
-							this.refs.transferDetail.close();
-							alert('发布交易成功！');
+							this.refs.loading.close();
+							setTimeout(() => {
+								alert('发布交易成功！');
+							}, 100);
 							console.log(tx, '=======');
 						}
 					}
@@ -130,12 +135,16 @@ class Transfer extends Component {
 					web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'),
 					(err, tx) => {
 						if (err) {
-							this.refs.transferDetail.close();
-							alert('发布交易失败，请稍后重试！');
+							this.refs.loading.close();
+							setTimeout(() => {
+								alert('发布交易失败，请稍后重试！');
+							}, 100);
 							console.log(err);
 						} else {
-							this.refs.transferDetail.close();
-							alert('发布交易成功！');
+							this.refs.loading.close();
+							setTimeout(() => {
+								alert('发布交易成功！');
+							}, 100);
 							console.log(tx, '=======');
 						}
 					}
@@ -263,6 +272,7 @@ class Transfer extends Component {
 							}, 100);
 						}}
 					/>
+					<Loading ref="loading" />
 				</View>
 				<Modal style={styles.modal} position={'bottom'} ref={'transferDetail'} swipeArea={20}>
 					<ScrollView>
@@ -317,18 +327,25 @@ class Transfer extends Component {
 											if (!this.state.password) {
 												alert('请输入密码');
 											} else {
-												try {
-													web3.eth.accounts.decrypt(
-														this.state.keystoreV3,
-														this.state.password
-													);
-													this._sendTokens();
-													this.setState({
-														password: null
-													});
-												} catch (error) {
-													alert('密码错误,请重新输入');
-												}
+												this.refs.loading.show();
+												this.refs.transferDetail.close();
+												setTimeout(() => {
+													try {
+														web3.eth.accounts.decrypt(
+															this.state.keystoreV3,
+															this.state.password
+														);
+														this._sendTokens();
+														this.setState({
+															password: null
+														});
+													} catch (error) {
+														this.refs.loading.close();
+														setTimeout(() => {
+															alert('密码错误,请重新输入');
+														}, 100);
+													}
+												}, 100);
 											}
 										}}
 									/>

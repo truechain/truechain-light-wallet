@@ -321,4 +321,3 @@ const styles = StyleSheet.create({
 });
 
 export default App;
-// export default connect((state) => state.walletInfo, actions)(App);

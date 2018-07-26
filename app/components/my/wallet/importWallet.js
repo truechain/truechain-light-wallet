@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Alert } from 'react-native';
 import { I18n } from '../../../../language/i18n';
 import lightWallet from 'eth-lightwallet';
 import { withNavigation } from 'react-navigation';
-import LoadingView from '../../public/loadingView';
 import TextWidget from '../../public/textWidget/textWidget';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
@@ -275,31 +274,36 @@ class ImportWallet extends Component {
 			},
 			() => {
 				this.refs.loading.show();
-				try {
-					let keystoreV3 = web3.eth.accounts.encrypt(this.state.privateFile, this.state.privatePwd);
-					storage.save({
-						key: 'walletInfo',
-						data: {
-							walletAddress: '0x' + keystoreV3.address,
-							keystoreV3: keystoreV3
-						},
-						expires: null
-					});
+				setTimeout(() => {
+					try {
+						let keystoreV3 = web3.eth.accounts.encrypt(this.state.privateFile, this.state.privatePwd);
+						storage.save({
+							key: 'walletInfo',
+							data: {
+								walletAddress: '0x' + keystoreV3.address,
+								keystoreV3: keystoreV3
+							},
+							expires: null
+						});
 
-					storage.save({
-						key: 'walletName',
-						data: {
-							walletName: '新钱包'
-						},
-						expires: null
-					});
-					setTimeout(() => {
+						storage.save({
+							key: 'walletName',
+							data: {
+								walletName: '新钱包'
+							},
+							expires: null
+						});
+						setTimeout(() => {
+							this.refs.loading.close();
+							this.props.navigation.navigate('Home');
+						}, 100);
+					} catch (err) {
 						this.refs.loading.close();
-						this.props.navigation.navigate('Home');
-					}, 100);
-				} catch (err) {
-					Alert.alert('提示', '私钥无效,请重新输入！');
-				}
+						setTimeout(() => {
+							Alert.alert('提示', '私钥无效,请重新输入！');
+						}, 100);
+					}
+				}, 500);
 			}
 		);
 	}
@@ -313,31 +317,35 @@ class ImportWallet extends Component {
 			Alert.alert('提示', '请同意服务及隐私条款');
 		} else {
 			this.refs.loading.show();
-
-			try {
-				let account = web3.eth.accounts.decrypt(this.state.keystoreFile, this.state.keystorePwd);
-				storage.save({
-					key: 'walletInfo',
-					data: {
-						walletAddress: account.address,
-						keystoreV3: JSON.parse(this.state.keystoreFile)
-					},
-					expires: null
-				});
-				storage.save({
-					key: 'walletName',
-					data: {
-						walletName: '新钱包'
-					},
-					expires: null
-				});
-				setTimeout(() => {
+			setTimeout(() => {
+				try {
+					let account = web3.eth.accounts.decrypt(this.state.keystoreFile, this.state.keystorePwd);
+					storage.save({
+						key: 'walletInfo',
+						data: {
+							walletAddress: account.address,
+							keystoreV3: JSON.parse(this.state.keystoreFile)
+						},
+						expires: null
+					});
+					storage.save({
+						key: 'walletName',
+						data: {
+							walletName: '新钱包'
+						},
+						expires: null
+					});
+					setTimeout(() => {
+						this.refs.loading.close();
+						this.props.navigation.navigate('Home');
+					}, 100);
+				} catch (e) {
 					this.refs.loading.close();
-					this.props.navigation.navigate('Home');
-				}, 100);
-			} catch (e) {
-				alert('导入钱包失败, 请检查keystore或者密码是否正确');
-			}
+					setTimeout(() => {
+						Alert.alert('提示', '导入钱包失败, 请检查keystore或者密码是否正确');
+					}, 100);
+				}
+			}, 500);
 		}
 	}
 
