@@ -3,15 +3,15 @@ package com.truewallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
-import com.tradle.react.UdpSocketsModule;
-import com.peel.react.TcpSocketsModule;
-import com.peel.react.rnos.RNOSModule;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
 import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
 import org.reactnative.camera.RNCameraPackage;
+import com.tradle.react.UdpSocketsModule;
+import com.peel.react.TcpSocketsModule;
+import com.peel.react.rnos.RNOSModule;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -32,15 +32,15 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
-            new UdpSocketsModule(),
-            new TcpSocketsModule(),
-            new RNOSModule(),
-            new VectorIconsPackage(),
             new SvgPackage(),
             new ReactNativeRestartPackage(),
             new RandomBytesPackage(),
             new RNI18nPackage(),
-            new RNCameraPackage()
+            new RNCameraPackage(),
+            new UdpSocketsModule(),
+            new TcpSocketsModule(),
+            new RNOSModule(),
+            new VectorIconsPackage()
       );
     }
 

@@ -11,7 +11,6 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 import actions from '../../store/action/walletInfo';
-import { withNavigation } from 'react-navigation';
 import getBalance from '../../utils/addTokens';
 import iterface from '../../utils/iterface';
 import { I18n } from '../../../language/i18n';
@@ -254,7 +253,9 @@ const styles = StyleSheet.create({
 	},
 	walletInfo: {
 		height: 230,
-		backgroundColor: '#528bf7'
+		backgroundColor: '#528bf7',
+		borderBottomLeftRadius: 10,
+		borderBottomRightRadius: 10
 	},
 	walletInfo_item: {
 		flex: 1,

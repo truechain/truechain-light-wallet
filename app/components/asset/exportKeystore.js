@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
 		padding: 10
 	},
 	warningBox: {
-		height: 70,
+		height: 85,
 		justifyContent: 'space-around'
 	},
 	color_999: {

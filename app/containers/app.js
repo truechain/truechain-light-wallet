@@ -156,24 +156,16 @@ const TabBarPage = createBottomTabNavigator(
 			screen: Assets,
 			navigationOptions: {
 				tabBarLabel: I18n.t('tab.assets'),
-				tabBarIcon: ({ focused, tintColor }) =>
-					focused ? (
-						<Icon name="icon-zichan" size={30} color="#4F8EF7" />
-					) : (
-						<Icon name="icon-zichan" size={30} color="#666" />
-					)
+				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-zichan" size={30} color={tintColor} />
 			}
 		},
 		Node: {
 			screen: Node,
 			navigationOptions: {
 				tabBarLabel: I18n.t('tab.node'),
-				tabBarIcon: ({ focused, tintColor }) =>
-					focused ? (
-						<Icon name="icon-xiajiantouxialakuang-" size={20} color="#4F8EF7" />
-					) : (
-							<Icon name="icon-xiajiantouxialakuang-" size={20} color="#666" />
-					),
+				tabBarIcon: ({ focused, tintColor }) => (
+					<Icon name="icon-xiajiantouxialakuang-" size={20} color={tintColor} />
+				),
 				tabBarOnPress: ({ navigation, defaultHandler }) => {
 					storage
 						.load({
@@ -192,12 +184,7 @@ const TabBarPage = createBottomTabNavigator(
 			screen: My,
 			navigationOptions: {
 				tabBarLabel: I18n.t('tab.my'),
-				tabBarIcon: ({ focused, tintColor }) =>
-					focused ? (
-						<Icon name="icon-geren" size={30} color="#4F8EF7" />
-					) : (
-							<Icon name="icon-geren" size={30} color="#666" />
-						),
+				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-geren" size={30} color={tintColor} />
 			}
 		}
 	},

@@ -176,7 +176,6 @@ class VoteList extends Component {
 					scrollEventThrottle={200}
 					onScroll={this._OnScroll.bind(this)}
 				>
-					>
 					{this.state.NodeData.map((item, index) => {
 						return this._renderItem(item, index);
 					})}
