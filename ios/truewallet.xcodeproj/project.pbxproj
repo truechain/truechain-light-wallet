@@ -38,9 +38,9 @@
 		31C91850597846119CF92B0C /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BFE17970DAF496091CB5C97 /* libRNSVG-tvOS.a */; };
 		36A28248F7F44F23B99DA8DE /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C72C8CE88740309B7764F0 /* libRNCamera.a */; };
 		3C13CA0320F6083B00BC09F5 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13CA0020F6082B00BC09F5 /* libRCTPushNotification.a */; };
-		3C291DE821073EC100407896 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C291DE721073EC100407896 /* iconfont.ttf */; };
 		3C7151F220F3657C00E63617 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		3C82970220F35D9500CCE45C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		3C866A61210ABEC8005F3FD8 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C866A60210ABEC8005F3FD8 /* iconfont.ttf */; };
 		3C8F15B620FF3BE4008A0251 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8F15B520FF3BCF008A0251 /* libRCTRestart.a */; };
 		3C8F15B720FF3BED008A0251 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8F15B520FF3BCF008A0251 /* libRCTRestart.a */; };
 		3CD5E0CA20F338DD003D2686 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD5E0C920F338A6003D2686 /* libRNVectorIcons.a */; };
@@ -487,7 +487,7 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A1A9319B07A494C978279EE /* libRCTRestart.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTRestart.a; sourceTree = "<group>"; };
 		3C13C9FA20F6082A00BC09F5 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
-		3C291DE721073EC100407896 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = iconfont.ttf; path = ../../app/assets/iconfont/iconfont.ttf; sourceTree = "<group>"; };
+		3C866A60210ABEC8005F3FD8 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = iconfont.ttf; path = ../../app/assets/iconfont/iconfont.ttf; sourceTree = "<group>"; };
 		3C8F15B020FF3BCF008A0251 /* RCTRestart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTRestart.xcodeproj; path = "../node_modules/react-native-restart/ios/RCTRestart.xcodeproj"; sourceTree = "<group>"; };
 		3CB4FD7B20FF0CBA00116540 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		3CD5E11720F33ACE003D2686 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -750,7 +750,7 @@
 		3C291DE621073DCC00407896 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				3C291DE721073EC100407896 /* iconfont.ttf */,
+				3C866A60210ABEC8005F3FD8 /* iconfont.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -1558,7 +1558,7 @@
 			files = (
 				3CD5E12620F33ACF003D2686 /* Octicons.ttf in Resources */,
 				3CD5E13420F33ACF003D2686 /* Entypo.ttf in Resources */,
-				3C291DE821073EC100407896 /* iconfont.ttf in Resources */,
+				3C866A61210ABEC8005F3FD8 /* iconfont.ttf in Resources */,
 				3CD5E13220F33ACF003D2686 /* FontAwesome.ttf in Resources */,
 				3CD5E12A20F33ACF003D2686 /* Foundation.ttf in Resources */,
 				3CD5E12C20F33ACF003D2686 /* Ionicons.ttf in Resources */,

@@ -48,6 +48,7 @@ import TransactionRecord from '../components/my/transactionRecord';
 
 //rely
 import Storage from 'react-native-storage';
+import Icon from '../pages/iconSets';
 
 const storage = new Storage({
 	size: 1000,
@@ -155,14 +156,24 @@ const TabBarPage = createBottomTabNavigator(
 			screen: Assets,
 			navigationOptions: {
 				tabBarLabel: I18n.t('tab.assets'),
-				tabBarIcon: ({ tintColor }) => <Image style={styles.icon} source={IconUrl.assets} />
+				tabBarIcon: ({ focused, tintColor }) =>
+					focused ? (
+						<Icon name="icon-zichan" size={30} color="#4F8EF7" />
+					) : (
+						<Icon name="icon-zichan" size={30} color="#666" />
+					)
 			}
 		},
 		Node: {
 			screen: Node,
 			navigationOptions: {
 				tabBarLabel: I18n.t('tab.node'),
-				tabBarIcon: ({ tintColor }) => <Image style={styles.icon} source={IconUrl.node} />,
+				tabBarIcon: ({ focused, tintColor }) =>
+					focused ? (
+						<Icon name="icon-xiajiantouxialakuang-" size={20} color="#4F8EF7" />
+					) : (
+							<Icon name="icon-xiajiantouxialakuang-" size={20} color="#666" />
+					),
 				tabBarOnPress: ({ navigation, defaultHandler }) => {
 					storage
 						.load({
@@ -181,7 +192,12 @@ const TabBarPage = createBottomTabNavigator(
 			screen: My,
 			navigationOptions: {
 				tabBarLabel: I18n.t('tab.my'),
-				tabBarIcon: ({ tintColor }) => <Image style={styles.icon} source={IconUrl.my} />
+				tabBarIcon: ({ focused, tintColor }) =>
+					focused ? (
+						<Icon name="icon-geren" size={30} color="#4F8EF7" />
+					) : (
+							<Icon name="icon-geren" size={30} color="#666" />
+						),
 			}
 		}
 	},
