@@ -319,6 +319,7 @@ class WalletInfo extends Component {
 					style={styles.modalCode}
 					position={'bottom'}
 					ref={'codeInput'}
+					coverScreen={true}
 					swipeArea={20}
 					onClosed={() => {
 						this.setState({ deleteBtnshow: true });
@@ -336,7 +337,7 @@ class WalletInfo extends Component {
 					</View>
 				</Modal>
 
-				<Modal style={styles.modalCode} position={'bottom'} ref={'changeWalletName'} swipeArea={20}>
+				<Modal style={styles.modalCode} position={'bottom'} coverScreen={true} ref={'changeWalletName'} swipeArea={20}>
 					<View style={styles.InputPwd_title}>
 						<Text>{this.state.modalTitle}</Text>
 					</View>
@@ -443,17 +444,12 @@ const styles = StyleSheet.create({
 		backgroundColor: '#bbb',
 		height: 45,
 		borderRadius: 50,
-		marginTop: 30,
-		position: 'relative',
-		zIndex: 5,
-		zIndex: -999
+		marginTop: 30
 	},
 	modalCode: {
 		alignItems: 'center',
 		width: screen.width,
 		height: screen.height * 0.5,
-		position: 'relative',
-		zIndex: 100
 	},
 	InputPwd_title: {
 		width: screen.width,
