@@ -3,6 +3,12 @@ package com.truewallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.horcrux.svg.SvgPackage;
+import com.avishayil.rnrestart.ReactNativeRestartPackage;
+import com.bitgo.randombytes.RandomBytesPackage;
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
+import org.reactnative.camera.RNCameraPackage;
 import com.horcrux.svg.SvgPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
 import com.bitgo.randombytes.RandomBytesPackage;
@@ -32,6 +38,12 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
+            new SvgPackage(),
+            new ReactNativeRestartPackage(),
+            new RandomBytesPackage(),
+            new RNI18nPackage(),
+            new RNCameraPackage(),
             new SvgPackage(),
             new ReactNativeRestartPackage(),
             new RandomBytesPackage(),
