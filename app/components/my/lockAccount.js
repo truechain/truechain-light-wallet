@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { StyleSheet, Text, View, Image, PixelRatio, Dimensions, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, PixelRatio, Dimensions, Alert, TouchableOpacity } from 'react-native';
 import { I18n } from '../../../language/i18n';
 import actions from '../../store/action/lockAccount';
 import { getTrueCoin } from '../../api/loged';
@@ -75,7 +75,9 @@ class LockAccount extends React.Component {
 				</TouchableOpacity>
 				<View style={styles.lockInfo}>
 					<Text style={styles.color_fff}>TRUE</Text>
-					<Text style={[ styles.color_fff, styles.lock_num ]}>{this.state.lock_num} 锁仓</Text>
+					<Text style={[ styles.color_fff, styles.lock_num ]}>
+						{this.state.lock_num} {I18n.t('public.lockedWarehouse')}
+					</Text>
 				</View>
 
 				<View style={styles.bottom_fun}>
@@ -87,15 +89,18 @@ class LockAccount extends React.Component {
 							});
 						}}
 					>
-						转入
+						{I18n.t('public.transferIn')}
+						{/* 转入 */}
 					</Text>
 					<Text
 						style={[ styles.bottom_fun_item, styles.bottom_fun_item_receipt ]}
 						onPress={() => {
-							alert('优先节点投票期间暂不提供转出功能!');
+							// Alert.alert(null, '优先节点投票期间暂不提供转出功能!');
+							Alert.alert(null, I18n.t('public.transferOutPrompt'));
 						}}
 					>
-						转出
+						{I18n.t('public.transferOut')}
+						{/* 转出 */}
 					</Text>
 				</View>
 			</View>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Image, StyleSheet, ScrollView, Dimensions, FlatList } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { getTransactionRecord, getERC20TransactionRecord } from '../../api/index';
+import { I18n } from '../../../language/i18n';
 import Icon from '../../pages/iconSets';
 
 class Recording extends Component {
@@ -55,24 +56,12 @@ class TransactionRecordOO extends Component {
 	}
 }
 class TransactionRecord extends Component {
-	static navigationOptions = {
-		headerTitle: '交易记录'
-	};
-
 	constructor(props) {
 		super(props);
 		this.state = {
 			recordData: []
 		};
 	}
-
-	// componentDidMount() {
-	// 	getTransactionRecord('0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e').then((res) => {
-	// 		this.setState({
-	// 			recordData: res.data.result
-	// 		});
-	// 	});
-	// }
 
 	componentDidMount() {
 		getTransactionRecord(store.getState().walletInfo.wallet_address).then((res) => {

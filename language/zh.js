@@ -43,6 +43,7 @@ export default {
 			aboutUs: '关于我们'
 		},
 		language: {
+			_title: '语言设置',
 			changeToChinese: '简体中文',
 			changeToEnglish: 'English'
 		}
@@ -81,7 +82,7 @@ export default {
 			transferRemarks: '备注',
 			transferFee: '矿工费用',
 			transferSpeedSlow: '慢',
-			transferSpeedFast: '块',
+			transferSpeedFast: '快',
 			nextStep: '下一步',
 			copyReceiptAddr: '复制收款地址'
 		}
@@ -120,6 +121,10 @@ export default {
 		}
 	},
 	public: {
+		transferOutPrompt:'优先节点投票期间暂不提供转出功能!',
+		lockedWarehouse: '锁仓',
+		transferIn: '转入',
+		transferOut: '转出',
 		verifyPwd: '验证密码',
 		inputPwd: '输入您的密码',
 		define: '确定',

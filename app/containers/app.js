@@ -1,13 +1,14 @@
 import React from 'react';
 import { I18n } from '../../language/i18n'; // 多国语言支持
-import { Image, StyleSheet, AsyncStorage } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation';  // 页面切换 路由导航组件
+import { StyleSheet, AsyncStorage } from 'react-native';
+import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation'; // 页面切换 路由导航组件
+import { host } from '../utils/config';
 
 //TabBar 底部栏位页面
-import Splash from '../pages/Splash';  // app开屏画面
+import Splash from '../pages/Splash'; // app开屏画面
 import Assets from '../components/asset/asset'; // 底部：资产
 import Node_item from '../components/node/node'; //底部：节点
-import My_item from '../components/my/my';   //底部： 我的
+import My_item from '../components/my/my'; //底部： 我的
 
 //Router
 import Guide from '../guide/guide'; //没有本地存储的钱包时进入的引导页：引导用户去选择创建钱包或导入钱包
@@ -85,8 +86,6 @@ storage
 	});
 
 const Web3 = require('web3');
-let host = 'https://ropsten.infura.io/';
-// let host = 'https://mainnet.infura.io/';
 window.host = host;
 
 if (host.includes('ropsten')) {
@@ -269,7 +268,7 @@ const App = createStackNavigator(
 		SignUp: {
 			screen: SignUp,
 			navigationOptions: {
-				headerTitle: '报名参选'
+				headerTitle: I18n.t('node.signUp')
 			}
 		},
 		SignUpNode,
@@ -299,7 +298,12 @@ const App = createStackNavigator(
 		VoteList,
 		VoteInfo,
 		SysLanguage,
-		TransactionRecord,
+		TransactionRecord: {
+			screen: TransactionRecord,
+			navigationOptions: {
+				headerTitle: I18n.t('my.home.transactionRecord')
+			}
+		},
 		KnowledgePoint
 	},
 	{
@@ -317,12 +321,5 @@ const App = createStackNavigator(
 		}
 	}
 );
-
-const styles = StyleSheet.create({
-	icon: {
-		width: 20,
-		height: 20
-	}
-});
 
 export default App;

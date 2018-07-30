@@ -45,6 +45,7 @@ export default {
 			aboutUs: 'AboutUs'
 		},
 		language: {
+			_title: 'language settings',
 			changeToChinese: '简体中文',
 			changeToEnglish: 'English'
 		}
@@ -77,19 +78,20 @@ export default {
 			keystore_scanning_item:
 				'It is forbidden to save, take screenshots or take pictures of the following QR code. The QR code should be used for direct scanning in a safe environment to import wallet. ',
 			keystore_surround: 'Using in a Safe Environment',
-			keystore_surround_item: 'Please make sure to use the QR code when there are no people or camera around you. Once the QR code is acquired by other people, irreversible loss may happen to your assets. '
+			keystore_surround_item:
+				'Please make sure to use the QR code when there are no people or camera around you. Once the QR code is acquired by other people, irreversible loss may happen to your assets. '
 		},
-		currency:{
-			transfer:'transfer',
-			recentTradeRecord:'recentTradeRecord',
-			receipt:'receipt',
-			receiptAddr:'receiptAddr',
-			transferCount:'transferCount',
-			transferRemarks:'Remarks',
-			transferFee:'transferFee',
-			transferSpeedSlow:'Slow',
-			transferSpeedFast:'Fast',
-			nextStep:'next'
+		currency: {
+			transfer: 'transfer',
+			recentTradeRecord: 'recentTradeRecord',
+			receipt: 'receipt',
+			receiptAddr: 'receiptAddr',
+			transferCount: 'transferCount',
+			transferRemarks: 'Remarks',
+			transferFee: 'transferFee',
+			transferSpeedSlow: 'Slow',
+			transferSpeedFast: 'Fast',
+			nextStep: 'next'
 		}
 	},
 	node: {
@@ -129,6 +131,10 @@ export default {
 		}
 	},
 	public: {
+		transferOutPrompt: 'No rollout is available during the voting period of the priority node.',
+		lockedWarehouse: '锁仓_待替换',
+		transferIn: 'Transfer In',
+		transferOut: 'Transfer Out',
 		verifyPwd: 'verify your password',
 		inputPwd: 'Enter your password',
 		define: 'OK',
