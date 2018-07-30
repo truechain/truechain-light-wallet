@@ -1,6 +1,6 @@
 import React from 'react';
 import { I18n } from '../../language/i18n'; // 多国语言支持
-import { Image, StyleSheet, AsyncStorage } from 'react-native';
+import { Image, StyleSheet, AsyncStorage, Text } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation';  // 页面切换 路由导航组件
 
 //TabBar 底部栏位页面
@@ -156,14 +156,18 @@ const TabBarPage = createBottomTabNavigator(
 		Assets: {
 			screen: Assets,
 			navigationOptions: {
-				tabBarLabel: I18n.t('tab.assets'),
+				tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ 'color': tintColor , 'fontSize': 12 }}>{I18n.t('tab.assets')}</Text>
+				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-zichan" size={30} color={tintColor} />
 			}
 		},
 		Node: {
 			screen: Node,
 			navigationOptions: {
-				tabBarLabel: I18n.t('tab.node'),
+					tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ 'color': tintColor, 'fontSize': 12 }}>{I18n.t('tab.node')}</Text>
+				),
 				tabBarIcon: ({ focused, tintColor }) => (
 					<Icon name="icon-xiajiantouxialakuang-" size={20} color={tintColor} />
 				),
@@ -184,7 +188,9 @@ const TabBarPage = createBottomTabNavigator(
 		My: {
 			screen: My,
 			navigationOptions: {
-				tabBarLabel: I18n.t('tab.my'),
+					tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ 'color': tintColor, 'fontSize': 12 }}>{I18n.t('tab.my')}</Text>
+				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-geren" size={30} color={tintColor} />
 			}
 		}
