@@ -8,10 +8,6 @@ import {
     Clipboard
 } from "react-native";
 import { I18n } from '../../../language/i18n';
-<<<<<<< HEAD
-
-=======
->>>>>>> 6c389610613d1fcf3408675b09eb1cbb8435708f
 import {
     Input,
     Button
