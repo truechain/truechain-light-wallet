@@ -1,3 +1,5 @@
+// 该文件已弃用，将在下一版本删除
+
 import React from 'react';
 import {
     Image,
