@@ -151,7 +151,7 @@ export default {
 	},
 	public: {
 		transferOutPrompt: 'No rollout is available during the voting period of the priority node.',
-		lockedWarehouse: '锁仓_待替换',
+		lockedWarehouse: 'lock warehouse',
 		transferIn: 'Transfer In',
 		transferOut: 'Transfer Out',
 		verifyPwd: 'verify your password',
