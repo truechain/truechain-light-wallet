@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, FlatList, Dimensions, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { getTransactionRecord, getERC20TransactionRecord } from '../../api/index';
-import { I18n } from '../../language/i18n';
+import { I18n } from '../../../language/i18n';
 
 class Recording extends Component {
 	show(num) {
