@@ -41,7 +41,7 @@ class SysSet extends Component {
 					}}
 				/> */}
 				<ListFun
-					fun_name={I18n.t('my.language._title')}
+					fun_name={I18n.t('my.sysSetting.language._title')}
 					onPress={() => {
 						this.navigate('SysLanguage');
 					}}

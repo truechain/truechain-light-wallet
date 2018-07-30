@@ -4,10 +4,6 @@ import { Button } from 'react-native-elements';
 import { I18n } from '../../../language/i18n';
 const screen = Dimensions.get('window');
 class LogOut extends React.Component {
-	static navigationOptions = {
-		headerTitle: I18n.t('my.home.lockAccount._title1') 
-	};
-
 	render() {
 		const { params } = this.props.navigation.state;
 		return (

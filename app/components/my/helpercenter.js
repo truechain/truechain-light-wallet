@@ -18,23 +18,23 @@ export class HelperCenter extends Component {
 	// 	this.navigate('ContactUs');
 	// };
 
-	static navigationOptions = ({ navigation }) => ({
-		headerTitle: I18n.t('my.home.helpCenter._title')
-		// headerRight:(
-		//     <TouchableHighlight underlayColor={"#ddd"} activeOpacity={0.5}
-		//     onPress={navigation.state.params?navigation.state.params.headerRightPress:null}
-		//     >
-		//     <Text style={ {
-		//         color:"rgb(0,118,255)",
-		//         fontSize:15,
-		//         textAlignVertical:"center",
-		//         paddingRight:15
-		//     } }>
-		//     联系我们
-		//     </Text>
-		//     </TouchableHighlight>
-		// )
-	});
+	// static navigationOptions = ({ navigation }) => ({
+	// 	headerTitle: I18n.t('my.home.helpCenter._title'),
+	// 	headerRight:(
+	// 	    <TouchableHighlight underlayColor={"#ddd"} activeOpacity={0.5}
+	// 	    onPress={navigation.state.params?navigation.state.params.headerRightPress:null}
+	// 	    >
+	// 	    <Text style={ {
+	// 	        color:"rgb(0,118,255)",
+	// 	        fontSize:15,
+	// 	        textAlignVertical:"center",
+	// 	        paddingRight:15
+	// 	    } }>
+	// 	    联系我们
+	// 	    </Text>
+	// 	    </TouchableHighlight>
+	// 	)
+	// });
 
 	_keyExtractor = (item, index) => item;
 
@@ -53,7 +53,10 @@ export class HelperCenter extends Component {
 				>
 					<View style={styles.row}>
 						<View style={styles.rowLf}>
-							<Text style={styles.rowLfText}>{I18n.t('my.home.helpCenter.mnemonic')}</Text>
+							<Text style={styles.rowLfText}>
+								{I18n.t('my.home.helpCenter.mnemonic')}
+								{/* 什么是助记词 */}
+							</Text>
 						</View>
 						<View style={styles.rowRi}>
 							<Image
@@ -77,6 +80,7 @@ export class HelperCenter extends Component {
 					<View style={styles.row}>
 						<View style={styles.rowLf}>
 							<Text style={styles.rowLfText}>{I18n.t('my.home.helpCenter.keystore')}</Text>
+							{/* 什么是keystore */}
 						</View>
 						<View style={styles.rowRi}>
 							<Image
@@ -100,6 +104,7 @@ export class HelperCenter extends Component {
 					<View style={styles.row}>
 						<View style={styles.rowLf}>
 							<Text style={styles.rowLfText}>{I18n.t('my.home.helpCenter.privateKey')}</Text>
+							{/* 什么是私钥 */}
 						</View>
 						<View style={styles.rowRi}>
 							<Image

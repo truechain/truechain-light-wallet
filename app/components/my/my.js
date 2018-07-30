@@ -157,7 +157,7 @@ class My extends Component {
 									<Icon name="icon-guanyuwomen" size={20} color="#528bf7" />
 								</View>
 								<View style={[ styles.myColsConPartRowRi, styles.noSplitLine ]}>
-									<Text>{I18n.t('my.home.aboutUs')}</Text>
+									<Text>{I18n.t('my.home.aboutUs._title')}</Text>
 									<View style={styles.myColsConPartRowRi2R}>
 										<Image
 											style={styles.iconArr2R}

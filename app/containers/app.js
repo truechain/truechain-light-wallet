@@ -1,6 +1,6 @@
 import React from 'react';
 import { I18n } from '../../language/i18n'; // 多国语言支持
-import { StyleSheet, AsyncStorage } from 'react-native';
+import { StyleSheet, Text, AsyncStorage } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation'; // 页面切换 路由导航组件
 import { host } from '../utils/config';
 
@@ -22,7 +22,6 @@ import ExportMnemonic from '../components/asset/exportMnemonic';
 import ExportKeystore from '../components/asset/exportKeystore';
 import AboutUs from '../components/my/aboutus';
 import UserPolicy from '../components/my/userpolicy';
-import PrivacyPolicy from '../components/my/privacypolicy';
 import Versions from '../components/my/versions';
 import SysSet from '../components/my/sysset';
 import HelperCenter from '../components/my/helpercenter';
@@ -156,7 +155,7 @@ const TabBarPage = createBottomTabNavigator(
 			screen: Assets,
 			navigationOptions: {
 				tabBarLabel: ({ tintColor, focused }) => (
-					<Text style={{ 'color': tintColor , 'fontSize': 12 }}>{I18n.t('tab.assets')}</Text>
+					<Text style={{ color: tintColor, fontSize: 12 }}>{I18n.t('tab.assets')}</Text>
 				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-zichan" size={30} color={tintColor} />
 			}
@@ -164,8 +163,8 @@ const TabBarPage = createBottomTabNavigator(
 		Node: {
 			screen: Node,
 			navigationOptions: {
-					tabBarLabel: ({ tintColor, focused }) => (
-					<Text style={{ 'color': tintColor, 'fontSize': 12 }}>{I18n.t('tab.node')}</Text>
+				tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ color: tintColor, fontSize: 12 }}>{I18n.t('tab.node')}</Text>
 				),
 				tabBarIcon: ({ focused, tintColor }) => (
 					<Icon name="icon-xiajiantouxialakuang-" size={20} color={tintColor} />
@@ -187,8 +186,8 @@ const TabBarPage = createBottomTabNavigator(
 		My: {
 			screen: My,
 			navigationOptions: {
-					tabBarLabel: ({ tintColor, focused }) => (
-					<Text style={{ 'color': tintColor, 'fontSize': 12 }}>{I18n.t('tab.my')}</Text>
+				tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ color: tintColor, fontSize: 12 }}>{I18n.t('tab.my')}</Text>
 				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-geren" size={30} color={tintColor} />
 			}
@@ -238,7 +237,7 @@ const App = createStackNavigator(
 		Receipt: {
 			screen: Receipt,
 			navigationOptions: {
-				headerTitle: '收款码'
+				headerTitle: () => <Text>{I18n.t('assets.currency.receipt')}</Text>
 			}
 		},
 		CreateWallet: CreateWallet,
@@ -246,7 +245,7 @@ const App = createStackNavigator(
 		WalletInfo: {
 			screen: WalletInfo,
 			navigationOptions: {
-				headerTitle: I18n.t('assets.walletInfo.title')
+				headerTitle: () => <Text>{I18n.t('assets.walletInfo.title')}</Text>
 			}
 		},
 		ExportMnemonic: {
@@ -258,16 +257,35 @@ const App = createStackNavigator(
 		ExportKeystore: {
 			screen: ExportKeystore,
 			navigationOptions: {
-				headerTitle: I18n.t('assets.walletInfo.exportKeystore')
+				headerTitle: () => <Text>{I18n.t('assets.walletInfo.exportKeystore')}</Text>
 			}
 		},
-		AboutUs,
-		UserPolicy,
-		PrivacyPolicy,
+		AboutUs: {
+			screen: AboutUs,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('my.home.aboutUs._title')}</Text>
+			}
+		},
+		UserPolicy: {
+			screen: UserPolicy,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('my.home.aboutUs.useAgreement')}</Text>
+			}
+		},
 		Versions,
-		HelperCenter,
+		HelperCenter: {
+			screen: HelperCenter,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('my.home.helpCenter._title')}</Text>
+			}
+		},
 		ContactUs,
-		SysSet,
+		SysSet: {
+			screen: SysSet,
+			navigationOptions: {
+				headerTitle: () => <Text> {I18n.t('my.sysSetting._title')}</Text>
+			}
+		},
 		Login: {
 			screen: Login
 		},
@@ -294,8 +312,18 @@ const App = createStackNavigator(
 		FillInfo: {
 			screen: FillInfo
 		},
-		LockAccount,
-		LogOut,
+		LockAccount: {
+			screen: LockAccount,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('my.home.lockAccount._title')}</Text>
+			}
+		},
+		LogOut: {
+			screen: LogOut,
+			navigationOptions: {
+				headerTitle: () => <Text> {I18n.t('my.home.lockAccount._title1')}</Text>
+			}
+		},
 		SignUpSuccess,
 		MyTeam,
 		PersonnelManagement,
@@ -303,11 +331,16 @@ const App = createStackNavigator(
 		VoteNode,
 		VoteList,
 		VoteInfo,
-		SysLanguage,
+		SysLanguage: {
+			screen: SysLanguage,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('my.sysSetting.language.multi_language')} </Text>
+			}
+		},
 		TransactionRecord: {
 			screen: TransactionRecord,
 			navigationOptions: {
-				headerTitle: I18n.t('my.home.transactionRecord')
+				headerTitle: () => <Text>{I18n.t('my.home.transactionRecord')} </Text>
 			}
 		},
 		KnowledgePoint

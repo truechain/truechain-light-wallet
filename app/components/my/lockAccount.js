@@ -15,10 +15,6 @@ class LockAccount extends React.Component {
 		this.navigate = this.props.navigation.navigate;
 	}
 
-	static navigationOptions = {
-		headerTitle: I18n.t('my.home.lockAccount._title')
-	};
-
 	componentDidMount() {
 		getTrueCoin()
 			.then((result) => {
