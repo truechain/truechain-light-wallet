@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { StyleSheet, Text, View, Image, PixelRatio, Dimensions, TextInput, TouchableOpacity } from 'react-native';
-import { withNavigation } from 'react-navigation';
+import { I18n } from '../../../language/i18n';
 import actions from '../../store/action/lockAccount';
 import { getTrueCoin } from '../../api/loged';
 const screen = Dimensions.get('window');
@@ -16,7 +16,7 @@ class LockAccount extends React.Component {
 	}
 
 	static navigationOptions = {
-		headerTitle: '锁仓账户'
+		headerTitle: I18n.t('my.home.lockAccount._title')
 	};
 
 	componentDidMount() {

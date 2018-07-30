@@ -45,6 +45,7 @@ import VoteList from '../components/node/vote/voteList';
 import VoteInfo from '../components/node/vote/voteInfo';
 import SysLanguage from '../components/my/sysLanguage';
 import TransactionRecord from '../components/my/transactionRecord';
+import KnowledgePoint from '../components/my/knowledgePoint';
 
 //rely
 import Storage from 'react-native-storage';
@@ -240,19 +241,19 @@ const App = createStackNavigator(
 		WalletInfo: {
 			screen: WalletInfo,
 			navigationOptions: {
-				headerTitle: '账户信息'
+				headerTitle: I18n.t('assets.walletInfo.title')
 			}
 		},
 		ExportMnemonic: {
 			screen: ExportMnemonic,
 			navigationOptions: {
-				headerTitle: '导出助记词'
+				headerTitle: I18n.t('assets.walletInfo.exportMnemonic')
 			}
 		},
 		ExportKeystore: {
 			screen: ExportKeystore,
 			navigationOptions: {
-				headerTitle: '导出Keystore'
+				headerTitle: I18n.t('assets.walletInfo.exportKeystore')
 			}
 		},
 		AboutUs,
@@ -298,7 +299,8 @@ const App = createStackNavigator(
 		VoteList,
 		VoteInfo,
 		SysLanguage,
-		TransactionRecord
+		TransactionRecord,
+		KnowledgePoint
 	},
 	{
 		// initialRouteName: 'Guide',

@@ -37,7 +37,7 @@ class WalletInfo extends Component {
 		};
 		this.verifyPwd = this.verifyPwd.bind(this);
 	}
-
+	
 	componentDidMount() {
 		storage
 			.load({
@@ -337,7 +337,13 @@ class WalletInfo extends Component {
 					</View>
 				</Modal>
 
-				<Modal style={styles.modalCode} position={'bottom'} coverScreen={true} ref={'changeWalletName'} swipeArea={20}>
+				<Modal
+					style={styles.modalCode}
+					position={'bottom'}
+					coverScreen={true}
+					ref={'changeWalletName'}
+					swipeArea={20}
+				>
 					<View style={styles.InputPwd_title}>
 						<Text>{this.state.modalTitle}</Text>
 					</View>
@@ -449,7 +455,7 @@ const styles = StyleSheet.create({
 	modalCode: {
 		alignItems: 'center',
 		width: screen.width,
-		height: screen.height * 0.5,
+		height: screen.height * 0.5
 	},
 	InputPwd_title: {
 		width: screen.width,

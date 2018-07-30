@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, Image, PixelRatio, Dimensions, TextInput, TouchableOpacity } from 'react-native';
 import { Button } from 'react-native-elements';
+import { I18n } from '../../../language/i18n';
 const screen = Dimensions.get('window');
 class LogOut extends React.Component {
 	static navigationOptions = {
-		headerTitle: '账户管理'
+		headerTitle: I18n.t('my.home.lockAccount._title1') 
 	};
 
 	render() {
@@ -12,12 +13,12 @@ class LogOut extends React.Component {
 		return (
 			<View>
 				<View style={styles.account}>
-					<Text>账号</Text>
+					<Text>{I18n.t('my.home.lockAccount.accountNumber')}</Text>
 					<Text>{params.mobile}</Text>
 				</View>
 				<View style={styles.logout}>
 					<Button
-						title="退出账号"
+						title={I18n.t('my.home.lockAccount.logOut')}
 						buttonStyle={styles.buttonStyle}
 						onPress={() => {
 							storage
