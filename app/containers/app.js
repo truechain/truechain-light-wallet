@@ -48,6 +48,7 @@ import TransactionRecord from '../components/my/transactionRecord';
 
 //rely
 import Storage from 'react-native-storage';
+import Icon from '../pages/iconSets';
 
 const storage = new Storage({
 	size: 1000,
@@ -83,9 +84,24 @@ storage
 	});
 
 const Web3 = require('web3');
-// let host = 'https://ropsten.infura.io/';
-let host = 'https://mainnet.infura.io/';
+let host = 'https://ropsten.infura.io/';
+// let host = 'https://mainnet.infura.io/';
 window.host = host;
+
+if (host.includes('ropsten')) {
+	store.dispatch({
+		type: 'CONTRACTADDR',
+		TRUEContractAddr: '0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1',
+		TTRContractAddr: '0x635AfeB8739f908A37b3d312cB4958CB2033F456'
+	});
+} else {
+	store.dispatch({
+		type: 'CONTRACTADDR',
+		TRUEContractAddr: '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab',
+		TTRContractAddr: '0xf2bb016e8c9c8975654dcd62f318323a8a79d48e'
+	});
+}
+
 const web3 = new Web3(new Web3.providers.HttpProvider(host));
 window.web3 = web3;
 
@@ -140,14 +156,16 @@ const TabBarPage = createBottomTabNavigator(
 			screen: Assets,
 			navigationOptions: {
 				tabBarLabel: I18n.t('tab.assets'),
-				tabBarIcon: ({ tintColor }) => <Image style={styles.icon} source={IconUrl.assets} />
+				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-zichan" size={30} color={tintColor} />
 			}
 		},
 		Node: {
 			screen: Node,
 			navigationOptions: {
 				tabBarLabel: I18n.t('tab.node'),
-				tabBarIcon: ({ tintColor }) => <Image style={styles.icon} source={IconUrl.node} />,
+				tabBarIcon: ({ focused, tintColor }) => (
+					<Icon name="icon-xiajiantouxialakuang-" size={20} color={tintColor} />
+				),
 				tabBarOnPress: ({ navigation, defaultHandler }) => {
 					storage
 						.load({
@@ -166,7 +184,7 @@ const TabBarPage = createBottomTabNavigator(
 			screen: My,
 			navigationOptions: {
 				tabBarLabel: I18n.t('tab.my'),
-				tabBarIcon: ({ tintColor }) => <Image style={styles.icon} source={IconUrl.my} />
+				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-geren" size={30} color={tintColor} />
 			}
 		}
 	},

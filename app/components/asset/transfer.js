@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, ScrollView, TouchableHighlight } from 'react-native';
+import { View, Text, Image, Alert, StyleSheet, Dimensions, ScrollView, TouchableHighlight } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Input, Slider, Button } from 'react-native-elements';
 import Modal from 'react-native-modalbox';
@@ -8,6 +8,7 @@ import sendEth from '../../utils/sendEth';
 import sendTokens from '../../utils/sendTokens';
 import iterface from '../../utils/trueIterface';
 import { I18n } from '../../language/i18n';
+import Loading from 'react-native-whc-loading';
 
 const screen = Dimensions.get('window');
 
@@ -104,12 +105,23 @@ class Transfer extends Component {
 					web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'),
 					(err, tx) => {
 						if (err) {
-							this.refs.transferDetail.close();
-							alert('发布交易失败，请稍后重试！');
+							this.refs.loading.close();
+							setTimeout(() => {
+								Alert.alert('提示', '发布交易失败，请稍后重试！');
+							}, 100);
 							console.log(err);
 						} else {
-							this.refs.transferDetail.close();
-							alert('发布交易成功！');
+							this.refs.loading.close();
+							setTimeout(() => {
+								Alert.alert('提示', '发布交易成功！', [
+									{
+										text: 'OK',
+										onPress: () => {
+											this.props.navigation.navigate('Home');
+										}
+									}
+								]);
+							}, 100);
 							console.log(tx, '=======');
 						}
 					}
@@ -131,12 +143,23 @@ class Transfer extends Component {
 					web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'),
 					(err, tx) => {
 						if (err) {
-							this.refs.transferDetail.close();
-							alert('发布交易失败，请稍后重试！');
+							this.refs.loading.close();
+							setTimeout(() => {
+								Alert.alert('提示', '发布交易失败，请稍后重试！');
+							}, 100);
 							console.log(err);
 						} else {
-							this.refs.transferDetail.close();
-							alert('发布交易成功！');
+							this.refs.loading.close();
+							setTimeout(() => {
+								Alert.alert('提示', '发布交易成功！', [
+									{
+										text: 'OK',
+										onPress: () => {
+											this.props.navigation.navigate('Home');
+										}
+									}
+								]);
+							}, 100);
 							console.log(tx, '=======');
 						}
 					}
@@ -172,7 +195,7 @@ class Transfer extends Component {
 								toAddressFlag: false,
 								disabledNext: true
 							});
-							alert('地址无效，请仔细检查！');
+							Alert.alert('提示', '地址无效，请仔细检查！');
 						} else {
 							this.setState(
 								{
@@ -255,21 +278,24 @@ class Transfer extends Component {
 						disabledStyle={styles.borderRadius}
 						disabled={this.state.disabledNext}
 						onPress={() => {
-							setTimeout(() => {
-								this.refs.transferDetail.open();
-								this.setState({
-									gasPrice:
-										Math.round(
-											this.state.cost /
-												web3.utils.fromWei(this.state.gas.toString(), 'Gwei') *
-												100
-										) / 100
-								});
-							}, 100);
+							this.refs.transferDetail.open();
+							this.setState({
+								gasPrice:
+									Math.round(
+										this.state.cost / web3.utils.fromWei(this.state.gas.toString(), 'Gwei') * 100
+									) / 100
+							});
 						}}
 					/>
+					<Loading ref="loading" />
 				</View>
-				<Modal style={styles.modal} position={'bottom'} ref={'transferDetail'} swipeArea={20}>
+				<Modal
+					style={styles.modal}
+					position={'bottom'}
+					coverScreen={true}
+					ref={'transferDetail'}
+					swipeArea={20}
+				>
 					<ScrollView>
 						<View style={styles.paymentDetails_title}>
 							<Text>支付详情</Text>
@@ -297,9 +323,7 @@ class Transfer extends Component {
 								title="下一步"
 								buttonStyle={styles.buttonStyle}
 								onPress={() => {
-									setTimeout(() => {
-										this.refs.transferPwd.open();
-									}, 100);
+									this.refs.transferPwd.open();
 								}}
 							/>
 						</View>
@@ -319,22 +343,41 @@ class Transfer extends Component {
 										title="下一步"
 										buttonStyle={styles.buttonStyle}
 										onPress={() => {
-											if (!this.state.password) {
-												alert('请输入密码');
-											} else {
-												try {
-													web3.eth.accounts.decrypt(
-														this.state.keystoreV3,
-														this.state.password
-													);
-													this._sendTokens();
-													this.setState({
-														password: null
-													});
-												} catch (error) {
-													alert('密码错误,请重新输入');
+											this.refs.transferDetail.close();
+											setTimeout(() => {
+												this.refs.loading.show();
+												if (!this.state.password) {
+													this.refs.loading.close();
+													setTimeout(() => {
+														Alert.alert('提示', '请输入密码');
+													}, 100);
+												} else {
+													setTimeout(() => {
+														try {
+															web3.eth.accounts.decrypt(
+																this.state.keystoreV3,
+																this.state.password
+															);
+															this._sendTokens();
+															this.setState({
+																password: null
+															});
+														} catch (error) {
+															this.refs.loading.close();
+															setTimeout(() => {
+																this.setState(
+																	{
+																		password: null
+																	},
+																	() => {
+																		Alert.alert('提示', '密码错误,请重新输入');
+																	}
+																);
+															}, 100);
+														}
+													}, 100);
 												}
-											}
+											}, 1000);
 										}}
 									/>
 								</View>
@@ -430,7 +473,6 @@ const styles = StyleSheet.create({
 	},
 	pwdNext: {
 		alignItems: 'center',
-		position: 'relative',
-		top: 100
+		marginTop: 100
 	}
 });

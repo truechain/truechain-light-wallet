@@ -14,6 +14,7 @@ import { withNavigation } from 'react-navigation';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import { getNodeRank, getMemberStatus, getTeamAddress } from '../../api/loged';
 import { I18n } from '../../../language/i18n';
+import Icon from '../../pages/iconSets'
 
 const screen = Dimensions.get('window');
 
@@ -254,10 +255,7 @@ class Node extends Component {
 							}}
 						>
 							<View style={styles.fun}>
-								<Image
-									source={require('../../assets/images/node/baoming_2x.png')}
-									style={styles.fun_icon}
-								/>
+								<Icon name="icon-baoming" size={40} color="#fff" />
 								<Text style={styles.color_white}>{I18n.t('node.signUp')}</Text>
 							</View>
 						</TouchableHighlight>
@@ -268,10 +266,7 @@ class Node extends Component {
 							}}
 						>
 							<View style={styles.fun}>
-								<Image
-									source={require('../../assets/images/node/toupiao_2x.png')}
-									style={styles.fun_icon}
-								/>
+								<Icon name="icon-639" size={40} color="#fff" />								
 								<Text style={styles.color_white}>{I18n.t('node.vote')}</Text>
 							</View>
 						</TouchableHighlight>
@@ -300,7 +295,6 @@ class Node extends Component {
 							scrollEventThrottle={200}
 							onScroll={this._fullOnScroll.bind(this)}
 						>
-							>
 							{this.state.fullNodeData.map((item, index) => {
 								return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
 							})}
@@ -387,7 +381,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center',
 		alignItems: 'center',
 		width: 25,
-		height: 30
+		height: 33
 	},
 	iconPersonal: {
 		width: 20,

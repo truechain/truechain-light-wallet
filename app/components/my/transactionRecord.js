@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
-
 import { Text, View, Image, StyleSheet, ScrollView, Dimensions, FlatList } from 'react-native';
-
 import { withNavigation } from 'react-navigation';
 import { getTransactionRecord, getERC20TransactionRecord } from '../../api/index';
+import Icon from '../../pages/iconSets';
 
 class Recording extends Component {
 	show(num) {
@@ -19,14 +18,14 @@ class Recording extends Component {
 			num = '0' + num;
 		}
 		num += '00000';
-		num = num.match(/\d+\.\d{4}/)[0];
+		num = num.match(/\d+\.\d{3}/)[0];
 		return num;
 	}
 
 	render() {
 		return (
 			<View style={styles.recordDetail_item}>
-				<Text>{this.props.to.replace(this.props.to.slice('10', '32'), '......')}</Text>
+				<Text>{this.props.to.replace(this.props.to.slice('10', '33'), '......')}</Text>
 				<Text>{this.show(this.props.value / 1e18)} ether</Text>
 			</View>
 		);
@@ -39,20 +38,14 @@ class TransactionRecordOO extends Component {
 				{this.props.data.item.from === store.getState().walletInfo.wallet_address.toLowerCase() ? (
 					<View style={styles.recordDetail}>
 						<View>
-							<Image
-								style={styles.record_icon}
-								source={require('../../assets/images/asset/expend_3x.png')}
-							/>
+							<Icon name="icon-shourusel" size={50} color="#528bf7" />
 						</View>
 						<Recording to={this.props.data.item.to} value={this.props.data.item.value} />
 					</View>
 				) : (
 					<View style={styles.recordDetail}>
 						<View>
-							<Image
-								style={styles.record_icon}
-								source={require('../../assets/images/asset/add_3x.png')}
-							/>
+							<Icon name="icon-zhichusel" size={50} color="#34ccbf" />
 						</View>
 						<Recording to={this.props.data.item.to} value={this.props.data.item.value} />
 					</View>
@@ -92,7 +85,11 @@ class TransactionRecord extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<FlatList data={this.state.recordData} renderItem={(item) => <TransactionRecordOO data={item} />} />
+				{this.state.recordData ? (
+					<FlatList data={this.state.recordData} renderItem={(item) => <TransactionRecordOO data={item} />} />
+				) : (
+					<Text style={{ textAlign: 'center' }}>~</Text>
+				)}
 			</View>
 		);
 	}
@@ -112,7 +109,9 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
-		backgroundColor: '#fff'
+		backgroundColor: '#fff',
+		paddingLeft: 20,
+		paddingRight: 20
 	},
 	balance: {
 		height: 150,

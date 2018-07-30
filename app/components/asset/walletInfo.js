@@ -3,8 +3,7 @@ import { View, Text, Image, StyleSheet, Dimensions, Clipboard, TouchableHighligh
 import { Button, Input } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import Modal from 'react-native-modalbox';
-import lightwallet from 'eth-lightwallet';
-import TextWidget from '../public/textWidget/textWidget';
+import Loading from 'react-native-whc-loading';
 import Toast from 'react-native-easy-toast';
 import { I18n } from '../../../language/i18n';
 
@@ -121,45 +120,6 @@ class WalletInfo extends Component {
 	};
 
 	render() {
-		let deleteBtnComponents = this.state.deleteBtnshow ? (
-			<Button
-				title={I18n.t('assets.walletInfo.deleteWallet')}
-				buttonStyle={styles.buttonStyle}
-				onPress={() => {
-					this.setState(
-						{
-							modalTitle: I18n.t('public.verifyPwd')
-						},
-						() => {
-							this.refs.codeInput.open();
-							this.setState({
-								onPress: () => {
-									try {
-										web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
-										storage.remove({
-											key: 'walletInfo'
-										});
-
-										storage.remove({
-											key: 'token'
-										});
-
-										storage.remove({
-											key: 'walletName'
-										});
-
-										this.navigate('Guide');
-									} catch (error) {
-										alert(I18n.t('public.wrongPwd'));
-									}
-								}
-							});
-						}
-					);
-				}}
-			/>
-		) : null;
-
 		return (
 			<View style={styles.container}>
 				<View style={styles.walletInfo}>
@@ -195,23 +155,33 @@ class WalletInfo extends Component {
 								this.refs.codeInput.open();
 								this.setState({
 									onPress: () => {
-										try {
-											web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
-											storage.load({ key: 'walletInfo' }).then((res) => {
-												let PrivateKey = web3.eth.accounts.decrypt(
-													JSON.stringify(res.keystoreV3),
+										this.refs.loading.show();
+										this.refs.codeInput.close();
+										setTimeout(() => {
+											try {
+												web3.eth.accounts.decrypt(
+													this.state.keystoreV3,
 													this.state.walletPassword
-												).privateKey;
-												this.setState({
-													walletPassword: '',
-													PrivateKey
+												);
+												storage.load({ key: 'walletInfo' }).then((res) => {
+													let PrivateKey = web3.eth.accounts.decrypt(
+														JSON.stringify(res.keystoreV3),
+														this.state.walletPassword
+													).privateKey;
+													this.setState({
+														walletPassword: '',
+														PrivateKey
+													});
 												});
-											});
-											this.refs.codeInput.close();
-											this.refs.privateKey.open();
-										} catch (error) {
-											alert(I18n.t('public.wrongPwd'));
-										}
+												this.refs.privateKey.open();
+												this.refs.loading.close();
+											} catch (error) {
+												this.refs.loading.close();
+												setTimeout(() => {
+													alert(I18n.t('public.wrongPwd'));
+												}, 100);
+											}
+										}, 100);
 									}
 								});
 							}
@@ -229,16 +199,26 @@ class WalletInfo extends Component {
 								this.refs.codeInput.open();
 								this.setState({
 									onPress: () => {
-										try {
-											web3.eth.accounts.decrypt(this.state.keystoreV3, this.state.walletPassword);
-											this.setState({
-												walletPassword: ''
-											});
-											this.navigate('ExportKeystore', { keystoreV3: this.state.keystoreV3 });
-											this.refs.codeInput.close();
-										} catch (error) {
-											alert(I18n.t('public.wrongPwd'));
-										}
+										this.refs.loading.show();
+										this.refs.codeInput.close();
+										setTimeout(() => {
+											try {
+												web3.eth.accounts.decrypt(
+													this.state.keystoreV3,
+													this.state.walletPassword
+												);
+												this.setState({
+													walletPassword: ''
+												});
+												this.refs.loading.close();
+												this.navigate('ExportKeystore', { keystoreV3: this.state.keystoreV3 });
+											} catch (error) {
+												this.refs.loading.close();
+												setTimeout(() => {
+													alert(I18n.t('public.wrongPwd'));
+												}, 100);
+											}
+										}, 100);
 									}
 								});
 							}
@@ -258,21 +238,28 @@ class WalletInfo extends Component {
 									this.refs.codeInput.open();
 									this.setState({
 										onPress: () => {
-											try {
-												web3.eth.accounts.decrypt(
-													this.state.keystoreV3,
-													this.state.walletPassword
-												);
-												this.navigate('ExportMnemonic', {
-													walletPassword: this.state.walletPassword
-												});
-												this.setState({
-													walletPassword: ''
-												});
-												this.refs.codeInput.close();
-											} catch (error) {
-												alert(I18n.t('public.wrongPwd'));
-											}
+											this.refs.loading.show();
+											this.refs.codeInput.close();
+											setTimeout(() => {
+												try {
+													web3.eth.accounts.decrypt(
+														this.state.keystoreV3,
+														this.state.walletPassword
+													);
+													this.navigate('ExportMnemonic', {
+														walletPassword: this.state.walletPassword
+													});
+													this.setState({
+														walletPassword: ''
+													});
+													this.refs.loading.close();
+												} catch (error) {
+													this.refs.loading.close();
+													setTimeout(() => {
+														alert(I18n.t('public.wrongPwd'));
+													}, 100);
+												}
+											}, 100);
 										}
 									});
 								}
@@ -280,14 +267,59 @@ class WalletInfo extends Component {
 						}}
 					/>
 				) : null}
+				<Loading ref="loading" />
+				<Button
+					title={I18n.t('assets.walletInfo.deleteWallet')}
+					buttonStyle={styles.buttonStyle}
+					onPress={() => {
+						this.setState(
+							{
+								modalTitle: I18n.t('public.verifyPwd')
+							},
+							() => {
+								this.refs.codeInput.open();
+								this.setState({
+									onPress: () => {
+										this.refs.loading.show();
+										this.refs.codeInput.close();
+										setTimeout(() => {
+											try {
+												web3.eth.accounts.decrypt(
+													this.state.keystoreV3,
+													this.state.walletPassword
+												);
+												storage.remove({
+													key: 'walletInfo'
+												});
 
-				{deleteBtnComponents}
+												storage.remove({
+													key: 'token'
+												});
+												storage.remove({
+													key: 'walletName'
+												});
+												this.refs.loading.close();
+												this.navigate('Guide');
+											} catch (error) {
+												this.refs.loading.close();
+												setTimeout(() => {
+													alert(I18n.t('public.wrongPwd'));
+												}, 100);
+											}
+										}, 100);
+									}
+								});
+							}
+						);
+					}}
+				/>
 
 				<Toast ref="toast" position="center" />
 				<Modal
 					style={styles.modalCode}
 					position={'bottom'}
 					ref={'codeInput'}
+					coverScreen={true}
 					swipeArea={20}
 					onClosed={() => {
 						this.setState({ deleteBtnshow: true });
@@ -305,7 +337,7 @@ class WalletInfo extends Component {
 					</View>
 				</Modal>
 
-				<Modal style={styles.modalCode} position={'bottom'} ref={'changeWalletName'} swipeArea={20}>
+				<Modal style={styles.modalCode} position={'bottom'} coverScreen={true} ref={'changeWalletName'} swipeArea={20}>
 					<View style={styles.InputPwd_title}>
 						<Text>{this.state.modalTitle}</Text>
 					</View>
@@ -412,14 +444,12 @@ const styles = StyleSheet.create({
 		backgroundColor: '#bbb',
 		height: 45,
 		borderRadius: 50,
-		marginTop: 30,
-		position: 'relative',
-		zIndex: 5
+		marginTop: 30
 	},
 	modalCode: {
 		alignItems: 'center',
 		width: screen.width,
-		height: screen.height * 0.5
+		height: screen.height * 0.5,
 	},
 	InputPwd_title: {
 		width: screen.width,

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, TouchableHighlight } from 'react-native';
 import { withNavigation } from 'react-navigation';
 const screen = Dimensions.get('window');
+import Icon from '../../pages/iconSets';
 
 class My extends Component {
 	constructor(props) {
@@ -22,10 +23,7 @@ class My extends Component {
 							}}
 						>
 							<View style={styles.center}>
-								<Image
-									style={styles.myTopBanrecicon_1}
-									source={require('../../assets/images/my/wallet-icon_3x.png')}
-								/>
+								<Icon name="icon-qianbao-" size={30} color='#fff' />
 								<Text style={styles.myTopBanConItemText}>钱包管理</Text>
 							</View>
 						</TouchableHighlight>
@@ -38,10 +36,7 @@ class My extends Component {
 							}}
 						>
 							<View style={styles.center}>
-								<Image
-									style={styles.myTopBanrecicon}
-									source={require('../../assets/images/my/deal-icon_3x.png')}
-								/>
+								<Icon name="icon-jiaoyijilu" size={30} color='#fff' />
 								<Text style={styles.myTopBanConItemText}>交易记录</Text>
 							</View>
 						</TouchableHighlight>
@@ -89,10 +84,7 @@ class My extends Component {
 						>
 							<View style={styles.myColsConPartRow}>
 								<View style={styles.myColsConPartRowLf}>
-									<Image
-										style={styles.iconLinkman}
-										source={require('../../assets/images/my/suocang_2x.png')}
-									/>
+									<Icon name="icon-suoding" size={20} color='#528bf7' />
 								</View>
 								<View style={styles.myColsConPartRowRi}>
 									<Text>锁仓账户</Text>
@@ -116,10 +108,7 @@ class My extends Component {
 						>
 							<View style={styles.myColsConPartRow}>
 								<View style={styles.myColsConPartRowLf}>
-									<Image
-										style={styles.iconSettings}
-										source={require('../../assets/images/my/setting-icon_2x.png')}
-									/>
+									<Icon name="icon-shezhi" size={20} color='#528bf7' />
 								</View>
 								<View style={[ styles.myColsConPartRowRi, styles.noSplitLine ]}>
 									<Text>系统设置</Text>
@@ -143,11 +132,7 @@ class My extends Component {
 						>
 							<View style={styles.myColsConPartRow}>
 								<View style={styles.myColsConPartRowLf}>
-									<Image
-										style={[ styles.icon22, styles.iconHelper ]}
-										resizeMode={Image.resizeMode.stretch}
-										source={require('../../assets/images/my/help-icon_2x.png')}
-									/>
+									<Icon name="icon-bangzhuzhongxin" size={18} color='#528bf7' />
 								</View>
 								<View style={styles.myColsConPartRowRi}>
 									<Text>帮助中心</Text>
@@ -168,11 +153,8 @@ class My extends Component {
 						>
 							<View style={styles.myColsConPartRow}>
 								<View style={styles.myColsConPartRowLf}>
-									<Image
-										style={[ styles.icon22, styles.iconAbout ]}
-										resizeMode={Image.resizeMode.stretch}
-										source={require('../../assets/images/my/aboutus-icon_2x.png')}
-									/>
+									<Icon name="icon-guanyuwomen" size={20} color='#528bf7' />
+
 								</View>
 								<View style={[ styles.myColsConPartRowRi, styles.noSplitLine ]}>
 									<Text>关于我们</Text>

@@ -3,6 +3,7 @@ import { View, Text, Image, Dimensions, StyleSheet, ScrollView, TouchableHighlig
 import { withNavigation } from 'react-navigation';
 import { getTeamInfo, getTeamMember, initStatus } from '../../api/loged';
 import { Button } from 'react-native-elements';
+import Icon from '../../pages/iconSets';
 const screen = Dimensions.get('window');
 class TeamMemberList extends Component {
 	render() {
@@ -10,13 +11,17 @@ class TeamMemberList extends Component {
 			<View style={styles.memberList}>
 				<View style={styles.baseInfo}>
 					{this.props.item.role === 2 ? (
-						<Image style={styles.avatar} source={require('../../assets/images/node/duizhang_3x.png')} />
+						// <Image style={styles.avatar} source={require('../../assets/images/node/duizhang_3x.png')} />
+						<Icon name="icon-1231zuchang" size={30} color="#4F8EF7" />
 					) : (
-						<Image style={styles.avatar} source={require('../../assets/images/node/duiyuan_3x.png')} />
+						// <Image style={styles.avatar} source={require('../../assets/images/node/duiyuan_3x.png')} />
+						<Icon name="icon-geren" size={30} color="#4F8EF7" />
 					)}
 					<Text style={{ marginLeft: 5 }}>{this.props.item.nickname}</Text>
 				</View>
-				<Text style={{ color: '#528BF7' }}>{this.props.item.lock_num} TRUE</Text>
+				{this.props.status === 2 ? (
+					<Text style={{ color: '#528BF7' }}>{this.props.item.lock_num} TRUE</Text>
+				) : null}
 			</View>
 		);
 	}
@@ -155,7 +160,7 @@ class TeamInfo extends Component {
 					</View>
 					<ScrollView style={{ marginTop: 10, height: 200 }}>
 						{this.state.teamMemberData.map((item, index) => {
-							return <TeamMemberList item={item} key={index} />;
+							return <TeamMemberList item={item} key={index} status={this.state.status} />;
 						})}
 					</ScrollView>
 					<View style={styles.next}>{this.state.Button}</View>
@@ -209,7 +214,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between'
 	},
 	baseInfo: {
-		flexDirection: 'row'
+		flexDirection: 'row',
+		alignItems: 'center'
 	},
 	avatar: {
 		width: 20,

@@ -79,7 +79,7 @@ export class ExportMnemonic extends Component {
 				}
 			]);
 		} else {
-			Alert.alert('助记词有误，请重新输入');
+			Alert.alert('提示', '助记词有误，请重新输入');
 			this.setState({
 				selectWords: [],
 				selectWordsText: ' '
@@ -130,6 +130,7 @@ export class ExportMnemonic extends Component {
 					<Button
 						title={this.state.backupBtnText}
 						disabled={this.state.next}
+						disabledStyle={styles.disabledButtonStyle}
 						buttonStyle={styles.backupBtn}
 						onPress={this.nextStep}
 					/>
@@ -195,6 +196,9 @@ const styles = StyleSheet.create({
 		marginLeft: 'auto',
 		marginRight: 'auto',
 		marginTop: 30
+	},
+	disabledButtonStyle: {
+		borderRadius: 30
 	},
 	word: {
 		backgroundColor: '#eee',

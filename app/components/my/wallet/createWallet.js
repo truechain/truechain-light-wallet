@@ -3,7 +3,7 @@ import '../../../../shim';
 import { StyleSheet, Text, View, Alert } from 'react-native';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import lightwallet from 'eth-lightwallet';
-import LoadingView from '../../public/loadingView';
+import Loading from 'react-native-whc-loading';
 import { StackActions, NavigationActions, withNavigation } from 'react-navigation';
 
 const Web3 = require('web3');
@@ -22,8 +22,7 @@ class CreateWallet extends Component {
 			pwd: null,
 			confirmPwd: null,
 			isAgree: false,
-			disabledImport: false,
-			showLoading: false
+			disabledImport: false
 		};
 	}
 
@@ -76,9 +75,7 @@ class CreateWallet extends Component {
 		} else if (!this.state.isAgree) {
 			Alert.alert('提示', '请同意服务及隐私条款');
 		} else {
-			this.setState({
-				showLoading: true
-			});
+			this.refs.loading.show();
 			setTimeout(() => {
 				let randomSeed = lightwallet.keystore.generateRandomSeed();
 				lightwallet.keystore.createVault(
@@ -111,26 +108,20 @@ class CreateWallet extends Component {
 								expires: null
 							});
 							setTimeout(() => {
-								this.setState(
-									{
-										showLoading: false
-									},
-									() => {
-										let resetAction = StackActions.reset({
-											index: 0,
-											actions: [
-												NavigationActions.navigate({
-													routeName: 'ExportMnemonic',
-													params: {
-														walletPassword: this.state.pwd
-													}
-												})
-											]
-										});
-										this.props.navigation.dispatch(resetAction);
-									}
-								);
-							}, 2000);
+								this.refs.loading.close();
+								let resetAction = StackActions.reset({
+									index: 0,
+									actions: [
+										NavigationActions.navigate({
+											routeName: 'ExportMnemonic',
+											params: {
+												walletPassword: this.state.pwd
+											}
+										})
+									]
+								});
+								this.props.navigation.dispatch(resetAction);
+							}, 100);
 						});
 					}
 				);
@@ -141,7 +132,7 @@ class CreateWallet extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				<LoadingView showLoading={this.state.showLoading} />
+				<Loading ref="loading" />
 				<View style={styles.warning}>
 					<Text style={styles.color_white}>·密码用于加密私钥，强度非常重要！</Text>
 					<Text style={styles.color_white}>·True钱包不会储存密码，也无法帮您找回，请务必牢记！</Text>
@@ -167,9 +158,14 @@ class CreateWallet extends Component {
 							}}
 						/>
 						<Text style={styles.color_999}>我已仔细阅读并同意</Text>
-						<Text style={styles.color_aff} onPress={() => {
-							this.props.navigation.navigate('UserPolicy');
-						}}>《服务及隐私条款》</Text>
+						<Text
+							style={styles.color_aff}
+							onPress={() => {
+								this.props.navigation.navigate('UserPolicy');
+							}}
+						>
+							《服务及隐私条款》
+						</Text>
 					</View>
 					<Button
 						title="创建钱包"
