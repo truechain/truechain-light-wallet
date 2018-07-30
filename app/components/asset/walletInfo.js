@@ -86,7 +86,7 @@ class WalletInfo extends Component {
 		ref: 'pwdInput'
 	};
 	walletName = {
-		placeholder: '输入您的钱包名称',
+		placeholder: I18n.t('wallet.createWalletTip'),//'输入您的钱包名称',
 		inputContainerStyle: styles.walletNameStyle,
 		onChangeText: (walletName) => {
 			this.setState({
@@ -101,7 +101,7 @@ class WalletInfo extends Component {
 			this.refs.codeInput.close();
 			this.navigate('ExportMnemonic');
 		} catch (e) {
-			alert('密码错误,请重新输入');
+			alert( I18n.t('wallet.wrongPwd') ); //'密码错误,请重新输入');
 			this.setState({
 				walletPassword: ' '
 			});
@@ -136,7 +136,7 @@ class WalletInfo extends Component {
 					onPress={() => {
 						this.setState(
 							{
-								modalTitle: '钱包名称'
+								modalTitle: I18n.t('assets.walletInfo.walletName') //'钱包名称'
 							},
 							() => {
 								this.refs.changeWalletName.open();
@@ -333,7 +333,11 @@ class WalletInfo extends Component {
 					</View>
 					<Input {...this.pwd} />
 					<View style={styles.confirm}>
-						<Button title="确定" buttonStyle={styles.confirmButtonStyle} onPress={this.state.onPress} />
+						<Button 
+							title={ I18n.t('public.define') } //"确定" 
+							buttonStyle={styles.confirmButtonStyle} 
+							onPress={this.state.onPress} 
+						/>
 					</View>
 				</Modal>
 
@@ -357,7 +361,8 @@ class WalletInfo extends Component {
 									this.refs.changeWalletName.close();
 								}}
 							>
-								取消
+								{ I18n.t('public.cancel') }
+								{/* 取消 */}
 							</Text>
 						</TouchableHighlight>
 						<TouchableHighlight style={styles.bottom_fun_item_done}>
