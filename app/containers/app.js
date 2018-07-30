@@ -155,14 +155,18 @@ const TabBarPage = createBottomTabNavigator(
 		Assets: {
 			screen: Assets,
 			navigationOptions: {
-				tabBarLabel: I18n.t('tab.assets'),
+				tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ 'color': tintColor , 'fontSize': 12 }}>{I18n.t('tab.assets')}</Text>
+				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-zichan" size={30} color={tintColor} />
 			}
 		},
 		Node: {
 			screen: Node,
 			navigationOptions: {
-				tabBarLabel: I18n.t('tab.node'),
+					tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ 'color': tintColor, 'fontSize': 12 }}>{I18n.t('tab.node')}</Text>
+				),
 				tabBarIcon: ({ focused, tintColor }) => (
 					<Icon name="icon-xiajiantouxialakuang-" size={20} color={tintColor} />
 				),
@@ -183,7 +187,9 @@ const TabBarPage = createBottomTabNavigator(
 		My: {
 			screen: My,
 			navigationOptions: {
-				tabBarLabel: I18n.t('tab.my'),
+					tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ 'color': tintColor, 'fontSize': 12 }}>{I18n.t('tab.my')}</Text>
+				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-geren" size={30} color={tintColor} />
 			}
 		}
