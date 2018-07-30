@@ -32,7 +32,7 @@ export default {
 		privateKeyIsWrong:'Wrong private key, please enter again',
 		keystoreIsNull:'Please enter keystore information ',
 		wrongByKeystoreOrPwd:'failed to import wallet, please check if keystore or password  is correct',
-		copyKeystoreTip:'直接复制粘贴以太坊官方钱包keystore文件内容至输入框。'
+		copyKeystoreTip:'please paste the content of Ethereum (ETH) wallet keystore file to input box'
 	},
 	tips:'tips',
 	tab: {
