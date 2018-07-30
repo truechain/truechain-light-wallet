@@ -24,7 +24,14 @@ export default {
 		createWalletTipOfPwd:'密码用于加密私钥，强度非常重要！',
 		createWalletTipOfNoStore:'True钱包不会储存密码，也无法帮您找回，请务必牢记！',
 		iAgreeTerm:'我已仔细阅读并同意',
-		term:'服务及隐私条款'
+		term:'服务及隐私条款',
+		mnemonicTip:'助记词首尾不能有空格,请重新输入',
+		mnemonicIsWrong:'助记词有误，请重新输入',
+		mnemonicIsNull:'助记词不能为空',
+		privateKeyIsNull:'私钥不能为空',
+		privateKeyIsWrong:'私钥有误，请重新输入',
+		keystoreIsNull:'请输入keystore信息',
+		wrongByKeystoreOrPwd:'导入钱包失败, 请检查keystore或者密码是否正确'
 	},
 	tips:'tips',
 	tab: {
