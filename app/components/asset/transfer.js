@@ -7,7 +7,7 @@ import { withNavigation } from 'react-navigation';
 import sendEth from '../../utils/sendEth';
 import sendTokens from '../../utils/sendTokens';
 import iterface from '../../utils/trueIterface';
-import { I18n } from '../../language/i18n';
+import { I18n } from '../../../language/i18n';
 import Loading from 'react-native-whc-loading';
 
 const screen = Dimensions.get('window');

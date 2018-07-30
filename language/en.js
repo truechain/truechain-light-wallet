@@ -14,9 +14,19 @@ export default {
 		officialWallet: 'Official wallet',
 		privateKey: 'Private key',
 		path: 'path',
-		enterPwd: 'Enter your password',
-		confirmPwd: 'confirm your password'
+		enterPwd: 'enter your password',
+		confirmPwd: 'confirm your password',
+		creatWallet:'creat wallet',
+		createWalletTip:'enter your wallet name',
+		pwdSuggest:'recommended password be no less than 8 characters',
+		pwdIsWrong:'the passwords should be consistent',
+		agreeTerm:'agree to the terms of service',
+		createWalletTipOfPwd:'密码用于加密私钥，强度非常重要！',
+		createWalletTipOfNoStore:'True钱包不会储存密码，也无法帮您找回，请务必牢记！',
+		iAgreeTerm:'我已仔细阅读并同意',
+		term:'服务及隐私条款'
 	},
+	tips:'tips',
 	tab: {
 		assets: 'Assets',
 		node: 'Node',

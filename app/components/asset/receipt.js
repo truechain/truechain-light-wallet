@@ -7,7 +7,7 @@ import {
     StyleSheet,
     Clipboard
 } from "react-native";
-import { I18n } from '../../language/i18n';
+import { I18n } from '../../../language/i18n';
 
 import {
     Input,
