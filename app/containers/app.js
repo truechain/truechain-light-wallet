@@ -1,19 +1,19 @@
 import React from 'react';
-import { I18n } from '../../language/i18n';
+import { I18n } from '../../language/i18n'; // 多国语言支持
 import { Image, StyleSheet, AsyncStorage } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation';
+import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation';  // 页面切换 路由导航组件
 
-//TabBar
-import Splash from '../pages/Splash';
-import Assets from '../components/asset/asset';
-import Node_item from '../components/node/node';
-import My_item from '../components/my/my';
+//TabBar 底部栏位页面
+import Splash from '../pages/Splash';  // app开屏画面
+import Assets from '../components/asset/asset'; // 底部：资产
+import Node_item from '../components/node/node'; //底部：节点
+import My_item from '../components/my/my';   //底部： 我的
 
 //Router
-import Guide from '../guide/guide';
-import CurrencyDetail from '../components/asset/currencyDetail';
-import Transfer from '../components/asset/transfer';
-import Receipt from '../components/asset/receipt';
+import Guide from '../guide/guide'; //没有本地存储的钱包时进入的引导页：引导用户去选择创建钱包或导入钱包
+import CurrencyDetail from '../components/asset/currencyDetail'; //  资产 -> 币种详情页
+import Transfer from '../components/asset/transfer'; // 资产 -> 币种详情 -> 转账页
+import Receipt from '../components/asset/receipt'; // 资产 -> 币种详情 -> 收款页
 import CreateWallet from '../components/my/wallet/createWallet';
 import ImportWallet from '../components/my/wallet/importWallet';
 import WalletInfo from '../components/asset/walletInfo';

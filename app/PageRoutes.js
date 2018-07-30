@@ -1,3 +1,5 @@
+// 该文件已弃用，将在下一版本删除
+
 import { createStackNavigator } from 'react-navigation';
 import TabBarPage from './HomeTabRoutes'
 import Assets from './components/asset/asset'

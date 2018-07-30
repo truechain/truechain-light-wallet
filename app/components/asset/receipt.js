@@ -7,6 +7,7 @@ import {
     StyleSheet,
     Clipboard
 } from "react-native";
+import { I18n } from '../../language/i18n';
 
 import {
     Input,
@@ -74,7 +75,8 @@ export default class Receipt extends Component {
 
                 <View style={styles.copyAddress}>
                     <Button
-                        title='复制收款地址'
+                        title={I18n.t('assets.currency.copyReceiptAddr')}
+                        // '复制收款地址'
                         buttonStyle={styles.buttonStyle}
                         onPress={this._setClipboardContent.bind(this)}
                     />

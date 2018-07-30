@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, Image, FlatList, Dimensions, StyleSheet } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { getTransactionRecord, getERC20TransactionRecord } from '../../api/index';
+import { I18n } from '../../language/i18n';
+
 class Recording extends Component {
 	show(num) {
 		num += '';
@@ -113,7 +115,7 @@ class currencyDetail extends Component {
 					{/* <Text style={[ styles.color_white, styles.marginTop_20 ]}>市值：*****</Text> */}
 				</View>
 				<View style={styles.record}>
-					<Text>近期交易记录</Text>
+					<Text>{I18n.t('guide.createWallet')}</Text> {/* 近期交易记录 */}
 					{this.state.recordData.length > 1 ? (
 						<FlatList
 							style={styles.marginTop_20}
@@ -134,7 +136,7 @@ class currencyDetail extends Component {
 							});
 						}}
 					>
-						转账
+						 {I18n.t('assets.currency.transfer')} {/*转账 */}
 					</Text>
 					<Text
 						style={[ styles.bottom_fun_item, styles.bottom_fun_item_receipt ]}
@@ -142,7 +144,7 @@ class currencyDetail extends Component {
 							this.navigate('Receipt');
 						}}
 					>
-						收款
+						{I18n.t('assets.currency.receipt')} {/* 收款 */}
 					</Text>
 				</View>
 			</View>

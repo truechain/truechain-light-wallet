@@ -7,6 +7,7 @@ import { withNavigation } from 'react-navigation';
 import sendEth from '../../utils/sendEth';
 import sendTokens from '../../utils/sendTokens';
 import iterface from '../../utils/trueIterface';
+import { I18n } from '../../language/i18n';
 import Loading from 'react-native-whc-loading';
 
 const screen = Dimensions.get('window');
@@ -46,7 +47,7 @@ class Transfer extends Component {
 	}
 
 	static navigationOptions = ({ navigation }) => ({
-		headerTitle: '转账',
+		headerTitle: I18n.t('assets.currency.transfer'), // 转账
 		headerRight: (
 			<TouchableHighlight
 				underlayColor={'transparent'}
@@ -177,7 +178,8 @@ class Transfer extends Component {
 		return (
 			<View style={styles.container}>
 				<Input
-					placeholder="收款人钱包地址"
+					placeholder={I18n.t('assets.currency.receiptAddr')}
+					//"收款人钱包地址"
 					//     <Icon
 					//         name='user'
 					//         size={25}
@@ -212,7 +214,8 @@ class Transfer extends Component {
 					inputContainerStyle={styles.inputContainerStyle}
 				/>
 				<Input
-					placeholder="转账金额"
+					placeholder={I18n.t('assets.currency.transferCount')}
+					// "转账金额"
 					onChangeText={(amount) => {
 						this.setState({ amount });
 						if (amount) {
@@ -238,11 +241,12 @@ class Transfer extends Component {
 					inputContainerStyle={styles.inputContainerStyle}
 				/>
 				<Input
-					placeholder="备注"
+					placeholder={I18n.t('assets.currency.transferRemarks')}
+					// "备注"
 					onChangeText={(remarks) => this.setState({ remarks })}
 					inputContainerStyle={styles.inputContainerStyle}
 				/>
-				<Text style={styles.minerCosts_text}>矿工费用</Text>
+				<Text style={styles.minerCosts_text}>{I18n.t('assets.currency.transferFee')}{/* 矿工费用 */}</Text> 
 				<Slider
 					value={this.state.cost}
 					onValueChange={(cost) => {
@@ -262,13 +266,14 @@ class Transfer extends Component {
 					maximumValue={0.00251999}
 				/>
 				<View style={styles.gasPrice}>
-					<Text>慢</Text>
+					<Text>{I18n.t('assets.currency.transferSpeedSlow')}{/* 慢 */}</Text> 
 					<Text style={styles.textAlign}>{this.show(this.state.cost)}ether</Text>
-					<Text>快</Text>
+					<Text>{I18n.t('assets.currency.transferSpeedFast')}{/* 快 */}</Text>
 				</View>
 				<View style={styles.next}>
 					<Button
-						title="下一步"
+						title={I18n.t('assets.currency.nextStep')}
+						// "下一步"
 						buttonStyle={styles.buttonStyle}
 						disabledStyle={styles.borderRadius}
 						disabled={this.state.disabledNext}

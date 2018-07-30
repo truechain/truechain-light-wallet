@@ -71,6 +71,19 @@ export default {
 			keystore_scanning_item: '二维码禁止保存、截图以及拍照。仅供用户在安全环境下直接扫描来方便的导入钱包。',
 			keystore_surround: '在安全的环境下使用',
 			keystore_surround_item: '请在确保四周无人及无摄像头的情况下使用。二维码一旦被他人获取讲造成不可挽回的资产损失。'
+		},
+		currency:{
+			transfer:'转账',
+			recentTradeRecord:'近期交易记录',
+			receipt:'收款',
+			receiptAddr:'收款人钱包地址',
+			transferCount:'转账金额',
+			transferRemarks:'备注',
+			transferFee:'矿工费用',
+			transferSpeedSlow:'慢',
+			transferSpeedFast:'块',
+			nextStep:'下一步',
+			copyReceiptAddr:'复制收款地址'
 		}
 	},
 	node: {
