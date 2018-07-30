@@ -107,13 +107,13 @@ class Transfer extends Component {
 						if (err) {
 							this.refs.loading.close();
 							setTimeout(() => {
-								Alert.alert('提示', '发布交易失败，请稍后重试！');
+								Alert.alert(null, '发布交易失败，请稍后重试！');
 							}, 100);
 							console.log(err);
 						} else {
 							this.refs.loading.close();
 							setTimeout(() => {
-								Alert.alert('提示', '发布交易成功！', [
+								Alert.alert(null, '发布交易成功！', [
 									{
 										text: 'OK',
 										onPress: () => {
@@ -145,13 +145,13 @@ class Transfer extends Component {
 						if (err) {
 							this.refs.loading.close();
 							setTimeout(() => {
-								Alert.alert('提示', '发布交易失败，请稍后重试！');
+								Alert.alert(null, '发布交易失败，请稍后重试！');
 							}, 100);
 							console.log(err);
 						} else {
 							this.refs.loading.close();
 							setTimeout(() => {
-								Alert.alert('提示', '发布交易成功！', [
+								Alert.alert(null, '发布交易成功！', [
 									{
 										text: 'OK',
 										onPress: () => {
@@ -195,7 +195,7 @@ class Transfer extends Component {
 								toAddressFlag: false,
 								disabledNext: true
 							});
-							Alert.alert('提示', '地址无效，请仔细检查！');
+							Alert.alert(null, '地址无效，请仔细检查！');
 						} else {
 							this.setState(
 								{
@@ -349,7 +349,7 @@ class Transfer extends Component {
 												if (!this.state.password) {
 													this.refs.loading.close();
 													setTimeout(() => {
-														Alert.alert('提示', '请输入密码');
+														Alert.alert(null, '请输入密码');
 													}, 100);
 												} else {
 													setTimeout(() => {
@@ -370,7 +370,7 @@ class Transfer extends Component {
 																		password: null
 																	},
 																	() => {
-																		Alert.alert('提示', '密码错误,请重新输入');
+																		Alert.alert(null, '密码错误,请重新输入');
 																	}
 																);
 															}, 100);

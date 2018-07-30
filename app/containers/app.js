@@ -1,13 +1,14 @@
 import React from 'react';
 import { I18n } from '../../language/i18n'; // 多国语言支持
-import { Image, StyleSheet, AsyncStorage } from 'react-native';
-import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation';  // 页面切换 路由导航组件
+import { StyleSheet, AsyncStorage } from 'react-native';
+import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation'; // 页面切换 路由导航组件
+import { host } from '../utils/config';
 
 //TabBar 底部栏位页面
-import Splash from '../pages/Splash';  // app开屏画面
+import Splash from '../pages/Splash'; // app开屏画面
 import Assets from '../components/asset/asset'; // 底部：资产
 import Node_item from '../components/node/node'; //底部：节点
-import My_item from '../components/my/my';   //底部： 我的
+import My_item from '../components/my/my'; //底部： 我的
 
 //Router
 import Guide from '../guide/guide'; //没有本地存储的钱包时进入的引导页：引导用户去选择创建钱包或导入钱包
@@ -45,6 +46,7 @@ import VoteList from '../components/node/vote/voteList';
 import VoteInfo from '../components/node/vote/voteInfo';
 import SysLanguage from '../components/my/sysLanguage';
 import TransactionRecord from '../components/my/transactionRecord';
+import KnowledgePoint from '../components/my/knowledgePoint';
 
 //rely
 import Storage from 'react-native-storage';
@@ -84,8 +86,6 @@ storage
 	});
 
 const Web3 = require('web3');
-let host = 'https://ropsten.infura.io/';
-// let host = 'https://mainnet.infura.io/';
 window.host = host;
 
 if (host.includes('ropsten')) {
@@ -155,14 +155,18 @@ const TabBarPage = createBottomTabNavigator(
 		Assets: {
 			screen: Assets,
 			navigationOptions: {
-				tabBarLabel: I18n.t('tab.assets'),
+				tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ 'color': tintColor , 'fontSize': 12 }}>{I18n.t('tab.assets')}</Text>
+				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-zichan" size={30} color={tintColor} />
 			}
 		},
 		Node: {
 			screen: Node,
 			navigationOptions: {
-				tabBarLabel: I18n.t('tab.node'),
+					tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ 'color': tintColor, 'fontSize': 12 }}>{I18n.t('tab.node')}</Text>
+				),
 				tabBarIcon: ({ focused, tintColor }) => (
 					<Icon name="icon-xiajiantouxialakuang-" size={20} color={tintColor} />
 				),
@@ -183,7 +187,9 @@ const TabBarPage = createBottomTabNavigator(
 		My: {
 			screen: My,
 			navigationOptions: {
-				tabBarLabel: I18n.t('tab.my'),
+					tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ 'color': tintColor, 'fontSize': 12 }}>{I18n.t('tab.my')}</Text>
+				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-geren" size={30} color={tintColor} />
 			}
 		}
@@ -240,19 +246,19 @@ const App = createStackNavigator(
 		WalletInfo: {
 			screen: WalletInfo,
 			navigationOptions: {
-				headerTitle: '账户信息'
+				headerTitle: I18n.t('assets.walletInfo.title')
 			}
 		},
 		ExportMnemonic: {
 			screen: ExportMnemonic,
 			navigationOptions: {
-				headerTitle: '导出助记词'
+				headerTitle: I18n.t('assets.walletInfo.exportMnemonic')
 			}
 		},
 		ExportKeystore: {
 			screen: ExportKeystore,
 			navigationOptions: {
-				headerTitle: '导出Keystore'
+				headerTitle: I18n.t('assets.walletInfo.exportKeystore')
 			}
 		},
 		AboutUs,
@@ -268,7 +274,7 @@ const App = createStackNavigator(
 		SignUp: {
 			screen: SignUp,
 			navigationOptions: {
-				headerTitle: '报名参选'
+				headerTitle: I18n.t('node.signUp')
 			}
 		},
 		SignUpNode,
@@ -298,7 +304,13 @@ const App = createStackNavigator(
 		VoteList,
 		VoteInfo,
 		SysLanguage,
-		TransactionRecord
+		TransactionRecord: {
+			screen: TransactionRecord,
+			navigationOptions: {
+				headerTitle: I18n.t('my.home.transactionRecord')
+			}
+		},
+		KnowledgePoint
 	},
 	{
 		// initialRouteName: 'Guide',
@@ -315,12 +327,5 @@ const App = createStackNavigator(
 		}
 	}
 );
-
-const styles = StyleSheet.create({
-	icon: {
-		width: 20,
-		height: 20
-	}
-});
 
 export default App;

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, PixelRatio, Dimensions, TextInput, TouchableOpacity } from 'react-native';
 import CountryPicker from 'react-native-country-picker-modal';
+import { I18n } from '../../../language/i18n';
 import { Button } from 'react-native-elements';
 import { getCode, login } from '../../api/index';
 import { serverUrl } from '../../utils/config';
@@ -216,7 +217,7 @@ export default class Login extends React.Component {
 		return (
 			<View style={styles.container}>
 				<View style={[ styles.country_select, styles.line_bottom ]}>
-					<Text>国家/地区</Text>
+					<Text>{I18n.t('my.home.lockAccount.country_region')}</Text>
 					<View>
 						<Text>{this.state.countryName}</Text>
 						<CountryPicker
@@ -239,7 +240,7 @@ export default class Login extends React.Component {
 						maxLength={11}
 						onChangeText={(tel) => this.setState({ tel })}
 						style={[ styles.input_item, styles.tel_input ]}
-						placeholder="请输入手机号"
+						placeholder={I18n.t('public.enterMobile')}
 						underlineColorAndroid="transparent"
 					/>
 				</View>
@@ -249,7 +250,7 @@ export default class Login extends React.Component {
 						maxLength={4}
 						onChangeText={(cap_code) => this.setState({ cap_code })}
 						style={[ styles.input_item, styles.cap_input ]}
-						placeholder="输入图片验证码"
+						placeholder={I18n.t('public.enterCaptcha')}
 						underlineColorAndroid="transparent"
 					/>
 					<View>
@@ -271,14 +272,14 @@ export default class Login extends React.Component {
 						maxLength={6}
 						style={[ styles.input_item, styles.cap_input ]}
 						onChangeText={(v_code) => this.setState({ v_code })}
-						placeholder="输入手机验证码"
+						placeholder={I18n.t('public.enterMobileCode')}
 						underlineColorAndroid="transparent"
 					/>
 					<TouchableOpacity disabled={this.state.disabled} onPress={this.setTime}>
 						{this.state.countdown >= 0 ? (
 							<Text style={styles.color_bu}>{`${this.state.countdown}`}秒</Text>
 						) : (
-							<Text style={styles.color_bu}>获取验证码</Text>
+							<Text style={styles.color_bu}>{I18n.t('public.getMobileCode')}</Text>
 						)}
 					</TouchableOpacity>
 				</View>
@@ -293,7 +294,7 @@ export default class Login extends React.Component {
 					disabledStyle={styles.disabledStyle}
 				/>
 				<View style={styles.prompt}>
-					<Text>未注册过的手机号将自动创建账号</Text>
+					<Text>{I18n.t('my.home.lockAccount.prompt')}</Text>
 				</View>
 			</View>
 		);

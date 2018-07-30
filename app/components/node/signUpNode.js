@@ -67,7 +67,7 @@ class SignUpNode extends Component {
 		switch (this.state.nodeType) {
 			case '1':
 				if (this.state.true_banlance + this.state.lock_num < 2000) {
-					Alert.alert('提示', I18n.t('node.InsufficientQualification.qu_1'));
+					Alert.alert(null, I18n.t('node.InsufficientQualification.qu_1'));
 				} else {
 					this.navigate('SignUpInput', {
 						title: I18n.t('node.personSignUp.personSignUp_title'),
@@ -78,7 +78,7 @@ class SignUpNode extends Component {
 				break;
 			case '2':
 				if (this.state.true_banlance + this.state.lock_num < 50000) {
-					Alert.alert('提示', I18n.t('node.InsufficientQualification.qu_2'));
+					Alert.alert(null, I18n.t('node.InsufficientQualification.qu_2'));
 				} else {
 					this.navigate('SignUpInput', {
 						title: I18n.t('node.personSignUp.personSignUp_title'),
@@ -92,7 +92,7 @@ class SignUpNode extends Component {
 
 	_createTeam() {
 		if (this.state.true_banlance + this.state.lock_num < 1) {
-			Alert.alert('提示', I18n.t('node.InsufficientQualification.qu_3'));
+			Alert.alert(null, I18n.t('node.InsufficientQualification.qu_3'));
 		} else {
 			this.navigate('CreateTeam', {
 				nodeType: this.state.nodeType

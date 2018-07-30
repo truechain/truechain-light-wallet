@@ -8,15 +8,16 @@ import {
     Clipboard
 } from "react-native";
 import { I18n } from '../../../language/i18n';
+<<<<<<< HEAD
 
+=======
+>>>>>>> 6c389610613d1fcf3408675b09eb1cbb8435708f
 import {
     Input,
     Button
 } from 'react-native-elements';
 import QRCode from 'react-native-qrcode'
 import Toast from 'react-native-easy-toast';
-
-
 const screen = Dimensions.get('window');
 
 export default class Receipt extends Component {
