@@ -15,9 +15,9 @@ import Guide from '../guide/guide'; //没有本地存储的钱包时进入的引
 import CurrencyDetail from '../components/asset/currencyDetail'; //  资产 -> 币种详情页
 import Transfer from '../components/asset/transfer'; // 资产 -> 币种详情 -> 转账页
 import Receipt from '../components/asset/receipt'; // 资产 -> 币种详情 -> 收款页
-import CreateWallet from '../components/my/wallet/createWallet';
-import ImportWallet from '../components/my/wallet/importWallet';
-import WalletInfo from '../components/asset/walletInfo';
+import CreateWallet from '../components/my/wallet/createWallet'; // 创建钱包：新建1个本地钱包 
+import ImportWallet from '../components/my/wallet/importWallet';  // 导入钱包
+import WalletInfo from '../components/asset/walletInfo'; // 我的 -> 钱包管理（账户信息页）
 import ExportMnemonic from '../components/asset/exportMnemonic';
 import ExportKeystore from '../components/asset/exportKeystore';
 import AboutUs from '../components/my/aboutus';

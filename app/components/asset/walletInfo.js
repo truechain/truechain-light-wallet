@@ -101,7 +101,7 @@ class WalletInfo extends Component {
 			this.refs.codeInput.close();
 			this.navigate('ExportMnemonic');
 		} catch (e) {
-			alert('密码错误,请重新输入');
+			alert( I18n.t('wallet.wrongPwd') ); //'密码错误,请重新输入');
 			this.setState({
 				walletPassword: ' '
 			});
@@ -136,7 +136,7 @@ class WalletInfo extends Component {
 					onPress={() => {
 						this.setState(
 							{
-								modalTitle: I18n.t('assets.walletInfo.walletName')
+								modalTitle: I18n.t('assets.walletInfo.walletName') //'钱包名称'
 							},
 							() => {
 								this.refs.changeWalletName.open();
@@ -333,10 +333,10 @@ class WalletInfo extends Component {
 					</View>
 					<Input {...this.pwd} />
 					<View style={styles.confirm}>
-						<Button
-							title={I18n.t('public.define')}
-							buttonStyle={styles.confirmButtonStyle}
-							onPress={this.state.onPress}
+						<Button 
+							title={ I18n.t('public.define') } //"确定" 
+							buttonStyle={styles.confirmButtonStyle} 
+							onPress={this.state.onPress} 
 						/>
 					</View>
 				</Modal>
@@ -361,7 +361,7 @@ class WalletInfo extends Component {
 									this.refs.changeWalletName.close();
 								}}
 							>
-								{I18n.t('public.cancel')}
+								{ I18n.t('public.cancel') }
 								{/* 取消 */}
 							</Text>
 						</TouchableHighlight>
