@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
 import { View, Text, Image, StyleSheet, TouchableHighlight, ScrollView } from 'react-native';
 import { getTeamInfo, getTeamMember } from '../../api/loged';
+import { I18n } from '../../../language/i18n'
 
 class TeamMemberList extends Component {
 	render() {
@@ -23,7 +24,7 @@ class TeamMemberList extends Component {
 
 class MyTeam extends Component {
 	static navigationOptions = ({ navigation }) => ({
-		headerTitle: '我的战队'
+		headerTitle: I18n.t('node.myTeam') //'我的战队'
 	});
 
 	constructor(props) {
@@ -88,7 +89,8 @@ class MyTeam extends Component {
 					}}
 				>
 					<View style={[ styles.personnelManagement, styles.personalInfo ]}>
-						<Text>待加入人员管理</Text>
+						<Text>{ I18n.t('node.futureMember') }</Text>
+						{/* 待加入人员管理 */}
 						<Image
 							style={{
 								width: 8,
@@ -103,7 +105,8 @@ class MyTeam extends Component {
 					<View style={styles.headerInfo}>
 						<View style={styles.headerInfo_item}>
 							<View style={styles.baseInfo}>
-								<Text>组队信息</Text>
+								{/* 组队信息 */}
+								<Text>{ I18n.t('node.teamInfo.teamInfo_Info') } </Text>
 								<TouchableHighlight style={styles.lock_num}>
 									<Text style={styles.color_fff}>{this.state.lock_num} TRUE</Text>
 								</TouchableHighlight>
@@ -112,7 +115,8 @@ class MyTeam extends Component {
 						</View>
 
 						<TouchableHighlight style={styles.ticket}>
-							<Text style={styles.color_fff}>{this.state.tickets} 票</Text>
+							{/* 票数 */}
+							<Text style={styles.color_fff}>{this.state.tickets} { I18n.t('public.tickets') } </Text>
 						</TouchableHighlight>
 					</View>
 					<View>

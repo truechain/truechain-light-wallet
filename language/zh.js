@@ -149,7 +149,9 @@ export default {
 			qu_1: '个人报名标准节点需要不少于2千TRUE',
 			qu_2: '个人报名全节点需要不少于5万TRUE',
 			qu_3: '创建组队需要不少于1TRUE'
-		}
+		},
+		myTeam:'我的战队',
+		futureMember:'待加入人员管理'
 	},
 	public: {
 		transferOutPrompt: '优先节点投票期间暂不提供转出功能!',
