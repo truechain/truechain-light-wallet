@@ -9,6 +9,10 @@ class SignUp extends Component {
 		this.navigate = this.props.navigation.navigate;
 	}
 
+	static navigationOptions = {
+		headerTitle: I18n.t('node.signUp') // 报名参选
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
