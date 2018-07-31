@@ -114,7 +114,9 @@ class currencyDetail extends Component {
 					<Text style={[ styles.color_white, styles.balance_text_big ]}>{this.state.banlance}</Text>
 					{/* <Text style={[ styles.color_white, styles.marginTop_20 ]}>市值：*****</Text> */}
 				</View>
-				<Text>{I18n.t('assets.currency.recentTradeRecord')}</Text> {/* 近期转账记录 */}
+				<View>
+					<Text>{I18n.t('assets.currency.recentTradeRecord')}</Text>
+				</View>
 				<View style={styles.record}>
 					{this.state.recordData.length > 1 ? (
 						<FlatList
