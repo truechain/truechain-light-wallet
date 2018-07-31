@@ -114,8 +114,8 @@ class currencyDetail extends Component {
 					<Text style={[ styles.color_white, styles.balance_text_big ]}>{this.state.banlance}</Text>
 					{/* <Text style={[ styles.color_white, styles.marginTop_20 ]}>市值：*****</Text> */}
 				</View>
+				<Text>{I18n.t('assets.currency.recentTradeRecord')}</Text> {/* 近期转账记录 */}
 				<View style={styles.record}>
-					<Text>{I18n.t('guide.createWallet')}</Text> {/* 近期交易记录 */}
 					{this.state.recordData.length > 1 ? (
 						<FlatList
 							style={styles.marginTop_20}
@@ -136,7 +136,7 @@ class currencyDetail extends Component {
 							});
 						}}
 					>
-						 {I18n.t('assets.currency.transfer')} {/*转账 */}
+						{I18n.t('assets.currency.transfer')} {/* 转账 */}
 					</Text>
 					<Text
 						style={[ styles.bottom_fun_item, styles.bottom_fun_item_receipt ]}
@@ -144,7 +144,7 @@ class currencyDetail extends Component {
 							this.navigate('Receipt');
 						}}
 					>
-						{I18n.t('assets.currency.receipt')} {/* 收款 */}
+						{I18n.t('assets.currency.receipt')} {/*  收款 */}
 					</Text>
 				</View>
 			</View>
@@ -214,7 +214,7 @@ const styles = StyleSheet.create({
 	bottom_fun_item: {
 		height: 50,
 		lineHeight: 50,
-		color:'#fff',
+		color: '#fff',
 		textAlign: 'center',
 		width: Dimensions.get('window').width / 2
 	},
@@ -225,3 +225,41 @@ const styles = StyleSheet.create({
 		backgroundColor: '#528bf7'
 	}
 });
+
+// <View style={styles.balance}>
+// 	<Text style={[styles.color_white, styles.balance_text_big]}>{this.state.banlance}</Text>
+// 	{/* <Text style={[ styles.color_white, styles.marginTop_20 ]}>市值：*****</Text> */}
+// </View>
+// 	<View style={styles.record}>
+// 		<Text>{I18n.t('assets.currency.recentTradeRecord')}</Text> {/* 近期交易记录 */}
+// 		{this.state.recordData.length > 1 ? (
+// 			<FlatList
+// 				style={styles.marginTop_20}
+// 				data={this.state.recordData}
+// 				renderItem={(item) => <TransactionRecord data={item} />}
+// 			/>
+// 		) : (
+// 				<Text style={styles.textAlign}>~</Text>
+// 			)}
+// 	</View>
+// 	<View style={styles.bottom_fun}>
+// 		<Text
+// 			style={[styles.bottom_fun_item, styles.bottom_fun_item_transfer]}
+// 			onPress={() => {
+// 				this.navigate('Transfer', {
+// 					navigate: this.navigate,
+// 					currencyName: this.state.currencyName
+// 				});
+// 			}}
+// 		>
+// 			{I18n.t('assets.currency.transfer')} {/*转账 */}
+// 		</Text>
+// 		<Text
+// 			style={[styles.bottom_fun_item, styles.bottom_fun_item_receipt]}
+// 			onPress={() => {
+// 				this.navigate('Receipt');
+// 			}}
+// 		>
+// 			{I18n.t('assets.currency.receipt')} {/* 收款 */}
+// 		</Text>
+// 	</View>

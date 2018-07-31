@@ -151,6 +151,9 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-device-info')
+    compile project(':react-native-pdf')
+    compile project(':rn-fetch-blob')
     compile project(':react-native-vector-icons')
     compile project(':react-native-svg')
     compile project(':react-native-restart')

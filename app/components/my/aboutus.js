@@ -2,12 +2,50 @@ import React, { Component } from 'react';
 import { Text, View, Image, StyleSheet, TouchableHighlight, Modal } from 'react-native';
 import { I18n } from '../../../language/i18n';
 import { withNavigation } from 'react-navigation';
+var DeviceInfo = require('react-native-device-info');
 
 export class AboutUs extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { modalVisible: false };
+		this.state = { modalVisible: false, service_source: null };
 		this.setModalVisible = this.setModalVisible.bind(this);
+	}
+
+	componentDidMount() {
+		storage
+			.load({
+				key: 'localLanguage'
+			})
+			.then((res) => {
+				res.localLanguage.includes('zh')
+					? this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_zh.pdf',
+								cache: true
+							}
+						})
+					: this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_en.pdf',
+								cache: true
+							}
+						});
+			})
+			.catch((e) => {
+				DeviceInfo.getDeviceLocale().includes('zh')
+					? this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_zh.pdf',
+								cache: true
+							}
+						})
+					: this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_en.pdf',
+								cache: true
+							}
+						});
+			});
 	}
 
 	setModalVisible(visible) {
@@ -70,7 +108,10 @@ export class AboutUs extends Component {
 					<TouchableHighlight
 						underlayColor={'#ddd'}
 						activeOpacity={0.5}
-						onPress={() => this.props.navigation.navigate('UserPolicy')}
+						onPress={() =>
+							this.props.navigation.navigate('UserPolicy', {
+								service_source: this.state.service_source
+							})}
 					>
 						<View style={styles.row}>
 							<View style={styles.rowLf}>
@@ -91,7 +132,10 @@ export class AboutUs extends Component {
 					<TouchableHighlight
 						underlayColor={'#ddd'}
 						activeOpacity={0.5}
-						onPress={() => this.props.navigation.navigate('UserPolicy')}
+						onPress={() =>
+							this.props.navigation.navigate('UserPolicy', {
+								service_source: this.state.service_source
+							})}
 					>
 						<View style={styles.row}>
 							<View style={styles.rowLf}>

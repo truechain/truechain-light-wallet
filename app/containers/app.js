@@ -15,8 +15,8 @@ import Guide from '../guide/guide'; //没有本地存储的钱包时进入的引
 import CurrencyDetail from '../components/asset/currencyDetail'; //  资产 -> 币种详情页
 import Transfer from '../components/asset/transfer'; // 资产 -> 币种详情 -> 转账页
 import Receipt from '../components/asset/receipt'; // 资产 -> 币种详情 -> 收款页
-import CreateWallet from '../components/my/wallet/createWallet'; // 创建钱包：新建1个本地钱包 
-import ImportWallet from '../components/my/wallet/importWallet';  // 导入钱包
+import CreateWallet from '../components/my/wallet/createWallet'; // 创建钱包：新建1个本地钱包
+import ImportWallet from '../components/my/wallet/importWallet'; // 导入钱包
 import WalletInfo from '../components/asset/walletInfo'; // 我的 -> 钱包管理（账户信息页）
 import ExportMnemonic from '../components/asset/exportMnemonic';
 import ExportKeystore from '../components/asset/exportKeystore';
@@ -155,7 +155,7 @@ const TabBarPage = createBottomTabNavigator(
 			screen: Assets,
 			navigationOptions: {
 				tabBarLabel: ({ tintColor, focused }) => (
-					<Text style={{ color: tintColor, fontSize: 12 }}>{I18n.t('tab.assets')}</Text>
+					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>{I18n.t('tab.assets')}</Text>
 				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-zichan" size={30} color={tintColor} />
 			}
@@ -164,7 +164,7 @@ const TabBarPage = createBottomTabNavigator(
 			screen: Node,
 			navigationOptions: {
 				tabBarLabel: ({ tintColor, focused }) => (
-					<Text style={{ color: tintColor, fontSize: 12 }}>{I18n.t('tab.node')}</Text>
+					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>{I18n.t('tab.node')}</Text>
 				),
 				tabBarIcon: ({ focused, tintColor }) => (
 					<Icon name="icon-xiajiantouxialakuang-" size={20} color={tintColor} />
@@ -187,7 +187,7 @@ const TabBarPage = createBottomTabNavigator(
 			screen: My,
 			navigationOptions: {
 				tabBarLabel: ({ tintColor, focused }) => (
-					<Text style={{ color: tintColor, fontSize: 12 }}>{I18n.t('tab.my')}</Text>
+					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>{I18n.t('tab.my')}</Text>
 				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-geren" size={30} color={tintColor} />
 			}

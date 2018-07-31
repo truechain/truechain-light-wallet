@@ -3,6 +3,9 @@ package com.truewallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import org.wonday.pdf.RCTPdfView;
+import com.RNFetchBlob.RNFetchBlobPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.horcrux.svg.SvgPackage;
 import com.avishayil.rnrestart.ReactNativeRestartPackage;
@@ -32,6 +35,9 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNDeviceInfo(),
+            new RCTPdfView(),
+            new RNFetchBlobPackage(),
             new VectorIconsPackage(),
             new SvgPackage(),
             new ReactNativeRestartPackage(),
