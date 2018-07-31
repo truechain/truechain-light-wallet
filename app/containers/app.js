@@ -28,7 +28,7 @@ import SysSet from '../components/my/sysset';
 import HelperCenter from '../components/my/helpercenter';
 import ContactUs from '../components/my/contactus';
 import Login from '../components/my/login';
-import SignUp from '../components/node/signUp';
+import SignUp from '../components/node/signUp'; // 节点 -> 报名参选
 import SignUpNode from '../components/node/signUpNode';
 import SignUpInput from '../components/public/signUpInput';
 import Lockpositon from '../components/public/lockpositon';
@@ -43,7 +43,7 @@ import PersonnelManagement from '../components/node/personnelManagement';
 import SetGesturePassword from '../components/my/setgesturepassword';
 import VoteNode from '../components/node/vote/voteNode';
 import VoteList from '../components/node/vote/voteList';
-import VoteInfo from '../components/node/vote/voteInfo';
+import VoteInfo from '../components/node/vote/voteInfo'; //节点 -> 组件节点的投票详情页
 import SysLanguage from '../components/my/sysLanguage';
 import TransactionRecord from '../components/my/transactionRecord';
 import KnowledgePoint from '../components/my/knowledgePoint';

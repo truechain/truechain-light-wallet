@@ -27,6 +27,7 @@ class NodeItem extends Component {
 		];
 		return (
 			<TouchableOpacity
+				// 点击组队节点排行项信息
 				onPress={() => {
 					this.props.navigate('VoteInfo', {
 						teamAddress: this.props.item.address,
@@ -76,6 +77,7 @@ class NodeItem extends Component {
 	}
 }
 class Node extends Component {
+	// 初始化组件节点状态
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -89,11 +91,13 @@ class Node extends Component {
 		this.navigate = this.props.navigation.navigate;
 	}
 
+	// 组件初始渲染挂载界面完成后 异步加载数据
 	componentDidMount() {
 		this._fullOnRefresh();
 		this._standOnRefresh();
 	}
 
+	// 加载全节点排行数据
 	_fullOnRefresh() {
 		this.setState(
 			{
@@ -112,6 +116,7 @@ class Node extends Component {
 		);
 	}
 
+	// 加载标准节点数据
 	_standOnRefresh() {
 		this.setState(
 			{
@@ -130,6 +135,7 @@ class Node extends Component {
 		);
 	}
 
+	// 
 	_getTeamAddress(option) {
 		getTeamAddress()
 			.then((result) => {
@@ -196,6 +202,7 @@ class Node extends Component {
 			});
 	}
 
+	// 全节点刷新时事件
 	_fullOnScroll(evt) {
 		const event = evt['nativeEvent'];
 		const _num =
@@ -219,6 +226,7 @@ class Node extends Component {
 		}
 	}
 
+	// 标准节点刷新时事件
 	_standOnScroll(evt) {
 		const event = evt['nativeEvent'];
 		const _num =
@@ -248,15 +256,18 @@ class Node extends Component {
 			<View style={styles.container}>
 				<View style={styles.header}>
 					<View style={styles.header_item}>
+					    
 						<TouchableHighlight
 							underlayColor={'transparent'}
 							onPress={() => {
 								this._signUp();
 							}}
 						>
+							{/* 点击报名参选时检查用户状态 */}
 							<View style={styles.fun}>
 								<Icon name="icon-baoming" size={40} color="#fff" />
-								<Text style={styles.color_white}>{I18n.t('node.signUp')}</Text>
+								
+								<Text style={styles.color_white}>{I18n.t('node.signUp')} {/* 报名参选 */}</Text> 
 							</View>
 						</TouchableHighlight>
 						<TouchableHighlight
@@ -266,8 +277,8 @@ class Node extends Component {
 							}}
 						>
 							<View style={styles.fun}>
-								<Icon name="icon-639" size={40} color="#fff" />								
-								<Text style={styles.color_white}>{I18n.t('node.vote')}</Text>
+								<Icon name="icon-639" size={40} color="#fff" />	
+								<Text style={styles.color_white}>{I18n.t('node.vote')} {/* '投票' */} </Text>
 							</View>
 						</TouchableHighlight>
 					</View>
@@ -280,7 +291,7 @@ class Node extends Component {
 					tabBarInactiveTextColor="#000"
 					renderTabBar={() => <DefaultTabBar />}
 				>
-					<View tabLabel={I18n.t('node.fullNodeRank')}>
+					<View tabLabel={I18n.t('node.fullNodeRank')}> {/* 全节点排行 */}						
 						<ScrollView
 							style={styles.scrollview}
 							refreshControl={
@@ -301,7 +312,7 @@ class Node extends Component {
 						</ScrollView>
 					</View>
 
-					<View tabLabel={I18n.t('node.standNodeRank')}>
+					<View tabLabel={I18n.t('node.standNodeRank')}> {/* 标准节点排行 */}						
 						<ScrollView
 							style={styles.scrollview}
 							refreshControl={

@@ -8,6 +8,7 @@ import getVote from '../../../utils/getVote';
 import voteToken from '../../../utils/voteToken';
 import LoadingView from '../../public/loadingView';
 import RadiusBtn from '../../public/radiusbtn';
+import { I18n } from '../../../../language/i18n';
 
 const screen = Dimensions.get('window');
 
