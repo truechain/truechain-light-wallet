@@ -37,7 +37,7 @@ class WalletInfo extends Component {
 		};
 		this.verifyPwd = this.verifyPwd.bind(this);
 	}
-	
+
 	componentDidMount() {
 		storage
 			.load({
@@ -86,7 +86,7 @@ class WalletInfo extends Component {
 		ref: 'pwdInput'
 	};
 	walletName = {
-		placeholder: I18n.t('wallet.createWalletTip'),//'输入您的钱包名称',
+		placeholder: I18n.t('assets.walletInfo.enterWalletName'), //'输入您的钱包名称',
 		inputContainerStyle: styles.walletNameStyle,
 		onChangeText: (walletName) => {
 			this.setState({
@@ -193,7 +193,7 @@ class WalletInfo extends Component {
 					onPress={() => {
 						this.setState(
 							{
-								modalTitle: I18n.t('public.verifyPwd')
+								modalTitle: I18n.t('assets.walletInfo.exportKeystore')
 							},
 							() => {
 								this.refs.codeInput.open();
@@ -232,7 +232,7 @@ class WalletInfo extends Component {
 						onPress={() => {
 							this.setState(
 								{
-									modalTitle: I18n.t('public.verifyPwd')
+									modalTitle: I18n.t('assets.walletInfo.exportMnemonic')
 								},
 								() => {
 									this.refs.codeInput.open();
@@ -379,7 +379,8 @@ class WalletInfo extends Component {
 									this.refs.changeWalletName.close();
 								}}
 							>
-								确定
+								{I18n.t('public.define')}
+								{/* 确定 */}
 							</Text>
 						</TouchableHighlight>
 					</View>

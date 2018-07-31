@@ -40,18 +40,27 @@ export default class ExportKeystore extends Component {
 				tabBarInactiveTextColor="#000"
 				renderTabBar={() => <DefaultTabBar />}
 			>
-				<View tabLabel="keyStore文件" style={styles.container}>
+				<View tabLabel={I18n.t('assets.walletInfo.keystoreFile')} style={styles.container}>
 					<ScrollView>
 						<View style={styles.warningBox}>
-							<Text style={styles.color_cbf}>{I18n.t('assets.walletInfo.keystore_save')}</Text>
+							<Text style={styles.color_cbf}>
+								{I18n.t('assets.walletInfo.keystore_save')}
+								{/* 离线保存 */}
+							</Text>
 							<Text style={styles.color_999}>{I18n.t('assets.walletInfo.keystore_save_item')}</Text>
 						</View>
 						<View style={styles.warningBox}>
-							<Text style={styles.color_cbf}>{I18n.t('assets.walletInfo.keystore_network')}</Text>
+							<Text style={styles.color_cbf}>
+								{I18n.t('assets.walletInfo.keystore_network')}
+								{/* 请勿使用网络传输 */}
+							</Text>
 							<Text style={styles.color_999}>{I18n.t('assets.walletInfo.keystore_network_item')}</Text>
 						</View>
 						<View style={styles.warningBox}>
-							<Text style={styles.color_cbf}>{I18n.t('assets.walletInfo.keystore_pwdsave')}</Text>
+							<Text style={styles.color_cbf}>
+								{I18n.t('assets.walletInfo.keystore_pwdsave')}
+								{/* 密码保险箱保存 */}
+							</Text>
 							<Text style={styles.color_999}>{I18n.t('assets.walletInfo.keystore_pwdsave_item')}</Text>
 						</View>
 						<TouchableHighlight style={styles.keystore_area}>
@@ -67,11 +76,17 @@ export default class ExportKeystore extends Component {
 				</View>
 				<View tabLabel={I18n.t('assets.walletInfo.qrcode')} style={styles.container}>
 					<View style={styles.warningBox}>
-						<Text style={styles.color_cbf}>{I18n.t('assets.walletInfo.keystore_scanning')}</Text>
+						<Text style={styles.color_cbf}>
+							{I18n.t('assets.walletInfo.keystore_scanning')}
+							{/* 仅供直接扫描 */}
+						</Text>
 						<Text style={styles.color_999}>{I18n.t('assets.walletInfo.keystore_scanning_item')}</Text>
 					</View>
 					<View style={styles.warningBox}>
-						<Text style={styles.color_cbf}>{I18n.t('assets.walletInfo.keystore_surround')}</Text>
+						<Text style={styles.color_cbf}>
+							{I18n.t('assets.walletInfo.keystore_surround')}
+							{/* 在安全的环境下使用 */}
+						</Text>
 						<Text style={styles.color_999}>{I18n.t('assets.walletInfo.keystore_surround_item')}</Text>
 					</View>
 					<View style={styles.qrcode}>

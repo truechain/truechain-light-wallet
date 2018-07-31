@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, Dimensions, TouchableHighlight } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { I18n } from '../../../language/i18n';
-import RNRestart from 'react-native-restart'
+import RNRestart from 'react-native-restart';
 
 class ListFun extends Component {
 	render() {
@@ -26,10 +26,6 @@ class SysLanguage extends Component {
 			isSelected: true
 		};
 	}
-
-	static navigationOptions = {
-		headerTitle: '多语言'
-	};
 
 	componentDidMount() {
 		this.setState(
@@ -80,12 +76,12 @@ class SysLanguage extends Component {
 		return (
 			<View style={styles.container}>
 				<ListFun
-					fun_name={I18n.t('my.language.changeToEnglish')}
+					fun_name={I18n.t('my.sysSetting.language.changeToEnglish')}
 					isSelected={!this.state.isSelected}
 					onPress={() => this.refreshLanguage(0)}
 				/>
 				<ListFun
-					fun_name={I18n.t('my.language.changeToChinese')}
+					fun_name={I18n.t('my.sysSetting.language.changeToChinese')}
 					isSelected={this.state.isSelected}
 					onPress={() => this.refreshLanguage(1)}
 				/>

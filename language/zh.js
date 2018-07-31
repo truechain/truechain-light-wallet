@@ -58,12 +58,24 @@ export default {
 				keystore: '什么是keystore',
 				privateKey: '什么是私钥'
 			},
-			aboutUs: '关于我们'
+			aboutUs: {
+				_title: '关于我们',
+				currentVersion: '当前版本',
+				introduction: 'True是一款移动端轻钱包APP,它旨在为普通用户提供一款安全放心，简单好用，功能强大的数字资产钱包应用。',
+				useAgreement: '用户协议',
+				privacyPolicy: '隐私条款',
+				versionLog: '版本日志',
+				checkVersion: '检测新版'
+			}
 		},
-		language: {
-			_title: '语言设置',
-			changeToChinese: '简体中文',
-			changeToEnglish: 'English'
+		sysSetting: {
+			_title: '系统设置',
+			language: {
+				_title: '语言设置',
+				multi_language: '多语言',
+				changeToChinese: '简体中文',
+				changeToEnglish: 'English'
+			}
 		}
 	},
 	assets: {
@@ -71,6 +83,7 @@ export default {
 		walletInfo: {
 			title: '账户信息',
 			walletName: '钱包名称',
+			enterWalletName:'输入您的钱包名称',
 			exportPrivateKey: '导出私钥',
 			exportKeystore: '导出keystore',
 			exportMnemonic: '导出助记词',
@@ -139,7 +152,7 @@ export default {
 		}
 	},
 	public: {
-		transferOutPrompt:'优先节点投票期间暂不提供转出功能!',
+		transferOutPrompt: '优先节点投票期间暂不提供转出功能!',
 		lockedWarehouse: '锁仓',
 		transferIn: '转入',
 		transferOut: '转出',

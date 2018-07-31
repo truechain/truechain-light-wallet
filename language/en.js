@@ -60,12 +60,25 @@ export default {
 				keystore: 'What is a keystore?',
 				privateKey: 'What is a privateKey?'
 			},
-			aboutUs: 'AboutUs'
+			aboutUs: {
+				_title: 'AboutUs',
+				currentVersion: 'current version',
+				introduction:
+					'True is a mobile light wallet APP designed to provide ordinary users with a secure, easy-to-use, powerful digital asset wallet application.',
+				useAgreement: 'Use Agreement',
+				privacyPolicy: 'Privacy Policy',
+				versionLog: 'Version Log',
+				checkVersion: 'Detect new version'
+			}
 		},
-		language: {
-			_title: 'language settings',
-			changeToChinese: '简体中文',
-			changeToEnglish: 'English'
+		sysSetting: {
+			_title: 'System Settings',
+			language: {
+				_title: 'Language Setting',
+				multi_language: 'multi language',
+				changeToChinese: '简体中文',
+				changeToEnglish: 'English'
+			}
 		}
 	},
 	assets: {
@@ -73,11 +86,12 @@ export default {
 		walletInfo: {
 			title: 'Account Infomation',
 			walletName: 'Wallet Name',
+			enterWalletName: 'Enter your wallet name',
 			exportPrivateKey: 'Export PrivateKey',
 			exportKeystore: 'Export Keystore',
 			exportMnemonic: 'Export Mnemonic',
 			deleteWallet: 'Delete Wallet',
-			keystoreFile: 'keystore文件',
+			keystoreFile: 'keystore File',
 			qrcode: 'QR code',
 			privateKeyWarning:
 				'Safety Warning: Private keys are exposed to risks when exporting without encryption. It is strongly suggested to use mnemonic and keystore for backup.',
@@ -102,15 +116,15 @@ export default {
 		currency: {
 			transfer: 'transfer',
 			recentTradeRecord: 'recentTradeRecord',
-			receipt: 'receipt',
+			receipt: 'Receipt',
 			receiptAddr: 'receiptAddr',
 			transferCount: 'transferCount',
 			transferRemarks: 'Remarks',
 			transferFee: 'transferFee',
 			transferSpeedSlow: 'Slow',
 			transferSpeedFast: 'Fast',
-			nextStep: 'next',			
-			copyReceiptAddr: '复制收款地址'
+			nextStep: 'next',
+			copyReceiptAddr: 'Copy ReceiptAddr'
 		}
 	},
 	node: {
