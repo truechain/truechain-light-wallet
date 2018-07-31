@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { Text, View, StyleSheet, Dimensions, TouchableHighlight } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { I18n } from '../../../language/i18n';
+import Icon from '../../pages/iconSets';
 class ListFun extends Component {
 	render() {
 		return (
 			<TouchableHighlight underlayColor={'transparent'} onPress={this.props.onPress}>
 				<View style={styles.fun}>
 					<Text style={styles.fun_text}>{this.props.fun_name}</Text>
-					<Text style={styles.color_bbb}>></Text>
+					<Icon name="icon-right" size={15} color="#000" />					
 				</View>
 			</TouchableHighlight>
 		);

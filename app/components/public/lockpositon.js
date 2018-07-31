@@ -139,11 +139,7 @@ class LockPosition extends Component {
 							this.setState({ cost }, () => {
 								this.setState({
 									gasPrice:
-										Math.round(
-											this.state.cost /
-												web3.utils.fromWei(this.state.gas.toString(), 'Gwei') *
-												100
-										) / 100
+										Math.round(this.state.cost /web3.utils.fromWei(this.state.gas.toString(), 'Gwei') *100) / 100
 								});
 							});
 						}}
@@ -170,7 +166,6 @@ class LockPosition extends Component {
 				<Modal animationType={'fade'} transparent={true} isOpen={this.state.isSuccess}>
 					<View style={styles.success}>
 						<View style={styles.success_item}>
-							>
 							<Text style={styles.success_text}>报名成功</Text>
 							<Text style={styles.marginBottom}>恭喜您报名成功！</Text>
 							<RadiusBtn

@@ -28,7 +28,7 @@ class CreateWallet extends Component {
 	}
 
 	nameInput = {
-		placeholder: I18n.t('wallet.creatWalletTip'),//'请输入钱包名称',
+		placeholder: I18n.t('wallet.createWalletTip'),//'请输入钱包名称',
 		inputContainerStyle: styles.textInput,
 		errorStyle: styles.errorStyle,
 		onChangeText: (walletName) => {
@@ -136,10 +136,10 @@ class CreateWallet extends Component {
 				<Loading ref="loading" />
 				<View style={styles.warning}>
 					 <Text style={styles.color_white}>
-						·I18n.t('wallet.createWalletTipOfPwd') {/*密码用于加密私钥，强度非常重要！*/} 
+						·{I18n.t('wallet.createWalletTipOfPwd')} {/*密码用于加密私钥，强度非常重要！*/} 
 					</Text> 
 					<Text style={styles.color_white}>
-					·I18n.t('wallet.createWalletTipOfNoStore'){/* ·True钱包不会储存密码，也无法帮您找回，请务必牢记！ */}
+					·{I18n.t('wallet.createWalletTipOfNoStore')}{/* ·True钱包不会储存密码，也无法帮您找回，请务必牢记！ */}
 					</Text>
 				</View>
 				<View style={styles.padding_10}>

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Text, View, Image, StyleSheet, TouchableHighlight, Modal } from 'react-native';
 import { I18n } from '../../../language/i18n';
 import { withNavigation } from 'react-navigation';
+import Icon from '../../pages/iconSets';
 var DeviceInfo = require('react-native-device-info');
 
 export class AboutUs extends Component {
@@ -121,11 +122,7 @@ export class AboutUs extends Component {
 								</Text>
 							</View>
 							<View style={styles.rowRi}>
-								<Image
-									resizeMode={Image.resizeMode.stretch}
-									source={require('../../assets/images/common/arr2ri.png')}
-									style={styles.iconArr2R}
-								/>
+								<Icon name="icon-right" size={15} color="#000" />
 							</View>
 						</View>
 					</TouchableHighlight>
@@ -145,11 +142,7 @@ export class AboutUs extends Component {
 								</Text>
 							</View>
 							<View style={styles.rowRi}>
-								<Image
-									resizeMode={Image.resizeMode.stretch}
-									source={require('../../assets/images/common/arr2ri.png')}
-									style={styles.iconArr2R}
-								/>
+								<Icon name="icon-right" size={15} color="#000" />
 							</View>
 						</View>
 					</TouchableHighlight>
@@ -166,11 +159,7 @@ export class AboutUs extends Component {
 								</Text>
 							</View>
 							<View style={styles.rowRi}>
-								<Image
-									resizeMode={Image.resizeMode.stretch}
-									source={require('../../assets/images/common/arr2ri.png')}
-									style={styles.iconArr2R}
-								/>
+								<Icon name="icon-right" size={15} color="#000" />
 							</View>
 						</View>
 					</TouchableHighlight>
@@ -189,11 +178,7 @@ export class AboutUs extends Component {
 								</Text>
 							</View>
 							<View style={styles.rowRi}>
-								<Image
-									resizeMode={Image.resizeMode.stretch}
-									source={require('../../assets/images/common/arr2ri.png')}
-									style={styles.iconArr2R}
-								/>
+								<Icon name="icon-right" size={15} color="#000" />								
 							</View>
 						</View>
 					</TouchableHighlight>

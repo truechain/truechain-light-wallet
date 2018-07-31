@@ -11,10 +11,8 @@ class TeamMemberList extends Component {
 			<View style={styles.memberList}>
 				<View style={styles.baseInfo}>
 					{this.props.item.role === 2 ? (
-						// <Image style={styles.avatar} source={require('../../assets/images/node/duizhang_3x.png')} />
 						<Icon name="icon-1231zuchang" size={30} color="#4F8EF7" />
 					) : (
-						// <Image style={styles.avatar} source={require('../../assets/images/node/duiyuan_3x.png')} />
 						<Icon name="icon-geren" size={30} color="#4F8EF7" />
 					)}
 					<Text style={{ marginLeft: 5 }}>{this.props.item.nickname}</Text>
@@ -163,8 +161,8 @@ class TeamInfo extends Component {
 							return <TeamMemberList item={item} key={index} status={this.state.status} />;
 						})}
 					</ScrollView>
-					<View style={styles.next}>{this.state.Button}</View>
 				</View>
+				<View style={styles.next}>{this.state.Button}</View>
 			</View>
 		);
 	}
@@ -223,8 +221,7 @@ const styles = StyleSheet.create({
 	},
 	next: {
 		alignItems: 'center',
-		position: 'relative',
-		top: 100
+		marginTop: 50
 	},
 	button: {
 		width: 260,

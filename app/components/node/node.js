@@ -203,11 +203,11 @@ class Node extends Component {
 	}
 
 	// 全节点刷新时事件
-	_fullOnScroll(evt) {
+	_fullOnScroll(evt) {				
 		const event = evt['nativeEvent'];
 		const _num =
 			event['contentSize']['height'] - event['layoutMeasurement']['height'] - event['contentOffset']['y'];
-		if (event['contentSize']['height'] > event['layoutMeasurement']['height'] && _num < -50) {
+		if (event['contentSize']['height'] > event['layoutMeasurement']['height'] && _num < 30) {
 			this.setState(
 				{
 					fullPageIndex: this.state.fullPageIndex + 10
@@ -231,7 +231,7 @@ class Node extends Component {
 		const event = evt['nativeEvent'];
 		const _num =
 			event['contentSize']['height'] - event['layoutMeasurement']['height'] - event['contentOffset']['y'];
-		if (event['contentSize']['height'] > event['layoutMeasurement']['height'] && _num < -50) {
+		if (event['contentSize']['height'] > event['layoutMeasurement']['height'] && _num < 30) {
 			this.setState(
 				{
 					standPageIndex: this.state.standPageIndex + 10
@@ -267,7 +267,8 @@ class Node extends Component {
 							<View style={styles.fun}>
 								<Icon name="icon-baoming" size={40} color="#fff" />
 								
-								<Text style={styles.color_white}>{I18n.t('node.signUp')} {/* 报名参选 */}</Text> 
+								<Text style={styles.color_white}>{I18n.t('node.signUp')} </Text> 
+								{/* 报名参选 */}
 							</View>
 						</TouchableHighlight>
 						<TouchableHighlight
@@ -278,7 +279,8 @@ class Node extends Component {
 						>
 							<View style={styles.fun}>
 								<Icon name="icon-639" size={40} color="#fff" />	
-								<Text style={styles.color_white}>{I18n.t('node.vote')} {/* '投票' */} </Text>
+								<Text style={styles.color_white}>{I18n.t('node.vote')} </Text>
+								{/* '投票' */}
 							</View>
 						</TouchableHighlight>
 					</View>
@@ -291,7 +293,8 @@ class Node extends Component {
 					tabBarInactiveTextColor="#000"
 					renderTabBar={() => <DefaultTabBar />}
 				>
-					<View tabLabel={I18n.t('node.fullNodeRank')}> {/* 全节点排行 */}						
+					<View tabLabel={I18n.t('node.fullNodeRank')}> 
+					{/* 全节点排行 */}						
 						<ScrollView
 							style={styles.scrollview}
 							refreshControl={
@@ -312,7 +315,8 @@ class Node extends Component {
 						</ScrollView>
 					</View>
 
-					<View tabLabel={I18n.t('node.standNodeRank')}> {/* 标准节点排行 */}						
+					<View tabLabel={I18n.t('node.standNodeRank')}> 
+					{/* 标准节点排行 */}						
 						<ScrollView
 							style={styles.scrollview}
 							refreshControl={

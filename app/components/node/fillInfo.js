@@ -62,7 +62,7 @@ class FillInfo extends Component {
 				<View style={styles.infoBox}>
 					<Text style={styles.infoBoxTitle}>个人信息</Text>
 					<TextInput
-						style={[ styles.textInput, styles.textInputNickname ]}
+						style={styles.textInput}
 						placeholder="昵称"
 						maxLength={15}
 						selectionColor="#528BF7"
@@ -120,7 +120,6 @@ class FillInfo extends Component {
 				<Modal animationType={'fade'} transparent={true} visible={this.state.isSuccess}>
 					<View style={styles.success}>
 						<View style={styles.success_item}>
-							>
 							<Text style={styles.success_text}>申请提交成功</Text>
 							<Text style={styles.marginBottom}>申请已提交成功，请等待队长处理！</Text>
 							<RadiusBtn
@@ -169,9 +168,6 @@ const styles = StyleSheet.create({
 		borderWidth: 1 / 2,
 		borderColor: '#ccc',
 		borderRadius: 6
-	},
-	textInputNickname: {
-		height: 35
 	},
 	textInputBig: {
 		height: 50

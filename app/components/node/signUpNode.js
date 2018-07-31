@@ -3,6 +3,7 @@ import { View, Text, Image, Dimensions, StyleSheet, ScrollView, TouchableHighlig
 import { withNavigation } from 'react-navigation';
 import { getTeamRank } from '../../api/loged';
 import { I18n } from '../../../language/i18n';
+import Icon from '../../pages/iconSets';
 
 const screen = Dimensions.get('window');
 
@@ -24,7 +25,7 @@ class TeamList extends Component {
 						<Text>{this.props.index + 1}</Text>
 						<Text style={styles.marginLeft_20}>{this.props.item.nickname}</Text>
 					</View>
-					<Image style={{ height: 15 }} source={require('../../assets/images/common/arr2ri.png')} />
+					<Icon name="icon-right" size={15} color="#000" />
 				</View>
 			</TouchableHighlight>
 		);
@@ -110,7 +111,7 @@ class SignUpNode extends Component {
 				>
 					<View style={styles.personalReg_item}>
 						<Text>{I18n.t('node.personSignUp.personSignUp_title')}</Text>
-						<Image style={{ height: 15 }} source={require('../../assets/images/common/arr2ri.png')} />
+						<Icon name="icon-right" size={15} color="#000" />
 					</View>
 				</TouchableHighlight>
 
@@ -173,7 +174,7 @@ const styles = StyleSheet.create({
 		height: 60
 	},
 	createTeam: {
-		width: 80,
+		// width: 80,
 		height: 30,
 		backgroundColor: '#007AFF',
 		borderRadius: 50,
@@ -181,6 +182,7 @@ const styles = StyleSheet.create({
 		alignItems: 'center'
 	},
 	createTeam_text: {
+		padding:10,
 		color: '#fff'
 	},
 	teamList_item: {

@@ -3,6 +3,7 @@ import { View, Text, Image, FlatList, Dimensions, StyleSheet } from 'react-nativ
 import { withNavigation } from 'react-navigation';
 import { getTransactionRecord, getERC20TransactionRecord } from '../../api/index';
 import { I18n } from '../../../language/i18n';
+import Icon from '../../pages/iconSets';
 
 class Recording extends Component {
 	show(num) {
@@ -39,20 +40,14 @@ class TransactionRecord extends Component {
 				{this.props.data.item.from === store.getState().walletInfo.wallet_address ? (
 					<View style={styles.recordDetail}>
 						<View>
-							<Image
-								style={styles.record_icon}
-								source={require('../../assets/images/asset/expend_3x.png')}
-							/>
+							<Icon name="icon-zhichusel" size={50} color="#34ccbf" />
 						</View>
 						<Recording to={this.props.data.item.to} value={this.props.data.item.value} />
 					</View>
 				) : (
 					<View style={styles.recordDetail}>
 						<View>
-							<Image
-								style={styles.record_icon}
-								source={require('../../assets/images/asset/add_3x.png')}
-							/>
+							<Icon name="icon-shourusel" size={50} color="#528bf7" />
 						</View>
 						<Recording to={this.props.data.item.to} value={this.props.data.item.value} />
 					</View>
@@ -114,7 +109,7 @@ class currencyDetail extends Component {
 					<Text style={[ styles.color_white, styles.balance_text_big ]}>{this.state.banlance}</Text>
 					{/* <Text style={[ styles.color_white, styles.marginTop_20 ]}>市值：*****</Text> */}
 				</View>
-				<View>
+				<View style={{ paddingLeft: 20, paddingTop: 10 }}>
 					<Text>{I18n.t('assets.currency.recentTradeRecord')}</Text>
 				</View>
 				<View style={styles.record}>

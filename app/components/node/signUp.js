@@ -3,6 +3,7 @@ import { View, Text, Image, Dimensions, StyleSheet, TouchableHighlight } from 'r
 import { withNavigation } from 'react-navigation';
 import { I18n } from '../../../language/i18n';
 const screen = Dimensions.get('window');
+import Icon from '../../pages/iconSets';
 class SignUp extends Component {
 	constructor(props) {
 		super(props);
@@ -11,7 +12,7 @@ class SignUp extends Component {
 
 	static navigationOptions = {
 		headerTitle: I18n.t('node.signUp') // 报名参选
-	}
+	};
 
 	render() {
 		return (
@@ -25,7 +26,7 @@ class SignUp extends Component {
 					<View style={styles.standardNode_item}>
 						<View style={styles.title}>
 							<Text style={styles.font_12}>{I18n.t('node.signUp_item.fullNode')}</Text>
-							<Image style={{ height: 15 }} source={require('../../assets/images/common/arr2ri.png')} />
+							<Icon name="icon-right" size={15} color="#000" />
 						</View>
 						<Text style={styles.font_12}>{I18n.t('node.signUp_item.fullNode_info')}</Text>
 					</View>
@@ -40,7 +41,7 @@ class SignUp extends Component {
 					<View style={styles.standardNode_item}>
 						<View style={styles.title}>
 							<Text style={styles.font_12}>{I18n.t('node.signUp_item.standNode')}</Text>
-							<Image style={{ height: 15 }} source={require('../../assets/images/common/arr2ri.png')} />
+							<Icon name="icon-right" size={15} color="#000" />
 						</View>
 						<Text style={styles.font_12}>{I18n.t('node.signUp_item.standNode_info')}</Text>
 					</View>

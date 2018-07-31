@@ -183,6 +183,7 @@ const styles = StyleSheet.create({
 		justifyContent: 'center'
 	},
 	bottom_fun_item: {
+		color: '#fff',
 		height: 50,
 		lineHeight: 50,
 		textAlign: 'center',

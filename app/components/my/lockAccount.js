@@ -5,6 +5,7 @@ import { I18n } from '../../../language/i18n';
 import actions from '../../store/action/lockAccount';
 import { getTrueCoin } from '../../api/loged';
 const screen = Dimensions.get('window');
+import Icon from '../../pages/iconSets';
 class LockAccount extends React.Component {
 	constructor(props) {
 		super(props);
@@ -22,7 +23,7 @@ class LockAccount extends React.Component {
 			})
 			.then((res) => {
 				this.setState({
-					mobile: res.mobile.replace(res.mobile.substr(3, 4), '****'),
+					mobile: res.mobile.substring(0, 3) + '****' + res.mobile.substring(7, 11),
 					lock_num: res.true_num
 				});
 				this.props.lockAccount({
@@ -62,11 +63,7 @@ class LockAccount extends React.Component {
 							</TouchableOpacity>
 							<Text style={{ marginLeft: 15 }}>{this.state.mobile}</Text>
 						</View>
-						<Image
-							style={styles.iconArr2R}
-							resizeMode={Image.resizeMode.stretch}
-							source={require('../../assets/images/common/arr2ri.png')}
-						/>
+						<Icon name="icon-right" size={15} color="#000" />									
 					</View>
 				</TouchableOpacity>
 				<View style={styles.lockInfo}>
@@ -122,10 +119,6 @@ const styles = StyleSheet.create({
 	account_baseInfo: {
 		flexDirection: 'row',
 		alignItems: 'center'
-	},
-	iconArr2R: {
-		width: 8,
-		height: 14
 	},
 	lockInfo: {
 		height: 150,

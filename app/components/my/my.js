@@ -90,11 +90,7 @@ class My extends Component {
 								<View style={styles.myColsConPartRowRi}>
 									<Text>{I18n.t('my.home.lockAccount._title')}</Text>
 									<View style={styles.myColsConPartRowRi2R}>
-										<Image
-											style={styles.iconArr2R}
-											resizeMode={Image.resizeMode.stretch}
-											source={require('../../assets/images/common/arr2ri.png')}
-										/>
+										<Icon name="icon-right" size={15} color="#000" />									
 									</View>
 								</View>
 							</View>
@@ -114,11 +110,7 @@ class My extends Component {
 								<View style={[ styles.myColsConPartRowRi, styles.noSplitLine ]}>
 									<Text>{I18n.t('my.home.systemSetting')}</Text>
 									<View style={styles.myColsConPartRowRi2R}>
-										<Image
-											style={styles.iconArr2R}
-											resizeMode={Image.resizeMode.stretch}
-											source={require('../../assets/images/common/arr2ri.png')}
-										/>
+										<Icon name="icon-right" size={15} color="#000" />										
 									</View>
 								</View>
 							</View>
@@ -138,11 +130,7 @@ class My extends Component {
 								<View style={styles.myColsConPartRowRi}>
 									<Text>{I18n.t('my.home.helpCenter._title')}</Text>
 									<View style={styles.myColsConPartRowRi2R}>
-										<Image
-											style={styles.iconArr2R}
-											resizeMode={Image.resizeMode.stretch}
-											source={require('../../assets/images/common/arr2ri.png')}
-										/>
+										<Icon name="icon-right" size={15} color="#000" />
 									</View>
 								</View>
 							</View>
@@ -159,11 +147,7 @@ class My extends Component {
 								<View style={[ styles.myColsConPartRowRi, styles.noSplitLine ]}>
 									<Text>{I18n.t('my.home.aboutUs._title')}</Text>
 									<View style={styles.myColsConPartRowRi2R}>
-										<Image
-											style={styles.iconArr2R}
-											resizeMode={Image.resizeMode.stretch}
-											source={require('../../assets/images/common/arr2ri.png')}
-										/>
+										<Icon name="icon-right" size={15} color="#000" />										
 									</View>
 								</View>
 							</View>
