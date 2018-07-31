@@ -28,7 +28,7 @@ import HelperCenter from '../components/my/helpercenter';
 import ContactUs from '../components/my/contactus';
 import Login from '../components/my/login';
 import SignUp from '../components/node/signUp'; // 节点 -> 报名参选
-import SignUpNode from '../components/node/signUpNode';
+import SignUpNode from '../components/node/signUpNode';// 节点 -> 报名参选 -> (全/标准)节点报名
 import SignUpInput from '../components/public/signUpInput';
 import Lockpositon from '../components/public/lockpositon';
 import CreateTeam from '../components/node/createTeam';

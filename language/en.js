@@ -161,7 +161,9 @@ export default {
 			qu_2:
 				'Sorry, you don’t have 50000 TRUE in lock account and can’t register for election as an individual at this time. ',
 			qu_3: 'At least 1 TRUE is required to create a team'
-		}
+		},
+		myTeam:'My Team',
+		futureMember:'Future member management'
 	},
 	public: {
 		transferOutPrompt: 'No rollout is available during the voting period of the priority node.',
