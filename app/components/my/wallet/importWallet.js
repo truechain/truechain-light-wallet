@@ -233,13 +233,13 @@ class ImportWallet extends Component {
 		if (option.content) {
 			Alert.alert('提示', option.msg);
 		} else if (!option.pwd) {
-			Alert.alert(  I18n.t('tips'), I18n.t('wallet.enterPwd') ); // '提示', '请输入密码'
+			Alert.alert(  null, I18n.t('wallet.enterPwd') ); // '提示', '请输入密码'
 		} else if (option.pwd.length < 8) {
-			Alert.alert(  I18n.t('tips'), I18n.t('wallet.pwdSuggest') );  // '提示', '建议密码不少于8位字符'
+			Alert.alert(  null, I18n.t('wallet.pwdSuggest') );  // '提示', '建议密码不少于8位字符'
 		} else if (option.pwd !== option.confirmPwd) {
-			Alert.alert( I18n.t('tips'), I18n.t('wallet.pwdIsWrong') ); // '提示', '两次密码不一致请重新输入'
+			Alert.alert( null, I18n.t('wallet.pwdIsWrong') ); // '提示', '两次密码不一致请重新输入'
 		} else if (!option.isAgree) {
-			Alert.alert( I18n.t('tips'), I18n.t('wallet.agreeTerm') ); // '提示', '请同意服务及隐私条款'
+			Alert.alert( null, I18n.t('wallet.agreeTerm') ); // '提示', '请同意服务及隐私条款'
 		} else {
 			cb({
 				mnemonic: this.state.mnemonic,
@@ -300,7 +300,7 @@ class ImportWallet extends Component {
 					} catch (err) {
 						this.refs.loading.close();
 						setTimeout(() => {
-							Alert.alert( I18n.t('tips'), I18n.t('wallet.privateKeyIsWrong') ); // '提示', '私钥无效,请重新输入！'
+							Alert.alert( null, I18n.t('wallet.privateKeyIsWrong') ); // '提示', '私钥无效,请重新输入！'
 						}, 100);
 					}
 				}, 500);
@@ -310,11 +310,11 @@ class ImportWallet extends Component {
 
 	_keystoreImport() {
 		if (this.state.keystoreFileFlag) {
-			Alert.alert( I18n.t('tips'), I18n.t('wallet.keystoreIsNull') ); // '提示', '请输入keystore信息'
+			Alert.alert( null, I18n.t('wallet.keystoreIsNull') ); // '提示', '请输入keystore信息'
 		} else if (!this.state.keystorePwd) {
-			Alert.alert(  I18n.t('tips'), I18n.t('wallet.enterPwd') ); // '提示', '请输入密码'
+			Alert.alert(  null, I18n.t('wallet.enterPwd') ); // '提示', '请输入密码'
 		} else if (!this.state.keystoreisAgree) {
-			Alert.alert( I18n.t('tips'), I18n.t('wallet.agreeTerm') ); // '提示', '请同意服务及隐私条款'
+			Alert.alert( null, I18n.t('wallet.agreeTerm') ); // '提示', '请同意服务及隐私条款'
 		} else {
 			this.refs.loading.show();
 			setTimeout(() => {
@@ -342,7 +342,7 @@ class ImportWallet extends Component {
 				} catch (e) {
 					this.refs.loading.close();
 					setTimeout(() => {
-						Alert.alert( I18n.t('tips'), I18n.t('wallet.wrongByKeystoreOrPwd') ); 
+						Alert.alert( null, I18n.t('wallet.wrongByKeystoreOrPwd') ); 
 						// '提示', '导入钱包失败, 请检查keystore或者密码是否正确');
 					}, 100);
 				}

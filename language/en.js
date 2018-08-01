@@ -13,14 +13,14 @@ export default {
 		mnemonicPlaceholder: 'Mnemonic words, separated by spaces',
 		officialWallet: 'Official wallet',
 		privateKey: 'Private key',
-		path: 'path',
-		enterPwd: 'enter your password',
-		confirmPwd: 'confirm your password',
-		creatWallet: 'creat wallet',
-		createWalletTip: 'enter your wallet name',
-		pwdSuggest: 'recommended password be no less than 8 characters',
-		pwdIsWrong: 'the passwords should be consistent',
-		agreeTerm: 'agree to the terms of service',
+		path: 'Path',
+		enterPwd: 'Enter your password',
+		confirmPwd: 'Confirm your password',
+		creatWallet: 'Creat wallet',
+		createWalletTip: 'Enter your wallet name',
+		pwdSuggest: 'Recommended password be no less than 8 characters',
+		pwdIsWrong: 'The passwords should be consistent',
+		agreeTerm: 'Agree to the terms of service',
 		createWalletTipOfPwd: 'Strong password is needed to encrypt private key！',
 		createWalletTipOfNoStore:
 			'Do remember your password! True wallet will not store and cannot find back your password！',
@@ -28,14 +28,13 @@ export default {
 		term: 'Service and privacy terms',
 		mnemonicTip: 'No blank is allowed at the beginning or end of the mnemonic tip, please enter again',
 		mnemonicIsWrong: 'Wrong mnemonic tip, please enter again',
-		mnemonicIsNull: 'mnemonic words cannot be empty',
+		mnemonicIsNull: 'Mnemonic words cannot be empty',
 		privateKeyIsNull: 'Private key cannot be empty',
 		privateKeyIsWrong: 'Wrong private key, please enter again',
 		keystoreIsNull: 'Please enter keystore information ',
-		wrongByKeystoreOrPwd: 'failed to import wallet, please check if keystore or password  is correct',
-		copyKeystoreTip: 'please paste the content of Ethereum (ETH) wallet keystore file to input box'
+		wrongByKeystoreOrPwd: 'Failed to import wallet, please check if keystore or password  is correct',
+		copyKeystoreTip: 'Please paste the content of Ethereum (ETH) wallet keystore file to input box'
 	},
-	tips: 'tips',
 	tab: {
 		assets: 'Assets',
 		node: 'Node',
@@ -43,10 +42,10 @@ export default {
 	},
 	my: {
 		home: {
-			walletManagement: 'WalletManagement',
-			transactionRecord: 'TransactionRecord',
+			walletManagement: 'Wallet Management',
+			transactionRecord: 'Transaction Record',
 			lockAccount: {
-				_title: 'LockAccount',
+				_title: 'Lock Account',
 				_address: 'Lock address',
 				minerFee: 'Miner fee',
 				_title1: 'Account management',
@@ -56,16 +55,16 @@ export default {
 				accountNumber: 'Account Number',
 				logOut: 'Exit account'
 			},
-			systemSetting: 'SystemSetting',
+			systemSetting: 'System Setting',
 			helpCenter: {
-				_title: 'HelpCenter',
+				_title: 'Help Center',
 				mnemonic: 'What is a mnemonic?',
 				keystore: 'What is a keystore?',
 				privateKey: 'What is a privateKey?'
 			},
 			aboutUs: {
-				_title: 'AboutUs',
-				currentVersion: 'current version',
+				_title: 'About Us',
+				currentVersion: 'Current version',
 				introduction:
 					'True is a mobile light wallet APP designed to provide ordinary users with a secure, easy-to-use, powerful digital asset wallet application.',
 				useAgreement: 'Use Agreement',
@@ -78,14 +77,14 @@ export default {
 			_title: 'System Settings',
 			language: {
 				_title: 'Language Setting',
-				multi_language: 'multi language',
+				multi_language: 'Multi language',
 				changeToChinese: '简体中文',
 				changeToEnglish: 'English'
 			}
 		}
 	},
 	assets: {
-		totalAssets: 'totalAssets',
+		totalAssets: 'TotalAssets',
 		walletInfo: {
 			title: 'Account Infomation',
 			walletName: 'Wallet Name',
@@ -94,7 +93,7 @@ export default {
 			exportKeystore: 'Export Keystore',
 			exportMnemonic: 'Export Mnemonic',
 			deleteWallet: 'Delete Wallet',
-			keystoreFile: 'keystore File',
+			keystoreFile: 'Keystore File',
 			qrcode: 'QR code',
 			privateKeyWarning:
 				'Safety Warning: Private keys are exposed to risks when exporting without encryption. It is strongly suggested to use mnemonic and keystore for backup.',
@@ -117,16 +116,16 @@ export default {
 				'Please make sure to use the QR code when there are no people or camera around you. Once the QR code is acquired by other people, irreversible loss may happen to your assets. '
 		},
 		currency: {
-			transfer: 'transfer',
-			recentTradeRecord: 'recentTradeRecord',
+			transfer: 'Transfer',
+			recentTradeRecord: 'RecentTradeRecord',
 			receipt: 'Receipt',
-			receiptAddr: 'receiptAddr',
-			transferCount: 'transferCount',
+			receiptAddr: 'ReceiptAddr',
+			transferCount: 'TransferCount',
 			transferRemarks: 'Remarks',
-			transferFee: 'transferFee',
+			transferFee: 'TransferFee',
 			transferSpeedSlow: 'Slow',
 			transferSpeedFast: 'Fast',
-			nextStep: 'next',
+			nextStep: 'Next',
 			copyReceiptAddr: 'Copy ReceiptAddr'
 		}
 	},
@@ -135,13 +134,13 @@ export default {
 		vote: 'Vote',
 		voteInfo: {
 			_baseInfo: 'Basic Information',
-			_available: 'available votes: ',
-			enterNumber_votes: 'input vote count',
+			_available: 'Available votes: ',
+			enterNumber_votes: 'Input vote count',
 			confirmVote: 'Confirm Vote',
-			voteFail: 'vote fail,please try again later',
-			voteSuccess: 'packaging vote transactions complete',
-			voteApplyed: 'publish vote transactions',
-			voteApplyedSuccess: 'packaging vote transactions success'
+			voteFail: 'Vote fail,please try again later',
+			voteSuccess: 'Packaging vote transactions complete',
+			voteApplyed: 'Publish vote transactions',
+			voteApplyedSuccess: 'Packaging vote transactions success'
 		},
 		fullNode: {
 			fullNode_title: 'Full node'
@@ -175,8 +174,8 @@ export default {
 			declaration: 'Campaign declaration',
 			contactInformation: 'Contact Information',
 			reason: 'Reason',
-			_success: '申请提交成功_en',
-			_success_info: '申请已提交成功，请等待队长处理！_en'
+			_success: 'Successful application submission',
+			_success_info: 'The application has been submitted successfully, please wait for the captain to handle!'
 		},
 		InsufficientQualification: {
 			qu_1:
@@ -186,28 +185,28 @@ export default {
 			qu_3: 'At least 1 TRUE is required to create a team'
 		},
 		application: {
-			_success: '申请已通过，请进行下一步操作_en',
-			_fail: '申请失败，队长拒绝了您的申请_en'
+			_success: 'The application has been approved. Please proceed to the next step.',
+			_fail: 'The application failed and the captain rejected your application.'
 		},
 		myTeam: 'My Team',
 		personnelManagement: 'Personnel Management',
 		futureMember: 'Future member management'
 	},
 	public: {
-		second: 'second',
+		second: 'Second',
 		next: 'Next',
 		back: 'Back',
 		enterPassword: 'Enter password',
 		transferOutPrompt: 'No rollout is available during the voting period of the priority node.',
-		lockedWarehouse: 'lock warehouse',
-		lockedWarehouseAddr: 'lock warehouse address',
+		lockedWarehouse: 'Lock warehouse',
+		lockedWarehouseAddr: 'Lock warehouse address',
 		transferIn: 'Transfer In',
 		transferOut: 'Transfer Out',
 		verifyPwd: 'verify your password',
 		inputPwd: 'Enter your password',
 		PwdIsNull: 'Please enter your password',
 		define: 'OK',
-		cancel: 'cancel',
+		cancel: 'Cancel',
 		copySuccess: 'Successful copy',
 		copyFailed: 'Replication failed',
 		wrongPwd: 'Password error, please retype',
@@ -216,7 +215,7 @@ export default {
 		tickets: 'Votes',
 		signSuccess: 'Successful registration',
 		signSuccess_info: 'Congratulations on your successful registration',
-		joinTeam: 'joinTeam',
+		joinTeam: 'JoinTeam',
 		enterMobile: 'Please enter phone number',
 		enterCaptcha: 'Enter image verification code',
 		enterMobileCode: 'Enter your phone verification code',
@@ -225,14 +224,14 @@ export default {
 		hasBind: 'The phone number is bound to the wallet address',
 		verificationCodeError: 'Verification code error',
 		enter_the_legal_mobile_number: 'Please enter a legal mobile number',
-		walletName: 'wallet name',
+		walletName: 'Wallet name',
 		electoralManifesto: 'electoral manifesto',
-		nickName: 'nick name',
+		nickName: 'Nick name',
 		personaNickName: 'Personal Nickname',
-		personalSign: 'personal info',
+		personalSign: 'Personal info',
 		scan: 'Scan',
-		refuse: 'refuse',
-		agree: 'agree',
+		refuse: 'Refuse',
+		agree: 'Agree',
 		mnemonic:
 			'Mnemonic is another form of plain text private keys. It was first come up with in BIP 39 proposal. Its purpose is to help the users to memorize the complicated private keys (64 digits of hash value). Mnemonic usually consists of 12, 15, 18, 21 words. These words are from a fixed pool of vocabulary. The order of the words is generated according to certain algorithm. So there’s no need for the users to worry that an address of wallet would be generated by randomly entering 12 words. Although mnemonic and keystore can both be used as plain text form, compared to keystore, mnemonic is unencrypted private keys with no guarantee of security. Anyone who accidentally acquires your mnemonic can take away your asset effortlessly. So when backing up the mnemonic, the users should keep the following three in mind: 1. It’s the best to use physical backup device, such as writing down on the paper. Try not to use screen shots or take photos and put them in the online device in order to prevent the data from being acquired by the hackers. 2. Verify mnemonic multiple times to ensure the correctness of the backup. The misrecord of one or two words, will bring great difficulty to restoring mnemonic. 3. Keep the backup of mnemonic properly to prevent it from being lost or stolen.',
 		mnemonic_ps:

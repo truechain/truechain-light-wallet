@@ -32,7 +32,6 @@ export default {
 		wrongByKeystoreOrPwd: '导入钱包失败, 请检查keystore或者密码是否正确',
 		copyKeystoreTip: '直接复制粘贴以太坊官方钱包keystore文件内容至输入框。'
 	},
-	tips: '提示',
 	tab: {
 		assets: '资产',
 		node: '节点',
