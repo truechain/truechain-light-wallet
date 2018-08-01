@@ -7,13 +7,18 @@ import {
 	Dimensions,
 	ScrollView,
 	RefreshControl,
-	TouchableHighlight
+	TouchableHighlight,
+	Modal,
+	Linking
 } from 'react-native';
 import { connect } from 'react-redux';
 import actions from '../../store/action/walletInfo';
 import getBalance from '../../utils/addTokens';
 import iterface from '../../utils/iterface';
 import { I18n } from '../../../language/i18n';
+import { checkVersion } from '../../api/index';
+var DeviceInfo = require('react-native-device-info');
+
 class CurrencyList extends Component {
 	currencyDetail(title, banlance) {
 		this.props.navigate('CurrencyDetail', {
@@ -59,7 +64,10 @@ class Assets extends Component {
 			eth_banlance: 0,
 			true_banlance: 0,
 			ttr_banlance: 0,
-			lock_num: 0
+			lock_num: 0,
+			newVersion: '--',
+			modalVisible: false,
+			currentVersion: null
 		};
 	}
 
@@ -126,6 +134,25 @@ class Assets extends Component {
 				console.log(x);
 			});
 		this.updataWalletName();
+
+		this.setState({
+			currentVersion: DeviceInfo.getVersion().replace(/\./g, '')
+		});
+
+		checkVersion()
+			.then((result) => {
+				return result.data.data;
+			})
+			.then((res) => {
+				this.setState({
+					newVersion: res.version,
+					modalVisible: true
+				});
+				let ver_new = res.version.replace(/\./g, '');
+				if (ver_new > this.state.currentVersion) {
+					this.setState({ modalVisible: true });
+				}
+			});
 	}
 
 	updataWalletName() {
@@ -232,6 +259,47 @@ class Assets extends Component {
 						return <CurrencyList item={item} index={index} key={index} navigate={this.navigate} />;
 					})}
 				</ScrollView>
+
+				<Modal
+					animationType={'fade'}
+					transparent={true}
+					visible={this.state.modalVisible}
+					onRequestClose={() => {
+						this.setState({ modalVisible: false });
+					}}
+				>
+					<View style={styles.modalCon}>
+						<View style={styles.modal}>
+							<Text style={styles.modalTitle}>发现True {this.state.newVersion}版本</Text>
+							<View style={styles.modalBottomBtn}>
+								<View>
+									<Text
+										style={styles.modalBottomBtnNoText}
+										onPress={() => {
+											this.setState({
+												modalVisible: false
+											});
+										}}
+									>
+										暂不升级
+									</Text>
+								</View>
+								<View>
+									<Text
+										style={styles.modalBottomBtnYesText}
+										onPress={() => {
+											Linking.openURL('http://wapxk.com/wapindex-1000-6635.html').catch((err) =>
+												console.error('An error occurred', err)
+											);
+										}}
+									>
+										立即升级
+									</Text>
+								</View>
+							</View>
+						</View>
+					</View>
+				</Modal>
 			</View>
 		);
 	}
@@ -342,5 +410,49 @@ const styles = StyleSheet.create({
 	},
 	currency: {
 		color: '#ccc'
+	},
+	// version
+	modalCon: {
+		backgroundColor: 'rgba(0,0,0,0.5)',
+		flex: 1,
+		justifyContent: 'center',
+		alignItems: 'center'
+	},
+	modal: {
+		backgroundColor: 'white',
+		width: 260,
+		borderRadius: 10
+	},
+	modalTitle: {
+		fontSize: 16,
+		color: '#222',
+		lineHeight: 50,
+		height: 50,
+		textAlign: 'center',
+		paddingLeft: 15,
+		paddingRight: 15
+	},
+	versionText: {
+		paddingLeft: 15,
+		paddingRight: 15,
+		paddingBottom: 20
+	},
+	modalBottomBtn: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+		borderTopWidth: 1,
+		borderColor: '#eee',
+		alignItems: 'center',
+		height: 50
+	},
+	modalBottomBtnNoText: {
+		color: 'rgb(0,118,255)',
+		fontSize: 16,
+		textAlign: 'center'
+	},
+	modalBottomBtnYesText: {
+		color: 'rgb(254,56,36)',
+		fontSize: 16,
+		textAlign: 'center'
 	}
 });

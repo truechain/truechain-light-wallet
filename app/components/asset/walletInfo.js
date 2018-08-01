@@ -6,6 +6,7 @@ import Modal from 'react-native-modalbox';
 import Loading from 'react-native-whc-loading';
 import Toast from 'react-native-easy-toast';
 import { I18n } from '../../../language/i18n';
+import Icon from '../../pages/iconSets';
 
 const screen = Dimensions.get('window');
 
@@ -15,7 +16,7 @@ class ListFun extends Component {
 			<TouchableHighlight underlayColor={'transparent'} onPress={this.props.onPress}>
 				<View style={styles.fun}>
 					<Text style={styles.fun_text}>{this.props.fun_name}</Text>
-					<Image style={styles.arr} source={require('../../assets/images/common/arr2ri.png')} />
+					<Icon name="icon-right" size={15} color="#000" />
 				</View>
 			</TouchableHighlight>
 		);
@@ -101,7 +102,7 @@ class WalletInfo extends Component {
 			this.refs.codeInput.close();
 			this.navigate('ExportMnemonic');
 		} catch (e) {
-			alert( I18n.t('wallet.wrongPwd') ); //'密码错误,请重新输入');
+			alert(I18n.t('wallet.wrongPwd')); //'密码错误,请重新输入');
 			this.setState({
 				walletPassword: ' '
 			});
@@ -333,10 +334,10 @@ class WalletInfo extends Component {
 					</View>
 					<Input {...this.pwd} />
 					<View style={styles.confirm}>
-						<Button 
-							title={ I18n.t('public.define') } //"确定" 
-							buttonStyle={styles.confirmButtonStyle} 
-							onPress={this.state.onPress} 
+						<Button
+							title={I18n.t('public.define')} //"确定"
+							buttonStyle={styles.confirmButtonStyle}
+							onPress={this.state.onPress}
 						/>
 					</View>
 				</Modal>
@@ -361,7 +362,7 @@ class WalletInfo extends Component {
 									this.refs.changeWalletName.close();
 								}}
 							>
-								{ I18n.t('public.cancel') }
+								{I18n.t('public.cancel')}
 								{/* 取消 */}
 							</Text>
 						</TouchableHighlight>
@@ -386,7 +387,13 @@ class WalletInfo extends Component {
 					</View>
 				</Modal>
 
-				<Modal style={styles.privateKey} position={'center'} ref={'privateKey'} swipeArea={20}>
+				<Modal
+					style={styles.privateKey}
+					position={'center'}
+					coverScreen={true}
+					ref={'privateKey'}
+					swipeArea={20}
+				>
 					<View style={styles.privateKeyTitle}>
 						<Text>{I18n.t('assets.walletInfo.exportPrivateKey')}</Text>
 					</View>

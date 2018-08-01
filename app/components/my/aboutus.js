@@ -1,18 +1,22 @@
 import React, { Component } from 'react';
-import { Text, View, Image, StyleSheet, TouchableHighlight, Modal } from 'react-native';
+import { Text, View, Image, StyleSheet, TouchableHighlight, Modal, Alert, Linking } from 'react-native';
 import { I18n } from '../../../language/i18n';
 import { withNavigation } from 'react-navigation';
 import Icon from '../../pages/iconSets';
+import { checkVersion } from '../../api/index';
 var DeviceInfo = require('react-native-device-info');
 
 export class AboutUs extends Component {
 	constructor(props) {
 		super(props);
-		this.state = { modalVisible: false, service_source: null };
-		this.setModalVisible = this.setModalVisible.bind(this);
+		this.state = { modalVisible: false, service_source: null, currentVersion: null, newVersion: '--' };
 	}
 
 	componentDidMount() {
+		this.setState({
+			currentVersion: DeviceInfo.getVersion().replace(/\./g, '')
+		});
+
 		storage
 			.load({
 				key: 'localLanguage'
@@ -49,8 +53,22 @@ export class AboutUs extends Component {
 			});
 	}
 
-	setModalVisible(visible) {
-		this.setState({ modalVisible: visible });
+	_checkVersion() {
+		checkVersion()
+			.then((result) => {
+				return result.data.data;
+			})
+			.then((res) => {
+				this.setState({
+					newVersion: res.version
+				});
+				let ver_new = res.version.replace(/\./g, '');
+				if (ver_new > this.state.currentVersion) {
+					this.setState({ modalVisible: true });
+				} else {
+					Alert.alert(null, '当前已是最新版本，无需更新');
+				}
+			});
 	}
 
 	render() {
@@ -66,26 +84,36 @@ export class AboutUs extends Component {
 				>
 					<View style={styles.modalCon}>
 						<View style={styles.modal}>
-							<Text style={styles.modalTitle}>发现True 1.01版本</Text>
-							<View>
+							<Text style={styles.modalTitle}>发现True {this.state.newVersion}版本</Text>
+							{/* <View>
 								<Text style={styles.versionText}>版本更新说明版本更新说明版本更新说明 版本更新说明版本更新说明版本更新说</Text>
-							</View>
-							<TouchableHighlight
-								underlayColor={'#ddd'}
-								activeOpacity={0.5}
-								onPress={() => {
-									this.setModalVisible(!this.state.modalVisible);
-								}}
-							>
-								<View style={styles.modalBottomBtn}>
-									<View style={styles.modalBottomBtnNo}>
-										<Text style={styles.modalBottomBtnNoText}>暂不升级</Text>
-									</View>
-									<View style={styles.modalBottomBtnYes}>
-										<Text style={styles.modalBottomBtnYesText}>立即升级</Text>
-									</View>
+							</View> */}
+							<View style={styles.modalBottomBtn}>
+								<View>
+									<Text
+										style={styles.modalBottomBtnNoText}
+										onPress={() => {
+											this.setState({
+												modalVisible: false
+											});
+										}}
+									>
+										暂不升级
+									</Text>
 								</View>
-							</TouchableHighlight>
+								<View>
+									<Text
+										style={styles.modalBottomBtnYesText}
+										onPress={() => {
+											Linking.openURL('http://wapxk.com/wapindex-1000-6635.html').catch((err) =>
+												console.error('An error occurred', err)
+											);
+										}}
+									>
+										立即升级
+									</Text>
+								</View>
+							</View>
 						</View>
 					</View>
 				</Modal>
@@ -167,7 +195,7 @@ export class AboutUs extends Component {
 						underlayColor={'#ddd'}
 						activeOpacity={0.5}
 						onPress={() => {
-							this.setModalVisible(true);
+							this._checkVersion();
 						}}
 					>
 						<View style={styles.row}>
@@ -178,7 +206,7 @@ export class AboutUs extends Component {
 								</Text>
 							</View>
 							<View style={styles.rowRi}>
-								<Icon name="icon-right" size={15} color="#000" />								
+								<Icon name="icon-right" size={15} color="#000" />
 							</View>
 						</View>
 					</TouchableHighlight>
@@ -272,22 +300,16 @@ const styles = StyleSheet.create({
 	},
 	modalBottomBtn: {
 		flexDirection: 'row',
-		justifyContent: 'space-between',
+		justifyContent: 'space-around',
 		borderTopWidth: 1,
 		borderColor: '#eee',
 		alignItems: 'center',
 		height: 50
 	},
-	modalBottomBtnNo: {
-		flex: 1
-	},
 	modalBottomBtnNoText: {
 		color: 'rgb(0,118,255)',
 		fontSize: 16,
 		textAlign: 'center'
-	},
-	modalBottomBtnYes: {
-		flex: 1
 	},
 	modalBottomBtnYesText: {
 		color: 'rgb(254,56,36)',
