@@ -169,7 +169,8 @@ export default {
 		},
 		myTeam: '我的战队',
 		futureMember: '待加入人员管理',
-		publishDealFail:'发布交易失败,稍候重试'
+		publishDealFail:'发布交易失败,稍候重试',
+		memberManagement:'人员管理'
 	},
 	public: {
 		next: '下一步',

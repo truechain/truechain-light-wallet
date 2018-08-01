@@ -3,6 +3,7 @@ import { View, Text, Image, StyleSheet, Animated, Dimensions, TouchableHighlight
 import { getMemberList, isJoinTeam } from '../../api/loged';
 import { withNavigation } from 'react-navigation';
 import { CheckBox } from 'react-native-elements';
+import { I18n } from '../../../language/i18n';
 const screen = Dimensions.get('window');
 
 const ICONS = {
@@ -65,7 +66,8 @@ class Panel extends Component {
 
 class PersonnelManagement extends Component {
 	static navigationOptions = ({ navigation }) => ({
-		headerTitle: '人员管理'
+		headerTitle: I18n.t('node.memberManagement') 
+		// '人员管理'
 	});
 
 	constructor(props) {

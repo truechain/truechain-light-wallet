@@ -182,7 +182,8 @@ export default {
 		},
 		myTeam: 'My Team',
 		futureMember: 'Future member management',
-		publishDealFail:'publish deal failed,please try again later'
+		publishDealFail:'publish deal failed,please try again later',
+		memberManagement:'Member Management'
 	},
 	public: {
 		next: 'Next',
