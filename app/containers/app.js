@@ -287,7 +287,10 @@ const App = createStackNavigator(
 			}
 		},
 		Login: {
-			screen: Login
+			screen: Login,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('my.home.lockAccount.loginIn')}</Text>
+			}
 		},
 		SignUp: {
 			screen: SignUp,
@@ -298,12 +301,15 @@ const App = createStackNavigator(
 		SignUpNode,
 		SignUpInput,
 		Lockpositon: {
-			screen: Lockpositon
+			screen: Lockpositon,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('public.lockedWarehouse')}</Text>
+			}
 		},
 		CreateTeam: {
 			screen: CreateTeam,
 			navigationOptions: {
-				headerTitle: '创建组队'
+				headerTitle: () => <Text>{I18n.t('node.teamInfo.createTeam')}</Text>
 			}
 		},
 		TeamInfo: {
@@ -329,7 +335,12 @@ const App = createStackNavigator(
 		},
 		SignUpSuccess,
 		MyTeam,
-		PersonnelManagement,
+		PersonnelManagement:{
+			screen: PersonnelManagement,
+			navigationOptions: {
+				headerTitle: () => <Text> {I18n.t('node.personnelManagement')}</Text>
+			}
+		},
 		SetGesturePassword,
 		VoteNode: {
 			screen: VoteNode,

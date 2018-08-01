@@ -65,11 +65,6 @@ class Panel extends Component {
 }
 
 class PersonnelManagement extends Component {
-	static navigationOptions = ({ navigation }) => ({
-		headerTitle: I18n.t('node.memberManagement') 
-		// '人员管理'
-	});
-
 	constructor(props) {
 		super(props);
 		this.state = {
@@ -139,14 +134,14 @@ class PersonnelManagement extends Component {
 								title={item.nickname}
 								key={index}
 							>
+								{/* <Text>申请理由: {item.reason}</Text> */}
 								<Text>
-									{/* 申请理由 */}
-									{ I18n.t('node.applyReason')  }: {item.reason}
+									{I18n.t('node.fillInfo.reason')}：{item.reason}
 								</Text>
 								<Text>
-									{/* 联系方式 */}
-									{ I18n.t('public.linkInfo') }: {item.mobile}
+									{I18n.t('node.fillInfo.contactInformation')}: {item.mobile}
 								</Text>
+								{/* <Text>联系方式: {item.mobile}</Text> */}
 							</Panel>
 						);
 					})}
@@ -159,8 +154,8 @@ class PersonnelManagement extends Component {
 								status: 3
 							})}
 					>
+						{I18n.t('public.refuse')}
 						{/* 拒绝 */}
-						{ I18n.t('public.disagree') }
 					</Text>
 					<Text
 						style={[ styles.bottom_fun_item, styles.bottom_fun_item_agree ]}
@@ -169,8 +164,8 @@ class PersonnelManagement extends Component {
 								status: 2
 							})}
 					>
+						{I18n.t('public.agree')}
 						{/* 同意 */}
-						{ I18n.t('public.agree') }
 					</Text>
 				</View>
 			</View>

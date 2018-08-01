@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TextInput, Text, Slider, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
+import { View, TextInput, Text, Slider, StyleSheet, Dimensions, TouchableOpacity, Alert } from 'react-native';
 import RadiusBtn from './radiusbtn';
 import sendTokens from '../../utils/sendTokens';
 import iterface from '../../utils/iterface';
@@ -34,11 +34,6 @@ class LockPosition extends Component {
 			isSuccess: false
 		};
 	}
-
-	static navigationOptions = ({ navigation }) => ({
-		headerTitle: I18n.t('public.lockedWarehouse')
-		//'锁仓'
-	});
 
 	setModalVisible(visible) {
 		this.setState({ modalVisible: visible });
@@ -97,8 +92,7 @@ class LockPosition extends Component {
 						this.setState({
 							pwd: null
 						});
-						alert(I18n.t('node.publishDealFail'))
-						// alert('发布交易失败，请稍后重试！');
+						Alert.alert(null, I18n.t('public.transactionFailed'));
 					}, 100);
 				} else {
 					this.refs.loading.close();
@@ -131,24 +125,24 @@ class LockPosition extends Component {
 		return (
 			<View style={styles.inputPage}>
 				<View style={styles.infoBox}>
-					<Text style={styles.infoBoxTitle}>
-						{/* 锁仓地址 */}
-						{ I18n.t('public.lockedWarehouseAddr') }
-					</Text>
+					<Text style={styles.infoBoxTitle}>{I18n.t('my.home.lockAccount._address')}</Text>
+					{/* 锁仓地址 */}
 					<View style={styles.splitLine} />
 					<Text>{this.state.lock_num} true</Text>
 					<View style={styles.splitLine} />
-					<Text style={styles.minerCosts_text}>
-						{/* 矿工费用 */}
-						{ I18n.t('currency.transferFee') }
-					</Text>
+					<Text style={styles.minerCosts_text}>{I18n.t('my.home.lockAccount.minerFee')}</Text>
+					{/* 矿工费用 */}
 					<Slider
 						value={this.state.cost}
 						onValueChange={(cost) => {
 							this.setState({ cost }, () => {
 								this.setState({
 									gasPrice:
-										Math.round(this.state.cost /web3.utils.fromWei(this.state.gas.toString(), 'Gwei') *100) / 100
+										Math.round(
+											this.state.cost /
+												web3.utils.fromWei(this.state.gas.toString(), 'Gwei') *
+												100
+										) / 100
 								});
 							});
 						}}
@@ -159,15 +153,9 @@ class LockPosition extends Component {
 						maximumValue={0.00599999}
 					/>
 					<View style={styles.gasPrice}>
-						<Text>
-							{/* 慢 */}
-							{ I18n.t('currency.transferSpeedSlow') }
-						</Text>
+						<Text>{I18n.t('assets.currency.transferSpeedSlow')}</Text>
 						<Text style={styles.textAlign}>{this.show(this.state.cost)}ether</Text>
-						<Text>
-							{/* 快 */}
-							{ I18n.t('currency.transferSpeedFast') }
-						</Text>
+						<Text>{I18n.t('assets.currency.transferSpeedFast')}</Text>
 					</View>
 				</View>
 				<RadiusBtn
@@ -181,17 +169,12 @@ class LockPosition extends Component {
 				<Modal animationType={'fade'} transparent={true} isOpen={this.state.isSuccess}>
 					<View style={styles.success}>
 						<View style={styles.success_item}>
-							<Text style={styles.success_text}>
-								{/* 报名成功 */}
-								{ I18n.t('public.signSuccess') }
-							</Text>
-							<Text style={styles.marginBottom}>
-								{/* 恭喜您报名成功！ */}
-								{ I18n.t('public.subSignSuccess') }
-							</Text>
+							<Text style={styles.success_text}>{I18n.t('public.signSuccess')}</Text>
+							{/* 报名成功 */}
+							<Text style={styles.marginBottom}>{I18n.t('public.signSuccess_info')}</Text>
+							{/* 恭喜您报名成功！ */}
 							<RadiusBtn
-								btnText={ I18n.t('public.back') }
-								// "返回"
+								btnText={I18n.t('public.back')} //"返回"
 								onPress={() => {
 									this.setState({
 										isSuccess: false
@@ -213,15 +196,12 @@ class LockPosition extends Component {
 				>
 					<View style={styles.modalCon}>
 						<View style={styles.modal}>
-							<Text style={styles.modalTitle}>
-								{/* 输入密码 */}
-								{ I18n.t('public.inputPwd') }
-							</Text>
+							<Text style={styles.modalTitle}>{I18n.t('public.enterPassword')}</Text>
+							{/* 输入密码 */}
 							<View style={styles.modalInput}>
 								<TextInput
 									style={{ height: 50 }}
-									placeholder={ I18n.t('public.inputPwd') }
-									//"输入密码"
+									placeholder={I18n.t('public.enterPassword')} //"输入密码"
 									secureTextEntry={true}
 									underlineColorAndroid="transparent"
 									onChangeText={(pwd) => {
@@ -240,10 +220,7 @@ class LockPosition extends Component {
 									}}
 								>
 									<View style={styles.modalBottomBtnNo}>
-										<Text style={styles.modalBottomBtnNoText}>
-											{/* 取消 */}
-											{ I18n.t('public.cancel') }
-										</Text>
+										<Text style={styles.modalBottomBtnNoText}>{I18n.t('public.cancel')}</Text>
 									</View>
 								</TouchableOpacity>
 								<TouchableOpacity
@@ -253,8 +230,7 @@ class LockPosition extends Component {
 									activeOpacity={0.5}
 									onPress={() => {
 										if (!this.state.pwd) {
-											// alert('请输入密码!');
-											alert( I18n.t('public.PwdIsNull') );
+											Alert.alert(null, I18n.t('public.inputPwd'));
 										} else {
 											this.setModalVisible(false);
 											this.refs.loading.show();
@@ -267,8 +243,7 @@ class LockPosition extends Component {
 													this.setState({ pwd: null }, () => {
 														this.refs.loading.close();
 														setTimeout(() => {
-															// alert('密码错误,请重新输入');
-															alert( I18n.t('public.wrongPwd') );
+															Alert.alert(null, I18n.t('public.wrongPwd'));
 														}, 100);
 													});
 												}
@@ -277,10 +252,7 @@ class LockPosition extends Component {
 									}}
 								>
 									<View style={styles.modalBottomBtnYes}>
-										<Text style={styles.modalBottomBtnYesText}>
-											{/* 确认 */}
-											{ I18n.t('public.define') }
-										</Text>
+										<Text style={styles.modalBottomBtnYesText}>{I18n.t('public.define')}</Text>
 									</View>
 								</TouchableOpacity>
 							</View>

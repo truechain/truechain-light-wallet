@@ -4,7 +4,6 @@ import { Input, Button } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import { createTeam, writeUserInfo } from '../../api/loged';
 import { I18n } from '../../../language/i18n';
-
 const screen = Dimensions.get('window');
 class CreateTeam extends Component {
 	constructor(props) {
@@ -54,13 +53,10 @@ class CreateTeam extends Component {
 		return (
 			<View style={styles.container}>
 				<View style={[ styles.InfoArea, styles.marginTop_10 ]}>
-					<Text>
-						{/* 个人信息 */}
-						{ I18n.t('node.personSignUp.personSignUp_Info')}
-					</Text>
+					<Text>{I18n.t('node.personSignUp.personSignUp_Info')}</Text>
+					{/* 个人信息 */}
 					<Input
-						placeholder={ I18n.t('node.personalNickName') }
-						// "个人昵称"
+						placeholder={I18n.t('public.personaNickName')} //"个人昵称"
 						maxLength={15}
 						onChangeText={(personalNickName) => {
 							this.setState({
@@ -81,13 +77,10 @@ class CreateTeam extends Component {
 				</View>
 
 				<View style={[ styles.InfoArea, styles.marginTop_10 ]}>
-					<Text>
-						{/* 组队信息 */}
-						{ I18n.t('node.teamInfo.teamInfo_Info') }
-					</Text>
+					<Text>{I18n.t('node.teamInfo.teamInfo_Info')} </Text>
+					{/* 组队信息 */}
 					<Input
-						placeholder={ I18n.t('node.teamNickName') }
-						// "组队昵称"
+						placeholder={I18n.t('node.fillInfo.teamNickname')} //"组队昵称"
 						maxLength={15}
 						onChangeText={(teamNickName) => {
 							this.setState({
@@ -106,8 +99,7 @@ class CreateTeam extends Component {
 						inputContainerStyle={[ styles.inputContainerStyle, styles.marginTop_10 ]}
 					/>
 					<Input
-						placeholder={ I18n.t('public.electoralManifesto') }
-						// "竞选宣言"
+						placeholder={I18n.t('node.fillInfo.declaration')} //"竞选宣言"
 						maxLength={50}
 						onChangeText={(declaration) => {
 							this.setState({
@@ -129,8 +121,7 @@ class CreateTeam extends Component {
 
 				<TouchableHighlight style={styles.next}>
 					<Button
-						title={ I18n.t('public.next') }
-						// "下一步"
+						title={I18n.t('public.next')} //"下一步"
 						disabled={
 							this.state.personalNickNameFlag || this.state.teamNickNameFlag || this.state.declarationFlag
 						}
