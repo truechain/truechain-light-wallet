@@ -6,6 +6,7 @@ import {
     StyleSheet,
     TouchableHighlight
 } from 'react-native';
+import { I18n } from '../../../language/i18n'
 
 import RadiusBtn from './radiusbtn'
 import { createTeam } from '../../api/loged';
@@ -66,10 +67,14 @@ class SignUpInput extends Component {
         return (
             <View style={styles.inputPage}>
                 <View style={styles.infoBox}>
-                    <Text style={styles.infoBoxTitle}>个人信息</Text>
+                    <Text style={styles.infoBoxTitle}>
+                        {/* 个人信息 */}
+                        { I18n.t('public.personalSign') }
+                    </Text>
                     <TextInput
                         style={[styles.textInput, styles.textInputNickname]}
-                        placeholder='昵称'
+                        placeholder={ I18n.t('public.nickName') } 
+                        // '昵称'
                         maxLength={15}
                         selectionColor="#528BF7"
                         underlineColorAndroid="#528BF7"
@@ -87,7 +92,8 @@ class SignUpInput extends Component {
                         }}
                     ></TextInput>
                     <TextInput style={[styles.textInput, styles.textInputBig]}
-                        placeholder='竞选宣言'
+                        placeholder={ I18n.t('public.electoralManifesto')} 
+                        //'竞选宣言'
                         multiline={true}
                         maxLength={50}
                         selectionColor="#528BF7"
@@ -109,7 +115,8 @@ class SignUpInput extends Component {
 
                 <TouchableHighlight style={styles.center}>
                     <Button
-                        title='下一步'
+                        title={ I18n.t('public.next')}
+                        //'下一步'
                         buttonStyle={styles.buttonStyle}
                         disabled={this.state.isNext}
                         onPress={() => {

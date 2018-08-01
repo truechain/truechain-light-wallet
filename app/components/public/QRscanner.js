@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 // import {QRscanner} from 'react-native-qr-scanner';
+import { I18n } from '../../../language/i18n';
 
 export default class Scanner extends Component {
   constructor(props) {
@@ -12,8 +13,9 @@ export default class Scanner extends Component {
       <View style={styles.container}>
         {/* <QRscanner onRead={this.onRead} finderY={-20}/> */}
         <Text>
-          扫描
-</Text>
+          {/* 扫描 */}
+          { I18n.t('public.scan') }
+        </Text>
       </View>
     );
   }
