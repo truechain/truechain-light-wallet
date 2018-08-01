@@ -90,7 +90,8 @@ class VoteInfo extends Component {
 								this.setState({
 									pwd: null
 								});
-								alert('投票打包失败，请稍后重试！');
+								// alert('投票打包失败，请稍后重试！');
+								alert( I18n.t('node.voteInfo.voteFail') );
 							}, 100);
 						}
 					);
@@ -101,7 +102,8 @@ class VoteInfo extends Component {
 							isSuccess: true
 						},
 						() => {
-							alert('投票打包交易完成');
+							// alert('投票打包交易完成');
+							alert( I18n.t('node.voteInfo.voteSuccess') );
 						}
 					);
 				}
@@ -155,7 +157,8 @@ class VoteInfo extends Component {
 					</View>
 
 					<Input
-						placeholder={I18n.t('node.voteInfo.enterNumber_votes')} //"输入投票数量"
+						placeholder={I18n.t('node.voteInfo.enterNumber_votes')} 
+						//"输入投票数量"
 						inputContainerStyle={styles.textInput}
 						onChangeText={(num) => {
 							this.setState({ num });
@@ -163,7 +166,8 @@ class VoteInfo extends Component {
 					/>
 
 					<Button
-						title={I18n.t('node.voteInfo.confirmVote')} //"确认投票"
+						title={I18n.t('node.voteInfo.confirmVote')} 
+						//"确认投票"
 						onPress={() => {
 							this.setState({ modalVisible: true });
 						}}
@@ -177,10 +181,17 @@ class VoteInfo extends Component {
 					<View style={styles.success}>
 						<View style={styles.success_item}>
 							>
-							<Text style={styles.success_text}>投票交易发布</Text>
-							<Text style={styles.marginBottom}>投票交易打包成功</Text>
+							<Text style={styles.success_text}>
+								{I18n.t('node.voteInfo.voteApplyed')} 
+								{/* 投票交易发布 */}
+							</Text>
+							<Text style={styles.marginBottom}>
+								{/* 投票交易打包成功 */}
+								{I18n.t('node.voteInfo.voteApplyedSuccess')}
+							</Text>
 							<RadiusBtn
-								btnText="返回"
+								btnText={I18n.t('public.back')}
+								// "返回"
 								onPress={() => {
 									this.setState({
 										isSuccess: false
@@ -202,11 +213,15 @@ class VoteInfo extends Component {
 				>
 					<View style={styles.modalCon}>
 						<View style={styles.modal}>
-							<Text style={styles.modalTitle}>输入密码</Text>
+							<Text style={styles.modalTitle}>
+								{/* 输入密码 */}
+								{I18n.t('public.inputPwd')}
+							</Text>
 							<View style={styles.modalInput}>
 								<TextInput
 									style={{ height: 50 }}
-									placeholder="输入密码"
+									placeholder={I18n.t('public.inputPwd')}
+									//"输入密码"
 									secureTextEntry={true}
 									underlineColorAndroid="transparent"
 									onChangeText={(pwd) => {
@@ -236,7 +251,8 @@ class VoteInfo extends Component {
 									onPress={() => {
 										if (!this.state.pwd) {
 											this.setState({ showLoading: false }, () => {
-												alert('请输入密码!');
+												// alert('请输入密码!');
+												alert( I18n.t('public.PwdIsNull') );
 											});
 										} else {
 											this.setModalVisible(false);
@@ -251,7 +267,8 @@ class VoteInfo extends Component {
 												} catch (error) {
 													this.setState({ showLoading: false, pwd: null }, () => {
 														setTimeout(() => {
-															alert('密码错误,请重新输入');
+															// alert('密码错误,请重新输入');
+															alert( I18n.t('public.wrongPwd') );
 														}, 100);
 													});
 												}
@@ -260,7 +277,10 @@ class VoteInfo extends Component {
 									}}
 								>
 									<View style={styles.modalBottomBtnYes}>
-										<Text style={styles.modalBottomBtnYesText}>确认</Text>
+										<Text style={styles.modalBottomBtnYesText}>
+											{/* 确认 */}
+											{ I18n.t('public.define') }
+										</Text>
 									</View>
 								</TouchableOpacity>
 							</View>

@@ -125,7 +125,11 @@ export default {
 			_baseInfo: '基本信息',
 			_available: '可用票数：',
 			enterNumber_votes: '输入投票数量',
-			confirmVote:'确认投票'
+			confirmVote:'确认投票',
+			voteFail:'投票失败，请稍后重试！',
+			voteSuccess:'投票打包交易完成',
+			voteApplyed:'投票交易发布',
+			voteApplyedSuccess:'投票交易打包成功'
 		},
 		fullNode: {
 			fullNode_title: '全节点'

@@ -133,9 +133,13 @@ export default {
 		vote: 'Vote',
 		voteInfo: {
 			_baseInfo: 'Basic Information',
-			_available: '可用票数_en : ',
-			enterNumber_votes: '输入投票数量_en',
-			confirmVote: '确认投票_en'
+			_available: 'available votes: ',
+			enterNumber_votes: 'input vote count',
+			confirmVote: 'yes,vote',
+			voteFail:'vote fail,please try again later',
+			voteSuccess:'packaging vote transactions complete',
+			voteApplyed:'publish vote transactions',
+			voteApplyedSuccess:'packaging vote transactions success'
 		},
 		fullNode: {
 			fullNode_title: 'Full node'
