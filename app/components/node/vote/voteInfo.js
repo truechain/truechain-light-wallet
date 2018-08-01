@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TextInput, Dimensions, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import { getTeamInfo } from '../../../api/loged';
@@ -168,11 +168,7 @@ class VoteInfo extends Component {
 					/>
 				</View>
 
-				<Modal 
-					animationType={'fade'} 
-					transparent={true} 
-					isOpen={this.state.isSuccess}
-				>
+				<Modal animationType={'fade'} transparent={true} isOpen={this.state.isSuccess}>
 					<View style={styles.success}>
 						<View style={styles.success_item}>
 							>
@@ -199,8 +195,9 @@ class VoteInfo extends Component {
 				</Modal>
 
 				<Modal
-					style={{ height: 280 }}
+					style={styles.modalCode}
 					animationType={'fade'}
+					position={'bottom'}
 					transparent={true}
 					isOpen={this.state.modalVisible}
 					onClosed={() => {
@@ -354,12 +351,16 @@ const styles = StyleSheet.create({
 	disabledStyle: {
 		borderRadius: 50
 	},
+	modalCode: {
+		alignItems: 'center',
+		width: screen.width,
+		height: screen.height * 0.5
+	},
 	modalCon: {
 		backgroundColor: 'rgba(0,0,0,0.5)',
 		flex: 1,
 		flexDirection: 'row',
-		justifyContent: 'center',
-		alignItems: 'flex-end'
+		justifyContent: 'center'
 	},
 	modal: {
 		flex: 1,
