@@ -139,20 +139,20 @@ class Assets extends Component {
 			currentVersion: DeviceInfo.getVersion().replace(/\./g, '')
 		});
 
-		checkVersion()
-			.then((result) => {
-				return result.data.data;
-			})
-			.then((res) => {
-				this.setState({
-					newVersion: res.version,
-					modalVisible: true
-				});
-				let ver_new = res.version.replace(/\./g, '');
-				if (ver_new > this.state.currentVersion) {
-					this.setState({ modalVisible: true });
-				}
-			});
+		// checkVersion()
+		// 	.then((result) => {
+		// 		return result.data.data;
+		// 	})
+		// 	.then((res) => {
+		// 		this.setState({
+		// 			newVersion: res.version,
+		// 			modalVisible: true
+		// 		});
+		// 		let ver_new = res.version.replace(/\./g, '');
+		// 		if (ver_new > this.state.currentVersion) {
+		// 			this.setState({ modalVisible: true });
+		// 		}
+		// 	});
 	}
 
 	updataWalletName() {
@@ -249,9 +249,9 @@ class Assets extends Component {
 							onRefresh={() => {
 								this.getAllBalance();
 							}}
-							tintColor="#528bf7"
+							tintColor="#BABEBA"
 							title="Loading..."
-							titleColor="#528bf7"
+							titleColor="#9FA3A0"
 						/>
 					}
 				>
@@ -322,8 +322,8 @@ const styles = StyleSheet.create({
 	walletInfo: {
 		height: 230,
 		backgroundColor: '#528bf7',
-		borderBottomLeftRadius: 10,
-		borderBottomRightRadius: 10
+		// borderBottomLeftRadius: 10,
+		// borderBottomRightRadius: 10
 	},
 	walletInfo_item: {
 		flex: 1,
@@ -367,7 +367,13 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		backgroundColor: '#fff',
 		justifyContent: 'space-between',
-		width: Dimensions.get('window').width * 0.85
+		width: Dimensions.get('window').width * 0.85,
+		shadowColor: '#938670',
+		shadowOpacity: 0.2,
+		shadowOffset: {
+			width: 0,
+			height: 2
+		}
 	},
 	currency_text: {
 		color: '#ccc',
