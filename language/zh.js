@@ -172,6 +172,8 @@ export default {
 		publishDealFail:'发布交易失败,稍候重试',
 		memberManagement:'人员管理',
 		applyReason:'申请理由',
+		personalNickName:'个人昵称',
+		teamNickName:'组队昵称'
 	},
 	public: {
 		next: '下一步',

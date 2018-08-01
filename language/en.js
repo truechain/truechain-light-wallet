@@ -185,6 +185,8 @@ export default {
 		publishDealFail:'publish deal failed,please try again later',
 		memberManagement:'Member Management',
 		applyReason:'apply reason',
+		personalNickName:'personal nickname',
+		teamNickName:'team nickname'
 	},
 	public: {
 		next: 'Next',
