@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, Dimensions, StyleSheet, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TextInput, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import { getTeamInfo } from '../../../api/loged';
@@ -9,6 +9,7 @@ import voteToken from '../../../utils/voteToken';
 import LoadingView from '../../public/loadingView';
 import RadiusBtn from '../../public/radiusbtn';
 import { I18n } from '../../../../language/i18n';
+import Modal from 'react-native-modalbox';
 
 const screen = Dimensions.get('window');
 
@@ -177,7 +178,11 @@ class VoteInfo extends Component {
 					/>
 				</View>
 
-				<Modal animationType={'fade'} transparent={true} visible={this.state.isSuccess}>
+				<Modal 
+					animationType={'fade'} 
+					transparent={true} 
+					isOpen={this.state.isSuccess}
+				>
 					<View style={styles.success}>
 						<View style={styles.success_item}>
 							>
@@ -204,10 +209,11 @@ class VoteInfo extends Component {
 				</Modal>
 
 				<Modal
+					style={{ height: 280 }}
 					animationType={'fade'}
 					transparent={true}
-					visible={this.state.modalVisible}
-					onRequestClose={() => {
+					isOpen={this.state.modalVisible}
+					onClosed={() => {
 						this.setState({ modalVisible: false });
 					}}
 				>
