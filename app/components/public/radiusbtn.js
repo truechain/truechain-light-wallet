@@ -5,6 +5,7 @@ import {
     Text,
     StyleSheet
 } from 'react-native';
+import { I18n } from '../../../language/i18n';
 
 /**
  * 可复用的按钮组件
@@ -15,7 +16,8 @@ class RadiusBtn extends Component {
     }
 
     static defaultProps = {
-        btnText:"下一步",
+        btnText:I18n.t('public.next'),
+        //"下一步"
         backgroundColor:"#528BF7",
         height:45,
         borderRadius:23,
