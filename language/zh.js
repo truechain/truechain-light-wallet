@@ -14,25 +14,25 @@ export default {
 		path: '路径',
 		enterPwd: '输入您的密码',
 		confirmPwd: '确认您的密码',
-		creatWallet:'创建钱包',
-		createWalletTip:'请输入钱包名称',
-		pwdSuggest:'建议密码不少于8位字符',
-		pwdIsWrong:'两次密码不一致',
-		agreeTerm:'请同意服务及隐私条款',
-		createWalletTipOfPwd:'密码用于加密私钥，强度非常重要！',
-		createWalletTipOfNoStore:'True钱包不会储存密码，也无法帮您找回，请务必牢记！',
-		iAgreeTerm:'我已仔细阅读并同意',
-		term:'服务及隐私条款',
-		mnemonicTip:'助记词首尾不能有空格,请重新输入',
-		mnemonicIsWrong:'助记词有误，请重新输入',
-		mnemonicIsNull:'助记词不能为空',
-		privateKeyIsNull:'私钥不能为空',
-		privateKeyIsWrong:'私钥有误，请重新输入',
-		keystoreIsNull:'请输入keystore信息',
-		wrongByKeystoreOrPwd:'导入钱包失败, 请检查keystore或者密码是否正确',
-		copyKeystoreTip:'直接复制粘贴以太坊官方钱包keystore文件内容至输入框。'
+		creatWallet: '创建钱包',
+		createWalletTip: '请输入钱包名称',
+		pwdSuggest: '建议密码不少于8位字符',
+		pwdIsWrong: '两次密码不一致',
+		agreeTerm: '请同意服务及隐私条款',
+		createWalletTipOfPwd: '密码用于加密私钥，强度非常重要！',
+		createWalletTipOfNoStore: 'True钱包不会储存密码，也无法帮您找回，请务必牢记！',
+		iAgreeTerm: '我已仔细阅读并同意',
+		term: '服务及隐私条款',
+		mnemonicTip: '助记词首尾不能有空格,请重新输入',
+		mnemonicIsWrong: '助记词有误，请重新输入',
+		mnemonicIsNull: '助记词不能为空',
+		privateKeyIsNull: '私钥不能为空',
+		privateKeyIsWrong: '私钥有误，请重新输入',
+		keystoreIsNull: '请输入keystore信息',
+		wrongByKeystoreOrPwd: '导入钱包失败, 请检查keystore或者密码是否正确',
+		copyKeystoreTip: '直接复制粘贴以太坊官方钱包keystore文件内容至输入框。'
 	},
-	tips:'提示',
+	tips: '提示',
 	tab: {
 		assets: '资产',
 		node: '节点',
@@ -83,7 +83,7 @@ export default {
 		walletInfo: {
 			title: '账户信息',
 			walletName: '钱包名称',
-			enterWalletName:'输入您的钱包名称',
+			enterWalletName: '输入您的钱包名称',
 			exportPrivateKey: '导出私钥',
 			exportKeystore: '导出keystore',
 			exportMnemonic: '导出助记词',
@@ -121,6 +121,12 @@ export default {
 	node: {
 		signUp: '报名参选',
 		vote: '投票',
+		voteInfo: {
+			_baseInfo: '基本信息',
+			_available: '可用票数：',
+			enterNumber_votes: '输入投票数量',
+			confirmVote:'确认投票'
+		},
 		fullNode: {
 			fullNode_title: '全节点'
 		},
@@ -145,15 +151,28 @@ export default {
 			teamList: '组队列表',
 			createTeam: '建立组队'
 		},
+		fillInfo: {
+			_title: '填写信息',
+			nickName: '昵称',
+			reason: '申请理由',
+			_success: '申请提交成功',
+			_success_info: '申请已提交成功，请等待队长处理！'
+		},
 		InsufficientQualification: {
 			qu_1: '个人报名标准节点需要不少于2千TRUE',
 			qu_2: '个人报名全节点需要不少于5万TRUE',
 			qu_3: '创建组队需要不少于1TRUE'
 		},
-		myTeam:'我的战队',
-		futureMember:'待加入人员管理'
+		application: {
+			_success: '申请已通过，请进行下一步操作',
+			_fail: '申请失败，队长拒绝了您的申请'
+		},
+		myTeam: '我的战队',
+		futureMember: '待加入人员管理'
 	},
 	public: {
+		next: '下一步',
+		back: '返回',
 		transferOutPrompt: '优先节点投票期间暂不提供转出功能!',
 		lockedWarehouse: '锁仓',
 		transferIn: '转入',
@@ -173,7 +192,7 @@ export default {
 		enterCaptcha: '输入图片验证码',
 		enterMobileCode: '输入手机验证码',
 		getMobileCode: '获取验证码',
-		walletName:'钱包名称',
+		walletName: '钱包名称',
 		mnemonic:
 			'助记词是明文私钥的另一种表现形式, 最早是由 BIP39 提案提出, 其目的是为了帮助用户记忆复杂的私钥 (64位的哈希值)。助记词一般由12、15、18、21个单词构成, 这些单词都取自一个固定词库, 其生成顺序也是按照一定算法而来, 所以用户没必要担心随便输入 12 个单词就会生成一个地址。虽然助记词和 Keystore 都可以作为私钥的另一种表现形式, 但与 Keystore 不同的是, 助记词是未经加密的私钥, 没有任何安全性可言, 任何人得到了你的助记词, 可以不费吹灰之力的夺走你的资产。所以在用户在备份助记词之后, 一定要注意三点:1. 尽可能采用物理介质备份, 例如用笔抄在纸上等, 尽可能不要采用截屏或者拍照之后放在联网的设备里, 以防被黑客窃取 2. 多次验证备份的助记词是否正确, 一旦抄错一两个单词, 那么将对后续找回正确的助记词带来巨大的困难; 3. 将备份后的助记词妥善保管, 做好防盗防丢措施。',
 		mnemonic_ps: 'PS: 用户可以使用备份的助记词, 重新导入 初链钱包 , 用新的密码生成一个新的 Keystore, 用这种方法来修改钱包密码。',

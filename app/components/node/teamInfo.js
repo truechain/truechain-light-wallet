@@ -4,6 +4,7 @@ import { withNavigation } from 'react-navigation';
 import { getTeamInfo, getTeamMember, initStatus } from '../../api/loged';
 import { Button } from 'react-native-elements';
 import Icon from '../../pages/iconSets';
+import { I18n } from '../../../language/i18n';
 const screen = Dimensions.get('window');
 class TeamMemberList extends Component {
 	render() {
@@ -81,9 +82,10 @@ class TeamInfo extends Component {
 					{
 						Button: (
 							<View style={styles.rejected}>
-								<Text style={styles.applicationReminder_text}>申请已通过，请进行下一步操作</Text>
+								<Text style={styles.applicationReminder_text}>{I18n.t('node.application._success')}</Text>
+								{/* 申请已通过，请进行下一步操作 */}
 								<Button
-									title="下一步"
+									title={I18n.t('public.next')} //"下一步"
 									buttonStyle={[ styles.button, styles.buttonStyle ]}
 									onPress={() => {
 										this.navigate('Lockpositon', {
@@ -105,7 +107,8 @@ class TeamInfo extends Component {
 				this.setState({
 					Button: (
 						<View style={styles.rejected}>
-							<Text style={styles.applicationReminder_text}>申请失败，队长拒绝了您的申请</Text>
+							<Text style={styles.applicationReminder_text}>{I18n.t('node.application._fail')}</Text>
+							{/* 申请失败，队长拒绝了您的申请 */}
 							<Button
 								title="加入其它组队"
 								buttonStyle={[ styles.button, styles.buttonStyle ]}
@@ -123,7 +126,7 @@ class TeamInfo extends Component {
 				this.setState({
 					Button: (
 						<Button
-							title="下一步"
+							title={I18n.t('public.next')} //下一步
 							buttonStyle={[ styles.button, styles.buttonStyle ]}
 							onPress={() => {
 								this.navigate('FillInfo', {
@@ -144,11 +147,12 @@ class TeamInfo extends Component {
 				<View style={styles.teamInfo}>
 					<View style={styles.headerInfo}>
 						<View style={styles.headerInfo_item}>
-							<Text>组队信息</Text>
+							<Text>{I18n.t('node.teamInfo.teamInfo_Info')}</Text>
+							{/* 组队信息 */}
 							<Text style={styles.color_999}>{this.state.teamInfoData.nickname}</Text>
 						</View>
 						<TouchableHighlight style={styles.ticket}>
-							<Text style={styles.color_fff}>{this.state.teamInfoData.lock_num}票</Text>
+							<Text style={styles.color_fff}>{this.state.teamInfoData.lock_num}{I18n.t('public.tickets')}</Text>
 						</TouchableHighlight>
 					</View>
 					<View>

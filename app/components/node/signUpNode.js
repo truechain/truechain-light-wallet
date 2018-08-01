@@ -174,15 +174,17 @@ const styles = StyleSheet.create({
 		height: 60
 	},
 	createTeam: {
-		// width: 80,
 		height: 30,
 		backgroundColor: '#007AFF',
 		borderRadius: 50,
 		justifyContent: 'center',
-		alignItems: 'center'
+		alignItems: 'center',
+		borderWidth: 1,
+		borderColor: 'green'
 	},
 	createTeam_text: {
-		padding:10,
+		paddingLeft: 10,
+		paddingRight: 10,
 		color: '#fff'
 	},
 	teamList_item: {

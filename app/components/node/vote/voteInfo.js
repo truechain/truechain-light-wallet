@@ -28,10 +28,6 @@ class VoteInfo extends Component {
 		this.navigate = this.props.navigation.navigate;
 	}
 
-	static navigationOptions = {
-		headerTitle: '基本信息'
-	};
-
 	componentDidMount() {
 		const { params } = this.props.navigation.state;
 		storage
@@ -124,7 +120,8 @@ class VoteInfo extends Component {
 				<View style={styles.Info}>
 					<View style={[ styles.headerInfo, styles.line ]}>
 						<View style={styles.headerInfo_item}>
-							<Text>组队信息</Text>
+							<Text>{I18n.t('node.teamInfo.teamInfo_Info')}</Text>
+							{/* 组队信息 */}
 							<Text style={styles.color_999}>{this.state.teamInfoData.nickname}</Text>
 						</View>
 					</View>
@@ -146,18 +143,19 @@ class VoteInfo extends Component {
 				<View style={[ styles.Info, styles.marginTop_20 ]}>
 					<View style={[ styles.headerInfo, styles.line ]}>
 						<View style={styles.headerInfo_item}>
-							<Text>个人信息</Text>
+							<Text>{I18n.t('node.personSignUp.personSignUp_Info')}</Text>							
+							{/* 个人信息 */}
 							<Text style={[ styles.color_999, styles.marginTop_5, styles.address ]}>
 								{this.state.walletAddress.replace(this.state.walletAddress.slice('15', '25'), '......')}
 							</Text>
 						</View>
 					</View>
 					<View style={styles.line}>
-						<Text style={[ styles.color_999, styles.marginTop_5 ]}>剩余票数:{this.state.ttrBanlance}</Text>
+						<Text style={[styles.color_999, styles.marginTop_5]}>{I18n.t('node.voteInfo._available')}{this.state.ttrBanlance}</Text>
 					</View>
 
 					<Input
-						placeholder="输入投票数量"
+						placeholder={I18n.t('node.voteInfo.enterNumber_votes')} //"输入投票数量"
 						inputContainerStyle={styles.textInput}
 						onChangeText={(num) => {
 							this.setState({ num });
@@ -165,7 +163,7 @@ class VoteInfo extends Component {
 					/>
 
 					<Button
-						title="确认投票"
+						title={I18n.t('node.voteInfo.confirmVote')} //"确认投票"
 						onPress={() => {
 							this.setState({ modalVisible: true });
 						}}

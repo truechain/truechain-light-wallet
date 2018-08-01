@@ -4,6 +4,7 @@ import { withNavigation } from 'react-navigation';
 import { Button } from 'react-native-elements';
 import { joinTeamRequest, writeUserInfo } from '../../api/loged';
 import RadiusBtn from '../public/radiusbtn';
+import { I18n } from '../../../language/i18n';
 const screen = Dimensions.get('window');
 
 class FillInfo extends Component {
@@ -21,10 +22,6 @@ class FillInfo extends Component {
 		};
 		this.navigate = this.props.navigation.navigate;
 	}
-
-	static navigationOptions = () => ({
-		headerTitle: '填写信息'
-	});
 
 	componentDidMount() {
 		const { params } = this.props.navigation.state;
@@ -60,10 +57,11 @@ class FillInfo extends Component {
 		return (
 			<View style={styles.inputPage}>
 				<View style={styles.infoBox}>
-					<Text style={styles.infoBoxTitle}>个人信息</Text>
+					<Text style={styles.infoBoxTitle}>{I18n.t('node.personSignUp.personSignUp_Info')}</Text>
+					{/* 个人信息 */}
 					<TextInput
 						style={styles.textInput}
-						placeholder="昵称"
+						placeholder={I18n.t('node.fillInfo.nickName')}	//昵称
 						maxLength={15}
 						selectionColor="#528BF7"
 						underlineColorAndroid="#528BF7"
@@ -84,7 +82,7 @@ class FillInfo extends Component {
 					/>
 					<TextInput
 						style={[ styles.textInput, styles.textInputBig ]}
-						placeholder="申请理由"
+						placeholder={I18n.t('node.fillInfo.reason')}		//申请理由
 						multiline={true}
 						maxLength={50}
 						selectionColor="#528BF7"
@@ -108,9 +106,10 @@ class FillInfo extends Component {
 
 				<TouchableHighlight style={styles.center}>
 					<Button
-						title="下一步"
+						title={I18n.t('public.next')} //下一步
 						buttonStyle={styles.buttonStyle}
 						disabled={this.state.nickNameFlag || this.state.reasonFlag}
+						disabledStyle={styles.disabledButtonStyle}
 						onPress={() => {
 							this._joinTeam();
 						}}
@@ -120,10 +119,12 @@ class FillInfo extends Component {
 				<Modal animationType={'fade'} transparent={true} visible={this.state.isSuccess}>
 					<View style={styles.success}>
 						<View style={styles.success_item}>
-							<Text style={styles.success_text}>申请提交成功</Text>
-							<Text style={styles.marginBottom}>申请已提交成功，请等待队长处理！</Text>
+							<Text style={styles.success_text}>{I18n.t('node.fillInfo._success')}</Text>
+							{/* 申请提交成功 */}
+							<Text style={styles.marginBottom}>{I18n.t('node.fillInfo._success_info')}</Text>
+							{/* 申请已提交成功，请等待队长处理！ */}
 							<RadiusBtn
-								btnText="返回"
+								btnText={I18n.t('public.back')} //返回
 								onPress={() => {
 									this.setState({
 										isSuccess: false
@@ -185,6 +186,9 @@ const styles = StyleSheet.create({
 		width: 260,
 		height: 45,
 		borderRadius: 30
+	},
+	disabledButtonStyle: {
+		borderRadius: 50
 	},
 	success: {
 		flex: 1,

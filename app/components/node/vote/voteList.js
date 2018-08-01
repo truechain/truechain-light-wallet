@@ -13,6 +13,7 @@ import {
 import { withNavigation } from 'react-navigation';
 import { getNodeRank, searchTeam } from '../../../api/loged';
 import Search from 'react-native-search-box';
+import { I18n } from '../../../../language/i18n';
 const screen = Dimensions.get('window');
 const iconUrl = [
 	require('../../../assets/images/node/sort_1.png'),
@@ -84,12 +85,16 @@ class VoteList extends Component {
 						</View>
 					) : (
 						<View style={styles.lockNum}>
-							<Text style={[ styles.node_text, styles.font_12 ]}>{item.score} 分</Text>
+							<Text style={[ styles.node_text, styles.font_12 ]}>
+								{item.score} {I18n.t('public.score')}
+							</Text>
 						</View>
 					)}
 					{item.tickets >= 0 ? (
 						<View style={styles.tickets}>
-							<Text style={[ styles.node_text, styles.font_12 ]}>{item.tickets} 票</Text>
+							<Text style={[ styles.node_text, styles.font_12 ]}>
+								{item.tickets} {I18n.t('public.tickets')}
+							</Text>
 						</View>
 					) : null}
 				</View>
@@ -224,7 +229,7 @@ const styles = StyleSheet.create({
 		width: screen.width * 0.25
 	},
 	tickets: {
-		width: screen.width * 0.2
+		width: screen.width * 0.25
 	},
 	node_text: {
 		color: '#528bf7'

@@ -28,7 +28,7 @@ import HelperCenter from '../components/my/helpercenter';
 import ContactUs from '../components/my/contactus';
 import Login from '../components/my/login';
 import SignUp from '../components/node/signUp'; // 节点 -> 报名参选
-import SignUpNode from '../components/node/signUpNode';// 节点 -> 报名参选 -> (全/标准)节点报名
+import SignUpNode from '../components/node/signUpNode'; // 节点 -> 报名参选 -> (全/标准)节点报名
 import SignUpInput from '../components/public/signUpInput';
 import Lockpositon from '../components/public/lockpositon';
 import CreateTeam from '../components/node/createTeam';
@@ -292,7 +292,7 @@ const App = createStackNavigator(
 		SignUp: {
 			screen: SignUp,
 			navigationOptions: {
-				headerTitle: I18n.t('node.signUp')
+				headerTitle: () => <Text>{I18n.t('node.signUp')}</Text>
 			}
 		},
 		SignUpNode,
@@ -310,7 +310,10 @@ const App = createStackNavigator(
 			screen: TeamInfo
 		},
 		FillInfo: {
-			screen: FillInfo
+			screen: FillInfo,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('node.fillInfo._title')}</Text>
+			}
 		},
 		LockAccount: {
 			screen: LockAccount,
@@ -328,9 +331,19 @@ const App = createStackNavigator(
 		MyTeam,
 		PersonnelManagement,
 		SetGesturePassword,
-		VoteNode,
+		VoteNode: {
+			screen: VoteNode,
+			navigationOptions: {
+				headerTitle: () => <Text> {I18n.t('node.vote')}</Text>
+			}
+		},
 		VoteList,
-		VoteInfo,
+		VoteInfo: {
+			screen: VoteInfo,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('node.voteInfo._baseInfo')} </Text>
+			}
+		},
 		SysLanguage: {
 			screen: SysLanguage,
 			navigationOptions: {

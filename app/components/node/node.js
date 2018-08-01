@@ -413,7 +413,7 @@ const styles = StyleSheet.create({
 		width: screen.width * 0.25
 	},
 	tickets: {
-		width: screen.width * 0.2
+		width: screen.width * 0.25
 	},
 	node_text: {
 		color: '#528bf7'
