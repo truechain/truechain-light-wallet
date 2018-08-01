@@ -63,7 +63,7 @@ class LockAccount extends React.Component {
 							</TouchableOpacity>
 							<Text style={{ marginLeft: 15 }}>{this.state.mobile}</Text>
 						</View>
-						<Icon name="icon-right" size={15} color="#000" />									
+						<Icon name="icon-right" size={15} color="#000" />
 					</View>
 				</TouchableOpacity>
 				<View style={styles.lockInfo}>
@@ -78,7 +78,7 @@ class LockAccount extends React.Component {
 						style={[ styles.bottom_fun_item, styles.bottom_fun_item_transfer ]}
 						onPress={() => {
 							this.navigate('Lockpositon', {
-								type: 1
+								type: '2'
 							});
 						}}
 					>

@@ -24,6 +24,7 @@ class LockPosition extends Component {
 			fromAddress: null,
 			toAddress: '0x08C62C32226CE2D9148A80F71A03dDB73B673792',
 			lock_num: '2000',
+			isInput: false,
 			modalVisible: false,
 			cost: 0.0004284,
 			gas: 80000,
@@ -57,20 +58,28 @@ class LockPosition extends Component {
 			});
 
 		const { params } = this.props.navigation.state;
-		if (params.type === '1') {
-			if (params.nodeType === '1') {
+		switch (params.type) {
+			case '1':
+				if (params.nodeType === '1') {
+					this.setState({
+						lock_num: '2000'
+					});
+				} else {
+					this.setState({
+						lock_num: '50000'
+					});
+				}
+				break;
+			case '2':
+				this.setState({
+					isInput: true
+				});
+				break;
+			default:
 				this.setState({
 					lock_num: '2000'
 				});
-			} else {
-				this.setState({
-					lock_num: '50000'
-				});
-			}
-		} else {
-			this.setState({
-				lock_num: '2000'
-			});
+				break;
 		}
 	}
 
@@ -128,7 +137,21 @@ class LockPosition extends Component {
 					<Text style={styles.infoBoxTitle}>{I18n.t('my.home.lockAccount._address')}</Text>
 					{/* 锁仓地址 */}
 					<View style={styles.splitLine} />
-					<Text>{this.state.lock_num} true</Text>
+					{this.state.isInput ? (
+						<TextInput
+							style={{ height: 50 }}
+							placeholder="锁仓数量"
+							underlineColorAndroid="transparent"
+							onChangeText={(lock_num) => {
+								this.setState({
+									lock_num
+								});
+							}}
+						/>
+					) : (
+						<Text>{this.state.lock_num} true</Text>
+					)}
+
 					<View style={styles.splitLine} />
 					<Text style={styles.minerCosts_text}>{I18n.t('my.home.lockAccount.minerFee')}</Text>
 					{/* 矿工费用 */}
