@@ -135,9 +135,13 @@ export default {
 		vote: 'Vote',
 		voteInfo: {
 			_baseInfo: 'Basic Information',
-			_available: '可用票数_en : ',
-			enterNumber_votes: '输入投票数量_en',
-			confirmVote: '确认投票_en'
+			_available: 'available votes: ',
+			enterNumber_votes: 'input vote count',
+			confirmVote: 'Confirm Vote',
+			voteFail: 'vote fail,please try again later',
+			voteSuccess: 'packaging vote transactions complete',
+			voteApplyed: 'publish vote transactions',
+			voteApplyedSuccess: 'packaging vote transactions success'
 		},
 		fullNode: {
 			fullNode_title: 'Full node'
@@ -196,10 +200,12 @@ export default {
 		enterPassword: 'Enter password',
 		transferOutPrompt: 'No rollout is available during the voting period of the priority node.',
 		lockedWarehouse: 'lock warehouse',
+		lockedWarehouseAddr: 'lock warehouse address',
 		transferIn: 'Transfer In',
 		transferOut: 'Transfer Out',
 		verifyPwd: 'verify your password',
 		inputPwd: 'Enter your password',
+		PwdIsNull: 'Please enter your password',
 		define: 'OK',
 		cancel: 'cancel',
 		copySuccess: 'Successful copy',

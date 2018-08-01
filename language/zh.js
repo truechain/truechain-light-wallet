@@ -127,7 +127,11 @@ export default {
 			_baseInfo: '基本信息',
 			_available: '可用票数：',
 			enterNumber_votes: '输入投票数量',
-			confirmVote: '确认投票'
+			confirmVote:'确认投票',
+			voteFail:'投票失败，请稍后重试！',
+			voteSuccess:'投票打包交易完成',
+			voteApplyed:'投票交易发布',
+			voteApplyedSuccess:'投票交易打包成功'
 		},
 		fullNode: {
 			fullNode_title: '全节点'
@@ -183,10 +187,12 @@ export default {
 		enterPassword: '输入密码',
 		transferOutPrompt: '优先节点投票期间暂不提供转出功能!',
 		lockedWarehouse: '锁仓',
+		lockedWarehouseAddr:'锁仓地址',
 		transferIn: '转入',
 		transferOut: '转出',
 		verifyPwd: '验证密码',
 		inputPwd: '输入您的密码',
+		PwdIsNull:'请输入密码',
 		define: '确定',
 		cancel: '取消',
 		copySuccess: '复制成功',
