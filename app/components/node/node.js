@@ -93,12 +93,17 @@ class Node extends Component {
 
 	// 组件初始渲染挂载界面完成后 异步加载数据
 	componentDidMount() {
-		this._fullOnRefresh();
-		this._standOnRefresh();
+		this._fullOnRefresh(true);
+		this._standOnRefresh(true);
 	}
 
 	// 加载全节点排行数据
-	_fullOnRefresh() {
+	_fullOnRefresh(isInit) {
+		if(!isInit) {
+			this.setState({
+				isRefreshing: true
+			})
+		}
 		this.setState(
 			{
 				fullPageIndex: 0
@@ -108,16 +113,26 @@ class Node extends Component {
 					nodeType: 2,
 					pageIndex: this.state.fullPageIndex
 				}).then((res) => {
-					this.setState({
-						fullNodeData: res.data.data
-					});
+					setTimeout(() => {
+						this.setState({
+							fullNodeData: res.data.data
+						});
+						this.setState({
+							isRefreshing: false
+						})
+					}, 1000);
 				});
 			}
 		);
 	}
 
 	// 加载标准节点数据
-	_standOnRefresh() {
+	_standOnRefresh(isInit) {
+		if(!isInit) {
+			this.setState({
+				isRefreshing: true
+			})
+		}
 		this.setState(
 			{
 				standPageIndex: 0
@@ -127,15 +142,20 @@ class Node extends Component {
 					nodeType: 1,
 					pageIndex: this.state.standPageIndex
 				}).then((res) => {
-					this.setState({
-						standardNodeData: res.data.data
-					});
+					setTimeout(() => {
+						this.setState({
+							standardNodeData: res.data.data
+						});
+						this.setState({
+							isRefreshing: false
+						})
+					}, 1000);
 				});
 			}
 		);
 	}
 
-	// 
+	//
 	_getTeamAddress(option) {
 		getTeamAddress()
 			.then((result) => {
@@ -203,7 +223,7 @@ class Node extends Component {
 	}
 
 	// 全节点刷新时事件
-	_fullOnScroll(evt) {				
+	_fullOnScroll(evt) {
 		const event = evt['nativeEvent'];
 		const _num =
 			event['contentSize']['height'] - event['layoutMeasurement']['height'] - event['contentOffset']['y'];
@@ -256,7 +276,7 @@ class Node extends Component {
 			<View style={styles.container}>
 				<View style={styles.header}>
 					<View style={styles.header_item}>
-					    
+
 						<TouchableHighlight
 							underlayColor={'transparent'}
 							onPress={() => {
@@ -266,8 +286,8 @@ class Node extends Component {
 							{/* 点击报名参选时检查用户状态 */}
 							<View style={styles.fun}>
 								<Icon name="icon-baoming" size={40} color="#fff" />
-								
-								<Text style={styles.color_white}>{I18n.t('node.signUp')} </Text> 
+
+								<Text style={styles.color_white}>{I18n.t('node.signUp')} </Text>
 								{/* 报名参选 */}
 							</View>
 						</TouchableHighlight>
@@ -278,7 +298,7 @@ class Node extends Component {
 							}}
 						>
 							<View style={styles.fun}>
-								<Icon name="icon-639" size={40} color="#fff" />	
+								<Icon name="icon-639" size={40} color="#fff" />
 								<Text style={styles.color_white}>{I18n.t('node.vote')} </Text>
 								{/* '投票' */}
 							</View>
@@ -293,17 +313,17 @@ class Node extends Component {
 					tabBarInactiveTextColor="#000"
 					renderTabBar={() => <DefaultTabBar />}
 				>
-					<View tabLabel={I18n.t('node.fullNodeRank')}> 
-					{/* 全节点排行 */}						
+					<View tabLabel={I18n.t('node.fullNodeRank')}>
+					{/* 全节点排行 */}
 						<ScrollView
 							style={styles.scrollview}
 							refreshControl={
 								<RefreshControl
 									refreshing={this.state.isRefreshing}
 									onRefresh={this._fullOnRefresh.bind(this)}
-									tintColor="#528bf7"
+									tintColor="#BABEBA"
 									title="Loading..."
-									titleColor="#528bf7"
+									titleColor="#9FA3A0"
 								/>
 							}
 							scrollEventThrottle={200}
@@ -315,17 +335,17 @@ class Node extends Component {
 						</ScrollView>
 					</View>
 
-					<View tabLabel={I18n.t('node.standNodeRank')}> 
-					{/* 标准节点排行 */}						
+					<View tabLabel={I18n.t('node.standNodeRank')}>
+					{/* 标准节点排行 */}
 						<ScrollView
 							style={styles.scrollview}
 							refreshControl={
 								<RefreshControl
 									refreshing={this.state.isRefreshing}
 									onRefresh={this._standOnRefresh.bind(this)}
-									tintColor="#528bf7"
+									tintColor="#BABEBA"
 									title="Loading..."
-									titleColor="#528bf7"
+									titleColor="#9FA3A0"
 								/>
 							}
 							scrollEventThrottle={200}

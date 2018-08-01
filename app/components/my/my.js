@@ -24,7 +24,7 @@ class My extends Component {
 							}}
 						>
 							<View style={styles.center}>
-								<Icon name="icon-qianbao-" size={30} color="#fff" />
+								<Icon name="icon-qianbao-" size={40} color="#fff" />
 								<Text style={styles.myTopBanConItemText}>{I18n.t('my.home.walletManagement')}</Text>
 							</View>
 						</TouchableHighlight>
@@ -37,7 +37,7 @@ class My extends Component {
 							}}
 						>
 							<View style={styles.center}>
-								<Icon name="icon-jiaoyijilu" size={30} color="#fff" />
+								<Icon name="icon-jiaoyijilu" size={40} color="#fff" />
 								<Text style={styles.myTopBanConItemText}>{I18n.t('my.home.transactionRecord')}</Text>
 							</View>
 						</TouchableHighlight>
@@ -87,10 +87,10 @@ class My extends Component {
 								<View style={styles.myColsConPartRowLf}>
 									<Icon name="icon-suoding" size={20} color="#528bf7" />
 								</View>
-								<View style={styles.myColsConPartRowRi}>
+								<View style={[styles.myColsConPartRowRi, styles.bottomLine]}>
 									<Text>{I18n.t('my.home.lockAccount._title')}</Text>
 									<View style={styles.myColsConPartRowRi2R}>
-										<Icon name="icon-right" size={15} color="#000" />									
+										<Icon name="icon-right" size={15} color="#000" />
 									</View>
 								</View>
 							</View>
@@ -110,7 +110,7 @@ class My extends Component {
 								<View style={[ styles.myColsConPartRowRi, styles.noSplitLine ]}>
 									<Text>{I18n.t('my.home.systemSetting')}</Text>
 									<View style={styles.myColsConPartRowRi2R}>
-										<Icon name="icon-right" size={15} color="#000" />										
+										<Icon name="icon-right" size={15} color="#000" />
 									</View>
 								</View>
 							</View>
@@ -127,7 +127,7 @@ class My extends Component {
 								<View style={styles.myColsConPartRowLf}>
 									<Icon name="icon-bangzhuzhongxin" size={18} color="#528bf7" />
 								</View>
-								<View style={styles.myColsConPartRowRi}>
+								<View style={[styles.myColsConPartRowRi, styles.bottomLine]}>
 									<Text>{I18n.t('my.home.helpCenter._title')}</Text>
 									<View style={styles.myColsConPartRowRi2R}>
 										<Icon name="icon-right" size={15} color="#000" />
@@ -147,7 +147,7 @@ class My extends Component {
 								<View style={[ styles.myColsConPartRowRi, styles.noSplitLine ]}>
 									<Text>{I18n.t('my.home.aboutUs._title')}</Text>
 									<View style={styles.myColsConPartRowRi2R}>
-										<Icon name="icon-right" size={15} color="#000" />										
+										<Icon name="icon-right" size={15} color="#000" />
 									</View>
 								</View>
 							</View>
@@ -163,7 +163,8 @@ export default withNavigation(My);
 
 const styles = StyleSheet.create({
 	myPage: {
-		flex: 1
+		flex: 1,
+		backgroundColor: '#F6F6F6',
 	},
 	myTopBan: {
 		padding: 8,
@@ -194,7 +195,6 @@ const styles = StyleSheet.create({
 	},
 	myTopBanConItemText: {
 		color: 'white',
-		fontSize: 13,
 		marginTop: 5
 	},
 	myColsCon: {},
@@ -218,6 +218,9 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		paddingRight: 10,
+
+	},
+	bottomLine: {
 		borderBottomWidth: 1,
 		borderColor: '#eee'
 	},
