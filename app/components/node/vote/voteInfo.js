@@ -1,9 +1,5 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
 import { View, Text, Image, TextInput, Dimensions, StyleSheet, TouchableOpacity } from 'react-native';
-=======
-import { View, Text, Image, TextInput, Dimensions, StyleSheet, Modal, TouchableOpacity, Alert } from 'react-native';
->>>>>>> 4ce71c5e10da7d2d118d05ddcf043828d7101fa3
 import { Button, Input } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import { getTeamInfo } from '../../../api/loged';
@@ -12,11 +8,8 @@ import getVote from '../../../utils/getVote';
 import voteToken from '../../../utils/voteToken';
 import RadiusBtn from '../../public/radiusbtn';
 import { I18n } from '../../../../language/i18n';
-<<<<<<< HEAD
 import Modal from 'react-native-modalbox';
-=======
 import Loading from 'react-native-whc-loading';
->>>>>>> 4ce71c5e10da7d2d118d05ddcf043828d7101fa3
 
 const screen = Dimensions.get('window');
 
