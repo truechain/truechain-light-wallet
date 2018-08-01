@@ -4,6 +4,7 @@ axios.defaults.baseURL = serverUrl;
 
 const getcodeUrl = '/smsCaptcha';
 const loginUrl = '/login';
+const checkVersionUrl = '/checkVersion';
 
 //获取eth交易记录
 const getTransactionRecord = (walletAddress, contractaddress) => {
@@ -66,4 +67,9 @@ const login = (option) => {
 	});
 };
 
-export { login, getCode, getTransactionRecord, getERC20TransactionRecord };
+//获取版本信息
+const checkVersion = () => {
+	return axios.get(checkVersionUrl);
+};
+
+export { login, getCode, getTransactionRecord, getERC20TransactionRecord, checkVersion };
