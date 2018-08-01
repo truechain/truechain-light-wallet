@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, Clipboard, TouchableHighlight } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, Clipboard, TouchableHighlight, Alert } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import Modal from 'react-native-modalbox';
@@ -102,7 +102,7 @@ class WalletInfo extends Component {
 			this.refs.codeInput.close();
 			this.navigate('ExportMnemonic');
 		} catch (e) {
-			alert(I18n.t('wallet.wrongPwd')); //'密码错误,请重新输入');
+			Alert.alert(null,I18n.t('wallet.wrongPwd')); //'密码错误,请重新输入');
 			this.setState({
 				walletPassword: ' '
 			});
@@ -179,7 +179,7 @@ class WalletInfo extends Component {
 											} catch (error) {
 												this.refs.loading.close();
 												setTimeout(() => {
-													alert(I18n.t('public.wrongPwd'));
+													Alert.alert(null,I18n.t('public.wrongPwd'));
 												}, 100);
 											}
 										}, 100);
@@ -216,7 +216,7 @@ class WalletInfo extends Component {
 											} catch (error) {
 												this.refs.loading.close();
 												setTimeout(() => {
-													alert(I18n.t('public.wrongPwd'));
+													Alert.alert(null,I18n.t('public.wrongPwd'));
 												}, 100);
 											}
 										}, 100);
@@ -257,7 +257,7 @@ class WalletInfo extends Component {
 												} catch (error) {
 													this.refs.loading.close();
 													setTimeout(() => {
-														alert(I18n.t('public.wrongPwd'));
+														Alert.alert(null,I18n.t('public.wrongPwd'));
 													}, 100);
 												}
 											}, 100);
@@ -304,7 +304,7 @@ class WalletInfo extends Component {
 											} catch (error) {
 												this.refs.loading.close();
 												setTimeout(() => {
-													alert(I18n.t('public.wrongPwd'));
+													Alert.alert(null,I18n.t('public.wrongPwd'));
 												}, 100);
 											}
 										}, 100);

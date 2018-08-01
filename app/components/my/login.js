@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, PixelRatio, Dimensions, TextInput, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, PixelRatio, Dimensions, TextInput, TouchableOpacity, Alert } from 'react-native';
 import CountryPicker from 'react-native-country-picker-modal';
 import { I18n } from '../../../language/i18n';
 import { Button } from 'react-native-elements';
@@ -32,10 +32,6 @@ export default class Login extends React.Component {
 		this.navigate = this.props.navigation.navigate;
 		this.strHandle = this.strHandle.bind(this);
 	}
-
-	static navigationOptions = {
-		headerTitle: '登录'
-	};
 
 	strHandle(svgStr) {
 		let arr = [];
@@ -132,7 +128,9 @@ export default class Login extends React.Component {
 			smsType: this.state.smsType
 		}).then((res) => {
 			if (res.data.body.status == 202) {
-				alert('图形验证码错误,请重新验证!');
+				// Alert.alert(null, '图形验证码错误,请重新验证!');
+				Alert.alert(null, I18n.t('public.captchaError'));
+				
 			} else {
 				this.setCountdown(60);
 				this.startCountDown();
@@ -155,9 +153,10 @@ export default class Login extends React.Component {
 				});
 				this.navigate('Node');
 			} else if (res.data.body.status == 202) {
-				alert('手机验证码错误');
+				Alert.alert(null, I18n.t('public.verificationCodeError'));
 			} else if (res.data.body.status == 203) {
-				alert('该手机号已绑定钱包地址');
+				Alert.alert(null, I18n.t('public.hasBind'));
+				// Alert.alert(null, '该手机号已绑定钱包地址');
 			}
 		});
 	}
@@ -203,11 +202,14 @@ export default class Login extends React.Component {
 		if (this.state.callingCode === '86') {
 		}
 		if (!this.state.tel) {
-			alert('请输入手机号');
+			// alert('请输入手机号');
+			Alert.alert(null, I18n.t('public.enterMobile'));
 		} else if (this.state.callingCode === '86' && !this.regPhone.test(this.state.tel)) {
-			alert('请输入合法手机号');
+			Alert.alert(null, I18n.t('public.enter_the_legal_mobile_number'));
+			// Alert.alert(null, '请输入合法手机号');
 		} else if (!this.state.cap_code) {
-			alert('请输入图形验证码');
+			Alert.alert(null, I18n.t('public.enterCaptcha'));
+			// alert('请输入图形验证码');
 		} else {
 			this._getCode();
 		}
@@ -277,7 +279,9 @@ export default class Login extends React.Component {
 					/>
 					<TouchableOpacity disabled={this.state.disabled} onPress={this.setTime}>
 						{this.state.countdown >= 0 ? (
-							<Text style={styles.color_bu}>{`${this.state.countdown}`}秒</Text>
+							<Text style={styles.color_bu}>
+								{`${this.state.countdown}`} {I18n.t('public.second')}
+							</Text>
 						) : (
 							<Text style={styles.color_bu}>{I18n.t('public.getMobileCode')}</Text>
 						)}
@@ -285,7 +289,7 @@ export default class Login extends React.Component {
 				</View>
 
 				<Button
-					title="登录"
+					title={I18n.t('my.home.lockAccount.loginIn')} //"登录"
 					onPress={() => {
 						this._login();
 					}}

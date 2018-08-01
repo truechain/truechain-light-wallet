@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, TextInput, Dimensions, StyleSheet, Modal, TouchableOpacity } from 'react-native';
+import { View, Text, Image, TextInput, Dimensions, StyleSheet, Modal, TouchableOpacity, Alert } from 'react-native';
 import { Button, Input } from 'react-native-elements';
 import { withNavigation } from 'react-navigation';
 import { getTeamInfo } from '../../../api/loged';
@@ -90,7 +90,7 @@ class VoteInfo extends Component {
 								this.setState({
 									pwd: null
 								});
-								alert('投票打包失败，请稍后重试！');
+								Alert.alert(null, '投票打包失败，请稍后重试！');
 							}, 100);
 						}
 					);
@@ -101,7 +101,7 @@ class VoteInfo extends Component {
 							isSuccess: true
 						},
 						() => {
-							alert('投票打包交易完成');
+							Alert.alert(null, '投票打包交易完成');
 						}
 					);
 				}
@@ -143,7 +143,7 @@ class VoteInfo extends Component {
 				<View style={[ styles.Info, styles.marginTop_20 ]}>
 					<View style={[ styles.headerInfo, styles.line ]}>
 						<View style={styles.headerInfo_item}>
-							<Text>{I18n.t('node.personSignUp.personSignUp_Info')}</Text>							
+							<Text>{I18n.t('node.personSignUp.personSignUp_Info')}</Text>
 							{/* 个人信息 */}
 							<Text style={[ styles.color_999, styles.marginTop_5, styles.address ]}>
 								{this.state.walletAddress.replace(this.state.walletAddress.slice('15', '25'), '......')}
@@ -151,7 +151,10 @@ class VoteInfo extends Component {
 						</View>
 					</View>
 					<View style={styles.line}>
-						<Text style={[styles.color_999, styles.marginTop_5]}>{I18n.t('node.voteInfo._available')}{this.state.ttrBanlance}</Text>
+						<Text style={[ styles.color_999, styles.marginTop_5 ]}>
+							{I18n.t('node.voteInfo._available')}
+							{this.state.ttrBanlance}
+						</Text>
 					</View>
 
 					<Input
@@ -236,7 +239,7 @@ class VoteInfo extends Component {
 									onPress={() => {
 										if (!this.state.pwd) {
 											this.setState({ showLoading: false }, () => {
-												alert('请输入密码!');
+												Alert.alert(null, '请输入密码!');
 											});
 										} else {
 											this.setModalVisible(false);
@@ -251,7 +254,7 @@ class VoteInfo extends Component {
 												} catch (error) {
 													this.setState({ showLoading: false, pwd: null }, () => {
 														setTimeout(() => {
-															alert('密码错误,请重新输入');
+															Alert.alert(null, '密码错误,请重新输入');
 														}, 100);
 													});
 												}
@@ -336,7 +339,7 @@ const styles = StyleSheet.create({
 		marginTop: 30
 	},
 	disabledStyle: {
-		borderRadius: 50,
+		borderRadius: 50
 	},
 	modalCon: {
 		backgroundColor: 'rgba(0,0,0,0.5)',
