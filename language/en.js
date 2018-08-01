@@ -181,13 +181,15 @@ export default {
 			_fail: '申请失败，队长拒绝了您的申请_en'
 		},
 		myTeam: 'My Team',
-		futureMember: 'Future member management'
+		futureMember: 'Future member management',
+		publishDealFail:'publish deal failed,please try again later'
 	},
 	public: {
 		next: 'Next',
 		back: '返回_en',
 		transferOutPrompt: 'No rollout is available during the voting period of the priority node.',
 		lockedWarehouse: 'lock warehouse',
+		lockedWarehouseAddr:'lock warehouse address',
 		transferIn: 'Transfer In',
 		transferOut: 'Transfer Out',
 		verifyPwd: 'verify your password',
@@ -197,9 +199,11 @@ export default {
 		copySuccess: 'Successful copy',
 		copyFailed: 'Replication failed',
 		wrongPwd: 'Password error, please retype',
+		PwdIsNull:'password cannot be empty',
 		score: 'Score',
 		tickets: 'Votes',
 		signSuccess: 'Successful registration',
+		subSignSuccess:'Congratulations of your success',
 		joinTeam: 'joinTeam',
 		enterMobile: 'Please enter phone number',
 		enterCaptcha: 'Enter image verification code',

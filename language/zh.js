@@ -168,17 +168,20 @@ export default {
 			_fail: '申请失败，队长拒绝了您的申请'
 		},
 		myTeam: '我的战队',
-		futureMember: '待加入人员管理'
+		futureMember: '待加入人员管理',
+		publishDealFail:'发布交易失败,稍候重试'
 	},
 	public: {
 		next: '下一步',
 		back: '返回',
 		transferOutPrompt: '优先节点投票期间暂不提供转出功能!',
 		lockedWarehouse: '锁仓',
+		lockedWarehouseAddr:'锁仓地址',
 		transferIn: '转入',
 		transferOut: '转出',
 		verifyPwd: '验证密码',
 		inputPwd: '输入您的密码',
+		PwdIsNull:'请输入密码',
 		define: '确定',
 		cancel: '取消',
 		copySuccess: '复制成功',
@@ -187,6 +190,7 @@ export default {
 		score: '分',
 		tickets: '票',
 		signSuccess: '报名成功',
+		subSignSuccess:'恭喜您验证成功',
 		joinTeam: '加入组队',
 		enterMobile: '请输入手机号',
 		enterCaptcha: '输入图片验证码',
