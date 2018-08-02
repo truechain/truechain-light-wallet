@@ -214,52 +214,54 @@ class ImportWallet extends Component {
 
 	_setSeed(option) {
 		option._this.refs.loading.show();
-		var words = option.mnemonic.split(' ');
-		if (!Mnemonic.isValid(option.mnemonic, Mnemonic.Words.ENGLISH) || words.length !== 12) {
-			option._this.refs.loading.close();
-			setTimeout(() => {
-				alert(I18n.t('wallet.mnemonicIsWrong')); // '助记词无效，请重新输入'
-			}, 100);
-		} else {
-			lightWallet.keystore.createVault(
-				{
-					password: option.password,
-					seedPhrase: option.mnemonic,
-					hdPathString: option.hdPathString
-				},
-				(err, ks) => {
-					ks.keyFromPassword(option.password, (err, pwDerivedKey) => {
-						ks.generateNewAddress(pwDerivedKey, 1);
-						var address = ks.getAddresses();
-						let keystoreV3 = web3.eth.accounts
-							.privateKeyToAccount('0x' + ks.exportPrivateKey(address[0], pwDerivedKey))
-							.encrypt(option.password);
-						storage.save({
-							key: 'walletInfo',
-							data: {
-								walletAddress: address[0],
-								keystoreV3: keystoreV3,
-								ks: ks
-							},
-							expires: null
-						});
+		setTimeout(() => {
+			var words = option.mnemonic.split(' ');
+			if (!Mnemonic.isValid(option.mnemonic, Mnemonic.Words.ENGLISH) || words.length !== 12) {
+				option._this.refs.loading.close();
+				setTimeout(() => {
+					alert(I18n.t('wallet.mnemonicIsWrong')); // '助记词无效，请重新输入'
+				}, 100);
+			} else {
+				lightWallet.keystore.createVault(
+					{
+						password: option.password,
+						seedPhrase: option.mnemonic,
+						hdPathString: option.hdPathString
+					},
+					(err, ks) => {
+						ks.keyFromPassword(option.password, (err, pwDerivedKey) => {
+							ks.generateNewAddress(pwDerivedKey, 1);
+							var address = ks.getAddresses();
+							let keystoreV3 = web3.eth.accounts
+								.privateKeyToAccount('0x' + ks.exportPrivateKey(address[0], pwDerivedKey))
+								.encrypt(option.password);
+							storage.save({
+								key: 'walletInfo',
+								data: {
+									walletAddress: address[0],
+									keystoreV3: keystoreV3,
+									ks: ks
+								},
+								expires: null
+							});
 
-						storage.save({
-							key: 'walletName',
-							data: {
-								walletName: '新钱包'
-							},
-							expires: null
-						});
+							storage.save({
+								key: 'walletName',
+								data: {
+									walletName: '新钱包'
+								},
+								expires: null
+							});
 
-						setTimeout(() => {
-							option._this.refs.loading.close();
-							option._this.props.navigation.navigate('Home');
-						}, 100);
-					});
-				}
-			);
-		}
+							setTimeout(() => {
+								option._this.refs.loading.close();
+								option._this.props.navigation.navigate('Home');
+							}, 100);
+						});
+					}
+				);
+			}
+		}, 300);
 	}
 
 	check(option, cb) {
