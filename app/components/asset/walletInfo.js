@@ -102,7 +102,7 @@ class WalletInfo extends Component {
 			this.refs.codeInput.close();
 			this.navigate('ExportMnemonic');
 		} catch (e) {
-			Alert.alert(null,I18n.t('wallet.wrongPwd')); //'密码错误,请重新输入');
+			Alert.alert(null, I18n.t('wallet.wrongPwd')); //'密码错误,请重新输入');
 			this.setState({
 				walletPassword: ' '
 			});
@@ -156,33 +156,36 @@ class WalletInfo extends Component {
 								this.refs.codeInput.open();
 								this.setState({
 									onPress: () => {
-										this.refs.loading.show();
 										this.refs.codeInput.close();
 										setTimeout(() => {
-											try {
-												web3.eth.accounts.decrypt(
-													this.state.keystoreV3,
-													this.state.walletPassword
-												);
-												storage.load({ key: 'walletInfo' }).then((res) => {
-													let PrivateKey = web3.eth.accounts.decrypt(
-														JSON.stringify(res.keystoreV3),
+											this.refs.loading.show();
+
+											setTimeout(() => {
+												try {
+													web3.eth.accounts.decrypt(
+														this.state.keystoreV3,
 														this.state.walletPassword
-													).privateKey;
-													this.setState({
-														walletPassword: '',
-														PrivateKey
+													);
+													storage.load({ key: 'walletInfo' }).then((res) => {
+														let PrivateKey = web3.eth.accounts.decrypt(
+															JSON.stringify(res.keystoreV3),
+															this.state.walletPassword
+														).privateKey;
+														this.setState({
+															walletPassword: '',
+															PrivateKey
+														});
 													});
-												});
-												this.refs.privateKey.open();
-												this.refs.loading.close();
-											} catch (error) {
-												this.refs.loading.close();
-												setTimeout(() => {
-													Alert.alert(null,I18n.t('public.wrongPwd'));
-												}, 100);
-											}
-										}, 100);
+													this.refs.privateKey.open();
+													this.refs.loading.close();
+												} catch (error) {
+													this.refs.loading.close();
+													setTimeout(() => {
+														Alert.alert(null, I18n.t('public.wrongPwd'));
+													}, 100);
+												}
+											}, 100);
+										}, 1000);
 									}
 								});
 							}
@@ -200,26 +203,30 @@ class WalletInfo extends Component {
 								this.refs.codeInput.open();
 								this.setState({
 									onPress: () => {
-										this.refs.loading.show();
 										this.refs.codeInput.close();
 										setTimeout(() => {
-											try {
-												web3.eth.accounts.decrypt(
-													this.state.keystoreV3,
-													this.state.walletPassword
-												);
-												this.setState({
-													walletPassword: ''
-												});
-												this.refs.loading.close();
-												this.navigate('ExportKeystore', { keystoreV3: this.state.keystoreV3 });
-											} catch (error) {
-												this.refs.loading.close();
-												setTimeout(() => {
-													Alert.alert(null,I18n.t('public.wrongPwd'));
-												}, 100);
-											}
-										}, 100);
+											this.refs.loading.show();
+											setTimeout(() => {
+												try {
+													web3.eth.accounts.decrypt(
+														this.state.keystoreV3,
+														this.state.walletPassword
+													);
+													this.setState({
+														walletPassword: ''
+													});
+													this.refs.loading.close();
+													this.navigate('ExportKeystore', {
+														keystoreV3: this.state.keystoreV3
+													});
+												} catch (error) {
+													this.refs.loading.close();
+													setTimeout(() => {
+														Alert.alert(null, I18n.t('public.wrongPwd'));
+													}, 100);
+												}
+											}, 100);
+										}, 1000);
 									}
 								});
 							}
@@ -239,28 +246,30 @@ class WalletInfo extends Component {
 									this.refs.codeInput.open();
 									this.setState({
 										onPress: () => {
-											this.refs.loading.show();
 											this.refs.codeInput.close();
 											setTimeout(() => {
-												try {
-													web3.eth.accounts.decrypt(
-														this.state.keystoreV3,
-														this.state.walletPassword
-													);
-													this.navigate('ExportMnemonic', {
-														walletPassword: this.state.walletPassword
-													});
-													this.setState({
-														walletPassword: ''
-													});
-													this.refs.loading.close();
-												} catch (error) {
-													this.refs.loading.close();
-													setTimeout(() => {
-														Alert.alert(null,I18n.t('public.wrongPwd'));
-													}, 100);
-												}
-											}, 100);
+												this.refs.loading.show();
+												setTimeout(() => {
+													try {
+														web3.eth.accounts.decrypt(
+															this.state.keystoreV3,
+															this.state.walletPassword
+														);
+														this.navigate('ExportMnemonic', {
+															walletPassword: this.state.walletPassword
+														});
+														this.setState({
+															walletPassword: ''
+														});
+														this.refs.loading.close();
+													} catch (error) {
+														this.refs.loading.close();
+														setTimeout(() => {
+															Alert.alert(null, I18n.t('public.wrongPwd'));
+														}, 100);
+													}
+												}, 100);
+											}, 1000);
 										}
 									});
 								}
@@ -269,6 +278,7 @@ class WalletInfo extends Component {
 					/>
 				) : null}
 				<Loading ref="loading" />
+				{/* <ActivityIndicator animating={this.state.huhu} /> */}
 				<Button
 					title={I18n.t('assets.walletInfo.deleteWallet')}
 					buttonStyle={styles.buttonStyle}
@@ -281,33 +291,35 @@ class WalletInfo extends Component {
 								this.refs.codeInput.open();
 								this.setState({
 									onPress: () => {
-										this.refs.loading.show();
 										this.refs.codeInput.close();
 										setTimeout(() => {
-											try {
-												web3.eth.accounts.decrypt(
-													this.state.keystoreV3,
-													this.state.walletPassword
-												);
-												storage.remove({
-													key: 'walletInfo'
-												});
+											this.refs.loading.show();
+											setTimeout(() => {
+												try {
+													web3.eth.accounts.decrypt(
+														this.state.keystoreV3,
+														this.state.walletPassword
+													);
+													storage.remove({
+														key: 'walletInfo'
+													});
 
-												storage.remove({
-													key: 'token'
-												});
-												storage.remove({
-													key: 'walletName'
-												});
-												this.refs.loading.close();
-												this.navigate('Guide');
-											} catch (error) {
-												this.refs.loading.close();
-												setTimeout(() => {
-													Alert.alert(null,I18n.t('public.wrongPwd'));
-												}, 100);
-											}
-										}, 100);
+													storage.remove({
+														key: 'token'
+													});
+													storage.remove({
+														key: 'walletName'
+													});
+													this.refs.loading.close();
+													this.navigate('Guide');
+												} catch (error) {
+													this.refs.loading.close();
+													setTimeout(() => {
+														Alert.alert(null, I18n.t('public.wrongPwd'));
+													}, 100);
+												}
+											}, 100);
+										}, 1000);
 									}
 								});
 							}
