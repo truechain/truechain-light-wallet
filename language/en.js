@@ -123,6 +123,15 @@ export default {
 			keystore_surround_item:
 				'Please make sure to use the QR code when there are no people or camera around you. Once the QR code is acquired by other people, irreversible loss may happen to your assets. '
 		},
+		mnemonic: {
+			backUpMnemonic: 'Please backup your mnemonic',
+			mnemonicSuccess: 'The mnemonic is correct, please keep your mnemonic properly!',
+			mnemonicError: 'The mnemonic is incorrect. Please re-enter',
+			copyYourMnemonic: 'Copy your mnemonic',
+			confirmMnemonic: 'Confirm your wallet mnemonic',
+			mnemonicWring: 'The mnemonic is used to restore the wallet or reset the wallet password, copy it to paper accurately, and store it in a safe place that only you know.',
+			confirmMnemonicWring: 'Please click on the mnemonic in order to confirm that your backup mnemonic is correct.'
+		},
 		currency: {
 			transfer: 'Transfer',
 			recentTradeRecord: 'RecentTradeRecord',

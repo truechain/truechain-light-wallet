@@ -4,13 +4,15 @@ import { Button } from 'react-native-elements';
 import lightwallet from 'eth-lightwallet';
 import { StackActions, NavigationActions, withNavigation } from 'react-navigation';
 import { Polygon } from 'react-native-svg';
+import { I18n } from '../../../language/i18n';
 
 export class ExportMnemonic extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			Mnemonic: ' ',
-			backupBtnText: '请备份您的助记词',
+			// backupBtnText: '请备份您的助记词',
+			backupBtnText: I18n.t('assets.mnemonic.backUpMnemonic'),
 			backupBtnOpacity: 0.6,
 			onPress: null,
 			step: 'backup',
@@ -41,7 +43,8 @@ export class ExportMnemonic extends Component {
 
 		setTimeout(() => {
 			this.setState({
-				backupBtnText: '下一步',
+				backupBtnText: I18n.t('public.next'),
+				// backupBtnText: '下一步',
 				backupBtnOpacity: 1,
 				next: false
 			});
@@ -62,7 +65,8 @@ export class ExportMnemonic extends Component {
 	// 选择助记词完 点击确认完成
 	confirmWords() {
 		if (this.state.selectWordsText == this.state.Mnemonic) {
-			Alert.alert('提示', '助记词正确,请妥善保管您的助记词！', [
+			// 助记词正确, 请妥善保管您的助记词！
+			Alert.alert(null, I18n.t('assets.mnemonic.mnemonicSuccess'), [
 				{
 					text: 'OK',
 					onPress: () => {
@@ -79,7 +83,8 @@ export class ExportMnemonic extends Component {
 				}
 			]);
 		} else {
-			Alert.alert('提示', '助记词有误，请重新输入');
+			Alert.alert(null, I18n.t('assets.mnemonic.mnemonicError'));
+			// Alert.alert(null, '助记词有误，请重新输入')
 			this.setState({
 				selectWords: [],
 				selectWordsText: ' '
@@ -118,8 +123,14 @@ export class ExportMnemonic extends Component {
 			currentStep = (
 				<View style={styles.container}>
 					<View style={styles.warning}>
-						<Text style={styles.warning_item}>抄写下你的助记词</Text>
-						<Text style={styles.color_999}>助记词用于恢复钱包或重置钱包密码，将它准确的抄写到纸上，并存放在只有你知道的安全地方。</Text>
+						<Text style={styles.warning_item}>
+							{I18n.t('assets.mnemonic.copyYourMnemonic')}
+							{/* 抄写下你的助记词 */}
+						</Text>
+						<Text style={styles.color_999}>
+							{I18n.t('assets.mnemonic.mnemonicWring')}
+							{/* 助记词用于恢复钱包或重置钱包密码，将它准确的抄写到纸上，并存放在只有你知道的安全地方。 */}
+						</Text>
 					</View>
 
 					<TouchableHighlight style={styles.mnemonic_area}>
@@ -141,8 +152,14 @@ export class ExportMnemonic extends Component {
 			currentStep = (
 				<View style={styles.container}>
 					<View style={styles.warning}>
-						<Text style={styles.warning_item}>确认你的钱包助记词</Text>
-						<Text style={styles.color_999}>请按顺序点击助记词，以确认你备份的助记词正确。</Text>
+						<Text style={styles.warning_item}>
+							{I18n.t('assets.mnemonic.confirmMnemonic')}
+							{/* 确认你的钱包助记词 */}
+						</Text>
+						<Text style={styles.color_999}>
+							{I18n.t('assets.mnemonic.confirmMnemonicWring')}
+							{/* 请按顺序点击助记词，以确认你备份的助记词正确。 */}
+						</Text>
 					</View>
 					<TouchableHighlight style={styles.mnemonic_area}>
 						<View>
@@ -150,7 +167,11 @@ export class ExportMnemonic extends Component {
 						</View>
 					</TouchableHighlight>
 					<View style={styles.wordsCon}>{this.state.words}</View>
-					<Button title="完成" buttonStyle={styles.backupBtn} onPress={this.confirmWords} />
+					<Button
+						title={I18n.t('public.define')}
+						buttonStyle={styles.backupBtn}
+						onPress={this.confirmWords}
+					/>
 				</View>
 			);
 		}

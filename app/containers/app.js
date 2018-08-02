@@ -58,7 +58,7 @@ const storage = new Storage({
 	defaultExpires: null,
 	enableCache: true
 });
-window.storage = storage;
+global.storage = storage;
 
 storage
 	.load({
@@ -101,6 +101,7 @@ function check(host) {
 			TTRContractAddr: '0xf2bb016e8c9c8975654dcd62f318323a8a79d48e'
 		});
 	}
+	global.host = host;
 	const web3 = new Web3(new Web3.providers.HttpProvider(host));
 	global.web3 = web3;
 }
@@ -246,8 +247,18 @@ const App = createStackNavigator(
 				headerTitle: () => <Text>{I18n.t('assets.currency.receipt')}</Text>
 			}
 		},
-		CreateWallet: CreateWallet,
-		ImportWallet: ImportWallet,
+		CreateWallet: {
+			screen: CreateWallet,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('wallet.creatWallet')}</Text>
+			}
+		},
+		ImportWallet: {
+			screen: ImportWallet,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('guide.importWallet')}</Text>
+			}
+		},
 		WalletInfo: {
 			screen: WalletInfo,
 			navigationOptions: {
@@ -257,7 +268,7 @@ const App = createStackNavigator(
 		ExportMnemonic: {
 			screen: ExportMnemonic,
 			navigationOptions: {
-				headerTitle: I18n.t('assets.walletInfo.exportMnemonic')
+				headerTitle: () => <Text>{I18n.t('assets.walletInfo.exportMnemonic')}</Text>
 			}
 		},
 		ExportKeystore: {

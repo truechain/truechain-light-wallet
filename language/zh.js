@@ -85,7 +85,7 @@ export default {
 			noEscalation: '暂不升级',
 			noUpdate: '当前已是最新版本，无需更新'
 		},
-		webHost:'Web3 设置'
+		webHost: 'Web3 设置'
 	},
 	assets: {
 		totalAssets: '账户总资产',
@@ -112,6 +112,15 @@ export default {
 			keystore_scanning_item: '二维码禁止保存、截图以及拍照。仅供用户在安全环境下直接扫描来方便的导入钱包。',
 			keystore_surround: '在安全的环境下使用',
 			keystore_surround_item: '请在确保四周无人及无摄像头的情况下使用。二维码一旦被他人获取讲造成不可挽回的资产损失。'
+		},
+		mnemonic: {
+			backUpMnemonic: '请备份您的助记词',
+			mnemonicSuccess: '助记词正确,请妥善保管您的助记词！',
+			mnemonicError: '助记词有误，请重新输入',
+			copyYourMnemonic: '抄写下你的助记词',
+			confirmMnemonic: '确认你的钱包助记词',
+			mnemonicWring: '助记词用于恢复钱包或重置钱包密码，将它准确的抄写到纸上，并存放在只有你知道的安全地方。',
+			confirmMnemonicWring: '请按顺序点击助记词，以确认你备份的助记词正确。'
 		},
 		currency: {
 			transfer: '转账',
