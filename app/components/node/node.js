@@ -8,13 +8,14 @@ import {
 	ScrollView,
 	RefreshControl,
 	TouchableOpacity,
-	TouchableHighlight
+	TouchableHighlight,
+	ActivityIndicator
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import { getNodeRank, getMemberStatus, getTeamAddress } from '../../api/loged';
 import { I18n } from '../../../language/i18n';
-import Icon from '../../pages/iconSets'
+import Icon from '../../pages/iconSets';
 
 const screen = Dimensions.get('window');
 
@@ -99,10 +100,10 @@ class Node extends Component {
 
 	// 加载全节点排行数据
 	_fullOnRefresh(isInit) {
-		if(!isInit) {
+		if (!isInit) {
 			this.setState({
 				isRefreshing: true
-			})
+			});
 		}
 		this.setState(
 			{
@@ -119,7 +120,7 @@ class Node extends Component {
 						});
 						this.setState({
 							isRefreshing: false
-						})
+						});
 					}, 1000);
 				});
 			}
@@ -128,10 +129,10 @@ class Node extends Component {
 
 	// 加载标准节点数据
 	_standOnRefresh(isInit) {
-		if(!isInit) {
+		if (!isInit) {
 			this.setState({
 				isRefreshing: true
-			})
+			});
 		}
 		this.setState(
 			{
@@ -148,7 +149,7 @@ class Node extends Component {
 						});
 						this.setState({
 							isRefreshing: false
-						})
+						});
 					}, 1000);
 				});
 			}
@@ -276,7 +277,6 @@ class Node extends Component {
 			<View style={styles.container}>
 				<View style={styles.header}>
 					<View style={styles.header_item}>
-
 						<TouchableHighlight
 							underlayColor={'transparent'}
 							onPress={() => {
@@ -314,47 +314,55 @@ class Node extends Component {
 					renderTabBar={() => <DefaultTabBar />}
 				>
 					<View tabLabel={I18n.t('node.fullNodeRank')}>
-					{/* 全节点排行 */}
-						<ScrollView
-							style={styles.scrollview}
-							refreshControl={
-								<RefreshControl
-									refreshing={this.state.isRefreshing}
-									onRefresh={this._fullOnRefresh.bind(this)}
-									tintColor="#BABEBA"
-									title="Loading..."
-									titleColor="#9FA3A0"
-								/>
-							}
-							scrollEventThrottle={200}
-							onScroll={this._fullOnScroll.bind(this)}
-						>
-							{this.state.fullNodeData.map((item, index) => {
-								return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
-							})}
-						</ScrollView>
+						{/* 全节点排行 */}
+						{this.state.fullNodeData.length > 0 ? (
+							<ScrollView
+								style={styles.scrollview}
+								refreshControl={
+									<RefreshControl
+										refreshing={this.state.isRefreshing}
+										onRefresh={this._fullOnRefresh.bind(this)}
+										tintColor="#BABEBA"
+										title="Loading..."
+										titleColor="#9FA3A0"
+									/>
+								}
+								scrollEventThrottle={200}
+								onScroll={this._fullOnScroll.bind(this)}
+							>
+								{this.state.fullNodeData.map((item, index) => {
+									return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
+								})}
+							</ScrollView>
+						) : (
+							<ActivityIndicator size="large" style={{ marginTop: 30 }} animating={true} />
+						)}
 					</View>
 
 					<View tabLabel={I18n.t('node.standNodeRank')}>
-					{/* 标准节点排行 */}
-						<ScrollView
-							style={styles.scrollview}
-							refreshControl={
-								<RefreshControl
-									refreshing={this.state.isRefreshing}
-									onRefresh={this._standOnRefresh.bind(this)}
-									tintColor="#BABEBA"
-									title="Loading..."
-									titleColor="#9FA3A0"
-								/>
-							}
-							scrollEventThrottle={200}
-							onScroll={this._standOnScroll.bind(this)}
-						>
-							{this.state.standardNodeData.map((item, index) => {
-								return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
-							})}
-						</ScrollView>
+						{/* 标准节点排行 */}
+						{this.state.standardNodeData.length > 0 ? (
+							<ScrollView
+								style={styles.scrollview}
+								refreshControl={
+									<RefreshControl
+										refreshing={this.state.isRefreshing}
+										onRefresh={this._standOnRefresh.bind(this)}
+										tintColor="#BABEBA"
+										title="Loading..."
+										titleColor="#9FA3A0"
+									/>
+								}
+								scrollEventThrottle={200}
+								onScroll={this._standOnScroll.bind(this)}
+							>
+								{this.state.standardNodeData.map((item, index) => {
+									return <NodeItem navigate={this.navigate} item={item} index={index} key={index} />;
+								})}
+							</ScrollView>
+						) : (
+							<ActivityIndicator size="large" style={{ marginTop: 30 }} animating={true} />
+						)}
 					</View>
 				</ScrollableTabView>
 			</View>
