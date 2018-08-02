@@ -162,7 +162,8 @@ const styles = StyleSheet.create({
 		marginTop: 20
 	},
 	container: {
-		flex: 1
+		flex: 1,
+		backgroundColor: 'white',
 	},
 	balance: {
 		height: 150,
