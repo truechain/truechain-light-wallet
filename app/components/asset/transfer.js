@@ -47,25 +47,25 @@ class Transfer extends Component {
 	}
 
 	static navigationOptions = ({ navigation }) => ({
-		headerTitle: I18n.t('assets.currency.transfer'), // 转账
-		headerRight: (
-			<TouchableHighlight
-				underlayColor={'transparent'}
-				onPress={() => {
-					alert('暂停');
-					// navigation.state.params.navigate('QRscanner');
-				}}
-			>
-				<Image
-					style={{
-						width: 20,
-						height: 20,
-						marginRight: 10
-					}}
-					source={require('../../assets/images/common/ercodeicon.png')}
-				/>
-			</TouchableHighlight>
-		)
+		headerTitle: I18n.t('assets.currency.transfer') // 转账
+		// headerRight: (
+		// 	<TouchableHighlight
+		// 		underlayColor={'transparent'}
+		// 		onPress={() => {
+		// 			alert('暂停');
+		// 			// navigation.state.params.navigate('QRscanner');
+		// 		}}
+		// 	>
+		// 		<Image
+		// 			style={{
+		// 				width: 20,
+		// 				height: 20,
+		// 				marginRight: 10
+		// 			}}
+		// 			source={require('../../assets/images/common/ercodeicon.png')}
+		// 		/>
+		// 	</TouchableHighlight>
+		// )
 	});
 
 	show(num) {
@@ -246,7 +246,10 @@ class Transfer extends Component {
 					onChangeText={(remarks) => this.setState({ remarks })}
 					inputContainerStyle={styles.inputContainerStyle}
 				/>
-				<Text style={styles.minerCosts_text}>{I18n.t('assets.currency.transferFee')}{/* 矿工费用 */}</Text> 
+				<Text style={styles.minerCosts_text}>
+					{I18n.t('assets.currency.transferFee')}
+					{/* 矿工费用 */}
+				</Text>
 				<Slider
 					value={this.state.cost}
 					onValueChange={(cost) => {
@@ -266,9 +269,15 @@ class Transfer extends Component {
 					maximumValue={0.00251999}
 				/>
 				<View style={styles.gasPrice}>
-					<Text>{I18n.t('assets.currency.transferSpeedSlow')}{/* 慢 */}</Text> 
+					<Text>
+						{I18n.t('assets.currency.transferSpeedSlow')}
+						{/* 慢 */}
+					</Text>
 					<Text style={styles.textAlign}>{this.show(this.state.cost)}ether</Text>
-					<Text>{I18n.t('assets.currency.transferSpeedFast')}{/* 快 */}</Text>
+					<Text>
+						{I18n.t('assets.currency.transferSpeedFast')}
+						{/* 快 */}
+					</Text>
 				</View>
 				<View style={styles.next}>
 					<Button

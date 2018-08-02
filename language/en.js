@@ -81,7 +81,15 @@ export default {
 				changeToChinese: '简体中文',
 				changeToEnglish: 'English'
 			}
-		}
+		},
+		version: {
+			_newVersion: 'Find True',
+			_version: 'version',
+			upgradeNow: 'Upgrade Now',
+			noEscalation: 'No upgrade',
+			noUpdate: "Now it's the latest version, no need to update"
+		},
+		webHost: 'Web3 Settings'
 	},
 	assets: {
 		totalAssets: 'TotalAssets',
@@ -196,6 +204,7 @@ export default {
 		second: 'Second',
 		next: 'Next',
 		back: 'Back',
+		save: 'Save',
 		enterPassword: 'Enter password',
 		transferOutPrompt: 'No rollout is available during the voting period of the priority node.',
 		lockedWarehouse: 'Lock warehouse',

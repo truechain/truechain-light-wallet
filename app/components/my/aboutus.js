@@ -66,7 +66,7 @@ export class AboutUs extends Component {
 				if (ver_new > this.state.currentVersion) {
 					this.setState({ modalVisible: true });
 				} else {
-					Alert.alert(null, '当前已是最新版本，无需更新');
+					Alert.alert(null, I18n.t('my.version.noUpdate'));
 				}
 			});
 	}
@@ -84,7 +84,7 @@ export class AboutUs extends Component {
 				>
 					<View style={styles.modalCon}>
 						<View style={styles.modal}>
-							<Text style={styles.modalTitle}>发现True {this.state.newVersion}版本</Text>
+							<Text style={styles.modalTitle}>{I18n.t('my.version._newVersion')} {this.state.newVersion}{I18n.t('my.version._version')}</Text>
 							{/* <View>
 								<Text style={styles.versionText}>版本更新说明版本更新说明版本更新说明 版本更新说明版本更新说明版本更新说</Text>
 							</View> */}
@@ -98,7 +98,8 @@ export class AboutUs extends Component {
 											});
 										}}
 									>
-										暂不升级
+										{I18n.t('my.version.noEscalation')}
+										{/* 暂不升级 */}
 									</Text>
 								</View>
 								<View>
@@ -110,7 +111,8 @@ export class AboutUs extends Component {
 											);
 										}}
 									>
-										立即升级
+										{I18n.t('my.version.upgradeNow')}
+										{/* 立即升级 */}
 									</Text>
 								</View>
 							</View>

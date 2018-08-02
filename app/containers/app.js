@@ -2,7 +2,7 @@ import React from 'react';
 import { I18n } from '../../language/i18n'; // 多国语言支持
 import { StyleSheet, Text, AsyncStorage } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation'; // 页面切换 路由导航组件
-import { host } from '../utils/config';
+// import { host } from '../utils/config';
 
 //TabBar 底部栏位页面
 import Splash from '../pages/Splash'; // app开屏画面
@@ -46,6 +46,7 @@ import VoteInfo from '../components/node/vote/voteInfo'; //节点 -> 组件节�
 import SysLanguage from '../components/my/sysLanguage';
 import TransactionRecord from '../components/my/transactionRecord';
 import KnowledgePoint from '../components/my/knowledgePoint';
+import WebSetting from '../components/my/webSetting';
 
 //rely
 import Storage from 'react-native-storage';
@@ -85,30 +86,35 @@ storage
 	});
 
 const Web3 = require('web3');
-window.host = host;
 
-if (host.includes('ropsten')) {
-	store.dispatch({
-		type: 'CONTRACTADDR',
-		TRUEContractAddr: '0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1',
-		TTRContractAddr: '0x635AfeB8739f908A37b3d312cB4958CB2033F456'
-	});
-} else {
-	store.dispatch({
-		type: 'CONTRACTADDR',
-		TRUEContractAddr: '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab',
-		TTRContractAddr: '0xf2bb016e8c9c8975654dcd62f318323a8a79d48e'
-	});
+function check(host) {
+	if (host.includes('ropsten')) {
+		store.dispatch({
+			type: 'CONTRACTADDR',
+			TRUEContractAddr: '0x2792d677B7Ba6B7072bd2293F64BC0C1CDe23ac1',
+			TTRContractAddr: '0x635AfeB8739f908A37b3d312cB4958CB2033F456'
+		});
+	} else {
+		store.dispatch({
+			type: 'CONTRACTADDR',
+			TRUEContractAddr: '0xa4d17ab1ee0efdd23edc2869e7ba96b89eecf9ab',
+			TTRContractAddr: '0xf2bb016e8c9c8975654dcd62f318323a8a79d48e'
+		});
+	}
+	const web3 = new Web3(new Web3.providers.HttpProvider(host));
+	global.web3 = web3;
 }
 
-const web3 = new Web3(new Web3.providers.HttpProvider(host));
-window.web3 = web3;
-
-const IconUrl = {
-	assets: require('../assets/images/common/asset1_3x.png'),
-	node: require('../assets/images/common/node1_3x.png'),
-	my: require('../assets/images/common/my1_3x.png')
-};
+storage
+	.load({
+		key: 'webHost'
+	})
+	.then(({ webHost }) => {
+		check(webHost);
+	})
+	.catch((e) => {
+		check('https://mainnet.infura.io/');
+	});
 
 const Node = createStackNavigator({
 	Node: {
@@ -335,7 +341,7 @@ const App = createStackNavigator(
 		},
 		SignUpSuccess,
 		MyTeam,
-		PersonnelManagement:{
+		PersonnelManagement: {
 			screen: PersonnelManagement,
 			navigationOptions: {
 				headerTitle: () => <Text> {I18n.t('node.personnelManagement')}</Text>
@@ -367,7 +373,13 @@ const App = createStackNavigator(
 				headerTitle: () => <Text>{I18n.t('my.home.transactionRecord')} </Text>
 			}
 		},
-		KnowledgePoint
+		KnowledgePoint,
+		WebSetting: {
+			screen: WebSetting,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('my.webHost')} </Text>
+			}
+		}
 	},
 	{
 		// initialRouteName: 'Guide',

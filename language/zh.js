@@ -77,7 +77,15 @@ export default {
 				changeToChinese: '简体中文',
 				changeToEnglish: 'English'
 			}
-		}
+		},
+		version: {
+			_newVersion: '发现True',
+			_version: '版本',
+			upgradeNow: '立即升级',
+			noEscalation: '暂不升级',
+			noUpdate: '当前已是最新版本，无需更新'
+		},
+		webHost:'Web3 设置'
 	},
 	assets: {
 		totalAssets: '账户总资产',
@@ -126,11 +134,11 @@ export default {
 			_baseInfo: '基本信息',
 			_available: '可用票数：',
 			enterNumber_votes: '输入投票数量',
-			confirmVote:'确认投票',
-			voteFail:'投票失败，请稍后重试！',
-			voteSuccess:'投票打包交易完成',
-			voteApplyed:'投票交易发布',
-			voteApplyedSuccess:'投票交易打包成功'
+			confirmVote: '确认投票',
+			voteFail: '投票失败，请稍后重试！',
+			voteSuccess: '投票打包交易完成',
+			voteApplyed: '投票交易发布',
+			voteApplyedSuccess: '投票交易打包成功'
 		},
 		fullNode: {
 			fullNode_title: '全节点'
@@ -183,15 +191,16 @@ export default {
 		second: '秒',
 		next: '下一步',
 		back: '返回',
+		save: '保存',
 		enterPassword: '输入密码',
 		transferOutPrompt: '优先节点投票期间暂不提供转出功能!',
 		lockedWarehouse: '锁仓',
-		lockedWarehouseAddr:'锁仓地址',
+		lockedWarehouseAddr: '锁仓地址',
 		transferIn: '转入',
 		transferOut: '转出',
 		verifyPwd: '验证密码',
 		inputPwd: '输入您的密码',
-		PwdIsNull:'请输入密码',
+		PwdIsNull: '请输入密码',
 		define: '确定',
 		cancel: '取消',
 		copySuccess: '复制成功',

@@ -67,7 +67,8 @@ class Assets extends Component {
 			lock_num: 0,
 			newVersion: '--',
 			modalVisible: false,
-			currentVersion: null
+			currentVersion: null,
+			isRefreshing: true
 		};
 	}
 
@@ -89,6 +90,10 @@ class Assets extends Component {
 	}
 
 	getAllBalance() {
+		this.setState({
+			isRefreshing: true
+		});
+
 		web3.eth.getBalance(this.state.walletAddress).then((res) => {
 			let eth_banlance = this.show(web3.utils.fromWei(res, 'ether'));
 			this.setState({ eth_banlance });
@@ -112,6 +117,12 @@ class Assets extends Component {
 			}
 		);
 		this.updataWalletName();
+
+		setTimeout(() => {
+			this.setState({
+				isRefreshing: false
+			});
+		}, 1000);
 	}
 
 	componentDidMount() {
@@ -245,7 +256,7 @@ class Assets extends Component {
 					style={styles.scrollview}
 					refreshControl={
 						<RefreshControl
-							refreshing={false}
+							refreshing={this.state.isRefreshing}
 							onRefresh={() => {
 								this.getAllBalance();
 							}}
@@ -321,7 +332,7 @@ const styles = StyleSheet.create({
 	},
 	walletInfo: {
 		height: 230,
-		backgroundColor: '#528bf7',
+		backgroundColor: '#528bf7'
 		// borderBottomLeftRadius: 10,
 		// borderBottomRightRadius: 10
 	},

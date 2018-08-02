@@ -9,7 +9,7 @@ class ListFun extends Component {
 			<TouchableHighlight underlayColor={'transparent'} onPress={this.props.onPress}>
 				<View style={styles.fun}>
 					<Text style={styles.fun_text}>{this.props.fun_name}</Text>
-					<Icon name="icon-right" size={15} color="#000" />					
+					<Icon name="icon-right" size={15} color="#000" />
 				</View>
 			</TouchableHighlight>
 		);
@@ -22,25 +22,21 @@ class SysSet extends Component {
 		this.navigate = this.props.navigation.navigate;
 	}
 
-	static navigationOptions = {
-		headerTitle: '系统设置'
-	};
-
 	render() {
 		return (
 			<View style={styles.container}>
-				<ListFun
+				{/* <ListFun
 					fun_name="手势密码"
 					onPress={() => {
 						this.navigate('SetGesturePassword');
 					}}
-				/>
-				{/* <ListFun
-					fun_name="web3设置"
-					onPress={() => {
-						alert('web3设置');
-					}}
 				/> */}
+				<ListFun
+					fun_name={I18n.t('my.webHost')}
+					onPress={() => {
+						this.navigate('WebSetting');
+					}}
+				/>
 				<ListFun
 					fun_name={I18n.t('my.sysSetting.language._title')}
 					onPress={() => {
