@@ -11,11 +11,6 @@ const Web3 = require('web3');
 
 var web3 = new Web3(new Web3.providers.HttpProvider('https:mainnet.infura.io/'));
 class CreateWallet extends Component {
-	static navigationOptions = {
-		title:I18n.t('wallet.creatWallet'), // '创建钱包',
-		headerTintColor: '#000'
-	};
-
 	constructor() {
 		super();
 		this.state = {
@@ -28,7 +23,7 @@ class CreateWallet extends Component {
 	}
 
 	nameInput = {
-		placeholder: I18n.t('wallet.createWalletTip'),//'请输入钱包名称',
+		placeholder: I18n.t('wallet.createWalletTip'), //'请输入钱包名称',
 		inputContainerStyle: styles.textInput,
 		errorStyle: styles.errorStyle,
 		onChangeText: (walletName) => {
@@ -39,7 +34,7 @@ class CreateWallet extends Component {
 	};
 
 	pwd = {
-		placeholder: I18n.t('wallet.enterPwd'),//'输入您的密码',
+		placeholder: I18n.t('wallet.enterPwd'), //'输入您的密码',
 		inputContainerStyle: styles.textInput,
 		errorStyle: styles.errorStyle,
 		secureTextEntry: true,
@@ -51,7 +46,7 @@ class CreateWallet extends Component {
 	};
 
 	confirmPwd = {
-		placeholder: I18n.t('wallet.enterPwd'),//'确认您的密码',
+		placeholder: I18n.t('wallet.enterPwd'), //'确认您的密码',
 		inputContainerStyle: styles.textInput,
 		errorStyle: styles.errorStyle,
 		secureTextEntry: true,
@@ -64,17 +59,17 @@ class CreateWallet extends Component {
 
 	CreateWallet() {
 		if (!this.state.walletName) {
-			Alert.alert( null, I18n.t('wallet.createWalletTip') ); // 提示 请输入钱包名称
+			Alert.alert(null, I18n.t('wallet.createWalletTip')); // 提示 请输入钱包名称
 		} else if (!this.state.pwd) {
-			Alert.alert( null, I18n.t('wallet.enterPwd') ); // '提示', '请输入密码'
+			Alert.alert(null, I18n.t('wallet.enterPwd')); // '提示', '请输入密码'
 		} else if (this.state.pwd.length < 8) {
-			Alert.alert( null, I18n.t('wallet.pwdSuggest') ); // '提示', '建议密码不少于8位字符'
+			Alert.alert(null, I18n.t('wallet.pwdSuggest')); // '提示', '建议密码不少于8位字符'
 		} else if (!this.state.confirmPwd) {
-			Alert.alert( null, I18n.t('wallet.confirmPwd') ); // '提示', '请确认您的密码
-		} else if (this.state.pwd !== this.state.confirmPwd) {
-			Alert.alert( null, I18n.t('wallet.pwdIsWrong') ); // '提示', '两次密码不一致请重新输入'
+			Alert.alert(null, I18n.t('wallet.confirmPwd')); // '提示', '请确认您的密码
+		} else if (!this.state.pwd === this.state.confirmPwd) {
+			Alert.alert(null, I18n.t('wallet.pwdIsWrong')); // '提示', '两次密码不一致请重新输入'
 		} else if (!this.state.isAgree) {
-			Alert.alert( null, I18n.t('wallet.pwdIsWrong') ); // '提示', '请同意服务及隐私条款'
+			Alert.alert(null, I18n.t('wallet.pwdIsWrong')); // '提示', '请同意服务及隐私条款'
 		} else {
 			this.refs.loading.show();
 			setTimeout(() => {
@@ -135,25 +130,28 @@ class CreateWallet extends Component {
 			<View style={styles.container}>
 				<Loading ref="loading" />
 				<View style={styles.warning}>
-					 <Text style={styles.color_white}>
-						·{I18n.t('wallet.createWalletTipOfPwd')} {/*密码用于加密私钥，强度非常重要！*/} 
-					</Text> 
 					<Text style={styles.color_white}>
-					·{I18n.t('wallet.createWalletTipOfNoStore')}{/* ·True钱包不会储存密码，也无法帮您找回，请务必牢记！ */}
+						·{I18n.t('wallet.createWalletTipOfPwd')} {/*密码用于加密私钥，强度非常重要！*/}
+					</Text>
+					<Text style={styles.color_white}>
+						·{I18n.t('wallet.createWalletTipOfNoStore')}
+						{/* ·True钱包不会储存密码，也无法帮您找回，请务必牢记！ */}
 					</Text>
 				</View>
 				<View style={styles.padding_10}>
-					<Input 
-						{...this.nameInput} errorMessage={ this.state.walletName ? ' ' : I18n.t('wallet.createWalletTip') }  
+					<Input
+						{...this.nameInput}
+						errorMessage={this.state.walletName ? ' ' : I18n.t('wallet.createWalletTip')}
 						// '请输入钱包名称'
 					/>
-					<Input 
-						{...this.pwd} errorMessage={this.state.pwd ? ' ' : I18n.t('wallet.pwdSuggest') } 
+					<Input
+						{...this.pwd}
+						errorMessage={this.state.pwd ? ' ' : I18n.t('wallet.pwdSuggest')}
 						// '不少于8位字符，建议混合大小写字母、数字、特殊字符'
 					/>
 					<Input
 						{...this.confirmPwd}
-						errorMessage={this.state.pwd === this.state.confirmPwd ? ' ' :I18n.t('wallet.pwdIsWrong') }
+						errorMessage={this.state.pwd === this.state.confirmPwd ? ' ' : I18n.t('wallet.pwdIsWrong')}
 						// '两次密码输入不一致'
 					/>
 					<View style={styles.isAgree_flex}>
@@ -170,21 +168,21 @@ class CreateWallet extends Component {
 							}}
 						/>
 						<Text style={styles.color_999}>
-						    { I18n.t('wallet.iAgreeTerm') }
+							{I18n.t('wallet.iAgreeTerm')}
 							{/* 我已仔细阅读并同意 */}
-						</Text>
-						<Text
-							style={styles.color_aff}
-							onPress={() => {
-								this.props.navigation.navigate('UserPolicy');
-							}}
-						>
-							{"《" + I18n.t('wallet.term')+ "》" }
-							{/* 《服务及隐私条款》 */}
+							<Text
+								style={styles.color_aff}
+								onPress={() => {
+									this.props.navigation.navigate('UserPolicy');
+								}}
+							>
+								{'《' + I18n.t('wallet.term') + '》'}
+								{/* 《服务及隐私条款》 */}
+							</Text>
 						</Text>
 					</View>
 					<Button
-						title={ I18n.t('wallet.creatWallet') }
+						title={I18n.t('wallet.creatWallet')}
 						// "创建钱包"
 						onPress={this.CreateWallet.bind(this)}
 						buttonStyle={styles.buttonStyle}
@@ -208,7 +206,7 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
-		backgroundColor:'#fff'
+		backgroundColor: '#fff'
 	},
 	warning: {
 		height: 60,
