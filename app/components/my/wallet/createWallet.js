@@ -6,6 +6,7 @@ import lightwallet from 'eth-lightwallet';
 import Loading from 'react-native-whc-loading';
 import { StackActions, NavigationActions, withNavigation } from 'react-navigation';
 import { I18n } from '../../../../language/i18n';
+var DeviceInfo = require('react-native-device-info');
 
 const Web3 = require('web3');
 
@@ -18,8 +19,46 @@ class CreateWallet extends Component {
 			pwd: null,
 			confirmPwd: null,
 			isAgree: false,
-			disabledImport: false
+			disabledImport: false,
+			service_source: null
 		};
+	}
+
+	componentDidMount() {
+		storage
+			.load({
+				key: 'localLanguage'
+			})
+			.then((res) => {
+				res.localLanguage.includes('zh')
+					? this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_zh.pdf',
+								cache: true
+							}
+						})
+					: this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_en.pdf',
+								cache: true
+							}
+						});
+			})
+			.catch((e) => {
+				DeviceInfo.getDeviceLocale().includes('zh')
+					? this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_zh.pdf',
+								cache: true
+							}
+						})
+					: this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_en.pdf',
+								cache: true
+							}
+						});
+			});
 	}
 
 	nameInput = {
@@ -173,7 +212,9 @@ class CreateWallet extends Component {
 							<Text
 								style={styles.color_aff}
 								onPress={() => {
-									this.props.navigation.navigate('UserPolicy');
+									this.props.navigation.navigate('UserPolicy', {
+										service_source: this.state.service_source
+									});
 								}}
 							>
 								{'《' + I18n.t('wallet.term') + '》'}

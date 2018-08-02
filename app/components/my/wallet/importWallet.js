@@ -7,7 +7,7 @@ import TextWidget from '../../public/textWidget/textWidget';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import Loading from 'react-native-whc-loading';
-
+var DeviceInfo = require('react-native-device-info');
 var Mnemonic = require('bitcore-mnemonic');
 
 class ImportWallet extends Component {
@@ -28,8 +28,46 @@ class ImportWallet extends Component {
 			keystoreFile: null,
 			keystoreFileFlag: true,
 			keystorePwd: null,
-			keystoreisAgree: false
+			keystoreisAgree: false,
+			service_source: null
 		};
+	}
+
+	componentDidMount() {
+		storage
+			.load({
+				key: 'localLanguage'
+			})
+			.then((res) => {
+				res.localLanguage.includes('zh')
+					? this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_zh.pdf',
+								cache: true
+							}
+						})
+					: this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_en.pdf',
+								cache: true
+							}
+						});
+			})
+			.catch((e) => {
+				DeviceInfo.getDeviceLocale().includes('zh')
+					? this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_zh.pdf',
+								cache: true
+							}
+						})
+					: this.setState({
+							service_source: {
+								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_en.pdf',
+								cache: true
+							}
+						});
+			});
 	}
 
 	componentWillMount() {
@@ -388,7 +426,9 @@ class ImportWallet extends Component {
 							<Text
 								style={styles.color_aff}
 								onPress={() => {
-									this.props.navigation.navigate('UserPolicy');
+									this.props.navigation.navigate('UserPolicy', {
+										service_source: this.state.service_source
+									});
 								}}
 							>
 								{'《' + I18n.t('wallet.term') + '》'}
@@ -432,7 +472,9 @@ class ImportWallet extends Component {
 							<Text
 								style={styles.color_aff}
 								onPress={() => {
-									this.props.navigation.navigate('UserPolicy');
+									this.props.navigation.navigate('UserPolicy', {
+										service_source: this.state.service_source
+									});
 								}}
 							>
 								{'《' + I18n.t('wallet.term') + '》'}
@@ -479,7 +521,9 @@ class ImportWallet extends Component {
 							<Text
 								style={styles.color_aff}
 								onPress={() => {
-									this.props.navigation.navigate('UserPolicy');
+									this.props.navigation.navigate('UserPolicy', {
+										service_source: this.state.service_source
+									});
 								}}
 							>
 								{'《' + I18n.t('wallet.term') + '》'}

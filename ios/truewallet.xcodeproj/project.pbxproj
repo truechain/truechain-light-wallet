@@ -39,7 +39,7 @@
 		31C91850597846119CF92B0C /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BFE17970DAF496091CB5C97 /* libRNSVG-tvOS.a */; };
 		36A28248F7F44F23B99DA8DE /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C72C8CE88740309B7764F0 /* libRNCamera.a */; };
 		3C13CA0320F6083B00BC09F5 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13CA0020F6082B00BC09F5 /* libRCTPushNotification.a */; };
-		3C676CCB2112E4A600D4D7EC /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C676CCA2112E4A600D4D7EC /* bundle */; };
+		3C676D1D2112F86F00D4D7EC /* bundle in Resources */ = {isa = PBXBuildFile; fileRef = 3C676D1C2112F86F00D4D7EC /* bundle */; };
 		3C7151F220F3657C00E63617 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		3C719EEF211001690088E6F3 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C719EE1211001570088E6F3 /* libRNDeviceInfo.a */; };
 		3C719EF02110018E0088E6F3 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C719EE1211001570088E6F3 /* libRNDeviceInfo.a */; };
@@ -522,7 +522,7 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A1A9319B07A494C978279EE /* libRCTRestart.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTRestart.a; sourceTree = "<group>"; };
 		3C13C9FA20F6082A00BC09F5 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
-		3C676CCA2112E4A600D4D7EC /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
+		3C676D1C2112F86F00D4D7EC /* bundle */ = {isa = PBXFileReference; lastKnownFileType = folder; path = bundle; sourceTree = "<group>"; };
 		3C866A60210ABEC8005F3FD8 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = iconfont.ttf; path = ../../app/assets/iconfont/iconfont.ttf; sourceTree = "<group>"; };
 		3C8F15B020FF3BCF008A0251 /* RCTRestart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTRestart.xcodeproj; path = "../node_modules/react-native-restart/ios/RCTRestart.xcodeproj"; sourceTree = "<group>"; };
 		3CB4FD7B20FF0CBA00116540 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -732,7 +732,7 @@
 		13B07FAE1A68108700A75B9A /* truewallet */ = {
 			isa = PBXGroup;
 			children = (
-				3C676CCA2112E4A600D4D7EC /* bundle */,
+				3C676D1C2112F86F00D4D7EC /* bundle */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1682,7 +1682,7 @@
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				3CD5E13620F33ACF003D2686 /* EvilIcons.ttf in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				3C676CCB2112E4A600D4D7EC /* bundle in Resources */,
+				3C676D1D2112F86F00D4D7EC /* bundle in Resources */,
 				3CD5E12820F33ACF003D2686 /* Zocial.ttf in Resources */,
 				3CD5E13020F33ACF003D2686 /* SimpleLineIcons.ttf in Resources */,
 				3CD5E12E20F33ACF003D2686 /* MaterialCommunityIcons.ttf in Resources */,
