@@ -96,7 +96,7 @@ class CreateWallet extends Component {
 		}
 	};
 
-	CreateWallet() {
+	_CreateWallet() {
 		if (!this.state.walletName) {
 			Alert.alert(null, I18n.t('wallet.createWalletTip')); // 提示 请输入钱包名称
 		} else if (!this.state.pwd) {
@@ -105,10 +105,10 @@ class CreateWallet extends Component {
 			Alert.alert(null, I18n.t('wallet.pwdSuggest')); // '提示', '建议密码不少于8位字符'
 		} else if (!this.state.confirmPwd) {
 			Alert.alert(null, I18n.t('wallet.confirmPwd')); // '提示', '请确认您的密码
-		} else if (!this.state.pwd === this.state.confirmPwd) {
+		} else if (this.state.pwd !== this.state.confirmPwd) {
 			Alert.alert(null, I18n.t('wallet.pwdIsWrong')); // '提示', '两次密码不一致请重新输入'
 		} else if (!this.state.isAgree) {
-			Alert.alert(null, I18n.t('wallet.pwdIsWrong')); // '提示', '请同意服务及隐私条款'
+			Alert.alert(null, I18n.t('wallet.agreeTerm')); // '提示', '请同意服务及隐私条款'
 		} else {
 			this.refs.loading.show();
 			setTimeout(() => {
@@ -225,7 +225,7 @@ class CreateWallet extends Component {
 					<Button
 						title={I18n.t('wallet.creatWallet')}
 						// "创建钱包"
-						onPress={this.CreateWallet.bind(this)}
+						onPress={this._CreateWallet.bind(this)}
 						buttonStyle={styles.buttonStyle}
 						disabled={this.state.disabledImport}
 						disabledStyle={styles.disabledStyle}

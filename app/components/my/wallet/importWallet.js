@@ -7,6 +7,7 @@ import TextWidget from '../../public/textWidget/textWidget';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import Loading from 'react-native-whc-loading';
+import '../../../../shim';
 var DeviceInfo = require('react-native-device-info');
 var Mnemonic = require('bitcore-mnemonic');
 
