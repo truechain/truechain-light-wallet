@@ -47,6 +47,7 @@ export default {
 				minerFee: '矿工费用',
 				_title1: '账户管理',
 				loginIn: '登录',
+				quantity: '锁仓数量',
 				country_region: '国家/地区',
 				prompt: '未注册过的手机号将自动创建账号',
 				accountNumber: '账号',

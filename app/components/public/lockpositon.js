@@ -140,7 +140,7 @@ class LockPosition extends Component {
 					{this.state.isInput ? (
 						<TextInput
 							style={{ height: 50 }}
-							placeholder="锁仓数量"
+							placeholder={I18n.t('my.home.lockAccount.quantity')} //"锁仓数量"
 							underlineColorAndroid="transparent"
 							onChangeText={(lock_num) => {
 								this.setState({
@@ -182,7 +182,7 @@ class LockPosition extends Component {
 					</View>
 				</View>
 				<RadiusBtn
-					btnText={this.props.bottomBtnText}
+					btnText={I18n.t('public.next')}
 					onPress={() => {
 						this.setModalVisible(true);
 					}}

@@ -50,6 +50,7 @@ export default {
 				minerFee: 'Miner fee',
 				_title1: 'Account management',
 				loginIn: 'LogIn',
+				quantity: 'Number of locks',
 				country_region: 'country / region',
 				prompt: 'Unregistered mobile phone number will automatically create an account',
 				accountNumber: 'Account Number',
@@ -134,16 +135,16 @@ export default {
 		},
 		currency: {
 			transfer: 'Transfer',
-			recentTradeRecord: 'RecentTradeRecord',
+			recentTradeRecord: 'RecentTrade Record',
 			receipt: 'Receipt',
-			receiptAddr: 'ReceiptAddr',
-			transferCount: 'TransferCount',
+			receiptAddr: 'Receipt Address',
+			transferCount: 'Transfer Count',
 			transferRemarks: 'Remarks',
-			transferFee: 'TransferFee',
+			transferFee: 'Transfer Fee',
 			transferSpeedSlow: 'Slow',
 			transferSpeedFast: 'Fast',
 			nextStep: 'Next',
-			copyReceiptAddr: 'Copy ReceiptAddr'
+			copyReceiptAddr: 'Copy Receipt Address'
 		}
 	},
 	node: {

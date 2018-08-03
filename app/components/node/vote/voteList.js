@@ -105,7 +105,8 @@ class VoteList extends Component {
 	_OnRefresh() {
 		this.setState(
 			{
-				PageIndex: 0
+				PageIndex: 0,
+				isRefreshing: true
 			},
 			() => {
 				getNodeRank({
@@ -113,9 +114,18 @@ class VoteList extends Component {
 					pageIndex: this.state.PageIndex,
 					pageNumber: 15
 				}).then((res) => {
-					this.setState({
-						NodeData: res.data.data
-					});
+					this.setState(
+						{
+							NodeData: res.data.data
+						},
+						() => {
+							setTimeout(() => {
+								this.setState({
+									isRefreshing: false
+								});
+							}, 1000);
+						}
+					);
 				});
 			}
 		);
@@ -151,6 +161,8 @@ class VoteList extends Component {
 			<View style={styles.container}>
 				<Search
 					ref="search_box"
+					backgroundColor="#fff"
+					titleCancelColor='#949596'
 					onChangeText={(val) => {
 						setTimeout(() => {
 							searchTeam({
@@ -173,9 +185,9 @@ class VoteList extends Component {
 						<RefreshControl
 							refreshing={this.state.isRefreshing}
 							onRefresh={this._OnRefresh.bind(this)}
-							tintColor="#528bf7"
+							tintColor="#BABEBA"
 							title="Loading..."
-							titleColor="#528bf7"
+							titleColor="#9FA3A0"
 						/>
 					}
 					scrollEventThrottle={200}
