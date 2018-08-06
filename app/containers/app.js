@@ -47,6 +47,7 @@ import SysLanguage from '../components/my/sysLanguage';
 import TransactionRecord from '../components/my/transactionRecord';
 import KnowledgePoint from '../components/my/knowledgePoint';
 import WebSetting from '../components/my/webSetting';
+import QRscanner from '../components/public/QRscanner';
 
 //rely
 import Storage from 'react-native-storage';
@@ -389,6 +390,12 @@ const App = createStackNavigator(
 			screen: WebSetting,
 			navigationOptions: {
 				headerTitle: () => <Text>{I18n.t('my.webHost')} </Text>
+			}
+		},
+		QRscanner: {
+			screen: QRscanner,
+			navigationOptions: {
+				headerTitle: () => <Text>扫描</Text>
 			}
 		}
 	},

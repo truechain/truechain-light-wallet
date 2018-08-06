@@ -125,6 +125,7 @@ export default {
 		},
 		currency: {
 			transfer: '转账',
+			orderInformation:'订单信息',
 			recentTradeRecord: '近期交易记录',
 			receipt: '收款',
 			receiptAddr: '收款人钱包地址',
@@ -135,6 +136,11 @@ export default {
 			transferSpeedFast: '快',
 			nextStep: '下一步',
 			copyReceiptAddr: '复制收款地址'
+		},
+		transfer: {
+			checkAddress: '地址无效，请仔细检查！',
+			transferInAddress: '转入地址',
+			transferOutAddress: '转出地址'
 		}
 	},
 	node: {
@@ -202,6 +208,7 @@ export default {
 		next: '下一步',
 		back: '返回',
 		save: '保存',
+		payDetail: '支付详情',
 		enterPassword: '输入密码',
 		transferOutPrompt: '优先节点投票期间暂不提供转出功能!',
 		lockedWarehouse: '锁仓',
@@ -216,6 +223,7 @@ export default {
 		copySuccess: '复制成功',
 		copyFailed: '复制失败',
 		wrongPwd: '密码错误,请重新输入',
+		transactionSuccess: '发布交易成功！',
 		transactionFailed: '发布交易失败，请稍后重试！',
 		score: '分',
 		tickets: '票',

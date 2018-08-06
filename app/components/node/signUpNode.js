@@ -178,9 +178,7 @@ const styles = StyleSheet.create({
 		backgroundColor: '#007AFF',
 		borderRadius: 50,
 		justifyContent: 'center',
-		alignItems: 'center',
-		borderWidth: 1,
-		borderColor: 'green'
+		alignItems: 'center'
 	},
 	createTeam_text: {
 		paddingLeft: 10,

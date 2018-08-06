@@ -47,25 +47,24 @@ class Transfer extends Component {
 	}
 
 	static navigationOptions = ({ navigation }) => ({
-		headerTitle: I18n.t('assets.currency.transfer') // 转账
-		// headerRight: (
-		// 	<TouchableHighlight
-		// 		underlayColor={'transparent'}
-		// 		onPress={() => {
-		// 			alert('暂停');
-		// 			// navigation.state.params.navigate('QRscanner');
-		// 		}}
-		// 	>
-		// 		<Image
-		// 			style={{
-		// 				width: 20,
-		// 				height: 20,
-		// 				marginRight: 10
-		// 			}}
-		// 			source={require('../../assets/images/common/ercodeicon.png')}
-		// 		/>
-		// 	</TouchableHighlight>
-		// )
+		headerTitle: I18n.t('assets.currency.transfer'), // 转账
+		headerRight: (
+			<TouchableHighlight
+				underlayColor={'transparent'}
+				onPress={() => {
+					navigation.state.params.navigate('QRscanner');
+				}}
+			>
+				<Image
+					style={{
+						width: 20,
+						height: 20,
+						marginRight: 10
+					}}
+					source={require('../../assets/images/common/ercodeicon.png')}
+				/>
+			</TouchableHighlight>
+		)
 	});
 
 	show(num) {
@@ -107,13 +106,15 @@ class Transfer extends Component {
 						if (err) {
 							this.refs.loading.close();
 							setTimeout(() => {
-								Alert.alert(null, '发布交易失败，请稍后重试！');
+								Alert.alert(null, I18n.t('public.transactionFailed'));
+								// Alert.alert(null, '发布交易失败，请稍后重试！');
 							}, 100);
 							console.log(err);
 						} else {
 							this.refs.loading.close();
 							setTimeout(() => {
-								Alert.alert(null, '发布交易成功！', [
+								// 发布交易成功！
+								Alert.alert(null, I18n.t('public.transactionSuccess'), [
 									{
 										text: 'OK',
 										onPress: () => {
@@ -145,13 +146,15 @@ class Transfer extends Component {
 						if (err) {
 							this.refs.loading.close();
 							setTimeout(() => {
-								Alert.alert(null, '发布交易失败，请稍后重试！');
+								Alert.alert(null, I18n.t('public.transactionFailed'));
+								// Alert.alert(null, '发布交易失败，请稍后重试！');
 							}, 100);
 							console.log(err);
 						} else {
 							this.refs.loading.close();
 							setTimeout(() => {
-								Alert.alert(null, '发布交易成功！', [
+								// 发布交易成功！
+								Alert.alert(null, I18n.t('public.transactionSuccess'), [
 									{
 										text: 'OK',
 										onPress: () => {
@@ -174,6 +177,13 @@ class Transfer extends Component {
 		}
 	}
 
+	componentWillReceiveProps(nextProps) {
+		this.setState({
+			toAddress: nextProps.navigation.state.params.res
+		});
+		console.log(nextProps.navigation.state.params.res);
+	}
+
 	render() {
 		return (
 			<View style={styles.container}>
@@ -188,6 +198,7 @@ class Transfer extends Component {
 					//         }}
 					//     />
 					// }
+					value={this.state.toAddress.length > 0 ? this.state.toAddress : null}
 					onChangeText={(toAddress) => this.setState({ toAddress })}
 					onEndEditing={(event) => {
 						if (!web3.utils.isAddress(event.nativeEvent.text)) {
@@ -195,7 +206,8 @@ class Transfer extends Component {
 								toAddressFlag: false,
 								disabledNext: true
 							});
-							Alert.alert(null, '地址无效，请仔细检查！');
+							Alert.alert(null, I18n.t('assets.transfer.checkAddress'));
+							// Alert.alert(null, '地址无效，请仔细检查！');
 						} else {
 							this.setState(
 								{
@@ -307,29 +319,37 @@ class Transfer extends Component {
 				>
 					<ScrollView>
 						<View style={styles.paymentDetails_title}>
-							<Text>支付详情</Text>
+							{/* <Text>支付详情</Text> */}
+							<Text>{I18n.t('public.payDetail')}</Text>
 						</View>
-						<Detail key_k="订单信息" val="转账" style={styles.marginLeft_20} />
+						{/* 订单信息 */}
+						<Detail key_k={I18n.t('assets.currency.orderInformation')} val={I18n.t('assets.currency.transfer')} style={styles.marginLeft_20} />
 						<Detail
-							key_k="转入地址"
+							key_k={I18n.t('assets.transfer.transferInAddress')} //"转入地址"
 							val={this.state.fromAddr.replace(this.state.fromAddr.slice('10', '25'), '......')}
 							style={styles.marginLeft_20}
 						/>
 						<Detail
-							key_k="转出地址"
+							key_k={I18n.t('assets.transfer.transferOutAddress')} //"转出地址"
 							val={this.state.toAddress.replace(this.state.toAddress.slice('10', '25'), '......')}
 							style={styles.marginLeft_20}
 						/>
 						<Detail
-							key_k="矿工费用"
+							key_k={I18n.t('assets.currency.transferFee')} //"矿工费用"
 							gasPrice="666"
 							val={'≈ Gas(' + this.state.gas + ') * Gas Price(' + this.state.gasPrice + 'gwei)'}
 							style={styles.paymentDetails_item_gasPOramount}
 						/>
-						<Detail key_k="金额" val={this.state.amount} style={styles.paymentDetails_item_gasPOramount} />
+						{/* 金额 */}
+						<Detail
+							key_k={I18n.t('assets.currency.transferCount')}
+							val={this.state.amount}
+							style={styles.paymentDetails_item_gasPOramount}
+						/>
 						<View style={styles.next}>
 							<Button
-								title="下一步"
+								title={I18n.t('public.next')}
+								// title="下一步"
 								buttonStyle={styles.buttonStyle}
 								onPress={() => {
 									this.refs.transferPwd.open();
@@ -339,17 +359,17 @@ class Transfer extends Component {
 						<Modal style={styles.modal} position={'bottom'} ref={'transferPwd'} swipeArea={20}>
 							<ScrollView>
 								<View style={styles.paymentDetails_title}>
-									<Text>钱包密码</Text>
+									<Text>{I18n.t('public.verifyPwd')}</Text>
 								</View>
 								<Input
-									placeholder="请输入你的密码"
+									placeholder={I18n.t('public.inputPwd')} //"请输入你的密码"
 									secureTextEntry={true}
 									onChangeText={(password) => this.setState({ password })}
 									inputContainerStyle={[ styles.inputContainerStyle, styles.pwdStyle ]}
 								/>
 								<View style={styles.pwdNext}>
 									<Button
-										title="下一步"
+										title={I18n.t('public.next')} //"下一步"
 										buttonStyle={styles.buttonStyle}
 										onPress={() => {
 											this.refs.transferDetail.close();
@@ -358,7 +378,8 @@ class Transfer extends Component {
 												if (!this.state.password) {
 													this.refs.loading.close();
 													setTimeout(() => {
-														Alert.alert(null, '请输入密码');
+														// Alert.alert(null, '请输入密码');
+														Alert.alert(null, I18n.t('public.inputPwd'));
 													}, 100);
 												} else {
 													setTimeout(() => {
@@ -379,7 +400,8 @@ class Transfer extends Component {
 																		password: null
 																	},
 																	() => {
-																		Alert.alert(null, '密码错误,请重新输入');
+																		Alert.alert(null, I18n.t('public.wrongPwd'));
+																		// Alert.alert(null, '密码错误,请重新输入');
 																	}
 																);
 															}, 100);

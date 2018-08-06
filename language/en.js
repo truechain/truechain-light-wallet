@@ -16,10 +16,10 @@ export default {
 		path: 'Path',
 		enterPwd: 'Enter your password',
 		confirmPwd: 'Confirm your password',
-		creatWallet: 'Creat wallet',
+		creatWallet: 'Create wallet',
 		createWalletTip: 'Enter your wallet name',
 		pwdSuggest: 'Recommended password be no less than 8 characters',
-		pwdIsWrong: 'The passwords should be consistent',
+		pwdIsWrong: 'The passwords should be consistant',
 		agreeTerm: 'Agree to the terms of service',
 		createWalletTipOfPwd: 'Strong password is needed to encrypt private key！',
 		createWalletTipOfNoStore:
@@ -32,7 +32,7 @@ export default {
 		privateKeyIsNull: 'Private key cannot be empty',
 		privateKeyIsWrong: 'Wrong private key, please enter again',
 		keystoreIsNull: 'Please enter keystore information ',
-		wrongByKeystoreOrPwd: 'Failed to import wallet, please check if keystore or password  is correct',
+		wrongByKeystoreOrPwd: 'Failed to import wallet, please check private keystore or password  is correct',
 		copyKeystoreTip: 'Please paste the content of Ethereum (ETH) wallet keystore file to input box'
 	},
 	tab: {
@@ -113,7 +113,7 @@ export default {
 				'Please copy and paste keystore files to a safe place offline for saving. Please do not save the files in the mail box, notebook, cloud storage or other online chatting tools, it’s very risky.',
 			keystore_network: 'Do not use Internet for transmission',
 			keystore_network_item:
-				'Do not use online tools to transmit keystore files. Once the files were acquired by hackers, irreversible loss may happen to your assets. It is suggested to transmit files offline using QR code.',
+				'Do not use online tools to transmit keystore files. Once the files acquired by hackers, irreversible loss may happen to your assets. It is suggested to transmit files offline using QR code.',
 			keystore_pwdsave: 'Password Safe Saving',
 			keystore_pwdsave_item:
 				'If online saving is needed, it is suggested to use password saving software with higher level of security to keep the files',
@@ -130,11 +130,14 @@ export default {
 			mnemonicError: 'The mnemonic is incorrect. Please re-enter',
 			copyYourMnemonic: 'Copy your mnemonic',
 			confirmMnemonic: 'Confirm your wallet mnemonic',
-			mnemonicWring: 'The mnemonic is used to restore the wallet or reset the wallet password, copy it to paper accurately, and store it in a safe place that only you know.',
-			confirmMnemonicWring: 'Please click on the mnemonic in order to confirm that your backup mnemonic is correct.'
+			mnemonicWring:
+				'The mnemonic is used to restore the wallet or reset the wallet password, copy it to paper accurately, and store it in a safe place that only you know.',
+			confirmMnemonicWring:
+				'Please click on the mnemonic in order to confirm that your backup mnemonic is correct.'
 		},
 		currency: {
 			transfer: 'Transfer',
+			orderInformation:'Order Information',
 			recentTradeRecord: 'RecentTrade Record',
 			receipt: 'Receipt',
 			receiptAddr: 'Receipt Address',
@@ -145,6 +148,11 @@ export default {
 			transferSpeedFast: 'Fast',
 			nextStep: 'Next',
 			copyReceiptAddr: 'Copy Receipt Address'
+		},
+		transfer: {
+			checkAddress: 'Invalid address, please check carefully',
+			transferInAddress: 'In Address',
+			transferOutAddress: 'To Address'
 		}
 	},
 	node: {
@@ -199,7 +207,7 @@ export default {
 			qu_1:
 				'Sorry, you don’t have 2,000 TRUE in lock account and can’t register for election as an individual at this time. ',
 			qu_2:
-				'Sorry, you don’t have 50000 TRUE in lock account and can’t register for election as an individual at this time. ',
+				'Sorry, you don’t have 50,000 TRUE in lock account and can’t register for election as an individual at this time. ',
 			qu_3: 'At least 1 TRUE is required to create a team'
 		},
 		application: {
@@ -215,6 +223,7 @@ export default {
 		next: 'Next',
 		back: 'Back',
 		save: 'Save',
+		payDetail: 'Payment details',
 		enterPassword: 'Enter password',
 		transferOutPrompt: 'No rollout is available during the voting period of the priority node.',
 		lockedWarehouse: 'Lock warehouse',
@@ -229,6 +238,7 @@ export default {
 		copySuccess: 'Successful copy',
 		copyFailed: 'Replication failed',
 		wrongPwd: 'Password error, please retype',
+		transactionSuccess: 'Publish the transaction successfully!',
 		transactionFailed: 'The posting transaction failed. Please try again later!',
 		score: 'Score',
 		tickets: 'Votes',
