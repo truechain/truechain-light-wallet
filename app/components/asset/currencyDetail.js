@@ -26,7 +26,7 @@ class Recording extends Component {
 	render() {
 		return (
 			<View style={styles.recordDetail_item}>
-				<Text>{this.props.to.replace(this.props.to.slice('10', '30'), '......')}</Text>
+				<Text>{this.props.to.replace(this.props.to.slice('8', '32'), '......')}</Text>
 				<Text>{this.show(this.props.value / 1e18)}</Text>
 			</View>
 		);

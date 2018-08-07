@@ -323,7 +323,11 @@ class Transfer extends Component {
 							<Text>{I18n.t('public.payDetail')}</Text>
 						</View>
 						{/* 订单信息 */}
-						<Detail key_k={I18n.t('assets.currency.orderInformation')} val={I18n.t('assets.currency.transfer')} style={styles.marginLeft_20} />
+						<Detail
+							key_k={I18n.t('assets.currency.orderInformation')}
+							val={I18n.t('assets.currency.transfer')}
+							style={styles.marginLeft_20}
+						/>
 						<Detail
 							key_k={I18n.t('assets.transfer.transferInAddress')} //"转入地址"
 							val={this.state.fromAddr.replace(this.state.fromAddr.slice('10', '25'), '......')}
@@ -356,7 +360,13 @@ class Transfer extends Component {
 								}}
 							/>
 						</View>
-						<Modal style={styles.modal} position={'bottom'} ref={'transferPwd'} swipeArea={20}>
+						<Modal
+							style={styles.modal}
+							coverScreen={true}
+							position={'bottom'}
+							ref={'transferPwd'}
+							swipeArea={20}
+						>
 							<ScrollView>
 								<View style={styles.paymentDetails_title}>
 									<Text>{I18n.t('public.verifyPwd')}</Text>

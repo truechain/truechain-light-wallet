@@ -125,6 +125,7 @@ class CreateTeam extends Component {
 						disabled={
 							this.state.personalNickNameFlag || this.state.teamNickNameFlag || this.state.declarationFlag
 						}
+						disabledStyle={styles.borderRadius}
 						buttonStyle={styles.buttonStyle}
 						onPress={() => {
 							this._signUp();
@@ -141,6 +142,9 @@ export default withNavigation(CreateTeam);
 const styles = StyleSheet.create({
 	marginTop_10: {
 		marginTop: 10
+	},
+	borderRadius: {
+		borderRadius: 50
 	},
 	container: {
 		flex: 1,
