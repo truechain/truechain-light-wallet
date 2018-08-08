@@ -104,7 +104,6 @@ const styles = StyleSheet.create({
 		padding: 10
 	},
 	warningBox: {
-		height: 85,
 		justifyContent: 'space-around'
 	},
 	color_999: {

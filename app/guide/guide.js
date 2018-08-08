@@ -42,6 +42,7 @@ export default withNavigation(Guide);
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		paddingTop: 50,
 		justifyContent: 'space-around',
 		alignItems: 'center',
 		backgroundColor: '#F5FCFF'

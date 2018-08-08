@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import '../../../../shim';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, Dimensions } from 'react-native';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import lightwallet from 'eth-lightwallet';
 import Loading from 'react-native-whc-loading';
 import { StackActions, NavigationActions, withNavigation } from 'react-navigation';
 import { I18n } from '../../../../language/i18n';
+const screen = Dimensions.get('window');
 var DeviceInfo = require('react-native-device-info');
 
 const Web3 = require('web3');
@@ -240,7 +241,8 @@ export default withNavigation(CreateWallet);
 
 const styles = StyleSheet.create({
 	color_white: {
-		color: '#fff'
+		color: '#fff',
+		fontSize: 12
 	},
 	padding_10: {
 		padding: 10
@@ -250,10 +252,9 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff'
 	},
 	warning: {
-		height: 60,
 		backgroundColor: '#528bf7',
 		justifyContent: 'center',
-		paddingLeft: 10
+		padding: 10
 	},
 	textInput: {
 		borderBottomWidth: 1,
@@ -270,12 +271,13 @@ const styles = StyleSheet.create({
 	},
 	checkBox: {
 		padding: 0,
-		width: 26,
+		width: 20,
 		borderWidth: 0,
 		backgroundColor: 'transparent'
 	},
 	color_999: {
-		color: '#999'
+		color: '#999',
+		width: screen.width - 50
 	},
 	color_aff: {
 		color: '#007AFF'

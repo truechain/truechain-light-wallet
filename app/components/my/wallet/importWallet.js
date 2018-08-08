@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, ScrollView, Dimensions } from 'react-native';
 import { I18n } from '../../../../language/i18n';
 import lightWallet from 'eth-lightwallet';
 import { withNavigation } from 'react-navigation';
@@ -8,6 +8,7 @@ import { CheckBox, Button, Input } from 'react-native-elements';
 import ScrollableTabView, { DefaultTabBar } from 'react-native-scrollable-tab-view';
 import Loading from 'react-native-whc-loading';
 import '../../../../shim';
+const screen = Dimensions.get('window');
 var DeviceInfo = require('react-native-device-info');
 var Mnemonic = require('bitcore-mnemonic');
 
@@ -112,7 +113,7 @@ class ImportWallet extends Component {
 	};
 
 	keystoreArea = {
-		placeholder: 'keystore文件',
+		placeholder: 'keystore',
 		multiline: true,
 		style: styles.mnemonicArea,
 		onChange: (e) => {
@@ -130,7 +131,7 @@ class ImportWallet extends Component {
 	};
 
 	privateKeyArea = {
-		placeholder: '明文私钥',
+		placeholder: 'PrivateKey',
 		multiline: true,
 		style: styles.mnemonicArea,
 		onChange: (e) => {
@@ -396,149 +397,163 @@ class ImportWallet extends Component {
 				renderTabBar={() => <DefaultTabBar />}
 			>
 				<View tabLabel={I18n.t('wallet.mnemonic')} style={styles.padding_10}>
-					<TextWidget {...this.mnemonicArea} />
-					<Input {...this.path} />
-					<Input
-						{...this.mnemonicPwd}
-						errorMessage={this.state.mnemonicPwd ? ' ' : I18n.t('wallet.pwdSuggest')}
-						// '不少于8位字符，建议混合大小写字母、数字、特殊字符'
-					/>
-					<Input
-						{...this.confirmMnemonicPwd}
-						errorMessage={
-							this.state.mnemonicPwd === this.state.confirmMnemonicPwd ? ' ' : I18n.t('wallet.pwdIsWrong')
-						}
-						// '两次密码输入不一致'
-					/>
-					<View style={styles.isAgree_flex}>
-						<CheckBox
-							title=" "
-							iconType="material"
-							checkedIcon="check-circle"
-							uncheckedIcon="check-circle"
-							checkedColor="#007AFF"
-							checked={this.state.mnemonisAgree}
-							containerStyle={styles.checkBox}
-							onPress={() => {
-								this.setState({ mnemonisAgree: !this.state.mnemonisAgree });
-							}}
+					<ScrollView>
+						<TextWidget {...this.mnemonicArea} />
+						<Input {...this.path} />
+						<Input
+							{...this.mnemonicPwd}
+							errorMessage={this.state.mnemonicPwd ? ' ' : I18n.t('wallet.pwdSuggest')}
+							// '不少于8位字符，建议混合大小写字母、数字、特殊字符'
 						/>
-						<Text style={styles.color_999}>
-							{I18n.t('wallet.iAgreeTerm')}
-							{/* 我已仔细阅读并同意 */}
-							<Text
-								style={styles.color_aff}
+						<Input
+							{...this.confirmMnemonicPwd}
+							errorMessage={
+								this.state.mnemonicPwd === this.state.confirmMnemonicPwd ? (
+									' '
+								) : (
+									I18n.t('wallet.pwdIsWrong')
+								)
+							}
+							// '两次密码输入不一致'
+						/>
+						<View style={styles.isAgree_flex}>
+							<CheckBox
+								title=" "
+								iconType="material"
+								checkedIcon="check-circle"
+								uncheckedIcon="check-circle"
+								checkedColor="#007AFF"
+								checked={this.state.mnemonisAgree}
+								containerStyle={styles.checkBox}
 								onPress={() => {
-									this.props.navigation.navigate('UserPolicy', {
-										service_source: this.state.service_source
-									});
+									this.setState({ mnemonisAgree: !this.state.mnemonisAgree });
 								}}
-							>
-								{'《' + I18n.t('wallet.term') + '》'}
-								{/* 《服务及隐私条款》 */}
+							/>
+							<Text style={styles.color_999}>
+								{I18n.t('wallet.iAgreeTerm')}
+								{/* 我已仔细阅读并同意 */}
+								<Text
+									style={styles.color_aff}
+									onPress={() => {
+										this.props.navigation.navigate('UserPolicy', {
+											service_source: this.state.service_source
+										});
+									}}
+								>
+									{'《' + I18n.t('wallet.term') + '》'}
+									{/* 《服务及隐私条款》 */}
+								</Text>
 							</Text>
-						</Text>
-					</View>
+						</View>
 
-					<Button
-						title={I18n.t('guide.importWallet')}
-						onPress={this._mnemonicImport.bind(this)}
-						buttonStyle={styles.buttonStyle}
-						disabled={this.state.disabledImport}
-						disabledStyle={styles.disabledStyle}
-					/>
-					<Loading ref="loading" />
+						<Button
+							title={I18n.t('guide.importWallet')}
+							onPress={this._mnemonicImport.bind(this)}
+							buttonStyle={styles.buttonStyle}
+							disabled={this.state.disabledImport}
+							disabledStyle={styles.disabledStyle}
+						/>
+						<Loading ref="loading" />
+					</ScrollView>
 				</View>
 				<View tabLabel={I18n.t('wallet.officialWallet')} style={styles.padding_10}>
-					<Text style={styles.color_999}>
-						{I18n.t('wallet.copyKeystoreTip')}
-						{/* 直接复制粘贴以太坊官方钱包keystore文件内容至输入框。 */}
-					</Text>
-					<TextWidget {...this.keystoreArea} />
-					<Input {...this.keystorePwd} />
-					<View style={styles.isAgree_flex}>
-						<CheckBox
-							title=" "
-							iconType="material"
-							checkedIcon="check-circle"
-							uncheckedIcon="check-circle"
-							checkedColor="#007AFF"
-							checked={this.state.keystoreisAgree}
-							containerStyle={styles.checkBox}
-							onPress={() => {
-								this.setState({ keystoreisAgree: !this.state.keystoreisAgree });
-							}}
-						/>
+					<ScrollView>
 						<Text style={styles.color_999}>
-							{I18n.t('wallet.iAgreeTerm')}
-							{/* 我已仔细阅读并同意 */}
-							<Text
-								style={styles.color_aff}
-								onPress={() => {
-									this.props.navigation.navigate('UserPolicy', {
-										service_source: this.state.service_source
-									});
-								}}
-							>
-								{'《' + I18n.t('wallet.term') + '》'}
-								{/* 《服务及隐私条款》 */}
-							</Text>
+							{I18n.t('wallet.copyKeystoreTip')}
+							{/* 直接复制粘贴以太坊官方钱包keystore文件内容至输入框。 */}
 						</Text>
-					</View>
-					<Button
-						title={I18n.t('guide.importWallet')}
-						onPress={this._keystoreImport.bind(this)}
-						buttonStyle={styles.buttonStyle}
-					/>
+						<TextWidget {...this.keystoreArea} />
+						<Input {...this.keystorePwd} />
+						<View style={styles.isAgree_flex}>
+							<CheckBox
+								title=" "
+								iconType="material"
+								checkedIcon="check-circle"
+								uncheckedIcon="check-circle"
+								checkedColor="#007AFF"
+								checked={this.state.keystoreisAgree}
+								containerStyle={styles.checkBox}
+								onPress={() => {
+									this.setState({ keystoreisAgree: !this.state.keystoreisAgree });
+								}}
+							/>
+							<Text style={styles.color_999}>
+								{I18n.t('wallet.iAgreeTerm')}
+								{/* 我已仔细阅读并同意 */}
+								<Text
+									style={styles.color_aff}
+									onPress={() => {
+										this.props.navigation.navigate('UserPolicy', {
+											service_source: this.state.service_source
+										});
+									}}
+								>
+									{'《' + I18n.t('wallet.term') + '》'}
+									{/* 《服务及隐私条款》 */}
+								</Text>
+							</Text>
+						</View>
+						<Button
+							title={I18n.t('guide.importWallet')}
+							onPress={this._keystoreImport.bind(this)}
+							buttonStyle={styles.buttonStyle}
+						/>
+					</ScrollView>
 				</View>
 				<View tabLabel={I18n.t('wallet.privateKey')} style={styles.padding_10}>
-					<TextWidget {...this.privateKeyArea} />
-					<Input
-						{...this.privatePwd}
-						errorMessage={this.state.privatePwd ? ' ' : I18n.t('wallet.pwdSuggest')}
-						// '不少于8位字符，建议混合大小写字母、数字、特殊字符'
-					/>
-					<Input
-						{...this.confirmPrivatePwd}
-						errorMessage={
-							this.state.privatePwd === this.state.confirmPrivatePwd ? ' ' : I18n.t('wallet.pwdIsWrong')
-						}
-						// '两次密码输入不一致'
-					/>
-					<View style={styles.isAgree_flex}>
-						<CheckBox
-							title=" "
-							iconType="material"
-							checkedIcon="check-circle"
-							uncheckedIcon="check-circle"
-							checkedColor="#007AFF"
-							checked={this.state.privateisAgree}
-							containerStyle={styles.checkBox}
-							onPress={() => {
-								this.setState({ privateisAgree: !this.state.privateisAgree });
-							}}
+					<ScrollView>
+						<TextWidget {...this.privateKeyArea} />
+						<Input
+							{...this.privatePwd}
+							errorMessage={this.state.privatePwd ? ' ' : I18n.t('wallet.pwdSuggest')}
+							// '不少于8位字符，建议混合大小写字母、数字、特殊字符'
 						/>
-						<Text style={styles.color_999}>
-							{I18n.t('wallet.iAgreeTerm')}
-							{/* 我已仔细阅读并同意 */}
-							<Text
-								style={styles.color_aff}
+						<Input
+							{...this.confirmPrivatePwd}
+							errorMessage={
+								this.state.privatePwd === this.state.confirmPrivatePwd ? (
+									' '
+								) : (
+									I18n.t('wallet.pwdIsWrong')
+								)
+							}
+							// '两次密码输入不一致'
+						/>
+						<View style={styles.isAgree_flex}>
+							<CheckBox
+								title=" "
+								iconType="material"
+								checkedIcon="check-circle"
+								uncheckedIcon="check-circle"
+								checkedColor="#007AFF"
+								checked={this.state.privateisAgree}
+								containerStyle={styles.checkBox}
 								onPress={() => {
-									this.props.navigation.navigate('UserPolicy', {
-										service_source: this.state.service_source
-									});
+									this.setState({ privateisAgree: !this.state.privateisAgree });
 								}}
-							>
-								{'《' + I18n.t('wallet.term') + '》'}
-								{/* 《服务及隐私条款》 */}
+							/>
+							<Text style={styles.color_999}>
+								{I18n.t('wallet.iAgreeTerm')}
+								{/* 我已仔细阅读并同意 */}
+								<Text
+									style={styles.color_aff}
+									onPress={() => {
+										this.props.navigation.navigate('UserPolicy', {
+											service_source: this.state.service_source
+										});
+									}}
+								>
+									{'《' + I18n.t('wallet.term') + '》'}
+									{/* 《服务及隐私条款》 */}
+								</Text>
 							</Text>
-						</Text>
-					</View>
-					<Button
-						title={I18n.t('guide.importWallet')}
-						onPress={this._privateKeyImport.bind(this)}
-						buttonStyle={styles.buttonStyle}
-					/>
+						</View>
+						<Button
+							title={I18n.t('guide.importWallet')}
+							onPress={this._privateKeyImport.bind(this)}
+							buttonStyle={styles.buttonStyle}
+						/>
+					</ScrollView>
 				</View>
 			</ScrollableTabView>
 		);
@@ -564,7 +579,8 @@ const styles = StyleSheet.create({
 		padding: 5
 	},
 	padding_10: {
-		padding: 10
+		padding: 10,
+		flex: 1
 	},
 	isAgree_flex: {
 		flexDirection: 'row',
@@ -572,7 +588,8 @@ const styles = StyleSheet.create({
 		overflow: 'hidden'
 	},
 	color_999: {
-		color: '#999'
+		color: '#999',
+		width: screen.width - 50
 	},
 	color_aff: {
 		color: '#007AFF'
