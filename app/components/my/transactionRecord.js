@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, StyleSheet, ScrollView, Dimensions, FlatList } from 'react-native';
+import { Text, View, Image, StyleSheet, ScrollView, Dimensions, FlatList, ActivityIndicator } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { getTransactionRecord, getERC20TransactionRecord } from '../../api/index';
 import { I18n } from '../../../language/i18n';
@@ -59,7 +59,7 @@ class TransactionRecord extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			recordData: []
+			recordData: null
 		};
 	}
 
@@ -74,10 +74,12 @@ class TransactionRecord extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				{this.state.recordData ? (
+				{this.state.recordData ? this.state.recordData.length >= 1 ? (
 					<FlatList data={this.state.recordData} renderItem={(item) => <TransactionRecordOO data={item} />} />
 				) : (
-					<Text style={{ textAlign: 'center' }}>~</Text>
+					<Text style={styles.textAlign}>~</Text>
+				) : (
+					<ActivityIndicator />
 				)}
 			</View>
 		);
