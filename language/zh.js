@@ -54,6 +54,9 @@ export default {
 				logOut: '退出账号'
 			},
 			systemSetting: '系统设置',
+			Versions: {
+				_title: '版本日志'
+			},
 			helpCenter: {
 				_title: '帮助中心',
 				mnemonic: '什么是助记词',
@@ -125,7 +128,7 @@ export default {
 		},
 		currency: {
 			transfer: '转账',
-			orderInformation:'订单信息',
+			orderInformation: '订单信息',
 			recentTradeRecord: '近期交易记录',
 			receipt: '收款',
 			receiptAddr: '收款人钱包地址',

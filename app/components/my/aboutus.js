@@ -16,7 +16,7 @@ export class AboutUs extends Component {
 		this.setState({
 			currentVersion: DeviceInfo.getVersion().replace(/\./g, '')
 		});
-
+		
 		storage
 			.load({
 				key: 'localLanguage'
@@ -84,7 +84,10 @@ export class AboutUs extends Component {
 				>
 					<View style={styles.modalCon}>
 						<View style={styles.modal}>
-							<Text style={styles.modalTitle}>{I18n.t('my.version._newVersion')} {this.state.newVersion}{I18n.t('my.version._version')}</Text>
+							<Text style={styles.modalTitle}>
+								{I18n.t('my.version._newVersion')} {this.state.newVersion}
+								{I18n.t('my.version._version')}
+							</Text>
 							{/* <View>
 								<Text style={styles.versionText}>版本更新说明版本更新说明版本更新说明 版本更新说明版本更新说明版本更新说</Text>
 							</View> */}
@@ -126,7 +129,10 @@ export class AboutUs extends Component {
 						style={styles.logo}
 					/>
 					<View>
-						<Text style={styles.version}> {I18n.t('my.home.aboutUs.currentVersion')}：1.0</Text>
+						<Text style={styles.version}>
+							{' '}
+							{I18n.t('my.home.aboutUs.currentVersion')}：{DeviceInfo.getVersion()}
+						</Text>
 					</View>
 					<View>
 						<Text style={[ styles.txtCen, styles.descr ]}>

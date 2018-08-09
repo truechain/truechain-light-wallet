@@ -290,7 +290,12 @@ const App = createStackNavigator(
 				headerTitle: () => <Text>{I18n.t('my.home.aboutUs.useAgreement')}</Text>
 			}
 		},
-		Versions,
+		Versions:{
+			screen: Versions,
+			navigationOptions: {
+				headerTitle: () => <Text>{I18n.t('my.home.Versions._title')}</Text>
+			}
+		},
 		HelperCenter: {
 			screen: HelperCenter,
 			navigationOptions: {

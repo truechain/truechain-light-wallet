@@ -26,7 +26,7 @@ class Recording extends Component {
 	render() {
 		return (
 			<View style={styles.recordDetail_item}>
-				<Text>{this.props.to.replace(this.props.to.slice('10', '33'), '......')}</Text>
+				<Text>{this.props.to.replace(this.props.to.slice('10', '30'), '......')}</Text>
 				<Text>{this.show(this.props.value / 1e18)} ether</Text>
 			</View>
 		);
@@ -135,31 +135,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		height: 75,
 		padding: 10,
-		flexDirection: 'row',
-		justifyContent: 'space-between'
-	},
-	bottom_fun: {
-		position: 'absolute',
-		bottom: 0,
-		left: 0,
-		right: 0,
-		flexDirection: 'row',
-		justifyContent: 'center',
-		borderWidth: 1,
-		borderColor: 'transparent'
-	},
-	bottom_fun_item: {
-		height: 50,
-		lineHeight: 50,
-		color: '#fff',
-		textAlign: 'center',
-		width: Dimensions.get('window').width / 2
-	},
-	bottom_fun_item_transfer: {
-		backgroundColor: '#35ccbf'
-	},
-	bottom_fun_item_receipt: {
-		backgroundColor: '#528bf7'
+		// flexDirection: 'row',
+		justifyContent: 'space-around',
 	},
 	line: {
 		borderBottomColor: '#ccc',

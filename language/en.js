@@ -57,6 +57,9 @@ export default {
 				logOut: 'Exit account'
 			},
 			systemSetting: 'System Setting',
+			Versions: {
+				_title: 'Version log'
+			},
 			helpCenter: {
 				_title: 'Help Center',
 				mnemonic: 'What is a mnemonic?',

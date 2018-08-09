@@ -435,7 +435,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		alignItems: 'center',
 		justifyContent: 'center',
-		width: screen.width * 0.4
+		width: screen.width * 0.35
 	},
 	lockNum: {
 		width: screen.width * 0.25

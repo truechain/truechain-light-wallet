@@ -135,7 +135,7 @@ class VoteInfo extends Component {
 						<View style={styles.headerInfo_item}>
 							<Text>{I18n.t('node.personSignUp.personSignUp_Info')}</Text>
 							{/* 个人信息 */}
-							<Text style={[ styles.color_999, styles.marginTop_5, styles.address ]}>
+							<Text style={[ styles.color_999, styles.address ]}>
 								{this.state.walletAddress.replace(this.state.walletAddress.slice('15', '25'), '......')}
 							</Text>
 						</View>

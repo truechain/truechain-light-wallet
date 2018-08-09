@@ -365,6 +365,7 @@ class Transfer extends Component {
 							coverScreen={true}
 							position={'bottom'}
 							ref={'transferPwd'}
+							isOpen={this.state.huhu}
 							swipeArea={20}
 						>
 							<ScrollView>
@@ -383,6 +384,7 @@ class Transfer extends Component {
 										buttonStyle={styles.buttonStyle}
 										onPress={() => {
 											this.refs.transferDetail.close();
+											this.refs.transferPwd.close();
 											setTimeout(() => {
 												this.refs.loading.show();
 												if (!this.state.password) {
@@ -473,7 +475,7 @@ const styles = StyleSheet.create({
 		borderRadius: 30
 	},
 	modal: {
-		height: screen.height * 0.65
+		height: screen.height * 0.5
 	},
 	paymentDetails_title: {
 		width: screen.width,
