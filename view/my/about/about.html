@@ -65,7 +65,7 @@
 					mui.ajax({
 						type: "get",
 						dataType: 'json',
-						url: 'http://39.105.125.189:7001/checkVersion', //获取当前上架APPStore版本信息
+						url: 'http://45.40.243.125:7001/checkVersion', //获取当前上架APPStore版本信息
 						success: function(res) {
 							var ver_new = (res.data.version).replace(/\./g, '');
 							var ver_used = ver.replace(/\./g, '');
