@@ -147,7 +147,7 @@ class Assets extends Component {
 		this.updataWalletName();
 
 		this.setState({
-			currentVersion: DeviceInfo.getVersion().replace(/\./g, '')
+			currentVersion: DeviceInfo.default.getVersion().replace(/\./g, '')
 		});
 
 		// checkVersion()

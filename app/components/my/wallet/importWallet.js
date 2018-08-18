@@ -56,7 +56,7 @@ class ImportWallet extends Component {
 						});
 			})
 			.catch((e) => {
-				DeviceInfo.getDeviceLocale().includes('zh')
+				DeviceInfo.default.getDeviceLocale().includes('zh')
 					? this.setState({
 							service_source: {
 								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_zh.pdf',

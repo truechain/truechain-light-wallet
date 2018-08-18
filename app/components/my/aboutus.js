@@ -14,7 +14,7 @@ export class AboutUs extends Component {
 
 	componentDidMount() {
 		this.setState({
-			currentVersion: DeviceInfo.getVersion().replace(/\./g, '')
+			currentVersion: DeviceInfo.default.getVersion().replace(/\./g, '')
 		});
 		
 		storage
@@ -37,7 +37,7 @@ export class AboutUs extends Component {
 						});
 			})
 			.catch((e) => {
-				DeviceInfo.getDeviceLocale().includes('zh')
+				DeviceInfo.default.getDeviceLocale().includes('zh')
 					? this.setState({
 							service_source: {
 								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_zh.pdf',
@@ -131,7 +131,7 @@ export class AboutUs extends Component {
 					<View>
 						<Text style={styles.version}>
 							{' '}
-							{I18n.t('my.home.aboutUs.currentVersion')}：{DeviceInfo.getVersion()}
+							{I18n.t('my.home.aboutUs.currentVersion')}：{DeviceInfo.default.getVersion()}
 						</Text>
 					</View>
 					<View>
