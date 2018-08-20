@@ -17,8 +17,8 @@ import Receipt from '../components/asset/receipt'; // 资产 -> 币种详情 -> 
 import CreateWallet from '../components/my/wallet/createWallet'; // 创建钱包：新建1个本地钱包
 import ImportWallet from '../components/my/wallet/importWallet'; // 导入钱包
 import WalletInfo from '../components/asset/walletInfo'; // 我的 -> 钱包管理（账户信息页）
-import ExportMnemonic from '../components/asset/exportMnemonic';
-import ExportKeystore from '../components/asset/exportKeystore';
+import ExportMnemonic from '../components/asset/exportMnemonic'; //导出助记词
+import ExportKeystore from '../components/asset/exportKeystore'; //导出keystore
 import AboutUs from '../components/my/aboutus';
 import UserPolicy from '../components/my/userpolicy';
 import Versions from '../components/my/versions';
@@ -277,7 +277,7 @@ const App = createStackNavigator(
 				headerTitle: () => <Text>{I18n.t('my.home.aboutUs.useAgreement')}</Text>
 			}
 		},
-		Versions:{
+		Versions: {
 			screen: Versions,
 			navigationOptions: {
 				headerTitle: () => <Text>{I18n.t('my.home.Versions._title')}</Text>
