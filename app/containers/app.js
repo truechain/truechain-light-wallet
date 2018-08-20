@@ -7,7 +7,6 @@ import { createStackNavigator, createBottomTabNavigator, StackNavigator } from '
 //TabBar 底部栏位页面
 import Splash from '../pages/Splash'; // app开屏画面
 import Assets from '../components/asset/asset'; // 底部：资产
-import Node_item from '../components/node/node'; //底部：节点
 import My_item from '../components/my/my'; //底部： 我的
 
 //Router
@@ -18,8 +17,8 @@ import Receipt from '../components/asset/receipt'; // 资产 -> 币种详情 -> 
 import CreateWallet from '../components/my/wallet/createWallet'; // 创建钱包：新建1个本地钱包
 import ImportWallet from '../components/my/wallet/importWallet'; // 导入钱包
 import WalletInfo from '../components/asset/walletInfo'; // 我的 -> 钱包管理（账户信息页）
-import ExportMnemonic from '../components/asset/exportMnemonic';
-import ExportKeystore from '../components/asset/exportKeystore';
+import ExportMnemonic from '../components/asset/exportMnemonic'; //导出助记词
+import ExportKeystore from '../components/asset/exportKeystore'; //导出keystore
 import AboutUs from '../components/my/aboutus';
 import UserPolicy from '../components/my/userpolicy';
 import Versions from '../components/my/versions';
@@ -27,22 +26,10 @@ import SysSet from '../components/my/sysset';
 import HelperCenter from '../components/my/helpercenter';
 import ContactUs from '../components/my/contactus';
 import Login from '../components/my/login';
-import SignUp from '../components/node/signUp'; // 节点 -> 报名参选
-import SignUpNode from '../components/node/signUpNode'; // 节点 -> 报名参选 -> (全/标准)节点报名
-import SignUpInput from '../components/public/signUpInput';
 import Lockpositon from '../components/public/lockpositon';
-import CreateTeam from '../components/node/createTeam';
-import TeamInfo from '../components/node/teamInfo';
-import FillInfo from '../components/node/fillInfo';
 import LockAccount from '../components/my/lockAccount';
 import LogOut from '../components/my/logOut';
-import SignUpSuccess from '../components/public/signUpSuccess';
-import MyTeam from '../components/node/myTeam';
-import PersonnelManagement from '../components/node/personnelManagement';
 import SetGesturePassword from '../components/my/setgesturepassword';
-import VoteNode from '../components/node/vote/voteNode';
-import VoteList from '../components/node/vote/voteList';
-import VoteInfo from '../components/node/vote/voteInfo'; //节点 -> 组件节点的投票详情页
 import SysLanguage from '../components/my/sysLanguage';
 import TransactionRecord from '../components/my/transactionRecord';
 import KnowledgePoint from '../components/my/knowledgePoint';
@@ -118,26 +105,6 @@ storage
 		check('https://mainnet.infura.io/');
 	});
 
-const Node = createStackNavigator({
-	Node: {
-		screen: Node_item,
-		navigationOptions: () => ({
-			title: I18n.t('tab.node'),
-			headerBackTitle: null,
-			headerStyle: {
-				backgroundColor: '#528bf7',
-				borderBottomWidth: 0
-			},
-			headerTitleStyle: {
-				color: '#fff',
-				fontSize: 18
-			},
-			headerTintColor: '#000',
-			borderWidth: 0
-		})
-	}
-});
-
 const My = createStackNavigator({
 	My: {
 		screen: My_item,
@@ -166,29 +133,6 @@ const TabBarPage = createBottomTabNavigator(
 					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>{I18n.t('tab.assets')}</Text>
 				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-zichan" size={30} color={tintColor} />
-			}
-		},
-		Node: {
-			screen: Node,
-			navigationOptions: {
-				tabBarLabel: ({ tintColor, focused }) => (
-					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>{I18n.t('tab.node')}</Text>
-				),
-				tabBarIcon: ({ focused, tintColor }) => (
-					<Icon name="icon-xiajiantouxialakuang-" size={20} color={tintColor} />
-				),
-				tabBarOnPress: ({ navigation, defaultHandler }) => {
-					storage
-						.load({
-							key: 'token'
-						})
-						.then((res) => {
-							navigation.navigate('Node');
-						})
-						.catch((e) => {
-							navigation.navigate('Login');
-						});
-				}
 			}
 		},
 		My: {
@@ -290,7 +234,7 @@ const App = createStackNavigator(
 				headerTitle: () => <Text>{I18n.t('my.home.aboutUs.useAgreement')}</Text>
 			}
 		},
-		Versions:{
+		Versions: {
 			screen: Versions,
 			navigationOptions: {
 				headerTitle: () => <Text>{I18n.t('my.home.Versions._title')}</Text>
@@ -315,33 +259,10 @@ const App = createStackNavigator(
 				headerTitle: () => <Text>{I18n.t('my.home.lockAccount.loginIn')}</Text>
 			}
 		},
-		SignUp: {
-			screen: SignUp,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('node.signUp')}</Text>
-			}
-		},
-		SignUpNode,
-		SignUpInput,
 		Lockpositon: {
 			screen: Lockpositon,
 			navigationOptions: {
 				headerTitle: () => <Text>{I18n.t('public.lockedWarehouse')}</Text>
-			}
-		},
-		CreateTeam: {
-			screen: CreateTeam,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('node.teamInfo.createTeam')}</Text>
-			}
-		},
-		TeamInfo: {
-			screen: TeamInfo
-		},
-		FillInfo: {
-			screen: FillInfo,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('node.fillInfo._title')}</Text>
 			}
 		},
 		LockAccount: {
@@ -356,28 +277,7 @@ const App = createStackNavigator(
 				headerTitle: () => <Text> {I18n.t('my.home.lockAccount._title1')}</Text>
 			}
 		},
-		SignUpSuccess,
-		MyTeam,
-		PersonnelManagement: {
-			screen: PersonnelManagement,
-			navigationOptions: {
-				headerTitle: () => <Text> {I18n.t('node.personnelManagement')}</Text>
-			}
-		},
 		SetGesturePassword,
-		VoteNode: {
-			screen: VoteNode,
-			navigationOptions: {
-				headerTitle: () => <Text> {I18n.t('node.vote')}</Text>
-			}
-		},
-		VoteList,
-		VoteInfo: {
-			screen: VoteInfo,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('node.voteInfo._baseInfo')} </Text>
-			}
-		},
 		SysLanguage: {
 			screen: SysLanguage,
 			navigationOptions: {
