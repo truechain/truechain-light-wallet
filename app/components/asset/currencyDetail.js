@@ -26,7 +26,7 @@ class Recording extends Component {
 	render() {
 		return (
 			<View style={styles.recordDetail_item}>
-				<Text>{this.props.to.replace(this.props.to.slice('10', '30'), '......')}</Text>
+				<Text>{this.props.to.replace(this.props.to.slice('8', '32'), '......')}</Text>
 				<Text>{this.show(this.props.value / 1e18)}</Text>
 			</View>
 		);
@@ -113,11 +113,12 @@ class currencyDetail extends Component {
 					<Text>{I18n.t('assets.currency.recentTradeRecord')}</Text>
 				</View>
 				<View style={styles.record}>
-					{this.state.recordData.length > 1 ? (
+					{this.state.recordData.length >= 1 ? (
 						<FlatList
 							style={styles.marginTop_20}
 							data={this.state.recordData}
-							renderItem={(item) => <TransactionRecord data={item} />}
+							renderItem={(item, index) => <TransactionRecord data={item} key={index} />}
+							keyExtractor={(item, index) => index.toString()}
 						/>
 					) : (
 						<Text style={styles.textAlign}>~</Text>
@@ -163,7 +164,7 @@ const styles = StyleSheet.create({
 	},
 	container: {
 		flex: 1,
-		backgroundColor: 'white',
+		backgroundColor: 'white'
 	},
 	balance: {
 		height: 150,

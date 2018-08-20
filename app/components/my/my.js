@@ -87,7 +87,7 @@ class My extends Component {
 								<View style={styles.myColsConPartRowLf}>
 									<Icon name="icon-suoding" size={20} color="#528bf7" />
 								</View>
-								<View style={[styles.myColsConPartRowRi, styles.bottomLine]}>
+								<View style={[ styles.myColsConPartRowRi, styles.bottomLine ]}>
 									<Text>{I18n.t('my.home.lockAccount._title')}</Text>
 									<View style={styles.myColsConPartRowRi2R}>
 										<Icon name="icon-right" size={15} color="#000" />
@@ -127,7 +127,7 @@ class My extends Component {
 								<View style={styles.myColsConPartRowLf}>
 									<Icon name="icon-bangzhuzhongxin" size={18} color="#528bf7" />
 								</View>
-								<View style={[styles.myColsConPartRowRi, styles.bottomLine]}>
+								<View style={[ styles.myColsConPartRowRi, styles.bottomLine ]}>
 									<Text>{I18n.t('my.home.helpCenter._title')}</Text>
 									<View style={styles.myColsConPartRowRi2R}>
 										<Icon name="icon-right" size={15} color="#000" />
@@ -164,7 +164,7 @@ export default withNavigation(My);
 const styles = StyleSheet.create({
 	myPage: {
 		flex: 1,
-		backgroundColor: '#F6F6F6',
+		backgroundColor: '#F6F6F6'
 	},
 	myTopBan: {
 		padding: 8,
@@ -195,7 +195,8 @@ const styles = StyleSheet.create({
 	},
 	myTopBanConItemText: {
 		color: 'white',
-		marginTop: 5
+		marginTop: 5,
+		textAlign: 'center'
 	},
 	myColsCon: {},
 	myColsConPart: {
@@ -217,8 +218,7 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'space-between',
 		alignItems: 'center',
-		paddingRight: 10,
-
+		paddingRight: 10
 	},
 	bottomLine: {
 		borderBottomWidth: 1,

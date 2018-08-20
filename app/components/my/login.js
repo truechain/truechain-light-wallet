@@ -66,29 +66,6 @@ export default class Login extends React.Component {
 		return arr;
 	}
 
-	componentDidMount() {
-		storage
-			.load({
-				key: 'localLanguage'
-			})
-			.then((res) => {
-				if (res.localLanguage.includes('zh')) {
-					this.setState({
-						smsType: null
-					});
-				} else {
-					this.setState({
-						smsType: 2
-					});
-				}
-			})
-			.catch((e) => {
-				this.setState({
-					smsType: null
-				});
-			});
-	}
-
 	componentWillMount() {
 		this._fetchCode();
 		this.setState({
@@ -130,7 +107,6 @@ export default class Login extends React.Component {
 			if (res.data.body.status == 202) {
 				// Alert.alert(null, '图形验证码错误,请重新验证!');
 				Alert.alert(null, I18n.t('public.captchaError'));
-				
 			} else {
 				this.setCountdown(60);
 				this.startCountDown();
@@ -200,6 +176,9 @@ export default class Login extends React.Component {
 	}
 	setTime = () => {
 		if (this.state.callingCode === '86') {
+			this.setState({
+				smsType: 1
+			});
 		}
 		if (!this.state.tel) {
 			// alert('请输入手机号');

@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import '../../../../shim';
-import { StyleSheet, Text, View, Alert } from 'react-native';
+import { StyleSheet, Text, View, Alert, Dimensions } from 'react-native';
 import { CheckBox, Button, Input } from 'react-native-elements';
 import lightwallet from 'eth-lightwallet';
 import Loading from 'react-native-whc-loading';
 import { StackActions, NavigationActions, withNavigation } from 'react-navigation';
 import { I18n } from '../../../../language/i18n';
+const screen = Dimensions.get('window');
 var DeviceInfo = require('react-native-device-info');
 
 const Web3 = require('web3');
@@ -45,7 +46,7 @@ class CreateWallet extends Component {
 						});
 			})
 			.catch((e) => {
-				DeviceInfo.getDeviceLocale().includes('zh')
+				DeviceInfo.default.getDeviceLocale().includes('zh')
 					? this.setState({
 							service_source: {
 								uri: 'https://qiniu.baixiaojian.com/True_Chain_Wallet_Terms_of_Service_zh.pdf',
@@ -96,7 +97,7 @@ class CreateWallet extends Component {
 		}
 	};
 
-	CreateWallet() {
+	_CreateWallet() {
 		if (!this.state.walletName) {
 			Alert.alert(null, I18n.t('wallet.createWalletTip')); // 提示 请输入钱包名称
 		} else if (!this.state.pwd) {
@@ -105,10 +106,10 @@ class CreateWallet extends Component {
 			Alert.alert(null, I18n.t('wallet.pwdSuggest')); // '提示', '建议密码不少于8位字符'
 		} else if (!this.state.confirmPwd) {
 			Alert.alert(null, I18n.t('wallet.confirmPwd')); // '提示', '请确认您的密码
-		} else if (!this.state.pwd === this.state.confirmPwd) {
+		} else if (this.state.pwd !== this.state.confirmPwd) {
 			Alert.alert(null, I18n.t('wallet.pwdIsWrong')); // '提示', '两次密码不一致请重新输入'
 		} else if (!this.state.isAgree) {
-			Alert.alert(null, I18n.t('wallet.pwdIsWrong')); // '提示', '请同意服务及隐私条款'
+			Alert.alert(null, I18n.t('wallet.agreeTerm')); // '提示', '请同意服务及隐私条款'
 		} else {
 			this.refs.loading.show();
 			setTimeout(() => {
@@ -225,7 +226,7 @@ class CreateWallet extends Component {
 					<Button
 						title={I18n.t('wallet.creatWallet')}
 						// "创建钱包"
-						onPress={this.CreateWallet.bind(this)}
+						onPress={this._CreateWallet.bind(this)}
 						buttonStyle={styles.buttonStyle}
 						disabled={this.state.disabledImport}
 						disabledStyle={styles.disabledStyle}
@@ -240,7 +241,8 @@ export default withNavigation(CreateWallet);
 
 const styles = StyleSheet.create({
 	color_white: {
-		color: '#fff'
+		color: '#fff',
+		fontSize: 12
 	},
 	padding_10: {
 		padding: 10
@@ -250,10 +252,9 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff'
 	},
 	warning: {
-		height: 60,
 		backgroundColor: '#528bf7',
 		justifyContent: 'center',
-		paddingLeft: 10
+		padding: 10
 	},
 	textInput: {
 		borderBottomWidth: 1,
@@ -275,7 +276,8 @@ const styles = StyleSheet.create({
 		backgroundColor: 'transparent'
 	},
 	color_999: {
-		color: '#999'
+		color: '#999',
+		width: screen.width - 50
 	},
 	color_aff: {
 		color: '#007AFF'

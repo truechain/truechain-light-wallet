@@ -98,6 +98,7 @@ class Assets extends Component {
 			let eth_banlance = this.show(web3.utils.fromWei(res, 'ether'));
 			this.setState({ eth_banlance });
 		});
+
 		getBalance(
 			iterface,
 			this.state.walletAddress,
@@ -147,7 +148,7 @@ class Assets extends Component {
 		this.updataWalletName();
 
 		this.setState({
-			currentVersion: DeviceInfo.getVersion().replace(/\./g, '')
+			currentVersion: DeviceInfo.default.getVersion().replace(/\./g, '')
 		});
 
 		// checkVersion()

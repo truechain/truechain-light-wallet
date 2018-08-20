@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, Alert, Text, StyleSheet, TouchableHighlight } from 'react-native';
+import { View, Alert, Text, StyleSheet, TouchableHighlight, Dimensions } from 'react-native';
 import { Button } from 'react-native-elements';
 import lightwallet from 'eth-lightwallet';
 import { StackActions, NavigationActions, withNavigation } from 'react-navigation';
 import { Polygon } from 'react-native-svg';
 import { I18n } from '../../../language/i18n';
+const screen = Dimensions.get('window');
 
 export class ExportMnemonic extends Component {
 	constructor(props) {
@@ -189,7 +190,8 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		padding: 10,
-		backgroundColor: '#fff'
+		backgroundColor: '#fff',
+		alignItems: 'center'
 	},
 	warning: {
 		marginTop: 30,
@@ -200,6 +202,7 @@ const styles = StyleSheet.create({
 		color: '#35ccbf'
 	},
 	mnemonic_area: {
+		width: screen.width - 50,
 		borderWidth: 1,
 		borderColor: '#ccc',
 		padding: 10,
@@ -214,8 +217,6 @@ const styles = StyleSheet.create({
 		width: 300,
 		height: 45,
 		borderRadius: 30,
-		marginLeft: 'auto',
-		marginRight: 'auto',
 		marginTop: 30
 	},
 	disabledButtonStyle: {

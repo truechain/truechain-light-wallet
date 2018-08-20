@@ -107,7 +107,7 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
-        versionName "1.0"
+        versionName "3.0.0"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -151,15 +151,10 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-cookies')
     compile project(':react-native-device-info')
     compile project(':react-native-pdf')
     compile project(':rn-fetch-blob')
-    compile project(':react-native-vector-icons')
-    compile project(':react-native-svg')
-    compile project(':react-native-restart')
-    compile project(':react-native-randombytes')
-    compile project(':react-native-i18n')
-    compile project(':react-native-camera')
     compile project(':react-native-udp')
     compile project(':react-native-tcp')
     compile project(':react-native-os')

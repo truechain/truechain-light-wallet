@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, View, Image, StyleSheet, ScrollView, Dimensions, FlatList } from 'react-native';
+import { Text, View, Image, StyleSheet, ScrollView, Dimensions, FlatList, ActivityIndicator } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { getTransactionRecord, getERC20TransactionRecord } from '../../api/index';
 import { I18n } from '../../../language/i18n';
@@ -26,7 +26,7 @@ class Recording extends Component {
 	render() {
 		return (
 			<View style={styles.recordDetail_item}>
-				<Text>{this.props.to.replace(this.props.to.slice('10', '33'), '......')}</Text>
+				<Text>{this.props.to.replace(this.props.to.slice('10', '30'), '......')}</Text>
 				<Text>{this.show(this.props.value / 1e18)} ether</Text>
 			</View>
 		);
@@ -59,7 +59,7 @@ class TransactionRecord extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			recordData: []
+			recordData: null
 		};
 	}
 
@@ -74,10 +74,12 @@ class TransactionRecord extends Component {
 	render() {
 		return (
 			<View style={styles.container}>
-				{this.state.recordData ? (
+				{this.state.recordData ? this.state.recordData.length >= 1 ? (
 					<FlatList data={this.state.recordData} renderItem={(item) => <TransactionRecordOO data={item} />} />
 				) : (
-					<Text style={{ textAlign: 'center' }}>~</Text>
+					<Text style={styles.textAlign}>~</Text>
+				) : (
+					<ActivityIndicator />
 				)}
 			</View>
 		);
@@ -133,31 +135,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 		height: 75,
 		padding: 10,
-		flexDirection: 'row',
-		justifyContent: 'space-between'
-	},
-	bottom_fun: {
-		position: 'absolute',
-		bottom: 0,
-		left: 0,
-		right: 0,
-		flexDirection: 'row',
-		justifyContent: 'center',
-		borderWidth: 1,
-		borderColor: 'transparent'
-	},
-	bottom_fun_item: {
-		height: 50,
-		lineHeight: 50,
-		color: '#fff',
-		textAlign: 'center',
-		width: Dimensions.get('window').width / 2
-	},
-	bottom_fun_item_transfer: {
-		backgroundColor: '#35ccbf'
-	},
-	bottom_fun_item_receipt: {
-		backgroundColor: '#528bf7'
+		// flexDirection: 'row',
+		justifyContent: 'space-around',
 	},
 	line: {
 		borderBottomColor: '#ccc',

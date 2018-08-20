@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
-
 import { Text, View, Image, StyleSheet, ScrollView, FlatList } from 'react-native';
-
 import { withNavigation } from 'react-navigation';
 
 const versionData = [
+	{
+		version: '3.0.0',
+		con: [ '版本重构升级', '导入钱包功能优化', '增加语言切换设置', '转账增加地址校验功能' ]
+	},
 	{
 		version: '2.0.6',
 		con: [ '竞选投票搜索' ]
@@ -53,11 +55,6 @@ const versionData = [
 
 export class Versions extends Component {
 	_keyExtractor = (item, index) => item;
-
-	static navigationOptions = {
-		headerTitle: '版本日志'
-	};
-
 	render() {
 		return (
 			<View style={styles.versionsPage}>
@@ -78,6 +75,7 @@ export class Versions extends Component {
 								/>
 							</View>
 						)}
+						keyExtractor={(item, index) => index.toString()}
 					/>
 				</ScrollView>
 			</View>
