@@ -98,6 +98,7 @@ class Assets extends Component {
 			let eth_banlance = this.show(web3.utils.fromWei(res, 'ether'));
 			this.setState({ eth_banlance });
 		});
+
 		getBalance(
 			iterface,
 			this.state.walletAddress,
