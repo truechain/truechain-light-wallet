@@ -75,12 +75,14 @@ export default {
 		},
 		sysSetting: {
             _title: 'การตั้งค่าระบบ',
-			language: {
-                _title: 'การตั้งค่าภาษา',
-                multi_language: 'ภาษาหลายชนิด ',
-                changeToChinese: 'ภาษาจีนตัวย่อ ',
-                changeToEnglish: 'English'
-			}
+                  language: {
+                        _title: 'การตั้งค่าภาษา',
+                        multi_language: 'ภาษาหลายชนิด',
+                        changeToChinese: '简体中文',
+                        changeToEnglish: 'English',
+                        changeToThai: 'ไทย',
+                        changeToJp: '日本語'
+                  }
 		},
 		version: {
             _newVersion: 'พบเห็นTrue',

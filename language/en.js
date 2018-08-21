@@ -83,7 +83,9 @@ export default {
 				_title: 'Language Setting',
 				multi_language: 'Multi language',
 				changeToChinese: '简体中文',
-				changeToEnglish: 'English'
+				changeToEnglish: 'English',
+				changeToThai: 'ไทย',
+				changeToJp: '日本語'
 			}
 		},
 		version: {

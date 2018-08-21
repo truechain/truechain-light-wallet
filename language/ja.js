@@ -1,4 +1,4 @@
-日本語
+// 日本語
 
 export default {
 	guide: {
@@ -80,8 +80,10 @@ export default {
 			language: {
 				_title: '言語設定',
 				multi_language: '多言語',
-				changeToChinese: '中国語簡体',
-				changeToEnglish: 'English'
+				changeToChinese: '简体中文',
+				changeToEnglish: 'English',
+				changeToThai: 'ไทย',
+				changeToJp: '日本語'
 			}
 		},
 		version: {

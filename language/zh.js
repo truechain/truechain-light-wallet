@@ -79,7 +79,9 @@ export default {
 				_title: '语言设置',
 				multi_language: '多语言',
 				changeToChinese: '简体中文',
-				changeToEnglish: 'English'
+				changeToEnglish: 'English',
+				changeToThai: 'ไทย',
+				changeToJp: '日本語'
 			}
 		},
 		version: {
