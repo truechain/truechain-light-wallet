@@ -85,7 +85,9 @@ export default {
 				changeToChinese: '简体中文',
 				changeToEnglish: 'English',
 				changeToThai: 'ไทย',
-				changeToJp: '日本語'
+				changeToJp: '日本語',
+				changeToVi: '越南语',
+				changeToVi: 'Người việt nam'
 			}
 		},
 		version: {
@@ -142,7 +144,7 @@ export default {
 		},
 		currency: {
 			transfer: 'Transfer',
-			orderInformation:'Order Information',
+			orderInformation: 'Order Information',
 			recentTradeRecord: 'RecentTrade Record',
 			receipt: 'Receipt',
 			receiptAddr: 'Receipt Address',

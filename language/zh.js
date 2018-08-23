@@ -81,7 +81,8 @@ export default {
 				changeToChinese: '简体中文',
 				changeToEnglish: 'English',
 				changeToThai: 'ไทย',
-				changeToJp: '日本語'
+				changeToJp: '日本語',
+				changeToVi: 'Người việt nam'
 			}
 		},
 		version: {
