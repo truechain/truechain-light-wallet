@@ -85,6 +85,13 @@ class Transfer extends Component {
 	}
 
 	componentDidMount() {
+		web3.eth.getGasPrice().then((res) => {
+			this.setState({
+				gasPrice: res,
+				cost: res * web3.utils.fromWei(this.state.gas.toString(), 'ether')
+			});
+		});
+
 		storage.load({ key: 'walletInfo' }).then((res) => {
 			this.setState({
 				fromAddr: res.walletAddress,
@@ -93,83 +100,91 @@ class Transfer extends Component {
 		});
 		const { params } = this.props.navigation.state;
 		if (params.currencyName == 'ETH') {
-			this._sendTokens = () =>
-				sendEth(
-					this.state.fromAddr,
-					this.state.toAddress,
-					this.state.amount,
-					this.state.password,
-					this.state.keystoreV3,
-					this.state.gas.toString(),
-					web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'),
-					(err, tx) => {
-						if (err) {
-							this.refs.loading.close();
-							setTimeout(() => {
-								Alert.alert(null, I18n.t('public.transactionFailed'));
-								// Alert.alert(null, '发布交易失败，请稍后重试！');
-							}, 100);
-							console.log(err);
-						} else {
-							this.refs.loading.close();
-							setTimeout(() => {
-								// 发布交易成功！
-								Alert.alert(null, I18n.t('public.transactionSuccess'), [
-									{
-										text: 'OK',
-										onPress: () => {
-											this.props.navigation.navigate('Home');
-										}
-									}
-								]);
-							}, 100);
-							console.log(tx, '=======');
-						}
-					}
-				);
-			this.setState({
-				gas: 25200
-			});
+			this.setState(
+				{
+					gas: 25200
+				},
+				() => {
+					this._sendTokens = () =>
+						sendEth(
+							this.state.fromAddr,
+							this.state.toAddress,
+							this.state.amount,
+							this.state.password,
+							this.state.keystoreV3,
+							this.state.gas.toString(),
+							web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'),
+							(err, tx) => {
+								if (err) {
+									this.refs.loading.close();
+									setTimeout(() => {
+										Alert.alert(null, I18n.t('public.transactionFailed'));
+										// Alert.alert(null, '发布交易失败，请稍后重试！');
+									}, 100);
+									console.log(err);
+								} else {
+									this.refs.loading.close();
+									setTimeout(() => {
+										// 发布交易成功！
+										Alert.alert(null, I18n.t('public.transactionSuccess'), [
+											{
+												text: 'OK',
+												onPress: () => {
+													this.props.navigation.navigate('Home');
+												}
+											}
+										]);
+									}, 100);
+									console.log(tx, '=======');
+								}
+							}
+						);
+				}
+			);
 		} else {
-			this._sendTokens = () =>
-				sendTokens(
-					iterface,
-					this.state.fromAddr,
-					this.state.toAddress,
-					this.state.amount,
-					this.state.password,
-					this.state.keystoreV3,
-					this.state.ContractAddr,
-					this.state.gas.toString(),
-					web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'),
-					(err, tx) => {
-						if (err) {
-							this.refs.loading.close();
-							setTimeout(() => {
-								Alert.alert(null, I18n.t('public.transactionFailed'));
-								// Alert.alert(null, '发布交易失败，请稍后重试！');
-							}, 100);
-							console.log(err);
-						} else {
-							this.refs.loading.close();
-							setTimeout(() => {
-								// 发布交易成功！
-								Alert.alert(null, I18n.t('public.transactionSuccess'), [
-									{
-										text: 'OK',
-										onPress: () => {
-											this.props.navigation.navigate('Home');
-										}
-									}
-								]);
-							}, 100);
-							console.log(tx, '=======');
-						}
-					}
-				);
-			this.setState({
-				gas: 80000
-			});
+			this.setState(
+				{
+					gas: 80000
+				},
+				() => {
+					this._sendTokens = () =>
+						sendTokens(
+							iterface,
+							this.state.fromAddr,
+							this.state.toAddress,
+							this.state.amount,
+							this.state.password,
+							this.state.keystoreV3,
+							this.state.ContractAddr,
+							this.state.gas.toString(),
+							web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'),
+							(err, tx) => {
+								if (err) {
+									this.refs.loading.close();
+									setTimeout(() => {
+										Alert.alert(null, I18n.t('public.transactionFailed'));
+										// Alert.alert(null, '发布交易失败，请稍后重试！');
+									}, 100);
+									console.log(err);
+								} else {
+									this.refs.loading.close();
+									setTimeout(() => {
+										// 发布交易成功！
+										Alert.alert(null, I18n.t('public.transactionSuccess'), [
+											{
+												text: 'OK',
+												onPress: () => {
+													this.props.navigation.navigate('Home');
+												}
+											}
+										]);
+									}, 100);
+									console.log(tx, '=======');
+								}
+							}
+						);
+				}
+			);
 			let ContractAddr = params.currencyName + 'ContractAddr';
 			this.setState({
 				ContractAddr: store.getState().contractAddr[ContractAddr]
@@ -265,18 +280,16 @@ class Transfer extends Component {
 				<Slider
 					value={this.state.cost}
 					onValueChange={(cost) => {
-						this.setState({ cost }, () => {
-							this.setState({
-								gasPrice:
-									Math.round(
-										this.state.cost / web3.utils.fromWei(this.state.gas.toString(), 'Gwei') * 100
-									) / 100
-							});
+						this.setState({ cost: Number(cost.toFixed(6)) });
+					}}
+					onSlidingComplete={(res) => {
+						this.setState({
+							gasPrice: web3.utils.toWei(res.toFixed(6), 'ether') / this.state.gas
 						});
 					}}
 					minimumTrackTintColor="#528bf7"
 					thumbTintColor="#528bf7"
-					minimumValue={0.00022932}
+					minimumValue={0.0}
 					step={0.0000001}
 					maximumValue={0.00251999}
 				/>
@@ -300,12 +313,6 @@ class Transfer extends Component {
 						disabled={this.state.disabledNext}
 						onPress={() => {
 							this.refs.transferDetail.open();
-							this.setState({
-								gasPrice:
-									Math.round(
-										this.state.cost / web3.utils.fromWei(this.state.gas.toString(), 'Gwei') * 100
-									) / 100
-							});
 						}}
 					/>
 					<Loading ref="loading" />
@@ -341,7 +348,13 @@ class Transfer extends Component {
 						<Detail
 							key_k={I18n.t('assets.currency.transferFee')} //"矿工费用"
 							gasPrice="666"
-							val={'≈ Gas(' + this.state.gas + ') * Gas Price(' + this.state.gasPrice + 'gwei)'}
+							val={
+								'≈ Gas(' +
+								this.state.gas +
+								') * Gas Price(' +
+								web3.utils.fromWei(this.state.gasPrice.toString(), 'Gwei') +
+								'gwei)'
+							}
 							style={styles.paymentDetails_item_gasPOramount}
 						/>
 						{/* 金额 */}

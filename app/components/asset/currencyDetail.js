@@ -74,8 +74,10 @@ class currencyDetail extends Component {
 
 	componentDidMount() {
 		const { params } = this.props.navigation.state;
-		this.state.currencyName = params.title;
-		this.state.banlance = params.banlance;
+		this.setState({
+			currencyName: params.title,
+			banlance: params.banlance
+		});
 		let ContractAddr = params.title + 'ContractAddr';
 		this.setState(
 			{
@@ -224,41 +226,3 @@ const styles = StyleSheet.create({
 		backgroundColor: '#528bf7'
 	}
 });
-
-// <View style={styles.balance}>
-// 	<Text style={[styles.color_white, styles.balance_text_big]}>{this.state.banlance}</Text>
-// 	{/* <Text style={[ styles.color_white, styles.marginTop_20 ]}>市值：*****</Text> */}
-// </View>
-// 	<View style={styles.record}>
-// 		<Text>{I18n.t('assets.currency.recentTradeRecord')}</Text> {/* 近期交易记录 */}
-// 		{this.state.recordData.length > 1 ? (
-// 			<FlatList
-// 				style={styles.marginTop_20}
-// 				data={this.state.recordData}
-// 				renderItem={(item) => <TransactionRecord data={item} />}
-// 			/>
-// 		) : (
-// 				<Text style={styles.textAlign}>~</Text>
-// 			)}
-// 	</View>
-// 	<View style={styles.bottom_fun}>
-// 		<Text
-// 			style={[styles.bottom_fun_item, styles.bottom_fun_item_transfer]}
-// 			onPress={() => {
-// 				this.navigate('Transfer', {
-// 					navigate: this.navigate,
-// 					currencyName: this.state.currencyName
-// 				});
-// 			}}
-// 		>
-// 			{I18n.t('assets.currency.transfer')} {/*转账 */}
-// 		</Text>
-// 		<Text
-// 			style={[styles.bottom_fun_item, styles.bottom_fun_item_receipt]}
-// 			onPress={() => {
-// 				this.navigate('Receipt');
-// 			}}
-// 		>
-// 			{I18n.t('assets.currency.receipt')} {/* 收款 */}
-// 		</Text>
-// 	</View>
