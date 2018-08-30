@@ -5878,9 +5878,9 @@ react-native-pdf@^4.0.0:
     crypto-js "^3.1.9-1"
     prop-types "^15.5.10"
 
-react-native-qr-scanner@^1.2.4:
-  version "1.2.4"
-  resolved "http://registry.npm.taobao.org/react-native-qr-scanner/download/react-native-qr-scanner-1.2.4.tgz#0c5b1b079e15f8dbf06a77c91a87f8f1945c5d28"
+react-native-qr-scanner@^1.3.1:
+  version "1.3.1"
+  resolved "http://registry.npm.taobao.org/react-native-qr-scanner/download/react-native-qr-scanner-1.3.1.tgz#690644e43f858901b77ad4241a04674be983987b"
   dependencies:
     prop-types "15.5.10"
 
