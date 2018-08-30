@@ -2,7 +2,7 @@ import React from 'react';
 import { I18n } from '../../language/i18n'; // 多国语言支持
 import { StyleSheet, Text, AsyncStorage } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation'; // 页面切换 路由导航组件
-// import { host } from '../utils/config';
+import { nodeHost } from '../utils/config';
 
 //TabBar 底部栏位页面
 import Splash from '../pages/Splash'; // app开屏画面
@@ -102,7 +102,7 @@ storage
 		check(webHost);
 	})
 	.catch((e) => {
-		check('https://mainnet.infura.io/');
+		check(nodeHost);
 	});
 
 // const Node = createStackNavigator({

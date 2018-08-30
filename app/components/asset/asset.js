@@ -151,20 +151,19 @@ class Assets extends Component {
 			currentVersion: DeviceInfo.default.getVersion().replace(/\./g, '')
 		});
 
-		// checkVersion()
-		// 	.then((result) => {
-		// 		return result.data.data;
-		// 	})
-		// 	.then((res) => {
-		// 		this.setState({
-		// 			newVersion: res.version,
-		// 			modalVisible: true
-		// 		});
-		// 		let ver_new = res.version.replace(/\./g, '');
-		// 		if (ver_new > this.state.currentVersion) {
-		// 			this.setState({ modalVisible: true });
-		// 		}
-		// 	});
+		checkVersion()
+			.then((result) => {
+				return result.data.data;
+			})
+			.then((res) => {
+				this.setState({
+					newVersion: res.version
+				});
+				let ver_new = res.version.replace(/\./g, '');
+				if (ver_new > this.state.currentVersion) {
+					this.setState({ modalVisible: true });
+				}
+			});
 	}
 
 	updataWalletName() {
@@ -300,7 +299,7 @@ class Assets extends Component {
 									<Text
 										style={styles.modalBottomBtnYesText}
 										onPress={() => {
-											Linking.openURL('http://wapxk.com/wapindex-1000-6635.html').catch((err) =>
+											Linking.openURL('https://www.truechain.pro/').catch((err) =>
 												console.error('An error occurred', err)
 											);
 										}}

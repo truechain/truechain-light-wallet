@@ -109,7 +109,7 @@ export class AboutUs extends Component {
 									<Text
 										style={styles.modalBottomBtnYesText}
 										onPress={() => {
-											Linking.openURL('http://wapxk.com/wapindex-1000-6635.html').catch((err) =>
+											Linking.openURL('https://www.truechain.pro/').catch((err) =>
 												console.error('An error occurred', err)
 											);
 										}}
