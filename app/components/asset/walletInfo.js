@@ -342,7 +342,6 @@ class WalletInfo extends Component {
 					}}
 				/>
 
-				<Toast ref="toast" position="center" />
 				<Modal
 					style={styles.modalCode}
 					position={'bottom'}
@@ -434,7 +433,7 @@ class WalletInfo extends Component {
 							<Text>{this.state.PrivateKey}</Text>
 						</View>
 					</TouchableHighlight>
-
+					<Toast ref="toast" position="center" />
 					<View style={styles.copy}>
 						<Button
 							title={I18n.t('assets.walletInfo.copyPrivaateKey')}

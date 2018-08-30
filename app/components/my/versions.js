@@ -4,6 +4,10 @@ import { withNavigation } from 'react-navigation';
 
 const versionData = [
 	{
+		version: '3.0.1',
+		con: [ '国际化语言更新上线','转账矿工费优化调整' ]
+	},
+	{
 		version: '3.0.0',
 		con: [ '版本重构升级', '导入钱包功能优化', '增加语言切换设置', '转账增加地址校验功能' ]
 	},

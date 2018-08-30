@@ -36,6 +36,9 @@ node_modules/
 npm-debug.log
 yarn-error.log
 package-lock.json
+shim.js
+app/utils/config.js
+
 
 # BUCK
 buck-out/

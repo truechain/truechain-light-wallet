@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, Image, Dimensions, StyleSheet, Clipboard } from 'react-native';
 import { I18n } from '../../../language/i18n';
-import { Input, Button } from 'react-native-elements';
+import { Button } from 'react-native-elements';
 import QRCode from 'react-native-qrcode';
 import Toast from 'react-native-easy-toast';
 const screen = Dimensions.get('window');
@@ -55,14 +55,15 @@ export default class Receipt extends Component {
 					</View>
 				</View>
 
+				<Toast ref="toast" position="center" />
+
 				<View style={styles.copyAddress}>
 					<Button
 						title={I18n.t('assets.currency.copyReceiptAddr')}
 						// '复制收款地址'
 						buttonStyle={styles.buttonStyle}
-						onPress={this._setClipboardContent.bind(this)}
+						onPress={() => this._setClipboardContent()}
 					/>
-					<Toast ref="toast" position="center" />
 				</View>
 			</View>
 		);
