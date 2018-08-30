@@ -3,6 +3,13 @@ package com.truewallet;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
+import com.horcrux.svg.SvgPackage;
+import com.avishayil.rnrestart.ReactNativeRestartPackage;
+import com.bitgo.randombytes.RandomBytesPackage;
+import com.lewin.qrcode.QRScanReaderPackage;
+import com.AlexanderZaytsev.RNI18n.RNI18nPackage;
+import org.reactnative.camera.RNCameraPackage;
 import com.psykar.cookiemanager.CookieManagerPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import org.wonday.pdf.RCTPdfView;
@@ -36,6 +43,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
+            new SvgPackage(),
+            new ReactNativeRestartPackage(),
+            new RandomBytesPackage(),
+            new QRScanReaderPackage(),
+            new RNI18nPackage(),
+            new RNCameraPackage(),
             new CookieManagerPackage(),
             new RNDeviceInfo(),
             new RCTPdfView(),

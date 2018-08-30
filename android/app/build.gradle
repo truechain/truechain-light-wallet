@@ -151,6 +151,13 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-vector-icons')
+    compile project(':react-native-svg')
+    compile project(':react-native-restart')
+    compile project(':react-native-randombytes')
+    compile project(':react-native-qr-scanner')
+    compile project(':react-native-i18n')
+    compile project(':react-native-camera')
     compile project(':react-native-cookies')
     compile project(':react-native-device-info')
     compile project(':react-native-pdf')

@@ -127,7 +127,7 @@ export default class Login extends React.Component {
 						token: res.data.body.data.token
 					}
 				});
-				this.navigate('Node');
+				this.navigate('My');
 			} else if (res.data.body.status == 202) {
 				Alert.alert(null, I18n.t('public.verificationCodeError'));
 			} else if (res.data.body.status == 203) {

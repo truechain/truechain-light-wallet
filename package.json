@@ -35,7 +35,7 @@
     "react-native-os": "^1.2.1",
     "react-native-pdf": "^4.0.0",
     "react-native-qr-scanner": "^1.2.4",
-    "react-native-randombytes": "^3.0.0",
+    "react-native-randombytes": "^3.5.0",
     "react-native-restart": "0.0.6",
     "react-native-scrollable-tab-view": "^0.8.0",
     "react-native-search-box": "^0.0.19",

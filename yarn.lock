@@ -5899,9 +5899,9 @@ react-native-randombytes@^2.2.0:
     buffer "^4.9.1"
     sjcl "^1.0.3"
 
-react-native-randombytes@^3.0.0:
-  version "3.4.0"
-  resolved "http://registry.npm.taobao.org/react-native-randombytes/download/react-native-randombytes-3.4.0.tgz#c32632f475ec32aa14ea2dfef27c6fc082d4d1bb"
+react-native-randombytes@^3.5.0:
+  version "3.5.0"
+  resolved "http://registry.npm.taobao.org/react-native-randombytes/download/react-native-randombytes-3.5.0.tgz#a641130a52eca65ef2165409f65d930184c6dc83"
   dependencies:
     buffer "^4.9.1"
     sjcl "^1.0.3"
