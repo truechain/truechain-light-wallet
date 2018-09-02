@@ -113,7 +113,7 @@ class Transfer extends Component {
 							this.state.password,
 							this.state.keystoreV3,
 							this.state.gas.toString(),
-							web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'),
+							this.state.gasPrice.toString(),
 							(err, tx) => {
 								if (err) {
 									this.refs.loading.close();
@@ -157,7 +157,7 @@ class Transfer extends Component {
 							this.state.keystoreV3,
 							this.state.ContractAddr,
 							this.state.gas.toString(),
-							web3.utils.toWei(this.state.gasPrice.toString(), 'Gwei'),
+							this.state.gasPrice.toString(),
 							(err, tx) => {
 								if (err) {
 									this.refs.loading.close();
@@ -337,12 +337,12 @@ class Transfer extends Component {
 						/>
 						<Detail
 							key_k={I18n.t('assets.transfer.transferInAddress')} //"转入地址"
-							val={this.state.fromAddr.replace(this.state.fromAddr.slice('10', '25'), '......')}
+							val={this.state.toAddress.replace(this.state.toAddress.slice('10', '25'), '......')}
 							style={styles.marginLeft_20}
 						/>
 						<Detail
 							key_k={I18n.t('assets.transfer.transferOutAddress')} //"转出地址"
-							val={this.state.toAddress.replace(this.state.toAddress.slice('10', '25'), '......')}
+							val={this.state.fromAddr.replace(this.state.fromAddr.slice('10', '25'), '......')}
 							style={styles.marginLeft_20}
 						/>
 						<Detail
