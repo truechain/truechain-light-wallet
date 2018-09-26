@@ -39,12 +39,14 @@
 		31C91850597846119CF92B0C /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BFE17970DAF496091CB5C97 /* libRNSVG-tvOS.a */; };
 		36A28248F7F44F23B99DA8DE /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C72C8CE88740309B7764F0 /* libRNCamera.a */; };
 		3C13CA0320F6083B00BC09F5 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13CA0020F6082B00BC09F5 /* libRCTPushNotification.a */; };
+		3C1AA49B215B92FE0061FB8D /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1AA498215B92E90061FB8D /* libSplashScreen.a */; };
+		3C1AA49C215B93050061FB8D /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1AA498215B92E90061FB8D /* libSplashScreen.a */; };
 		3C35B10121380A0600CC1B33 /* libRNCookieManagerIOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C2DEBC2212BACEB00500B42 /* libRNCookieManagerIOS.a */; };
+		3C515FE92154C817007248B5 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C515FE82154C817007248B5 /* iconfont.ttf */; };
 		3C7151F220F3657C00E63617 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB11A68108700A75B9A /* LaunchScreen.xib */; };
 		3C719EEF211001690088E6F3 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C719EE1211001570088E6F3 /* libRNDeviceInfo.a */; };
 		3C719EF02110018E0088E6F3 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C719EE1211001570088E6F3 /* libRNDeviceInfo.a */; };
 		3C82970220F35D9500CCE45C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
-		3C866A61210ABEC8005F3FD8 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C866A60210ABEC8005F3FD8 /* iconfont.ttf */; };
 		3C8F15B620FF3BE4008A0251 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8F15B520FF3BCF008A0251 /* libRCTRestart.a */; };
 		3C8F15B720FF3BED008A0251 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8F15B520FF3BCF008A0251 /* libRCTRestart.a */; };
 		3CD5E0CA20F338DD003D2686 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD5E0C920F338A6003D2686 /* libRNVectorIcons.a */; };
@@ -268,6 +270,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = 3D05745F1DE6004600184BB4;
 			remoteInfo = "RCTPushNotification-tvOS";
+		};
+		3C1AA497215B92E90061FB8D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D1385E09B28943D482ACEAEE /* SplashScreen.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3D7682761D8E76B80014119E;
+			remoteInfo = SplashScreen;
 		};
 		3C2DEBC1212BACEB00500B42 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -539,7 +548,7 @@
 		38E9B96FA8B34993A600D90A /* RNCookieManagerIOS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCookieManagerIOS.xcodeproj; path = "../node_modules/react-native-cookies/ios/RNCookieManagerIOS.xcodeproj"; sourceTree = "<group>"; };
 		3A1A9319B07A494C978279EE /* libRCTRestart.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTRestart.a; sourceTree = "<group>"; };
 		3C13C9FA20F6082A00BC09F5 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
-		3C866A60210ABEC8005F3FD8 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = iconfont.ttf; path = ../../app/assets/iconfont/iconfont.ttf; sourceTree = "<group>"; };
+		3C515FE82154C817007248B5 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = iconfont.ttf; path = ../../app/assets/iconfont/iconfont.ttf; sourceTree = "<group>"; };
 		3C8F15B020FF3BCF008A0251 /* RCTRestart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTRestart.xcodeproj; path = "../node_modules/react-native-restart/ios/RCTRestart.xcodeproj"; sourceTree = "<group>"; };
 		3CB4FD7B20FF0CBA00116540 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		3CD5E11720F33ACE003D2686 /* Feather.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -584,6 +593,7 @@
 		B62E79B8E770474180B1E3B7 /* RNVectorIcons.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNVectorIcons.xcodeproj; path = "../node_modules/react-native-vector-icons/RNVectorIcons.xcodeproj"; sourceTree = "<group>"; };
 		C2A63ACC4DD74CC28A1E66EF /* RNRandomBytes.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNRandomBytes.xcodeproj; path = "../node_modules/react-native-randombytes/RNRandomBytes.xcodeproj"; sourceTree = "<group>"; };
 		CEC74E0582DD415999D44B99 /* RNCamera.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCamera.xcodeproj; path = "../node_modules/react-native-camera/ios/RNCamera.xcodeproj"; sourceTree = "<group>"; };
+		D1385E09B28943D482ACEAEE /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		D8F3B7CB1E0C4C15AEC8E3AD /* libRNI18n.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRNI18n.a; sourceTree = "<group>"; };
 		FF04A8C896CD487B89228743 /* RNOS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNOS.xcodeproj; path = "../node_modules/react-native-os/ios/RNOS.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -593,6 +603,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C1AA49C215B93050061FB8D /* libSplashScreen.a in Frameworks */,
 				3C35B10121380A0600CC1B33 /* libRNCookieManagerIOS.a in Frameworks */,
 				3C719EEF211001690088E6F3 /* libRNDeviceInfo.a in Frameworks */,
 				3CFF1C04210F566D00958B1B /* libRCTBlob.a in Frameworks */,
@@ -607,6 +618,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C1AA49B215B92FE0061FB8D /* libSplashScreen.a in Frameworks */,
 				3C719EF02110018E0088E6F3 /* libRNDeviceInfo.a in Frameworks */,
 				3C8F15B620FF3BE4008A0251 /* libRCTRestart.a in Frameworks */,
 				3C13CA0320F6083B00BC09F5 /* libRCTPushNotification.a in Frameworks */,
@@ -814,10 +826,18 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		3C1AA45D215B92E90061FB8D /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3C1AA498215B92E90061FB8D /* libSplashScreen.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		3C291DE621073DCC00407896 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				3C866A60210ABEC8005F3FD8 /* iconfont.ttf */,
+				3C515FE82154C817007248B5 /* iconfont.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -1024,6 +1044,7 @@
 				8E2A8BF37557415FA56C28B8 /* RNDeviceInfo.xcodeproj */,
 				38E9B96FA8B34993A600D90A /* RNCookieManagerIOS.xcodeproj */,
 				473277DB3BF44C199E1A8C58 /* QrCode.xcodeproj */,
+				D1385E09B28943D482ACEAEE /* SplashScreen.xcodeproj */,
 			);
 			name = Libraries;
 			sourceTree = "<group>";
@@ -1290,6 +1311,10 @@
 					ProjectRef = B62E79B8E770474180B1E3B7 /* RNVectorIcons.xcodeproj */;
 				},
 				{
+					ProductGroup = 3C1AA45D215B92E90061FB8D /* Products */;
+					ProjectRef = D1385E09B28943D482ACEAEE /* SplashScreen.xcodeproj */;
+				},
+				{
 					ProductGroup = 426844A92106D88F0089BC4E /* Products */;
 					ProjectRef = A12BCBED9D1C4445A0DE2CFD /* TcpSockets.xcodeproj */;
 				},
@@ -1468,6 +1493,13 @@
 			fileType = archive.ar;
 			path = "libRCTPushNotification-tvOS.a";
 			remoteRef = 3C13CA0120F6082B00BC09F5 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		3C1AA498215B92E90061FB8D /* libSplashScreen.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libSplashScreen.a;
+			remoteRef = 3C1AA497215B92E90061FB8D /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		3C2DEBC2212BACEB00500B42 /* libRNCookieManagerIOS.a */ = {
@@ -1737,7 +1769,7 @@
 			files = (
 				3CD5E12620F33ACF003D2686 /* Octicons.ttf in Resources */,
 				3CD5E13420F33ACF003D2686 /* Entypo.ttf in Resources */,
-				3C866A61210ABEC8005F3FD8 /* iconfont.ttf in Resources */,
+				3C515FE92154C817007248B5 /* iconfont.ttf in Resources */,
 				3CD5E13220F33ACF003D2686 /* FontAwesome.ttf in Resources */,
 				3CD5E12A20F33ACF003D2686 /* Foundation.ttf in Resources */,
 				3CD5E12C20F33ACF003D2686 /* Ionicons.ttf in Resources */,
@@ -1899,6 +1931,7 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-cookies/ios/RNCookieManagerIOS",
 					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = truewalletTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -1953,6 +1986,7 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-cookies/ios/RNCookieManagerIOS",
 					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = truewalletTests/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2005,6 +2039,7 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-cookies/ios/RNCookieManagerIOS",
 					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = truewallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2052,6 +2087,7 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-cookies/ios/RNCookieManagerIOS",
 					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = truewallet/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -2103,6 +2139,7 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-cookies/ios/RNCookieManagerIOS",
 					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = "truewallet-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2158,6 +2195,7 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-cookies/ios/RNCookieManagerIOS",
 					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = "truewallet-tvOS/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2212,6 +2250,7 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-cookies/ios/RNCookieManagerIOS",
 					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = "truewallet-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
@@ -2266,6 +2305,7 @@
 					"$(SRCROOT)/../node_modules/react-native-device-info/ios/RNDeviceInfo",
 					"$(SRCROOT)/../node_modules/react-native-cookies/ios/RNCookieManagerIOS",
 					"$(SRCROOT)/../node_modules/react-native-qr-scanner/ios/QrCode",
+					"$(SRCROOT)/../node_modules/react-native-splash-screen/ios",
 				);
 				INFOPLIST_FILE = "truewallet-tvOSTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";

@@ -5900,8 +5900,8 @@ react-native-randombytes@^2.2.0:
     sjcl "^1.0.3"
 
 react-native-randombytes@^3.5.0:
-  version "3.5.0"
-  resolved "http://registry.npm.taobao.org/react-native-randombytes/download/react-native-randombytes-3.5.0.tgz#a641130a52eca65ef2165409f65d930184c6dc83"
+  version "3.5.1"
+  resolved "http://registry.npm.taobao.org/react-native-randombytes/download/react-native-randombytes-3.5.1.tgz#7e4518204460079c8b3b533c701746c86b809c89"
   dependencies:
     buffer "^4.9.1"
     sjcl "^1.0.3"
@@ -5935,6 +5935,10 @@ react-native-search-box@^0.0.19:
   resolved "http://registry.npm.taobao.org/react-native-search-box/download/react-native-search-box-0.0.19.tgz#19a7baef309341a507bee89802df90218d4cc0a4"
   dependencies:
     prop-types "^15.5.10"
+
+react-native-splash-screen@^3.1.1:
+  version "3.1.1"
+  resolved "http://registry.npm.taobao.org/react-native-splash-screen/download/react-native-splash-screen-3.1.1.tgz#1a4e46c9fdce53ff52af2a2cb4181788c4e30b30"
 
 react-native-storage@^0.2.2:
   version "0.2.2"
