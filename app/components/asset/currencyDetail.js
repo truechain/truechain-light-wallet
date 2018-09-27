@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, FlatList, Dimensions, StyleSheet } from 'react-native';
+import { View, Text, Image, FlatList, Dimensions, StyleSheet, TouchableHighlight } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { getTransactionRecord, getERC20TransactionRecord } from '../../api/index';
 import { I18n } from '../../../language/i18n';
@@ -64,7 +64,8 @@ class currencyDetail extends Component {
 		this.state = {
 			title: null,
 			recordData: [],
-			ContractAddr: null
+			ContractAddr: null,
+			isSelectTransfer: true
 		};
 	}
 
@@ -89,6 +90,10 @@ class currencyDetail extends Component {
 						this.setState({
 							recordData: res.data.result
 						});
+					});
+				} else if (params.title === 'BETA') {
+					this.setState({
+						isSelectTransfer: false
 					});
 				} else {
 					getERC20TransactionRecord(
@@ -127,19 +132,27 @@ class currencyDetail extends Component {
 					)}
 				</View>
 				<View style={styles.bottom_fun}>
+					{this.state.isSelectTransfer ? (
+						<Text
+							style={[ styles.bottom_fun_item, styles.bottom_fun_item_transfer ]}
+							onPress={() => {
+								this.navigate('Transfer', {
+									navigate: this.navigate,
+									currencyName: this.state.currencyName
+								});
+							}}
+						>
+							{I18n.t('assets.currency.transfer')}
+							{/* 转账 */}
+						</Text>
+					) : null}
+
 					<Text
-						style={[ styles.bottom_fun_item, styles.bottom_fun_item_transfer ]}
-						onPress={() => {
-							this.navigate('Transfer', {
-								navigate: this.navigate,
-								currencyName: this.state.currencyName
-							});
-						}}
-					>
-						{I18n.t('assets.currency.transfer')} {/* 转账 */}
-					</Text>
-					<Text
-						style={[ styles.bottom_fun_item, styles.bottom_fun_item_receipt ]}
+						style={[
+							styles.bottom_fun_item,
+							styles.bottom_fun_item_receipt,
+							this.state.isSelectTransfer ? null : styles.bottom_fun_item_false
+						]}
 						onPress={() => {
 							this.navigate('Receipt');
 						}}
@@ -203,6 +216,8 @@ const styles = StyleSheet.create({
 		justifyContent: 'space-between'
 	},
 	bottom_fun: {
+		width: Dimensions.get('window').width,
+		backgroundColor: '#fff',
 		position: 'absolute',
 		bottom: 0,
 		left: 0,
@@ -214,10 +229,15 @@ const styles = StyleSheet.create({
 	},
 	bottom_fun_item: {
 		height: 50,
+		alignItems: 'center',
+		justifyContent: 'center',
 		lineHeight: 50,
 		color: '#fff',
 		textAlign: 'center',
 		width: Dimensions.get('window').width / 2
+	},
+	bottom_fun_item_false: {
+		width: Dimensions.get('window').width
 	},
 	bottom_fun_item_transfer: {
 		backgroundColor: '#35ccbf'

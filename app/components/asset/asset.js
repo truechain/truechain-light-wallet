@@ -64,6 +64,7 @@ class Assets extends Component {
 			eth_banlance: 0,
 			true_banlance: 0,
 			ttr_banlance: 0,
+			true_beta_banlance: 0,
 			lock_num: 0,
 			newVersion: '--',
 			modalVisible: false,
@@ -97,6 +98,11 @@ class Assets extends Component {
 		web3.eth.getBalance(this.state.walletAddress).then((res) => {
 			let eth_banlance = this.show(web3.utils.fromWei(res, 'ether'));
 			this.setState({ eth_banlance });
+		});
+
+		webtrue.getBalance(this.state.walletAddress).then((res) => {
+			let true_beta_banlance = this.show(web3.utils.fromWei(res, 'ether'));
+			this.setState({ true_beta_banlance });
 		});
 
 		getBalance(
@@ -207,6 +213,11 @@ class Assets extends Component {
 				currency_name: 'TTR',
 				balance: this.state.ttr_banlance,
 				logo_url: require('../../assets/images/currency_logo/ttr_logo.png')
+			},
+			{
+				currency_name: 'BETA',
+				balance: this.state.true_beta_banlance,
+				logo_url: require('../../assets/images/currency_logo/true_beta_logo.png')
 			}
 		];
 

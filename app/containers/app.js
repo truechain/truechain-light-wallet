@@ -2,7 +2,7 @@ import React from 'react';
 import { I18n } from '../../language/i18n'; // 多国语言支持
 import { StyleSheet, Text, AsyncStorage } from 'react-native';
 import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation'; // 页面切换 路由导航组件
-import { nodeHost } from '../utils/config';
+import { nodeHost, trueHost } from '../utils/config';
 
 //TabBar 底部栏位页面
 import Splash from '../pages/Splash'; // app开屏画面
@@ -74,6 +74,7 @@ storage
 	});
 
 const Web3 = require('web3');
+const WebTrue = require('webtrue');
 
 function check(host) {
 	if (host.includes('ropsten')) {
@@ -91,7 +92,10 @@ function check(host) {
 	}
 	global.host = host;
 	const web3 = new Web3(new Web3.providers.HttpProvider(host));
+	const webtrue = new WebTrue.modules.ETrue(trueHost);
+
 	global.web3 = web3;
+	global.webtrue = webtrue;
 }
 
 storage
