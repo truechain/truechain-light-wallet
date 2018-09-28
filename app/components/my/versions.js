@@ -4,8 +4,12 @@ import { withNavigation } from 'react-navigation';
 
 const versionData = [
 	{
+		version: '3.0.2',
+		con: [ '增加true_beta资产显示', '优化APP启动显示' ]
+	},
+	{
 		version: '3.0.1',
-		con: [ '国际化语言更新上线','转账矿工费优化调整' ]
+		con: [ '国际化语言更新上线', '转账矿工费优化调整' ]
 	},
 	{
 		version: '3.0.0',

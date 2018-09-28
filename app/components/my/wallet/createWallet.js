@@ -9,9 +9,6 @@ import { I18n } from '../../../../language/i18n';
 const screen = Dimensions.get('window');
 var DeviceInfo = require('react-native-device-info');
 
-const Web3 = require('web3');
-
-var web3 = new Web3(new Web3.providers.HttpProvider('https:mainnet.infura.io/'));
 class CreateWallet extends Component {
 	constructor() {
 		super();
