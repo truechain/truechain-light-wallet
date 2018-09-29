@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "lint": "eslint --ext .js app",
     "devtools": "react-devtools",
     "bundle-ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ./ios/bundle/index.ios.jsbundle --assets-dest ./ios/bundle"
   },
@@ -61,10 +62,16 @@
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
+    "babel-eslint": "^10.0.1",
     "babel-jest": "23.0.1",
     "babel-plugin-transform-remove-console": "^6.9.4",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react-native": "4.0.0",
+    "eslint": "^5.6.1",
+    "eslint-config-airbnb": "^17.1.0",
+    "eslint-plugin-import": "^2.14.0",
+    "eslint-plugin-jsx-a11y": "^6.1.1",
+    "eslint-plugin-react": "^7.11.1",
     "jest": "23.1.0",
     "react-native-qrcode": "^0.2.6",
     "react-navigation": "^2.3.1",

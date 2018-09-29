@@ -35,6 +35,8 @@ import TransactionRecord from '../components/my/transactionRecord';
 import KnowledgePoint from '../components/my/knowledgePoint';
 import WebSetting from '../components/my/webSetting';
 import QRscanner from '../components/public/QRscanner';
+import Inviting from '../components/my/inviting'; //邀请好友
+import InvitationRecord from '../components/my/invitationRecord'; //邀请记录
 
 //rely
 import Storage from 'react-native-storage';
@@ -348,6 +350,26 @@ const App = createStackNavigator(
 			screen: QRscanner,
 			navigationOptions: {
 				headerTitle: () => <Text>扫描</Text>
+			}
+		},
+		Inviting: {
+			screen: Inviting,
+			navigationOptions: {
+				headerTitle: () => <Text style={{ color: '#fff' }}>邀请好友</Text>,
+				headerTintColor: '#fff',
+				headerStyle: {
+					backgroundColor: '#528BF7'
+				}
+			}
+		},
+		InvitationRecord: {
+			screen: InvitationRecord,
+			navigationOptions: {
+				headerTitle: () => <Text style={{ color: '#fff' }}>邀请记录</Text>,
+				headerTintColor: '#fff',
+				headerStyle: {
+					backgroundColor: '#528BF7'
+				}
 			}
 		}
 	},
