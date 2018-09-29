@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, StyleSheet, Dimensions, TouchableHighlight } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { I18n } from '../../../language/i18n';
+import MenuList from '../public/menuList';
 const screen = Dimensions.get('window');
 import Icon from '../../pages/iconSets';
 
@@ -45,31 +46,9 @@ class My extends Component {
 				</View>
 				<View style={styles.myColsCon}>
 					<View style={styles.myColsConPart}>
-						{/* <View style={styles.myColsConPartRow}>
-                            <View style={styles.myColsConPartRowLf}>
-                                <Image style={styles.iconMsg} source={require('../../assets/images/my/message-icon_2x.png')} />
-                            </View>
-                            <View style={styles.myColsConPartRowRi}>
-                                <Text>消息中心</Text>
-                                <View style={styles.myColsConPartRowRi2R}>
-                                    <Text style={styles.newMsgFlag}>5</Text>
-                                    <Image style={styles.iconArr2R} resizeMode={Image.resizeMode.stretch} source={require('../../assets/images/common/arr2ri.png')} />
-                                </View>
-                            </View>
-                        </View>
-                        <View style={styles.myColsConPartRow}>
-                            <View style={styles.myColsConPartRowLf}>
-                                <Image style={styles.iconLinkman} source={require('../../assets/images/my/contacts-icon_2x.png')} />
-                            </View>
-                            <View style={styles.myColsConPartRowRi}>
-                                <Text>联系人</Text>
-                                <View style={styles.myColsConPartRowRi2R}>
-                                    <Image style={styles.iconArr2R} resizeMode={Image.resizeMode.stretch} source={require('../../assets/images/common/arr2ri.png')} />
-                                </View>
-                            </View>
-                        </View> */}
-						<TouchableHighlight
-							underlayColor={'#ddd'}
+						<MenuList
+							leftName={I18n.t('my.home.lockAccount._title')}
+							leftIconName="icon-suoding"
 							onPress={() => {
 								storage
 									.load({
@@ -82,76 +61,41 @@ class My extends Component {
 										this.navigate('Login');
 									});
 							}}
-						>
-							<View style={styles.myColsConPartRow}>
-								<View style={styles.myColsConPartRowLf}>
-									<Icon name="icon-suoding" size={20} color="#528bf7" />
-								</View>
-								<View style={[ styles.myColsConPartRowRi, styles.bottomLine ]}>
-									<Text>{I18n.t('my.home.lockAccount._title')}</Text>
-									<View style={styles.myColsConPartRowRi2R}>
-										<Icon name="icon-right" size={15} color="#000" />
-									</View>
-								</View>
-							</View>
-						</TouchableHighlight>
-
-						<TouchableHighlight
+						/>
+						<MenuList
+							leftName="邀请好友"
+							leftIconName="icon-shezhi"
 							onPress={() => {
-								this.props.navigation.navigate('SysSet');
+								this.navigate('Inviting');
 							}}
-							underlayColor={'#ddd'}
-							activeOpacity={0.5}
-						>
-							<View style={styles.myColsConPartRow}>
-								<View style={styles.myColsConPartRowLf}>
-									<Icon name="icon-shezhi" size={20} color="#528bf7" />
-								</View>
-								<View style={[ styles.myColsConPartRowRi, styles.noSplitLine ]}>
-									<Text>{I18n.t('my.home.systemSetting')}</Text>
-									<View style={styles.myColsConPartRowRi2R}>
-										<Icon name="icon-right" size={15} color="#000" />
-									</View>
-								</View>
-							</View>
-						</TouchableHighlight>
+						/>
+						<MenuList
+							leftName="邀请记录"
+							leftIconName="icon-shezhi"
+							onPress={() => {
+								this.navigate('InvitationRecord');
+							}}
+						/>
 					</View>
 
 					<View style={styles.myColsConPart}>
-						<TouchableHighlight
-							onPress={() => this.props.navigation.navigate('HelperCenter')}
-							underlayColor={'#ddd'}
-							activeOpacity={0.5}
-						>
-							<View style={styles.myColsConPartRow}>
-								<View style={styles.myColsConPartRowLf}>
-									<Icon name="icon-bangzhuzhongxin" size={18} color="#528bf7" />
-								</View>
-								<View style={[ styles.myColsConPartRowRi, styles.bottomLine ]}>
-									<Text>{I18n.t('my.home.helpCenter._title')}</Text>
-									<View style={styles.myColsConPartRowRi2R}>
-										<Icon name="icon-right" size={15} color="#000" />
-									</View>
-								</View>
-							</View>
-						</TouchableHighlight>
-						<TouchableHighlight
-							onPress={() => this.props.navigation.navigate('AboutUs')}
-							underlayColor={'#ddd'}
-							activeOpacity={0.5}
-						>
-							<View style={styles.myColsConPartRow}>
-								<View style={styles.myColsConPartRowLf}>
-									<Icon name="icon-guanyuwomen" size={20} color="#528bf7" />
-								</View>
-								<View style={[ styles.myColsConPartRowRi, styles.noSplitLine ]}>
-									<Text>{I18n.t('my.home.aboutUs._title')}</Text>
-									<View style={styles.myColsConPartRowRi2R}>
-										<Icon name="icon-right" size={15} color="#000" />
-									</View>
-								</View>
-							</View>
-						</TouchableHighlight>
+						<MenuList
+							leftName={I18n.t('my.home.systemSetting')}
+							leftIconName="icon-shezhi"
+							onPress={() => {
+								this.navigate('SysSet');
+							}}
+						/>
+						<MenuList
+							leftName={I18n.t('my.home.helpCenter._title')}
+							leftIconName="icon-bangzhuzhongxin"
+							onPress={() => this.navigate('HelperCenter')}
+						/>
+						<MenuList
+							leftName={I18n.t('my.home.aboutUs._title')}
+							leftIconName="icon-guanyuwomen"
+							onPress={() => this.navigate('AboutUs')}
+						/>
 					</View>
 				</View>
 			</View>
