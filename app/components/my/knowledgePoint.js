@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { MarkdownView } from 'react-native-markdown-view';
 class KnowledgePoint extends React.Component {
 	static navigationOptions = ({ navigation }) => ({
 		headerTitle: navigation.state.params.title
@@ -10,8 +11,12 @@ class KnowledgePoint extends React.Component {
 		return (
 			<View style={styles.container}>
 				<ScrollView>
-					<Text style={{ letterSpacing: 2 }}>{params.content}</Text>
-					<Text style={{ marginTop: 20 }}>{params.ps}</Text>
+					<MarkdownView>
+						{params.content}
+						{'\n'}
+						{'\n'}
+						{params.ps}
+					</MarkdownView>
 				</ScrollView>
 			</View>
 		);

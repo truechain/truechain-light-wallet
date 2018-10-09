@@ -100,10 +100,10 @@ class Assets extends Component {
 			this.setState({ eth_banlance });
 		});
 
-		webtrue.getBalance(this.state.walletAddress).then((res) => {
-			let true_beta_banlance = this.show(web3.utils.fromWei(res, 'ether'));
-			this.setState({ true_beta_banlance });
-		});
+		// webtrue.getBalance(this.state.walletAddress).then((res) => {
+		// 	let true_beta_banlance = this.show(web3.utils.fromWei(res, 'ether'));
+		// 	this.setState({ true_beta_banlance });
+		// });
 
 		getBalance(
 			iterface,
@@ -166,7 +166,7 @@ class Assets extends Component {
 					newVersion: res.version
 				});
 				let ver_new = res.version.replace(/\./g, '');
-				if (ver_new > this.state.currentVersion) {
+				if (ver_new !== this.state.currentVersion) {
 					this.setState({ modalVisible: true });
 				}
 			});

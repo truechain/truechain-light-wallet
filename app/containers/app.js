@@ -76,7 +76,7 @@ storage
 	});
 
 const Web3 = require('web3');
-const WebTrue = require('webtrue');
+// const WebTrue = require('webtrue');
 
 function check(host) {
 	if (host.includes('ropsten')) {
@@ -94,10 +94,10 @@ function check(host) {
 	}
 	global.host = host;
 	const web3 = new Web3(new Web3.providers.HttpProvider(host));
-	const webtrue = new WebTrue.modules.ETrue(trueHost);
+	// const webtrue = new WebTrue.modules.ETrue(trueHost);
 
 	global.web3 = web3;
-	global.webtrue = webtrue;
+	// global.webtrue = webtrue;
 }
 
 storage
