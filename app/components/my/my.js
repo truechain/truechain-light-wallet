@@ -64,14 +64,14 @@ class My extends Component {
 						/>
 						<MenuList
 							leftName="邀请好友"
-							leftIconName="icon-shezhi"
+							leftIconName="icon-yaoqinghaoyou"
 							onPress={() => {
 								this.navigate('Inviting');
 							}}
 						/>
 						<MenuList
 							leftName="邀请记录"
-							leftIconName="icon-shezhi"
+							leftIconName="icon-jiluliebiao"
 							onPress={() => {
 								this.navigate('InvitationRecord');
 							}}

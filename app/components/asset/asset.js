@@ -166,7 +166,7 @@ class Assets extends Component {
 					newVersion: res.version
 				});
 				let ver_new = res.version.replace(/\./g, '');
-				if (ver_new > this.state.currentVersion) {
+				if (ver_new !== this.state.currentVersion) {
 					this.setState({ modalVisible: true });
 				}
 			});
