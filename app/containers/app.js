@@ -8,6 +8,7 @@ import { nodeHost, trueHost } from '../utils/config';
 import Splash from '../pages/Splash'; // app开屏画面
 import Assets from '../components/asset/asset'; // 底部：资产
 import My_item from '../components/my/my'; //底部： 我的
+import Activity from '../components/activity/activity'; //活动
 
 //Router
 import Guide from '../guide/guide'; //没有本地存储的钱包时进入的引导页：引导用户去选择创建钱包或导入钱包
@@ -37,6 +38,7 @@ import WebSetting from '../components/my/webSetting';
 import QRscanner from '../components/public/QRscanner';
 import Inviting from '../components/my/inviting'; //邀请好友
 import InvitationRecord from '../components/my/invitationRecord'; //邀请记录
+import Referrer from '../components/my/referrer'; //推荐人
 
 //rely
 import Storage from 'react-native-storage';
@@ -159,6 +161,27 @@ const TabBarPage = createBottomTabNavigator(
 					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>{I18n.t('tab.assets')}</Text>
 				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-zichan" size={30} color={tintColor} />
+			}
+		},
+		Activity: {
+			screen: Activity,
+			navigationOptions: {
+				tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>活动</Text>
+				),
+				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-huodong" size={30} color={tintColor} />,
+				tabBarOnPress: ({ navigation, defaultHandler }) => {
+					storage
+						.load({
+							key: 'token'
+						})
+						.then((res) => {
+							navigation.navigate('Activity');
+						})
+						.catch((e) => {
+							navigation.navigate('Login');
+						});
+				}
 			}
 		},
 		// Node: {
@@ -355,21 +378,19 @@ const App = createStackNavigator(
 		Inviting: {
 			screen: Inviting,
 			navigationOptions: {
-				headerTitle: () => <Text style={{ color: '#fff' }}>邀请好友</Text>,
-				headerTintColor: '#fff',
-				headerStyle: {
-					backgroundColor: '#528BF7'
-				}
+				headerTitle: () => <Text>邀请好友</Text>
 			}
 		},
 		InvitationRecord: {
 			screen: InvitationRecord,
 			navigationOptions: {
-				headerTitle: () => <Text style={{ color: '#fff' }}>邀请记录</Text>,
-				headerTintColor: '#fff',
-				headerStyle: {
-					backgroundColor: '#528BF7'
-				}
+				headerTitle: () => <Text>邀请记录</Text>
+			}
+		},
+		Referrer: {
+			screen: Referrer,
+			navigationOptions: {
+				headerTitle: () => <Text>输入邀请码</Text>
 			}
 		}
 	},

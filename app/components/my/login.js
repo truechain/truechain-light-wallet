@@ -115,26 +115,41 @@ export default class Login extends React.Component {
 	}
 
 	_login() {
-		login({
-			mobile: this.state.tel,
-			code: this.state.v_code,
-			address: this.state.address
-		}).then((res) => {
-			if (res.data.body.status == 0) {
-				storage.save({
-					key: 'token',
-					data: {
-						token: res.data.body.data.token
-					}
-				});
-				this.navigate('My');
-			} else if (res.data.body.status == 202) {
-				Alert.alert(null, I18n.t('public.verificationCodeError'));
-			} else if (res.data.body.status == 203) {
-				Alert.alert(null, I18n.t('public.hasBind'));
-				// Alert.alert(null, '该手机号已绑定钱包地址');
-			}
-		});
+		if (this.state.callingCode === '86') {
+			this.setState({
+				smsType: 1
+			});
+		}
+		if (!this.state.tel) {
+			Alert.alert(null, I18n.t('public.enterMobile'));
+		} else if (this.state.callingCode === '86' && !this.regPhone.test(this.state.tel)) {
+			Alert.alert(null, I18n.t('public.enter_the_legal_mobile_number'));
+		} else if (!this.state.cap_code) {
+			Alert.alert(null, I18n.t('public.enterCaptcha'));
+		} else if (!this.state.v_code) {
+			Alert.alert(null, '___LLL  请输入手机验证码');
+		} else {
+			login({
+				mobile: this.state.tel,
+				code: this.state.v_code,
+				address: this.state.address
+			}).then((res) => {
+				if (res.data.body.status == 0) {
+					storage.save({
+						key: 'token',
+						data: {
+							token: res.data.body.data.token
+						}
+					});
+					this.navigate('My');
+				} else if (res.data.body.status == 202) {
+					Alert.alert(null, I18n.t('public.verificationCodeError'));
+				} else if (res.data.body.status == 203) {
+					Alert.alert(null, I18n.t('public.hasBind'));
+					// Alert.alert(null, '该手机号已绑定钱包地址');
+				}
+			});
+		}
 	}
 
 	getCountdown() {

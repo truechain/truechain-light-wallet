@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, TouchableHighlight } from 'react-native';
+import { View, Text, Image, StyleSheet, Dimensions, TouchableHighlight, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { I18n } from '../../../language/i18n';
 import MenuList from '../public/menuList';
@@ -44,60 +44,87 @@ class My extends Component {
 						</TouchableHighlight>
 					</View>
 				</View>
-				<View style={styles.myColsCon}>
-					<View style={styles.myColsConPart}>
-						<MenuList
-							leftName={I18n.t('my.home.lockAccount._title')}
-							leftIconName="icon-suoding"
-							onPress={() => {
-								storage
-									.load({
-										key: 'token'
-									})
-									.then((res) => {
-										this.navigate('LockAccount');
-									})
-									.catch((e) => {
-										this.navigate('Login');
-									});
-							}}
-						/>
-						<MenuList
-							leftName="邀请好友"
-							leftIconName="icon-yaoqinghaoyou"
-							onPress={() => {
-								this.navigate('Inviting');
-							}}
-						/>
-						<MenuList
-							leftName="邀请记录"
-							leftIconName="icon-jiluliebiao"
-							onPress={() => {
-								this.navigate('InvitationRecord');
-							}}
-						/>
-					</View>
+				<ScrollView>
+					<View style={styles.myColsCon}>
+						<View style={styles.myColsConPart}>
+							<MenuList
+								leftName={I18n.t('my.home.lockAccount._title')}
+								leftIconName="icon-suoding"
+								onPress={() => {
+									storage
+										.load({
+											key: 'token'
+										})
+										.then((res) => {
+											this.navigate('LockAccount');
+										})
+										.catch((e) => {
+											this.navigate('Login');
+										});
+								}}
+							/>
+							<MenuList
+								leftName="邀请好友"
+								leftIconName="icon-yaoqinghaoyou"
+								onPress={() => {
+									storage
+										.load({
+											key: 'token'
+										})
+										.then((res) => {
+											this.navigate('Inviting');
+										})
+										.catch((e) => {
+											this.navigate('Login');
+										});
+								}}
+							/>
+							<MenuList
+								leftName="邀请记录"
+								leftIconName="icon-jiluliebiao"
+								onPress={() => {
+									storage
+										.load({
+											key: 'token'
+										})
+										.then((res) => {
+											this.navigate('InvitationRecord');
+										})
+										.catch((e) => {
+											this.navigate('Login');
+										});
+								}}
+							/>
+						</View>
 
-					<View style={styles.myColsConPart}>
-						<MenuList
-							leftName={I18n.t('my.home.systemSetting')}
-							leftIconName="icon-shezhi"
-							onPress={() => {
-								this.navigate('SysSet');
-							}}
-						/>
-						<MenuList
-							leftName={I18n.t('my.home.helpCenter._title')}
-							leftIconName="icon-bangzhuzhongxin"
-							onPress={() => this.navigate('HelperCenter')}
-						/>
-						<MenuList
-							leftName={I18n.t('my.home.aboutUs._title')}
-							leftIconName="icon-guanyuwomen"
-							onPress={() => this.navigate('AboutUs')}
-						/>
+						<View style={styles.myColsConPart}>
+							<MenuList
+								leftName={I18n.t('my.home.systemSetting')}
+								leftIconName="icon-shezhi"
+								onPress={() => {
+									this.navigate('SysSet');
+								}}
+							/>
+							<MenuList
+								leftName={I18n.t('my.home.helpCenter._title')}
+								leftIconName="icon-bangzhuzhongxin"
+								onPress={() => this.navigate('HelperCenter')}
+							/>
+							<MenuList
+								leftName={I18n.t('my.home.aboutUs._title')}
+								leftIconName="icon-guanyuwomen"
+								onPress={() => this.navigate('AboutUs')}
+							/>
+							<MenuList
+								leftName="联系我们"
+								leftIconName="icon-lianxiwomen"
+								onPress={() => {
+									alert('联系我们');
+								}}
+							/>
+						</View>
 					</View>
-				</View>
+				</ScrollView>
 			</View>
 		);
 	}
