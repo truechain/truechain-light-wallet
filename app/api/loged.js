@@ -16,6 +16,8 @@ const isJoinTeamUrl = '/isJoinTeam';
 const getTeamAddressUrl = '/getTeamAddress';
 const initStatusUrl = '/initStatus';
 const searchTeamUrl = '/searchTeam';
+const isSetReferrerUrl = '/isSetReferrer';
+const setReferrerUrl = '/referrer';
 
 const getToken = () => {
 	return storage.load({
@@ -220,6 +222,33 @@ const searchTeam = async (option) => {
 	});
 };
 
+//是否设置推荐人
+const isSetReferrer = async (option) => {
+	let res = await getToken();
+	return axios.get(isSetReferrerUrl, {
+		headers: {
+			token: res.token
+		},
+		params: {
+			mobile: option.mobile
+		}
+	});
+};
+
+//填写推荐人
+const setReferrer = async (option) => {
+	let res = await getToken();
+	return axios.get(setReferrerUrl, {
+		headers: {
+			token: res.token
+		},
+		params: {
+			mobile: option.mobile,
+			referrer_code: option.referrer_code
+		}
+	});
+};
+
 export {
 	createTeam,
 	getTrueCoin,
@@ -234,5 +263,7 @@ export {
 	isJoinTeam,
 	getTeamAddress,
 	initStatus,
-	searchTeam
+	searchTeam,
+	isSetReferrer,
+	setReferrer
 };

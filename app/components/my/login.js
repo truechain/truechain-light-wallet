@@ -4,6 +4,7 @@ import CountryPicker from 'react-native-country-picker-modal';
 import { I18n } from '../../../language/i18n';
 import { Button } from 'react-native-elements';
 import { getCode, login } from '../../api/index';
+import { isSetReferrer } from '../../api/loged';
 import { serverUrl } from '../../utils/config';
 
 const screen = Dimensions.get('window');
@@ -141,7 +142,18 @@ export default class Login extends React.Component {
 							token: res.data.body.data.token
 						}
 					});
-					this.navigate('My');
+
+					isSetReferrer({
+						mobile: this.state.tel
+					}).then((res) => {
+						if (res.data.isSetReferrer) {
+							this.navigate('My');
+						} else {
+							this.navigate('Referrer', {
+								mobile: this.state.tel
+							});
+						}
+					});
 				} else if (res.data.body.status == 202) {
 					Alert.alert(null, I18n.t('public.verificationCodeError'));
 				} else if (res.data.body.status == 203) {
