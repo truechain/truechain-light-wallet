@@ -3,14 +3,29 @@ import { withNavigation } from 'react-navigation';
 import Icon from '../../pages/iconSets';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
 import { Text, View, StyleSheet, ImageBackground } from 'react-native';
+import { getReferrerCode } from '../../api/loged';
 
 export class MenuList extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			parent_promo_code: '88888888'
+			parent_promo_code: '-----'
 		};
 		this.navigate = this.props.navigation.navigate;
+	}
+
+	componentDidMount() {
+		storage.load({ key: 'walletInfo' }).then((res) => {
+			getReferrerCode({
+				address: res.walletAddress
+			}).then((res) => {
+				if (res.data.status === 2) {
+					this.setState({
+						parent_promo_code: res.data.referrer_code
+					});
+				}
+			});
+		});
 	}
 
 	render() {
@@ -96,10 +111,10 @@ const styles = StyleSheet.create({
 		paddingTop: 10,
 		alignItems: 'center'
 	},
-	title:{
+	title: {
 		marginTop: 30,
-		fontSize:18,
-		color:'#F3FFFF',
+		fontSize: 18,
+		color: '#F3FFFF',
 		fontWeight: 'bold'
 	},
 	cardArea: {

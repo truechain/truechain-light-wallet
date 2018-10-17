@@ -19,6 +19,7 @@ const searchTeamUrl = '/searchTeam';
 const isSetReferrerUrl = '/isSetReferrer';
 const setReferrerUrl = '/setReferrer';
 const getInvitationRecordUrl = 'invitationRecord';
+const getReferrerCodeUrl = 'getReferrerCode';
 
 const getToken = () => {
 	return storage.load({
@@ -223,6 +224,19 @@ const searchTeam = async (option) => {
 	});
 };
 
+//获取邀请码
+const getReferrerCode = async (option) => {
+	let res = await getToken();
+	return axios.get(getReferrerCodeUrl, {
+		headers: {
+			token: res.token
+		},
+		params: {
+			address: option.address
+		}
+	});
+};
+
 //是否设置推荐人
 const isSetReferrer = async (option) => {
 	let res = await getToken();
@@ -250,6 +264,7 @@ const setReferrer = async (option) => {
 	});
 };
 
+//获取邀请记录
 const getInvitationRecord = async (option) => {
 	let res = await getToken();
 	return axios.get(getInvitationRecordUrl, {
@@ -279,5 +294,6 @@ export {
 	searchTeam,
 	isSetReferrer,
 	setReferrer,
-	getInvitationRecord
+	getInvitationRecord,
+	getReferrerCode
 };

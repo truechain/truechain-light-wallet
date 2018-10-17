@@ -9,7 +9,8 @@ export class InvitationRecord extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			recordData: []
+			recordData: [],
+			socrt: 0
 		};
 		this.navigate = this.props.navigation.navigate;
 	}
@@ -18,10 +19,9 @@ export class InvitationRecord extends Component {
 		getInvitationRecord({
 			mobile: '17611223665'
 		}).then((res) => {
-			console.log(res.data.data);
-
 			this.setState({
-				recordData: res.data.data
+				recordData: res.data.data,
+				socrt: res.data.socrt[0].socrt
 			});
 		});
 	}
@@ -35,7 +35,7 @@ export class InvitationRecord extends Component {
 					<View style={[ styles.contentContainer, { height: 80, alignItems: 'center' } ]}>
 						<View style={styles.contentContainer_item}>
 							<Text style={styles.textL}>累计邀请人数</Text>
-							<Text style={styles.textR}>12</Text>
+							<Text style={styles.textR}>{this.state.recordData.length}</Text>
 						</View>
 						<View
 							style={{
@@ -47,7 +47,7 @@ export class InvitationRecord extends Component {
 						/>
 						<View style={styles.contentContainer_item}>
 							<Text style={styles.textL}>累计积分奖励</Text>
-							<Text style={styles.textR}>120</Text>
+							<Text style={styles.textR}>{this.state.socrt}</Text>
 						</View>
 					</View>
 
