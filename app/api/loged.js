@@ -17,7 +17,8 @@ const getTeamAddressUrl = '/getTeamAddress';
 const initStatusUrl = '/initStatus';
 const searchTeamUrl = '/searchTeam';
 const isSetReferrerUrl = '/isSetReferrer';
-const setReferrerUrl = '/referrer';
+const setReferrerUrl = '/setReferrer';
+const getInvitationRecordUrl = 'invitationRecord';
 
 const getToken = () => {
 	return storage.load({
@@ -249,6 +250,18 @@ const setReferrer = async (option) => {
 	});
 };
 
+const getInvitationRecord = async (option) => {
+	let res = await getToken();
+	return axios.get(getInvitationRecordUrl, {
+		headers: {
+			token: res.token
+		},
+		params: {
+			mobile: option.mobile
+		}
+	});
+};
+
 export {
 	createTeam,
 	getTrueCoin,
@@ -265,5 +278,6 @@ export {
 	initStatus,
 	searchTeam,
 	isSetReferrer,
-	setReferrer
+	setReferrer,
+	getInvitationRecord
 };

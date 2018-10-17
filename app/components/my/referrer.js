@@ -32,11 +32,18 @@ export class Referrer extends Component {
 				mobile: this.state.mobile,
 				referrer_code: this.state.referrer_code
 			}).then((res) => {
-				console.log(res);
-				if (res.status === 0) {
-					this.navigate('My');
-				} else {
-					Alert.alert(null, '邀请码错误,请检查重试!');
+				switch (res.data.status) {
+					case 2:
+						this.navigate('My');
+						break;
+					case 3:
+						Alert.alert(null, '请输入正确的邀请码!');
+						break;
+					case 4:
+						Alert.alert(null, '网络错误,请稍后重试!');
+						break;
+					default:
+						break;
 				}
 			});
 		} else {

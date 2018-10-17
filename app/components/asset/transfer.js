@@ -378,7 +378,6 @@ class Transfer extends Component {
 							coverScreen={true}
 							position={'bottom'}
 							ref={'transferPwd'}
-							isOpen={this.state.huhu}
 							swipeArea={20}
 						>
 							<ScrollView>

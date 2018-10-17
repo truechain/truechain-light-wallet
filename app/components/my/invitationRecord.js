@@ -2,12 +2,28 @@ import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
 import Icon from '../../pages/iconSets';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
-import { Text, View, StyleSheet, ImageBackground } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, ScrollView } from 'react-native';
+import { getInvitationRecord } from '../../api/loged';
 
 export class InvitationRecord extends Component {
 	constructor(props) {
 		super(props);
+		this.state = {
+			recordData: []
+		};
 		this.navigate = this.props.navigation.navigate;
+	}
+
+	componentDidMount() {
+		getInvitationRecord({
+			mobile: '17611223665'
+		}).then((res) => {
+			console.log(res.data.data);
+
+			this.setState({
+				recordData: res.data.data
+			});
+		});
 	}
 
 	render() {
@@ -35,10 +51,35 @@ export class InvitationRecord extends Component {
 						</View>
 					</View>
 
-					<View style={[ styles.contentContainer, { height: 300 } ]}>
-						<Text>时间</Text>
-						<Text>好友钱包地址</Text>
-						<Text>奖励</Text>
+					<View style={[ styles.contentContainer_bottom, { height: 300 } ]}>
+						<View style={styles.record}>
+							<Text>时间</Text>
+							<Text>好友地址</Text>
+						</View>
+
+						<ScrollView>
+							{this.state.recordData ? (
+								this.state.recordData.map((item, index) => {
+									return (
+										<View
+											key={item.create_time}
+											style={[ styles.record_item, index % 2 === 0 ? styles.single : null ]}
+										>
+											<Text style={styles.lineH} numberOfLines={1}>
+												{
+													new Date(Number(item.create_time))
+														.toLocaleString()
+														.match(/^\d+\/\d+\/\d+/g)[0]
+												}
+											</Text>
+											<Text style={styles.lineH} numberOfLines={1} ellipsizeMode="middle">
+												{item.address}
+											</Text>
+										</View>
+									);
+								})
+							) : null}
+						</ScrollView>
 					</View>
 				</ImageBackground>
 			</View>
@@ -82,5 +123,33 @@ const styles = StyleSheet.create({
 	textR: {
 		color: '#7eaaf5',
 		fontWeight: 'bold'
+	},
+	contentContainer_bottom: {
+		borderRadius: 5,
+		backgroundColor: '#fff',
+		marginTop: 20
+	},
+	record: {
+		width: screenWidth * 0.9,
+		height: 40,
+		flexDirection: 'row',
+		// justifyContent: 'center',
+		justifyContent: 'space-around',
+		alignItems: 'center'
+	},
+	record_item: {
+		flexDirection: 'row',
+		justifyContent: 'space-around'
+	},
+	lineH: {
+		width: screenWidth * 0.9 / 2,
+		lineHeight: 40,
+		fontSize: 12,
+		textAlign: 'center',
+		paddingLeft: 10,
+		paddingRight: 10
+	},
+	single: {
+		backgroundColor: '#EFEEF3'
 	}
 });
