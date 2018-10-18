@@ -51,9 +51,9 @@ export class InvitationRecord extends Component {
 						</View>
 					</View>
 
-					<View style={[ styles.contentContainer_bottom, { height: 300 } ]}>
+					<View style={[ styles.contentContainer_bottom, { height: screenHeight * 0.5 } ]}>
 						<View style={styles.record}>
-							<Text>时间</Text>
+							<Text>邀请时间</Text>
 							<Text>好友地址</Text>
 						</View>
 
@@ -133,7 +133,6 @@ const styles = StyleSheet.create({
 		width: screenWidth * 0.9,
 		height: 40,
 		flexDirection: 'row',
-		// justifyContent: 'center',
 		justifyContent: 'space-around',
 		alignItems: 'center'
 	},
