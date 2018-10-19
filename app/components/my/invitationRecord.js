@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
 import Icon from '../../pages/iconSets';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
-import { Text, View, StyleSheet, ImageBackground, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, ScrollView, RefreshControl } from 'react-native';
 import { getInvitationRecord } from '../../api/loged';
 
 export class InvitationRecord extends Component {
@@ -10,18 +10,23 @@ export class InvitationRecord extends Component {
 		super(props);
 		this.state = {
 			recordData: [],
-			socrt: 0
+			socrt: 0,
+			isRefreshing: false
 		};
 		this.navigate = this.props.navigation.navigate;
 	}
 
 	componentDidMount() {
+		this.refresh();
+	}
+
+	refresh() {
 		getInvitationRecord({
 			mobile: '17611223665'
 		}).then((res) => {
 			this.setState({
 				recordData: res.data.data,
-				socrt: res.data.socrt[0].socrt
+				socrt: res.data.socrt
 			});
 		});
 	}
@@ -35,7 +40,7 @@ export class InvitationRecord extends Component {
 					<View style={[ styles.contentContainer, { height: 80, alignItems: 'center' } ]}>
 						<View style={styles.contentContainer_item}>
 							<Text style={styles.textL}>累计邀请人数</Text>
-							<Text style={styles.textR}>{this.state.recordData.length}</Text>
+							<Text style={styles.textR}>{this.state.recordData.length || '--'}</Text>
 						</View>
 						<View
 							style={{
@@ -47,7 +52,7 @@ export class InvitationRecord extends Component {
 						/>
 						<View style={styles.contentContainer_item}>
 							<Text style={styles.textL}>累计积分奖励</Text>
-							<Text style={styles.textR}>{this.state.socrt}</Text>
+							<Text style={styles.textR}>{this.state.socrt || '--'}</Text>
 						</View>
 					</View>
 
@@ -57,7 +62,19 @@ export class InvitationRecord extends Component {
 							<Text>好友地址</Text>
 						</View>
 
-						<ScrollView>
+						<ScrollView
+							refreshControl={
+								<RefreshControl
+									refreshing={this.state.isRefreshing}
+									onRefresh={() => {
+										this.refresh();
+									}}
+									tintColor="#BABEBA"
+									title="Loading..."
+									titleColor="#9FA3A0"
+								/>
+							}
+						>
 							{this.state.recordData ? (
 								this.state.recordData.map((item, index) => {
 									return (

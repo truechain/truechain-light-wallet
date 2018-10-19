@@ -18,8 +18,10 @@ const initStatusUrl = '/initStatus';
 const searchTeamUrl = '/searchTeam';
 const isSetReferrerUrl = '/isSetReferrer';
 const setReferrerUrl = '/setReferrer';
-const getInvitationRecordUrl = 'invitationRecord';
-const getReferrerCodeUrl = 'getReferrerCode';
+const getInvitationRecordUrl = '/invitationRecord';
+const getReferrerCodeUrl = '/getReferrerCode';
+const signInUrl = '/signIn';
+const isSignInUrl = '/isSignIn';
 
 const getToken = () => {
 	return storage.load({
@@ -277,6 +279,28 @@ const getInvitationRecord = async (option) => {
 	});
 };
 
+//签到
+const signIn = async (params) => {
+	let res = await getToken();
+	return axios.get(signInUrl, {
+		headers: {
+			token: res.token
+		},
+		params: params
+	});
+};
+
+//今日是否签到    address
+const isSignIn = async (params) => {
+	let res = await getToken();
+	return axios.get(isSignInUrl, {
+		headers: {
+			token: res.token
+		},
+		params: params
+	});
+};
+
 export {
 	createTeam,
 	getTrueCoin,
@@ -295,5 +319,7 @@ export {
 	isSetReferrer,
 	setReferrer,
 	getInvitationRecord,
-	getReferrerCode
+	getReferrerCode,
+	signIn,
+	isSignIn
 };
