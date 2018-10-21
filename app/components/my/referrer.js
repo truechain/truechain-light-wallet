@@ -33,6 +33,9 @@ export class Referrer extends Component {
 				referrer_code: this.state.referrer_code
 			}).then((res) => {
 				switch (res.data.status) {
+					case 0:
+						Alert.alert(null, '不能设置自己为推荐人');
+						break;
 					case 2:
 						this.navigate('My');
 						break;
@@ -71,6 +74,7 @@ export class Referrer extends Component {
 
 				<Button title="下一步" buttonStyle={styles.buttonStyle} onPress={this._next.bind(this)} />
 				<TouchableHighlight
+					underlayColor={'transparent'}
 					style={{ marginTop: 50 }}
 					onPress={() => {
 						this.navigate('My');

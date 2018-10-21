@@ -62,6 +62,7 @@ class Activity extends Component {
 	}
 
 	_isSignIn() {
+		//当天是否已签到   连签天数
 		isSignIn({
 			address: this.state.walletAddress
 		}).then((res) => {
