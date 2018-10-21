@@ -318,7 +318,12 @@ const App = createStackNavigator(
 				headerTitle: () => <Text>{I18n.t('my.home.helpCenter._title')}</Text>
 			}
 		},
-		ContactUs,
+		ContactUs: {
+			screen: ContactUs,
+			navigationOptions: {
+				headerTitle: () => <Text>联系我们</Text>
+			}
+		},
 		SysSet: {
 			screen: SysSet,
 			navigationOptions: {

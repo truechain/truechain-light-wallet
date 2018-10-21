@@ -15,16 +15,19 @@ export class MenuList extends Component {
 				onPress={() => {
 					this.props.onPress() || null;
 				}}
-				underlayColor={'#ddd'}
+				underlayColor={'transparent'}
 				activeOpacity={0.5}
 			>
 				<View style={styles.myColsConPartRow}>
-					<View style={styles.myColsConPartRowLf}>
-						<Icon name={this.props.leftIconName} size={20} color="#528bf7" />
-					</View>
+					{this.props.leftIconName ? (
+						<View style={styles.myColsConPartRowLf}>
+							<Icon name={this.props.leftIconName} size={20} color="#528bf7" />
+						</View>
+					) : null}
 					<View style={[ styles.myColsConPartRowRi, styles.noSplitLine ]}>
 						<Text>{this.props.leftName}</Text>
 						<View style={styles.myColsConPartRowRi2R}>
+							{this.props.rightName ? <Text>{this.props.rightName}</Text> : null}
 							<Icon name="icon-right" size={15} color="#000" />
 						</View>
 					</View>

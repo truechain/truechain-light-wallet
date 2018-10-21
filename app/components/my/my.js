@@ -111,16 +111,14 @@ class My extends Component {
 								onPress={() => this.navigate('HelperCenter')}
 							/>
 							<MenuList
+								leftName="联系我们"
+								leftIconName="icon-lianxiwomen"
+								onPress={() => this.navigate('ContactUs')}
+							/>
+							<MenuList
 								leftName={I18n.t('my.home.aboutUs._title')}
 								leftIconName="icon-guanyuwomen"
 								onPress={() => this.navigate('AboutUs')}
-							/>
-							<MenuList
-								leftName="联系我们"
-								leftIconName="icon-lianxiwomen"
-								onPress={() => {
-									alert('联系我们');
-								}}
 							/>
 						</View>
 					</View>
