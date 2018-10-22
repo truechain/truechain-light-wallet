@@ -75,6 +75,25 @@ export default {
 				privacyPolicy: 'Privacy Policy',
 				versionLog: 'Version Log',
 				checkVersion: 'Detect new version'
+			},
+			inviteFriends: {
+				_title: 'Invite Friends',
+				lightWallet: 'Light wallet',
+				InvitationCode: 'Your invitation code',
+				scanQr: 'Scan QR code to download light wallet',
+				joinWallet: 'Join the light wallet to participate in the event to get True for free',
+				enterInvitationCode: 'Enter invitation code'
+			},
+			invitationRecord: {
+				_title: 'Invitation Record',
+				myInvitation: 'My invitation',
+				inviteesNum: 'Number of invitees',
+				pointReward: 'Accumulated points reward',
+				invitationTime: 'Invitation time',
+				friendAddress: 'Friend address'
+			},
+			contactUs: {
+				_title: 'Contact Us'
 			}
 		},
 		sysSetting: {
@@ -226,7 +245,9 @@ export default {
 		futureMember: 'Future member management'
 	},
 	public: {
+		rule: 'rule of activity',
 		second: 'Second',
+		skip: 'Skip',
 		next: 'Next',
 		back: 'Back',
 		save: 'Save',

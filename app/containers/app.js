@@ -321,7 +321,7 @@ const App = createStackNavigator(
 		ContactUs: {
 			screen: ContactUs,
 			navigationOptions: {
-				headerTitle: () => <Text>联系我们</Text>
+				headerTitle: () => <Text>{I18n.t('my.home.contactUs._title')}</Text>
 			}
 		},
 		SysSet: {
@@ -377,25 +377,25 @@ const App = createStackNavigator(
 		QRscanner: {
 			screen: QRscanner,
 			navigationOptions: {
-				headerTitle: () => <Text>扫描</Text>
+				headerTitle: () => <Text>{I18n.t('public.scan')}</Text>
 			}
 		},
 		Inviting: {
 			screen: Inviting,
 			navigationOptions: {
-				headerTitle: () => <Text>邀请好友</Text>
+				headerTitle: () => <Text>{I18n.t('my.home.inviteFriends._title')}</Text>
 			}
 		},
 		InvitationRecord: {
 			screen: InvitationRecord,
 			navigationOptions: {
-				headerTitle: () => <Text>邀请记录</Text>
+				headerTitle: () => <Text>{I18n.t('my.home.invitationRecord._title')}</Text>
 			}
 		},
 		Referrer: {
 			screen: Referrer,
 			navigationOptions: {
-				headerTitle: () => <Text>输入邀请码</Text>
+				headerTitle: () => <Text>{I18n.t('my.home.inviteFriends.enterInvitationCode')}</Text>
 			}
 		}
 	},

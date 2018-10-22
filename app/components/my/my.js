@@ -64,7 +64,7 @@ class My extends Component {
 								}}
 							/>
 							<MenuList
-								leftName="邀请好友"
+								leftName={I18n.t('my.home.inviteFriends._title')}
 								leftIconName="icon-yaoqinghaoyou"
 								onPress={() => {
 									storage
@@ -80,7 +80,7 @@ class My extends Component {
 								}}
 							/>
 							<MenuList
-								leftName="邀请记录"
+								leftName={I18n.t('my.home.invitationRecord._title')}
 								leftIconName="icon-jiluliebiao"
 								onPress={() => {
 									storage
@@ -111,7 +111,7 @@ class My extends Component {
 								onPress={() => this.navigate('HelperCenter')}
 							/>
 							<MenuList
-								leftName="联系我们"
+								leftName={I18n.t('my.home.contactUs._title')}
 								leftIconName="icon-lianxiwomen"
 								onPress={() => this.navigate('ContactUs')}
 							/>

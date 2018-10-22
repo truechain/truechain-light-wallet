@@ -4,6 +4,7 @@ import Icon from '../../pages/iconSets';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
 import { Text, View, StyleSheet, ImageBackground, ScrollView, RefreshControl } from 'react-native';
 import { getInvitationRecord } from '../../api/loged';
+import { I18n } from '../../../language/i18n';
 
 export class InvitationRecord extends Component {
 	constructor(props) {
@@ -11,18 +12,32 @@ export class InvitationRecord extends Component {
 		this.state = {
 			recordData: [],
 			socrt: 0,
-			isRefreshing: false
+			isRefreshing: false,
+			walletAddress: ''
 		};
 		this.navigate = this.props.navigation.navigate;
 	}
 
 	componentDidMount() {
-		this.refresh();
+		storage
+			.load({
+				key: 'walletInfo'
+			})
+			.then((walletInfo) => {
+				this.setState(
+					{
+						walletAddress: walletInfo.walletAddress
+					},
+					() => {
+						this.refresh();
+					}
+				);
+			});
 	}
 
 	refresh() {
 		getInvitationRecord({
-			mobile: '17611223665'
+			address: this.state.walletAddress
 		}).then((res) => {
 			this.setState({
 				recordData: res.data.data,
@@ -35,11 +50,11 @@ export class InvitationRecord extends Component {
 		return (
 			<View style={{ height: screenHeight }}>
 				<ImageBackground style={styles.container} source={require('../../assets/images/my/inviting.png')}>
-					<Text style={styles.title}>我的邀请</Text>
+					<Text style={styles.title}>{I18n.t('my.home.invitationRecord.myInvitation')}</Text>
 
 					<View style={[ styles.contentContainer, { height: 80, alignItems: 'center' } ]}>
 						<View style={styles.contentContainer_item}>
-							<Text style={styles.textL}>累计邀请人数</Text>
+							<Text style={styles.textL}>{I18n.t('my.home.invitationRecord.inviteesNum')}</Text>
 							<Text style={styles.textR}>{this.state.recordData.length || '--'}</Text>
 						</View>
 						<View
@@ -51,15 +66,15 @@ export class InvitationRecord extends Component {
 							}}
 						/>
 						<View style={styles.contentContainer_item}>
-							<Text style={styles.textL}>累计积分奖励</Text>
+							<Text style={styles.textL}>{I18n.t('my.home.invitationRecord.pointReward')}</Text>
 							<Text style={styles.textR}>{this.state.socrt || '--'}</Text>
 						</View>
 					</View>
 
 					<View style={[ styles.contentContainer_bottom, { height: screenHeight * 0.5 } ]}>
 						<View style={styles.record}>
-							<Text>邀请时间</Text>
-							<Text>好友地址</Text>
+							<Text>{I18n.t('my.home.invitationRecord.invitationTime')}</Text>
+							<Text>{I18n.t('my.home.invitationRecord.friendAddress')}</Text>
 						</View>
 
 						<ScrollView
@@ -135,6 +150,8 @@ const styles = StyleSheet.create({
 	},
 	textL: {
 		color: '#646464',
+		width: screenWidth * 0.3,
+		textAlign: 'center',
 		letterSpacing: 1
 	},
 	textR: {

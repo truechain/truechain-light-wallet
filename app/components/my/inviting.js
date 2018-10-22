@@ -4,6 +4,7 @@ import Icon from '../../pages/iconSets';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
 import { Text, View, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native';
 import { getReferrerCode } from '../../api/loged';
+import { I18n } from '../../../language/i18n';
 
 export class MenuList extends Component {
 	constructor(props) {
@@ -33,7 +34,7 @@ export class MenuList extends Component {
 			<ScrollView>
 				<View style={{ height: screenHeight }}>
 					<ImageBackground style={styles.container} source={require('../../assets/images/my/inviting.png')}>
-						<Text style={styles.title}>轻钱包</Text>
+						<Text style={styles.title}>{I18n.t('my.home.inviteFriends.lightWallet')}</Text>
 						<View>
 							<View
 								style={[
@@ -46,7 +47,7 @@ export class MenuList extends Component {
 									}
 								]}
 							>
-								<Text>您的邀请码</Text>
+								<Text>{I18n.t('my.home.inviteFriends.InvitationCode')}</Text>
 								<Text style={{ fontSize: 30 }}>
 									{this.state.parent_promo_code ? this.state.parent_promo_code : '-----'}
 								</Text>
@@ -95,8 +96,10 @@ export class MenuList extends Component {
 									source={require('../../assets/images/my/gw.png')}
 									style={{ width: 150, height: 150 }}
 								/>
-								<Text style={{ fontSize: 18, color: '#6A6A6A' }}>扫描二维码下载轻钱包</Text>
-								<Text style={{ color: '#6187DF' }}>加入轻钱包参与活动免费获取True</Text>
+								<Text style={{ fontSize: 15, color: '#6A6A6A' }}>
+									{I18n.t('my.home.inviteFriends.scanQr')}
+								</Text>
+								<Text style={{ color: '#6187DF' }}>{I18n.t('my.home.inviteFriends.joinWallet')}</Text>
 							</View>
 						</View>
 						<View style={styles.rule}>
@@ -105,7 +108,7 @@ export class MenuList extends Component {
 								<Text
 									style={[ styles.color_white, { fontSize: 16, paddingLeft: 10, paddingRight: 10 } ]}
 								>
-									活动规则
+									{I18n.t('public.rule')}
 								</Text>
 								<View style={styles.line} />
 							</View>

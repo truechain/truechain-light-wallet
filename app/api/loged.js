@@ -274,7 +274,7 @@ const getInvitationRecord = async (option) => {
 			token: res.token
 		},
 		params: {
-			mobile: option.mobile
+			address: option.address
 		}
 	});
 };

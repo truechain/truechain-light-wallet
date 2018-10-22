@@ -37,6 +37,9 @@ export default {
 		node: '节点',
 		my: '我的'
 	},
+	activity: {
+		_title: '活动'
+	},
 	my: {
 		home: {
 			walletManagement: '钱包管理',
@@ -71,6 +74,22 @@ export default {
 				privacyPolicy: '隐私条款',
 				versionLog: '版本日志',
 				checkVersion: '检测新版'
+			},
+			inviteFriends: {
+				_title: '邀请好友',
+				lightWallet: '轻钱包',
+				InvitationCode: '你的邀请码',
+				scanQr: '扫描二维码下载轻钱包',
+				joinWallet: '加入轻钱包参与活动免费获取True',
+				enterInvitationCode: '输入邀请码'
+			},
+			invitationRecord: {
+				_title: '邀请记录',
+				myInvitation: '我的邀请',
+				inviteesNum: '累计邀请人数',
+				pointReward: '累计邀请积分',
+				invitationTime: '邀请时间',
+				friendAddress: '好友地址'
 			}
 		},
 		sysSetting: {
@@ -210,7 +229,9 @@ export default {
 		futureMember: '待加入人员管理'
 	},
 	public: {
+		rule: '活动规则',
 		second: '秒',
+		skip: '跳过',
 		next: '下一步',
 		back: '返回',
 		save: '保存',

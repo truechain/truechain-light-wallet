@@ -4,6 +4,7 @@ import { withNavigation } from 'react-navigation';
 import { Input, Button } from 'react-native-elements';
 import { screenWidth } from '../../utils/Dimensions';
 import { setReferrer } from '../../api/loged';
+import { I18n } from '../../../language/i18n';
 
 export class Referrer extends Component {
 	constructor(props) {
@@ -65,14 +66,18 @@ export class Referrer extends Component {
 					}}
 				>
 					<Input
-						placeholder="输入邀请码"
+						placeholder={I18n.t('my.home.inviteFriends.enterInvitationCode')}
 						maxLength={6}
 						inputStyle={styles.inputStyle}
 						onChangeText={this._onChangeText.bind(this)}
 					/>
 				</View>
 
-				<Button title="下一步" buttonStyle={styles.buttonStyle} onPress={this._next.bind(this)} />
+				<Button
+					title={I18n.t('public.next')}
+					buttonStyle={styles.buttonStyle}
+					onPress={this._next.bind(this)}
+				/>
 				<TouchableHighlight
 					underlayColor={'transparent'}
 					style={{ marginTop: 50 }}
@@ -80,7 +85,7 @@ export class Referrer extends Component {
 						this.navigate('My');
 					}}
 				>
-					<Text style={{ color: '#818181' }}>跳过</Text>
+					<Text style={{ color: '#818181' }}>{I18n.t('public.skip')}</Text>
 				</TouchableHighlight>
 			</View>
 		);
