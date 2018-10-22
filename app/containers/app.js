@@ -25,7 +25,7 @@ import UserPolicy from '../components/my/userpolicy';
 import Versions from '../components/my/versions';
 import SysSet from '../components/my/sysset';
 import HelperCenter from '../components/my/helpercenter';
-import ContactUs from '../components/my/contactus';
+import FollowUs from '../components/my/followus';
 import Login from '../components/my/login';
 import Lockpositon from '../components/public/lockpositon';
 import LockAccount from '../components/my/lockAccount';
@@ -167,7 +167,9 @@ const TabBarPage = createBottomTabNavigator(
 			screen: Activity,
 			navigationOptions: {
 				tabBarLabel: ({ tintColor, focused }) => (
-					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>活动</Text>
+					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>
+						{I18n.t('activity._title')}
+					</Text>
 				),
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-huodong" size={30} color={tintColor} />,
 				tabBarOnPress: ({ navigation, defaultHandler }) => {
@@ -318,10 +320,10 @@ const App = createStackNavigator(
 				headerTitle: () => <Text>{I18n.t('my.home.helpCenter._title')}</Text>
 			}
 		},
-		ContactUs: {
-			screen: ContactUs,
+		FollowUs: {
+			screen: FollowUs,
 			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('my.home.contactUs._title')}</Text>
+				headerTitle: () => <Text>{I18n.t('my.home.followUs._title')}</Text>
 			}
 		},
 		SysSet: {

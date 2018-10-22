@@ -40,6 +40,15 @@ export default {
 		node: 'Node',
 		my: 'My'
 	},
+	activity: {
+		_title: 'Activity',
+		_signIn: {
+			_title: 'Get a bonus package for 7 consecutive days',
+			todayIntegral: 'Sign in today'
+		},
+		signIn: 'sign In',
+		SignedIn: 'Signed In'
+	},
 	my: {
 		home: {
 			walletManagement: 'Wallet Management',
@@ -92,8 +101,8 @@ export default {
 				invitationTime: 'Invitation time',
 				friendAddress: 'Friend address'
 			},
-			contactUs: {
-				_title: 'Contact Us'
+			followUs: {
+				_title: 'Follow Us'
 			}
 		},
 		sysSetting: {
@@ -246,6 +255,7 @@ export default {
 	},
 	public: {
 		rule: 'rule of activity',
+		day: 'day',
 		second: 'Second',
 		skip: 'Skip',
 		next: 'Next',

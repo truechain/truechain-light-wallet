@@ -111,9 +111,9 @@ class My extends Component {
 								onPress={() => this.navigate('HelperCenter')}
 							/>
 							<MenuList
-								leftName={I18n.t('my.home.contactUs._title')}
+								leftName={I18n.t('my.home.followUs._title')}
 								leftIconName="icon-lianxiwomen"
-								onPress={() => this.navigate('ContactUs')}
+								onPress={() => this.navigate('FollowUs')}
 							/>
 							<MenuList
 								leftName={I18n.t('my.home.aboutUs._title')}

@@ -38,7 +38,13 @@ export default {
 		my: '我的'
 	},
 	activity: {
-		_title: '活动'
+		_title: '活动',
+		_signIn: {
+			_title: '连续签到7天可以获得积分大礼包哦',
+			todayIntegral: '今日签到积分'
+		},
+		signIn: '签到',
+		SignedIn: '已签到'
 	},
 	my: {
 		home: {
@@ -90,6 +96,9 @@ export default {
 				pointReward: '累计邀请积分',
 				invitationTime: '邀请时间',
 				friendAddress: '好友地址'
+			},
+			followUs: {
+				_title: '关注我们'
 			}
 		},
 		sysSetting: {
@@ -230,6 +239,7 @@ export default {
 	},
 	public: {
 		rule: '活动规则',
+		day: '天',
 		second: '秒',
 		skip: '跳过',
 		next: '下一步',

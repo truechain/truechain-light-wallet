@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity, ScrollView, Text, StyleSheet, ImageBackground, Image, Alert } from 'react-native';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
 import { isSignIn, signIn } from '../../api/loged';
+import { I18n } from '../../../language/i18n';
 
 class Activity extends Component {
 	constructor(props) {
@@ -114,7 +115,9 @@ class Activity extends Component {
 					<ImageBackground style={styles.bottom_fun} source={require('../../assets/images/activity/c.png')}>
 						<ScrollView>
 							<View style={[ styles.msg, styles.center ]}>
-								<Text style={{ color: '#5D8BE2', fontSize: 15 }}>连续签到7天可以获得积分大礼包哦</Text>
+								<Text style={{ color: '#5D8BE2', fontSize: 15 }}>
+									{I18n.t('activity._signIn._title')}
+								</Text>
 							</View>
 
 							<View style={styles.signInArea}>
@@ -165,7 +168,8 @@ class Activity extends Component {
 															)
 														}
 													>
-														{item.date}天
+														{item.date}
+														{I18n.t('public.day')}
 													</Text>
 												</View>
 												{index === this.state.timeData.length - 1 ? null : (
@@ -178,7 +182,18 @@ class Activity extends Component {
 							</View>
 
 							<View style={[ styles.today, styles.center ]}>
-								<Text>今日签到积分 </Text>
+								{this.state.timeData
+									.filter((item) => {
+										return item.date === this.state.continuous_days;
+									})
+									.map((item, index) => {
+										return (
+											<Text key={index}>
+												{I18n.t('activity._signIn.todayIntegral')} +{item.socrt}
+											</Text>
+										);
+									})}
+
 								{/* <Text>今日签到积分 +{this.state.continuous_days}</Text> */}
 							</View>
 

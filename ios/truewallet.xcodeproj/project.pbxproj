@@ -47,6 +47,8 @@
 		3C719EEF211001690088E6F3 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C719EE1211001570088E6F3 /* libRNDeviceInfo.a */; };
 		3C719EF02110018E0088E6F3 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C719EE1211001570088E6F3 /* libRNDeviceInfo.a */; };
 		3C82970220F35D9500CCE45C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
+		3C875787217E015F00259BB8 /* libfishhook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6841FA4F8DC00B85C8A /* libfishhook.a */; };
+		3C875788217E016A00259BB8 /* libfishhook.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D16E6841FA4F8DC00B85C8A /* libfishhook.a */; };
 		3C8F15B620FF3BE4008A0251 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8F15B520FF3BCF008A0251 /* libRCTRestart.a */; };
 		3C8F15B720FF3BED008A0251 /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C8F15B520FF3BCF008A0251 /* libRCTRestart.a */; };
 		3CD5E0CA20F338DD003D2686 /* libRNVectorIcons.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CD5E0C920F338A6003D2686 /* libRNVectorIcons.a */; };
@@ -603,6 +605,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C875788217E016A00259BB8 /* libfishhook.a in Frameworks */,
 				3C1AA49C215B93050061FB8D /* libSplashScreen.a in Frameworks */,
 				3C35B10121380A0600CC1B33 /* libRNCookieManagerIOS.a in Frameworks */,
 				3C719EEF211001690088E6F3 /* libRNDeviceInfo.a in Frameworks */,
@@ -618,6 +621,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3C875787217E015F00259BB8 /* libfishhook.a in Frameworks */,
 				3C1AA49B215B92FE0061FB8D /* libSplashScreen.a in Frameworks */,
 				3C719EF02110018E0088E6F3 /* libRNDeviceInfo.a in Frameworks */,
 				3C8F15B620FF3BE4008A0251 /* libRCTRestart.a in Frameworks */,
@@ -2051,7 +2055,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.truewallet;
 				PRODUCT_NAME = truewallet;
-				SDKROOT = iphoneos11.4;
+				SDKROOT = iphoneos;
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -2100,7 +2104,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.app.truewallet;
 				PRODUCT_NAME = truewallet;
-				SDKROOT = iphoneos11.4;
+				SDKROOT = iphoneos;
 				VALID_ARCHS = "arm64 armv7 armv7s x86_64";
 				VERSIONING_SYSTEM = "apple-generic";
 			};
