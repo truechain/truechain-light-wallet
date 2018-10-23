@@ -22,6 +22,7 @@ const getInvitationRecordUrl = '/invitationRecord';
 const getReferrerCodeUrl = '/getReferrerCode';
 const signInUrl = '/signIn';
 const isSignInUrl = '/isSignIn';
+const getRankingUrl = '/ranking';
 
 const getToken = () => {
 	return storage.load({
@@ -301,6 +302,16 @@ const isSignIn = async (params) => {
 	});
 };
 
+//排行榜
+const getRanking = async () => {
+	let res = await getToken();
+	return axios.get(getRankingUrl, {
+		headers: {
+			token: res.token
+		}
+	});
+};
+
 export {
 	createTeam,
 	getTrueCoin,
@@ -321,5 +332,6 @@ export {
 	getInvitationRecord,
 	getReferrerCode,
 	signIn,
-	isSignIn
+	isSignIn,
+	getRanking
 };

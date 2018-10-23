@@ -1,25 +1,25 @@
 import React from 'react';
-import { I18n } from '../../language/i18n'; // 多国语言支持
 import { StyleSheet, Text, AsyncStorage } from 'react-native';
+import { I18n } from '../../language/i18n'; // 多国语言支持
 import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation'; // 页面切换 路由导航组件
 import { nodeHost, trueHost } from '../utils/config';
 
-//TabBar 底部栏位页面
+// TabBar 底部栏位页面
 import Splash from '../pages/Splash'; // app开屏画面
 import Assets from '../components/asset/asset'; // 底部：资产
-import My_item from '../components/my/my'; //底部： 我的
-import Activity from '../components/activity/activity'; //活动
+import My_item from '../components/my/my'; // 底部： 我的
+import Activity_item from '../components/activity/activity'; // 活动
 
-//Router
-import Guide from '../guide/guide'; //没有本地存储的钱包时进入的引导页：引导用户去选择创建钱包或导入钱包
+// Router
+import Guide from '../guide/guide'; // 没有本地存储的钱包时进入的引导页：引导用户去选择创建钱包或导入钱包
 import CurrencyDetail from '../components/asset/currencyDetail'; //  资产 -> 币种详情页
 import Transfer from '../components/asset/transfer'; // 资产 -> 币种详情 -> 转账页
 import Receipt from '../components/asset/receipt'; // 资产 -> 币种详情 -> 收款页
 import CreateWallet from '../components/my/wallet/createWallet'; // 创建钱包：新建1个本地钱包
 import ImportWallet from '../components/my/wallet/importWallet'; // 导入钱包
 import WalletInfo from '../components/asset/walletInfo'; // 我的 -> 钱包管理（账户信息页）
-import ExportMnemonic from '../components/asset/exportMnemonic'; //导出助记词
-import ExportKeystore from '../components/asset/exportKeystore'; //导出keystore
+import ExportMnemonic from '../components/asset/exportMnemonic'; // 导出助记词
+import ExportKeystore from '../components/asset/exportKeystore'; // 导出keystore
 import AboutUs from '../components/my/aboutus';
 import UserPolicy from '../components/my/userpolicy';
 import Versions from '../components/my/versions';
@@ -36,11 +36,13 @@ import TransactionRecord from '../components/my/transactionRecord';
 import KnowledgePoint from '../components/my/knowledgePoint';
 import WebSetting from '../components/my/webSetting';
 import QRscanner from '../components/public/QRscanner';
-import Inviting from '../components/my/inviting'; //邀请好友
-import InvitationRecord from '../components/my/invitationRecord'; //邀请记录
-import Referrer from '../components/my/referrer'; //推荐人
+import Inviting from '../components/my/inviting'; // 邀请好友
+import InvitationRecord from '../components/my/invitationRecord'; // 邀请记录
+import Referrer from '../components/my/referrer'; // 推荐人
+import SignIn from '../components/activity/signIn'; // 签到
+import Rank from '../components/my/rank'; // 签到
 
-//rely
+// rely
 import Storage from 'react-native-storage';
 import Icon from '../pages/iconSets';
 
@@ -132,6 +134,25 @@ storage
 // 		})
 // 	}
 // });
+
+const Activity = createStackNavigator({
+	Activity: {
+		screen: Activity_item,
+		navigationOptions: () => ({
+			title: I18n.t('activity._title'),
+			headerBackTitle: null,
+			headerStyle: {
+				backgroundColor: '#fff',
+				borderBottomWidth: 0
+			},
+			headerTitleStyle: {
+				color: '#000',
+				fontSize: 18
+			},
+			headerTintColor: '#000'
+		})
+	}
+});
 
 const My = createStackNavigator({
 	My: {
@@ -258,8 +279,8 @@ const App = createStackNavigator(
 				gesturesEnabled: false
 			}
 		},
-		CurrencyDetail: CurrencyDetail,
-		Transfer: Transfer,
+		CurrencyDetail,
+		Transfer,
 		Receipt: {
 			screen: Receipt,
 			navigationOptions: {
@@ -388,16 +409,29 @@ const App = createStackNavigator(
 				headerTitle: () => <Text>{I18n.t('my.home.inviteFriends._title')}</Text>
 			}
 		},
-		InvitationRecord: {
-			screen: InvitationRecord,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('my.home.invitationRecord._title')}</Text>
-			}
-		},
+		InvitationRecord,
+		// : {
+		// 	screen: InvitationRecord
+		// 	navigationOptions: {
+		// 		headerTitle: () => <Text>{I18n.t('my.home.invitationRecord._title')}</Text>
+		// 	}
+		// },
 		Referrer: {
 			screen: Referrer,
 			navigationOptions: {
 				headerTitle: () => <Text>{I18n.t('my.home.inviteFriends.enterInvitationCode')}</Text>
+			}
+		},
+		SignIn: {
+			screen: SignIn,
+			navigationOptions: {
+				headerTitle: () => <Text>签到</Text>
+			}
+		},
+		Rank: {
+			screen: Rank,
+			navigationOptions: {
+				headerTitle: () => <Text>积分排行榜</Text>
 			}
 		}
 	},

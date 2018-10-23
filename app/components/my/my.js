@@ -88,7 +88,10 @@ class My extends Component {
 											key: 'token'
 										})
 										.then((res) => {
-											this.navigate('InvitationRecord');
+											// this.navigate('InvitationRecord');
+											this.navigate('InvitationRecord', {
+												navigate: this.navigate
+											});
 										})
 										.catch((e) => {
 											this.navigate('Login');

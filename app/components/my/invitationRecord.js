@@ -2,11 +2,40 @@ import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
 import Icon from '../../pages/iconSets';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
-import { Text, View, StyleSheet, ImageBackground, ScrollView, RefreshControl } from 'react-native';
+import {
+	Text,
+	View,
+	StyleSheet,
+	ImageBackground,
+	ScrollView,
+	RefreshControl,
+	TouchableHighlight,
+	Image
+} from 'react-native';
 import { getInvitationRecord } from '../../api/loged';
 import { I18n } from '../../../language/i18n';
 
 export class InvitationRecord extends Component {
+	static navigationOptions = ({ navigation }) => ({
+		headerTitle: '排行榜',
+		headerRight: (
+			<TouchableHighlight
+				underlayColor={'transparent'}
+				onPress={() => {
+					navigation.state.params.navigate('Rank');
+				}}
+			>
+				<Text
+					style={{
+						marginRight: 10
+					}}
+				>
+					排行榜
+				</Text>
+			</TouchableHighlight>
+		)
+	});
+
 	constructor(props) {
 		super(props);
 		this.state = {
