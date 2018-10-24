@@ -410,12 +410,6 @@ const App = createStackNavigator(
 			}
 		},
 		InvitationRecord,
-		// : {
-		// 	screen: InvitationRecord
-		// 	navigationOptions: {
-		// 		headerTitle: () => <Text>{I18n.t('my.home.invitationRecord._title')}</Text>
-		// 	}
-		// },
 		Referrer: {
 			screen: Referrer,
 			navigationOptions: {
@@ -425,13 +419,13 @@ const App = createStackNavigator(
 		SignIn: {
 			screen: SignIn,
 			navigationOptions: {
-				headerTitle: () => <Text>签到</Text>
+				headerTitle: () => <Text>{I18n.t('activity.signIn')}</Text>
 			}
 		},
 		Rank: {
 			screen: Rank,
 			navigationOptions: {
-				headerTitle: () => <Text>积分排行榜</Text>
+				headerTitle: () => <Text>{I18n.t('my.home.invitationRecord.rank')}</Text>
 			}
 		}
 	},

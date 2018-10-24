@@ -99,7 +99,8 @@ export default {
 				inviteesNum: 'Number of invitees',
 				pointReward: 'Accumulated points reward',
 				invitationTime: 'Invitation time',
-				friendAddress: 'Friend address'
+				friendAddress: 'Friend address',
+				rank: 'Ranking'
 			},
 			followUs: {
 				_title: 'Follow Us'

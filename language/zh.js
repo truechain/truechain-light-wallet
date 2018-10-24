@@ -95,7 +95,8 @@ export default {
 				inviteesNum: '累计邀请人数',
 				pointReward: '累计邀请积分',
 				invitationTime: '邀请时间',
-				friendAddress: '好友地址'
+				friendAddress: '好友地址',
+				rank: '排行榜'
 			},
 			followUs: {
 				_title: '关注我们'

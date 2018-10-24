@@ -17,7 +17,7 @@ import { I18n } from '../../../language/i18n';
 
 export class InvitationRecord extends Component {
 	static navigationOptions = ({ navigation }) => ({
-		headerTitle: '排行榜',
+		headerTitle: I18n.t('my.home.invitationRecord._title'),
 		headerRight: (
 			<TouchableHighlight
 				underlayColor={'transparent'}
@@ -30,7 +30,7 @@ export class InvitationRecord extends Component {
 						marginRight: 10
 					}}
 				>
-					排行榜
+					{I18n.t('my.home.invitationRecord.rank')}
 				</Text>
 			</TouchableHighlight>
 		)

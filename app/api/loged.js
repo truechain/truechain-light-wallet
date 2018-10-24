@@ -23,6 +23,7 @@ const getReferrerCodeUrl = '/getReferrerCode';
 const signInUrl = '/signIn';
 const isSignInUrl = '/isSignIn';
 const getRankingUrl = '/ranking';
+const getIntegralInfoUrl = '/integralInfo';
 
 const getToken = () => {
 	return storage.load({
@@ -312,6 +313,17 @@ const getRanking = async () => {
 	});
 };
 
+//个人排名信息 			address
+const getIntegralInfo = async (params) => {
+	let res = await getToken();
+	return axios.get(getIntegralInfoUrl, {
+		headers: {
+			token: res.token
+		},
+		params: params
+	});
+};
+
 export {
 	createTeam,
 	getTrueCoin,
@@ -333,5 +345,6 @@ export {
 	getReferrerCode,
 	signIn,
 	isSignIn,
-	getRanking
+	getRanking,
+	getIntegralInfo
 };

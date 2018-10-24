@@ -26,7 +26,7 @@ class Activity extends Component {
 							break;
 					}
 				}}
-				source={{ uri: 'https://www.isee91.cn/activity.html' }}
+				source={{ uri: 'http://www.truewallet.net/static/activities/20181024/index.html' }}
 			/>
 		);
 	}
