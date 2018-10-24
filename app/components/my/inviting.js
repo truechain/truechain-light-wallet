@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { withNavigation } from 'react-navigation';
 import Icon from '../../pages/iconSets';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
-import { Text, View, StyleSheet, ImageBackground, Image, ScrollView } from 'react-native';
+import { Text, View, StyleSheet, ImageBackground, Image, ScrollView, TouchableOpacity, Clipboard } from 'react-native';
 import { getReferrerCode } from '../../api/loged';
+import Toast from 'react-native-easy-toast';
 import { I18n } from '../../../language/i18n';
 
 export class MenuList extends Component {
@@ -29,12 +30,23 @@ export class MenuList extends Component {
 		});
 	}
 
+	_setClipboardContent = async () => {
+		Clipboard.setString(this.state.parent_promo_code);
+		try {
+			var content = await Clipboard.getString();
+			this.refs.toast.show(I18n.t('public.copySuccess'));
+		} catch (e) {
+			this.refs.toast.show(I18n.t('public.copyFailed'));
+		}
+	};
+
 	render() {
 		return (
 			<ScrollView>
 				<View style={{ height: screenHeight }}>
 					<ImageBackground style={styles.container} source={require('../../assets/images/my/inviting.png')}>
 						<Text style={styles.title}>{I18n.t('my.home.inviteFriends.lightWallet')}</Text>
+						<Toast ref="toast" position="bottom" />
 						<View>
 							<View
 								style={[
@@ -48,9 +60,12 @@ export class MenuList extends Component {
 								]}
 							>
 								<Text>{I18n.t('my.home.inviteFriends.InvitationCode')}</Text>
-								<Text style={{ fontSize: 30 }}>
-									{this.state.parent_promo_code ? this.state.parent_promo_code : '-----'}
-								</Text>
+
+								<TouchableOpacity onPress={() => this._setClipboardContent()}>
+									<Text style={{ fontSize: 30 }}>
+										{this.state.parent_promo_code ? this.state.parent_promo_code : '-----'}
+									</Text>
+								</TouchableOpacity>
 							</View>
 							<View style={styles.roundArea}>
 								<View

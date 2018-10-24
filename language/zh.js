@@ -92,11 +92,13 @@ export default {
 			invitationRecord: {
 				_title: '邀请记录',
 				myInvitation: '我的邀请',
-				inviteesNum: '累计邀请人数',
+				inviteesNum: '邀请人数',
 				pointReward: '累计邀请积分',
 				invitationTime: '邀请时间',
 				friendAddress: '好友地址',
-				rank: '排行榜'
+				rank: '排行',
+				ranking: '排行榜',
+				noRecord:'暂无邀请记录'
 			},
 			followUs: {
 				_title: '关注我们'
@@ -239,6 +241,7 @@ export default {
 		futureMember: '待加入人员管理'
 	},
 	public: {
+		walletAddress: '钱包地址',
 		rule: '活动规则',
 		day: '天',
 		second: '秒',
@@ -263,7 +266,7 @@ export default {
 		wrongPwd: '密码错误,请重新输入',
 		transactionSuccess: '发布交易成功！',
 		transactionFailed: '发布交易失败，请稍后重试！',
-		score: '分',
+		score: '总分',
 		tickets: '票',
 		signSuccess: '报名成功',
 		signSuccess_info: '恭喜您报名成功',
@@ -293,5 +296,10 @@ export default {
 		privateKey:
 			'我们常说，你对钱包中资金的控制取决于相应私钥的所有权和控制权。在区块链交易中, 私钥用于生成支付货币所必须的签名，以证明资金的所有权。私钥必须始终保持机密，因为一旦泄露给第三方，相当于该私钥保护下的资产也拱手相让了。它不同于 Keystore，Keystore 是加密过后的私钥文件，只要密码强度足够强，即使黑客得到 Keystore，破解难度也足够大。 私钥实际上并不是存储在网络中，而是由用户生成并存储在一个文件或者简单的数据库中，称为钱包。存储在用户钱包中的私钥完全独立，可由用户的钱包软件生成并管理，无需区块链或者网络连接。用户的钱包地址就是由私钥通过椭圆曲线加密生成公钥，进而生成以 0x 开头的 42 位地址。私钥的样式为 64 位 16 进制的哈希值字符串，例如:```  56f759ece75f0ab1b783893cbe390288978d4d 4ff24dd233245b4285fcc31cf6。```',
 		privateKey_ps: 'PS: 用户可以使用明文私钥导入 初链，用新的密码生成一个新的 Keystore (记得要将旧的 Keystore 删除)，用这种方法来修改钱包密码。'
+	},
+	prompt: {
+		prompt_invition_code: '请正确输入邀请码',
+		prompt_recommender: '不能将自己设为推荐人',
+		prompt_netWork: '网络错误,请稍后再试!'
 	}
 };

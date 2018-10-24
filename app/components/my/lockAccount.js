@@ -73,7 +73,7 @@ class LockAccount extends React.Component {
 					</Text>
 				</View>
 
-				<View style={styles.bottom_fun}>
+				{/* <View style={styles.bottom_fun}>
 					<Text
 						style={[ styles.bottom_fun_item, styles.bottom_fun_item_transfer ]}
 						onPress={() => {
@@ -83,19 +83,19 @@ class LockAccount extends React.Component {
 						}}
 					>
 						{I18n.t('public.transferIn')}
-						{/* 转入 */}
+						转入
 					</Text>
 					<Text
 						style={[ styles.bottom_fun_item, styles.bottom_fun_item_receipt ]}
 						onPress={() => {
-							// Alert.alert(null, '优先节点投票期间暂不提供转出功能!');
+							Alert.alert(null, '优先节点投票期间暂不提供转出功能!');
 							Alert.alert(null, I18n.t('public.transferOutPrompt'));
 						}}
 					>
 						{I18n.t('public.transferOut')}
-						{/* 转出 */}
+						转出
 					</Text>
-				</View>
+				</View> */}
 			</View>
 		);
 	}

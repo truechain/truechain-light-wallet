@@ -425,7 +425,7 @@ const App = createStackNavigator(
 		Rank: {
 			screen: Rank,
 			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('my.home.invitationRecord.rank')}</Text>
+				headerTitle: () => <Text>{I18n.t('my.home.invitationRecord.ranking')}</Text>
 			}
 		}
 	},

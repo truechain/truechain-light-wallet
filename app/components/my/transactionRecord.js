@@ -26,13 +26,15 @@ class Recording extends Component {
 	render() {
 		return (
 			<View style={styles.recordDetail_item}>
-				<Text>{this.props.to.replace(this.props.to.slice('10', '30'), '......')}</Text>
+				<Text numberOfLines={1} ellipsizeMode="middle">
+					{this.props.to}
+				</Text>
 				<Text>{this.show(this.props.value / 1e18)} ether</Text>
 			</View>
 		);
 	}
 }
-class TransactionRecordOO extends Component {
+class TransactionRecordItem extends Component {
 	render() {
 		return (
 			<View style={styles.line}>
@@ -75,7 +77,10 @@ class TransactionRecord extends Component {
 		return (
 			<View style={styles.container}>
 				{this.state.recordData ? this.state.recordData.length >= 1 ? (
-					<FlatList data={this.state.recordData} renderItem={(item) => <TransactionRecordOO data={item} />} />
+					<FlatList
+						data={this.state.recordData}
+						renderItem={(item) => <TransactionRecordItem data={item} />}
+					/>
 				) : (
 					<Text style={styles.textAlign}>~</Text>
 				) : (
@@ -101,8 +106,7 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: '#fff',
-		paddingLeft: 20,
-		paddingRight: 20
+		paddingLeft: 10
 	},
 	balance: {
 		height: 150,
@@ -135,8 +139,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		height: 75,
 		padding: 10,
-		// flexDirection: 'row',
-		justifyContent: 'space-around',
+		justifyContent: 'space-around'
 	},
 	line: {
 		borderBottomColor: '#ccc',

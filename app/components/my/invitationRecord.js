@@ -30,7 +30,7 @@ export class InvitationRecord extends Component {
 						marginRight: 10
 					}}
 				>
-					{I18n.t('my.home.invitationRecord.rank')}
+					{I18n.t('my.home.invitationRecord.ranking')}
 				</Text>
 			</TouchableHighlight>
 		)
@@ -119,7 +119,7 @@ export class InvitationRecord extends Component {
 								/>
 							}
 						>
-							{this.state.recordData ? (
+							{this.state.recordData.length > 0 ? (
 								this.state.recordData.map((item, index) => {
 									return (
 										<View
@@ -139,7 +139,11 @@ export class InvitationRecord extends Component {
 										</View>
 									);
 								})
-							) : null}
+							) : (
+								<Text style={{ textAlign: 'center' }}>
+									{I18n.t('my.home.invitationRecord.noRecord')}
+								</Text>
+							)}
 						</ScrollView>
 					</View>
 				</ImageBackground>

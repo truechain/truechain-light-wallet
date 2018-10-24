@@ -3,6 +3,7 @@ import { Text, View, Image, StyleSheet, ImageBackground, ScrollView } from 'reac
 import { withNavigation } from 'react-navigation';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
 import { getRanking, getIntegralInfo } from '../../api/loged';
+import { I18n } from '../../../language/i18n';
 
 export class Rank extends Component {
 	constructor(props) {
@@ -55,26 +56,26 @@ export class Rank extends Component {
 					</View>
 					<View style={styles.justify}>
 						<Text style={[ styles.bigNum, styles.color_fff ]}>{this.state.selfRank}</Text>
-						<Text style={styles.color_fff}>排名</Text>
+						<Text style={styles.color_fff}>{I18n.t('my.home.invitationRecord.rank')}</Text>
 					</View>
 
 					<View style={styles.justify}>
 						<Text style={[ styles.bigNum, styles.color_fff ]}>{this.state.selfInvit_num}</Text>
-						<Text style={styles.color_fff}>邀请人数</Text>
+						<Text style={styles.color_fff}>{I18n.t('my.home.invitationRecord.inviteesNum')}</Text>
 					</View>
 
 					<View style={styles.justify}>
 						<Text style={[ styles.bigNum, styles.color_fff ]}>{this.state.selftotal}</Text>
-						<Text style={styles.color_fff}>积分</Text>
+						<Text style={styles.color_fff}>{I18n.t('public.score')}</Text>
 					</View>
 				</View>
 
 				<View style={[ styles.contentContainer_bottom, { height: screenHeight - 220 } ]}>
 					<View style={styles.record}>
-						<Text>排名</Text>
-						<Text>钱包地址</Text>
-						<Text>邀请人数</Text>
-						<Text>总积分</Text>
+						<Text>{I18n.t('my.home.invitationRecord.rank')}</Text>
+						<Text>{I18n.t('public.walletAddress')}</Text>
+						<Text>{I18n.t('my.home.invitationRecord.inviteesNum')}</Text>
+						<Text>{I18n.t('public.score')}</Text>
 					</View>
 
 					<ScrollView>

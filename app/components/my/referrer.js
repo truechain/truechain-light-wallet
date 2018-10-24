@@ -35,23 +35,26 @@ export class Referrer extends Component {
 			}).then((res) => {
 				switch (res.data.status) {
 					case 0:
-						Alert.alert(null, '不能设置自己为推荐人');
+						Alert.alert(null, I18n.t('prompt.prompt_recommender'));
+						// Alert.alert(null, '不能设置自己为推荐人');
 						break;
 					case 2:
 						this.navigate('My');
 						break;
 					case 3:
-						Alert.alert(null, '请输入正确的邀请码!');
+						Alert.alert(null, I18n.t('prompt.prompt_invition_code'));
+						// Alert.alert(null, '请输入正确的邀请码!');
 						break;
 					case 4:
-						Alert.alert(null, '网络错误,请稍后重试!');
+						// Alert.alert(null, '网络错误,请稍后重试!');
+						Alert.alert(null, I18n.t('prompt.prompt_netWork'));
 						break;
 					default:
 						break;
 				}
 			});
 		} else {
-			Alert.alert(null, '请输入推荐人邀请码!');
+			Alert.alert(null, I18n.t('prompt.prompt_invition_code'));
 		}
 	}
 
