@@ -91,7 +91,8 @@ export default {
 				InvitationCode: 'あなたの招待コード',
 				scanQr: 'ライトウォレットをダウンロードするQRコードをスキャンする',
 				joinWallet: '軽い財布に参加してイベントに参加し、無料でTrueを取得してください',
-				enterInvitationCode: '招待コードを入力'
+				enterInvitationCode: '招待コードを入力',
+				rule:'TRUEウォレットをダウンロードする友人を招待するたびに、あなたは10ポイントを受け取るでしょう。 また、イベントページで毎日チェックインすると、5〜20ポイントの報酬を得ることができます。 前月の累積ポイントを毎月の初めにカウントし、上位3人のウォレットユーザーには謎の正式な贈り物が届きます。'
 			},
 			invitationRecord: {
 				_title: '録音を招待',
@@ -306,6 +307,8 @@ export default {
 	prompt: {
 		prompt_invition_code: '招待コードを正しく入力してください',
 		prompt_recommender: '推薦者として自分自身を設定することはできません',
-		prompt_netWork: 'ネットワークエラー後。でもう一度お試しください'
+		prompt_netWork: 'ネットワークエラー後。でもう一度お試しください',
+		prompt_sign_succ: 'サインインの成功',
+		prompt_signed_succ: '同じ日にサインインし、もう一度チェックインしないでください!'
 	}
 };

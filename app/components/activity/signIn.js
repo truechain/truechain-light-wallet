@@ -14,7 +14,7 @@ class Activity extends Component {
 			socrt: 0,
 			timeData: [
 				{
-					socrt: 10,
+					socrt: 5,
 					date: 1
 				},
 				{
@@ -22,7 +22,7 @@ class Activity extends Component {
 					date: 2
 				},
 				{
-					socrt: 20,
+					socrt: 15,
 					date: 3
 				},
 				{
@@ -30,15 +30,15 @@ class Activity extends Component {
 					date: 4
 				},
 				{
-					socrt: 30,
+					socrt: 20,
 					date: 5
 				},
 				{
-					socrt: 30,
+					socrt: 20,
 					date: 6
 				},
 				{
-					socrt: 50,
+					socrt: 20,
 					date: 7
 				}
 			]
@@ -86,13 +86,16 @@ class Activity extends Component {
 						_isSignIn: true
 					});
 					this._isSignIn();
-					Alert.alert(null, '签到成功');
+					Alert.alert(null, I18n.t('prompt.prompt_sign_succ'));
+					// Alert.alert(null, '签到成功');
 					break;
 				case 3:
-					Alert.alert(null, '当天已签到,请勿重复签到!');
+					Alert.alert(null, I18n.t('prompt.prompt_signed_succ'));
+					// Alert.alert(null, '当天已签到,请勿重复签到!');
 					break;
 				case 4:
-					Alert.alert(null, '错误,请稍后重试!');
+					Alert.alert(null, I18n.t('prompt.prompt_netWork'));
+					// Alert.alert(null, '错误,请稍后重试!');
 					break;
 			}
 		});

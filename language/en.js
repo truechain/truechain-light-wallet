@@ -91,7 +91,8 @@ export default {
 				InvitationCode: 'Your invitation code',
 				scanQr: 'Scan QR code to download light wallet',
 				joinWallet: 'Join the light wallet to participate in the event to get True for free',
-				enterInvitationCode: 'Enter invitation code'
+				enterInvitationCode: 'Enter invitation code',
+				rule:'Each time you invite a friend to download the TRUE wallet, you will receive 10 points. You can also get 5~20 points reward when you check in on the event page every day. We will count the cumulative points of the previous month at the beginning of each month, and the top three wallet users will receive the official gift of mystery.'
 			},
 			invitationRecord: {
 				_title: 'Invitation Record',
@@ -319,6 +320,8 @@ export default {
 	prompt: {
 		prompt_invition_code: 'Please enter the invitation code correctly',
 		prompt_recommender: "Can't set yourself as a recommender",
-		prompt_netWork: 'Network error, please try again later'
+		prompt_netWork: 'Network error, please try again later',
+		prompt_sign_succ: 'Sign-in success',
+		prompt_signed_succ: 'Signed in on the same day, please do not check in again!'
 	}
 };

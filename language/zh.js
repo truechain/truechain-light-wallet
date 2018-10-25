@@ -87,7 +87,8 @@ export default {
 				InvitationCode: '你的邀请码',
 				scanQr: '扫描二维码下载轻钱包',
 				joinWallet: '加入轻钱包参与活动免费获取True',
-				enterInvitationCode: '输入邀请码'
+				enterInvitationCode: '输入邀请码',
+				rule: '每邀请一名好友下载TRUE钱包，即可获得10积分。每日在活动页面签到也可获得5~20的积分奖励。我们将于每月初统计上月积分累计排行，排行前三的钱包用户将获得官方赠送的神秘大礼。'
 			},
 			invitationRecord: {
 				_title: '邀请记录',
@@ -98,7 +99,7 @@ export default {
 				friendAddress: '好友地址',
 				rank: '排行',
 				ranking: '排行榜',
-				noRecord:'暂无邀请记录'
+				noRecord: '暂无邀请记录'
 			},
 			followUs: {
 				_title: '关注我们'
@@ -300,6 +301,8 @@ export default {
 	prompt: {
 		prompt_invition_code: '请正确输入邀请码',
 		prompt_recommender: '不能将自己设为推荐人',
-		prompt_netWork: '网络错误,请稍后再试!'
+		prompt_netWork: '网络错误,请稍后再试!',
+		prompt_sign_succ: '签到成功',
+		prompt_signed_succ: '当天已签到,请勿重复签到!'
 	}
 };

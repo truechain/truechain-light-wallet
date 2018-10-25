@@ -41,6 +41,15 @@ export default {
 		// node: 'Nút',
 		my: 'Của tôi'
 	},
+	activity: {
+		_title: 'Hoạt động',
+		_signIn: {
+			_title: 'Bạn có thể nhận được một gói tiền thưởng trong 7 ngày liên tiếp.',
+			todayIntegral: 'Kiểm tra điểm ngay hôm nay'
+		},
+		signIn: 'Đăng nhập',
+		SignedIn: 'Đã đăng nhập'
+	},
 	my: {
 		home: {
 			walletManagement: 'Quản lý Ví',
@@ -76,6 +85,30 @@ export default {
 				privacyPolicy: 'Chính sách bảo mật',
 				versionLog: 'Nhật ký phiên bản',
 				checkVersion: 'Phát hiện phiên bản mới'
+			},
+			inviteFriends: {
+				_title: 'Mời bạn bè',
+				lightWallet: 'Ví sáng',
+				InvitationCode: 'Mã thư mời của bạn',
+				scanQr: 'Quét mã QR để tải xuống ví ánh sáng',
+				joinWallet: 'Tham gia ví ánh sáng để tham gia sự kiện để nhận được sự thật miễn phí',
+				enterInvitationCode: 'Nhập mã thư mời',
+				rule:
+					'Mỗi lần bạn mời một người bạn tải xuống ví TRUE, bạn sẽ nhận được 10 điểm. Bạn cũng có thể nhận được 5 ~ 20 điểm thưởng khi bạn đăng ký trên trang sự kiện mỗi ngày. Chúng tôi sẽ tính điểm tích lũy của tháng trước vào đầu mỗi tháng và ba người dùng ví hàng đầu sẽ nhận được món quà bí ẩn chính thức.。'
+			},
+			invitationRecord: {
+				_title: 'Hồ sơ mời',
+				myInvitation: 'Lời mời của tôi',
+				inviteesNum: 'Số lượng người được mời',
+				pointReward: 'Điểm',
+				invitationTime: 'Thời gian',
+				friendAddress: 'Địa chỉ',
+				rank: 'Xếp hạng',
+				ranking: 'Bảng dẫn đầu',
+				noRecord: 'Không có hồ sơ mời'
+			},
+			followUs: {
+				_title: 'Theo dõi chúng tôi'
 			}
 		},
 		sysSetting: {
@@ -222,6 +255,9 @@ export default {
 	// 	futureMember: '待加入人员管理'
 	// },
 	public: {
+		walletAddress: 'Địa chỉ',
+		rule: 'Quy tắc hoạt động',
+		day: 'Ngày',
 		second: 'Thứ hai',
 		next: 'Tiếp theo',
 		back: 'Quay về',
@@ -243,7 +279,7 @@ export default {
 		wrongPwd: 'Mật khẩu sai',
 		transactionSuccess: 'Giao dịch thành công',
 		transactionFailed: 'Giao dịch thất bại ',
-		score: 'Điểm',
+		score: 'Tổng số điểm',
 		tickets: 'Vé',
 		signSuccess: 'ký thành công',
 		signSuccess_info: 'ký thành công_thông tin',
@@ -269,12 +305,19 @@ export default {
 		mnemonic_ps:
 			'Lưu ý: Người dùng có thể sử dụng bản lưu của bản ghi nhớ để tải vào TRUE, và sau đó tạo ra một keystore mới với mật khẩu mới',
 		keystore:
-			'Keystore là một tệp dạng chữ (JSON) có chứa private key của ví điện tử đã mã hóa. Nó sử dụng mật khẩu mã hóa của người dùng để cung cấp độ bảo mật mạnh mẽ, và mức độ bảo mật sẽ phụ thuộc vào độ khó của mật khẩu mà người dùng sử dụng để mã hóa ví. Mật khẩu như 123456 là rất không an toàn. Có hai thứ bạn cần phải nhớ đến khi sử dụng Keystore: 1. Mã hóa các tệp keystore với mật khẩu không được quá dễ mà phải càng phức tạp càng tốt. 2. Hãy chắc rằng bạn nhớ được mật khẩu keystore. Khi bạn quên mất mật khẩu của mình, bạn sẽ mất quyền truy cập vào keystore, và ví TrueChain khong thể giúp bạn lấy lại được mật khẩu, vì vậy hãy chắc rằng bạn giữ gìn cẩn thận mật khẩu và cả Keystore. Đây làm một loại keystore ```{“phiên bản”: 3, “id”: “b7467fcb-3c8b-41be-bccf-73d43a08c1b7”, “địa chỉ”: “540f18196da5a533fa36577a81de55f0a2f4e751”, “Crypto”: “ciphertext”: “78ed11b8b6bf29b00f52b42b8542df0e4a6ac078e626af7edcf885c3b68154a4”, “cipherparams”: “iv”: “4516579601d96695fe30ace985a9066f” “cipher”: “aes-128-ctr”, "kdf": "scrypt", "kdfparams":  dklen 32, "salt": "6276cfda7d40872352c801db5871e5a3368a8d0994cea39ed936760db78d1cdc", "n": 1024, "r": 8, "p": 1 }, "mac": "d889a5dc609c3f312a41394cc47640676d2612501a6f8c837ed55598158336db}```'
+			'Keystore là một tệp dạng chữ (JSON) có chứa private key của ví điện tử đã mã hóa. Nó sử dụng mật khẩu mã hóa của người dùng để cung cấp độ bảo mật mạnh mẽ, và mức độ bảo mật sẽ phụ thuộc vào độ khó của mật khẩu mà người dùng sử dụng để mã hóa ví. Mật khẩu như 123456 là rất không an toàn. Có hai thứ bạn cần phải nhớ đến khi sử dụng Keystore: 1. Mã hóa các tệp keystore với mật khẩu không được quá dễ mà phải càng phức tạp càng tốt. 2. Hãy chắc rằng bạn nhớ được mật khẩu keystore. Khi bạn quên mất mật khẩu của mình, bạn sẽ mất quyền truy cập vào keystore, và ví TrueChain khong thể giúp bạn lấy lại được mật khẩu, vì vậy hãy chắc rằng bạn giữ gìn cẩn thận mật khẩu và cả Keystore. Đây làm một loại keystore ```{“phiên bản”: 3, “id”: “b7467fcb-3c8b-41be-bccf-73d43a08c1b7”, “địa chỉ”: “540f18196da5a533fa36577a81de55f0a2f4e751”, “Crypto”: “ciphertext”: “78ed11b8b6bf29b00f52b42b8542df0e4a6ac078e626af7edcf885c3b68154a4”, “cipherparams”: “iv”: “4516579601d96695fe30ace985a9066f” “cipher”: “aes-128-ctr”, "kdf": "scrypt", "kdfparams":  dklen 32, "salt": "6276cfda7d40872352c801db5871e5a3368a8d0994cea39ed936760db78d1cdc", "n": 1024, "r": 8, "p": 1 }, "mac": "d889a5dc609c3f312a41394cc47640676d2612501a6f8c837ed55598158336db}```',
+		keystore_ps:
+			' PS: Mật khẩu keystore là duy nhất và không thể thay đổi. Nếu bạn muốn thay đổi mật khẩu ví, bạn cần nhập lại ví bằng bản ghi nhớ hoặc văn bản private key, và sử dụng mật khẩu mới để mã hoá, rồi tạo một Keystore mới.',
+		privateKey:
+			'Tài sản trong ví của bạn phụ thuộc vào cách bạn sử dụng private key của mình. Trong các giao dịch blockchain, private is thường được dùng để tạo ra những chữ ký cần thiết để trả cho đồng tiền để chứng minh sự sở hữu của quỹ. Private key phải luôn được giữ cẩn thận bởi vì khi nó bị một bên thứ ba chiếm hữu, tài sản được bảo mật bởi private key cũng sẽ rơi vào tay họ. Điều này khác với Keystore, một dạng private key đã được mã hóa. Miễn là mật khẩu càng mạnh thì kể cả những hacker chuyên nghiệp nhất cũng khó có thể mở khóa được. Private key thật sự không được lưu trữ trong mạng lưới nhưng được tạo ra bởi người dùng và dự trữ thành một tệp hoặc một dạng cơ sở dữ liệu được gọi là ví. Private key được lưu trữ trong ví của người dùng hoàn toàn độc lập và có thể được tạo và quản lý bởi phần mềm ví của người dùng mà không cần sự kết nối với blockchain hay mạng lưới. Địa chỉ ví của người dùng được tạo ra bởi private key bằng cách sử dụng mã hóa đường cong elip để tạo ra publick key, mà tạo ra một địa chỉ 42-bit bắt đầu với 0x. Private key được tạo ra là một chuỗi băm thập lục phân 64-bit, ví dụ: ```56f759ece75f0ab1b783893cbe390288978d4d4ff24dd233245b4285fcc31cf6```',
+		privateKey_ps:
+			'Chú ý: Người dùng có thể sử dụng private key dạng văn bản thông thường để nhập vào ví True Chain, tạo ra một Keystore với một mật khẩu mới (hãy nhớ xóa keystore cũ), và sử dụng phương pháp này để thay đổi mật khẩu ví'
 	},
-	keystore_ps:
-		' PS: Mật khẩu keystore là duy nhất và không thể thay đổi. Nếu bạn muốn thay đổi mật khẩu ví, bạn cần nhập lại ví bằng bản ghi nhớ hoặc văn bản private key, và sử dụng mật khẩu mới để mã hoá, rồi tạo một Keystore mới.',
-	privateKey:
-		'Tài sản trong ví của bạn phụ thuộc vào cách bạn sử dụng private key của mình. Trong các giao dịch blockchain, private is thường được dùng để tạo ra những chữ ký cần thiết để trả cho đồng tiền để chứng minh sự sở hữu của quỹ. Private key phải luôn được giữ cẩn thận bởi vì khi nó bị một bên thứ ba chiếm hữu, tài sản được bảo mật bởi private key cũng sẽ rơi vào tay họ. Điều này khác với Keystore, một dạng private key đã được mã hóa. Miễn là mật khẩu càng mạnh thì kể cả những hacker chuyên nghiệp nhất cũng khó có thể mở khóa được. Private key thật sự không được lưu trữ trong mạng lưới nhưng được tạo ra bởi người dùng và dự trữ thành một tệp hoặc một dạng cơ sở dữ liệu được gọi là ví. Private key được lưu trữ trong ví của người dùng hoàn toàn độc lập và có thể được tạo và quản lý bởi phần mềm ví của người dùng mà không cần sự kết nối với blockchain hay mạng lưới. Địa chỉ ví của người dùng được tạo ra bởi private key bằng cách sử dụng mã hóa đường cong elip để tạo ra publick key, mà tạo ra một địa chỉ 42-bit bắt đầu với 0x. Private key được tạo ra là một chuỗi băm thập lục phân 64-bit, ví dụ: ```56f759ece75f0ab1b783893cbe390288978d4d4ff24dd233245b4285fcc31cf6```',
-	privateKey_ps:
-		'Chú ý: Người dùng có thể sử dụng private key dạng văn bản thông thường để nhập vào ví True Chain, tạo ra một Keystore với một mật khẩu mới (hãy nhớ xóa keystore cũ), và sử dụng phương pháp này để thay đổi mật khẩu ví'
+	prompt: {
+		prompt_invition_code: 'Vui lòng nhập mã thư mời chính xác',
+		prompt_recommender: 'Không thể tự đặt mình làm liên kết giới thiệu',
+		prompt_netWork: 'Lỗi mạng, vui lòng thử lại sau!',
+		prompt_sign_succ: 'Đăng nhập thành công',
+		prompt_signed_succ: 'Đã đăng nhập vào cùng một ngày, vui lòng không đăng ký lại!'
+	}
 };
