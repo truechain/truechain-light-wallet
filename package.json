@@ -59,7 +59,8 @@
     "string_decoder": "^0.10.31",
     "timers-browserify": "^1.4.2",
     "url": "^0.10.3",
-    "web3": "^1.0.0-beta.34"
+    "web3": "^1.0.0-beta.34",
+    "etrue": "github:see91/etrue.js#lijian"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

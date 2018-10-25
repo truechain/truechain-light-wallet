@@ -3070,6 +3070,10 @@ ethjs-util@^0.1.3:
     is-hex-prefixed "1.0.0"
     strip-hex-prefix "1.0.0"
 
+"etrue@github:see91/etrue.js#lijian":
+  version "1.0.0-beta.36"
+  resolved "https://codeload.github.com/see91/etrue.js/tar.gz/f63d30906090c485bebc51aea151dee9a5ac0fe2"
+
 event-target-shim@^1.0.5:
   version "1.1.1"
   resolved "http://registry.npm.taobao.org/event-target-shim/download/event-target-shim-1.1.1.tgz#a86e5ee6bdaa16054475da797ccddf0c55698491"

@@ -84,7 +84,7 @@ export class InvitationRecord extends Component {
 					<View style={[ styles.contentContainer, { height: 80, alignItems: 'center' } ]}>
 						<View style={styles.contentContainer_item}>
 							<Text style={styles.textL}>{I18n.t('my.home.invitationRecord.inviteesNum')}</Text>
-							<Text style={styles.textR}>{this.state.recordData.length || '--'}</Text>
+							<Text style={styles.textR}>{this.state.recordData.length || '0'}</Text>
 						</View>
 						<View
 							style={{
@@ -96,7 +96,7 @@ export class InvitationRecord extends Component {
 						/>
 						<View style={styles.contentContainer_item}>
 							<Text style={styles.textL}>{I18n.t('my.home.invitationRecord.pointReward')}</Text>
-							<Text style={styles.textR}>{this.state.socrt || '--'}</Text>
+							<Text style={styles.textR}>{this.state.socrt || '0'}</Text>
 						</View>
 					</View>
 
