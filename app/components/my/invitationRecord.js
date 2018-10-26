@@ -100,7 +100,7 @@ export class InvitationRecord extends Component {
 						</View>
 					</View>
 
-					<View style={[ styles.contentContainer_bottom, { height: screenHeight * 0.5 } ]}>
+					<View style={[ styles.contentContainer_bottom, { height: screenHeight * 0.55 } ]}>
 						<View style={styles.record}>
 							<Text>{I18n.t('my.home.invitationRecord.invitationTime')}</Text>
 							<Text>{I18n.t('my.home.invitationRecord.friendAddress')}</Text>

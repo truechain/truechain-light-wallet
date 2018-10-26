@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, WebView } from 'react-native';
+import { StyleSheet, WebView, ActivityIndicator } from 'react-native';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
 
 class Activity extends Component {
@@ -14,7 +14,10 @@ class Activity extends Component {
 				style={styles.webView_style}
 				scrollEnabled={true}
 				javaScriptEnabled={true}
-				// injectedJavaScript={'插入到h5页面中的js代码'}
+				startInLoadingState={true}
+				renderLoading={() => {
+					return <ActivityIndicator />;
+				}}
 				onMessage={(event) => {
 					switch (event.nativeEvent.data) {
 						case 'signIn':

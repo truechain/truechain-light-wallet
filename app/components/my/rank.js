@@ -25,7 +25,7 @@ export class Rank extends Component {
 				getIntegralInfo({
 					address: walletInfo.walletAddress
 				}).then((res) => {
-					if (res) {
+					if (res.data.data) {
 						this.setState({
 							selfRank: res.data.data.rank,
 							selftotal: res.data.data.Total,
@@ -118,7 +118,9 @@ export class Rank extends Component {
 									</View>
 								);
 							})
-						) : null}
+						) : (
+							<Text style={{ textAlign: 'center' }}>~</Text>
+						)}
 					</ScrollView>
 				</View>
 			</ImageBackground>
