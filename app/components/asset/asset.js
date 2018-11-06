@@ -100,11 +100,6 @@ class Assets extends Component {
 			this.setState({ eth_banlance });
 		});
 
-		webtrue.getBalance(this.state.walletAddress).then((res) => {
-			let true_beta_banlance = this.show(web3.utils.fromWei(res, 'ether'));
-			this.setState({ true_beta_banlance });
-		});
-
 		getBalance(
 			iterface,
 			this.state.walletAddress,
@@ -213,11 +208,6 @@ class Assets extends Component {
 				currency_name: 'TTR',
 				balance: this.state.ttr_banlance,
 				logo_url: require('../../assets/images/currency_logo/ttr_logo.png')
-			},
-			{
-				currency_name: 'BETA',
-				balance: this.state.true_beta_banlance,
-				logo_url: require('../../assets/images/currency_logo/true_beta_logo.png')
 			}
 		];
 

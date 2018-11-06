@@ -64,44 +64,6 @@ class My extends Component {
 								}}
 							/>
 							<MenuList
-								leftName={I18n.t('my.home.inviteFriends._title')}
-								leftIconName="icon-yaoqinghaoyou"
-								onPress={() => {
-									storage
-										.load({
-											key: 'token'
-										})
-										.then((res) => {
-											this.navigate('Inviting');
-										})
-										.catch((e) => {
-											this.navigate('Login');
-										});
-								}}
-							/>
-							<MenuList
-								leftName={I18n.t('my.home.invitationRecord._title')}
-								leftIconName="icon-jiluliebiao"
-								onPress={() => {
-									storage
-										.load({
-											key: 'token'
-										})
-										.then((res) => {
-											// this.navigate('InvitationRecord');
-											this.navigate('InvitationRecord', {
-												navigate: this.navigate
-											});
-										})
-										.catch((e) => {
-											this.navigate('Login');
-										});
-								}}
-							/>
-						</View>
-
-						<View style={styles.myColsConPart}>
-							<MenuList
 								leftName={I18n.t('my.home.systemSetting')}
 								leftIconName="icon-shezhi"
 								onPress={() => {

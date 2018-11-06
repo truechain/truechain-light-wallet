@@ -59,8 +59,7 @@
     "string_decoder": "^0.10.31",
     "timers-browserify": "^1.4.2",
     "url": "^0.10.3",
-    "web3": "^1.0.0-beta.34",
-    "etrue": "github:truechain/web3.js#etrue"
+    "web3": "^1.0.0-beta.34"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
