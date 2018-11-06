@@ -48,22 +48,6 @@ class My extends Component {
 					<View style={styles.myColsCon}>
 						<View style={styles.myColsConPart}>
 							<MenuList
-								leftName={I18n.t('my.home.lockAccount._title')}
-								leftIconName="icon-suoding"
-								onPress={() => {
-									storage
-										.load({
-											key: 'token'
-										})
-										.then((res) => {
-											this.navigate('LockAccount');
-										})
-										.catch((e) => {
-											this.navigate('Login');
-										});
-								}}
-							/>
-							<MenuList
 								leftName={I18n.t('my.home.systemSetting')}
 								leftIconName="icon-shezhi"
 								onPress={() => {

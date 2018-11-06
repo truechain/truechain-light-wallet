@@ -16,7 +16,6 @@ import actions from '../../store/action/walletInfo';
 import getBalance from '../../utils/addTokens';
 import iterface from '../../utils/iterface';
 import { I18n } from '../../../language/i18n';
-import { checkVersion } from '../../api/index';
 var DeviceInfo = require('react-native-device-info');
 
 class CurrencyList extends Component {
@@ -151,20 +150,6 @@ class Assets extends Component {
 		this.setState({
 			currentVersion: DeviceInfo.default.getVersion().replace(/\./g, '')
 		});
-
-		checkVersion()
-			.then((result) => {
-				return result.data.data;
-			})
-			.then((res) => {
-				this.setState({
-					newVersion: res.version
-				});
-				let ver_new = res.version.replace(/\./g, '');
-				if (ver_new !== this.state.currentVersion) {
-					this.setState({ modalVisible: true });
-				}
-			});
 	}
 
 	updataWalletName() {

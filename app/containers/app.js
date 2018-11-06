@@ -25,10 +25,6 @@ import Versions from '../components/my/versions';
 import SysSet from '../components/my/sysset';
 import HelperCenter from '../components/my/helpercenter';
 import FollowUs from '../components/my/followus';
-import Login from '../components/my/login';
-import Lockpositon from '../components/public/lockpositon';
-import LockAccount from '../components/my/lockAccount';
-import LogOut from '../components/my/logOut';
 import SetGesturePassword from '../components/my/setgesturepassword';
 import SysLanguage from '../components/my/sysLanguage';
 import TransactionRecord from '../components/my/transactionRecord';
@@ -257,30 +253,6 @@ const App = createStackNavigator(
 			screen: SysSet,
 			navigationOptions: {
 				headerTitle: () => <Text> {I18n.t('my.sysSetting._title')}</Text>
-			}
-		},
-		Login: {
-			screen: Login,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('my.home.lockAccount.loginIn')}</Text>
-			}
-		},
-		Lockpositon: {
-			screen: Lockpositon,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('public.lockedWarehouse')}</Text>
-			}
-		},
-		LockAccount: {
-			screen: LockAccount,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('my.home.lockAccount._title')}</Text>
-			}
-		},
-		LogOut: {
-			screen: LogOut,
-			navigationOptions: {
-				headerTitle: () => <Text> {I18n.t('my.home.lockAccount._title1')}</Text>
 			}
 		},
 		SetGesturePassword,
