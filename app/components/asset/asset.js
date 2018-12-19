@@ -17,42 +17,9 @@ import getBalance from '../../utils/addTokens';
 import iterface from '../../utils/iterface';
 import { I18n } from '../../../language/i18n';
 import { checkVersion } from '../../api/index';
+import CurrencyList from './currencyList'
+import {withNavigation} from 'react-navigation'
 var DeviceInfo = require('react-native-device-info');
-
-class CurrencyList extends Component {
-	currencyDetail(title, banlance) {
-		this.props.navigate('CurrencyDetail', {
-			title: title,
-			banlance: banlance
-		});
-	}
-
-	render() {
-		return (
-			<TouchableHighlight
-				underlayColor={'transparent'}
-				onPress={() => this.currencyDetail(this.props.item.currency_name, this.props.item.balance)}
-			>
-				<View style={styles.currency_list}>
-					<View style={styles.currency_left}>
-						<View>
-							<TouchableHighlight style={styles.currency_logo}>
-								<Image style={styles.currency_logo_item} source={this.props.item.logo_url} />
-							</TouchableHighlight>
-						</View>
-						<View style={styles.marginLeft}>
-							<Text>{this.props.item.currency_name}</Text>
-						</View>
-					</View>
-					<View>
-						<Text style={styles.alignRight}>{this.props.item.balance}</Text>
-						<Text style={[ styles.alignRight, styles.currency ]} />
-					</View>
-				</View>
-			</TouchableHighlight>
-		);
-	}
-}
 
 class Assets extends Component {
 	constructor(props) {
@@ -227,14 +194,14 @@ class Assets extends Component {
 					<View style={styles.walletInfo_item}>
 						<TouchableHighlight
 							underlayColor={'transparent'}
-							onPress={() => this.props.navigation.navigate('WalletInfo')}
+							onPress={() => this.navigate('WalletInfo')}
 						>
 							<Image style={styles.avatar} source={require('../../assets/images/asset/head_2x.png')} />
 						</TouchableHighlight>
 						<Text style={styles.walletName}>{this.state.walletName}</Text>
 						<TouchableHighlight
 							underlayColor={'transparent'}
-							onPress={() => this.props.navigation.navigate('Receipt')}
+							onPress={() => this.navigate('Receipt')}
 						>
 							<View style={styles.walletAddress}>
 								<Text style={styles.walletAddress_item}>
@@ -327,7 +294,7 @@ class Assets extends Component {
 	}
 }
 
-export default connect((state) => state.walletInfo, actions)(Assets);
+export default connect((state) => state.walletInfo, actions)(withNavigation(Assets));
 
 const styles = StyleSheet.create({
 	marginLeft: {
@@ -411,33 +378,6 @@ const styles = StyleSheet.create({
 	},
 	currency_item_text: {
 		color: '#fff'
-	},
-	//币种列表
-	currency_list: {
-		height: 80,
-		marginTop: 5,
-		paddingLeft: 20,
-		paddingRight: 20,
-		flexDirection: 'row',
-		alignItems: 'center',
-		justifyContent: 'space-between'
-	},
-	currency_left: {
-		flexDirection: 'row',
-		alignItems: 'flex-start'
-	},
-	currency_logo: {
-		borderWidth: 1,
-		borderColor: '#ccc',
-		borderRadius: 50,
-		padding: 8
-	},
-	currency_logo_item: {
-		width: 40,
-		height: 40
-	},
-	currency: {
-		color: '#ccc'
 	},
 	// version
 	modalCon: {

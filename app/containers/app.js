@@ -5,12 +5,13 @@ import { createStackNavigator, createBottomTabNavigator, StackNavigator } from '
 import { nodeHost, trueHost } from '../utils/config';
 
 // TabBar 底部栏位页面
-import Splash from '../pages/Splash'; // app开屏画面
+// import Splash from '../pages/Splash'; // app开屏画面
 import Assets from '../components/asset/asset'; // 底部：资产
 import My_item from '../components/my/my'; // 底部： 我的
-import Activity_item from '../components/activity/activity'; // 活动
+// import Activity_item from '../components/activity/activity'; // 活动
 
 // Router
+import Turn from '../pages/turn'; // 没有本地存储的钱包时进入的引导页：引导用户去选择创建钱包或导入钱包
 import Guide from '../guide/guide'; // 没有本地存储的钱包时进入的引导页：引导用户去选择创建钱包或导入钱包
 import CurrencyDetail from '../components/asset/currencyDetail'; //  资产 -> 币种详情页
 import Transfer from '../components/asset/transfer'; // 资产 -> 币种详情 -> 转账页
@@ -39,7 +40,7 @@ import QRscanner from '../components/public/QRscanner';
 import Inviting from '../components/my/inviting'; // 邀请好友
 import InvitationRecord from '../components/my/invitationRecord'; // 邀请记录
 import Referrer from '../components/my/referrer'; // 推荐人
-import SignIn from '../components/activity/signIn'; // 签到
+// import SignIn from '../components/activity/signIn'; // 签到
 import Rank from '../components/my/rank'; // 签到
 
 // rely
@@ -135,24 +136,24 @@ storage
 // 	}
 // });
 
-const Activity = createStackNavigator({
-	Activity: {
-		screen: Activity_item,
-		navigationOptions: () => ({
-			title: I18n.t('activity._title'),
-			headerBackTitle: null,
-			headerStyle: {
-				backgroundColor: '#fff',
-				borderBottomWidth: 0
-			},
-			headerTitleStyle: {
-				color: '#000',
-				fontSize: 18
-			},
-			headerTintColor: '#000'
-		})
-	}
-});
+// const Activity = createStackNavigator({
+// 	Activity: {
+// 		screen: Activity_item,
+// 		navigationOptions: () => ({
+// 			title: I18n.t('activity._title'),
+// 			headerBackTitle: null,
+// 			headerStyle: {
+// 				backgroundColor: '#fff',
+// 				borderBottomWidth: 0
+// 			},
+// 			headerTitleStyle: {
+// 				color: '#000',
+// 				fontSize: 18
+// 			},
+// 			headerTintColor: '#000'
+// 		})
+// 	}
+// });
 
 const My = createStackNavigator({
 	My: {
@@ -161,14 +162,14 @@ const My = createStackNavigator({
 			title: I18n.t('tab.my'),
 			headerBackTitle: null,
 			headerStyle: {
-				backgroundColor: '#528bf7',
+				// backgroundColor: '#528bf7',
 				borderBottomWidth: 0
 			},
 			headerTitleStyle: {
-				color: '#fff',
+				color: '#000',
 				fontSize: 18
 			},
-			headerTintColor: '#000'
+			// headerTintColor: '#000'
 		})
 	}
 });
@@ -176,37 +177,37 @@ const My = createStackNavigator({
 const TabBarPage = createBottomTabNavigator(
 	{
 		Assets: {
-			screen: Assets,
+			screen: Turn,
 			navigationOptions: {
 				tabBarLabel: ({ tintColor, focused }) => (
 					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>{I18n.t('tab.assets')}</Text>
 				),
-				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-zichan" size={30} color={tintColor} />
+				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-qianbao1" size={30} color={tintColor} />
 			}
 		},
-		Activity: {
-			screen: Activity,
-			navigationOptions: {
-				tabBarLabel: ({ tintColor, focused }) => (
-					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>
-						{I18n.t('activity._title')}
-					</Text>
-				),
-				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-huodong" size={30} color={tintColor} />,
-				tabBarOnPress: ({ navigation, defaultHandler }) => {
-					storage
-						.load({
-							key: 'token'
-						})
-						.then((res) => {
-							navigation.navigate('Activity');
-						})
-						.catch((e) => {
-							navigation.navigate('Login');
-						});
-				}
-			}
-		},
+		// Activity: {
+		// 	screen: Activity,
+		// 	navigationOptions: {
+		// 		tabBarLabel: ({ tintColor, focused }) => (
+		// 			<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>
+		// 				{I18n.t('activity._title')}
+		// 			</Text>
+		// 		),
+		// 		tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-huodong" size={30} color={tintColor} />,
+		// 		tabBarOnPress: ({ navigation, defaultHandler }) => {
+		// 			storage
+		// 				.load({
+		// 					key: 'token'
+		// 				})
+		// 				.then((res) => {
+		// 					navigation.navigate('Activity');
+		// 				})
+		// 				.catch((e) => {
+		// 					navigation.navigate('Login');
+		// 				});
+		// 		}
+		// 	}
+		// },
 		// Node: {
 		// 	screen: Node,
 		// 	navigationOptions: {
@@ -236,7 +237,7 @@ const TabBarPage = createBottomTabNavigator(
 				tabBarLabel: ({ tintColor, focused }) => (
 					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>{I18n.t('tab.my')}</Text>
 				),
-				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-geren" size={30} color={tintColor} />
+				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-wode" size={30} color={tintColor} />
 			}
 		}
 	},
@@ -246,7 +247,7 @@ const TabBarPage = createBottomTabNavigator(
 		backBehavior: true,
 		tabBarPosition: 'bottom',
 		tabBarOptions: {
-			activeTintColor: '#3e9ce9',
+			activeTintColor: '#0071BC',
 			inactiveTintColor: '#999999',
 			showIcon: true,
 			style: {
@@ -264,7 +265,7 @@ const TabBarPage = createBottomTabNavigator(
 
 const App = createStackNavigator(
 	{
-		Splash: { screen: Splash },
+		// Splash: { screen: Splash },
 		Home: {
 			screen: TabBarPage,
 			navigationOptions: {
@@ -272,13 +273,13 @@ const App = createStackNavigator(
 				gesturesEnabled: false
 			}
 		},
-		Guide: {
-			screen: Guide,
-			navigationOptions: {
-				header: null,
-				gesturesEnabled: false
-			}
-		},
+		// Guide: {
+		// 	screen: Guide,
+		// 	navigationOptions: {
+		// 		header: null,
+		// 		gesturesEnabled: false
+		// 	}
+		// },
 		CurrencyDetail,
 		Transfer,
 		Receipt: {
@@ -290,7 +291,7 @@ const App = createStackNavigator(
 		CreateWallet: {
 			screen: CreateWallet,
 			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('wallet.creatWallet')}</Text>
+				headerTitle: () => <Text>{I18n.t('wallet.creatWallet_title')}</Text>
 			}
 		},
 		ImportWallet: {
@@ -416,12 +417,12 @@ const App = createStackNavigator(
 				headerTitle: () => <Text>{I18n.t('my.home.inviteFriends.enterInvitationCode')}</Text>
 			}
 		},
-		SignIn: {
-			screen: SignIn,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('activity.signIn')}</Text>
-			}
-		},
+		// SignIn: {
+		// 	screen: SignIn,
+		// 	navigationOptions: {
+		// 		headerTitle: () => <Text>{I18n.t('activity.signIn')}</Text>
+		// 	}
+		// },
 		Rank: {
 			screen: Rank,
 			navigationOptions: {
@@ -430,7 +431,7 @@ const App = createStackNavigator(
 		}
 	},
 	{
-		// initialRouteName: 'Guide',
+		// initialRouteName: 'Home',
 		headerMode: 'screen',
 		navigationOptions: {
 			headerStyle: {

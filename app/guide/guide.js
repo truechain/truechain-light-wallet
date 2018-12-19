@@ -12,6 +12,16 @@ class Guide extends Component {
 					<Text style={styles.welcome}>{I18n.t('guide.welcome')}</Text>
 				</View>
 				<View style={styles.fun}>
+					<View style={[ styles.funItem, styles.create ]}>
+							<Text>{I18n.t('guide.createInstructions')}</Text>
+							<TouchableHighlight
+								underlayColor={'#528bf7'}
+								style={[ styles.funRadius, styles.funCreate ]}
+								onPress={() => this.props.navigation.navigate('CreateWallet')}
+							>
+								<Text style={styles.funText}>{I18n.t('guide.createWallet')}</Text>
+							</TouchableHighlight>
+						</View>
 					<View style={[ styles.funItem, styles.import ]}>
 						<Text>{I18n.t('guide.importInstructions')}</Text>
 						<TouchableHighlight
@@ -20,16 +30,6 @@ class Guide extends Component {
 							onPress={() => this.props.navigation.navigate('ImportWallet')}
 						>
 							<Text style={styles.funText}>{I18n.t('guide.importWallet')}</Text>
-						</TouchableHighlight>
-					</View>
-					<View style={[ styles.funItem, styles.create ]}>
-						<Text>{I18n.t('guide.createInstructions')}</Text>
-						<TouchableHighlight
-							underlayColor={'#528bf7'}
-							style={[ styles.funRadius, styles.funCreate ]}
-							onPress={() => this.props.navigation.navigate('CreateWallet')}
-						>
-							<Text style={styles.funText}>{I18n.t('guide.createWallet')}</Text>
 						</TouchableHighlight>
 					</View>
 				</View>
@@ -74,10 +74,10 @@ const styles = StyleSheet.create({
 		padding: 15
 	},
 	funImport: {
-		backgroundColor: '#35ccbf'
+		backgroundColor: '#09C497'
 	},
 	funCreate: {
-		backgroundColor: '#528bf7'
+		backgroundColor: '#0071BC'
 	},
 	funText: {
 		color: '#fff',

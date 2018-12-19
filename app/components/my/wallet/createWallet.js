@@ -83,7 +83,7 @@ class CreateWallet extends Component {
 	};
 
 	confirmPwd = {
-		placeholder: I18n.t('wallet.enterPwd'), //'确认您的密码',
+		placeholder: I18n.t('wallet.enterPwd_2'), //'确认您的密码',
 		inputContainerStyle: styles.textInput,
 		errorStyle: styles.errorStyle,
 		secureTextEntry: true,
@@ -166,14 +166,16 @@ class CreateWallet extends Component {
 		return (
 			<View style={styles.container}>
 				<Loading ref="loading" />
-				<View style={styles.warning}>
-					<Text style={styles.color_white}>
-						·{I18n.t('wallet.createWalletTipOfPwd')} {/*密码用于加密私钥，强度非常重要！*/}
-					</Text>
-					<Text style={styles.color_white}>
-						·{I18n.t('wallet.createWalletTipOfNoStore')}
-						{/* ·True钱包不会储存密码，也无法帮您找回，请务必牢记！ */}
-					</Text>
+				<View style={styles.warning_area}>
+					<View style={styles.warning}>
+						<Text style={styles.color_waring}>
+							{I18n.t('wallet.createWalletTipOfPwd')} {/*密码用于加密私钥，强度非常重要！*/}
+						</Text>
+						<Text style={styles.color_waring}>
+							{I18n.t('wallet.createWalletTipOfNoStore')}
+							{/* ·True钱包不会储存密码，也无法帮您找回，请务必牢记！ */}
+						</Text>
+					</View>
 				</View>
 				<View style={styles.padding_10}>
 					<Input
@@ -237,8 +239,8 @@ class CreateWallet extends Component {
 export default withNavigation(CreateWallet);
 
 const styles = StyleSheet.create({
-	color_white: {
-		color: '#fff',
+	color_waring: {
+		color: '#6E5500',
 		fontSize: 12
 	},
 	padding_10: {
@@ -248,10 +250,16 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: '#fff'
 	},
+	warning_area:{
+		padding:20
+	},
 	warning: {
-		backgroundColor: '#528bf7',
+		backgroundColor: '#FFD74E',
 		justifyContent: 'center',
-		padding: 10
+		paddingLeft:10,
+		paddingRight:10,
+		borderRadius:5,
+		minHeight:50
 	},
 	textInput: {
 		borderBottomWidth: 1,
@@ -277,10 +285,10 @@ const styles = StyleSheet.create({
 		width: screen.width - 50
 	},
 	color_aff: {
-		color: '#007AFF'
+		color: '#0071BC'
 	},
 	buttonStyle: {
-		backgroundColor: '#007AFF',
+		backgroundColor: '#0071BC',
 		height: 45,
 		borderColor: 'transparent',
 		borderWidth: 0,
