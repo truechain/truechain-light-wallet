@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, Text, Image, StyleSheet, Dimensions, TouchableHighlight, ScrollView } from 'react-native';
+import { View, StyleSheet, Dimensions, ScrollView } from 'react-native';
 import { withNavigation } from 'react-navigation';
 import { I18n } from '../../../language/i18n';
 import MenuList from '../public/menuList';
 const screen = Dimensions.get('window');
-import Icon from '../../pages/iconSets';
 
 class My extends Component {
 	constructor(props) {
@@ -15,41 +14,20 @@ class My extends Component {
 	render() {
 		return (
 			<View style={styles.myPage}>
-				<View style={styles.myTopBan}>
-					<View style={styles.myTopBanCon}>
-						<TouchableHighlight
-							style={styles.myTopBanConItem}
-							underlayColor={'transparent'}
-							onPress={() => {
-								this.navigate('WalletInfo');
-							}}
-						>
-							<View style={styles.center}>
-								<Icon name="icon-qianbao-" size={40} color="#fff" />
-								<Text style={styles.myTopBanConItemText}>{I18n.t('my.home.walletManagement')}</Text>
-							</View>
-						</TouchableHighlight>
-
-						<TouchableHighlight
-							style={styles.myTopBanConItem}
-							underlayColor={'transparent'}
-							onPress={() => {
-								this.navigate('TransactionRecord');
-							}}
-						>
-							<View style={styles.center}>
-								<Icon name="icon-jiaoyijilu" size={40} color="#fff" />
-								<Text style={styles.myTopBanConItemText}>{I18n.t('my.home.transactionRecord')}</Text>
-							</View>
-						</TouchableHighlight>
-					</View>
-				</View>
 				<ScrollView>
 					<View style={styles.myColsCon}>
 						<View style={styles.myColsConPart}>
 							<MenuList
+									leftName='联系人'
+									leftIconName="icon-lianxiren"
+									onPress={() => {
+										alert('联系人')
+									}}
+								/>
+
+							<MenuList
 								leftName={I18n.t('my.home.lockAccount._title')}
-								leftIconName="icon-suoding"
+								leftIconName="icon-suocangzhanghu"
 								onPress={() => {
 									storage
 										.load({
@@ -63,47 +41,12 @@ class My extends Component {
 										});
 								}}
 							/>
-							<MenuList
-								leftName={I18n.t('my.home.inviteFriends._title')}
-								leftIconName="icon-yaoqinghaoyou"
-								onPress={() => {
-									storage
-										.load({
-											key: 'token'
-										})
-										.then((res) => {
-											this.navigate('Inviting');
-										})
-										.catch((e) => {
-											this.navigate('Login');
-										});
-								}}
-							/>
-							<MenuList
-								leftName={I18n.t('my.home.invitationRecord._title')}
-								leftIconName="icon-jiluliebiao"
-								onPress={() => {
-									storage
-										.load({
-											key: 'token'
-										})
-										.then((res) => {
-											// this.navigate('InvitationRecord');
-											this.navigate('InvitationRecord', {
-												navigate: this.navigate
-											});
-										})
-										.catch((e) => {
-											this.navigate('Login');
-										});
-								}}
-							/>
 						</View>
 
 						<View style={styles.myColsConPart}>
 							<MenuList
 								leftName={I18n.t('my.home.systemSetting')}
-								leftIconName="icon-shezhi"
+								leftIconName="icon-sheshi"
 								onPress={() => {
 									this.navigate('SysSet');
 								}}
@@ -115,7 +58,7 @@ class My extends Component {
 							/>
 							<MenuList
 								leftName={I18n.t('my.home.followUs._title')}
-								leftIconName="icon-duihuakuang"
+								leftIconName="icon-lianxiwomen"
 								onPress={() => this.navigate('FollowUs')}
 							/>
 							<MenuList

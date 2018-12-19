@@ -21,13 +21,13 @@ export class MenuList extends Component {
 				<View style={styles.myColsConPartRow}>
 					{this.props.leftIconName ? (
 						<View style={styles.myColsConPartRowLf}>
-							<Icon name={this.props.leftIconName} size={20} color="#528bf7" />
+							<Icon name={this.props.leftIconName} size={20} color="#0071BC" />
 						</View>
 					) : null}
 					<View style={[ styles.myColsConPartRowRi, styles.noSplitLine ]}>
 						<Text>{this.props.leftName}</Text>
 						<View style={styles.myColsConPartRowRi2R}>
-							{this.props.rightName ? <Text>{this.props.rightName}</Text> : null}
+							{this.props.rightName ? <Text style={styles.r_text}>{this.props.rightName}</Text> : null}
 							<Icon name="icon-right" size={15} color="#000" />
 						</View>
 					</View>
@@ -61,5 +61,8 @@ const styles = StyleSheet.create({
 		flexDirection: 'row',
 		justifyContent: 'flex-end',
 		alignItems: 'center'
+	},
+	r_text:{
+		color:'#A0A5B0'
 	}
 });

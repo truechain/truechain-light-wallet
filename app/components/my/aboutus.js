@@ -16,7 +16,7 @@ export class AboutUs extends Component {
 		this.setState({
 			currentVersion: DeviceInfo.default.getVersion().replace(/\./g, '')
 		});
-		
+
 		storage
 			.load({
 				key: 'localLanguage'
@@ -128,9 +128,9 @@ export class AboutUs extends Component {
 						source={require('../../assets/images/logo.png')}
 						style={styles.logo}
 					/>
+					{/* <Icon name='icon-logo' size={80} ></Icon> */}
 					<View>
 						<Text style={styles.version}>
-							{' '}
 							{I18n.t('my.home.aboutUs.currentVersion')}：{DeviceInfo.default.getVersion()}
 						</Text>
 					</View>
@@ -175,23 +175,6 @@ export class AboutUs extends Component {
 								<Text style={styles.rowLfText}>
 									{I18n.t('my.home.aboutUs.privacyPolicy')}
 									{/*隐私条款*/}
-								</Text>
-							</View>
-							<View style={styles.rowRi}>
-								<Icon name="icon-right" size={15} color="#000" />
-							</View>
-						</View>
-					</TouchableHighlight>
-					<TouchableHighlight
-						underlayColor={'#ddd'}
-						activeOpacity={0.5}
-						onPress={() => this.props.navigation.navigate('Versions')}
-					>
-						<View style={styles.row}>
-							<View style={styles.rowLf}>
-								<Text style={styles.rowLfText}>
-									{I18n.t('my.home.aboutUs.versionLog')}
-									{/*版本日志*/}
 								</Text>
 							</View>
 							<View style={styles.rowRi}>

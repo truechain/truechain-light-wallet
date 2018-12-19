@@ -325,7 +325,7 @@ class WalletInfo extends Component {
 															key: 'walletName'
 														});
 														this.refs.loading.close();
-														this.navigate('Guide');
+														this.navigate('Home');
 													} catch (error) {
 														this.refs.loading.close();
 														setTimeout(() => {
