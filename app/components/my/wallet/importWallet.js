@@ -22,10 +22,13 @@ class ImportWallet extends Component {
 			hdPathString: "m/44'/60'/0'/0",
 			mnemonicPwd: null,
 			privatePwd: null,
+			confirmPrivatePwd:null,
 			confirmMnemonicPwd: null,
 			mnemonisAgree: false,
 			privateisAgree: false,
-			disabledImport: false,
+			disabledMImport: true,
+			disabledKImport: true,
+			disabledPImport: true,
 			privateFileFlag: true,
 			keystoreFile: null,
 			keystoreFileFlag: true,
@@ -36,6 +39,76 @@ class ImportWallet extends Component {
 	}
 
 	componentDidMount() {
+		this._serviceSource();
+	}
+
+	mnemonicArea = {
+		placeholder: I18n.t('wallet.mnemonicPlaceholder'),
+		multiline: true,
+		style: styles.mnemonicArea,
+		onChange: (e) => {
+			let mnemonic = e.nativeEvent.text;
+			// let spaceReg = /(^\s*)|(\s*$)/g;
+			let spaceReg = /^[\s　]|[ ]$/gi;
+			this.setState(
+				{
+					mnemonic: mnemonic.replace(spaceReg, ' ')
+				},
+				() => {
+					this.setState({
+						mnemonicFlag: this.state.mnemonic ? false : true,
+						disabledMImport:(this.state.mnemonic&&this.state.mnemonicPwd&&this.state.mnemonicPwd.length>7&&this.state.mnemonicPwd===this.state.confirmMnemonicPwd&&this.state.mnemonisAgree)?false:true
+					});
+				}
+			);
+		},
+		onEndEditing: () => {
+			let reg = /^[\s　]|[ ]$/gi;
+			if (reg.test(this.state.mnemonic)) {
+				Alert.alert(I18n.t('wallet.mnemonicTip')); // '助记词首尾不能有空格,请重新输入'
+			}
+		}
+	};
+
+	keystoreArea = {
+		placeholder: 'keystore',
+		multiline: true,
+		style: styles.mnemonicArea,
+		onChange: (e) => {
+			this.setState(
+				{
+					keystoreFile: e.nativeEvent.text
+				},
+				() => {
+					this.setState({
+						keystoreFileFlag: this.state.keystoreFile ? false : true,
+						disabledKImport:(this.state.keystoreFile&&this.state.keystorePwd&&this.state.keystorePwd&&this.state.keystoreisAgree)?false:true
+					});
+				}
+			);
+		}
+	};
+
+	privateKeyArea = {
+		placeholder: 'PrivateKey',
+		multiline: true,
+		style: styles.mnemonicArea,
+		onChange: (e) => {
+			this.setState(
+				{
+					privateFile: e.nativeEvent.text
+				},
+				() => {
+					this.setState({
+						privateFileFlag: this.state.privateFile ? false : true,
+						disabledPImport:(this.state.privateFile&&this.state.privatePwd&&this.state.privatePwd.length>7&&this.state.privatePwd===this.state.confirmPrivatePwd&&this.state.privateisAgree)?false:true
+					});
+				}
+			);
+		}
+	};
+
+	_serviceSource(){
 		storage
 			.load({
 				key: 'localLanguage'
@@ -72,100 +145,17 @@ class ImportWallet extends Component {
 			});
 	}
 
-	componentWillMount() {
-		this.path = {
-			placeholder: I18n.t('wallet.path'),
-			value: this.state.hdPathString,
-			inputContainerStyle: styles.textInput,
-			onChangeText: (hdPathString) => {
-				this.setState({
-					hdPathString: hdPathString
-				});
-			}
-		};
-	}
-
-	mnemonicArea = {
-		placeholder: I18n.t('wallet.mnemonicPlaceholder'),
-		multiline: true,
-		style: styles.mnemonicArea,
-		onChange: (e) => {
-			let mnemonic = e.nativeEvent.text;
-			let spaceReg = /(^\s*)|(\s*$)/g;
-			this.setState(
-				{
-					mnemonic: mnemonic.replace(spaceReg, ' ')
-				},
-				() => {
-					this.setState({
-						mnemonic: this.state.mnemonic.replace(/^[\s　]|[ ]$/gi, ''),
-						mnemonicFlag: this.state.mnemonic ? false : true
-					});
-				}
-			);
-		},
-		onEndEditing: () => {
-			let reg = /^[\s　]|[ ]$/gi;
-			if (reg.test(this.state.mnemonic)) {
-				alert(I18n.t('wallet.mnemonicTip')); // '助记词首尾不能有空格,请重新输入'
-			}
-		}
-	};
-
-	keystoreArea = {
-		placeholder: 'keystore',
-		multiline: true,
-		style: styles.mnemonicArea,
-		onChange: (e) => {
-			this.setState(
-				{
-					keystoreFile: e.nativeEvent.text
-				},
-				() => {
-					this.setState({
-						keystoreFileFlag: this.state.keystoreFile ? false : true
-					});
-				}
-			);
-		}
-	};
-
-	privateKeyArea = {
-		placeholder: 'PrivateKey',
-		multiline: true,
-		style: styles.mnemonicArea,
-		onChange: (e) => {
-			this.setState(
-				{
-					privateFile: e.nativeEvent.text
-				},
-				() => {
-					this.setState({
-						privateFileFlag: this.state.privateFile ? false : true
-					});
-				}
-			);
-		}
-	};
-
-	// path = {
-	//     placeholder: I18n.t('wallet.path'),
-	//     value: this.state.hdPathString,
-	//     inputContainerStyle: styles.textInput,
-	//     onChangeText: (hdPathString) => {
-	//         this.setState({
-	//             hdPathString: hdPathString
-	//         })
-	//     }
-	// }
-
 	mnemonicPwd = {
 		placeholder: I18n.t('wallet.enterPwd'),
 		inputContainerStyle: styles.textInput,
 		secureTextEntry: true,
 		onChangeText: (mnemonicPwd) => {
 			this.setState({
-				mnemonicPwd: mnemonicPwd
+				mnemonicPwd
+			},()=>{
+				this.setState({
+					disabledMImport:(this.state.mnemonic&&this.state.mnemonicPwd&&this.state.mnemonicPwd.length>7&&this.state.mnemonicPwd===this.state.confirmMnemonicPwd&&this.state.mnemonisAgree)?false:true
+				})
 			});
 		}
 	};
@@ -177,6 +167,10 @@ class ImportWallet extends Component {
 		onChangeText: (keystorePwd) => {
 			this.setState({
 				keystorePwd: keystorePwd
+			},()=>{
+				this.setState({
+					disabledKImport:(this.state.keystoreFile&&this.state.keystorePwd&&this.state.keystorePwd&&this.state.keystoreisAgree)?false:true
+				})
 			});
 		}
 	};
@@ -188,6 +182,10 @@ class ImportWallet extends Component {
 		onChangeText: (privatePwd) => {
 			this.setState({
 				privatePwd: privatePwd
+			},()=>{
+				this.setState({
+					disabledPImport:(this.state.privateFile&&this.state.privatePwd&&this.state.privatePwd.length>7&&this.state.privatePwd===this.state.confirmPrivatePwd&&this.state.privateisAgree)?false:true
+				})
 			});
 		}
 	};
@@ -199,6 +197,10 @@ class ImportWallet extends Component {
 		onChangeText: (confirmMnemonicPwd) => {
 			this.setState({
 				confirmMnemonicPwd: confirmMnemonicPwd
+			},()=>{
+				this.setState({
+					disabledMImport:(this.state.mnemonic&&this.state.mnemonicPwd&&this.state.mnemonicPwd.length>7&&this.state.mnemonicPwd===this.state.confirmMnemonicPwd&&this.state.mnemonisAgree)?false:true
+				})
 			});
 		}
 	};
@@ -210,6 +212,10 @@ class ImportWallet extends Component {
 		onChangeText: (confirmPrivatePwd) => {
 			this.setState({
 				confirmPrivatePwd: confirmPrivatePwd
+			},()=>{
+				this.setState({
+					disabledPImport:(this.state.privateFile&&this.state.privatePwd&&this.state.privatePwd.length>7&&this.state.privatePwd===this.state.confirmPrivatePwd&&this.state.privateisAgree)?false:true
+				})
 			});
 		}
 	};
@@ -221,7 +227,7 @@ class ImportWallet extends Component {
 			if (!Mnemonic.isValid(option.mnemonic, Mnemonic.Words.ENGLISH) || words.length !== 12) {
 				option._this.refs.loading.close();
 				setTimeout(() => {
-					alert(I18n.t('wallet.mnemonicIsWrong')); // '助记词无效，请重新输入'
+					Alert.alert(I18n.t('wallet.mnemonicIsWrong')); // '助记词无效，请重新输入'
 				}, 100);
 			} else {
 				lightWallet.keystore.createVault(
@@ -391,30 +397,20 @@ class ImportWallet extends Component {
 		return (
 			<ScrollableTabView
 				style={{ backgroundColor: '#fff' }}
-				tabBarUnderlineStyle={{ backgroundColor: '#007aff', height: 2 }}
-				tabBarActiveTextColor="#007aff"
+				tabBarUnderlineStyle={{ backgroundColor: '#0071BC', height: 2 }}
+				tabBarActiveTextColor="#0071BC"
 				tabBarInactiveTextColor="#000"
 				renderTabBar={() => <DefaultTabBar />}
 			>
+				{/* 助记词导入 */}
 				<View tabLabel={I18n.t('wallet.mnemonic')} style={styles.padding_10}>
 					<ScrollView>
 						<TextWidget {...this.mnemonicArea} />
-						<Input {...this.path} />
 						<Input
 							{...this.mnemonicPwd}
-							errorMessage={this.state.mnemonicPwd ? ' ' : I18n.t('wallet.pwdSuggest')}
-							// '不少于8位字符，建议混合大小写字母、数字、特殊字符'
 						/>
 						<Input
 							{...this.confirmMnemonicPwd}
-							errorMessage={
-								this.state.mnemonicPwd === this.state.confirmMnemonicPwd ? (
-									' '
-								) : (
-									I18n.t('wallet.pwdIsWrong')
-								)
-							}
-							// '两次密码输入不一致'
 						/>
 						<View style={styles.isAgree_flex}>
 							<CheckBox
@@ -422,11 +418,15 @@ class ImportWallet extends Component {
 								iconType="material"
 								checkedIcon="check-circle"
 								uncheckedIcon="check-circle"
-								checkedColor="#007AFF"
+								checkedColor="#0071BC"
 								checked={this.state.mnemonisAgree}
 								containerStyle={styles.checkBox}
 								onPress={() => {
-									this.setState({ mnemonisAgree: !this.state.mnemonisAgree });
+									this.setState({ mnemonisAgree: !this.state.mnemonisAgree },()=>{
+										this.setState({
+											disabledMImport:(this.state.mnemonic&&this.state.mnemonicPwd&&this.state.mnemonicPwd.length>7&&this.state.mnemonicPwd===this.state.confirmMnemonicPwd&&this.state.mnemonisAgree)?false:true
+										})
+									});
 								}}
 							/>
 							<Text style={styles.color_999}>
@@ -450,12 +450,13 @@ class ImportWallet extends Component {
 							title={I18n.t('guide.importWallet')}
 							onPress={this._mnemonicImport.bind(this)}
 							buttonStyle={styles.buttonStyle}
-							disabled={this.state.disabledImport}
+							disabled={this.state.disabledMImport}
 							disabledStyle={styles.disabledStyle}
 						/>
 						<Loading ref="loading" />
 					</ScrollView>
 				</View>
+				{/* keystore导入 */}
 				<View tabLabel={I18n.t('wallet.officialWallet')} style={styles.padding_10}>
 					<ScrollView>
 						<Text style={styles.color_999}>
@@ -470,11 +471,15 @@ class ImportWallet extends Component {
 								iconType="material"
 								checkedIcon="check-circle"
 								uncheckedIcon="check-circle"
-								checkedColor="#007AFF"
+								checkedColor="#0071BC"
 								checked={this.state.keystoreisAgree}
 								containerStyle={styles.checkBox}
 								onPress={() => {
-									this.setState({ keystoreisAgree: !this.state.keystoreisAgree });
+									this.setState({ keystoreisAgree: !this.state.keystoreisAgree },()=>{
+										this.setState({
+											disabledKImport:(this.state.keystoreFile&&this.state.keystorePwd&&this.state.keystorePwd&&this.state.keystoreisAgree)?false:true
+										})
+									});
 								}}
 							/>
 							<Text style={styles.color_999}>
@@ -497,27 +502,20 @@ class ImportWallet extends Component {
 							title={I18n.t('guide.importWallet')}
 							onPress={this._keystoreImport.bind(this)}
 							buttonStyle={styles.buttonStyle}
+							disabled={this.state.disabledKImport}
+							disabledStyle={styles.disabledStyle}
 						/>
 					</ScrollView>
 				</View>
+				{/* 私钥导入 */}
 				<View tabLabel={I18n.t('wallet.privateKey')} style={styles.padding_10}>
 					<ScrollView>
 						<TextWidget {...this.privateKeyArea} />
 						<Input
 							{...this.privatePwd}
-							errorMessage={this.state.privatePwd ? ' ' : I18n.t('wallet.pwdSuggest')}
-							// '不少于8位字符，建议混合大小写字母、数字、特殊字符'
 						/>
 						<Input
 							{...this.confirmPrivatePwd}
-							errorMessage={
-								this.state.privatePwd === this.state.confirmPrivatePwd ? (
-									' '
-								) : (
-									I18n.t('wallet.pwdIsWrong')
-								)
-							}
-							// '两次密码输入不一致'
 						/>
 						<View style={styles.isAgree_flex}>
 							<CheckBox
@@ -525,11 +523,15 @@ class ImportWallet extends Component {
 								iconType="material"
 								checkedIcon="check-circle"
 								uncheckedIcon="check-circle"
-								checkedColor="#007AFF"
+								checkedColor="#0071BC"
 								checked={this.state.privateisAgree}
 								containerStyle={styles.checkBox}
 								onPress={() => {
-									this.setState({ privateisAgree: !this.state.privateisAgree });
+									this.setState({ privateisAgree: !this.state.privateisAgree },()=>{
+										this.setState({
+											disabledPImport:(this.state.privateFile&&this.state.privatePwd&&this.state.privatePwd.length>7&&this.state.privatePwd===this.state.confirmPrivatePwd&&this.state.privateisAgree)?false:true
+										})
+									});
 								}}
 							/>
 							<Text style={styles.color_999}>
@@ -552,6 +554,8 @@ class ImportWallet extends Component {
 							title={I18n.t('guide.importWallet')}
 							onPress={this._privateKeyImport.bind(this)}
 							buttonStyle={styles.buttonStyle}
+							disabled={this.state.disabledPImport}
+							disabledStyle={styles.disabledStyle}
 						/>
 					</ScrollView>
 				</View>
@@ -592,7 +596,7 @@ const styles = StyleSheet.create({
 		width: screen.width - 50
 	},
 	color_aff: {
-		color: '#007AFF'
+		color: '#0071BC'
 	},
 	checkBox: {
 		padding: 0,
@@ -601,7 +605,7 @@ const styles = StyleSheet.create({
 		backgroundColor: 'transparent'
 	},
 	buttonStyle: {
-		backgroundColor: '#007AFF',
+		backgroundColor: '#0071BC',
 		height: 45,
 		borderColor: 'transparent',
 		borderWidth: 0,
