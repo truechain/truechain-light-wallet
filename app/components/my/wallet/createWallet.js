@@ -6,6 +6,7 @@ import lightwallet from 'eth-lightwallet';
 import Loading from 'react-native-whc-loading';
 import { StackActions, NavigationActions, withNavigation } from 'react-navigation';
 import { I18n } from '../../../../language/i18n';
+import Icon from '../../../pages/iconSets'
 const screen = Dimensions.get('window');
 var DeviceInfo = require('react-native-device-info');
 
@@ -14,10 +15,10 @@ class CreateWallet extends Component {
 		super();
 		this.state = {
 			walletName: null,
-			pwd: null,
+			pwd: '',
 			confirmPwd: null,
 			isAgree: false,
-			disabledImport: false,
+			disabledCreat: true,
 			service_source: null
 		};
 	}
@@ -65,8 +66,8 @@ class CreateWallet extends Component {
 		errorStyle: styles.errorStyle,
 		onChangeText: (walletName) => {
 			this.setState({
-				walletName: walletName
-			});
+				walletName: walletName,
+			},this.isCreate);
 		}
 	};
 
@@ -78,7 +79,7 @@ class CreateWallet extends Component {
 		onChangeText: (pwd) => {
 			this.setState({
 				pwd: pwd
-			});
+			},this.isCreate);
 		}
 	};
 
@@ -90,9 +91,15 @@ class CreateWallet extends Component {
 		onChangeText: (confirmPwd) => {
 			this.setState({
 				confirmPwd: confirmPwd
-			});
+			},this.isCreate);
 		}
 	};
+
+	isCreate(){
+		this.setState({
+			disabledCreat:(this.state.walletName&&this.state.pwd&&this.state.confirmPwd&&this.state.pwd.length>7&&this.state.pwd===this.state.confirmPwd&&this.state.isAgree)?false:true
+		})
+	}
 
 	_CreateWallet() {
 		if (!this.state.walletName) {
@@ -168,29 +175,32 @@ class CreateWallet extends Component {
 				<Loading ref="loading" />
 				<View style={styles.warning_area}>
 					<View style={styles.warning}>
-						<Text style={styles.color_waring}>
-							{I18n.t('wallet.createWalletTipOfPwd')} {/*密码用于加密私钥，强度非常重要！*/}
-						</Text>
-						<Text style={styles.color_waring}>
-							{I18n.t('wallet.createWalletTipOfNoStore')}
-							{/* ·True钱包不会储存密码，也无法帮您找回，请务必牢记！ */}
-						</Text>
+						<Icon name='icon-tixing' size={ 20 } color='#6E5500'/>
+						<View style={{ marginLeft:10 }}>
+							<Text style={styles.color_waring}>
+								{I18n.t('wallet.createWalletTipOfPwd')} {/*密码用于加密私钥，强度非常重要！*/}
+							</Text>
+							<Text style={styles.color_waring}>
+								{I18n.t('wallet.createWalletTipOfNoStore')}
+								{/* ·True钱包不会储存密码，也无法帮您找回，请务必牢记！ */}
+							</Text>
+						</View>
 					</View>
 				</View>
 				<View style={styles.padding_10}>
 					<Input
 						{...this.nameInput}
-						errorMessage={this.state.walletName ? ' ' : I18n.t('wallet.createWalletTip')}
+						// errorMessage={this.state.walletName ? ' ' : I18n.t('wallet.createWalletTip')}
 						// '请输入钱包名称'
 					/>
 					<Input
 						{...this.pwd}
-						errorMessage={this.state.pwd ? ' ' : I18n.t('wallet.pwdSuggest')}
+						// errorMessage={this.state.pwd ? ' ' : I18n.t('wallet.pwdSuggest')}
 						// '不少于8位字符，建议混合大小写字母、数字、特殊字符'
 					/>
 					<Input
 						{...this.confirmPwd}
-						errorMessage={this.state.pwd === this.state.confirmPwd ? ' ' : I18n.t('wallet.pwdIsWrong')}
+						// errorMessage={this.state.pwd === this.state.confirmPwd ? ' ' : I18n.t('wallet.pwdIsWrong')}
 						// '两次密码输入不一致'
 					/>
 					<View style={styles.isAgree_flex}>
@@ -199,11 +209,11 @@ class CreateWallet extends Component {
 							iconType="material"
 							checkedIcon="check-circle"
 							uncheckedIcon="check-circle"
-							checkedColor="#007AFF"
+							checkedColor="#0071BC"
 							checked={this.state.isAgree}
 							containerStyle={styles.checkBox}
 							onPress={() => {
-								this.setState({ isAgree: !this.state.isAgree });
+								this.setState({ isAgree: !this.state.isAgree },this.isCreate);
 							}}
 						/>
 						<Text style={styles.color_999}>
@@ -227,7 +237,7 @@ class CreateWallet extends Component {
 						// "创建钱包"
 						onPress={this._CreateWallet.bind(this)}
 						buttonStyle={styles.buttonStyle}
-						disabled={this.state.disabledImport}
+						disabled={this.state.disabledCreat}
 						disabledStyle={styles.disabledStyle}
 					/>
 				</View>
@@ -259,7 +269,9 @@ const styles = StyleSheet.create({
 		paddingLeft:10,
 		paddingRight:10,
 		borderRadius:5,
-		minHeight:50
+		minHeight:60,
+		flexDirection:'row',
+		alignItems:'center'
 	},
 	textInput: {
 		borderBottomWidth: 1,
