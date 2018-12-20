@@ -1,18 +1,18 @@
 import React from 'react';
-import { StyleSheet, Text, AsyncStorage } from 'react-native';
+import { Text, AsyncStorage } from 'react-native';
 import { I18n } from '../../language/i18n'; // 多国语言支持
 import { createStackNavigator, createBottomTabNavigator, StackNavigator } from 'react-navigation'; // 页面切换 路由导航组件
 import { nodeHost, trueHost } from '../utils/config';
 
 // TabBar 底部栏位页面
 // import Splash from '../pages/Splash'; // app开屏画面
-import Assets from '../components/asset/asset'; // 底部：资产
+// import Assets from '../components/asset/asset'; // 底部：资产
+import Find from '../components/find/find'; // 底部： 发现
 import My_item from '../components/my/my'; // 底部： 我的
-// import Activity_item from '../components/activity/activity'; // 活动
 
 // Router
 import Turn from '../pages/turn'; // 没有本地存储的钱包时进入的引导页：引导用户去选择创建钱包或导入钱包
-import Guide from '../guide/guide'; // 没有本地存储的钱包时进入的引导页：引导用户去选择创建钱包或导入钱包
+// import Guide from '../guide/guide'; // 没有本地存储的钱包时进入的引导页：引导用户去选择创建钱包或导入钱包
 import CurrencyDetail from '../components/asset/currencyDetail'; //  资产 -> 币种详情页
 import Transfer from '../components/asset/transfer'; // 资产 -> 币种详情 -> 转账页
 import Receipt from '../components/asset/receipt'; // 资产 -> 币种详情 -> 收款页
@@ -31,17 +31,11 @@ import Login from '../components/my/login';
 import Lockpositon from '../components/public/lockpositon';
 import LockAccount from '../components/my/lockAccount';
 import LogOut from '../components/my/logOut';
-import SetGesturePassword from '../components/my/setgesturepassword';
 import SysLanguage from '../components/my/sysLanguage';
 import TransactionRecord from '../components/my/transactionRecord';
 import KnowledgePoint from '../components/my/knowledgePoint';
 import WebSetting from '../components/my/webSetting';
 import QRscanner from '../components/public/QRscanner';
-import Inviting from '../components/my/inviting'; // 邀请好友
-import InvitationRecord from '../components/my/invitationRecord'; // 邀请记录
-import Referrer from '../components/my/referrer'; // 推荐人
-// import SignIn from '../components/activity/signIn'; // 签到
-import Rank from '../components/my/rank'; // 签到
 
 // rely
 import Storage from 'react-native-storage';
@@ -55,19 +49,19 @@ const storage = new Storage({
 });
 global.storage = storage;
 
-storage
-	.load({
-		key: 'token'
-	})
-	.then((res) => {
-		store.dispatch({
-			type: 'TOKEN',
-			token: res.token
-		});
-	})
-	.catch((e) => {
-		console.log(e);
-	});
+// storage
+// 	.load({
+// 		key: 'token'
+// 	})
+// 	.then((res) => {
+// 		store.dispatch({
+// 			type: 'TOKEN',
+// 			token: res.token
+// 		});
+// 	})
+// 	.catch((e) => {
+// 		console.log(e);
+// 	});
 
 storage
 	.load({
@@ -80,7 +74,7 @@ storage
 		console.log(e, '首次获取系统语言');
 	});
 
-const Web3 = require('web3');
+// const Web3 = require('web3');
 const WebTrue = require('etrue');
 
 function check(host) {
@@ -98,11 +92,13 @@ function check(host) {
 		});
 	}
 	global.host = host;
-	const web3 = new Web3(new Web3.providers.HttpProvider(host));
-	const webtrue = new WebTrue.modules.ETrue(trueHost);
+	// const web3 = new Web3(new Web3.providers.HttpProvider(host));
+	// const webtrue = new WebTrue.modules.ETrue(trueHost);
+	// const webtrue = new Web3(new Web3.providers.HttpProvider(trueHost));
+	const web3 = new WebTrue(new WebTrue.providers.HttpProvider(trueHost));
 
 	global.web3 = web3;
-	global.webtrue = webtrue;
+	// global.webtrue = webtrue;
 }
 
 storage
@@ -116,45 +112,6 @@ storage
 		check(nodeHost);
 	});
 
-// const Node = createStackNavigator({
-// 	Node: {
-// 		screen: Node_item,
-// 		navigationOptions: () => ({
-// 			title: I18n.t('tab.node'),
-// 			headerBackTitle: null,
-// 			headerStyle: {
-// 				backgroundColor: '#528bf7',
-// 				borderBottomWidth: 0
-// 			},
-// 			headerTitleStyle: {
-// 				color: '#fff',
-// 				fontSize: 18
-// 			},
-// 			headerTintColor: '#000',
-// 			borderWidth: 0
-// 		})
-// 	}
-// });
-
-// const Activity = createStackNavigator({
-// 	Activity: {
-// 		screen: Activity_item,
-// 		navigationOptions: () => ({
-// 			title: I18n.t('activity._title'),
-// 			headerBackTitle: null,
-// 			headerStyle: {
-// 				backgroundColor: '#fff',
-// 				borderBottomWidth: 0
-// 			},
-// 			headerTitleStyle: {
-// 				color: '#000',
-// 				fontSize: 18
-// 			},
-// 			headerTintColor: '#000'
-// 		})
-// 	}
-// });
-
 const My = createStackNavigator({
 	My: {
 		screen: My_item,
@@ -162,14 +119,12 @@ const My = createStackNavigator({
 			title: I18n.t('tab.my'),
 			headerBackTitle: null,
 			headerStyle: {
-				// backgroundColor: '#528bf7',
 				borderBottomWidth: 0
 			},
 			headerTitleStyle: {
 				color: '#000',
 				fontSize: 18
-			},
-			// headerTintColor: '#000'
+			}
 		})
 	}
 });
@@ -185,52 +140,17 @@ const TabBarPage = createBottomTabNavigator(
 				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-qianbao1" size={30} color={tintColor} />
 			}
 		},
-		// Activity: {
-		// 	screen: Activity,
-		// 	navigationOptions: {
-		// 		tabBarLabel: ({ tintColor, focused }) => (
-		// 			<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>
-		// 				{I18n.t('activity._title')}
-		// 			</Text>
-		// 		),
-		// 		tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-huodong" size={30} color={tintColor} />,
-		// 		tabBarOnPress: ({ navigation, defaultHandler }) => {
-		// 			storage
-		// 				.load({
-		// 					key: 'token'
-		// 				})
-		// 				.then((res) => {
-		// 					navigation.navigate('Activity');
-		// 				})
-		// 				.catch((e) => {
-		// 					navigation.navigate('Login');
-		// 				});
-		// 		}
-		// 	}
-		// },
-		// Node: {
-		// 	screen: Node,
-		// 	navigationOptions: {
-		// 		tabBarLabel: ({ tintColor, focused }) => (
-		// 			<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>{I18n.t('tab.node')}</Text>
-		// 		),
-		// 		tabBarIcon: ({ focused, tintColor }) => (
-		// 			<Icon name="icon-xiajiantouxialakuang-" size={20} color={tintColor} />
-		// 		),
-		// 		tabBarOnPress: ({ navigation, defaultHandler }) => {
-		// 			storage
-		// 				.load({
-		// 					key: 'token'
-		// 				})
-		// 				.then((res) => {
-		// 					navigation.navigate('Node');
-		// 				})
-		// 				.catch((e) => {
-		// 					navigation.navigate('Login');
-		// 				});
-		// 		}
-		// 	}
-		// },
+		Find: {
+			screen: Find,
+			navigationOptions: {
+				tabBarLabel: ({ tintColor, focused }) => (
+					<Text style={{ color: tintColor, fontSize: 12, textAlign: 'center' }}>
+						发现
+					</Text>
+				),
+				tabBarIcon: ({ focused, tintColor }) => <Icon name="icon-faxian" size={30} color={tintColor} />
+			}
+		},
 		My: {
 			screen: My,
 			navigationOptions: {
@@ -265,7 +185,6 @@ const TabBarPage = createBottomTabNavigator(
 
 const App = createStackNavigator(
 	{
-		// Splash: { screen: Splash },
 		Home: {
 			screen: TabBarPage,
 			navigationOptions: {
@@ -273,13 +192,6 @@ const App = createStackNavigator(
 				gesturesEnabled: false
 			}
 		},
-		// Guide: {
-		// 	screen: Guide,
-		// 	navigationOptions: {
-		// 		header: null,
-		// 		gesturesEnabled: false
-		// 	}
-		// },
 		CurrencyDetail,
 		Transfer,
 		Receipt: {
@@ -378,7 +290,6 @@ const App = createStackNavigator(
 				headerTitle: () => <Text> {I18n.t('my.home.lockAccount._title1')}</Text>
 			}
 		},
-		SetGesturePassword,
 		SysLanguage: {
 			screen: SysLanguage,
 			navigationOptions: {
@@ -402,31 +313,6 @@ const App = createStackNavigator(
 			screen: QRscanner,
 			navigationOptions: {
 				headerTitle: () => <Text>{I18n.t('public.scan')}</Text>
-			}
-		},
-		Inviting: {
-			screen: Inviting,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('my.home.inviteFriends._title')}</Text>
-			}
-		},
-		InvitationRecord,
-		Referrer: {
-			screen: Referrer,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('my.home.inviteFriends.enterInvitationCode')}</Text>
-			}
-		},
-		// SignIn: {
-		// 	screen: SignIn,
-		// 	navigationOptions: {
-		// 		headerTitle: () => <Text>{I18n.t('activity.signIn')}</Text>
-		// 	}
-		// },
-		Rank: {
-			screen: Rank,
-			navigationOptions: {
-				headerTitle: () => <Text>{I18n.t('my.home.invitationRecord.ranking')}</Text>
 			}
 		}
 	},
