@@ -57,6 +57,7 @@ const styles = StyleSheet.create({
 	},
 	welcome: {
 		fontSize: 20,
+		color:'#1E64B4',
 		textAlign: 'center',
 		margin: 20,
 		letterSpacing: 1

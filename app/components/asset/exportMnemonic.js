@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { View, Alert, Text, StyleSheet, TouchableHighlight, Dimensions } from 'react-native';
+import { View, Alert, Text, StyleSheet,Image, TouchableHighlight } from 'react-native';
 import { Button } from 'react-native-elements';
 import lightwallet from 'eth-lightwallet';
 import { StackActions, NavigationActions, withNavigation } from 'react-navigation';
-import { Polygon } from 'react-native-svg';
 import { I18n } from '../../../language/i18n';
-const screen = Dimensions.get('window');
+import Icon from '../../pages/iconSets'
+import {screenWidth,screenHeight} from '../../utils/Dimensions'
 
 export class ExportMnemonic extends Component {
 	constructor(props) {
@@ -16,7 +16,7 @@ export class ExportMnemonic extends Component {
 			backupBtnText: I18n.t('assets.mnemonic.backUpMnemonic'),
 			backupBtnOpacity: 0.6,
 			onPress: null,
-			step: 'backup',
+			step: 'page',
 			words: null,
 			selectWordsText: ' ',
 			selectWords: [],
@@ -41,15 +41,6 @@ export class ExportMnemonic extends Component {
 				});
 			});
 		});
-
-		setTimeout(() => {
-			this.setState({
-				backupBtnText: I18n.t('public.next'),
-				// backupBtnText: '下一步',
-				backupBtnOpacity: 1,
-				next: false
-			});
-		}, 10000);
 	}
 
 	// 抄写完 点击下一步时 去确认
@@ -120,17 +111,45 @@ export class ExportMnemonic extends Component {
 
 	render() {
 		let currentStep = null;
+		if (this.state.step == 'page') {
+			currentStep = (
+				<View style={[styles.container,styles.backupPage]}>
+					<View style={styles.backupPageTop}>
+						<Image source={require('../../assets/images/icon/Safety.png')} style={styles.cen_50}></Image>
+						<Text style={styles.backupPageTop_t}>
+						请在安全的环境下备份助记词！没有妥善备份就无法保障资产安全。删除程序或钱包后，你需要备份助记词来恢复钱包。
+						</Text>
+					</View>
+					<Button
+						title='备份助记词'
+						buttonStyle={styles.btnBackupTip}
+						onPress={()=>{
+							this.setState({
+								step:'backup'
+							},()=>{
+								setTimeout(() => {
+									this.setState({
+										backupBtnText: I18n.t('public.next'),
+										backupBtnOpacity: 1,
+										next: false
+									});
+								}, 10000);
+							})
+						}}
+					/>
+
+				</View>
+			);
+		}
+
 		if (this.state.step == 'backup') {
 			currentStep = (
 				<View style={styles.container}>
-					<View style={styles.warning}>
-						<Text style={styles.warning_item}>
-							{I18n.t('assets.mnemonic.copyYourMnemonic')}
-							{/* 抄写下你的助记词 */}
-						</Text>
-						<Text style={styles.color_999}>
-							{I18n.t('assets.mnemonic.mnemonicWring')}
-							{/* 助记词用于恢复钱包或重置钱包密码，将它准确的抄写到纸上，并存放在只有你知道的安全地方。 */}
+					<Image source={require('../../assets/images/icon/Edit.png')} style={styles.cen_50}></Image>
+					<View style={styles.backup_warning}>
+						<Icon name='icon-tixing' size={ 20 } color='#6E5500'/>
+						<Text style={styles.color_waring}>
+							助记词用于恢复钱包或重置钱包密码，仔细抄写下助记词并放在安全的地方！请勿截图，如果有他人获取你的助记词将直接获取你的资产！
 						</Text>
 					</View>
 
@@ -149,17 +168,14 @@ export class ExportMnemonic extends Component {
 				</View>
 			);
 		}
+
 		if (this.state.step == 'confirm') {
 			currentStep = (
 				<View style={styles.container}>
 					<View style={styles.warning}>
-						<Text style={styles.warning_item}>
-							{I18n.t('assets.mnemonic.confirmMnemonic')}
-							{/* 确认你的钱包助记词 */}
-						</Text>
-						<Text style={styles.color_999}>
+						<Image source={require('../../assets/images/icon/Edit.png')} style={styles.cen_50}></Image>
+						<Text style={[styles.color_999,{marginTop:30}]}>
 							{I18n.t('assets.mnemonic.confirmMnemonicWring')}
-							{/* 请按顺序点击助记词，以确认你备份的助记词正确。 */}
 						</Text>
 					</View>
 					<TouchableHighlight style={styles.mnemonic_area}>
@@ -185,7 +201,8 @@ export default withNavigation(ExportMnemonic);
 
 const styles = StyleSheet.create({
 	color_999: {
-		color: '#999'
+		fontSize:12,
+		color: '#203260'
 	},
 	container: {
 		flex: 1,
@@ -193,16 +210,57 @@ const styles = StyleSheet.create({
 		backgroundColor: '#fff',
 		alignItems: 'center'
 	},
+	backupPage:{
+		justifyContent:'space-between',
+		paddingTop:50,
+		paddingBottom:50
+	},
+	backupPageTop:{
+		alignItems:'center'
+	},
+	backupPageTop_t:{
+		marginTop:20,
+		fontSize:11,
+		lineHeight:24,
+		color:'#203260'
+	},
+	btnBackupTip:{
+		width:screenWidth*0.8,
+		backgroundColor:'#0071BC',
+		borderRadius:50
+	},
 	warning: {
 		marginTop: 30,
 		height: 60,
+		alignItems:'center',
 		justifyContent: 'space-around'
+	},
+	backup_warning:{
+		width:screenWidth - 50,
+		minHeight:80,
+		flexDirection:'row',
+		alignItems:'center',
+		justifyContent:'space-around',
+		marginTop:20,
+		padding:10,
+		borderRadius:10,
+		backgroundColor:'#FFD74E'
+	},
+	color_waring:{
+		fontSize:12,
+		color:'#6E5500',
+		lineHeight:24,
+		marginLeft:20
+	},
+	cen_50:{
+		width:50,
+		height:50
 	},
 	warning_item: {
 		color: '#35ccbf'
 	},
 	mnemonic_area: {
-		width: screen.width - 50,
+		width: screenWidth - 50,
 		borderWidth: 1,
 		borderColor: '#ccc',
 		padding: 10,
@@ -213,7 +271,7 @@ const styles = StyleSheet.create({
 		lineHeight: 20
 	},
 	backupBtn: {
-		backgroundColor: '#528bf7',
+		backgroundColor: '#0071BC',
 		width: 300,
 		height: 45,
 		borderRadius: 30,

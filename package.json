@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "test": "jest",
+    "postinstall": "rn-nodeify --install --hack",
     "lint": "eslint --ext .js app",
     "devtools": "react-devtools",
     "bundle-ios": "react-native bundle --entry-file index.js --platform ios --dev false --bundle-output ./ios/bundle/index.ios.jsbundle --assets-dest ./ios/bundle"
@@ -16,6 +17,7 @@
     "crypto": "^1.0.1",
     "dns.js": "^1.0.1",
     "eth-lightwallet": "^3.0.1",
+    "etrue": "github:truechain/web3.js#etrue",
     "https-browserify": "0.0.1",
     "node-libs-browser": "^2.1.0",
     "react": "16.3.1",
@@ -59,8 +61,7 @@
     "string_decoder": "^0.10.31",
     "timers-browserify": "^1.4.2",
     "url": "^0.10.3",
-    "web3": "^1.0.0-beta.34",
-    "etrue": "github:truechain/web3.js#etrue"
+    "web3": "^1.0.0-beta.34"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",

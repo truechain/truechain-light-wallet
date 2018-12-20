@@ -1,6 +1,6 @@
 export default {
 	guide: {
-		welcome: '欢迎来到True',
+		welcome: 'True Wallet',
 		importWallet: '导入钱包',
 		createWallet: '创建钱包',
 		importInstructions: '在已有钱包中导出助记词，点击“导入钱包”，输入导出的助记词；导入钱包后请立即备份助记词。',
@@ -161,7 +161,7 @@ export default {
 			copyYourMnemonic: '抄写下你的助记词',
 			confirmMnemonic: '确认你的钱包助记词',
 			mnemonicWring: '助记词用于恢复钱包或重置钱包密码，将它准确的抄写到纸上，并存放在只有你知道的安全地方。',
-			confirmMnemonicWring: '请按顺序点击助记词，以确认你备份的助记词正确。'
+			confirmMnemonicWring: '请按顺序点击助记词，以确认您正确备份。'
 		},
 		currency: {
 			transfer: '转账',
