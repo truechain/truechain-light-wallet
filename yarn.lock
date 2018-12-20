@@ -587,6 +587,18 @@
     Base64 "~0.2.0"
     inherits "~2.0.1"
 
+"@types/bn.js@^4.11.1":
+  version "4.11.3"
+  resolved "http://registry.npm.taobao.org/@types/bn.js/download/@types/bn.js-4.11.3.tgz#0f09e53e98659b007d7019261ddab9178135df38"
+  integrity sha1-DwnlPphlmwB9cBkmHdq5F4E13zg=
+  dependencies:
+    "@types/node" "*"
+
+"@types/node@*":
+  version "10.12.18"
+  resolved "http://registry.npm.taobao.org/@types/node/download/@types/node-10.12.18.tgz#1d3ca764718915584fcd9f6344621b7672665c67"
+  integrity sha1-HTynZHGJFVhPzZ9jRGIbdnJmXGc=
+
 "@yarnpkg/lockfile@^1.0.0":
   version "1.0.2"
   resolved "http://registry.npm.taobao.org/@yarnpkg/lockfile/download/@yarnpkg/lockfile-1.0.2.tgz#833d163680a151d2441a2489f5fe5fa87ac87726"
@@ -3522,9 +3534,11 @@ ethjs-util@^0.1.3:
     is-hex-prefixed "1.0.0"
     strip-hex-prefix "1.0.0"
 
-"etrue@github:truechain/web3.js#etrue":
+"etrue@github:truechain/web3.js":
   version "1.0.0-beta.36"
-  resolved "https://codeload.github.com/truechain/web3.js/tar.gz/1bbf11d1a507594c0c626545b76b468316027ce1"
+  resolved "https://codeload.github.com/truechain/web3.js/tar.gz/6a446193740677e7161219c2a55aff530301faaa"
+  dependencies:
+    "@types/bn.js" "^4.11.1"
 
 event-target-shim@^1.0.5:
   version "1.1.1"

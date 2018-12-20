@@ -3,8 +3,8 @@ import {
 	View,
 	Text,
 	Image,
+	ImageBackground,
 	StyleSheet,
-	Dimensions,
 	ScrollView,
 	RefreshControl,
 	TouchableHighlight,
@@ -17,8 +17,9 @@ import getBalance from '../../utils/addTokens';
 import iterface from '../../utils/iterface';
 import { I18n } from '../../../language/i18n';
 import { checkVersion } from '../../api/index';
-import CurrencyList from './currencyList'
-import {withNavigation} from 'react-navigation'
+import CurrencyList from './currencyList';
+import {withNavigation} from 'react-navigation';
+import { screenWidth, screenHeight } from '../../utils/Dimensions';
 var DeviceInfo = require('react-native-device-info');
 
 class Assets extends Component {
@@ -67,29 +68,29 @@ class Assets extends Component {
 			this.setState({ eth_banlance });
 		});
 
-		webtrue.getBalance(this.state.walletAddress).then((res) => {
-			let true_beta_banlance = this.show(web3.utils.fromWei(res, 'ether'));
-			this.setState({ true_beta_banlance });
-		});
+		// webtrue.getBalance(this.state.walletAddress).then((res) => {
+		// 	let true_beta_banlance = this.show(web3.utils.fromWei(res, 'ether'));
+		// 	this.setState({ true_beta_banlance });
+		// });
 
-		getBalance(
-			iterface,
-			this.state.walletAddress,
-			store.getState().contractAddr.TRUEContractAddr,
-			(true_banlance) => {
-				true_banlance = this.show(true_banlance);
-				this.setState({ true_banlance });
-			}
-		);
-		getBalance(
-			iterface,
-			this.state.walletAddress,
-			store.getState().contractAddr.TTRContractAddr,
-			(ttr_banlance) => {
-				ttr_banlance = this.show(ttr_banlance);
-				this.setState({ ttr_banlance });
-			}
-		);
+		// getBalance(
+		// 	iterface,
+		// 	this.state.walletAddress,
+		// 	store.getState().contractAddr.TRUEContractAddr,
+		// 	(true_banlance) => {
+		// 		true_banlance = this.show(true_banlance);
+		// 		this.setState({ true_banlance });
+		// 	}
+		// );
+		// getBalance(
+		// 	iterface,
+		// 	this.state.walletAddress,
+		// 	store.getState().contractAddr.TTRContractAddr,
+		// 	(ttr_banlance) => {
+		// 		ttr_banlance = this.show(ttr_banlance);
+		// 		this.setState({ ttr_banlance });
+		// 	}
+		// );
 		this.updataWalletName();
 
 		setTimeout(() => {
@@ -167,31 +168,31 @@ class Assets extends Component {
 	render() {
 		const currencyData = [
 			{
-				currency_name: 'ETH',
-				balance: this.state.eth_banlance,
-				logo_url: require('../../assets/images/currency_logo/eth_logo.png')
-			},
-			{
 				currency_name: 'TRUE',
-				balance: this.state.true_banlance,
+				balance: this.state.eth_banlance,
 				logo_url: require('../../assets/images/currency_logo/true_logo.png')
 			},
-			{
-				currency_name: 'TTR',
-				balance: this.state.ttr_banlance,
-				logo_url: require('../../assets/images/currency_logo/ttr_logo.png')
-			},
-			{
-				currency_name: 'BETA',
-				balance: this.state.true_beta_banlance,
-				logo_url: require('../../assets/images/currency_logo/true_beta_logo.png')
-			}
+			// {
+			// 	currency_name: 'TRUE',
+			// 	balance: this.state.true_banlance,
+			// 	logo_url: require('../../assets/images/currency_logo/true_logo.png')
+			// },
+			// {
+			// 	currency_name: 'TTR',
+			// 	balance: this.state.ttr_banlance,
+			// 	logo_url: require('../../assets/images/currency_logo/ttr_logo.png')
+			// },
+			// {
+			// 	currency_name: 'BETA',
+			// 	balance: this.state.true_beta_banlance,
+			// 	logo_url: require('../../assets/images/currency_logo/true_beta_logo.png')
+			// }
 		];
 
 		return (
 			<View style={styles.container}>
-				<View style={styles.walletInfo}>
-					<View style={styles.walletInfo_item}>
+			<ImageBackground source={require('../../assets/images/asset/assets_bj.png')} style={styles.walletInfo}>
+				<View style={styles.walletInfo_item}>
 						<TouchableHighlight
 							underlayColor={'transparent'}
 							onPress={() => this.navigate('WalletInfo')}
@@ -217,21 +218,22 @@ class Assets extends Component {
 							</View>
 						</TouchableHighlight>
 					</View>
-				</View>
+			</ImageBackground>
+
 				<View style={styles.addCurrency}>
 					<View style={styles.addCurrency_item}>
 						<View>
 							<Text style={styles.currency_text}>{I18n.t('assets.totalAssets')}</Text>
 							<Text>{this.state.true_banlance}</Text>
 						</View>
-						{/* <TouchableHighlight style={styles.currency_item}>
+						<TouchableHighlight style={styles.currency_item}>
 							<Text style={styles.currency_item_text}>新增币种</Text>
-						</TouchableHighlight> */}
+						</TouchableHighlight>
 					</View>
 				</View>
 
 				<ScrollView
-					style={styles.scrollview}
+					style={styles._scrollview}
 					refreshControl={
 						<RefreshControl
 							refreshing={this.state.isRefreshing}
@@ -304,15 +306,13 @@ const styles = StyleSheet.create({
 		textAlign: 'right'
 	},
 	container: {
-		width: Dimensions.get('window').width,
-		height: Dimensions.get('window').height - 50,
+		width: screenWidth,
+		height: screenHeight - 50,
 		backgroundColor: '#fff'
 	},
 	walletInfo: {
 		height: 230,
 		backgroundColor: '#528bf7'
-		// borderBottomLeftRadius: 10,
-		// borderBottomRightRadius: 10
 	},
 	walletInfo_item: {
 		flex: 1,
@@ -346,19 +346,20 @@ const styles = StyleSheet.create({
 	//新增币种
 	addCurrency: {
 		alignItems: 'center',
-		marginTop: -30
+		// marginTop: -30,
+		backgroundColor:'#F1F4FA'
 	},
 	addCurrency_item: {
-		borderRadius: 8,
-		height: 80,
+		position:'relative',
+		top:-20,
+		borderRadius: 15,
 		padding: 30,
-		alignItems: 'center',
 		flexDirection: 'row',
 		backgroundColor: '#fff',
 		justifyContent: 'space-between',
-		width: Dimensions.get('window').width * 0.85,
-		shadowColor: '#938670',
-		shadowOpacity: 0.2,
+		width: screenWidth * 0.9,
+		shadowColor: '#0c2848',
+		shadowOpacity: 0.5,
 		shadowOffset: {
 			width: 0,
 			height: 2
@@ -374,10 +375,13 @@ const styles = StyleSheet.create({
 		borderRadius: 15,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#528bf7'
+		backgroundColor: '#0071BC'
 	},
 	currency_item_text: {
 		color: '#fff'
+	},
+	_scrollview:{
+		backgroundColor: '#F1F4FA'
 	},
 	// version
 	modalCon: {

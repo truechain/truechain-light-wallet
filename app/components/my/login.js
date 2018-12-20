@@ -4,7 +4,6 @@ import CountryPicker from 'react-native-country-picker-modal';
 import { I18n } from '../../../language/i18n';
 import { Button } from 'react-native-elements';
 import { getCode, login } from '../../api/index';
-import { isSetReferrer } from '../../api/loged';
 import { serverUrl } from '../../utils/config';
 
 const screen = Dimensions.get('window');
@@ -128,7 +127,7 @@ export default class Login extends React.Component {
 		} else if (!this.state.cap_code) {
 			Alert.alert(null, I18n.t('public.enterCaptcha'));
 		} else if (!this.state.v_code) {
-			Alert.alert(null, '___LLL  请输入手机验证码');
+			Alert.alert(null, '请输入手机验证码');
 		} else {
 			login({
 				mobile: this.state.tel,
@@ -140,18 +139,6 @@ export default class Login extends React.Component {
 						key: 'token',
 						data: {
 							token: res.data.body.data.token
-						}
-					});
-
-					isSetReferrer({
-						mobile: this.state.tel
-					}).then((res) => {
-						if (res.data.isSetReferrer) {
-							this.navigate('My');
-						} else {
-							this.navigate('Referrer', {
-								mobile: this.state.tel
-							});
 						}
 					});
 				} else if (res.data.body.status == 202) {

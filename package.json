@@ -17,7 +17,7 @@
     "crypto": "^1.0.1",
     "dns.js": "^1.0.1",
     "eth-lightwallet": "^3.0.1",
-    "etrue": "github:truechain/web3.js#etrue",
+    "etrue": "github:truechain/web3.js",
     "https-browserify": "0.0.1",
     "node-libs-browser": "^2.1.0",
     "react": "16.3.1",
