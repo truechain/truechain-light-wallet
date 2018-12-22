@@ -15,12 +15,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     padding: 15,
     backgroundColor: '#FFFFFF',
-    // borderWidth: 1,
-    // borderColor: 'green',
-  },
-  view_app: {
-    // borderWidth: 1,
-    // borderColor: 'red',
   },
   view_t: {
     flexDirection: 'row',
@@ -41,23 +35,30 @@ const styles = StyleSheet.create({
   },
   view_list: {
     width: screenWidth - 30,
-    // borderWidth: 1,
-    // borderColor: 'green',
     overflow: 'hidden',
   },
   view_listItem: {
-    // borderWidth: 1 / 2,
-    // borderColor: 'red',
     flexWrap: 'wrap',
     marginLeft: 0,
   },
   view_avatar: {
-    // borderWidth: 1 / 2,
-    // borderColor: 'green',
     alignItems: 'center',
     justifyContent: 'space-around',
     width: (screenWidth - 30) / 4,
     height: (screenWidth - 30) / 4,
+  },
+  card: {
+    backgroundColor: 'transparent',
+    borderColor: 'transparent',
+  },
+  cardItem: {
+    marginTop: 10,
+    backgroundColor: '#F1F4FA',
+  },
+  date: {
+    marginTop: 10,
+    fontSize: 12,
+    color: '#A0A5B0',
   },
 });
 
@@ -71,7 +72,7 @@ class Find extends Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <View style={[styles.view, styles.view_app]}>
+        <View style={styles.view}>
           <View style={styles.view_t}>
             <Text style={styles.view_tL}>应用</Text>
             <Text style={styles.view_tR}>更多</Text>
@@ -126,6 +127,46 @@ class Find extends Component {
             </List>
           </View>
           <View />
+        </View>
+
+        <View style={styles.view}>
+          <View style={styles.view_t}>
+            <Text style={styles.view_tL}>新闻</Text>
+          </View>
+
+          <List style={styles.view_list}>
+            <ListItem avatar>
+              <Card style={styles.card}>
+                <CardItem style={styles.cardItem}>
+                  <Body>
+                    <Text numberOfLines={2}>TrueChain主网测试版版第六批映射工作工做作...</Text>
+                    <Text style={styles.date}>2018-12-01</Text>
+                  </Body>
+                </CardItem>
+
+                <CardItem style={styles.cardItem}>
+                  <Body>
+                    <Text numberOfLines={2}>TrueChain主网测试版版第六批映射工作工做作...</Text>
+                    <Text style={styles.date}>2018-12-01</Text>
+                  </Body>
+                </CardItem>
+
+                <CardItem style={styles.cardItem}>
+                  <Body>
+                    <Text numberOfLines={2}>TrueChain主网测试版版第六批映射工作工做作...</Text>
+                    <Text style={styles.date}>2018-12-01</Text>
+                  </Body>
+                </CardItem>
+
+                <CardItem style={styles.cardItem}>
+                  <Body>
+                    <Text numberOfLines={2}>TrueChain主网测试版版第六批映射工作工做作...</Text>
+                    <Text style={styles.date}>2018-12-01</Text>
+                  </Body>
+                </CardItem>
+              </Card>
+            </ListItem>
+          </List>
         </View>
       </ScrollView>
     );
