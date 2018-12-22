@@ -3,7 +3,7 @@ import {
   View, Text, StyleSheet, ScrollView,
 } from 'react-native';
 import {
-  List, ListItem, Thumbnail, Card, CardItem, Body,
+  List, ListItem, Thumbnail, Card, CardItem, Body, Button,
 } from 'native-base';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
 
@@ -75,7 +75,15 @@ class Find extends Component {
         <View style={styles.view}>
           <View style={styles.view_t}>
             <Text style={styles.view_tL}>应用</Text>
-            <Text style={styles.view_tR}>更多</Text>
+            <Button
+              transparent
+              light
+              onPress={() => {
+                this.navigate('AppList');
+              }}
+            >
+              <Text style={styles.view_tR}>更多</Text>
+            </Button>
           </View>
 
           <View style={styles.view_content}>

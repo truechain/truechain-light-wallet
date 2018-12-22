@@ -37,6 +37,7 @@ import TransactionRecord from '../components/my/transactionRecord';
 import KnowledgePoint from '../components/my/knowledgePoint';
 import WebSetting from '../components/my/webSetting';
 import QRscanner from '../components/public/QRscanner';
+import AppList from '../components/find/appList';
 
 // rely
 import Icon from '../pages/iconSets';
@@ -335,6 +336,12 @@ const App = createStackNavigator(
       screen: QRscanner,
       navigationOptions: {
         headerTitle: () => <Text>{I18n.t('public.scan')}</Text>,
+      },
+    },
+    AppList: {
+      screen: AppList,
+      navigationOptions: {
+        headerTitle: () => <Text>更多应用</Text>,
       },
     },
   },
