@@ -11,6 +11,8 @@ import {
 	Modal,
 	Linking
 } from 'react-native';
+import Icon from '../../pages/iconSets';
+import { Button } from 'native-base';
 import { connect } from 'react-redux';
 import actions from '../../store/action/walletInfo';
 import getBalance from '../../utils/addTokens';
@@ -171,27 +173,15 @@ class Assets extends Component {
 				currency_name: 'TRUE',
 				balance: this.state.eth_banlance,
 				logo_url: require('../../assets/images/currency_logo/true_logo.png')
-			},
-			// {
-			// 	currency_name: 'TRUE',
-			// 	balance: this.state.true_banlance,
-			// 	logo_url: require('../../assets/images/currency_logo/true_logo.png')
-			// },
-			// {
-			// 	currency_name: 'TTR',
-			// 	balance: this.state.ttr_banlance,
-			// 	logo_url: require('../../assets/images/currency_logo/ttr_logo.png')
-			// },
-			// {
-			// 	currency_name: 'BETA',
-			// 	balance: this.state.true_beta_banlance,
-			// 	logo_url: require('../../assets/images/currency_logo/true_beta_logo.png')
-			// }
+			}
 		];
 
 		return (
 			<View style={styles.container}>
 			<ImageBackground source={require('../../assets/images/asset/assets_bj.png')} style={styles.walletInfo}>
+					<Button transparent style={{ position:'absolute', right: 10, top: 30, zIndex:999 }} onPress={this.openDrawer}>
+						<Icon name='icon-qianbao' size={23} />
+          </Button>
 				<View style={styles.walletInfo_item}>
 						<TouchableHighlight
 							underlayColor={'transparent'}
@@ -346,8 +336,7 @@ const styles = StyleSheet.create({
 	//新增币种
 	addCurrency: {
 		alignItems: 'center',
-		// marginTop: -30,
-		backgroundColor:'#F1F4FA'
+		backgroundColor:'transparent'
 	},
 	addCurrency_item: {
 		position:'relative',

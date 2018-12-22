@@ -17,8 +17,8 @@
     "crypto": "^1.0.1",
     "dns.js": "^1.0.1",
     "eth-lightwallet": "^3.0.1",
-    "etrue": "github:truechain/web3.js",
     "https-browserify": "0.0.1",
+    "native-base": "^2.6.0",
     "node-libs-browser": "^2.1.0",
     "react": "16.3.1",
     "react-native": "0.55.4",
@@ -31,6 +31,7 @@
     "react-native-device-info": "^0.22.2",
     "react-native-easy-toast": "^1.1.0",
     "react-native-elements": "^1.0.0-beta5",
+    "react-native-ezsidemenu": "^1.2.0",
     "react-native-gesture-password": "^0.3.4",
     "react-native-i18n": "^2.0.12",
     "react-native-level-fs": "^3.0.1",
@@ -61,7 +62,7 @@
     "string_decoder": "^0.10.31",
     "timers-browserify": "^1.4.2",
     "url": "^0.10.3",
-    "web3": "^1.0.0-beta.34"
+    "web3": "github:truechain/web3.js"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
