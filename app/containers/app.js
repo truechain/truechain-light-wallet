@@ -37,7 +37,8 @@ import TransactionRecord from '../components/my/transactionRecord';
 import KnowledgePoint from '../components/my/knowledgePoint';
 import WebSetting from '../components/my/webSetting';
 import QRscanner from '../components/public/QRscanner';
-import AppList from '../components/find/appList';
+import AppList from '../components/find/appList'; // 应用列表
+import Contact from '../components/my/contact/contact';// 联系人列表
 
 // rely
 import Icon from '../pages/iconSets';
@@ -342,6 +343,12 @@ const App = createStackNavigator(
       screen: AppList,
       navigationOptions: {
         headerTitle: () => <Text>更多应用</Text>,
+      },
+    },
+    Contact: {
+      screen: Contact,
+      navigationOptions: {
+        headerTitle: () => <Text>联系人</Text>,
       },
     },
   },

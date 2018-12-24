@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import {
   View, StyleSheet, Alert,
 } from 'react-native';
-import { withNavigation } from 'react-navigation';
 import {
-  Content, List, ListItem, Left, Thumbnail, Body, Text, Right,
+  Content, List, ListItem, Left, Thumbnail, Body, Text,
 } from 'native-base';
 import { screenWidth, screenHeight } from '../../utils/Dimensions';
 
@@ -32,11 +31,6 @@ const styles = StyleSheet.create({
 
 
 class AppList extends Component {
-  constructor(props) {
-    super(props);
-    this.navigate = this.props.natigation.navigate;
-  }
-
   render() {
     return (
       <Content style={styles.container}>
@@ -131,4 +125,4 @@ class AppList extends Component {
   }
 }
 
-export default withNavigation(AppList);
+export default AppList;
