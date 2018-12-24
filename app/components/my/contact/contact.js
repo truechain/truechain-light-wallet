@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {
   Text, View, StyleSheet, Image,
 } from 'react-native';
-import { Button } from 'native-base';
+import {
+  Content, List, ListItem, Left, Thumbnail, Body, Button, Right,
+} from 'native-base';
 import { withNavigation } from 'react-navigation';
 import Icon from '../../../pages/iconSets';
 import { screenWidth, screenHeight } from '../../../utils/Dimensions';
@@ -22,7 +24,29 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  container_cont: {
+    // flex: 1,
+    backgroundColor: '#fff',
+    marginTop: 10,
+    padding: 10,
+  },
+  listItem: {
+    marginLeft: 0,
+    marginTop: 10,
+    padding: 12,
+    borderBottomWidth: 1,
+    borderBottomColor: '#E1E4E8',
+  },
+  notBorder: {
+    borderColor: 'transparent',
+  },
+  margin_5: {
+    marginTop: 5,
+  },
+  arrow_area: {
+    marginLeft: 15,
     justifyContent: 'center',
   },
 });
@@ -60,8 +84,112 @@ export class Contact extends Component {
     return (
       <View style={styles.container}>
         {
-       isPresence
-         ? <Text>123</Text>
+       !isPresence
+         ? (
+           <Content style={styles.container_cont}>
+             <List>
+               <ListItem
+                 avatar
+                 style={styles.listItem}
+                 underlayColor="transparent"
+                 onPress={() => {
+                   alert('过一个月');
+                 }}
+               >
+                 <Left>
+                   <Thumbnail source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }} />
+                 </Left>
+                 <Body style={styles.notBorder}>
+                   <Text>非小号</Text>
+                   <Text numberOfLines={2} style={styles.margin_5}>0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e</Text>
+                 </Body>
+                 <Right style={styles.arrow_area}>
+                   <Icon name="icon-right" />
+                 </Right>
+               </ListItem>
+
+               <ListItem
+                 avatar
+                 style={styles.listItem}
+                 underlayColor="transparent"
+                 onPress={() => {
+                   alert('过一个月');
+                 }}
+               >
+                 <Left>
+                   <Thumbnail source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }} />
+                 </Left>
+                 <Body style={styles.notBorder}>
+                   <Text>非小号</Text>
+                   <Text numberOfLines={2} style={styles.margin_5}>0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e</Text>
+                 </Body>
+                 <Right style={styles.arrow_area}>
+                   <Icon name="icon-right" />
+                 </Right>
+               </ListItem>
+
+               <ListItem
+                 avatar
+                 style={styles.listItem}
+                 underlayColor="transparent"
+                 onPress={() => {
+                   alert('过一个月');
+                 }}
+               >
+                 <Left>
+                   <Thumbnail source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }} />
+                 </Left>
+                 <Body style={styles.notBorder}>
+                   <Text>非小号</Text>
+                   <Text numberOfLines={2} style={styles.margin_5}>0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e</Text>
+                 </Body>
+                 <Right style={styles.arrow_area}>
+                   <Icon name="icon-right" />
+                 </Right>
+               </ListItem>
+
+               <ListItem
+                 avatar
+                 style={styles.listItem}
+                 underlayColor="transparent"
+                 onPress={() => {
+                   alert('过一个月');
+                 }}
+               >
+                 <Left>
+                   <Thumbnail source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }} />
+                 </Left>
+                 <Body style={styles.notBorder}>
+                   <Text>非小号</Text>
+                   <Text numberOfLines={2} style={styles.margin_5}>0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e</Text>
+                 </Body>
+                 <Right style={styles.arrow_area}>
+                   <Icon name="icon-right" />
+                 </Right>
+               </ListItem>
+
+               <ListItem
+                 avatar
+                 style={styles.listItem}
+                 underlayColor="transparent"
+                 onPress={() => {
+                   alert('过一个月');
+                 }}
+               >
+                 <Left>
+                   <Thumbnail source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }} />
+                 </Left>
+                 <Body style={styles.notBorder}>
+                   <Text>非小号</Text>
+                   <Text numberOfLines={2} style={styles.margin_5}>0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e</Text>
+                 </Body>
+                 <Right style={styles.arrow_area}>
+                   <Icon name="icon-right" />
+                 </Right>
+               </ListItem>
+             </List>
+           </Content>
+         )
          : (
            <View style={styles.no_container}>
              <Image
