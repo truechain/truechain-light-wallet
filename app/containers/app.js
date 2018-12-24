@@ -39,6 +39,7 @@ import WebSetting from '../components/my/webSetting';
 import QRscanner from '../components/public/QRscanner';
 import AppList from '../components/find/appList'; // 应用列表
 import Contact from '../components/my/contact/contact';// 联系人列表
+import EditInfo from '../components/my/contact/editInfo';// 编辑信息
 
 // rely
 import Icon from '../pages/iconSets';
@@ -349,6 +350,12 @@ const App = createStackNavigator(
       screen: Contact,
       navigationOptions: {
         headerTitle: () => <Text>联系人</Text>,
+      },
+    },
+    EditInfo: {
+      screen: EditInfo,
+      navigationOptions: {
+        headerTitle: () => <Text>联系人信息</Text>,
       },
     },
   },

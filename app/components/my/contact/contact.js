@@ -51,12 +51,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export class Contact extends Component {
+class Contact extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isPresence: false,
     };
+    this.navigate = this.props.navigation.navigate;
   }
 
   static navigationOptions = ({ navigation }) => ({
@@ -71,7 +72,9 @@ export class Contact extends Component {
           justifyContent: 'center',
         }}
         onPress={() => {
-          alert('添加联系人');
+          navigation.navigate('EditInfo', {
+            type: 0, //  新建联系人
+          });
         }}
       >
         <Icon name="icon-xinjian" />
@@ -113,14 +116,18 @@ export class Contact extends Component {
                  style={styles.listItem}
                  underlayColor="transparent"
                  onPress={() => {
-                   alert('过一个月');
+                   this.navigate('EditInfo', {
+                     type: '1', // 查看联系人信息
+                     name: '非小号-----',
+                     address: '0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e',
+                   });
                  }}
                >
                  <Left>
                    <Thumbnail source={{ uri: 'https://facebook.github.io/react-native/docs/assets/favicon.png' }} />
                  </Left>
                  <Body style={styles.notBorder}>
-                   <Text>非小号</Text>
+                   <Text>非小号-----</Text>
                    <Text numberOfLines={2} style={styles.margin_5}>0x5833fA6053e6E781EaFb8695d63D90f6B3571e5e</Text>
                  </Body>
                  <Right style={styles.arrow_area}>
