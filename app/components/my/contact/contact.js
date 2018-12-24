@@ -82,12 +82,29 @@ class Contact extends Component {
     ),
   });
 
+  componentDidMount() {
+    this.setState({
+      isPresence: true,
+    });
+    // storage
+    //   .load({
+    //     key: 'localContact',
+    //   })
+    //   .then((res) => {
+    //     const data = JSON.parse(res);
+    //     console.log(data, '**********');
+    //   })
+    //   .catch((e) => {
+    //     console.log(e, '呼呼呼哈哈哈');
+    //   });
+  }
+
   render() {
     const { isPresence } = this.state;
     return (
       <View style={styles.container}>
         {
-       !isPresence
+       isPresence
          ? (
            <Content style={styles.container_cont}>
              <List>

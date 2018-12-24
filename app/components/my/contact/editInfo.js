@@ -3,10 +3,8 @@ import {
   Alert, Text, View, StyleSheet, TouchableHighlight,
 } from 'react-native';
 import {
-  Button, Container, Content, Item, Input, Label,
+  Button, Container, Content, Item, Input,
 } from 'native-base';
-import { withNavigation } from 'react-navigation';
-import Icon from '../../../pages/iconSets';
 import { screenWidth, screenHeight } from '../../../utils/Dimensions';
 
 const styles = StyleSheet.create({
@@ -54,7 +52,12 @@ class EditInfo extends Component {
         }}
         onPress={() => {
           if (!navigation.state.params.isEditFun) {
-            // 进行本地存储并返回上一页
+            const { name, address } = navigation.state.params._state;
+            if (web3.utils.isAddress(address)) {
+              // 进行本地存储并返回上一页
+            } else {
+              alert('无效的地址，请重新输入！');
+            }
             return;
           }
           navigation.state.params.isEdit();
@@ -89,6 +92,7 @@ class EditInfo extends Component {
         });
       },
       isEditFun: this.state.isdisabled,
+      _state: this.state,
     });
   }
 
@@ -104,6 +108,7 @@ class EditInfo extends Component {
   }
 
   delete() {
+    console.log(this.state.address, '---');
     // 进行本地清除动作并返回上一页
   }
 
@@ -115,10 +120,23 @@ class EditInfo extends Component {
       <Container style={styles.container}>
         <Content>
           <Item>
-            <Input placeholder="姓名" disabled={isdisabled} />
+            <Input
+              placeholder="姓名"
+              disabled={isdisabled}
+              onChangeText={(name) => {
+                this.setState({ name }, this.editOrSave);
+              }}
+            />
           </Item>
           <Text style={{ marginLeft: 5, marginTop: 5 }}>地址</Text>
-          <Input placeholder="输入有效地址" value={address || ''} disabled={isdisabled} />
+          <Input
+            placeholder="输入有效地址"
+            value={address || ''}
+            disabled={isdisabled}
+            onChangeText={(address) => {
+              this.setState({ address }, this.editOrSave);
+            }}
+          />
         </Content>
 
         {type === 0 ? null
@@ -131,7 +149,7 @@ class EditInfo extends Component {
                   Alert.alert(
                     '确定删除吗？', null,
                     [
-                      { text: '确定', onPress: this.delete },
+                      { text: '确定', onPress: this.delete.bind(this) },
                       { text: '取消', onPress: () => console.log('OK Pressed'), style: 'cancel' },
                     ],
                     { cancelable: false },
