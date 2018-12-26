@@ -38,6 +38,7 @@
 		2DF0FFEE2056DD460020B375 /* libReact.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3DAD3EA31DF850E9000B6D8A /* libReact.a */; };
 		31C91850597846119CF92B0C /* libRNSVG-tvOS.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5BFE17970DAF496091CB5C97 /* libRNSVG-tvOS.a */; };
 		36A28248F7F44F23B99DA8DE /* libRNCamera.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 99C72C8CE88740309B7764F0 /* libRNCamera.a */; };
+		3C05BD3A21D3708A00B7E711 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3C05BD3921D3708A00B7E711 /* iconfont.ttf */; };
 		3C13CA0320F6083B00BC09F5 /* libRCTPushNotification.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C13CA0020F6082B00BC09F5 /* libRCTPushNotification.a */; };
 		3C1AA49B215B92FE0061FB8D /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1AA498215B92E90061FB8D /* libSplashScreen.a */; };
 		3C1AA49C215B93050061FB8D /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3C1AA498215B92E90061FB8D /* libSplashScreen.a */; };
@@ -75,7 +76,6 @@
 		3CD5E13620F33ACF003D2686 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CD5E12120F33ACF003D2686 /* EvilIcons.ttf */; };
 		3CD5E13720F33ACF003D2686 /* EvilIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CD5E12120F33ACF003D2686 /* EvilIcons.ttf */; };
 		3CD5E13820F33D60003D2686 /* libRCTWebSocket.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 139FDEF41B06529B00C62182 /* libRCTWebSocket.a */; };
-		3CFA7D5E21CA2C6700A49A32 /* iconfont.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CFA7D5D21CA2C6700A49A32 /* iconfont.ttf */; };
 		3CFF1C04210F566D00958B1B /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		3E53F14B9C8B4AEA9F5461FD /* libRCTRestart.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A1A9319B07A494C978279EE /* libRCTRestart.a */; };
 		5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
@@ -549,6 +549,7 @@
 		2D16E6891FA4F8E400B85C8A /* libReact.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libReact.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		38E9B96FA8B34993A600D90A /* RNCookieManagerIOS.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = RNCookieManagerIOS.xcodeproj; path = "../node_modules/react-native-cookies/ios/RNCookieManagerIOS.xcodeproj"; sourceTree = "<group>"; };
 		3A1A9319B07A494C978279EE /* libRCTRestart.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libRCTRestart.a; sourceTree = "<group>"; };
+		3C05BD3921D3708A00B7E711 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = iconfont.ttf; path = ../../app/assets/iconfont/iconfont.ttf; sourceTree = "<group>"; };
 		3C13C9FA20F6082A00BC09F5 /* RCTPushNotification.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTPushNotification.xcodeproj; path = "../node_modules/react-native/Libraries/PushNotificationIOS/RCTPushNotification.xcodeproj"; sourceTree = "<group>"; };
 		3C8F15B020FF3BCF008A0251 /* RCTRestart.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTRestart.xcodeproj; path = "../node_modules/react-native-restart/ios/RCTRestart.xcodeproj"; sourceTree = "<group>"; };
 		3CB4FD7B20FF0CBA00116540 /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
@@ -563,7 +564,6 @@
 		3CD5E11F20F33ACF003D2686 /* FontAwesome.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
 		3CD5E12020F33ACF003D2686 /* Entypo.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Entypo.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Entypo.ttf"; sourceTree = "<group>"; };
 		3CD5E12120F33ACF003D2686 /* EvilIcons.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = EvilIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/EvilIcons.ttf"; sourceTree = "<group>"; };
-		3CFA7D5D21CA2C6700A49A32 /* iconfont.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = iconfont.ttf; path = ../../app/assets/iconfont/iconfont.ttf; sourceTree = "<group>"; };
 		4049F01B8A2A4A0D8C96E4EC /* libTcpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libTcpSockets.a; sourceTree = "<group>"; };
 		4128701C0C4440E4A529002C /* libUdpSockets.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libUdpSockets.a; sourceTree = "<group>"; };
 		473277DB3BF44C199E1A8C58 /* QrCode.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = QrCode.xcodeproj; path = "../node_modules/react-native-qr-scanner/ios/QrCode.xcodeproj"; sourceTree = "<group>"; };
@@ -841,7 +841,7 @@
 		3C291DE621073DCC00407896 /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				3CFA7D5D21CA2C6700A49A32 /* iconfont.ttf */,
+				3C05BD3921D3708A00B7E711 /* iconfont.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -1773,7 +1773,7 @@
 			files = (
 				3CD5E12620F33ACF003D2686 /* Octicons.ttf in Resources */,
 				3CD5E13420F33ACF003D2686 /* Entypo.ttf in Resources */,
-				3CFA7D5E21CA2C6700A49A32 /* iconfont.ttf in Resources */,
+				3C05BD3A21D3708A00B7E711 /* iconfont.ttf in Resources */,
 				3CD5E13220F33ACF003D2686 /* FontAwesome.ttf in Resources */,
 				3CD5E12A20F33ACF003D2686 /* Foundation.ttf in Resources */,
 				3CD5E12C20F33ACF003D2686 /* Ionicons.ttf in Resources */,
