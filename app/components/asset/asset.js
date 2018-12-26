@@ -79,7 +79,6 @@ class Assets extends Component {
     //   this.setState({ ttr_banlance });
     //  }
     // );
-    this.updataWalletName();
 
     setTimeout(() => {
       this.setState({
@@ -89,26 +88,7 @@ class Assets extends Component {
   }
 
   componentDidMount() {
-    storage
-      .load({
-        key: 'walletInfo',
-      })
-      .then((walletInfo) => {
-        const walletAddress = walletInfo.walletAddress;
-        this.setState(
-          {
-            walletAddress,
-          },
-          () => {
-            this.getAllBalance();
-          },
-        );
-      })
-      .catch((x) => {
-        console.log(x);
-      });
-    this.updataWalletName();
-
+    this.updataWallet();
     this.setState({
       currentVersion: DeviceInfo.default.getVersion().replace(/\./g, ''),
     });
@@ -126,19 +106,27 @@ class Assets extends Component {
       });
   }
 
-  updataWalletName() {
+  updataWallet() {
     storage
       .load({
-        key: 'walletName',
+        key: 'walletInfo',
       })
-      .then((res) => {
-        const walletName = res.walletName;
-        this.setState({
-          walletName,
-        });
+      .then((walletInfo) => {
+        const [current] = walletInfo.filter(l => l.isChecked);
+        const walletAddress = current.walletAddress;
+        const walletName = current.walletName;
+
+        this.setState(
+          {
+            walletName, walletAddress,
+          },
+          () => {
+            this.getAllBalance();
+          },
+        );
       })
       .catch((x) => {
-        console.log('没有发现钱包名称');
+        console.log(x);
       });
   }
 
