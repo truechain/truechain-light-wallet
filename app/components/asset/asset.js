@@ -163,12 +163,9 @@ class Assets extends Component {
             <Icon name="icon-qianbao" size={23} />
           </Button>
           <View style={styles.walletInfo_item}>
-            <TouchableHighlight
-              underlayColor="transparent"
-              onPress={() => this.navigate('WalletInfo')}
-            >
+            <View>
               <Image style={styles.avatar} source={require('../../assets/images/asset/head_2x.png')} />
-            </TouchableHighlight>
+            </View>
             <Text style={styles.walletName}>{this.state.walletName}</Text>
             <TouchableHighlight
               underlayColor="transparent"
